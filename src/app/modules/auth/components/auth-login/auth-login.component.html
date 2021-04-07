@@ -1,0 +1,7 @@
+<auth-input label="logon.EmailOrPhone" type="text" [(ngModel)]="login.Username" [control]="loginControl"></auth-input>
+<auth-input label="components.auth.YourPassword" type="password" [(ngModel)]="login.Password"
+    [control]="passwordControl"></auth-input>
+
+<auth-button (authClick)="onLogin()" [disabled]="loginControl.invalid"></auth-button>
+
+{{loading$ | async}}

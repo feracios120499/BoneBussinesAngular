@@ -1,0 +1,1 @@
+{"version":3,"sources":["./styles.scss","./assets.bone/scss/app/app.scss"],"names":[],"mappings":"AAAA;AAEA;EACI,uBCHS;ADGb,C","file":"styles.css","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n@import \"app.scss\";\nbody {\n    background-color: $color-dark;\n}\n","$color-dark: black;\r\n"],"sourceRoot":"webpack:///"}

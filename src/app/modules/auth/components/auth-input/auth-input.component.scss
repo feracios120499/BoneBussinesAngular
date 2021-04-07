@@ -1,0 +1,101 @@
+@import "variables.scss";
+.cl {
+    &-input {
+        background: none;
+        color: $color-dark;
+        @include medium;
+        @include light;
+        padding: 8px 12px 8px 0;
+        display: block;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid $color-light-500;
+        padding-right: 30px;
+        line-height: 1.5 !important;
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            color: transparent;
+        }
+        &.mobile::placeholder {
+            color: $color-dark;
+        }
+        &:invalid {
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:focus ~ label,
+        &.ng-valid ~ label,
+        &.ng-dirty ~ label {
+            top: -16px;
+            font-size: 14px;
+        }
+        &:focus ~ .cl-input-bar:before,
+        &.ng-valid ~ .cl-input-bar:before
+        {
+            width: 100%;
+        }
+        &.ng-touched.ng-invalid ~ .cl-input-bar:before,
+        &.ng-not-empty.ng-invalid ~ .cl-input-bar:before,
+        &.ng-touched:invalid ~ .cl-input-bar:before {
+            width: 100%;
+            background: $color-error;
+        }
+        &.ng-touched.ng-invalid ~ .cl-input-icon,
+        &.ng-not-empty.ng-invalid ~ .cl-input-icon,
+        &.ng-touched:invalid ~ .cl-input-icon {
+            color: $color-error;
+        }
+        &:focus ~ .cl-input-icon,
+        &.ng-valid ~ .cl-input-icon,
+        &.ng-dirty ~ .cl-input-icon {
+            color: $color-primary;
+        }
+        &-label {
+            color: $color-light-500;
+            @include base;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 0;
+            top: 12px;
+            transition: all 0.15s ease-out;
+        }
+        &-bar {
+            position: relative;
+            display: block;
+            width: 100%;
+            &:before {
+                content: "";
+                height: 2px;
+                width: 0;
+                bottom: 0px;
+                position: absolute;
+                background: $color-primary;
+                transition: all 0.15s ease-out;
+                left: 0%;
+            }
+        }
+        &-icon {
+            position: absolute;
+            right: 8px;
+            bottom: 12px;
+            color: $color-light-500;
+        }
+    }
+
+    &-input[type="password"] {
+        letter-spacing: 0.3em;
+    }
+    &-group {
+        position: relative;
+        margin-top: 32px;
+        & tooltip {
+            width: 100%;
+        }
+    }
+}

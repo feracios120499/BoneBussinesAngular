@@ -1,0 +1,38 @@
+@import "variables.scss";
+.b1 {
+    &-button {
+        @include button;
+
+        &-primary {
+            @include button-primary;
+            &_filled {
+                @include button-primary_filled;
+            }
+        }
+
+        &-error {
+            @include button-error;
+            &_filled {
+                @include button-error_filled;
+            }
+        }
+
+        &-warning {
+            @include button-warning;
+            &_filled {
+                @include button-warning_filled;
+            }
+        }
+        &-small {
+            @include button-small;
+        }
+
+        &-round {
+            @include button-round;
+        }
+    }
+
+    &-button-group {
+        @include button-group;
+    }
+}

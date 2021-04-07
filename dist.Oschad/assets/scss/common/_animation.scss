@@ -1,0 +1,54 @@
+@import "variables.scss";
+
+.b1 {
+  &-animate {
+    animation-duration: 0.45s;
+    animation-fill-mode: both;
+    animation-timing-function: $animation-timing;
+
+    &.infinite {
+      animation-iteration-count: infinite;
+    }
+
+    &.fast {
+      animation-duration: 0.3s;
+    }
+
+    &.faster {
+      animation-duration: 0.15s;
+    }
+
+    &.slow {
+      animation-duration: 0.6s;
+    }
+
+    &.slower {
+      animation-duration: 0.9s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg)
+          translate3d(0, 25%, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: perspective(400px) rotate3d(1, 0, 0, 0) translate3d(0, 0, 0);
+      }
+    }
+
+    &.fade-in-up {
+      animation-name: fadeInUp;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &-animate {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}

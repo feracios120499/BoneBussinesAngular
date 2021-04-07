@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "da255ddb-3f3c-4391-81eb-a862af201cc4"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -33,7 +36,12 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/scss/"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -62,6 +70,58 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "bone": {
+              "outputPath": "dist.Bone",
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets.bone/",
+                  "output": "/assets/"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/assets/scss/",
+                  "src/assets.bone/scss/"
+                ]
+              }
+            },
+            "oschad": {
+              "outputPath": "dist.Oschad",
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets.oschad/",
+                  "output": "/assets/"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/assets/scss/",
+                  "src/assets.oschad/scss/",
+                  "src/assets.oschad/fonts/FuturaPT/css/"
+                ]
+              }
+            },
+            "ubrr": {
+              "outputPath": "dist.Ubrr",
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets.ubrr/",
+                  "output": "/assets/"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/assets/scss/",
+                  "src/assets.ubrr/scss/"
+                ]
+              }
             }
           }
         },
@@ -73,6 +133,15 @@
           "configurations": {
             "production": {
               "browserTarget": "BOneBussinesAngular:build:production"
+            },
+            "bone": {
+              "browserTarget": "BOneBussinesAngular:build:bone"
+            },
+            "oschad": {
+              "browserTarget": "BOneBussinesAngular:build:oschad"
+            },
+            "ubrr": {
+              "browserTarget": "BOneBussinesAngular:build:ubrr"
             }
           }
         },

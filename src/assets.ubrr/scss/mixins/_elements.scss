@@ -1,0 +1,31 @@
+@import "../colors";
+
+@mixin quick-refresh {
+  color: $color-primary;
+}
+
+@mixin search-bar {
+  border: 2px solid var(--color-light-500);
+  border-radius: 0;
+  color: var(--color-dark);
+
+  &:hover {
+    background-color: var(--color-light-100);
+  }
+  &:focus,
+  &:active {
+    border-color: $color-primary;
+  }
+
+  &::placeholder {
+    color: var(--color-light-500);
+  }
+}
+
+@mixin card-table-column {
+  padding: 4px 16px;
+}
+
+@mixin card {
+  border: 1px solid rgba(var(--color-dark-rgb), 0.1);
+}

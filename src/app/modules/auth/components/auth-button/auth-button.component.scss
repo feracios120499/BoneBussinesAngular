@@ -1,0 +1,39 @@
+@import "variables.scss";
+.cl {
+    &-button {
+        @include base;
+        background-image: linear-gradient(
+            to right,
+            $color-primary 0%,
+            rgba($color-primary, 0.9) 50%,
+            rgba($color-primary, 0.6) 100%
+        );
+        background-size: 200% 100%;
+        background-position: left;
+        box-shadow: 0 2px 8px rgba($color-primary, 0.2);
+        padding: 12px;
+        border-radius: 4px;
+        border: 0;
+        color: $color-light;
+        width: 100%;
+        margin: 16px auto 16px;
+        transition: all 0.15s ease-out;
+        position: relative;
+        height: 48px;
+        &:hover {
+            background-position: right;
+        }
+
+        &:active {
+            box-shadow: 0 4px 16px rgba($color-primary, 0.4);
+        }
+
+        &[disabled],
+        &:hover[disabled] {
+            background-image: none;
+            background-color: $color-light-200;
+            color: rgba($color-dark, 0.6);
+            box-shadow: none;
+        }
+    }
+}

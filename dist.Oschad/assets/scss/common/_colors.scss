@@ -1,0 +1,393 @@
+@import "variables.scss";
+
+:root {
+  --color-light: #{$color-light};
+  --color-light-100: #{$color-light-100};
+  --color-light-200: #{$color-light-200};
+  --color-light-300: #{$color-light-300};
+  --color-light-400: #{$color-light-400};
+  --color-light-500: #{$color-light-500};
+
+  --color-dark: #{$color-dark};
+  --color-dark-100: #{$color-dark-100};
+  --color-dark-200: #{$color-dark-200};
+  --color-dark-300: #{$color-dark-300};
+  --color-dark-400: #{$color-dark-400};
+  --color-dark-500: #{$color-dark-500};
+
+  --color-light-rgb: #{$color-light-rgb};
+  --color-light-100-rgb: #{$color-light-100-rgb};
+  --color-light-200-rgb: #{$color-light-200-rgb};
+  --color-light-300-rgb: #{$color-light-300-rgb};
+  --color-light-400-rgb: #{$color-light-400-rgb};
+  --color-light-500-rgb: #{$color-light-500-rgb};
+
+  --color-dark-rgb: #{$color-dark-rgb};
+  --color-dark-100-rgb: #{$color-dark-100-rgb};
+  --color-dark-200-rgb: #{$color-dark-200-rgb};
+  --color-dark-300-rgb: #{$color-dark-300-rgb};
+  --color-dark-400-rgb: #{$color-dark-400-rgb};
+  --color-dark-500-rgb: #{$color-dark-500-rgb};
+
+  --color-primary: #{$color-primary};
+  --color-secondary: #{$color-secondary};
+  --color-tertiary: #{$color-tertiary};
+
+  --color-info: #{$color-info};
+  --color-error: #{$color-error};
+  --color-warning: #{$color-warning};
+  --color-success: #{$color-success};
+  --color-resource:#{$color-resource};
+
+  --color-primary-light:#{$color-primary};
+}
+
+body.dark-mode {
+  --color-dark: #{$color-light};
+  --color-dark-100: #{$color-light-100};
+  --color-dark-200: #{$color-light-200};
+  --color-dark-300: #{$color-light-300};
+  --color-dark-400: #{$color-light-400};
+  --color-dark-500: #{$color-light-500};
+
+  --color-light: #{$color-dark-100};
+  --color-light-100: #{$color-dark};
+  --color-light-200: #{$color-dark-200};
+  --color-light-300: #{$color-dark-300};
+  --color-light-400: #{$color-dark-400};
+  --color-light-500: #{$color-dark-500};
+
+  --color-dark-rgb: #{$color-light-100-rgb};
+  --color-dark-100-rgb: #{$color-light-rgb};
+  --color-dark-200-rgb: #{$color-light-200-rgb};
+  --color-dark-300-rgb: #{$color-light-300-rgb};
+  --color-dark-400-rgb: #{$color-light-400-rgb};
+  --color-dark-500-rgb: #{$color-light-500-rgb};
+
+  --color-light-rgb: #{$color-dark-100-rgb};
+  --color-light-100-rgb: #{$color-dark-rgb};
+  --color-light-200-rgb: #{$color-dark-200-rgb};
+  --color-light-300-rgb: #{$color-dark-300-rgb};
+  --color-light-400-rgb: #{$color-dark-400-rgb};
+  --color-light-500-rgb: #{$color-dark-500-rgb};
+
+  --color-primary: #{$color-dark-200};
+  --color-secondary: #{$color-dark-100};
+  --color-tertiary: #{$color-dark-100};
+
+  --color-info: #{$color-info-dt};
+  --color-error: #{$color-error-dt};
+  --color-warning: #{$color-warning-dt};
+  --color-success: #{$color-success-dt};
+
+  --color-primary-light:#{$color-light};
+}
+@mixin bg-light {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+.b1 {
+  &-bg-light {
+    @include bg-light;
+    &-const {
+      background-color: $color-light;
+      color: $color-dark;
+    }
+
+    &-100 {
+      background-color: var(--color-light-100);
+      color: var(--color-dark);
+
+      &-const {
+        background-color: $color-light-100;
+        color: $color-dark;
+      }
+    }
+
+    &-200 {
+      background-color: var(--color-light-200);
+      color: var(--color-dark);
+
+      &-const {
+        background-color: $color-light-200;
+        color: $color-dark;
+      }
+    }
+
+    &-300 {
+      background-color: var(--color-light-300);
+      color: var(--color-dark);
+
+      &-const {
+        background-color: $color-light-300;
+        color: $color-dark;
+      }
+    }
+
+    &-400 {
+      background-color: var(--color-light-400);
+      color: var(--color-dark);
+
+      &-const {
+        background-color: $color-light-400;
+        color: $color-dark;
+      }
+    }
+
+    &-500 {
+      background-color: var(--color-light-500);
+      color: var(--color-dark);
+
+      &-const {
+        background-color: $color-light-500;
+        color: $color-dark;
+      }
+    }
+  }
+
+  &-bg-dark {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+
+    &-const {
+      background-color: $color-dark;
+      color: $color-light;
+    }
+
+    &-100 {
+      background-color: var(--color-dark-100);
+      color: var(--color-light);
+
+      &-const {
+        background-color: $color-dark-100;
+        color: $color-light;
+      }
+    }
+
+    &-200 {
+      background-color: var(--color-dark-200);
+      color: var(--color-light);
+
+      &-const {
+        background-color: $color-dark-200;
+        color: $color-light;
+      }
+    }
+
+    &-300 {
+      background-color: var(--color-dark-300);
+      color: var(--color-light);
+
+      &-const {
+        background-color: $color-dark-300;
+        color: $color-light;
+      }
+    }
+  }
+
+  &-bg-primary {
+    background-color: $color-primary;
+    color: $color-light;
+
+    &-100 {
+      background-color: $color-primary-100;
+      color: $color-light;
+    }
+
+    &-200 {
+      background-color: $color-primary-200;
+      color: $color-light;
+    }
+
+    &-300 {
+      background-color: $color-primary-300;
+      color: $color-light;
+    }
+  }
+
+  &-bg-secondary {
+    background-color: $color-secondary;
+    color: $color-light;
+
+    &-100 {
+      background-color: $color-secondary-100;
+      color: $color-light;
+    }
+
+    &-200 {
+      background-color: $color-secondary-200;
+      color: $color-light;
+    }
+
+    &-300 {
+      background-color: $color-secondary-300;
+      color: $color-light;
+    }
+  }
+
+  &-bg-tertiary {
+    background-color: $color-tertiary;
+    color: var(--color-light);
+
+    &-100 {
+      background-color: $color-tertiary-100;
+      color: $color-light;
+    }
+
+    &-200 {
+      background-color: $color-tertiary-200;
+      color: $color-light;
+    }
+
+    &-300 {
+      background-color: $color-tertiary-300;
+      color: $color-light;
+    }
+  }
+
+  &-bg-info {
+    background-color: var(--color-info);
+    color: $color-light;
+  }
+
+  &-bg-error {
+    background-color: var(--color-error);
+    color: $color-light;
+  }
+
+  &-bg-success {
+    background-color: var(--color-success);
+    color: $color-light;
+  }
+
+  &-bg-warning {
+    background-color: var(--color-warning);
+    color: $color-dark;
+  }
+
+  &-color-light {
+    color: var(--color-light);
+
+    &-100 {
+      color: var(--color-light-100);
+    }
+
+    &-200 {
+      color: var(--color-light-200);
+    }
+
+    &-300 {
+      color: var(--color-light-300);
+    }
+
+    &-400 {
+      color: var(--color-light-400);
+    }
+
+    &-500 {
+      color: var(--color-light-500);
+    }
+  }
+
+  &-color-dark {
+    color: var(--color-dark);
+
+    &-100 {
+      color: var(--color-dark-100);
+    }
+
+    &-200 {
+      color: var(--color-dark-200);
+    }
+
+    &-300 {
+      color: var(--color-dark-300);
+    }
+  }
+
+  &-color-primary {
+    color: $color-primary;
+
+    &-100 {
+      color: $color-primary-100;
+    }
+
+    &-200 {
+      color: $color-primary-200;
+    }
+
+    &-300 {
+      color: $color-primary-300;
+    }
+  }
+
+  &-color-secondary {
+    color: $color-secondary;
+
+    &-100 {
+      color: $color-secondary-100;
+    }
+
+    &-200 {
+      color: $color-secondary-200;
+    }
+
+    &-300 {
+      color: $color-secondary-300;
+    }
+  }
+
+  &-color-tertiary {
+    color: $color-tertiary;
+
+    &-100 {
+      color: $color-tertiary-100;
+    }
+
+    &-200 {
+      color: $color-tertiary-200;
+    }
+
+    &-300 {
+      color: $color-tertiary-300;
+    }
+  }
+
+  &-color-info {
+    color: var(--color-info);
+  }
+
+  &-color-error {
+    color: var(--color-error);
+  }
+
+  &-color-success {
+    color: var(--color-success);
+  }
+
+  &-color-warning {
+    color: var(--color-warning);
+  }
+
+  &-alpha {
+    &-100 {
+      opacity: 1;
+    }
+
+    &-80 {
+      opacity: 0.8;
+    }
+
+    &-60 {
+      opacity: 0.6;
+    }
+
+    &-40 {
+      opacity: 0.4;
+    }
+
+    &-20 {
+      opacity: 0.2;
+    }
+  }
+}

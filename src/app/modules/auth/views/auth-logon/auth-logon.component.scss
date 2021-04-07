@@ -1,0 +1,113 @@
+@import "variables.scss";
+@mixin cl-anim {
+    transform: translateY(100px);
+    transition: all 0.3s;
+    opacity: 0;
+    &._active {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+:host {
+    max-width: 500px;
+    width: 100%;
+}
+.cl {
+    &-content {
+        &-form {
+            max-width: 500px;
+            width: 100%;
+        }
+        &-logo {
+            margin: 0 auto;
+            display: flex;
+            width: 217px;
+        }
+        &-title {
+            @include base;
+            font-size: 22px;
+            line-height: 25px;
+            color: #d3d3d3;
+            text-align: center;
+        }
+        &-tabs {
+            position: relative;
+            margin: 40px 0 0 0;
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .nav > .nav-item {
+                flex: 1 1 50%;
+                text-align: center;
+            }
+            .nav > .nav-item > .nav-link {
+                position: relative;
+                @include base;
+                line-height: 1;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $color-primary;
+                padding: 8px 12px;
+                z-index: 1;
+               
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: -1;
+                    transform: scaleY(0.9);
+                    background-color: $color-light-100;
+                    border-radius: 4px;
+                    transition: all 0.15s ease-out;
+                }
+            }
+
+            .nav > li:last-child > a {
+                margin-right: 0px;
+                margin-left: 12px;
+
+                @media (max-width: 768px) {
+                    margin: 8px 0;
+                }
+            }
+
+            .nav > .nav-item > .nav-link.active,
+            .nav > .nav-item > .nav-link.active:hover,
+            .nav > .nav-item > .nav-link.active:focus,
+            .nav > .nav-item > .nav-link.active:active {
+                @include base;
+                height: 40px;
+                color: $color-light;
+                border: none;
+             
+
+                &::before {
+                    background-color:  $color-primary;
+                    transform: scaleY(1);
+                }
+            }
+            .nav > .nav-item > .nav-link:hover,
+            .nav > .nav-item > .nav-link:focus,
+            .nav > .nav-item > .nav-link:active {
+                @include base;
+                height: 40px;
+                color: $color-primary;
+                border: none;
+               
+
+                &::before {
+                    background-color:  $color-light-200;
+                    transform: scaleY(1);
+                }
+            }
+        }
+    }
+}

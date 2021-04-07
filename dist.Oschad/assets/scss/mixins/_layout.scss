@@ -1,0 +1,42 @@
+@import "../colors";
+
+@mixin app-content {
+  background-color: var(--color-light);
+}
+
+@mixin header-block {
+  display: block;
+  padding: 40px;
+  background-color: var(--color-primary);
+  color: $color-light;
+}
+
+@mixin header-block-title {
+  padding: 0 0 16px;
+  width: 100%;
+  background-color: transparent;
+}
+
+@mixin head-tabs {
+  height: auto;
+
+  & > li {
+    margin-bottom: 16px;
+  }
+}
+
+@mixin header-filters-item {
+  &:hover {
+    background-color: rgba($color-light, 0.1);
+  }
+
+  &.active {
+    background-color: rgba($color-light, 0.2);
+  }
+}
+
+@mixin header-filters-link {
+  &:hover {
+    color: $color-light;
+  }
+}

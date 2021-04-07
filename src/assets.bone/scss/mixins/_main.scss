@@ -1,0 +1,120 @@
+@import "../colors";
+
+@mixin navbar {
+  box-shadow: none;
+}
+
+@mixin sidemenu {
+  background-color: $color-dark-100;
+  color: $color-light;
+}
+
+@mixin sidemenu-head {
+  background-color: $color-dark-100;
+  color: $color-light;
+}
+
+@mixin client-button {
+  background-color: rgba($color-light, 0.1);
+  color: $color-light;
+}
+
+@mixin collapse-button {
+  background-color: $color-dark-200;
+}
+
+@mixin sidemenu-nav-item {
+  &::after {
+    background-color: rgba($color-primary, 0.1);
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0;
+    left: 0;
+    top: 0;
+    transition: all 0.15s $animation-timing;
+  }
+
+  &.active::after,
+  &:hover::after {
+    width: 100%;
+  }
+
+  &.active::after {
+    background-color: $color-primary;
+  }
+
+  &__link {
+    @include base;
+    position: relative;
+    opacity: 0.8;
+    padding: 8px 16px !important;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    z-index: 9;
+
+    &__icon {
+      width: 20px;
+      height: 24px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      text-align: center;
+      color: $color-light;
+      transition: transform 0.3s $animation-timing, color 0.3s $animation-timing;
+
+      &_opt {
+        color: $color-light;
+      }
+    }
+
+    &__text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &:hover &__link {
+    opacity: 1;
+
+    &__icon {
+      transform: translateY(2px);
+    }
+  }
+
+  &.active &__link {
+    opacity: 1;
+    color: $color-light;
+
+    &__icon {
+      color: $color-light !important;
+    }
+  }
+
+  &_opt {
+    &::after {
+      background-color: rgba($color-tertiary, 0.1);
+    }
+
+    &.active::after {
+      background-color: $color-tertiary;
+    }
+  }
+}
+
+@mixin selected-row {
+  background-image: $linear-gradient;
+  color: var(--color-light);
+}
+@mixin hover-row {
+  background-image: $linear-gradient-light;
+}
+@mixin data-row{
+  border-radius: 10px;
+  margin: 0 32px;
+  margin-bottom: 8px;
+}

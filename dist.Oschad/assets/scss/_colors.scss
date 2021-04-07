@@ -1,0 +1,218 @@
+@function tint($color, $percentage) {
+  @return mix(#fff, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(#000, $color, $percentage);
+}
+
+$color-light: #fff;
+$color-light-100: #f2f2f2;
+$color-light-200: #eee;
+$color-light-300: #ddd;
+$color-light-400: #ccc;
+$color-light-500: #999;
+
+$color-dark: #001731;
+$color-dark-100: tint($color-dark, 5%);
+$color-dark-200: tint($color-dark, 15%);
+$color-dark-300: tint($color-dark, 25%);
+$color-dark-400: tint($color-dark, 25%);
+$color-dark-500: tint($color-dark, 30%);
+
+$color-light-rgb: 255, 255, 255;
+$color-light-100-rgb: 242, 242, 242;
+$color-light-200-rgb: 237, 237, 237;
+$color-light-300-rgb: 221, 221, 221;
+$color-light-400-rgb: 204, 204, 204;
+$color-light-500-rgb: 153, 153, 153;
+
+$color-dark-rgb: 0, 23, 49;
+$color-dark-100-rgb: 13, 35, 59;
+$color-dark-200-rgb: 26, 46, 70;
+$color-dark-300-rgb: 38, 58, 80;
+$color-dark-400-rgb: 51, 69, 90;
+$color-dark-500-rgb: 64, 81, 101;
+
+$color-primary: rgb(0, 135, 158);
+$color-primary-100: tint($color-primary, 5%);
+$color-primary-200: tint($color-primary, 10%);
+$color-primary-300: tint($color-primary, 25%);
+
+$color-secondary: rgb(0, 135, 158);
+$color-secondary-100: tint($color-secondary, 5%);
+$color-secondary-200: tint($color-secondary, 10%);
+$color-secondary-300: tint($color-secondary, 25%);
+
+$color-tertiary: rgb(0, 135, 158);
+$color-tertiary-100: tint($color-tertiary, 5%);
+$color-tertiary-200: tint($color-tertiary, 10%);
+$color-tertiary-300: tint($color-tertiary, 25%);
+
+$color-error: hsl(0, 100%, 56%);
+$color-info: rgb(0, 135, 158);
+$color-success: hsl(150, 100%, 31%);
+$color-warning: hsl(62, 90%, 44%);
+
+$color-error-dt: hsl(0, 90%, 61%);
+$color-info-dt: rgb(0, 135, 158);
+$color-success-dt: hsl(150, 90%, 41%);
+$color-warning-dt: hsl(62, 80%, 49%);
+
+// ! DEPRECATED
+
+$heading-font: "Futura PT Demi", sans-serif;
+
+$color-loader-100: #3498db;
+$color-loader-200: #e74c3c;
+$color-loader-300: #f9c922;
+
+$color-sidebar-100: #6cc195;
+
+$color-alpha-100: #fff;
+$color-alpha-200: #f4f4f4;
+$color-alpha-300: #eee;
+$color-alpha-400: #ddd;
+$color-alpha-500: #ccc;
+$color-alpha-600: #bbb;
+$color-alpha-700: #aaa;
+
+$color-beta-100: #8ca9dd;
+$color-beta-200: #8daade;
+$color-beta-300: #a8cbeb;
+$color-beta-400: #66afe9;
+$color-beta-500: #7fb6d6;
+$color-beta-600: #7296da;
+$color-beta-700: #658acf;
+$color-beta-800: #3d69ba;
+$color-beta-900: #007299;
+$color-beta-1200: #7fb6d6;
+$color-beta-1300: #3a3f51;
+$color-beta-1400: #89c8eb;
+$color-beta-1500: #7196da;
+$color-beta-1600: #7794d8;
+$color-beta-1700: #5f7fc9;
+$color-beta-1800: #64b3d5;
+$color-beta-1900: #33a6cc;
+$color-beta-2000: #68b4d6;
+$color-beta-2100: #6fabcc;
+$color-beta-2200: #00b1e5;
+$color-beta-2300: #57b0e2;
+$color-beta-2400: #6dbdde;
+$color-beta-2500: #92c1e9;
+$color-beta-2600: #23b7e5;
+
+$color-beta-muted-100: #347294;
+$color-beta-muted-200: #ba9cc5;
+$color-beta-muted-300: #c8b1d0;
+$color-beta-muted-400: #a279b1;
+$color-beta-muted-600: #5e7190;
+$color-beta-muted-700: #58666e;
+$color-beta-muted-800: #60446b;
+$color-beta-muted-900: #9d6aaf;
+$color-beta-muted-1000: #a078af;
+
+$color-psy-100: #8cdab2;
+$color-psy-200: #6cc094;
+$color-psy-300: #6bbbae;
+$color-psy-400: #5f9ea0;
+$color-psy-500: #6cc094;
+$color-psy-600: #6cc195;
+$color-psy-700: #6cbd83;
+$color-psy-800: #27ae60;
+$color-psy-900: #3eb879;
+$color-psy-1000: #5ca07d;
+$color-psy-1200: #00503c;
+$color-psy-1300: #b4b2b5;
+$color-psy-1400: #716c6c;
+$color-psy-1500: #61ad86;
+$color-psy-1600: #00504e;
+$color-psy-1700: #27c24c;
+
+$color-gamma-100: #f5868a;
+$color-gamma-200: #fc6a70;
+$color-gamma-300: #ff585d;
+$color-gamma-600: #ed4b52;
+$color-gamma-700: #fabfc1;
+$color-gamma-800: #f05050;
+$color-gamma-900: #b70109;
+$color-gamma-1000: #8b4649;
+$color-gamma-1100: #c5a0bc;
+$color-gamma-1200: #fa323c;
+
+$color-gamma-muted-100: #ccabd8;
+$color-gamma-muted-600: #a279b1;
+
+$color-delta-100: #fed2ad;
+$color-delta-200: #dce123;
+$color-delta-300: #dbe023;
+$color-delta-400: #dde03d;
+$color-delta-600: #dbde3c;
+$color-delta-700: #d2db46;
+$color-delta-800: #fdaa63;
+$color-delta-900: #f9b178;
+$color-delta-1000: #fc6a70;
+$color-delta-1100: #ffe8bf;
+$color-delta-1200: #ffcc80;
+
+$color-omega-100: #000;
+$color-omega-300: #222;
+$color-omega-1000: #555;
+$color-omega-1200: #888;
+
+$color-light-600: #bbb;
+$color-light-700: #aaa;
+
+$color-info-200: #8daade;
+$color-info-300: #a8cbeb;
+$color-info-400: #66afe9;
+$color-info-500: #7fb6d6;
+$color-info-600: #7196da;
+$color-info-700: #658acf;
+$color-info-800: #3d69ba;
+$color-info-900: #007299;
+$color-info-1200: #3a3f51;
+
+$color-info-muted-200: #ba9cc5;
+$color-info-muted-600: #5e7190;
+$color-info-muted-800: #60446b;
+
+$color-success-100: #8cdab2;
+$color-success-200: #6cc094;
+$color-success-300: #6bbbae;
+$color-success-400: #5f9ea0;
+$color-success-600: #6cc195;
+$color-success-700: #6cbd83;
+$color-success-800: #27ae60;
+$color-success-1000: #5ca07d;
+$color-success-1200: #00503c;
+
+$color-error-100: #f5868a;
+$color-error-200: #fc6a70;
+$color-error-300: #ff585d;
+$color-error-600: #ed4b52;
+$color-error-700: #fabfc1;
+$color-error-800: #f05050;
+$color-error-900: #b70109;
+$color-error-1000: #8b4649;
+$color-error-1100: #c5a0bc;
+$color-error-1200: #fa323c;
+
+$color-error-muted-600: #a279b1;
+
+$color-warning-100: #fed2ad;
+$color-warning-200: #dce123;
+$color-warning-300: #dbe023;
+$color-warning-400: #dde03d;
+$color-warning-600: #dbde3c;
+$color-warning-700: #d2db46;
+$color-warning-800: #fdaa63;
+$color-warning-900: #f9b178;
+$color-warning-1000: #fc6a70;
+$color-warning-1100: #ffe8bf;
+
+$color-dark-1000: #555;
+$color-dark-1200: #888;
+$color-resource: #001731;
+$linear-gradient: linear-gradient(90.03deg, #156d81 0.36%, #36abc5 99.98%);
+$linear-gradient-light: linear-gradient(90.03deg, rgba(#156d81, 0.1) 0.36%, rgba(#36abc5, 0.1) 99.98%);

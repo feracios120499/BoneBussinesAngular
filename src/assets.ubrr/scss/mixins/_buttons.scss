@@ -1,0 +1,239 @@
+@import "../vars";
+@import "../typography";
+@import "../colors";
+
+@mixin button {
+  @include medium;
+  @include bold;
+  line-height: 1;
+  display: inline-block;
+  padding: 8px 28px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid var(--color-dark-500);
+  color: var(--color-dark);
+  border-radius: 8px;
+  position: relative;
+  z-index: 9;
+  transition: all 0.15s $animation-timing;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  &.ng-animate {
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+  & i {
+    font-size: 16px;
+  }
+  &:hover {
+    background-color: var(--color-light-200);
+  }
+
+  & > i {
+    margin-right: 8px;
+  }
+
+  &:active {
+    box-shadow: inset 0 2px 8px rgba(var(--color-dark-rgb), 0.2);
+  }
+
+  &:disabled,
+  &.ng-disabled {
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: $color-light-400;
+    border: 2px solid $color-light-400;
+    color: $color-dark;
+  }
+}
+
+@mixin button-primary {
+  @include button;
+  border: 2px solid var(--color-info);
+  background: transparent;
+  padding: 7px 28px;
+  &::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: -4px;
+    right: -4px;
+    border: 0 solid var(--color-info);
+    border-radius: 30px;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--color-info);
+    color: $color-light;
+  }
+
+  &:active::before {
+    border: 4px solid var(--color-info);
+    opacity: 0.4;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+@mixin button-primary_filled {
+  color: $color-light;
+  background: var(--color-info);
+  box-shadow: 0 4px 16px rgba($color-info, 0.4);
+  &:hover:not(:disabled) {
+    color: $color-light;
+    background: var(--color-info);
+    opacity: 0.9;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+@mixin button-error {
+  @include button;
+  border: 2px solid var(--color-error);
+  background: transparent;
+  padding: 7px 28px;
+  &::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: -4px;
+    right: -4px;
+    border: 0 solid var(--color-error);
+    border-radius: 2px * $border-radius-factor;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  &:hover {
+    //background: rgba($color-error, 0.2);
+    background: $color-error;
+    color: $color-light;
+  }
+
+  &:active::before {
+    // border: 4px solid var(--color-error);
+    // opacity: 0.4;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+@mixin button-error_filled {
+  color: $color-light;
+  background: var(--color-error);
+  box-shadow: 0 4px 16px rgba($color-error, 0.4);
+
+  &:hover {
+    color: $color-light;
+    background: var(--color-error);
+    opacity: 0.9;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+@mixin button-warning {
+  @include button;
+  border: 2px solid var(--color-warning);
+  background: transparent;
+  padding: 7px 28px;
+  &::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: -4px;
+    right: -4px;
+    border: 0 solid var(--color-warning);
+    border-radius: 2px * $border-radius-factor;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  &:hover {
+    background: $color-warning;
+    color: $color-dark;
+  }
+
+  &:active::before {
+    // border: 4px solid var(--color-warning);
+    // opacity: 0.4;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}
+@mixin button-warning_filled {
+  color: $color-dark;
+  background: var(--color-warning);
+  box-shadow: 0 4px 16px rgba($color-warning, 0.4);
+
+  &:hover {
+    color: $color-dark;
+    background: var(--color-warning);
+    opacity: 0.9;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+@mixin button-small {
+  @include button;
+  @include light;
+  @include base;
+  padding: 6px 6px;
+  height: auto;
+  border-color: var(--color-info);
+  border-radius: 5px;
+  &:hover:not(:disabled) {
+    background-color: var(--color-info);
+    color: $color-light;
+  }
+  &:disabled {
+    border: 1px solid $color-light-400;
+  }
+}
+@mixin button-round {
+  border-radius: 50%;
+  width: 40px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin button-group {
+  display: flex;
+
+  button {
+    &:first-of-type {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-of-type {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
