@@ -2,6 +2,5 @@
 <auth-input label="components.auth.YourPassword" type="password" [(ngModel)]="login.Password"
     [control]="passwordControl"></auth-input>
 
-<auth-button (authClick)="onLogin()" [disabled]="loginControl.invalid"></auth-button>
-
-{{loading$ | async}}
+<auth-button (authClick)="onLogin()" [isLoading]="loading$ | async" label="bid.Enter"></auth-button>
+<auth-error [message]="error$ | async"></auth-error>

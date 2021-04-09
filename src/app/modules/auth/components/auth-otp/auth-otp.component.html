@@ -1,0 +1,14 @@
+<div class="otp">
+    <div class="otp-title">
+        {{'components.auth.SMSpassword' | translate}}
+    </div>
+    <div class="otp-label b1-mt-3">
+        {{'components.auth.loginWithNewDevice2' | translate:{phone:phone || ''} }}
+    </div>
+    <div class="b1-flex b1-align-center b1-justify-center b1-mt-3">
+        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+    </div>
+</div>
+<auth-button label="bid.Accept" (authClick)="onSendOtp()" [isLoading]="loading$ | async"
+    [disabled]="otp.length != LENGTH_OTP"></auth-button>
+<auth-error [message]="error$ | async"></auth-error>

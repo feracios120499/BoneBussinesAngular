@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -23,7 +23,11 @@ export class AuthInputComponent implements ControlValueAccessor {
   @Input() name: string | undefined;
   @Input() type: string | undefined;
   @Input() disabled = false;
-  onChange: any = () => { };
+  @Output() authChange = new EventEmitter();
+  onChange: any = () => {
+    this.authChange.emit();
+  }
+
   onTouch: any = () => { };
   val: any;
 

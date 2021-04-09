@@ -1,6 +1,7 @@
-import { currentLanguageSelector, allowedLanguagesSelector, setLanguage } from './../../../../reducers/settings';
+import { setLanguage } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { allowedLanguagesSelector, currentLanguageSelector } from '@selectors/settings.selectors';
 
 @Component({
   selector: 'app-auth-languages',

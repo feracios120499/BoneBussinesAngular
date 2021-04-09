@@ -2,7 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LogInModel } from './../../models/login.model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { login, resetLogin } from 'src/app/reducers/auth';
+import { loginRequest, resetLogin } from '@actions/auth.actions';
 import { AuthFacade } from 'src/app/@core/facades/auth.facade';
 
 @Component({
@@ -13,6 +13,7 @@ import { AuthFacade } from 'src/app/@core/facades/auth.facade';
 export class AuthLoginComponent implements OnInit {
 
   public loading$ = this.facade.isLoading$;
+  public error$ = this.facade.errorMessage$;
   constructor(private store: Store, private facade: AuthFacade) { }
   login = new LogInModel();
 
@@ -22,8 +23,8 @@ export class AuthLoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.store.dispatch(login({ model: { ...this.login } }));
     this.store.dispatch(resetLogin());
+    this.store.dispatch(loginRequest({ data: { ...this.login } }));
   }
 
 }

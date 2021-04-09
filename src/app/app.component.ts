@@ -1,4 +1,4 @@
-import { currentLanguageSelector } from './reducers/settings';
+import { currentLanguageSelector } from '@selectors/settings.selectors';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';

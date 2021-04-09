@@ -10,7 +10,9 @@ export class AuthButtonComponent implements OnInit {
   constructor() { }
 
   @Output() authClick = new EventEmitter();
-  @Input() disabled = false;
+  @Input() isLoading: boolean | null = false;
+  @Input() disabled: boolean | null = false;
+  @Input() label: string = '';
 
   onClick(): void {
     this.authClick.emit();

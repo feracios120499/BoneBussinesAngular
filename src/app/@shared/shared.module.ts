@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CheckStateDirective } from './directives/check-state.directive';
-
+import { NgOtpInputModule } from 'ng-otp-input';
 @NgModule({
     declarations: [CheckStateDirective],
     imports: [
@@ -13,7 +13,7 @@ import { CheckStateDirective } from './directives/check-state.directive';
         TranslateModule,
         ReactiveFormsModule,
         NgbModule,
-
+        NgOtpInputModule
     ],
     exports: [
         CommonModule,
@@ -21,7 +21,8 @@ import { CheckStateDirective } from './directives/check-state.directive';
         TranslateModule,
         ReactiveFormsModule,
         NgbModule,
-        CheckStateDirective
+        CheckStateDirective,
+        NgOtpInputModule
     ]
 })
 export class SharedModule { }

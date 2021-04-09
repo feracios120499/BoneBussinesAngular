@@ -5,7 +5,6 @@
 @import "base.scss";
 @import "loaders.scss";
 
-
 body {
     overflow-y: scroll;
     background-color: var(--color-light-200);
@@ -3400,4 +3399,23 @@ textarea {
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-
+auth-otp {
+    & ng-otp-input {
+        width: 100%;
+        & .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            & input {
+                width: 15% !important;
+                height: auto !important;
+                @include base;
+                font-size: 32px !important;
+                line-height: 2 !important;
+                &:focus {
+                    outline: $color-primary auto 1px !important;
+                }
+            }
+        }
+    }
+}

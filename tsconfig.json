@@ -19,7 +19,30 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@selectors/*": [
+        "./src/app/@core/store/selectors/*"
+      ],
+      "@actions/*": [
+        "./src/app/@core/store/actions/*"
+      ],
+      "@reducers/*": [
+        "./src/app/@core/store/reducers/*"
+      ],
+      "@effects/*": [
+        "./src/app/@core/store/effects/*"
+      ],
+      "@services/*": [
+        "./src/app/@core/services/*"
+      ],
+      "@modules/*": [
+        "./src/app/modules/*"
+      ],
+      "@core/*": [
+        "./src/app/@core/*"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

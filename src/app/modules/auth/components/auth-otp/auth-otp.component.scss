@@ -1,0 +1,19 @@
+@import "variables.scss";
+:host {
+    width: 100%;
+}
+.otp {
+    &-title {
+        @include title2;
+        text-align: center;
+    }
+    &-subtitle {
+    }
+    &-part {
+        width: 20%;
+        & > input {
+            text-align: center;
+            padding-right: 0;
+        }
+    }
+}

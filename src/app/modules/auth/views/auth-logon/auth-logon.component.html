@@ -1,4 +1,4 @@
-<div class="cl-content-form">
+<div class="cl-content-form" *ngIf="!(isNeedOtp$ | async)">
     <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo">
     <div class="cl-content-title">
         {{'owner.slogan' | translate}}
@@ -28,4 +28,7 @@
         </ul>
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </div>
+</div>
+<div *ngIf="(isNeedOtp$ | async)" class="b1-mt-5">
+    <auth-otp [phone]="phone$ | async" (sendOtp)="logintOtp($event)"></auth-otp>
 </div>

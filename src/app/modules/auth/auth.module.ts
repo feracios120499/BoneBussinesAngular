@@ -13,6 +13,8 @@ import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component
 import { AuthPhoneComponent } from './components/auth-phone/auth-phone.component';
 import { AuthKeyComponent } from './components/auth-key/auth-key.component';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
+import { AuthErrorComponent } from './components/auth-error/auth-error.component';
+import { AuthOtpComponent } from './components/auth-otp/auth-otp.component';
 
 
 @NgModule({
@@ -26,9 +28,11 @@ import { AuthButtonComponent } from './components/auth-button/auth-button.compon
         AuthCloudComponent,
         AuthPhoneComponent,
         AuthKeyComponent,
-        AuthButtonComponent
+        AuthButtonComponent,
+        AuthErrorComponent,
+        AuthOtpComponent
     ],
-    imports: [CommonModule, AuthRoutingModule, CoreModule, SharedModule],
+    imports: [CommonModule, AuthRoutingModule, SharedModule],
     exports: [],
 })
 export class AuthModule { }
