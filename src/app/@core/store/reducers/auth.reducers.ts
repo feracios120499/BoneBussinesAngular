@@ -36,7 +36,7 @@ export const authReducer = createReducer(
         authActions.loginRequest,
         authActions.tokenLoginRequest,
         authActions.tokenOtpRequest,
-        state => ({ ...state, isLoading: true })
+        state => ({ ...state, isLoading: true, error: '' })
     ),
     on(
         authActions.loginFailure,
