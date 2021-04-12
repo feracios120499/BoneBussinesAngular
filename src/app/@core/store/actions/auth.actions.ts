@@ -1,59 +1,59 @@
-import { LoginResponse } from '@modules/auth/models/login.response';
 import { LogInModel } from '@modules/auth/models/login.model';
-import { createAction, props } from '@ngrx/store';
+import { LoginResponse } from '@modules/auth/models/login.response';
 import { Token } from '@modules/auth/models/token.model';
+import { createAction, props } from '@ngrx/store';
 
 
 export const loginRequest = createAction(
-    '[AUTH] login request',
-    props<{ data: LogInModel }>()
+  '[AUTH] login request',
+  props<{ data: LogInModel }>()
 );
 
 export const tokenLoginRequest = createAction(
-    '[AUTH] token with login request',
-    props<{ data: LogInModel | undefined }>()
+  '[AUTH] token with login request',
+  props<{ data: LogInModel | undefined }>()
 );
 
 export const tokenOtpRequest = createAction(
-    '[AUTH] token with otp request',
-    props<{ code: string }>()
+  '[AUTH] token with otp request',
+  props<{ code: string }>()
 );
 
 export const resetLogin = createAction(
-    '[AUTH] reset login data'
+  '[AUTH] reset login data'
 );
 
 export const loginSuccess = createAction(
-    '[AUTH] login success',
-    props<{ response: LoginResponse }>()
+  '[AUTH] login success',
+  props<{ response: LoginResponse }>()
 );
 
 export const loginFailure = createAction(
-    '[AUTH] login error',
-    props<{ message: string }>()
+  '[AUTH] login error',
+  props<{ message: string }>()
 );
 
 // tokenSuccess action
 export const tokenSuccess = createAction(
-    '[AUTH] token success',
-    props<{ token: Token }>()
+  '[AUTH] token success',
+  props<{ token: Token }>()
 );
 
 // tokenFailure action
 export const tokenFailure = createAction(
-    '[AUTH] token error',
-    props<{ message: string }>()
+  '[AUTH] token error',
+  props<{ message: string }>()
 );
 
 export const setIsLoading = createAction(
-    '[AUTH] set is loading',
-    props<{ isLoading: boolean }>()
+  '[AUTH] set is loading',
+  props<{ isLoading: boolean }>()
 );
 
 // setNeedOtp action
 export const setNeedOtp = createAction(
-    '[AUTH] sett need otp',
-    props<{ phone: string | undefined }>()
+  '[AUTH] sett need otp',
+  props<{ phone: string | undefined }>()
 );
 
 

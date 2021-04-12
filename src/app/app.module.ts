@@ -1,21 +1,17 @@
-import { CoreModule } from './@core/core.module';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { CoreModule } from './@core/core.module';
+import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
+import { B1GlobalLoaderComponent } from './@shared/components/b1-global-loader/b1-global-loader.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
-import { B1GlobalLoaderComponent } from './@shared/components/b1-global-loader/b1-global-loader.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
-import { localStorageSync } from 'ngrx-store-localstorage';
+import { TestComponent } from './test/test.component';
 
 
 
@@ -27,10 +23,9 @@ import { localStorageSync } from 'ngrx-store-localstorage';
     AuthorizedLayoutComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    CoreModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -38,7 +33,8 @@ import { localStorageSync } from 'ngrx-store-localstorage';
         deps: [HttpClient]
       }
     }),
-
+    AppRoutingModule,
+    CoreModule
   ],
   providers: [
     {

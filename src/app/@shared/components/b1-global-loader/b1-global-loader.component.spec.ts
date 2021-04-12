@@ -8,9 +8,9 @@ describe('B1GlobalLoaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ B1GlobalLoaderComponent ]
+      declarations: [B1GlobalLoaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
