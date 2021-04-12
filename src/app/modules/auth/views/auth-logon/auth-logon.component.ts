@@ -1,9 +1,7 @@
-import { LoginOtpModel } from './../../models/login-otp.model';
-import { LogInModel } from './../../models/login.model';
-import { AuthFacade } from 'src/app/@core/facades/auth.facade';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { AuthFacade } from 'src/app/@core/facades/auth.facade';
+
+import { LogInModel } from './../../models/login.model';
 
 @Component({
   selector: 'app-auth-logon',

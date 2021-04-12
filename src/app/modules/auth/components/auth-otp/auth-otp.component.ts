@@ -1,5 +1,5 @@
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AuthFacade } from 'src/app/@core/facades/auth.facade';
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 
 @Component({
   selector: 'auth-otp',
@@ -13,9 +13,11 @@ export class AuthOtpComponent implements OnInit {
 
   loading$ = this.authFacade.isLoading$;
   error$ = this.authFacade.errorMessage$;
+  otp = '';
+
   @Input() phone: string | undefined | null = '';
   @Output() sendOtp = new EventEmitter<string>();
-  otp: string = '';
+
   @ViewChild('ngOtpInput', { static: false }) ngOtpInput: any;
   config = {
     allowNumbersOnly: true,
@@ -24,7 +26,6 @@ export class AuthOtpComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-
     }
   };
 

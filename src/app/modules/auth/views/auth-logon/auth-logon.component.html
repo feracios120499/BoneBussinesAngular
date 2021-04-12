@@ -1,34 +1,35 @@
 <div class="cl-content-form" *ngIf="!(isNeedOtp$ | async)">
-    <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo">
-    <div class="cl-content-title">
-        {{'owner.slogan' | translate}}
-    </div>
-    <div class="cl-content-tabs">
-        <ul ngbNav #nav="ngbNav" [animation]="false" [destroyOnHide]="false">
-            <li [ngbNavItem]="1">
-                <a ngbNavLink>
-                    <div>
-                        {{'owner.byPhone' | translate}}
-                    </div>
-                </a>
-                <ng-template ngbNavContent>
-                    <auth-login></auth-login>
-                </ng-template>
-            </li>
-            <li [ngbNavItem]="2">
-                <a ngbNavLink>
-                    <div>
-                        {{'owner.byCloud' | translate}}
-                    </div>
-                </a>
-                <ng-template ngbNavContent>
-                    <p>345</p>
-                </ng-template>
-            </li>
-        </ul>
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-    </div>
+  <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo">
+  <div class="cl-content-title">
+    {{ 'owner.slogan' | translate }}
+  </div>
+  <div class="cl-content-tabs">
+    <ul ngbNav #nav="ngbNav" [animation]="false" [destroyOnHide]="false">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>
+          <div>
+            {{ 'owner.byPhone' | translate }}
+          </div>
+        </a>
+        <ng-template ngbNavContent>
+          <auth-login></auth-login>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>
+          <div>
+            {{ 'owner.byCloud' | translate }}
+          </div>
+        </a>
+        <ng-template ngbNavContent>
+          <p>345</p>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
 </div>
+
 <div *ngIf="(isNeedOtp$ | async)" class="b1-mt-5">
-    <auth-otp [phone]="phone$ | async" (sendOtp)="logintOtp($event)"></auth-otp>
+  <auth-otp [phone]="phone$ | async" (sendOtp)="logintOtp($event)"></auth-otp>
 </div>

@@ -1,15 +1,14 @@
 <div ngbDropdown class="lang-dropdown" #dropdown="ngbDropdown">
-    <a class="lang-dropdown__button b1-base" id="languages"
-        (click)="$event.stopPropagation(); dropdown.open();">{{'shared.languages.' + (language$ | async) | translate}}
-        <b class="caret"></b></a>
-    <ul class="lang-dropdown__menu" ngbDropdownMenu aria-labelledby="languages">
-        <li class="lang-dropdown__item" *ngFor="let language of (languages$ | async)">
-            <a class="lang-dropdown__link"
-                (click)="$event.stopPropagation();setLanguage(language); dropdown.close();">{{'shared.languages.' +
-                language | translate}}</a>
-        </li>
-    </ul>
-    <!-- <div ngbDropdownMenu aria-labelledby="languages">
+  <a class="lang-dropdown__button b1-base" id="languages" (click)="$event.stopPropagation(); dropdown.open();">
+    {{ 'shared.languages.' + (language$ | async) | translate }}
+    <b class="caret"></b></a>
+  <ul class="lang-dropdown__menu" ngbDropdownMenu aria-labelledby="languages">
+    <li class="lang-dropdown__item" *ngFor="let language of (languages$ | async)">
+      <a class="lang-dropdown__link" (click)="$event.stopPropagation(); setLanguage(language); dropdown.close();">
+        {{ 'shared.languages.' + language | translate }}</a>
+    </li>
+  </ul>
+  <!-- <div ngbDropdownMenu aria-labelledby="languages">
         <button class="lang-dropdown__item" ngbDropdownItem *ngFor="let language of (languages$ | async)">
             <span class="lang-dropdown__link">{{'shared.languages.' + language | translate}}</span></button>
     </div> -->

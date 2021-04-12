@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,19 +18,6 @@ export class AuthInputComponent implements ControlValueAccessor {
   constructor() {
   }
 
-  @Input() label: string | undefined;
-  @Input() control: FormControl | undefined;
-  @Input() name: string | undefined;
-  @Input() type: string | undefined;
-  @Input() disabled = false;
-  @Output() authChange = new EventEmitter();
-  onChange: any = () => {
-    this.authChange.emit();
-  }
-
-  onTouch: any = () => { };
-  val: any;
-
 
   set value(val: any) {
     if (val !== undefined && this.val !== val) {
@@ -40,6 +27,21 @@ export class AuthInputComponent implements ControlValueAccessor {
     }
 
   }
+
+  @Input() label: string | undefined;
+  @Input() control: FormControl | undefined;
+  @Input() name: string | undefined;
+  @Input() type: string | undefined;
+  @Input() disabled = false;
+  @Output() authChange = new EventEmitter();
+
+  val: any;
+
+  onChange: any = () => {
+    this.authChange.emit();
+  }
+
+  onTouch: any = () => { };
 
   writeValue(value: any): void {
     this.value = value;
@@ -52,6 +54,7 @@ export class AuthInputComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
+
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
   }
