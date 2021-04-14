@@ -22,5 +22,5 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: Run linter
-        run: ./node_modules/tslint/bin/tslint
+      - name: TSLint checks
+        uses: mooyoul/tslint-actions@v1.1.1
