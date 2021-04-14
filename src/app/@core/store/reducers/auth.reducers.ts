@@ -51,4 +51,7 @@ export const authReducer = createReducer(
         authActions.setNeedOtp,
         (state, action) => ({ ...state, isNeedOtp: true, phone: action.phone })
     ),
+    on(
+        authActions.loginRequest,
+        (state, actions) => ({ ...state, loginData: actions.data })),
 );

@@ -1,0 +1,26 @@
+name: ESLint
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run-linter:
+    name: Run linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Run linter
+        run: ./node_modules/tslint/bin/tslint .
