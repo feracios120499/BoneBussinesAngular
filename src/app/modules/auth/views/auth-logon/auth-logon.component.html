@@ -1,4 +1,4 @@
-<div class="cl-content-form" *ngIf="!(isNeedOtp$ | async)">
+<div class="cl-content-form" *ngIf="(isNeedOtp$ | async) === false">
   <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo">
   <div class="cl-content-title">
     {{ 'owner.slogan' | translate }}

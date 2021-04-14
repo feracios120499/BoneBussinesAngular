@@ -1,3 +1,4 @@
+// tslint:disable variable-name
 export class Token {
   access_token: string | undefined;
   token_type: string | undefined;
