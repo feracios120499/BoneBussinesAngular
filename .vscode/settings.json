@@ -1,3 +1,12 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "angular.experimental-ivy": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": false,
+        "source.fixAll.tslint": true
+    },
+    "tslint.configFile": "tslint.json",
+    "typescriptHero.imports.organizeOnSave": true
 }
