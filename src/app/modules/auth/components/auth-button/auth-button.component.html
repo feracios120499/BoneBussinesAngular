@@ -1,9 +1,9 @@
 <button class="cl-button" (click)="onClick()" [disabled]="disabled || isLoading">
-    <span *ngIf="!isLoading">{{label | translate}}</span>
-    <div class="lds-ellipsis" *ngIf="isLoading">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+  <span *ngIf="!isLoading">{{ label | translate }}</span>
+  <div class="lds-ellipsis" *ngIf="isLoading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </button>

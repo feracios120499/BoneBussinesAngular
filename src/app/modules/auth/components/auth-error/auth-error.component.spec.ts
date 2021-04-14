@@ -8,9 +8,9 @@ describe('AuthErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthErrorComponent ]
+      declarations: [AuthErrorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

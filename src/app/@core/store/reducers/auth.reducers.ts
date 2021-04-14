@@ -1,7 +1,7 @@
-import { createReducer, on } from '@ngrx/store';
+import * as authActions from '@actions/auth.actions';
 import { LogInModel } from '@modules/auth/models/login.model';
 import { Token } from '@modules/auth/models/token.model';
-import * as authActions from '@actions/auth.actions';
+import { createReducer, on } from '@ngrx/store';
 
 export const AUTH_KEY = 'auth';
 
@@ -36,7 +36,7 @@ export const authReducer = createReducer(
         authActions.loginRequest,
         authActions.tokenLoginRequest,
         authActions.tokenOtpRequest,
-        state => ({ ...state, isLoading: true })
+        state => ({ ...state, isLoading: true, error: '' })
     ),
     on(
         authActions.loginFailure,
