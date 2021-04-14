@@ -9,7 +9,7 @@ export class AuthorizedLayoutComponent implements OnInit {
 
   constructor() { }
 
-  public test = "";
+  public test: boolean = '';
   ngOnInit(): void {
   }
 

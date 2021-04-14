@@ -22,8 +22,8 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: TSLint checks
-        uses: mooyoul/tslint-actions@v1.1.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: '*.ts'
+      - name: Install TSLint
+        run: npm i -g tslint
+
+      - name: Run linter
+        run: npm run lint
