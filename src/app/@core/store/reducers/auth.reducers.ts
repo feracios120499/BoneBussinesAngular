@@ -30,12 +30,15 @@ export const authReducer = createReducer(
         authActions.loginSuccess,
         authActions.tokenFailure,
         authActions.tokenSuccess,
+        authActions.authLoadProfileSuccess,
+        authActions.authLoadProfileFailure,
         state => ({ ...state, isLoading: false }),
     ),
     on(
         authActions.loginRequest,
         authActions.tokenLoginRequest,
         authActions.tokenOtpRequest,
+        authActions.authLoadProfileRequest,
         state => ({ ...state, isLoading: true, error: '' })
     ),
     on(
@@ -44,7 +47,7 @@ export const authReducer = createReducer(
         (state, action) => ({ ...state, error: action.message })
     ),
     on(
-        authActions.tokenSuccess,
+        authActions.setToken,
         (state, action) => ({ ...state, token: action.token })
     ),
     on(
@@ -53,5 +56,10 @@ export const authReducer = createReducer(
     ),
     on(
         authActions.loginRequest,
-        (state, actions) => ({ ...state, loginData: actions.data })),
+        (state, actions) => ({ ...state, loginData: actions.data })
+    ),
+    on(
+        authActions.resetLogin,
+        (state) => ({ ...initialState })
+    )
 );

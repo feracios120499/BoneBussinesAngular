@@ -55,4 +55,19 @@ export class AuthService extends BaseService {
     };
     return this.http.post<Token>('api/v1/auth/token', params, httpOptions);
   }
+
+  refreshToken(refreshToken: string | undefined, sessionId: string | undefined): Observable<Token> {
+    const params = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', refreshToken || '')
+      .set('sessionId', sessionId || '')
+      .set('client_id', 'CORP-LIGHT-WEB'); // TODO add to environment
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+    return this.http.post<Token>('api/v1/auth/token', params, httpOptions);
+  }
 }

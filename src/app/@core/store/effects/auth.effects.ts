@@ -5,12 +5,17 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { loginDataSelector } from '@selectors/auth.selectors';
 import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private action$: Actions, private authService: AuthService, private store: Store) { }
+  constructor(
+    private action$: Actions,
+    private authService: AuthService,
+    private store: Store,
+    private userService: UserService) { }
 
   loginRequest$ = createEffect(() => this.action$.pipe(
     ofType(authActions.loginRequest),
@@ -25,7 +30,7 @@ export class AuthEffects {
     withLatestFrom(this.store.select(loginDataSelector)),
 
     switchMap(([action, model]) => this.authService.loginOtp(new LoginOtpModel(action.code, model)).pipe(
-      map(token => authActions.tokenSuccess({ token })),
+      switchMap(token => [authActions.setToken({ token }), authActions.tokenSuccess({ token })]),
       catchError(error => of(authActions.tokenFailure({ message: error.error.error_description })))
     ))
   ));
@@ -42,9 +47,25 @@ export class AuthEffects {
   tokenLogin$ = createEffect(() => this.action$.pipe(
     ofType(authActions.tokenLoginRequest),
     switchMap(action => this.authService.loginWithData(action.data).pipe(
-      map(token => authActions.tokenSuccess({ token })),
+      switchMap(token => [authActions.setToken({ token }), authActions.tokenSuccess({ token })]),
       catchError(error => of(authActions.loginFailure({ message: error.error.error_description })))
     ))
   ));
 
+  tokenSuccessEffect$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(authActions.tokenSuccess),
+      map(() => authActions.authLoadProfileRequest())
+    )
+  );
+
+  loadProfileRequestEffect$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(authActions.authLoadProfileRequest),
+      switchMap(action => this.userService.getProfile().pipe(
+        map(profile => authActions.authLoadProfileSuccess({ profile })),
+        catchError(error => of(authActions.authLoadProfileFailure({ error: error.error.Message })))
+      ))
+    )
+  );
 }

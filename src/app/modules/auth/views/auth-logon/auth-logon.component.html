@@ -31,5 +31,5 @@
 </div>
 
 <div *ngIf="(isNeedOtp$ | async)" class="b1-mt-5">
-  <auth-otp [phone]="phone$ | async" (sendOtp)="logintOtp($event)"></auth-otp>
+  <auth-otp [phone]="(phone$ | async)" (sendOtp)="logintOtp($event)"></auth-otp>
 </div>

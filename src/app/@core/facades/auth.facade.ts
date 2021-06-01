@@ -1,15 +1,8 @@
 import * as authActions from '@actions/auth.actions';
 import { Injectable } from '@angular/core';
+import { LogInModel } from '@modules/auth/models/login.model';
 import { Store } from '@ngrx/store';
-import {
-  errorSelector,
-  isLoadingSelector,
-  isNeedOtpSelector,
-  loginDataSelector,
-  phoneSelector,
-} from '@selectors/auth.selectors';
-
-import { LogInModel } from './../../modules/auth/models/login.model';
+import { errorSelector, isLoadingSelector, isNeedOtpSelector, phoneSelector } from '@selectors/auth.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +15,12 @@ export class AuthFacade {
   public errorMessage$ = this.store.select(errorSelector);
   public phone$ = this.store.select(phoneSelector);
   public isNeedOtp$ = this.store.select(isNeedOtpSelector);
-  public loginData$ = this.store.select(loginDataSelector);
 
   constructor(private store: Store) {
 
   }
   login(loginData: LogInModel): void {
-
+    this.store.dispatch(authActions.loginRequest({ data: loginData }));
   }
 
   loginOtp(otp: string): void {

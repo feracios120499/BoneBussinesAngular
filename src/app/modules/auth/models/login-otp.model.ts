@@ -8,6 +8,6 @@ export class LoginOtpModel extends LogInModel {
     super();
     this.ConfirmCode = code;
     this.Password = loginData?.Password;
-    this.Username = loginData?.Password;
+    this.Username = loginData?.Username;
   }
 }

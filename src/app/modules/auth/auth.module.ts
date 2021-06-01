@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../@shared/shared.module';
@@ -31,7 +32,7 @@ import { AuthComponent } from './views/auth/auth.component';
     AuthErrorComponent,
     AuthOtpComponent
   ],
-  imports: [AuthRoutingModule, SharedModule],
+  imports: [CommonModule, AuthRoutingModule, SharedModule],
   exports: [],
 })
 export class AuthModule { }

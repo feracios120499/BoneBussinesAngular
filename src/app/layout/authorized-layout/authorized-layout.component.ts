@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserFacade } from '@core/facades/user.facade';
 
 @Component({
   selector: 'app-authorized-layout',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorizedLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userFacade: UserFacade) { }
 
-  public test: boolean = '';
   ngOnInit(): void {
+    this.userFacade.loadProfile();
   }
 
 }

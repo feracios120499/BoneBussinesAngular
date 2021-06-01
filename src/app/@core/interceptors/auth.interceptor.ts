@@ -1,10 +1,12 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { logout, setToken } from '@actions/auth.actions';
+import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { tokenSelector } from '@selectors/auth.selectors';
-import { Observable, throwError } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { AuthService } from '@services/auth.service';
+import { EMPTY, Observable, Subject, throwError } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { Token } from './../../modules/auth/models/token.model';
 
@@ -14,26 +16,93 @@ export class AuthInterceptor implements HttpInterceptor {
   endpoint = 'http://localhost/Bars.API.Web.Client/';
   token: Token | undefined = undefined;
 
-  constructor(private translate: TranslateService, private store: Store) {
+  constructor(private translate: TranslateService, private store: Store, private authService: AuthService) {
     store.select(tokenSelector).subscribe(token => {
       this.token = token;
     });
   }
 
+  refreshTokenInProgress = false;
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  tokenRefreshedSource = new Subject();
+  tokenRefreshed$ = this.tokenRefreshedSource.asObservable();
+
+  refreshToken(): any {
+    if (this.refreshTokenInProgress) {
+      return new Observable(observer => {
+        this.tokenRefreshed$.subscribe(() => {
+          observer.next();
+          observer.complete();
+        });
+      });
+    } else {
+      this.refreshTokenInProgress = true;
+
+      return this.authService.refreshToken(this.token?.refresh_token, this.token?.sessionId).pipe(
+        tap((token) => {
+          this.store.dispatch(setToken({ token }));
+          this.refreshTokenInProgress = false;
+          this.tokenRefreshedSource.next();
+        }),
+        catchError(() => {
+          this.refreshTokenInProgress = false;
+          this.logout();
+          return EMPTY;
+        }));
+    }
+  }
+
+  handleResponseError(error: any, request: HttpRequest<any>, next: HttpHandler): any {
+
+    // Invalid token error
+    if (error.status === 401) {
+      return this.refreshToken().pipe(
+        switchMap(() => {
+          request = this.formatRequest(request);
+          return next.handle(request);
+        }),
+        catchError(e => {
+          if (e.status !== 401) {
+            return this.handleResponseError(e, request, next);
+          } else {
+            this.logout();
+            return EMPTY;
+          }
+        }));
+    }
+
+    // Access denied error
+    else if (error.status === 403) {
+      // Show message
+      // Logout
+      this.logout();
+    }
+
+    // Server error
+    else if (error.status === 500) {
+      // Show message
+    }
+
+    // Maintenance error
+    else if (error.status === 503) {
+      // Show message
+      // Redirect to the maintenance page
+    }
+
+    return throwError(error);
+  }
+
+  logout(): any {
+    this.store.dispatch(logout());
+  }
+  intercept(req: HttpRequest<any>, next: HttpHandler): any {
     const requestFormated = this.formatRequest(req);
     return next.handle(requestFormated)
       .pipe(
         map((data: any) => {
           return data;
         }),
-        tap((event: HttpEvent<any>) => {
-
-        },
-          (err: any) => {
-            return throwError(err);
-          })
+        catchError(error => this.handleResponseError(error, req, next))
       );
   }
 
@@ -65,13 +134,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     });
 
-    if (this.token) {
+    if (this.token && !request.url.includes('token')) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer' + this.token.access_token
+          Authorization: 'Bearer ' + this.token.access_token
         }
       });
     }
+
     return request;
   }
 

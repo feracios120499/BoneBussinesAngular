@@ -2,6 +2,7 @@ import { LogInModel } from '@modules/auth/models/login.model';
 import { LoginResponse } from '@modules/auth/models/login.response';
 import { Token } from '@modules/auth/models/token.model';
 import { createAction, props } from '@ngrx/store';
+import { Profile } from 'src/app/@shared/models/profile.model';
 
 
 export const loginRequest = createAction(
@@ -54,6 +55,35 @@ export const setIsLoading = createAction(
 export const setNeedOtp = createAction(
   '[AUTH] sett need otp',
   props<{ phone: string | undefined }>()
+);
+
+
+// authLoadProfile action
+export const authLoadProfileRequest = createAction(
+  '[AUTH] load profile request'
+);
+
+// authLoadProfileSuccess action
+export const authLoadProfileSuccess = createAction(
+  '[AUTH] load profile success',
+  props<{ profile: Profile }>()
+);
+
+// authLoadProfileFailure action
+export const authLoadProfileFailure = createAction(
+  '[AUTH] load profile failure',
+  props<{ error: string }>()
+);
+
+// setToken action
+export const setToken = createAction(
+  '[AUTH] set token',
+  props<{ token: Token }>()
+);
+
+// logout action
+export const logout = createAction(
+  '[AUTH] logout'
 );
 
 
