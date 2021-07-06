@@ -31,7 +31,7 @@
       &.picker-open {
         border-color: var(--color-info) !important;
         box-shadow: 0 0 0 3px rgba($color-info, 0.4) !important;
-        & + .ub-icons {
+        & + .b1-icons {
           color: var(--color-info) !important;
         }
       }
@@ -104,7 +104,7 @@
         color: rgba(var(--color-dark-rgb), 0.6);
         transition: all 0.15s $animation-timing;
       }
-      & + .ub-icons {
+      & + .b1-icons {
         color: rgba(var(--color-dark-rgb), 0.6);
       }
       &_textarea {
@@ -121,7 +121,7 @@
 
       &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);
-        & + .ub-icons {
+        & + .b1-icons {
           color: rgba(var(--color-dark-rgb), 0.9);
         }
         &::placeholder {
@@ -166,7 +166,7 @@
       border: 1px solid var(--color-dark-500);
       border-radius: 2px * $border-radius-factor;
       transition: all 0.15s $animation-timing;
-      &.ui-select-multiple{
+      &.ui-select-multiple {
         height: auto;
       }
       &:hover {

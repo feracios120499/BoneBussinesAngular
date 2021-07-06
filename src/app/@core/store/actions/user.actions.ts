@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Profile } from 'src/app/@shared/models/profile.model';
+import { Notification } from 'src/app/@shared/models/notification.model';
 
 // loadProfileRequest action
 export const loadProfileRequest = createAction('[USER] load profile');
@@ -22,4 +23,13 @@ export const checkProfile = createAction(
 
 export const profileExist = createAction(
     '[USER] profile exist'
+);
+
+export const loadNotifications = createAction(
+    '[USER] load notifications'
+);
+
+export const setNotifications = createAction(
+    '[USER] set notifications',
+    props<{ notifications: Notification[] }>()
 );

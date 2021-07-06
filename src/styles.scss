@@ -3151,11 +3151,11 @@ textarea {
     border-radius: 4px;
     &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);
-        & + .ub-icons {
+        & + .b1-icons {
             color: rgba(var(--color-dark-rgb), 0.9);
         }
     }
-    & + .ub-icons {
+    & + .b1-icons {
         color: rgba(var(--color-dark-rgb), 0.6);
     }
 }
@@ -3165,11 +3165,11 @@ textarea {
     border-radius: 4px;
     &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);
-        & + .ub-icons {
+        & + .b1-icons {
             color: rgba(var(--color-dark-rgb), 0.9);
         }
     }
-    & + .ub-icons {
+    & + .b1-icons {
         color: rgba(var(--color-dark-rgb), 0.6);
     }
 }

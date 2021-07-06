@@ -103,7 +103,7 @@
 }
 
 /* Loaded styles */
-.loaded .screen-loader-wrapper .screen-loader-section {
+.loaded.screen-loader-wrapper .screen-loader-section {
   opacity: 0;
 
   -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
@@ -115,7 +115,7 @@
   -webkit-transition: all 0.3s ease-out; /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
   transition: all 0.3s ease-out; /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
 }
-.loaded .screen-loader-wrapper {
+.loaded.screen-loader-wrapper {
   visibility: hidden;
 
   -webkit-transform: translateY(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
@@ -244,10 +244,7 @@
   /* Style adjustments for viewports that meet the condition */
 }
 
-@media print,
-  (-o-min-device-pixel-ratio: 5/4),
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 120dpi) {
+@media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 

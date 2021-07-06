@@ -21,4 +21,6 @@ export class UserService extends BaseService {
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>('api/v1/user/profile').pipe(tap((response: Profile) => console.log(response)));
   }
+
+
 }

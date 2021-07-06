@@ -12,3 +12,8 @@ export const allowedLanguagesSelector = createSelector(
   featureSelector,
   state => state.allowedLanguages
 );
+
+export const darkModeSelector = createSelector(
+  featureSelector,
+  state => state.darkModeActive
+);

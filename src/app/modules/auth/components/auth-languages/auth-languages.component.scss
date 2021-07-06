@@ -1,4 +1,7 @@
 @import "variables";
+:host {
+    display: contents;
+}
 .lang {
     &-dropdown {
         margin: 0;

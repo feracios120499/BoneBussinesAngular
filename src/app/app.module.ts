@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
 import { TestComponent } from './test/test.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { SharedModule } from './@shared/shared.module';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 
 
@@ -20,12 +23,14 @@ import { TestComponent } from './test/test.component';
     AppComponent,
     TestComponent,
     B1GlobalLoaderComponent,
-    AuthorizedLayoutComponent
+    AuthorizedLayoutComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
+    ReactiveComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -34,7 +39,8 @@ import { TestComponent } from './test/test.component';
       }
     }),
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   providers: [
     {

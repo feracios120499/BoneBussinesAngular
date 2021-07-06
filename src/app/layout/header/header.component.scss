@@ -1,0 +1,230 @@
+@import "variables.scss";
+.main {
+    &-navbar {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 56px;
+        margin-left: 240px;
+        @include navbar;
+
+        &.show {
+            display: flex !important;
+            height: 56px;
+            flex-direction: row;
+        }
+
+        @media (max-width: 767px) {
+            display: none;
+            margin: 0;
+
+            &.show {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: auto;
+            }
+        }
+
+        &_brand {
+            position: fixed;
+            margin: 0;
+            width: 240px;
+            height: 56px;
+            justify-content: center;
+            box-shadow: none;
+            @include sidemenu-head;
+
+            @media (max-width: 767px) {
+                display: flex;
+                position: relative;
+                width: 100%;
+                justify-content: space-between;
+                padding: 0 32px;
+            }
+
+            & > button {
+                margin: 0 16px;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        &__app-logo {
+            max-height: 56px;
+            margin: 0;
+        }
+
+        &__list {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            height: 100%;
+            padding-left: 16px;
+
+            @media (max-width: 767px) {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            &__item {
+                position: relative;
+                display: block;
+                transition: all 0.15s $animation-timing;
+                height: 48px;
+                border-radius: 2px * $border-radius-factor;
+                margin-left: 4px;
+                width: auto;
+
+                &:first-child {
+                    margin: 0;
+                }
+
+                @media (max-width: 767px) {
+                    width: 100%;
+                    border-bottom: 2px solid var(--color-light-300);
+                }
+
+                &:hover,
+                &.open {
+                    background-color: var(--color-light-100);
+                }
+
+                &__link {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 16px;
+                    position: relative;
+
+                    & > span {
+                        margin: 0 8px;
+                    }
+
+                    .avatar {
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        overflow: hidden;
+
+                        & > img {
+                            width: 100%;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+
+                .customer {
+                    display: flex;
+                    justify-content: space-between;
+
+                    &__circle {
+                        flex-shrink: 0;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background-color: var(--color-light-500);
+                    }
+
+                    &__name {
+                        padding-right: 16px;
+                    }
+
+                    &__lock {
+                        display: none;
+                        color: var(--color-light-500);
+                    }
+
+                    &.active {
+                        opacity: 1;
+
+                        .customer__circle {
+                            background-color: $color-primary;
+                        }
+
+                        .customer__name {
+                            color: $color-primary;
+                            opacity: 1;
+                        }
+
+                        .customer__lock {
+                            color: $color-primary;
+                        }
+                    }
+
+                    &.locked {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        pointer-events: none;
+
+                        .customer__lock {
+                            display: inline;
+                        }
+                    }
+                }
+
+                .notification {
+                    display: flex;
+                    align-items: flex-start;
+                    margin-bottom: 4px;
+
+                    &:last-child {
+                        margin: 0;
+                    }
+
+                    &__icon {
+                        flex-shrink: 0;
+                        padding: 8px 12px;
+                        padding-left: 0;
+                    }
+
+                    &__info {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    &__close {
+                        flex-shrink: 0;
+                        align-self: center;
+                        padding: 8px;
+                        padding-right: 0;
+                    }
+                }
+
+                .button-exit {
+                    width: 100%;
+                    text-transform: lowercase;
+                }
+
+                & > .rates {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 16px;
+                    position: relative;
+                }
+            }
+        }
+
+        &.b1-collapsed {
+            margin-left: 80px;
+        }
+
+        &_brand.b1-collapsed {
+            margin: 0;
+            width: 80px;
+        }
+    }
+}
+
+.bell {
+    -webkit-animation: ring 4s 0.7s ease-in-out infinite;
+    -webkit-transform-origin: 50% 4px;
+    -moz-animation: ring 4s 0.7s ease-in-out infinite;
+    -moz-transform-origin: 50% 4px;
+    animation: ring 4s 0.7s ease-in-out infinite;
+    transform-origin: 50% 4px;
+}

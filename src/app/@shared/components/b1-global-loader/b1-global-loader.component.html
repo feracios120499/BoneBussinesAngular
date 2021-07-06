@@ -1,4 +1,4 @@
-<div class="screen-loader-wrapper" *ngIf="loading">
+<div class="screen-loader-wrapper" [class.loaded]="!(loading$ | async)">
   <div class="screen-loader"></div>
   <div class="screen-loader-section"></div>
 </div>

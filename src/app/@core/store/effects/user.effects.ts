@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { profileSelector } from '@selectors/user.selectors';
+import { NotificationsService } from '@services/notifications.service';
 import { UserService } from '@services/user.service';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
@@ -15,7 +16,11 @@ import * as userActions from './../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
-    constructor(private actions$: Actions, private store: Store, private userService: UserService) { }
+    constructor(
+        private actions$: Actions,
+        private store: Store,
+        private userService: UserService,
+        private notificationsService: NotificationsService) { }
 
     checkProfile$ = createEffect(() =>
         this.actions$.pipe(
@@ -42,5 +47,17 @@ export class UserEffects {
                 )
             )
         ));
+
+    loadNotifications$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(userActions.loadNotifications),
+            withLatestFrom(this.store.select(profileSelector)),
+            switchMap(([action, profile]) =>
+                this.notificationsService.getNotifications(profile?.UserId || '').pipe(
+                    map((notifications) => userActions.setNotifications({ notifications }))
+                ))
+        ));
+
+
 
 }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  languages: ['uk', 'ru', 'en']
+  languages: ['uk', 'ru', 'en'],
+  defaultUserPictureUrl: 'assets/img/a0.jpg'
 };
 
 /*

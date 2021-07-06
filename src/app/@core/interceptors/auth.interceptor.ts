@@ -118,6 +118,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
+
     if (this.isStaticFileRequest(request.url)) {
       request = request.clone({
         url: request.url + prefix + this.customDate(new Date(), '.')

@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { globalLoaderSelector } from '@selectors/app.selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,28 +9,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './b1-global-loader.component.html',
   styleUrls: ['./b1-global-loader.component.scss']
 })
-export class B1GlobalLoaderComponent implements OnInit, OnDestroy {
+export class B1GlobalLoaderComponent implements OnInit {
 
-  loading = false;
-  eventsSubscription$!: Subscription;
+  public loading$ = this.store.select(globalLoaderSelector);
 
-  constructor(private router: Router) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.eventsSubscription$ = this.router.events.subscribe(event => {
-      if (event instanceof RouteConfigLoadStart) {
-        this.loading = true;
-        console.log('start load');
-      } else if (event instanceof RouteConfigLoadEnd) {
-        this.loading = false;
-        console.log('end load');
-      }
-    });
 
   }
-
-  ngOnDestroy(): void {
-    this.eventsSubscription$.unsubscribe();
-  }
-
 }

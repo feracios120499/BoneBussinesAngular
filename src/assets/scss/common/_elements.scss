@@ -18,6 +18,7 @@
   }
 
   &-dropdown {
+    color: var(--color-dark);
     min-width: 100%;
     position: absolute;
     flex-direction: column;
@@ -74,7 +75,7 @@
   &-quick-refresh {
     font-size: x-large;
     float: left;
-    opacity: .7;
+    opacity: 0.7;
     transition: 0.2s all ease;
     -moz-transition: 0.2s all ease;
     -webkit-transition: 0.2s all ease;
@@ -251,7 +252,7 @@
   display: none;
 }
 
-.dropdown.open > .b1-dropdown {
+.dropdown.show > .b1-dropdown {
   display: flex;
 }
 
@@ -1267,7 +1268,7 @@
   &_item {
     padding: 16px;
     margin: 0 8px;
-    & .ub-icons {
+    & .b1-icons {
       font-size: 56px;
       color: $color-primary;
     }

@@ -4,11 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { B1IconDirective } from './directives/b1-icon.directive';
 
 import { CheckStateDirective } from './directives/check-state.directive';
 
+
 @NgModule({
-  declarations: [CheckStateDirective],
+  declarations: [CheckStateDirective, B1IconDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,7 +26,8 @@ import { CheckStateDirective } from './directives/check-state.directive';
     ReactiveFormsModule,
     NgbModule,
     CheckStateDirective,
-    NgOtpInputModule
+    NgOtpInputModule,
+    B1IconDirective
   ]
 })
 export class SharedModule { }
