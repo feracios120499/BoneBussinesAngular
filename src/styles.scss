@@ -3419,3 +3419,117 @@ auth-otp {
         }
     }
 }
+
+.app {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+}
+
+.app.container {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+@media (min-width: 768px) {
+    .app.container {
+        width: 750px;
+        -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+    .app.container .app-aside {
+        overflow-x: hidden;
+    }
+    .app.container.app-aside-folded .app-aside {
+        overflow-x: visible;
+    }
+    .app.container.app-aside-fixed .aside-wrap {
+        left: inherit;
+    }
+    .app.container.app-aside-fixed.app-aside-folded .app-aside > ul.nav {
+        position: absolute;
+    }
+    .app.container .app-aside,
+    .app.container .app-header {
+        max-width: 750px;
+    }
+    .app.container .app-footer-fixed {
+        right: auto;
+        left: auto;
+        width: 100%;
+        max-width: 550px;
+    }
+    .app.container.app-aside-folded .app-footer-fixed {
+        max-width: 690px;
+    }
+    .app.container.app-aside-dock .app-footer-fixed {
+        max-width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .app.container {
+        width: 970px;
+    }
+    .app.container .app-aside,
+    .app.container .app-header {
+        max-width: 970px;
+    }
+    .app.container .app-footer-fixed {
+        max-width: 770px;
+    }
+    .app.container.app-aside-folded .app-footer-fixed {
+        max-width: 910px;
+    }
+    .app.container.app-aside-dock .app-footer-fixed {
+        max-width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .app.container {
+        width: 100%;
+        max-width: 1920px;
+    }
+    .app.container .app-aside,
+    .app.container .app-header {
+        max-width: 1920px;
+    }
+    .app.container .app-footer-fixed {
+        max-width: 1720px;
+    }
+    .app.container.app-aside-folded .app-footer-fixed {
+        max-width: 1860px;
+    }
+    .app.container.app-aside-dock .app-footer-fixed {
+        max-width: 1920px;
+    }
+}
+.app-content {
+    height: 100%;
+}
+@media (min-width: 768px) {
+    .app-content {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 767px) {
+    .app-content {
+        -webkit-transition: -webkit-transform 0.2s ease;
+        -moz-transition: -moz-transform 0.2s ease;
+        -o-transition: -o-transform 0.2s ease;
+        transition: transform 0.2s ease;
+    }
+}
+
+.menu-tooltip {
+    display: none !important;
+}
+
+.b1-collapsed {
+    .menu-tooltip {
+        display: block !important;
+    }
+}

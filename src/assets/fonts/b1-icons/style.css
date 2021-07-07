@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?mfs40q');
-  src:  url('fonts/b1-icons.eot?mfs40q#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?mfs40q') format('truetype'),
-    url('fonts/b1-icons.woff?mfs40q') format('woff'),
-    url('fonts/b1-icons.svg?mfs40q#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?fcw6f4');
+  src:  url('fonts/b1-icons.eot?fcw6f4#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?fcw6f4') format('truetype'),
+    url('fonts/b1-icons.woff?fcw6f4') format('woff'),
+    url('fonts/b1-icons.svg?fcw6f4#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,6 +28,21 @@
 .b1-icons-icon-moon:before {
   content: "\e900";
 }
+.b1-icons-icon-book-reader:before {
+  content: "\e907";
+}
+.b1-icons-icon-wallet:before {
+  content: "\e904";
+}
+.b1-icons-icon-coins:before {
+  content: "\e905";
+}
+.b1-icons-icon-money-bill-wave:before {
+  content: "\e906";
+}
+.b1-icons-icon-piggy-bank:before {
+  content: "\1f308";
+}
 .b1-icons-icon-user:before {
   content: "\e901";
 }
@@ -37,9 +52,48 @@
 .b1-icons-icon-settings:before {
   content: "\e903";
 }
+.b1-icons-icon-cog:before {
+  content: "\f013";
+}
+.b1-icons-icon-map-marker:before {
+  content: "\f041";
+}
 .b1-icons-icon-adjust:before {
   content: "\f042";
 }
+.b1-icons-icon-arrows:before {
+  content: "\f07e";
+}
+.b1-icons-icon-phone:before {
+  content: "\f095";
+}
+.b1-icons-icon-users:before {
+  content: "\f0c0";
+}
 .b1-icons-icon-bell:before {
   content: "\f0f3";
+}
+.b1-icons-icon-file:before {
+  content: "\f15b";
+}
+.b1-icons-icon-university:before {
+  content: "\f19c";
+}
+.b1-icons-icon-calculator:before {
+  content: "\f1ec";
+}
+.b1-icons-icon-pie-chart:before {
+  content: "\f200";
+}
+.b1-icons-icon-credit-card:before {
+  content: "\f283";
+}
+.b1-icons-icon-basket:before {
+  content: "\f291";
+}
+.b1-icons-icon-mobile:before {
+  content: "\e958";
+}
+.b1-icons-icon-agents:before {
+  content: "\e976";
 }

@@ -15,6 +15,7 @@ import { TestComponent } from './test/test.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SharedModule } from './@shared/shared.module';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 
 
@@ -24,7 +25,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     TestComponent,
     B1GlobalLoaderComponent,
     AuthorizedLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,

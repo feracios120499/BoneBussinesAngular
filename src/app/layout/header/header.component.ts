@@ -3,7 +3,7 @@ import { setDarkMode, setLanguage } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@core/facades/user.facade';
 import { Store } from '@ngrx/store';
-import { allowedLanguagesSelector, currentLanguageSelector, darkModeSelector } from '@selectors/settings.selectors';
+import { allowedLanguagesSelector, currentLanguageSelector, darkModeSelector, isCollapsedSelector, logoSelector } from '@selectors/settings.selectors';
 import { countNotificationsSelector, userNameSelector, userPictureSelector } from '@selectors/user.selectors';
 
 @Component({
@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit {
   public countNotifications$ = this.store.select(countNotificationsSelector);
   public userName$ = this.store.select(userNameSelector);
   public userPictureUrl$ = this.store.select(userPictureSelector);
+  public logo$ = this.store.select(logoSelector);
+  public isCollapsed$ = this.store.select(isCollapsedSelector);
 
   ngOnInit(): void {
   }

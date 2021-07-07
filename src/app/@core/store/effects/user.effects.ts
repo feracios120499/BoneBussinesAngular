@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { profileSelector } from '@selectors/user.selectors';
+import { currentClientIdSelector, currentCustomerSelector, profileSelector } from '@selectors/user.selectors';
 import { NotificationsService } from '@services/notifications.service';
 import { UserService } from '@services/user.service';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as userActions from './../actions/user.actions';
+import * as authActions from './../actions/auth.actions';
+import { MenuService } from '@services/menu.service';
 
 // import { EMPTY } from 'rxjs';
 // import { map, mergeMap, catchError } from 'rxjs/operators';
@@ -20,7 +22,8 @@ export class UserEffects {
         private actions$: Actions,
         private store: Store,
         private userService: UserService,
-        private notificationsService: NotificationsService) { }
+        private notificationsService: NotificationsService,
+        private menuService: MenuService) { }
 
     checkProfile$ = createEffect(() =>
         this.actions$.pipe(
@@ -58,6 +61,37 @@ export class UserEffects {
                 ))
         ));
 
+    loadProfileSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(userActions.loadProfileSuccess, authActions.authLoadProfileSuccess),
+            withLatestFrom(this.store.select(currentClientIdSelector)),
+            map(([action, currentClientId]) => {
+                if (currentClientId === undefined) {
+                    return userActions.setCurrentClientId({ clientId: action.profile.Customers[0].ClientId });
+                }
+                else {
+                    return userActions.setCurrentClientId({ clientId: currentClientId });
+                }
+            })
+        )
+    );
 
+    buildMenu$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(userActions.setCurrentClientId),
+            withLatestFrom(this.store.select(currentCustomerSelector)),
+            map(([action, currentCustomer]) => {
+                const menu = this.menuService.getMenuForCustomer(currentCustomer!);
+                return userActions.setMenu({ menu });
+            })
+        ));
 
+    buildSubMenu$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(userActions.setMenu),
+            map(() => {
+                const menu = this.menuService.getSubMenu();
+                return userActions.setSubMenu({ menu });
+            })
+        ));
 }

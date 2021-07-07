@@ -1,2 +1,7 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div class="app container app-aside-fixed">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="app-content fade-in" [class.b1-collapsed]="isCollapsed$ | ngrxPush">
+        <router-outlet></router-outlet>
+    </div>
+</div>

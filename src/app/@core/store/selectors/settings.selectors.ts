@@ -17,3 +17,38 @@ export const darkModeSelector = createSelector(
   featureSelector,
   state => state.darkModeActive
 );
+
+export const logoSelector = createSelector(
+  featureSelector,
+  state => state.resources?.Owner.LogoImage || ''
+);
+
+export const callCenterPhonesSelector = createSelector(
+  featureSelector,
+  state => state.resources?.Owner.CallCenterPhone
+);
+
+export const callCenterPhonesLocalSelector = createSelector(
+  featureSelector,
+  state => state.resources?.Owner.CallCenterPhoneLocal
+);
+
+export const callCenterWorkSelector = createSelector(
+  featureSelector,
+  state => {
+    return {
+      from: state.resources?.Owner.CallCenterWorkFrom,
+      to: state.resources?.Owner.CallCenterWorkTo
+    };
+  }
+);
+
+export const ecpSupportPhonesSelector = createSelector(
+  featureSelector,
+  state => state.resources?.Owner.ECPTechSupportPhone
+);
+
+export const isCollapsedSelector = createSelector(
+  featureSelector,
+  state => state.isCollapsed
+);

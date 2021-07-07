@@ -17,7 +17,8 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
     {
       keys: [
         { settings: ['currentLanguage', 'darkModeActive'] },
-        { auth: ['token'] }
+        { auth: ['token'] },
+        { user: ['currentClientId'] }
       ],
       rehydrate: true
     })(reducer);

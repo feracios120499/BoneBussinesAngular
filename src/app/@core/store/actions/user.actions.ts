@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Profile } from 'src/app/@shared/models/profile.model';
 import { Notification } from 'src/app/@shared/models/notification.model';
+import { MenuItem } from 'src/app/@shared/models/menu-item.model';
 
 // loadProfileRequest action
 export const loadProfileRequest = createAction('[USER] load profile');
@@ -32,4 +33,19 @@ export const loadNotifications = createAction(
 export const setNotifications = createAction(
     '[USER] set notifications',
     props<{ notifications: Notification[] }>()
+);
+
+export const setCurrentClientId = createAction(
+    '[USER] set current client id',
+    props<{ clientId: string }>()
+);
+
+export const setMenu = createAction(
+    '[USER] set menu',
+    props<{ menu: MenuItem[] }>()
+);
+
+export const setSubMenu = createAction(
+    '[USER] set sub menu',
+    props<{ menu: MenuItem[] }>()
 );
