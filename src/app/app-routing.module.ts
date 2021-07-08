@@ -12,6 +12,7 @@ const routes: Routes = [
     component: AuthorizedLayoutComponent,
     children: [
       { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(p => p.DashboardModule) },
+      { path: 'accounts', loadChildren: () => import('./modules/accounts/accounts.module').then(p => p.AccountsModule) }
     ]
   }
 ];

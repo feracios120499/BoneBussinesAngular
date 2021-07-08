@@ -40,7 +40,7 @@ export class MenuService extends BaseService {
             icon: 'university',
             dataRole:
                 'Director,Accountant,AccountsViewer,StatsViewer,PaymentsManager,ForeignCurrencyPaymentsManager,ForeignCurrencyApplicationsManager',
-            route: 'app.acct.index',
+            route: 'accounts',
             // //gaTrackEvent: "['left-menu', 'view-accts']",
             dataTranslate: 'aside.nav.ACCOUNTS',
             moduleName: 'Accounts',

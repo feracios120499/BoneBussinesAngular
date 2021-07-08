@@ -30,14 +30,18 @@
     position: absolute;
     height: 100%;
     width: 0;
-    left: 0;
+    left: -100%;
     top: 0;
     transition: all 0.15s $animation-timing;
+    padding: 16px;
+    margin-left: 16px;
+    border-radius: 8px;
   }
 
   &.active::after,
   &:hover::after {
-    width: 100%;
+    width: calc(100% - 32px);
+    left: 0px;
   }
 
   &.active::after {
@@ -53,7 +57,7 @@
     display: flex;
     align-items: center;
     z-index: 9;
-
+    margin-left: 8px;
     &__icon {
       width: 20px;
       height: 24px;
@@ -113,7 +117,7 @@
 @mixin hover-row {
   background-image: $linear-gradient-light;
 }
-@mixin data-row{
+@mixin data-row {
   border-radius: 10px;
   margin: 0 32px;
   margin-bottom: 8px;

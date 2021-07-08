@@ -23,7 +23,8 @@
                     <ul class="main-sidemenu__nav">
                         <li *ngFor="let menuItem of menu" class="main-sidemenu__nav__item"
                             [ngbTooltip]="menuItem.dataTranslate | translate" placement="right" container="body"
-                            tooltipClass="{{isCollapsed ?'':'menu-tooltip'}}">
+                            tooltipClass="{{isCollapsed ?'':'menu-tooltip'}}" [routerLink]="menuItem.route"
+                            routerLinkActive="active">
                             <a class="main-sidemenu__nav__item__link">
                                 <span class="main-sidemenu__nav__item__link__icon">
                                     <i b1-icon [icon]="menuItem.icon"></i>
