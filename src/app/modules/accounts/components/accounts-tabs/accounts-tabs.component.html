@@ -1,0 +1,18 @@
+<ul class="b1-page-tabs b1-base b1-bold" *ngrxLet="currentTab$ as currentTab">
+    <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Active"
+        *ngrxLet="countActiveAccounts$ as countActiveAccounts">
+        <a (click)="setTab(accountTab.Active)" class="b1-filter-block__link">
+            <span class="b1-mr-2">{{'components.acct.active' | translate}}</span>
+            <span class="b1-page-badge b1-page-badge__success"
+                [class.bounce-in]="countActiveAccounts != 0">{{countActiveAccounts}}</span>
+        </a>
+    </li>
+    <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Closed"
+        *ngrxLet="countClosedAccounts$ as countClosedAccounts">
+        <a (click)="setTab(accountTab.Closed)" class="b1-filter-block__link">
+            <span class="b1-mr-2">{{'components.acct.closed' | translate}}</span>
+            <span class="b1-page-badge b1-page-badge__error"
+                [class.bounce-in]="countClosedAccounts != 0">{{countClosedAccounts}}</span>
+        </a>
+    </li>
+</ul>

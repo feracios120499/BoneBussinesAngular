@@ -3005,7 +3005,7 @@ textarea {
     }
     &-data {
         min-height: 450px;
-        overflow: hidden;
+        // overflow: hidden;
         flex: 1;
         &_auto {
             height: auto;

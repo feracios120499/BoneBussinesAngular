@@ -1,5 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
 import { USER_KEY, UserState } from '@reducers/user.reducers';
+import { pipe } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 export const featureSelector = createFeatureSelector<UserState>(USER_KEY);
@@ -39,6 +41,10 @@ export const currentClientIdSelector = createSelector(
     featureSelector,
     state => state.currentClientId
 );
+
+export const currentClientIdFilteredSelector = (store: Store) => {
+    return store.select(currentClientIdSelector).pipe(filter(value => !!value), map(value => value as string));
+};
 
 export const currentCustomerSelector = createSelector(
     profileSelector,

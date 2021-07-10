@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AcctEffects } from '@effects/acct.effects';
 import { AuthEffects } from '@effects/auth.effects';
 import { RouteEffects } from '@effects/route.effects';
 import { SettingsEffects } from '@effects/settings.effects';
@@ -32,7 +33,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 100, logOnly: environment.production }),
-    EffectsModule.forRoot([AuthEffects, RouteEffects, UserEffects, SettingsEffects])
+    EffectsModule.forRoot([AuthEffects, RouteEffects, UserEffects, SettingsEffects, AcctEffects])
   ],
   declarations: [],
   exports: [StoreModule, StoreDevtoolsModule, EffectsModule]

@@ -1,0 +1,8 @@
+<ng-container *ngrxLet="accounts$ as accounts">
+    <ng-scrollbar class="virtual-scroll b1-page-data">
+        <cdk-virtual-scroll-viewport scrollViewport itemSize="90">
+            <div *cdkVirtualFor="let item of accounts" class="b1-page-data__row">{{item.Number}}</div>
+        </cdk-virtual-scroll-viewport>
+    </ng-scrollbar>
+
+</ng-container>

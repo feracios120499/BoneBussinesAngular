@@ -5,7 +5,7 @@ import { currentClientIdSelector, currentCustomerSelector, profileSelector } fro
 import { NotificationsService } from '@services/notifications.service';
 import { UserService } from '@services/user.service';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, delay, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as userActions from './../actions/user.actions';
 import * as authActions from './../actions/auth.actions';
