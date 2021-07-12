@@ -1,8 +1,17 @@
 <ng-container *ngrxLet="accounts$ as accounts">
     <ng-scrollbar class="virtual-scroll b1-page-data">
         <cdk-virtual-scroll-viewport scrollViewport itemSize="90">
-            <div *cdkVirtualFor="let item of accounts" class="b1-page-data__row">{{item.Number}}</div>
+            <app-account-row *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush)"
+                class="b1-page-data__row" [account]="account">
+            </app-account-row>
         </cdk-virtual-scroll-viewport>
     </ng-scrollbar>
 
 </ng-container>
+<!-- <div class="b1-page-data" *ngrxLet="accounts$ as accounts">
+    <cdk-virtual-scroll-viewport scrollViewport itemSize="90">
+        <div *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush)" class="b1-page-data__row">
+            <app-account-row [account]="account"></app-account-row>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div> -->

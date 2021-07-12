@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +17,7 @@ import { SharedModule } from './@shared/shared.module';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgrxFormsModule } from 'ngrx-forms';
 
 
 
@@ -53,7 +54,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

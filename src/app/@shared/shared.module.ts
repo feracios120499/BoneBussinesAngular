@@ -12,12 +12,21 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ConnectFormDirective } from './directives/connect-form.directive';
+import { NgrxFormsModule } from 'ngrx-forms';
+import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
+import { MoneyPipe } from './pipes/money.pipe';
 
 
 
 
 @NgModule({
-  declarations: [CheckStateDirective, B1IconDirective, B1CardLoaderComponent, ConnectFormDirective],
+  declarations: [
+    CheckStateDirective,
+    B1IconDirective,
+    B1CardLoaderComponent,
+    ConnectFormDirective,
+    AccountFilterPipe,
+    MoneyPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,7 +36,8 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
     NgOtpInputModule,
     ReactiveComponentModule,
     ScrollingModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    NgrxFormsModule
   ],
   exports: [
     CommonModule,
@@ -41,7 +51,10 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
     B1CardLoaderComponent,
     ScrollingModule,
     NgScrollbarModule,
-    ConnectFormDirective
+    ConnectFormDirective,
+    NgrxFormsModule,
+    AccountFilterPipe,
+    MoneyPipe
   ]
 })
 export class SharedModule { }

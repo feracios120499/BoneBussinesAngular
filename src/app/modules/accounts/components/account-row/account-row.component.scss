@@ -1,0 +1,95 @@
+@import "variables";
+:host {
+    height: 90px;
+    @media (max-width: 812px) {
+        height: 95px;
+    }
+}
+.account {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    @media (max-width: 812px) {
+        flex-wrap: wrap;
+    }
+    &-body {
+        @media (max-width: 812px) {
+            width: calc(100% - 32px);
+        }
+    }
+    &-icon {
+        width: 24px;
+        height: 24px;
+        @media (max-width: 812px) {
+            margin-right: 8px;
+        }
+    }
+
+    &-name {
+        @include medium;
+        margin-left: 42px;
+        width: 40%;
+        @media (max-width: 812px) {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    &-number {
+        @include base;
+        @include bold;
+        @media (max-width: 812px) {
+            display: none;
+        }
+    }
+
+    &-date {
+        @include base;
+        @include bold;
+        margin-left: 42px;
+        @media (max-width: 812px) {
+            margin-left: 0;
+            width: 100%;
+            color: $color-light-500;
+            @include light;
+        }
+    }
+
+    &-amount {
+        text-align: right;
+        width: 40%;
+        @media (max-width: 812px) {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &-balance {
+        @include large;
+        @media (max-width: 812px) {
+            @include medium;
+        }
+    }
+    &-turns {
+        @include base;
+        @include bold;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        &-credit {
+            color: $color-success;
+        }
+        &-debit {
+            color: $color-error;
+        }
+
+        @media (max-width: 812px) {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+}

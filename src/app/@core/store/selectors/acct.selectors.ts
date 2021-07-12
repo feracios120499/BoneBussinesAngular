@@ -23,3 +23,13 @@ export const currentTabSelector = createSelector(
     featureSelector,
     state => state.currentTab
 );
+
+export const formSelector = createSelector(
+    featureSelector,
+    state => state.filterForm
+);
+
+export const filterAccountsSelector = createSelector(
+    featureSelector,
+    state => state.filterForm.controls.filter.value
+);

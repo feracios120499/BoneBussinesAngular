@@ -1,0 +1,33 @@
+<div class="account">
+    <div class="account-icon">
+        <!-- <i b1-icon icon="credit-card"></i> -->
+    </div>
+    <div class="account-body">
+        <div class="account-name b1-ellipsis">
+            {{account.Name}}
+            <div class="account-number">
+                {{account.Number}}
+            </div>
+        </div>
+        <div class="account-date">
+            <span>{{'components.acct.acctDetail.turnoverDate' | translate}}</span>
+            <span class="b1-ml-2 b1-mr-2">-</span>
+            <span>{{account.LastActive | date:'dd.MM.yyyy'}}</span>
+        </div>
+        <div class="account-amount">
+            <div class="account-balance">
+                <span>{{account.Balance / 100 | money}}</span>
+                <span class="b1-ml-2">{{account.CurrencyCode}}</span>
+            </div>
+            <div class="account-turns">
+                <div class="account-turns-debit">
+                    {{account.DebitTurns / 100 | money}}
+                </div>
+                <div class="account-turns-credit">
+                    {{account.CreditTurns / 100 | money}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

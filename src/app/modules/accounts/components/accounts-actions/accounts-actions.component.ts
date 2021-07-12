@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { formSelector } from '@selectors/acct.selectors';
+import { FormGroupState } from 'ngrx-forms';
 import { Observable, of } from 'rxjs';
+import { Filter } from 'src/app/@shared/models/filter.model';
 
 @Component({
   selector: 'app-accounts-actions',
@@ -8,20 +11,13 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./accounts-actions.component.scss']
 })
 export class AccountsActionsComponent implements OnInit {
-  filterForm: FormGroup;
-  test: Observable<any> = of({ filter: '123' });
-  constructor() {
-    this.filterForm = new FormGroup({
-      filter: new FormControl(null),
-    });
+
+  formState$: Observable<FormGroupState<Filter>>;
+  constructor(store: Store) {
+    this.formState$ = store.select(formSelector);
   }
 
   ngOnInit(): void {
 
   }
-
-  filterChange(filter: any): void {
-    console.log(filter);
-  }
-
 }

@@ -29,12 +29,17 @@
             </div>
         </div>
     </div>
-    <form class="b1-page-actions__right" name="search" [formGroup]="filterForm" connectForm
-        (formChange)="filterChange($event)" [value]="test">
-        <div class="b1-page-inputWithIcon width-100">
-            <input class="b1-input__control b1-base b1-page-input resize" name="search" id="search" type="text"
-                placeholder="пошук" formControlName="filter" />
-            <label class="resize ub-icons ub-icons-icon-search" for="search"></label>
-        </div>
-    </form>
+    <ng-container>
+        <ng-container *ngIf="formState$ | async as formState">
+            <form class="b1-page-actions__right" name="search" novalidate [ngrxFormState]="formState">
+                <div class="b1-page-inputWithIcon width-100">
+                    <input class="b1-input__control b1-base b1-page-input resize" name="search" id="search" type="text"
+                        placeholder="пошук" [ngrxFormControlState]="formState.controls.filter" />
+                    <label class="resize ub-icons ub-icons-icon-search" for="search"></label>
+                </div>
+            </form>
+        </ng-container>
+    </ng-container>
+
+
 </div>

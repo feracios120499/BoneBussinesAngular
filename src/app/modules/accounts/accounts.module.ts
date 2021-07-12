@@ -9,6 +9,7 @@ import { AccountsHeaderComponent } from './components/accounts-header/accounts-h
 import { AccountsTabsComponent } from './components/accounts-tabs/accounts-tabs.component';
 import { AccountsActionsComponent } from './components/accounts-actions/accounts-actions.component';
 import { AccountsListComponent } from './components/accounts-list/accounts-list.component';
+import { AccountRowComponent } from './components/account-row/account-row.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { AccountsListComponent } from './components/accounts-list/accounts-list.
         AccountsHeaderComponent,
         AccountsTabsComponent,
         AccountsActionsComponent,
-        AccountsListComponent
+        AccountsListComponent,
+        AccountRowComponent
     ],
     imports: [
         CommonModule,
