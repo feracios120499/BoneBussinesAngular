@@ -1,45 +1,38 @@
-<div class="b1-page-actions">
-    <div class="b1-page-actions__left">
-        <div class="b1-page-icons" style="margin-left:0">
-            <div class="b1-group-checkboxs">
-                <div class="b1-group-checkboxs_item">
-                    <input name="currency" id="₴" type="checkbox" class="pointer"
-                        ng-model="accountsCtrl.accGridCurrencyFilter.UAH"
-                        ng-change="accountsCtrl.setAccGridCurrencyFilter()">
-                    <label for="₴" class="b1-large b1-flex b1-align-center b1-justify-center pointer">₴</label>
-                </div>
-                <div class="b1-group-checkboxs_item">
-                    <input name="currency" id="$" type="checkbox" class="pointer"
-                        ng-model="accountsCtrl.accGridCurrencyFilter.USD"
-                        ng-change="accountsCtrl.setAccGridCurrencyFilter()">
-                    <label for="$" class="b1-large b1-flex b1-align-center b1-justify-center pointer">$</label>
-                </div>
-                <div class="b1-group-checkboxs_item">
-                    <input name="currency" id="€" type="checkbox" class="pointer"
-                        ng-model="accountsCtrl.accGridCurrencyFilter.EUR"
-                        ng-change="accountsCtrl.setAccGridCurrencyFilter()">
-                    <label for="€" class="b1-large b1-flex b1-align-center b1-justify-center pointer">€</label>
-                </div>
-                <div class="b1-group-checkboxs_item">
-                    <input name="currency" id="other" type="checkbox" class="pointer"
-                        ng-model="accountsCtrl.accGridCurrencyFilter.OTHER"
-                        ng-change="accountsCtrl.setAccGridCurrencyFilter('OTHER')">
-                    <label for="other" class="b1-large b1-flex b1-align-center b1-justify-center pointer">...</label>
+<ng-container *ngrxLet="formState$ as formState">
+    <form class="b1-page-actions" novalidate [ngrxFormState]="formState">
+        <div class="b1-page-actions__left">
+            <div class="b1-page-icons" style="margin-left:0">
+                <div class="b1-group-checkboxs">
+                    <div class="b1-group-checkboxs_item">
+                        <input name="currency" id="₴" type="checkbox" class="pointer"
+                            [ngrxFormControlState]="formState.controls.currency.controls.UAH">
+                        <label for="₴" class="b1-large b1-flex b1-align-center b1-justify-center pointer">₴</label>
+                    </div>
+                    <div class="b1-group-checkboxs_item">
+                        <input name="currency" id="$" type="checkbox" class="pointer"
+                            [ngrxFormControlState]="formState.controls.currency.controls.USD">
+                        <label for="$" class="b1-large b1-flex b1-align-center b1-justify-center pointer">$</label>
+                    </div>
+                    <div class="b1-group-checkboxs_item">
+                        <input name="currency" id="€" type="checkbox" class="pointer"
+                            [ngrxFormControlState]="formState.controls.currency.controls.EUR">
+                        <label for="€" class="b1-large b1-flex b1-align-center b1-justify-center pointer">€</label>
+                    </div>
+                    <div class="b1-group-checkboxs_item">
+                        <input name="currency" id="other" type="checkbox" class="pointer"
+                            [ngrxFormControlState]="formState.controls.currency.controls.OTHER">
+                        <label for="other"
+                            class="b1-large b1-flex b1-align-center b1-justify-center pointer">...</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <ng-container>
-        <ng-container *ngIf="formState$ | async as formState">
-            <form class="b1-page-actions__right" name="search" novalidate [ngrxFormState]="formState">
-                <div class="b1-page-inputWithIcon width-100">
-                    <input class="b1-input__control b1-base b1-page-input resize" name="search" id="search" type="text"
-                        placeholder="пошук" [ngrxFormControlState]="formState.controls.filter" />
-                    <label class="resize ub-icons ub-icons-icon-search" for="search"></label>
-                </div>
-            </form>
-        </ng-container>
-    </ng-container>
-
-
-</div>
+        <div class="b1-page-actions__right" name="search">
+            <div class="b1-page-inputWithIcon width-100">
+                <input class="b1-input__control b1-base b1-page-input resize" name="search" id="search" type="text"
+                    placeholder="пошук" [ngrxFormControlState]="formState.controls.filter" />
+                <label class="resize ub-icons ub-icons-icon-search" for="search"></label>
+            </div>
+        </div>
+    </form>
+</ng-container>

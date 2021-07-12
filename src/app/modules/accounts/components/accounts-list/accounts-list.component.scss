@@ -1,5 +1,9 @@
 $white: #f8f8f8;
-
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 ::ng-deep {
     ng-scrollbar.virtual-scroll {
         --scrollbar-size: 8px;

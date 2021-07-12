@@ -13,7 +13,7 @@ import { Token } from './../../modules/auth/models/token.model';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  endpoint = 'http://localhost/Bars.API.Web.Client/';
+  endpoint = 'https://bobusiness.unity-bars.com/Bars.API.Web.Client/';
   token: Token | undefined = undefined;
 
   constructor(private translate: TranslateService, private store: Store, private authService: AuthService) {

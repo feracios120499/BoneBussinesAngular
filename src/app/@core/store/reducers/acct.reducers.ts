@@ -11,12 +11,27 @@ export const ACCT_KEY = 'acct';
 export interface AcctState {
     accounts: AccountModel[] | undefined;
     currentTab: AccountTab;
-    filterForm: FormGroupState<Filter>;
+    filterForm: FormGroupState<AcctFilter>;
 }
 
+export interface CurrencyFilter {
+    UAH: boolean,
+    USD: boolean,
+    EUR: boolean,
+    OTHER: boolean
+}
+export interface AcctFilter extends Filter {
+    currency: CurrencyFilter
+};
 
-const initalFromState = createFormGroupState<Filter>('TEST', {
-    filter: undefined
+const initalFromState = createFormGroupState<AcctFilter>('ACCT_FILTER_FORM', {
+    filter: undefined,
+    currency: {
+        UAH: false,
+        USD: false,
+        EUR: false,
+        OTHER: false
+    }
 });
 
 export const initialState: AcctState = {

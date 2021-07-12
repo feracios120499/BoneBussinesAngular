@@ -2868,6 +2868,10 @@ textarea {
         align-items: center;
         padding: 50px 32px;
         justify-content: space-between;
+        @media (max-width: 812px) {
+            flex-wrap: wrap;
+            height: 150px;
+        }
         &__left {
             display: flex;
             align-items: center;
@@ -3535,5 +3539,7 @@ auth-otp {
 }
 
 .no-wrap-xs {
-    padding: 0;
+    @media (max-width: 812px) {
+        padding: 0;
+    }
 }
