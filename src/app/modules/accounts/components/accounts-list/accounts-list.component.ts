@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { accountsSelector, filterAccountsSelector } from '@selectors/acct.selectors';
+import { accountsSelector, filterAccountsSelector, FilterCurrencySelector } from '@selectors/acct.selectors';
 
 @Component({
   selector: 'app-accounts-list',
@@ -14,6 +14,7 @@ export class AccountsListComponent implements OnInit {
 
   accounts$ = this.store.select(accountsSelector);
   filter$ = this.store.select(filterAccountsSelector);
+  filterCurrency$ = this.store.select(FilterCurrencySelector);
 
   ngOnInit(): void {
   }

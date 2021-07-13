@@ -15,16 +15,18 @@ export interface AcctState {
 }
 
 export interface CurrencyFilter {
-    UAH: boolean,
-    USD: boolean,
-    EUR: boolean,
-    OTHER: boolean
+    UAH: boolean;
+    USD: boolean;
+    EUR: boolean;
+    OTHER: boolean;
+    [key: string]: boolean;
 }
 export interface AcctFilter extends Filter {
-    currency: CurrencyFilter
-};
+    currency: CurrencyFilter;
+}
+export const ACCT_FILTER_FORM = 'ACCT_FILTER_FORM';
 
-const initalFromState = createFormGroupState<AcctFilter>('ACCT_FILTER_FORM', {
+const initalFromState = createFormGroupState<AcctFilter>(ACCT_FILTER_FORM, {
     filter: undefined,
     currency: {
         UAH: false,

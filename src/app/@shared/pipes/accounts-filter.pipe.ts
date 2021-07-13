@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterService } from '@services/filter.service';
 import { AccountModel } from '../models/account.model';
+import { FilterCurrency, FilterCurrencyType } from '../models/filter.model';
 
 @Pipe({ name: 'accountsFilter' })
 export class AccountFilterPipe implements PipeTransform {
@@ -8,10 +9,22 @@ export class AccountFilterPipe implements PipeTransform {
     constructor(private filterService: FilterService) {
     }
 
-    transform(accounts?: AccountModel[], filter?: string): AccountModel[] {
+    transform(accounts?: AccountModel[], filter?: string, filterCurrency?: FilterCurrency): AccountModel[] {
+        debugger;
         if (!accounts) {
             return new Array<AccountModel>();
         }
+
+        if (!filter && (!filterCurrency || !filterCurrency.currencies || filterCurrency.currencies.length === 0)) {
+            return accounts;
+        }
+
+        if (!!filterCurrency && !!filterCurrency.currencies && filterCurrency.currencies.length !== 0) {
+            accounts = filterCurrency.type === FilterCurrencyType.Include ?
+                accounts.filter(p => filterCurrency.currencies.indexOf(p.CurrencyCode) >= 0) :
+                accounts.filter(p => filterCurrency.currencies.indexOf(p.CurrencyCode) === -1);
+        }
+
         if (!!filter) {
             return accounts.filter(account => {
                 const filterArray = this.getFilterArray(account);
@@ -21,9 +34,7 @@ export class AccountFilterPipe implements PipeTransform {
                 return false;
             });
         }
-        else {
-            return accounts;
-        }
+        return accounts;
     }
 
     private getFilterArray(account: AccountModel): string[] {
