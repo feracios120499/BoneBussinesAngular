@@ -3,6 +3,9 @@ $white: #f8f8f8;
     display: flex;
     flex-direction: column;
     flex: 1;
+    @media (max-width: 812px) {
+        margin-top: 16px;
+    }
 }
 ::ng-deep {
     ng-scrollbar.virtual-scroll {

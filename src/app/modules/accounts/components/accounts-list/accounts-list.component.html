@@ -1,6 +1,6 @@
 <ng-container *ngrxLet="accounts$ as accounts">
     <ng-scrollbar class="virtual-scroll b1-page-data">
-        <cdk-virtual-scroll-viewport scrollViewport itemSize="90">
+        <cdk-virtual-scroll-viewport scrollViewport [itemSize]="98" maxBufferPx="600" minBufferPx="600">
             <app-account-row
                 *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush):(filterCurrency$ | ngrxPush)"
                 class="b1-page-data__row" [account]="account">

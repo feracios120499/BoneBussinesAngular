@@ -1,6 +1,6 @@
 <div class="account">
     <div class="account-icon">
-        <!-- <i b1-icon icon="credit-card"></i> -->
+        <i b1-icon icon="account-card" class="b1-large"></i>
     </div>
     <div class="account-body">
         <div class="account-name b1-ellipsis">
@@ -21,13 +21,21 @@
             </div>
             <div class="account-turns">
                 <div class="account-turns-debit">
+                    <i b1-icon icon="chevron-down"></i>
                     {{account.DebitTurns / 100 | money}}
                 </div>
                 <div class="account-turns-credit">
+                    <i b1-icon icon="chevron-up"></i>
                     {{account.CreditTurns / 100 | money}}
                 </div>
             </div>
         </div>
+    </div>
+    <div class="account-more b1-card__col b1-card__col_dot">
+        <a class="b1-card__v-dots" data-toggle="dropdown" uib-dropdown-toggle="" aria-haspopup="true"
+            onclick="$(this).offset().top - $('.b1-page-data').offset().top - $(this).next().height() < 0 ? $(this).next().addClass('b1-dropdown_down').removeClass('b1-dropdown_up') : $(this).next().addClass('b1-dropdown_up').removeClass('b1-dropdown_down')"
+            aria-expanded="false">
+        </a>
     </div>
 
 </div>

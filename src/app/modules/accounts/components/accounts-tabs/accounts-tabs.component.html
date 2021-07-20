@@ -1,18 +1,49 @@
-<ul class="b1-page-tabs b1-base b1-bold" *ngrxLet="currentTab$ as currentTab">
-    <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Active"
-        *ngrxLet="countActiveAccounts$ as countActiveAccounts">
-        <a (click)="setTab(accountTab.Active)" class="b1-filter-block__link">
-            <span class="b1-mr-2">{{'components.acct.active' | translate}}</span>
-            <span class="b1-page-badge b1-page-badge__success"
-                [class.bounce-in]="countActiveAccounts != 0">{{countActiveAccounts}}</span>
-        </a>
-    </li>
-    <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Closed"
-        *ngrxLet="countClosedAccounts$ as countClosedAccounts">
-        <a (click)="setTab(accountTab.Closed)" class="b1-filter-block__link">
-            <span class="b1-mr-2">{{'components.acct.closed' | translate}}</span>
-            <span class="b1-page-badge b1-page-badge__error"
-                [class.bounce-in]="countClosedAccounts != 0">{{countClosedAccounts}}</span>
-        </a>
-    </li>
-</ul>
+<ng-container *ngrxLet="currentTab$ as currentTab">
+    <ng-container *ngrxLet="countActiveAccounts$ as countActiveAccounts">
+        <ng-container *ngrxLet="countClosedAccounts$ as countClosedAccounts">
+            <ul class="b1-page-tabs b1-base b1-bold accounts-tabs">
+                <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Active">
+                    <a (click)="setTab(accountTab.Active)" class="b1-filter-block__link">
+                        <span class="b1-mr-2">{{'components.acct.active' | translate}}</span>
+                        <span class="b1-page-badge b1-page-badge__success"
+                            [class.bounce-in]="countActiveAccounts != 0">{{countActiveAccounts}}</span>
+                    </a>
+                </li>
+                <li class="b1-page-tabs__item" [class.active]="currentTab == accountTab.Closed">
+                    <a (click)="setTab(accountTab.Closed)" class="b1-filter-block__link">
+                        <span class="b1-mr-2">{{'components.acct.closed' | translate}}</span>
+                        <span class="b1-page-badge b1-page-badge__error"
+                            [class.bounce-in]="countClosedAccounts != 0">{{countClosedAccounts}}</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="accounts-tabs-mobile">
+                <div *ngIf="currentTab == accountTab.Active">
+                    <span class="b1-mr-2">{{'components.acct.active' | translate}}</span>
+                    <span class="b1-page-badge"
+                        [class.bounce-in]="countActiveAccounts != 0">{{countActiveAccounts}}</span>
+                </div>
+                <div *ngIf="currentTab == accountTab.Closed">
+                    <span class="b1-mr-2">{{'components.acct.closed' | translate}}</span>
+                    <span class="b1-page-badge"
+                        [class.bounce-in]="countClosedAccounts != 0">{{countClosedAccounts}}</span>
+                </div>
+                <i b1-icon icon="chevron-down" class="b1-color-primary accounts-tabs-list_chevron"></i>
+                <select name="tabs" id="tabs" class="accounts-tabs-list" #selectList
+                    (change)="selectTab(selectList.value)">
+                    <option [value]="accountTab.Active">
+                        {{'components.acct.active' | translate}}
+                        ({{countActiveAccounts}})
+                    </option>
+                    <option [value]="accountTab.Closed">
+                        {{'components.acct.closed' | translate}}
+                        ({{countClosedAccounts}})
+                    </option>
+                </select>
+            </div>
+        </ng-container>
+
+    </ng-container>
+
+
+</ng-container>

@@ -20,7 +20,7 @@ export class RouteEffects {
     dashboardEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(authActions.authLoadProfileSuccess),
-            map(() => routeActions.routeTo({ route: 'dashboard' }))
+            map(() => routeActions.routeTo({ route: 'accounts' }))
         )
     );
 

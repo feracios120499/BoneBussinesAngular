@@ -1,3 +1,6 @@
+* {
+    -webkit-locale: auto;
+}
 @import "~bootstrap/scss/bootstrap";
 @import "fonts.scss";
 @import "common.scss";
@@ -2797,12 +2800,18 @@ textarea {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @media (max-width: 812px) {
+            margin: 8px 16px;
+        }
     }
     &-card {
         border-radius: 4px;
         flex: 1;
         display: flex;
         flex-direction: column;
+        @media (max-width: 812px) {
+            border-radius: 16p;
+        }
     }
     &-tabs {
         display: flex;
@@ -2871,6 +2880,7 @@ textarea {
         @media (max-width: 812px) {
             flex-wrap: wrap;
             height: 150px;
+            padding: 16px;
         }
         &__left {
             display: flex;
@@ -2882,6 +2892,9 @@ textarea {
             width: 100%;
             justify-content: flex-end;
             margin-left: 16px;
+            @media (max-width: 812px) {
+                margin-left: 0;
+            }
         }
     }
     &-icons {
@@ -2947,6 +2960,9 @@ textarea {
 
         & input.resize {
             width: 360px;
+            @media (max-width: 812px) {
+                width: 100%;
+            }
             transition: all 600ms $animation-timing;
             & + label {
                 transition: all 600ms $animation-timing;
@@ -2956,6 +2972,9 @@ textarea {
                 top: 50%;
                 transform: translateY(-50%);
                 color: var(--color-dark-500);
+                @media (max-width: 812px) {
+                    right: calc(100% - 28px);
+                }
             }
             &:focus,
             &.ng-not-empty {
@@ -2979,6 +2998,10 @@ textarea {
         background-color: var(--color-light-300);
         position: relative;
         overflow: hidden;
+        @media (max-width: 812px) {
+            margin: 0 auto;
+            width: calc(100% - 32px);
+        }
         &.loading::before {
             position: absolute;
             content: "";
@@ -3048,7 +3071,7 @@ textarea {
 
             transition: all 150ms $animation-timing, color 0ms;
             cursor: pointer;
-            border-bottom: 1px solid rgba($color-light, 0.2);
+            border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
             &:not(.selected):hover {
                 @include hover-row;
             }
@@ -3542,4 +3565,10 @@ auth-otp {
     @media (max-width: 812px) {
         padding: 0;
     }
+}
+
+.full-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }

@@ -2,7 +2,7 @@
 :host {
     height: 90px;
     @media (max-width: 812px) {
-        height: 95px;
+        height: 120px;
     }
 }
 .account {
@@ -12,21 +12,25 @@
     height: 100%;
     @media (max-width: 812px) {
         flex-wrap: wrap;
+        align-items: flex-start;
+        padding-top: 8px;
     }
     &-body {
         width: calc(100% - 66px);
         display: flex;
         align-items: center;
         @media (max-width: 812px) {
-            width: calc(100% - 32px);
+            width: calc(100% - 64px);
             flex-direction: column;
         }
     }
     &-icon {
+        margin-left: 16px;
         width: 24px;
         height: 24px;
         @media (max-width: 812px) {
-            margin-right: 8px;
+            margin-right: 0px;
+            margin-left: 8px;
         }
     }
 
@@ -78,7 +82,7 @@
     }
     &-turns {
         @include base;
-        @include bold;
+        @include light;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -86,13 +90,20 @@
         &-credit {
             color: $color-success;
             margin-left: 42px;
+            @media (max-width: 812px) {
+                margin-left: 0px;
+            }
         }
         &-debit {
             color: $color-error;
+            @media (max-width: 812px) {
+            }
         }
 
         @media (max-width: 812px) {
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
     }
 }

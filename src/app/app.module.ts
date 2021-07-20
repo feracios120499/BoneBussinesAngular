@@ -11,7 +11,6 @@ import { B1GlobalLoaderComponent } from './@shared/components/b1-global-loader/b
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
-import { TestComponent } from './test/test.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SharedModule } from './@shared/shared.module';
 import { ReactiveComponentModule } from '@ngrx/component';
@@ -24,7 +23,6 @@ import { NgrxFormsModule } from 'ngrx-forms';
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     B1GlobalLoaderComponent,
     AuthorizedLayoutComponent,
     HeaderComponent,

@@ -1,4 +1,9 @@
 @import "variables.scss";
+:host {
+    @media (max-width: 812px) {
+        display: none;
+    }
+}
 .main {
     &-sidemenu {
         position: fixed;

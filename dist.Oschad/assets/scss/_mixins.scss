@@ -4,6 +4,7 @@
 @import "mixins/elements";
 @import "mixins/main";
 @import "mixins/buttons";
+// DEPRECATED
 
 @mixin sidebar {
   background-color: var(--color-dark);

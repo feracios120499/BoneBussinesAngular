@@ -10,7 +10,6 @@ export class AccountFilterPipe implements PipeTransform {
     }
 
     transform(accounts?: AccountModel[], filter?: string, filterCurrency?: FilterCurrency): AccountModel[] {
-        debugger;
         if (!accounts) {
             return new Array<AccountModel>();
         }

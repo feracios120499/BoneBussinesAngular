@@ -26,4 +26,9 @@ export class AccountsTabsComponent implements OnInit {
     this.store.dispatch(setTab({ tab }));
   }
 
+  selectTab(tabString: string): void {
+    const tab = tabString as keyof typeof AccountTab;
+    this.setTab(AccountTab[tab]);
+  }
+
 }

@@ -18,6 +18,7 @@
   }
 
   &-dropdown {
+    color: var(--color-dark);
     min-width: 100%;
     position: absolute;
     flex-direction: column;
@@ -251,7 +252,7 @@
   display: none;
 }
 
-.dropdown.open > .b1-dropdown {
+.dropdown.show > .b1-dropdown {
   display: flex;
 }
 

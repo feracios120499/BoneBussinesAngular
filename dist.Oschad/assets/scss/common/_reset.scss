@@ -147,3 +147,14 @@ tooltip._bottom:not(._left):not(._right) tip tip-arrow {
 iban tooltip._multiline {
   display: inline !important;
 }
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
