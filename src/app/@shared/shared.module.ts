@@ -15,6 +15,7 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
+import { ItemAutosizeDirective } from './directives/item-autosize.directive';
 
 
 
@@ -26,7 +27,8 @@ import { MoneyPipe } from './pipes/money.pipe';
     B1CardLoaderComponent,
     ConnectFormDirective,
     AccountFilterPipe,
-    MoneyPipe],
+    MoneyPipe,
+    ItemAutosizeDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -54,7 +56,8 @@ import { MoneyPipe } from './pipes/money.pipe';
     ConnectFormDirective,
     NgrxFormsModule,
     AccountFilterPipe,
-    MoneyPipe
+    MoneyPipe,
+    ItemAutosizeDirective
   ]
 })
 export class SharedModule { }
