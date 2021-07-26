@@ -28,6 +28,7 @@
     "@ngrx/store-devtools": "^11.1.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "big-integer": "^1.6.48",
     "bootstrap": "^4.5.0",
     "mathjs": "^9.4.4",
     "ng-otp-input": "^1.7.1",

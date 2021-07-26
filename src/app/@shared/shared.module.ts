@@ -9,16 +9,22 @@ import { B1IconDirective } from './directives/b1-icon.directive';
 import { CheckStateDirective } from './directives/check-state.directive';
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { ReactiveComponentModule } from '@ngrx/component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FixedSizeVirtualScrollStrategy, ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ConnectFormDirective } from './directives/connect-form.directive';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
-import { ItemAutosizeDirective } from './directives/item-autosize.directive';
+import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
+import { IbanDirective } from './directives/iban.directive';
 
 
 
+export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
+  constructor() {
+    super(50, 400, 900);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -28,7 +34,8 @@ import { ItemAutosizeDirective } from './directives/item-autosize.directive';
     ConnectFormDirective,
     AccountFilterPipe,
     MoneyPipe,
-    ItemAutosizeDirective],
+    CdkVirtualScrollViewportPatchDirective,
+    IbanDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -57,7 +64,14 @@ import { ItemAutosizeDirective } from './directives/item-autosize.directive';
     NgrxFormsModule,
     AccountFilterPipe,
     MoneyPipe,
-    ItemAutosizeDirective
+    CdkVirtualScrollViewportPatchDirective,
+    IbanDirective
+  ],
+  providers: [
+    {
+      provide: VIRTUAL_SCROLL_STRATEGY,
+      useClass: CustomVirtualScrollStrategy,
+    },
   ]
 })
 export class SharedModule { }

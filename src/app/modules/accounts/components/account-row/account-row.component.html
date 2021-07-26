@@ -1,12 +1,14 @@
 <div class="account">
     <div class="account-icon">
-        <i b1-icon icon="account-card" class="b1-large"></i>
+        <i b1-icon icon="university" class="b1-large" *ngIf="!account.IsCardAccount"
+            [ngbTooltip]="'components.acct.currentAccount' | translate" placement="right"></i>
+        <i b1-icon icon="account-card" class="b1-large" *ngIf="account.IsCardAccount"
+            [ngbTooltip]="'components.acct.cardAccount' | translate" placement="right"></i>
     </div>
     <div class="account-body">
         <div class="account-name b1-ellipsis">
             {{account.Name}}
-            <div class="account-number">
-                {{account.Number}}
+            <div class="account-number" [iban]="account.Number">
             </div>
         </div>
         <div class="account-date">
@@ -31,11 +33,53 @@
             </div>
         </div>
     </div>
-    <div class="account-more b1-card__col b1-card__col_dot">
-        <a class="b1-card__v-dots" data-toggle="dropdown" uib-dropdown-toggle="" aria-haspopup="true"
-            onclick="$(this).offset().top - $('.b1-page-data').offset().top - $(this).next().height() < 0 ? $(this).next().addClass('b1-dropdown_down').removeClass('b1-dropdown_up') : $(this).next().addClass('b1-dropdown_up').removeClass('b1-dropdown_down')"
-            aria-expanded="false">
-        </a>
+    <div class="account-more b1-card__col b1-card__col_dot" style="position: relative;">
+        <div class="dropdown">
+            <a class="b1-card__v-dots" (click)="$event.stopPropagation(); dropdown.open();">
+            </a>
+            <ul class="b1-dropdown b1-bg-light b1-animate fade-in-up" role="menu" style="width: 350px;" ngbDropdown
+                #dropdown="ngbDropdown">
+                <li class="b1-dropdown__item"
+                    ng-if="IsEnableFunction('Accounts','Requisites') && account.CurrencyCode == 'UAH'">
+                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.share(account)">
+                        <i class="ub-icons ub-icons-icon-file b1-mr-3"></i>
+                        {{'components.acct.share' | translate}}
+                    </a>
+                </li>
+                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
+                                   'INNER')">
+                        <i class="ub-icons ub-icons-icon-my-accounts b1-mr-3"></i>
+                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
+                        <span data-translate="components.pay.actions.innerPay">між власними рахунками</span>
+                    </a>
+                </li>
+                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
+                                   'OUTER')">
+                        <i class="ub-icons ub-icons-icon-country b1-mr-3"></i>
+                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
+                        <span data-translate="components.pay.actions.inUrainePay">
+                            по Україні
+                        </span>
+                    </a>
+                </li>
+                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                    <a data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager"
+                        class="b1-dropdown__link b1-base" href=""
+                        ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
+                                   'SWIFT')">
+                        <i class="ub-icons ub-icons-icon-SWIFT b1-mr-3"></i>
+                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
+                        <span data-translate="components.pay.actions.swift">
+                            SWIFT
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
     </div>
 
 </div>

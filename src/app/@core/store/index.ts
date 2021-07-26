@@ -2,6 +2,7 @@ import { ActionReducerMap } from '@ngrx/store';
 import { acctReducers, AcctState, ACCT_KEY } from '@reducers/acct.reducers';
 import { appReducers, AppState, APP_KEY } from '@reducers/app.reducers';
 import { AUTH_KEY, authReducer, AuthState } from '@reducers/auth.reducers';
+import { publicReducer, PublicState, PUBLIC_KEY } from '@reducers/public.reducers';
 import { SETTINGS_KEY, settingsReducer, SettingsState } from '@reducers/settings.reducers';
 import { USER_KEY, userReducer, UserState } from '@reducers/user.reducers';
 
@@ -11,6 +12,7 @@ export interface State {
   [USER_KEY]: UserState;
   [APP_KEY]: AppState;
   [ACCT_KEY]: AcctState;
+  [PUBLIC_KEY]: PublicState;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -18,5 +20,6 @@ export const reducers: ActionReducerMap<State> = {
   [AUTH_KEY]: authReducer,
   [USER_KEY]: userReducer,
   [APP_KEY]: appReducers,
-  [ACCT_KEY]: acctReducers
+  [ACCT_KEY]: acctReducers,
+  [PUBLIC_KEY]: publicReducer
 };
