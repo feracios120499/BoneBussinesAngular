@@ -1,3 +1,5 @@
+import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
+
 export interface AccountModel {
     StatementTypesList: string[];
     IsStatementFree: boolean;
@@ -27,4 +29,5 @@ export interface AccountModel {
     OB22: string;
     TIP: string;
     Branch: string;
+    Status: AccountTab;
 }

@@ -37,49 +37,52 @@
         <div class="dropdown">
             <a class="b1-card__v-dots" (click)="$event.stopPropagation(); dropdown.open();">
             </a>
-            <ul class="b1-dropdown b1-bg-light b1-animate fade-in-up" role="menu" style="width: 350px;" ngbDropdown
-                #dropdown="ngbDropdown">
-                <li class="b1-dropdown__item"
-                    ng-if="IsEnableFunction('Accounts','Requisites') && account.CurrencyCode == 'UAH'">
-                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.share(account)">
-                        <i class="ub-icons ub-icons-icon-file b1-mr-3"></i>
+            <ul class="b1-dropdown b1-bg-light" webClass="b1-animate fade-in-up" role="menu" style="width: 360px;"
+                ngbDropdown #dropdown="ngbDropdown" mobile-more more-auto-direction>
+                <li class="b1-dropdown__item" *ngIf="account.CurrencyCode == 'UAH'">
+                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                        ng-click="accountsCtrl.accActions.share(account)">
+                        <i b1-icon icon="file-details" class="b1-mr-3 b1-medium"></i>
                         {{'components.acct.share' | translate}}
                     </a>
                 </li>
+                <!-- TODO ADD  IsPayingAccount on backend-->
                 <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
-                                   'INNER')">
-                        <i class="ub-icons ub-icons-icon-my-accounts b1-mr-3"></i>
-                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
-                        <span data-translate="components.pay.actions.innerPay">між власними рахунками</span>
+                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                        ng-click="accountsCtrl.accActions.createPayment($event, account.Id,'INNER')">
+                        <i b1-icon icon="cards" class="b1-medium b1-mr-3"></i>
+
+                        <span>{{'components.acct.newPayment' | translate}}</span>
+                        <span>&nbsp;</span>
+                        <span>{{'components.pay.actions.innerPay' | translate}}</span>
                     </a>
                 </li>
+                <!-- TODO ADD  IsPayingAccount on backend-->
                 <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a class="b1-dropdown__link b1-base" href="" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
-                                   'OUTER')">
-                        <i class="ub-icons ub-icons-icon-country b1-mr-3"></i>
-                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
-                        <span data-translate="components.pay.actions.inUrainePay">
-                            по Україні
-                        </span>
+                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                        ng-click="accountsCtrl.accActions.createPayment($event, account.Id, 'OUTER')">
+
+                        <i b1-icon icon="country" class="b1-medium b1-mr-3"></i>
+                        <span>{{'components.acct.newPayment' | translate}}</span>
+                        <span>&nbsp;</span>
+                        <span>{{'components.pay.actions.inUrainePay' | translate}}</span>
                     </a>
                 </li>
+                <!-- TODO ADD  IsPayingAccount on backend-->
+                <!-- TODO ADD Directive role in -->
                 <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager"
-                        class="b1-dropdown__link b1-base" href=""
+                    <a data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager" class="b1-dropdown__link"
+                        webClass="b1-base" mobileClass="b1-medium"
                         ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
                                    'SWIFT')">
-                        <i class="ub-icons ub-icons-icon-SWIFT b1-mr-3"></i>
-                        <span data-translate="components.acct.newPayment">новий платіж</span>&nbsp
-                        <span data-translate="components.pay.actions.swift">
-                            SWIFT
-                        </span>
+
+                        <i b1-icon icon="swift" class=" b1-mr-3"></i>
+                        <span>{{'components.acct.newPayment' | translate}}</span>
+                        <span>&nbsp;</span>
+                        <span>{{'components.pay.actions.swift' | translate}}</span>
                     </a>
                 </li>
-
             </ul>
         </div>
-
     </div>
-
 </div>

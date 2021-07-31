@@ -1,7 +1,9 @@
 <div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush">
+    <i b1-icon icon="menu" class="b1-title2 visible-xs"></i>
     <a *ngrxLet="logo$ as logo">
         <img [src]="logo" alt="" class="main-navbar__app-logo">
     </a>
+    <i b1-icon icon="settings" class="b1-title2 visible-xs"></i>
 </div>
 <div class="main-navbar b1-bg-light" [class.b1-collapsed]="isCollapsed$ | ngrxPush">
     <ul class="main-navbar__list">

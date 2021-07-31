@@ -1,19 +1,63 @@
 <ng-container *ngrxLet="accounts$ as accounts">
-    <ng-scrollbar class="virtual-scroll b1-page-data">
-        <cdk-virtual-scroll-viewport scrollViewport [itemSize]="98">
-            <app-account-row
-                *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush):(filterCurrency$ | ngrxPush)"
-                class="b1-page-data__row" [account]="account">
-            </app-account-row>
+    <ng-container *ngrxLet="isLoadingAccounts$ as isLoading">
+        <ng-scrollbar class="virtual-scroll b1-page-data" *ngIf="!isLoading">
+            <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+                <app-account-row (click)="toDetail(account)"
+                    *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush):(filterCurrency$ | ngrxPush)"
+                    class="b1-page-data__row" [account]="account">
+                </app-account-row>
+            </cdk-virtual-scroll-viewport>
+        </ng-scrollbar>
+        <ng-container *ngIf="isLoading">
+            <div class="b1-page-data b1-page-data_skeleton">
+                <div class="b1-page-data__row skeleton" *ngFor="let number of [0,1,2,3,4,5,6,]">
+                    <div class="account-skeleton">
+                        <div class="account-skeleton-icon">
+                            <ngx-skeleton-loader animation="pulse">
 
-        </cdk-virtual-scroll-viewport>
-    </ng-scrollbar>
+                            </ngx-skeleton-loader>
+                        </div>
+                        <div class="account-skeleton-body">
+                            <div class="account-skeleton-name b1-ellipsis">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                                <div class="account-skeleton-number">
+                                    <ngx-skeleton-loader animation="pulse">
+
+                                    </ngx-skeleton-loader>
+                                </div>
+
+                            </div>
+                            <div class="account-skeleton-date">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                            <div class="account-skeleton-amount">
+                                <div class="account-skeleton-balance">
+                                    <ngx-skeleton-loader animation="pulse">
+
+                                    </ngx-skeleton-loader>
+                                </div>
+                                <div class="account-skeleton-turns">
+                                    <div class="account-skeleton-turns-debit">
+                                        <ngx-skeleton-loader animation="pulse">
+
+                                        </ngx-skeleton-loader>
+                                    </div>
+                                    <div class="account-skeleton-turns-credit">
+                                        <ngx-skeleton-loader animation="pulse">
+
+                                        </ngx-skeleton-loader>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+    </ng-container>
 </ng-container>
-
-<!-- <div class="b1-page-data" *ngrxLet="accounts$ as accounts">
-    <cdk-virtual-scroll-viewport scrollViewport itemSize="90">
-        <div *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush)" class="b1-page-data__row">
-            <app-account-row [account]="account"></app-account-row>
-        </div>
-    </cdk-virtual-scroll-viewport>
-</div> -->

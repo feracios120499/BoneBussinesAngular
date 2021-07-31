@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   languages: ['uk', 'ru', 'en'],
-  defaultUserPictureUrl: 'assets/img/a0.jpg'
+  defaultUserPictureUrl: 'assets/img/a0.jpg',
+  mobileWidth: 812
 };
 
 /*

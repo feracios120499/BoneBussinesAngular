@@ -1,0 +1,193 @@
+<ng-container *ngrxLet="account$ as account">
+    <ng-container *ngrxLet="isLoading$ as isLoading">
+        <div class="b1-account" *ngIf="account && !isLoading">
+            <div class="b1-account-header">
+                <div class="b1-account-header_card">
+                    <div class="b1-flex b1-align-center b1-justify-between">
+                        <div class="b1-medium b1-ellipsis">
+                            {{account.Name}}
+                        </div>
+                        <div class="b1-large b1-ml-2 b1-hover-info pointer" (click)="editAccount(account)">
+                            <i b1-icon icon="edit"></i>
+                        </div>
+                    </div>
+                    <div class="b1-large b1-mt-6">
+                        {{account.Balance / 100 | money : ''}}
+                        {{account.CurrencyCode}}
+                    </div>
+                    <div class="b1-base b1-bold">
+                        <div class="b1-flex b1-align-center">
+                            <div class="b1-color-error b1-mr-5 b1-light">
+                                <i b1-icon icon="chevron-down" class="b1-mr-2"></i>
+                                <span>{{account.DebitTurns / 100 | money:''}}</span>
+                            </div>
+                            <div class="b1-color-success b1-light">
+                                <i b1-icon icon="chevron-up" class="b1-mr-2"></i>
+                                <span>{{account.CreditTurns / 100 | money:''}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b1-account-header_info">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="b1-base b1-color-light-500">
+                                {{'components.pay.account' | translate}}
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                <span [iban]="account.Number"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" webClass="b1-mt-5">
+                        <div class="col-8">
+                            <div class="b1-base b1-color-light-500">
+                                {{'components.acct.acctDetail.futureBalance' | translate}}
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                {{account.PlannedBalance / 100 | money : ''}}
+                                {{account.CurrencyCode}}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="b1-base b1-color-light-500">
+                                {{'components.acct.acctDetail.turnoverDate' | translate}}
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                {{account.LastActive | date : 'dd.MM.yyyy'}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="b1-card__col b1-card__col_dots b1-account-more">
+                <div class="dropdown">
+                    <a class="b1-card__v-dots without-after b1-rotate-90"
+                        (click)="$event.stopPropagation(); dropdown.open();">
+                    </a>
+                    <ul class="b1-dropdown b1-bg-light test" webClass="b1-animate fade-in-up" role="menu"
+                        style="width: 360px;" ngbDropdown #dropdown="ngbDropdown" mobile-more>
+                        <!-- TODO ADD  IsPayingAccount on backend-->
+                        <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                            <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                                ng-click="accountsCtrl.accActions.createPayment($event, account.Id,'INNER')">
+                                <i b1-icon icon="cards" class="b1-medium b1-mr-3"></i>
+
+                                <span>{{'components.acct.newPayment' | translate}}</span>
+                                <span>&nbsp;</span>
+                                <span>{{'components.pay.actions.innerPay' | translate}}</span>
+                            </a>
+                        </li>
+                        <!-- TODO ADD  IsPayingAccount on backend-->
+                        <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                            <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                                ng-click="accountsCtrl.accActions.createPayment($event, account.Id, 'OUTER')">
+
+                                <i b1-icon icon="country" class="b1-medium b1-mr-3"></i>
+                                <span>{{'components.acct.newPayment' | translate}}</span>
+                                <span>&nbsp;</span>
+                                <span>{{'components.pay.actions.inUrainePay' | translate}}</span>
+                            </a>
+                        </li>
+                        <!-- TODO ADD  IsPayingAccount on backend-->
+                        <!-- TODO ADD Directive role in -->
+                        <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
+                            <a data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager"
+                                class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
+                                ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
+                                   'SWIFT')">
+
+                                <i b1-icon icon="swift" class=" b1-mr-3"></i>
+                                <span>{{'components.acct.newPayment' | translate}}</span>
+                                <span>&nbsp;</span>
+                                <span>{{'components.pay.actions.swift' | translate}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- SKELETON -->
+        <div class="b1-account" *ngIf="isLoading">
+            <div class="b1-account-header">
+                <div class="b1-account-header_card">
+                    <div class="b1-flex b1-align-center b1-justify-between">
+                        <div class="b1-medium b1-ellipsis width-100">
+                            <ngx-skeleton-loader animation="pulse">
+
+                            </ngx-skeleton-loader>
+                        </div>
+                    </div>
+                    <div class="b1-large b1-mt-6">
+                        <ngx-skeleton-loader animation="pulse">
+
+                        </ngx-skeleton-loader>
+                        <ngx-skeleton-loader animation="pulse">
+
+                        </ngx-skeleton-loader>
+                    </div>
+                    <div class="b1-base b1-bold">
+                        <div class="b1-flex b1-align-center">
+                            <div class="b1-color-error b1-mr-5 b1-flex b1-align-center">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                            <div class="b1-color-success b1-flex b1-align-center">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b1-account-header_info">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                            <div class="b1-base b1-bold b1-ellipsis">
+                                <ngx-skeleton-loader animation="pulse">
+
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+
+</ng-container>

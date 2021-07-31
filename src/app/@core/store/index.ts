@@ -1,3 +1,4 @@
+import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducerMap } from '@ngrx/store';
 import { acctReducers, AcctState, ACCT_KEY } from '@reducers/acct.reducers';
 import { appReducers, AppState, APP_KEY } from '@reducers/app.reducers';
@@ -13,6 +14,7 @@ export interface State {
   [APP_KEY]: AppState;
   [ACCT_KEY]: AcctState;
   [PUBLIC_KEY]: PublicState;
+  router: RouterReducerState;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -21,5 +23,6 @@ export const reducers: ActionReducerMap<State> = {
   [USER_KEY]: userReducer,
   [APP_KEY]: appReducers,
   [ACCT_KEY]: acctReducers,
-  [PUBLIC_KEY]: publicReducer
+  [PUBLIC_KEY]: publicReducer,
+  router: routerReducer
 };

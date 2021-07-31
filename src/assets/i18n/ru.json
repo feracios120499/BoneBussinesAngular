@@ -1793,6 +1793,7 @@
 	"components.users.notFound": "Пользователи отсутствуют",
 	"components.version.version": "Версия",
 	"components.version.whatsNew": "Что нового?",
+	"componets.acct.updateAccountSuccess": "Название счета успешно обновлено",
 	"editAmount": "",
 	"errors.authorizeAgain": "авторизируйтесь, пожалуйста, повторно",
 	"errors.connectionError": "Ошибка интернет соединение",

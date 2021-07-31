@@ -1,0 +1,44 @@
+@import "variables";
+.b1-account {
+    padding: 24px;
+    position: relative;
+    @media (max-width: 812px) {
+        padding: 16px;
+    }
+    &-more {
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        @media (max-width: 812px) {
+            top: -32px;
+            right: 16px;
+        }
+    }
+    &-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        &_card {
+            width: 412px;
+            height: 194px;
+
+            border-radius: 4px;
+            border: 1px solid $color-light-500;
+            padding: 32px;
+            @media (max-width: 812px) {
+                width: 100%;
+                height: auto;
+                padding: 16px;
+            }
+        }
+        &_info {
+            margin-left: 64px;
+            width: 100%;
+            max-width: 550px;
+            @media (max-width: 812px) {
+                margin: 0;
+                margin-top: 16px;
+            }
+        }
+    }
+}

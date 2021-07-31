@@ -17,12 +17,16 @@ import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
 import { IbanDirective } from './directives/iban.directive';
+import { MobileMoreDirective } from './directives/mobile-more.directive';
 
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { WebClassDirective } from './directives/web-class.directive';
+import { MobileClassDirective } from './directives/mobile-class.directive';
+import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
-    super(50, 400, 900);
+    super(50, 98, 98);
   }
 }
 
@@ -35,7 +39,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     MoneyPipe,
     CdkVirtualScrollViewportPatchDirective,
-    IbanDirective],
+    IbanDirective,
+    MobileMoreDirective,
+    WebClassDirective,
+    MobileClassDirective,
+    MoreAutoDirectionDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -46,7 +54,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     ReactiveComponentModule,
     ScrollingModule,
     NgScrollbarModule,
-    NgrxFormsModule
+    NgrxFormsModule,
+    NgxSkeletonLoaderModule
   ],
   exports: [
     CommonModule,
@@ -65,7 +74,12 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     MoneyPipe,
     CdkVirtualScrollViewportPatchDirective,
-    IbanDirective
+    IbanDirective,
+    MobileMoreDirective,
+    NgxSkeletonLoaderModule,
+    WebClassDirective,
+    MobileClassDirective,
+    MoreAutoDirectionDirective
   ],
   providers: [
     {

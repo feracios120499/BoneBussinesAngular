@@ -1067,6 +1067,9 @@ table.recipients .row-element:hover {
 .width-100 {
     width: 100%;
 }
+.width-50 {
+    width: 50%;
+}
 
 .ub-nav ul.nav.nav-sub > li > a {
     height: 50px;
@@ -2810,7 +2813,7 @@ textarea {
         display: flex;
         flex-direction: column;
         @media (max-width: 812px) {
-            border-radius: 16p;
+            border-radius: 16px;
         }
     }
     &-tabs {
@@ -3034,6 +3037,11 @@ textarea {
         min-height: 450px;
         // overflow: hidden;
         flex: 1;
+        &_skeleton {
+            overflow: hidden;
+            flex: auto;
+            height: 450px;
+        }
         &_auto {
             height: auto;
             overflow: visible;
@@ -3072,8 +3080,11 @@ textarea {
             transition: all 150ms $animation-timing, color 0ms;
             cursor: pointer;
             border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
-            &:not(.selected):hover {
+            &:not(.selected):not(.skeleton):hover {
                 @include hover-row;
+            }
+            &.skeleton {
+                cursor: auto;
             }
             &.selected {
                 //background-image: linear-gradient(to right, $color-primary, $color-primary-100);
@@ -3139,14 +3150,13 @@ textarea {
     }
 }
 .b1-card__col_dots {
-    .dropdown .b1-card__v-dots::after {
+    .dropdown .b1-card__v-dots:not(.without-after):after {
         content: "";
         position: absolute;
         z-index: 2;
         width: 90px;
         height: 90px;
-        // top: -36px;
-        // left: -18px;
+        overflow: hidden;
     }
 }
 .b1-page-checkbox {
@@ -3286,6 +3296,7 @@ textarea {
 }
 
 .b1-hover-info {
+    cursor: pointer;
     transition: color 150ms $animation-timing;
     &:hover {
         color: var(--color-info);
@@ -3571,4 +3582,71 @@ auth-otp {
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.b1-page-data ngx-skeleton-loader .loader {
+    background: var(--color-light-300) !important;
+}
+
+ngx-skeleton-loader .loader {
+    margin-bottom: 0 !important;
+}
+
+.mobile-more {
+    position: "fixed";
+    top: "auto";
+    bottom: -100vh;
+    z-index: 1050;
+}
+
+[mobile-more] {
+    @media (max-width: 812px) {
+        position: fixed;
+        top: auto;
+        bottom: -100vh;
+        z-index: 1050;
+        transition: bottom 300ms $animation-timing;
+        &.mobile-more-show {
+            bottom: 0;
+        }
+    }
+}
+
+.modal-dialog {
+    @media (max-width: 812px) {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        margin: 0;
+        width: 100%;
+        & .modal-content {
+            border-bottom: none;
+            border-radius: 16px 16px 0px 0px;
+            border-right: none;
+            border-left: none;
+        }
+    }
+}
+
+ngb-modal-window {
+    @media (max-width: 812px) {
+        .modal-content {
+            top: auto;
+            bottom: -100vh !important;
+            transition: bottom 0.3s $animation-timing !important;
+        }
+
+        &.show {
+            .modal-content {
+                bottom: 0 !important;
+            }
+        }
+    }
+}
+
+.visible-xs {
+    display: none;
+    @media (max-width: 812px) {
+        display: block;
+    }
 }

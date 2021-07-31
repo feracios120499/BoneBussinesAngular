@@ -1,0 +1,30 @@
+<div class="b1-modal-data" *ngrxLet="editForm$ as editForm">
+    <div class="b1-modal-close">
+
+        <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
+    </div>
+    <div class="b1-modal-header">
+        <div class="b1-title2">
+            {{'components.acct.editAccount' | translate}}
+        </div>
+    </div>
+    <form class="b1-modal-body b1-modal-wrapper" name="form">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="b1-input">
+                    <label class="b1-input__label b1-input__label_top">{{'componenets.acct.accName' |
+                        translate}}</label>
+                    <textarea class="w-full b1-base b1-input__control b1-input__control_textarea"
+                        [ngrxFormControlState]="editForm.controls.name"
+                        style="max-width: 360px; max-height: 360px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="b1-modal-footer" ngbAutofocus>
+        <button class="b1-button-primary " type="button" (click)="save()" [disabled]="editForm.isInvalid">
+            <i b1-icon icon="save"></i>
+            {{'actions.save' | translate}}
+        </button>
+    </div>
+</div>

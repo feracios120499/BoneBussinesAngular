@@ -23,7 +23,12 @@ export class CdkVirtualScrollViewportPatchDirective implements OnInit, OnDestroy
 
         const item = viewportObject.elementRef.nativeElement.children[0].children[0];
         const style = getComputedStyle(item);
-        const itemSize = item.clientHeight + parseInt(style.marginTop, 10) + parseInt(style.marginBottom, 10);
+        const itemSize = item.clientHeight +
+          parseInt(style.marginTop, 10) +
+          parseInt(style.marginBottom, 10) +
+          parseInt(style.paddingBottom, 10) +
+          parseInt(style.paddingTop, 10);
+        debugger;
         viewportObject.setRenderedRange({ start: 0, end: (viewportObject.getViewportSize() + strategy._minBufferPx) / itemSize });
         strategy.updateItemAndBufferSize(itemSize, strategy._minBufferPx, strategy._maxBufferPx);
       });

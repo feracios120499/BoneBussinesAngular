@@ -1,23 +1,30 @@
+import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AcctState, ACCT_KEY } from '@reducers/acct.reducers';
 import { AccountModel } from 'src/app/@shared/models/account.model';
 import { FilterCurrency, FilterCurrencyType } from 'src/app/@shared/models/filter.model';
+import { selectRouteNestedParams, selectRouteParams } from './router.selectors';
 
 export const featureSelector = createFeatureSelector<AcctState>(ACCT_KEY);
 
 export const countActiveAccountsSelector = createSelector(
     featureSelector,
-    state => !state.accounts ? 0 : (state.accounts as AccountModel[]).filter(p => !p.ClosingDate).length
+    state => !state.accounts ? 0 : (state.accounts as AccountModel[]).filter(p => p.Status === AccountTab.Active).length
 );
 
 export const countClosedAccountsSelector = createSelector(
     featureSelector,
-    state => !state.accounts ? 0 : (state.accounts as AccountModel[]).filter(p => p.ClosingDate).length
+    state => !state.accounts ? 0 : (state.accounts as AccountModel[]).filter(p => p.Status === AccountTab.Closed).length
 );
 
 export const accountsSelector = createSelector(
     featureSelector,
     state => state.accounts
+);
+
+export const accountsOnTabSelector = createSelector(
+    featureSelector,
+    state => state.accounts?.filter(p => p.Status === state.currentTab) || []
 );
 
 export const currentTabSelector = createSelector(
@@ -28,6 +35,11 @@ export const currentTabSelector = createSelector(
 export const formSelector = createSelector(
     featureSelector,
     state => state.filterForm
+);
+
+export const editFormSelector = createSelector(
+    featureSelector,
+    state => state.editForm
 );
 
 export const filterAccountsSelector = createSelector(
@@ -58,3 +70,25 @@ export const FilterCurrencySelector = createSelector(
         }
     }
 );
+
+export const isLoadingAccountsSelector = createSelector(
+    featureSelector,
+    state => state.loadings.indexOf('list') >= 0
+);
+
+export const isLoadingCurrentAccountSelector = createSelector(
+    featureSelector,
+    state => state.loadings.indexOf('account') >= 0
+);
+
+
+export const currentAccountSelector = createSelector(
+    featureSelector,
+    state => state.currentAccount
+);
+
+export const currentAccountRouteParamsSelector = createSelector(
+    selectRouteNestedParams,
+    ({ bankId, accountId }) => ({ bankId: (bankId as string) || '', accountId: parseInt(accountId || '', 10) })
+);
+

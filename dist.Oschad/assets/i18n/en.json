@@ -1793,6 +1793,7 @@
 	"components.users.notFound": "No users",
 	"components.version.version": "Version",
 	"components.version.whatsNew": "What's new?",
+	"componets.acct.updateAccountSuccess": "Account name successfully updated",
 	"editAmount": "",
 	"errors.authorizeAgain": "relogin, please",
 	"errors.connectionError": "Internet connection error",

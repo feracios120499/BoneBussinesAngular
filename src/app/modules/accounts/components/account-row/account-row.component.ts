@@ -14,4 +14,8 @@ export class AccountRowComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  test(): void {
+    console.log('test');
+  }
+
 }

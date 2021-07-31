@@ -10,6 +10,11 @@ import { AccountsTabsComponent } from './components/accounts-tabs/accounts-tabs.
 import { AccountsActionsComponent } from './components/accounts-actions/accounts-actions.component';
 import { AccountsListComponent } from './components/accounts-list/accounts-list.component';
 import { AccountRowComponent } from './components/account-row/account-row.component';
+import { AccountHeaderComponent } from './components/account-header/account-header.component';
+import { AccountComponent } from './views/account/account.component';
+import { AccountCardComponent } from './components/account-card/account-card.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { AccountEditModalComponent } from './components/account-edit-modal/account-edit-modal.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +23,12 @@ import { AccountRowComponent } from './components/account-row/account-row.compon
         AccountsTabsComponent,
         AccountsActionsComponent,
         AccountsListComponent,
-        AccountRowComponent
+        AccountRowComponent,
+        AccountHeaderComponent,
+        AccountComponent,
+        AccountCardComponent,
+        AccountDetailsComponent,
+        AccountEditModalComponent
     ],
     imports: [
         CommonModule,

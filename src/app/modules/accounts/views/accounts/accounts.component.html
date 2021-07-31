@@ -6,7 +6,7 @@
         <div class="b1-page-card b1-bg-light">
             <app-accounts-actions></app-accounts-actions>
 
-            <b1-card-loader></b1-card-loader>
+            <b1-card-loader [isLoading]="isLoadingAccounts$"></b1-card-loader>
             <app-accounts-list></app-accounts-list>
         </div>
     </div>

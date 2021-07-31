@@ -17,7 +17,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgrxFormsModule } from 'ngrx-forms';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -40,6 +41,8 @@ import { NgrxFormsModule } from 'ngrx-forms';
         deps: [HttpClient]
       }
     }),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     AppRoutingModule,
     CoreModule,
     SharedModule

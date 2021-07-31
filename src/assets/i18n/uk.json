@@ -1793,6 +1793,7 @@
 	"components.users.notFound": "Користувачі відсутні",
 	"components.version.version": "Версія",
 	"components.version.whatsNew": "Що нового?",
+	"componets.acct.updateAccountSuccess": "Назву рахунку успішно оновлено",
 	"editAmount": "",
 	"errors.authorizeAgain": "авторизуйтесь, будь ласка, повторно",
 	"errors.connectionError": "Помилка інтернет з'єднання",

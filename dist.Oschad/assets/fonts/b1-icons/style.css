@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?sc0ps2');
-  src:  url('fonts/b1-icons.eot?sc0ps2#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?sc0ps2') format('truetype'),
-    url('fonts/b1-icons.woff?sc0ps2') format('woff'),
-    url('fonts/b1-icons.svg?sc0ps2#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?v1uawl');
+  src:  url('fonts/b1-icons.eot?v1uawl#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?v1uawl') format('truetype'),
+    url('fonts/b1-icons.woff?v1uawl') format('woff'),
+    url('fonts/b1-icons.svg?v1uawl#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,30 @@
 
 .b1-icons-icon-moon:before {
   content: "\e900";
+}
+.b1-icons-icon-menu:before {
+  content: "\e911";
+}
+.b1-icons-icon-cancel:before {
+  content: "\e90f";
+}
+.b1-icons-icon-save:before {
+  content: "\e910";
+}
+.b1-icons-icon-edit:before {
+  content: "\e90e";
+}
+.b1-icons-icon-file-details:before {
+  content: "\e90d";
+}
+.b1-icons-icon-country:before {
+  content: "\e90a";
+}
+.b1-icons-icon-swift:before {
+  content: "\e90b";
+}
+.b1-icons-icon-cards:before {
+  content: "\e90c";
 }
 .b1-icons-icon-search:before {
   content: "\e909";
