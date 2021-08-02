@@ -86,12 +86,12 @@ export class AcctEffects {
             ),
             switchMap(([clientId, account, routeParams]) => {
                 if (account) {
-                    return of(acctActions.loadCurrentAccountSuccess({ account }));
+                    return of(acctActions.loadCurrentAccountSuccess(account));
                 }
                 else {
                     return this.accountsService.getAccount(routeParams.bankId, routeParams.accountId, clientId).pipe(
-                        map(currentAccount => acctActions.loadCurrentAccountSuccess({ account: currentAccount })),
-                        catchError(error => of(acctActions.loadCurrentAccountFailure({ error: error.error.Message })))
+                        map(currentAccount => acctActions.loadCurrentAccountSuccess(currentAccount)),
+                        catchError(error => of(acctActions.loadCurrentAccountFailure(error.error.Message)))
                     );
                 }
             })
@@ -103,7 +103,7 @@ export class AcctEffects {
                 acctActions.loadCurrentAccountSuccess,
                 acctActions.updateAccountSuccess
             ]),
-            map((action) => acctActions.setCurrentAccount({ account: action.account }))
+            map((action) => acctActions.setCurrentAccount({ account: action.payload }))
         )
     );
 
@@ -111,7 +111,7 @@ export class AcctEffects {
         this.actions$.pipe(
             ofType(acctActions.sumbitEditForm),
             withLatestFrom(this.store.select(editFormSelector)),
-            map(([, form]) => acctActions.updateAccountRequest({ model: form.value }))
+            map(([, form]) => acctActions.updateAccountRequest(form.value))
         ));
 
     updateAccountRequest$ = createEffect(() =>
@@ -120,13 +120,17 @@ export class AcctEffects {
             switchMap((action) => currentClientIdFilteredSelector(this.store).pipe(map((clientId) => ({ clientId, action })))),
             withLatestFrom(this.store.select(currentAccountRouteParamsSelector)),
             switchMap(([payload, routeParams]) =>
-                this.accountsService.updateAccount(routeParams.bankId, routeParams.accountId, payload.clientId, payload.action.model).pipe(
-                    withLatestFrom(this.store.select(currentAccountSelector)),
-                    filter(([, account]) => account !== undefined),
-                    map(([, account]) => account as AccountModel),
-                    map((account) => acctActions.updateAccountSuccess({ account: { ...account, Name: payload.action.model.name } })),
-                    catchError((error) => of(acctActions.updateAccountFailure(error.error.Message)))
-                )
+                this.accountsService.updateAccount(
+                    routeParams.bankId,
+                    routeParams.accountId,
+                    payload.clientId,
+                    payload.action.payload).pipe(
+                        withLatestFrom(this.store.select(currentAccountSelector)),
+                        filter(([, account]) => account !== undefined),
+                        map(([, account]) => account as AccountModel),
+                        map((account) => acctActions.updateAccountSuccess({ ...account, Name: payload.action.payload.name })),
+                        catchError((error) => of(acctActions.updateAccountFailure(error.error.Message)))
+                    )
             ))
     );
 
