@@ -52,3 +52,8 @@ export const isCollapsedSelector = createSelector(
   featureSelector,
   state => state.isCollapsed
 );
+
+export const isOpenMenu = createSelector(
+  featureSelector,
+  state => state.menuOpen
+)

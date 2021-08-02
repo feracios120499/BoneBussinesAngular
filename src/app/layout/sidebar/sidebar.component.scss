@@ -1,9 +1,9 @@
 @import "variables.scss";
-:host {
-    @media (max-width: 812px) {
-        display: none;
-    }
-}
+// :host {
+//     @media (max-width: 812px) {
+//         display: none;
+//     }
+// }
 .main {
     &-sidemenu {
         position: fixed;
@@ -13,6 +13,15 @@
         overflow: hidden;
         @include sidemenu;
 
+        @media (max-width: 812px) {
+            width: 100%;
+            z-index: 500;
+            transition: top 500ms $animation-timing;
+            &.open {
+                top: 90px;
+            }
+            top: 100%;
+        }
         &.b1-collapsed {
             width: 80px;
         }
@@ -24,6 +33,11 @@
             padding-bottom: 56px;
             overflow-x: hidden;
             overflow-y: scroll;
+            @media (max-width: 812px) {
+                width: 100%;
+                overflow: auto;
+                padding-right: 0;
+            }
         }
 
         &.b1-collapsed &__wrapper {

@@ -1,9 +1,9 @@
 import { setGlobalLoader } from '@actions/app.actions';
-import { setDarkMode, setLanguage } from '@actions/settings.actions';
+import { openMenu, setDarkMode, setLanguage } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@core/facades/user.facade';
 import { Store } from '@ngrx/store';
-import { allowedLanguagesSelector, currentLanguageSelector, darkModeSelector, isCollapsedSelector, logoSelector } from '@selectors/settings.selectors';
+import { allowedLanguagesSelector, currentLanguageSelector, darkModeSelector, isCollapsedSelector, isOpenMenu, logoSelector } from '@selectors/settings.selectors';
 import { countNotificationsSelector, userNameSelector, userPictureSelector } from '@selectors/user.selectors';
 
 @Component({
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   public userPictureUrl$ = this.store.select(userPictureSelector);
   public logo$ = this.store.select(logoSelector);
   public isCollapsed$ = this.store.select(isCollapsedSelector);
-
+  public isOpen$ = this.store.select(isOpenMenu);
   ngOnInit(): void {
   }
 
@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit {
     this.setDarkModeState(false);
   }
 
+  openMenu(): void {
+    this.store.dispatch(openMenu());
+  }
+
   private setDarkModeState(isActive: boolean): void {
     this.store.dispatch(setGlobalLoader({ isLoading: true }));
     this.store.dispatch(setDarkMode({ isActive }));
@@ -48,4 +52,6 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(setGlobalLoader({ isLoading: false }));
     }, 200);
   }
+
+
 }

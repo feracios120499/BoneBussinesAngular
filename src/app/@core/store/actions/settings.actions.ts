@@ -21,3 +21,7 @@ export const setDarkMode = createAction(
 export const toggleCollapsed = createAction(
   '[SETTINGS] toggle collapsed menu'
 );
+
+export const openMenu = createAction(
+  '[SETTINGS] open menu'
+);

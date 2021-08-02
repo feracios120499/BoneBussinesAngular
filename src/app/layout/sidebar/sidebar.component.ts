@@ -1,8 +1,8 @@
 import { toggleCollapsed } from '@actions/settings.actions';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { bankDateSelector } from '@selectors/app.selectors';
-import { callCenterPhonesLocalSelector, callCenterPhonesSelector, callCenterWorkSelector, ecpSupportPhonesSelector, isCollapsedSelector } from '@selectors/settings.selectors';
+import { callCenterPhonesLocalSelector, callCenterPhonesSelector, callCenterWorkSelector, ecpSupportPhonesSelector, isCollapsedSelector, isOpenMenu } from '@selectors/settings.selectors';
 import { currentCustomerNameSelector, menuSelector, subMenuSelector } from '@selectors/user.selectors';
 
 @Component({
@@ -21,7 +21,12 @@ export class SidebarComponent implements OnInit {
   public callCenterWork$ = this.store.select(callCenterWorkSelector);
   public ecpSupportPhone$ = this.store.select(ecpSupportPhonesSelector);
   public isCollapsed$ = this.store.select(isCollapsedSelector);
-  constructor(private store: Store) {
+  public isOpen$ = this.store.select(isOpenMenu);
+  constructor(private store: Store, private el: ElementRef) {
+    setTimeout(() => {
+      console.log(el.nativeElement.children[0].children[0].offsetWidth - el.nativeElement.children[0].children[0].clientWidth)
+    }, 3000)
+
 
   }
 

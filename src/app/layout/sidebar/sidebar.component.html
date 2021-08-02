@@ -1,121 +1,124 @@
-<div class="app-aside" *ngrxLet="isCollapsed$ as isCollapsed">
-    <div class="main-sidemenu" [class.b1-collapsed]="isCollapsed">
-        <div class="main-sidemenu__wrapper">
-            <div id="aside-user">
-                <div class="main-sidemenu__head">
-                    <div class="client">
-                        <button class="client__button">
-                            {{customerName$ | ngrxPush}}
-                        </button>
+<ng-container *ngrxLet="isOpen$ as isOpen">
+    <div class="app-aside" *ngrxLet="isCollapsed$ as isCollapsed">
+
+        <div class="main-sidemenu" [class.b1-collapsed]="isCollapsed" [class.open]="isOpen">
+            <div class="main-sidemenu__wrapper">
+                <div id="aside-user">
+                    <div class="main-sidemenu__head">
+                        <div class="client">
+                            <button class="client__button">
+                                {{customerName$ | ngrxPush}}
+                            </button>
+                        </div>
+                        <p class="bdate b1-small">
+                            <span>{{'aside.nav.bankDate' | translate}}</span>:
+                            <ng-container *ngrxLet="bankDate$ as bankDate">
+                                <span class="b1-bold" *ngIf="bankDate">
+                                    {{bankDate | date:'dd.MM.yyyy'}}
+                                </span>
+                            </ng-container>
+                        </p>
                     </div>
-                    <p class="bdate b1-small">
-                        <span>{{'aside.nav.bankDate' | translate}}</span>:
-                        <ng-container *ngrxLet="bankDate$ as bankDate">
-                            <span class="b1-bold" *ngIf="bankDate">
-                                {{bankDate | date:'dd.MM.yyyy'}}
-                            </span>
-                        </ng-container>
-                    </p>
                 </div>
-            </div>
-            <nav *ngrxLet="menu$ as menu">
-                <div>
-                    <ul class="main-sidemenu__nav">
-                        <li *ngFor="let menuItem of menu" class="main-sidemenu__nav__item"
-                            [ngbTooltip]="menuItem.dataTranslate | translate" placement="right" container="body"
-                            tooltipClass="{{isCollapsed ?'':'menu-tooltip'}}" [routerLink]="menuItem.route"
-                            routerLinkActive="active">
-                            <a class="main-sidemenu__nav__item__link">
-                                <span class="main-sidemenu__nav__item__link__icon">
-                                    <i b1-icon [icon]="menuItem.icon"></i>
-                                </span>
-                                <span class="main-sidemenu__nav__item__link__text">
-                                    {{menuItem.dataTranslate | translate}}
-                                </span>
-                            </a>
-                        </li>
-                        <hr class="b1-separator" />
-                        <ng-container *ngrxLet="subMenu$ as subMenu">
-                            <li *ngFor="let menuItem of subMenu" class="main-sidemenu__nav__item">
+                <nav *ngrxLet="menu$ as menu">
+                    <div>
+                        <ul class="main-sidemenu__nav">
+                            <li *ngFor="let menuItem of menu" class="main-sidemenu__nav__item"
+                                [ngbTooltip]="menuItem.dataTranslate | translate" placement="right" container="body"
+                                tooltipClass="{{isCollapsed ?'':'menu-tooltip'}}" [routerLink]="menuItem.route"
+                                routerLinkActive="active">
                                 <a class="main-sidemenu__nav__item__link">
                                     <span class="main-sidemenu__nav__item__link__icon">
                                         <i b1-icon [icon]="menuItem.icon"></i>
                                     </span>
                                     <span class="main-sidemenu__nav__item__link__text">
-                                        {{menuItem.dataTranslate| translate}}
+                                        {{menuItem.dataTranslate | translate}}
                                     </span>
                                 </a>
                             </li>
-                        </ng-container>
+                            <hr class="b1-separator" />
+                            <ng-container *ngrxLet="subMenu$ as subMenu">
+                                <li *ngFor="let menuItem of subMenu" class="main-sidemenu__nav__item">
+                                    <a class="main-sidemenu__nav__item__link">
+                                        <span class="main-sidemenu__nav__item__link__icon">
+                                            <i b1-icon [icon]="menuItem.icon"></i>
+                                        </span>
+                                        <span class="main-sidemenu__nav__item__link__text">
+                                            {{menuItem.dataTranslate| translate}}
+                                        </span>
+                                    </a>
+                                </li>
+                            </ng-container>
 
-                    </ul>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="main-sidemenu__contact">
+                    <ng-container *ngrxLet="callCenterPhones$ as callCenterPhones">
+                        <div *ngIf="callCenterPhones && callCenterPhones.length">
+                            <p>
+                                <i b1-icon icon="phone" class="b1-color-primary"></i>
+                                <span style="margin-left: 4px;" class="b1-color-primary b1-base b1-bold"
+                                    data-translate="aside.nav.CallCenterPhone">Контакт-центр</span>
+                            </p>
+                            <p *ngFor="let phone of callCenterPhones">
+                                <span class="b1-medium">{{phone}}</span>
+                            </p>
+                            <p>
+                                <span class="b1-micro b1-opacity-60">
+                                    {{'aside.nav.FreeTarif' | translate}}
+                                </span>
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngrxLet="callCenterPhonesLocal$ as callCenterPhonesLocal">
+                        <div *ngIf="callCenterPhonesLocal && callCenterPhonesLocal.length">
+                            <p *ngFor="let phone of callCenterPhonesLocal">
+                                <span class="b1-medium">{{phone}}</span>
+                            </p>
+                            <p>
+                                <span class="b1-micro b1-opacity-60">
+                                    {{'aside.nav.OperatorTarif' | translate}}
+                                </span>
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngrxLet="callCenterWork$ as callCenterWork">
+                        <div *ngIf="callCenterWork">
+                            <span class="b1-micro b1-opacity-60">
+                                {{'shared.workDates' | translate}}
+                            </span>
+                            <span class="b1-micro b1-opacity-60">
+                                {{callCenterWork.from}} - {{callCenterWork.to}}
+                            </span>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngrxLet="ecpSupportPhone$ as ecpSupportPhone">
+                        <div *ngIf="ecpSupportPhone && ecpSupportPhone.length">
+                            <p class="b1-flex b1-align-center">
+                                <i b1-icon icon="cog" class="b1-color-warning"></i>
+                                <span class="b1-color-warning b1-base b1-ml-2"
+                                    data-translate="aside.nav.ECPTechSupport">технічна підтримка ЕЦП</span>
+                            </p>
+                            <p *ngFor="let phone of ecpSupportPhone">
+                                <span class="b1-medium">{{phone}}</span>
+                            </p>
+                        </div>
+                    </ng-container>
+
                 </div>
-            </nav>
-            <div class="main-sidemenu__contact">
-                <ng-container *ngrxLet="callCenterPhones$ as callCenterPhones">
-                    <div *ngIf="callCenterPhones && callCenterPhones.length">
-                        <p>
-                            <i b1-icon icon="phone" class="b1-color-primary"></i>
-                            <span style="margin-left: 4px;" class="b1-color-primary b1-base b1-bold"
-                                data-translate="aside.nav.CallCenterPhone">Контакт-центр</span>
-                        </p>
-                        <p *ngFor="let phone of callCenterPhones">
-                            <span class="b1-medium">{{phone}}</span>
-                        </p>
-                        <p>
-                            <span class="b1-micro b1-opacity-60">
-                                {{'aside.nav.FreeTarif' | translate}}
-                            </span>
-                        </p>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngrxLet="callCenterPhonesLocal$ as callCenterPhonesLocal">
-                    <div *ngIf="callCenterPhonesLocal && callCenterPhonesLocal.length">
-                        <p *ngFor="let phone of callCenterPhonesLocal">
-                            <span class="b1-medium">{{phone}}</span>
-                        </p>
-                        <p>
-                            <span class="b1-micro b1-opacity-60">
-                                {{'aside.nav.OperatorTarif' | translate}}
-                            </span>
-                        </p>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngrxLet="callCenterWork$ as callCenterWork">
-                    <div *ngIf="callCenterWork">
-                        <span class="b1-micro b1-opacity-60">
-                            {{'shared.workDates' | translate}}
-                        </span>
-                        <span class="b1-micro b1-opacity-60">
-                            {{callCenterWork.from}} - {{callCenterWork.to}}
-                        </span>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngrxLet="ecpSupportPhone$ as ecpSupportPhone">
-                    <div *ngIf="ecpSupportPhone && ecpSupportPhone.length">
-                        <p class="b1-flex b1-align-center">
-                            <i b1-icon icon="cog" class="b1-color-warning"></i>
-                            <span class="b1-color-warning b1-base b1-ml-2"
-                                data-translate="aside.nav.ECPTechSupport">технічна підтримка ЕЦП</span>
-                        </p>
-                        <p *ngFor="let phone of ecpSupportPhone">
-                            <span class="b1-medium">{{phone}}</span>
-                        </p>
-                    </div>
-                </ng-container>
-
+            </div>
+            <div class="main-sidemenu__collapse">
+                <a class="main-sidemenu__collapse-button" (click)="collapseToggle()"
+                    ga-track-event="['left-menu','collapse']">
+                    <span class="b1-mr-2" *ngIf="!isCollapsed">{{'aside.nav.collapse' | translate}}</span>
+                    <i b1-icon icon="arrows"></i>
+                </a>
             </div>
         </div>
-        <div class="main-sidemenu__collapse">
-            <a class="main-sidemenu__collapse-button" (click)="collapseToggle()"
-                ga-track-event="['left-menu','collapse']">
-                <span class="b1-mr-2" *ngIf="!isCollapsed">{{'aside.nav.collapse' | translate}}</span>
-                <i b1-icon icon="arrows"></i>
-            </a>
-        </div>
-    </div>
 
-</div>
+    </div>
+</ng-container>

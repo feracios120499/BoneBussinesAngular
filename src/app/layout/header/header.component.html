@@ -1,5 +1,6 @@
-<div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush">
-    <i b1-icon icon="menu" class="b1-title2 visible-xs"></i>
+<div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush"
+    [class.open]="isOpen$ | ngrxPush">
+    <i b1-icon icon="menu" class="b1-title2 visible-xs header-icon-left" (click)="openMenu()"></i>
     <a *ngrxLet="logo$ as logo">
         <img [src]="logo" alt="" class="main-navbar__app-logo">
     </a>

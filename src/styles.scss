@@ -3420,12 +3420,14 @@ textarea {
         flex: 1;
     }
 }
-
-.main-sidemenu__wrapper::-webkit-scrollbar {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+@media (min-width: 812px) {
+    .main-sidemenu__wrapper::-webkit-scrollbar {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
 }
+
 .caret {
     display: inline-block;
     width: 0;

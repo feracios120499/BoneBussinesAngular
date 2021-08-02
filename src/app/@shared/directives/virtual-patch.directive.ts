@@ -28,7 +28,6 @@ export class CdkVirtualScrollViewportPatchDirective implements OnInit, OnDestroy
           parseInt(style.marginBottom, 10) +
           parseInt(style.paddingBottom, 10) +
           parseInt(style.paddingTop, 10);
-        debugger;
         viewportObject.setRenderedRange({ start: 0, end: (viewportObject.getViewportSize() + strategy._minBufferPx) / itemSize });
         strategy.updateItemAndBufferSize(itemSize, strategy._minBufferPx, strategy._maxBufferPx);
       });

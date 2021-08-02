@@ -42,6 +42,10 @@
                 justify-content: space-between;
                 padding: 0 32px;
                 height: 90px;
+                transition: background 500ms $animation-timing;
+                &.open {
+                    background-color: rgba(var(--color-dark-100-rgb), 0.9);
+                }
             }
 
             & > button {
@@ -227,4 +231,15 @@
     -moz-transform-origin: 50% 4px;
     animation: ring 4s 0.7s ease-in-out infinite;
     transform-origin: 50% 4px;
+}
+
+@media (max-width: 812px) {
+    .header-icon-left {
+        transition: all 500ms $animation-timing;
+    }
+    .open {
+        .header-icon-left {
+            transform: translateX(-150px);
+        }
+    }
 }
