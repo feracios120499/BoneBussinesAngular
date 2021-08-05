@@ -1,5 +1,5 @@
 import { setGlobalLoader } from '@actions/app.actions';
-import { openMenu, setDarkMode, setLanguage } from '@actions/settings.actions';
+import { closeMenu, openMenu, setDarkMode, setLanguage } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { UserFacade } from '@core/facades/user.facade';
 import { Store } from '@ngrx/store';
@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   public isCollapsed$ = this.store.select(isCollapsedSelector);
   public isOpen$ = this.store.select(isOpenMenu);
   ngOnInit(): void {
+    //this.disableDarkMode();
   }
 
   setLanguage(language: string): void {
@@ -43,6 +44,10 @@ export class HeaderComponent implements OnInit {
 
   openMenu(): void {
     this.store.dispatch(openMenu());
+  }
+
+  closeMenu(): void {
+    this.store.dispatch(closeMenu());
   }
 
   private setDarkModeState(isActive: boolean): void {

@@ -1,4 +1,4 @@
-import { openMenu, setDarkMode, setLanguage, setResources, toggleCollapsed } from '@actions/settings.actions';
+import { closeMenu, openMenu, setDarkMode, setLanguage, setResources, toggleCollapsed } from '@actions/settings.actions';
 import { createReducer, on } from '@ngrx/store';
 import { Resources } from 'src/app/@shared/models/resources.model';
 import { environment } from 'src/environments/environment';
@@ -40,6 +40,10 @@ export const settingsReducer = createReducer(
     on(
         openMenu,
         (state) => ({ ...state, menuOpen: true })
+    ),
+    on(
+        closeMenu,
+        (state) => ({ ...state, menuOpen: false })
     ),
     on(
         toggleCollapsed,

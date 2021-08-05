@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { currentLanguageSelector, darkModeSelector } from '@selectors/settings.selectors';
+import { currentLanguageSelector, darkModeSelector, isOpenMenu } from '@selectors/settings.selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,9 +17,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   language$ = this.store.select(currentLanguageSelector);
   darkMode$ = this.store.select(darkModeSelector);
+  isOpenMenu$ = this.store.select(isOpenMenu);
   private lngSubscription$!: Subscription;
   private darkModeSubscription$!: Subscription;
   private routeEventSubscription$!: Subscription;
+  private openMenuSubscription$!: Subscription;
 
   constructor(private translate: TranslateService, private store: Store, private router: Router) {
   }
@@ -38,6 +40,16 @@ export class AppComponent implements OnInit, OnDestroy {
         document.body.classList.remove('dark-mode');
       }
 
+    });
+    this.openMenuSubscription$ = this.isOpenMenu$.subscribe(isOpen => {
+      if (isOpen) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.body.classList.add('menu-open');
+      }
+      else {
+        document.body.classList.remove('menu-open');
+      }
     });
     this.store.dispatch(loadResources());
   }

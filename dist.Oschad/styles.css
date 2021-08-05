@@ -17978,10 +17978,12 @@ textarea {
   flex-direction: column;
   flex: 1;
 }
-.main-sidemenu__wrapper::-webkit-scrollbar {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+@media (min-width: 812px) {
+  .main-sidemenu__wrapper::-webkit-scrollbar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 }
 .caret {
   display: inline-block;
@@ -18196,6 +18198,10 @@ ngx-skeleton-loader .loader {
   .visible-xs {
     display: block;
   }
+}
+.menu-open {
+  height: 100vh !important;
+  overflow: hidden !important;
 }
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
 

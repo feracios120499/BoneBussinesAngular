@@ -1,4 +1,4 @@
-<div class="app container app-aside-fixed">
+<div class="app container app-aside-fixed" [class.menu-open]="isOpen$ | ngrxPush">
     <app-header></app-header>
     <app-sidebar></app-sidebar>
     <div class="app-content fade-in" [class.b1-collapsed]="isCollapsed$ | ngrxPush">

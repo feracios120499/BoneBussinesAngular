@@ -3652,3 +3652,8 @@ ngb-modal-window {
         display: block;
     }
 }
+
+.menu-open {
+    height: 100vh !important;
+    overflow: hidden !important;
+}

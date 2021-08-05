@@ -25,3 +25,7 @@ export const toggleCollapsed = createAction(
 export const openMenu = createAction(
   '[SETTINGS] open menu'
 );
+
+export const closeMenu = createAction(
+  '[SETTINGS] close menu'
+);
