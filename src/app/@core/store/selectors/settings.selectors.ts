@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { SETTINGS_KEY, SettingsState } from '@reducers/settings.reducers';
+import { SettingsState, SETTINGS_KEY } from '@stores/settings.store';
 
 export const featureSelector = createFeatureSelector<SettingsState>(SETTINGS_KEY);
 
@@ -48,12 +48,4 @@ export const ecpSupportPhonesSelector = createSelector(
   state => state.resources?.Owner.ECPTechSupportPhone
 );
 
-export const isCollapsedSelector = createSelector(
-  featureSelector,
-  state => state.isCollapsed
-);
 
-export const isOpenMenu = createSelector(
-  featureSelector,
-  state => state.menuOpen
-)

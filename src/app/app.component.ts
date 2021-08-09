@@ -4,7 +4,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { currentLanguageSelector, darkModeSelector, isOpenMenu } from '@selectors/settings.selectors';
+import { isOpenMenuOrInfoSelector, isOpenMenuSelector } from '@selectors/menu.selectors';
+import { currentLanguageSelector, darkModeSelector } from '@selectors/settings.selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   language$ = this.store.select(currentLanguageSelector);
   darkMode$ = this.store.select(darkModeSelector);
-  isOpenMenu$ = this.store.select(isOpenMenu);
+  isOpenMenu$ = this.store.select(isOpenMenuOrInfoSelector);
   private lngSubscription$!: Subscription;
   private darkModeSubscription$!: Subscription;
   private routeEventSubscription$!: Subscription;

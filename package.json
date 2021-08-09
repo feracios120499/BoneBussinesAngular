@@ -31,6 +31,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "big-integer": "^1.6.48",
     "bootstrap": "^4.5.0",
+    "deepmerge": "^4.2.2",
     "mathjs": "^9.4.4",
     "ng-otp-input": "^1.7.1",
     "ngrx-forms": "^6.3.5",

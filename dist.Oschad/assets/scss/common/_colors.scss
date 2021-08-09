@@ -37,9 +37,10 @@
   --color-error: #{$color-error};
   --color-warning: #{$color-warning};
   --color-success: #{$color-success};
-  --color-resource:#{$color-resource};
+  --color-resource: #{$color-resource};
 
-  --color-primary-light:#{$color-primary};
+  --color-primary-light: #{$color-primary};
+  --color-primary-light-rgb: #{$color-primary-rgb};
 }
 
 body.dark-mode {
@@ -80,7 +81,8 @@ body.dark-mode {
   --color-warning: #{$color-warning-dt};
   --color-success: #{$color-success-dt};
 
-  --color-primary-light:#{$color-light};
+  --color-primary-light: #{$color-light};
+  --color-primary-light-rgb: #{$color-light-rgb};
 }
 @mixin bg-light {
   background-color: var(--color-light);

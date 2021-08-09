@@ -86,6 +86,10 @@ export const logout = createAction(
   '[AUTH] logout'
 );
 
+export const logoutByUser = createAction(
+  '[AUTH] logout by user'
+);
+
 
 
 

@@ -30,6 +30,9 @@
       "@reducers/*": [
         "./src/app/@core/store/reducers/*"
       ],
+      "@stores/*": [
+        "./src/app/@core/store/stores/*"
+      ],
       "@effects/*": [
         "./src/app/@core/store/effects/*"
       ],

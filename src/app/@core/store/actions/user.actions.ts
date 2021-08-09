@@ -40,12 +40,4 @@ export const setCurrentClientId = createAction(
     props<{ clientId: string }>()
 );
 
-export const setMenu = createAction(
-    '[USER] set menu',
-    props<{ menu: MenuItem[] }>()
-);
 
-export const setSubMenu = createAction(
-    '[USER] set sub menu',
-    props<{ menu: MenuItem[] }>()
-);

@@ -1,27 +1,8 @@
 import * as authActions from '@actions/auth.actions';
-import { LogInModel } from '@modules/auth/models/login.model';
-import { Token } from '@modules/auth/models/token.model';
 import { createReducer, on } from '@ngrx/store';
+import { initialState } from '@stores/auth.store';
 
-export const AUTH_KEY = 'auth';
 
-export interface AuthState {
-    isLoading: boolean;
-    loginData: LogInModel | undefined;
-    phone: string | undefined;
-    error: string | undefined;
-    isNeedOtp: boolean;
-    token: Token | undefined;
-}
-
-export const initialState: AuthState = {
-    isLoading: false,
-    loginData: undefined,
-    phone: undefined,
-    error: undefined,
-    isNeedOtp: false,
-    token: undefined
-};
 
 export const authReducer = createReducer(
     initialState,
@@ -59,7 +40,11 @@ export const authReducer = createReducer(
         (state, actions) => ({ ...state, loginData: actions.data })
     ),
     on(
+        authActions.logout,
+        (state) => ({ ...state, token: undefined })
+    ),
+    on(
         authActions.resetLogin,
-        (state) => ({ ...initialState })
+        () => ({ ...initialState })
     )
 );

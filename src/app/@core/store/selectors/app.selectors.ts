@@ -1,11 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState, APP_KEY } from '@reducers/app.reducers';
+import { AppState, APP_KEY } from '@stores/app.store';
 import { currentCustomerSelector } from './user.selectors';
 
-export const featureSelector = createFeatureSelector<AppState>(APP_KEY);
+export const appStoreSelector = createFeatureSelector<AppState>(APP_KEY);
 
 export const globalLoaderSelector = createSelector(
-    featureSelector,
+    appStoreSelector,
     state => state.globalLoader
 );
 

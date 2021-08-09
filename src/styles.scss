@@ -3656,4 +3656,6 @@ ngb-modal-window {
 .menu-open {
     height: 100vh !important;
     overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
 }

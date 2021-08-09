@@ -5,11 +5,12 @@ import { currentClientIdSelector, currentCustomerSelector, profileSelector } fro
 import { NotificationsService } from '@services/notifications.service';
 import { UserService } from '@services/user.service';
 import { of } from 'rxjs';
-import { catchError, delay, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, delay, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as userActions from './../actions/user.actions';
 import * as authActions from './../actions/auth.actions';
 import { MenuService } from '@services/menu.service';
+import { Customer } from 'src/app/@shared/models/profile.model';
 
 // import { EMPTY } from 'rxjs';
 // import { map, mergeMap, catchError } from 'rxjs/operators';
@@ -75,23 +76,4 @@ export class UserEffects {
             })
         )
     );
-
-    buildMenu$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(userActions.setCurrentClientId),
-            withLatestFrom(this.store.select(currentCustomerSelector)),
-            map(([action, currentCustomer]) => {
-                const menu = this.menuService.getMenuForCustomer(currentCustomer!);
-                return userActions.setMenu({ menu });
-            })
-        ));
-
-    buildSubMenu$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(userActions.setMenu),
-            map(() => {
-                const menu = this.menuService.getSubMenu();
-                return userActions.setSubMenu({ menu });
-            })
-        ));
 }

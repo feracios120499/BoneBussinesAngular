@@ -176,6 +176,45 @@
             bottom: 0;
             background: transparent;
             z-index: 500;
+            @media (max-width: 812px) {
+                display: none;
+            }
+        }
+
+        &__customers {
+            display: none;
+            @media (max-width: 812px) {
+                display: block;
+            }
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            &-button {
+                height: 72px;
+                display: flex;
+                background-color: $color-dark-200;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+            }
+            &-change {
+                @include base;
+                @include light;
+                color: $color-light-400;
+                display: flex;
+                align-items: center;
+            }
+            &-list {
+                height: 0;
+                opacity: 0;
+                &.open {
+                    height: auto;
+                    opacity: 1;
+                }
+            }
         }
 
         &__collapse-button {

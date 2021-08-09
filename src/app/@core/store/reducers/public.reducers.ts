@@ -1,16 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { BankModel } from 'src/app/@shared/models/bank.model';
 import * as publicActions from '../actions/public.actions';
+import { initialState } from '@stores/public.store';
 
-export const PUBLIC_KEY = 'PUBLIC';
 
-export interface PublicState {
-    banks: BankModel[];
-}
-
-export const initialState: PublicState = {
-    banks: []
-};
 
 export const publicReducer = createReducer(
     initialState,

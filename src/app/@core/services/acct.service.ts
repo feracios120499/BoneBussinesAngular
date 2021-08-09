@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
-import { AcctEdit } from '@reducers/acct.reducers';
+import { AcctEdit } from '@stores/acct.store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AccountModel } from 'src/app/@shared/models/account.model';

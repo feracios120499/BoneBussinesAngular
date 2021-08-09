@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PublicState, PUBLIC_KEY } from '@reducers/public.reducers';
+import { PublicState, PUBLIC_KEY } from '@stores/public.store';
+
 
 export const featureSelector = createFeatureSelector<PublicState>(PUBLIC_KEY);
 

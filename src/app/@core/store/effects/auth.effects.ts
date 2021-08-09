@@ -68,4 +68,10 @@ export class AuthEffects {
       ))
     )
   );
+
+  logoutByUser$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(authActions.logoutByUser),
+      map(() => authActions.logout())
+    ));
 }

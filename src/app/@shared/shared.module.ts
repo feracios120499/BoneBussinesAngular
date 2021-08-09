@@ -23,6 +23,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { WebClassDirective } from './directives/web-class.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
+import { B1LinkComponent } from './components/b1-link/b1-link.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -43,7 +44,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     MobileMoreDirective,
     WebClassDirective,
     MobileClassDirective,
-    MoreAutoDirectionDirective],
+    MoreAutoDirectionDirective,
+    B1LinkComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -79,7 +81,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgxSkeletonLoaderModule,
     WebClassDirective,
     MobileClassDirective,
-    MoreAutoDirectionDirective
+    MoreAutoDirectionDirective,
+    B1LinkComponent
   ],
   providers: [
     {

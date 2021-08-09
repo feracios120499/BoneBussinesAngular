@@ -1,7 +1,7 @@
-<ng-container *ngrxLet="isOpen$ as isOpen">
+<ng-container *ngrxLet="isOpenMenu$ as isOpenMenu">
     <div class="app-aside" *ngrxLet="isCollapsed$ as isCollapsed">
 
-        <div class="main-sidemenu" [class.b1-collapsed]="isCollapsed" [class.open]="isOpen">
+        <div class="main-sidemenu" [class.b1-collapsed]="isCollapsed" [class.open]="isOpenMenu">
             <div class="main-sidemenu__wrapper">
                 <div id="aside-user">
                     <div class="main-sidemenu__head">
@@ -118,6 +118,34 @@
                     <i b1-icon icon="arrows"></i>
                 </a>
             </div>
+            <div class="main-sidemenu__customers" *ngrxLet="countCustomers$ as countCustomers">
+                <div class="main-sidemenu__customers-button">
+                    <div class="b1-large b1-bold">{{customerName$ | ngrxPush}}</div>
+                    <div *ngIf="countCustomers >= 2" (click)="openCustomersList()">
+                        <div class="main-sidemenu__customers-change">
+                            <span class="b1-mr-2">змінити клієнта</span>
+                            <i b1-icon icon="chevron-up"></i>
+                        </div>
+                        <div class="main-sidemenu__customers-list" [class.open]="isOpenCustomersList"
+                            *ngrxLet="customers$ as customers">
+                            <div *ngFor="let customer of customers">
+                                {{customer.Name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="dropdown">
+                <ul class="b1-dropdown b1-bg-light" role="menu" ngbDropdown #dropdown="ngbDropdown" mobile-more>
+                    <li class="b1-dropdown__item">
+                        <a class="b1-dropdown__link b1-medium b1-light"
+                            ng-click="accountsCtrl.accActions.share(account)">
+                            <i b1-icon icon="file-details" class="b1-mr-3 b1-medium"></i>
+                            {{'components.acct.share' | translate}}
+                        </a>
+                    </li>
+                </ul>
+            </div> -->
         </div>
 
     </div>

@@ -1,8 +1,7 @@
 import { createFeatureSelector, createSelector, Store } from '@ngrx/store';
-import { USER_KEY, UserState } from '@reducers/user.reducers';
-import { pipe } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UserState, USER_KEY } from '@stores/user.store';
 
 export const featureSelector = createFeatureSelector<UserState>(USER_KEY);
 
@@ -14,6 +13,11 @@ export const profileSelector = createSelector(
 export const countCustomersSelector = createSelector(
     featureSelector,
     state => state.profile?.Customers.length ?? 0
+);
+
+export const customersSelector = createSelector(
+    profileSelector,
+    state => state?.Customers
 );
 
 export const notificationsSelector = createSelector(
@@ -57,12 +61,13 @@ export const currentCustomerNameSelector = createSelector(
     (currentCustomer) => currentCustomer?.Name
 );
 
-export const menuSelector = createSelector(
-    featureSelector,
-    state => state.menu
+export const userEmailSelector = createSelector(
+    profileSelector,
+    (profile) => profile?.Email
 );
 
-export const subMenuSelector = createSelector(
-    featureSelector,
-    state => state.subMenu
+export const userPhoneSelector = createSelector(
+    profileSelector,
+    (profile) => profile?.PhoneNumber
 );
+

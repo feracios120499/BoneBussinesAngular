@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AcctFilter, ACCT_FILTER_FORM } from '@reducers/acct.reducers';
 import { formSelector } from '@selectors/acct.selectors';
+import { AcctFilter } from '@stores/acct.store';
 import { FormGroupState, setValue, SetValueAction } from 'ngrx-forms';
 import { Observable, of } from 'rxjs';
 import { Filter } from 'src/app/@shared/models/filter.model';

@@ -28,7 +28,7 @@
                     <span class="b1-page-badge"
                         [class.bounce-in]="countClosedAccounts != 0">{{countClosedAccounts}}</span>
                 </div>
-                <i b1-icon icon="chevron-down" class="b1-color-primary accounts-tabs-list_chevron"></i>
+                <i b1-icon icon="chevron-down" class="accounts-tabs-list_chevron"></i>
                 <select name="tabs" id="tabs" class="accounts-tabs-list" #selectList
                     (change)="selectTab(selectList.value)">
                     <option [value]="accountTab.Active">

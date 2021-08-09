@@ -18,14 +18,4 @@ export const setDarkMode = createAction(
   props<{ isActive: boolean }>()
 );
 
-export const toggleCollapsed = createAction(
-  '[SETTINGS] toggle collapsed menu'
-);
 
-export const openMenu = createAction(
-  '[SETTINGS] open menu'
-);
-
-export const closeMenu = createAction(
-  '[SETTINGS] close menu'
-);

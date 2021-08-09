@@ -2,7 +2,7 @@ import { setAccountName, setEditFormInitState, sumbitEditForm } from '@actions/a
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { AcctEdit } from '@reducers/acct.reducers';
+import { AcctEdit } from '@stores/acct.store';
 import { editFormSelector } from '@selectors/acct.selectors';
 
 @Component({
