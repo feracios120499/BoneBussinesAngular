@@ -2888,6 +2888,13 @@ textarea {
         &__left {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            & > .b1-title3 {
+                @media (max-width: 812px) {
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+            }
         }
         &__right {
             display: flex;
@@ -2928,13 +2935,18 @@ textarea {
         //color: var(--color-dark-100);
         color: var(--color-dark-100);
         font-size: 20px;
-        &:hover:not(:disabled) {
-            background-color: rgba($color-primary, 0.4) !important;
-            color: $color-light;
-            border-color: $color-primary;
+        @media (hover: hover) and (pointer: fine) {
+            &:hover:not(:disabled) {
+                background-color: rgba($color-primary, 0.4) !important;
+                color: $color-light;
+                border-color: $color-primary;
+            }
         }
+
         &:active:not(:disabled) {
             background-color: $color-primary !important;
+            color: $color-light;
+            border-color: $color-primary;
         }
         &:disabled {
             opacity: 0.6;
@@ -2947,8 +2959,10 @@ textarea {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        outline: none;
         & input {
             padding-left: 40px;
+            outline: none;
         }
 
         & input + label {
@@ -3184,7 +3198,8 @@ textarea {
 
 .b1-rangepicker {
     border: 1px solid rgba(var(--color-dark-rgb), 0.6);
-    width: 225px;
+    min-width: 225px;
+    width: 100%;
     border-radius: 4px;
     &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);
@@ -3652,10 +3667,121 @@ ngb-modal-window {
         display: block;
     }
 }
+.invisible-xs {
+    display: block;
+
+    @media (max-width: 812px) {
+        display: none;
+    }
+}
 
 .menu-open {
     height: 100vh !important;
+    height: var(--app-height) !important;
     overflow: hidden !important;
     position: fixed !important;
     width: 100% !important;
+}
+
+.cdk-virtual-scroll-orientation-vertical {
+    display: flex !important;
+    flex-direction: column !important;
+    & .cdk-virtual-scroll-content-wrapper {
+        flex: 1 !important;
+    }
+}
+
+.md-drppicker {
+    & tr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    & td {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+    color: var(--color-dark-200) !important;
+    background-color: var(--color-light) !important;
+    border: 1px solid var(--color-light-200) !important;
+    & .calendar.left {
+        border-left: 1px solid var(--color-light-200) !important;
+    }
+    & .show-ranges.ltr .calendar.right {
+        border-right: 1px solid var(--color-light-200) !important;
+    }
+    & .drp-buttons {
+        border-top: 1px solid var(--color-light-200) !important;
+    }
+    & .calendar-table {
+        border: 1px solid var(--color-light-200) !important;
+    }
+    & .drp-selected {
+        color: var(--color-dark) !important;
+    }
+    & .calendar-table {
+        background-color: var(--color-light) !important;
+    }
+    & .drp-calendar.left .calendar-table {
+        padding-left: 0px;
+    }
+    & .monthselect {
+        color: var(--color-dark-200) !important;
+        background-color: var(--color-light) !important;
+    }
+    & .yearselect {
+        color: var(--color-dark-200) !important;
+        background-color: var(--color-light) !important;
+    }
+    & .start-date {
+        border-radius: 4px 0 0 4px !important;
+    }
+    & .end-date {
+        border-radius: 0 4px 4px 0 !important;
+    }
+    & .start-date.end-date {
+        border-radius: 4px !important;
+    }
+    td.start-date,
+    td.end-date {
+        background-color: $color-primary !important;
+        color: $color-light !important;
+
+        border: none !important;
+    }
+    & td {
+        background-color: transparent !important;
+    }
+    & .in-range:not(.active) {
+        border-radius: 0 !important;
+        background-color: rgba($color-primary, 0.2) !important;
+        color: var(--color-dark) !important;
+    }
+    & td.available:hover:not(.active),
+    & th.available:hover:not(.active) {
+        background-color: rgba($color-primary, 0.4) !important;
+        color: var(--color-dark) !important;
+        border-radius: 0 !important;
+    }
+    & .prev span {
+        border: solid var(--color-dark) !important;
+        border-width: 0 2px 2px 0 !important;
+        border-radius: 0 !important;
+    }
+    & .next span {
+        border: solid var(--color-dark) !important;
+        border-width: 0 2px 2px 0 !important;
+        border-radius: 0 !important;
+    }
+    & .ranges li button:hover {
+        background-color: rgba($color-primary, 0.4) !important;
+    }
+    & .ranges li button.active {
+        background-color: $color-primary !important;
+    }
+    & .drp-calendar.left.single {
+        padding: 0;
+    }
 }

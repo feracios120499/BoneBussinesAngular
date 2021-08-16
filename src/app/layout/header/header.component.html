@@ -1,179 +1,48 @@
-<ng-container *ngrxLet="language$ as currentLanguage">
-    <ng-container *ngrxLet="languages$ as languages">
-        <ng-container *ngrxLet="darkMode$ as darkMode">
-            <ng-container *ngrxLet="userPictureUrl$ as userPictureUrl">
-                <ng-container *ngrxLet="userName$ as userName">
+<ng-container *ngrxLet="isMobile$ as isMobile">
+    <div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush"
+        [class.open]="isOpen$ | ngrxPush">
+        <i b1-icon icon="menu" class="b1-title2 visible-xs header-icon-left" (click)="openMenu()"></i>
+        <a>
+            <img [src]="logo$ | ngrxPush" alt="" class="main-navbar__app-logo">
+        </a>
+        <i b1-icon icon="settings" class="b1-title2 visible-xs header-icon-right" (click)="openInfo()"></i>
+        <i b1-icon icon="cancel" class="b1-title2 visible-xs header-icon-close" (click)="closeMenu()"></i>
+    </div>
+    <div class="main-navbar b1-bg-light" [class.b1-collapsed]="isCollapsed$ | ngrxPush" *ngIf="!isMobile">
+        <ul class="main-navbar__list">
 
+        </ul>
+        <ul class="main-navbar__list">
+            <li class="main-navbar__list__item">
+                <a href="#" class="main-navbar__list__item__link b1-base">
+                    Customers
+                    <span class="b1-badge b1-bg-info">{{countCustomers$ | ngrxPush}}</span>
+                </a>
+            </li>
+            <!-- LANGUAGES -->
+            <li class="main-navbar__list__item">
+                <header-languages></header-languages>
+            </li>
+            <!-- DARK MODE -->
+            <li class="main-navbar__list__item">
+                <header-dark-mode></header-dark-mode>
+            </li>
+            <!-- NOTIFICATIONS -->
+            <li class="main-navbar__list__item">
+                <header-notifications></header-notifications>
+            </li>
+            <li class="main-navbar__list__item b1-mr-4">
+                <header-profile></header-profile>
+            </li>
+        </ul>
+    </div>
 
-                    <div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush"
-                        [class.open]="isOpen$ | ngrxPush">
-                        <i b1-icon icon="menu" class="b1-title2 visible-xs header-icon-left" (click)="openMenu()"></i>
-                        <a *ngrxLet="logo$ as logo">
-                            <img [src]="logo" alt="" class="main-navbar__app-logo">
-                        </a>
-                        <i b1-icon icon="settings" class="b1-title2 visible-xs header-icon-right"
-                            (click)="openInfo()"></i>
-                        <i b1-icon icon="cancel" class="b1-title2 visible-xs header-icon-close"
-                            (click)="closeMenu()"></i>
-                    </div>
-                    <div class="main-navbar b1-bg-light" [class.b1-collapsed]="isCollapsed$ | ngrxPush">
-                        <ul class="main-navbar__list">
-
-                        </ul>
-                        <ul class="main-navbar__list">
-                            <li class="main-navbar__list__item">
-                                <a href="#" class="main-navbar__list__item__link b1-base">
-                                    Customers
-                                    <span class="b1-badge b1-bg-info">{{countCustomers$ | ngrxPush}}</span>
-                                </a>
-                            </li>
-                            <!-- LANGUAGES -->
-                            <li ngbDropdown class="main-navbar__list__item" #dropdown="ngbDropdown" display="static">
-                                <a class="main-navbar__list__item__link b1-base" id="languages"
-                                    (click)="$event.stopPropagation(); dropdown.open();">
-                                    <span>{{ 'shared.languages.' + currentLanguage | translate }}</span>
-                                    <b class="caret"></b></a>
-                                <ul class="b1-dropdown b1-animate fade-in-up" ngbDropdownMenu
-                                    aria-labelledby="languages" style="min-width: 160px;">
-                                    <li class="b1-dropdown__item" *ngFor="let language of languages">
-                                        <a class="b1-dropdown__link b1-base"
-                                            (click)="$event.stopPropagation(); setLanguage(language); dropdown.close();">
-                                            {{ 'shared.languages.' + language | translate }}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- DARK MODE -->
-                            <li class="main-navbar__list__item">
-
-                                <a class="main-navbar__list__item__link b1-base" *ngIf="darkMode"
-                                    (click)="disableDarkMode()">
-                                    <i b1-icon icon="adjust"></i>
-                                </a>
-                                <a class="main-navbar__list__item__link b1-base" *ngIf="!darkMode"
-                                    (click)="setDarkMode()">
-                                    <i b1-icon icon="moon"></i>
-                                </a>
-
-
-
-                            </li>
-                            <!-- NOTIFICATIONS -->
-                            <li class="main-navbar__list__item" ngbDropdown #dropdown="ngbDropdown">
-                                <a class="main-navbar__list__item__link b1-base" style="position: relative;">
-                                    <i b1-icon icon="bell" class="d-none d-sm-block"></i>
-                                    <span class="d-block d-sm-none d-print-inline">{{'header.navbar.NOTIFICATIONS' |
-                                        translate}}</span>
-                                    <b class="caret d-block d-sm-none"></b>
-                                    <ng-container *ngrxLet="countNotifications$ as countNotifications">
-                                        <span style="position: absolute; right: -4px; top: 2px;"
-                                            *ngIf="countNotifications !=0"
-                                            class="b1-badge b1-bg-error">{{countNotifications}}</span>
-                                    </ng-container>
-                                </a>
-                            </li>
-                            <li class="main-navbar__list__item b1-mr-4" ngbDropdown #profileDropdown="ngbDropdown">
-                                <a class="main-navbar__list__item__link b1-base" id="profile"
-                                    (click)="$event.stopPropagation(); profileDropdown.open();">
-                                    <span>{{userName || ('components.main.owner' | translate)}}</span>
-                                    <b class="caret"></b>
-                                    <span class="avatar">
-                                        <img [src]="userPictureUrl">
-                                    </span>
-                                </a>
-                                <ul class="b1-dropdown b1-animate fade-in-up" ngbDropdownMenu
-                                    aria-labelledby="languages" style="width: 100%; max-width: 400px;">
-                                    <li class="b1-dropdown__item">
-                                        <!-- TODO change ui-sref to angular route -->
-                                        <a class="b1-dropdown__link b1-base" ui-sref="app.profile.settings">
-                                            <i b1-icon icon="settings" class="b1-mr-4"></i>
-                                            <span>{{'header.navbar.Settings' | translate}}</span>
-                                        </a>
-                                    </li>
-                                    <li class="b1-dropdown__item">
-                                        <!-- TODO change ui-sref to angular route -->
-                                        <a class="b1-dropdown__link b1-base" ui-sref="app.profile.index">
-                                            <i b1-icon icon="user" class="b1-mr-4"></i>
-                                            <span>{{'header.navbar.Profile' | translate}}</span>
-                                        </a>
-                                    </li>
-                                    <hr class="b1-separator" />
-                                    <li class="b1-dropdown__item" (click)="logout()">
-                                        <a class="b1-dropdown__link b1-dropdown__link_error b1-base">
-                                            <i b1-icon icon="exit" class="b1-mr-4"></i>
-                                            <span>{{'header.navbar.Logout' | translate}}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="main-navbar_info" [class.open]="isOpenInfo$ | ngrxPush">
-                        <div class="info-header">
-                            <div class="info-languages">
-                                <span class="info-language">
-                                    {{ 'shared.languages.' + currentLanguage | translate }}
-                                </span>
-
-                                <i b1-icon icon="chevron-down"></i>
-                                <select name="tabs" id="tabs" #selectList (change)="setLanguage(selectList.value)">
-                                    <option *ngFor="let language of languages" [value]="language"
-                                        [selected]="language == currentLanguage">
-                                        {{ 'shared.languages.' + language | translate }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="info-theme">
-
-                                <div class="info-theme_light" *ngIf="!darkMode" (click)="setDarkMode()">
-                                    <i b1-icon icon="moon"></i>
-                                </div>
-                                <div class="info-theme_dark" *ngIf="darkMode" (click)="disableDarkMode()">
-                                    <i b1-icon icon="adjust"></i>
-                                </div>
-                            </div>
-                            <div class="info-notifications">
-                                <div b1-icon icon="bell"></div>
-                            </div>
-                        </div>
-                        <div class="info-body">
-                            <div class="info-avatar">
-                                <img [src]="userPictureUrl" (error)="handleError($event)">
-                            </div>
-                            <div class="info-name">
-                                <span>{{userName || ('components.main.owner' | translate)}}</span>
-                            </div>
-                            <div class="info-email" *ngrxLet="userEmail$ as userEmail">
-                                <span>{{userEmail}}</span>
-                            </div>
-                            <div class="info-phone" *ngrxLet="userPhone$ as userPhone">
-                                <span>{{userPhone}}</span>
-                            </div>
-                        </div>
-                        <div class="info-links">
-                            <b1-link icon="user" [title]="'header.navbar.Profile' | translate"></b1-link>
-                            <b1-link icon="settings" [title]="'header.navbar.Settings' | translate"></b1-link>
-                            <!-- <div class="b1-link">
-                                <div class="b1-link-icon">
-                                    <i b1-icon icon="user"></i>
-                                </div>
-                                <div class="b1-link-body">
-                                    <span>{{'header.navbar.Profile' | translate}}</span>
-                                </div>
-                                <div class="b1-link-arrow">
-                                    <i b1-icon icon="chevron-right"></i>
-                                </div>
-                            </div> -->
-                        </div>
-                        <div class="info-footer">
-                            <div class="info-logout" (click)="logout()">
-                                <i b1-icon icon="exit" class="b1-mr-4"></i>
-                                <span>{{'header.navbar.Logout' | translate}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-            </ng-container>
-        </ng-container>
-    </ng-container>
+    <div class="main-navbar_info" [class.open]="isOpenInfo$ | ngrxPush" *ngIf="isMobile">
+        <div class="info-header">
+            <header-languages></header-languages>
+            <header-dark-mode></header-dark-mode>
+            <header-notifications></header-notifications>
+        </div>
+        <header-profile></header-profile>
+    </div>
 </ng-container>

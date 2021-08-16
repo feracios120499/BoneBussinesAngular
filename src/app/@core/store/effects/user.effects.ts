@@ -76,4 +76,11 @@ export class UserEffects {
             })
         )
     );
+
+    selectCurrentClientId$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(userActions.selectCurrentClientId),
+            map((action) => userActions.setCurrentClientId({ clientId: action.clientId }))
+        )
+    );
 }

@@ -1,0 +1,20 @@
+<ng-container *ngrxLet="countNotifications$ as countNotifications">
+    <div class="invisible-xs w-100 h-100">
+        <a class="main-navbar__list__item__link b1-base" style="position: relative;">
+            <i b1-icon icon="bell" class="d-none d-sm-block"></i>
+            <span class="d-block d-sm-none d-print-inline">
+                {{'header.navbar.NOTIFICATIONS' | translate}}
+            </span>
+            <b class="caret d-block d-sm-none"></b>
+            <span style="position: absolute; right: -4px; top: 2px;" *ngIf="countNotifications !=0"
+                class="b1-badge b1-bg-error">
+                {{countNotifications}}
+            </span>
+        </a>
+    </div>
+    <div class="visible-xs">
+        <div class="info-notifications">
+            <div b1-icon icon="bell"></div>
+        </div>
+    </div>
+</ng-container>

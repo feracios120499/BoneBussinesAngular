@@ -206,7 +206,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_account_card_account_card_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/account-card/account-card.component */ "NWW/");
 /* harmony import */ var _components_account_details_account_details_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/account-details/account-details.component */ "w7hj");
 /* harmony import */ var _components_account_edit_modal_account_edit_modal_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/account-edit-modal/account-edit-modal.component */ "r6jU");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _components_account_transactions_account_transactions_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/account-transactions/account-transactions.component */ "bMOU");
+/* harmony import */ var _components_account_transaction_header_account_transaction_header_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/account-transaction-header/account-transaction-header.component */ "Z3YE");
+/* harmony import */ var _components_account_transactions_list_account_transactions_list_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/account-transactions-list/account-transactions-list.component */ "eHs7");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
 
 
 
@@ -226,14 +232,14 @@ __webpack_require__.r(__webpack_exports__);
 class AccountsModule {
 }
 AccountsModule.ɵfac = function AccountsModule_Factory(t) { return new (t || AccountsModule)(); };
-AccountsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineNgModule"]({ type: AccountsModule });
-AccountsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineInjector"]({ imports: [[
+AccountsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineNgModule"]({ type: AccountsModule });
+AccountsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵdefineInjector"]({ imports: [[
             _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
             src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"],
             _accounts_routing_module__WEBPACK_IMPORTED_MODULE_3__["AccountsRoutingModule"],
             _ngrx_component__WEBPACK_IMPORTED_MODULE_1__["ReactiveComponentModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵsetNgModuleScope"](AccountsModule, { declarations: [_views_accounts_accounts_component__WEBPACK_IMPORTED_MODULE_4__["AccountsComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵsetNgModuleScope"](AccountsModule, { declarations: [_views_accounts_accounts_component__WEBPACK_IMPORTED_MODULE_4__["AccountsComponent"],
         _components_accounts_header_accounts_header_component__WEBPACK_IMPORTED_MODULE_5__["AccountsHeaderComponent"],
         _components_accounts_tabs_accounts_tabs_component__WEBPACK_IMPORTED_MODULE_6__["AccountsTabsComponent"],
         _components_accounts_actions_accounts_actions_component__WEBPACK_IMPORTED_MODULE_7__["AccountsActionsComponent"],
@@ -243,7 +249,10 @@ AccountsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineIn
         _views_account_account_component__WEBPACK_IMPORTED_MODULE_11__["AccountComponent"],
         _components_account_card_account_card_component__WEBPACK_IMPORTED_MODULE_12__["AccountCardComponent"],
         _components_account_details_account_details_component__WEBPACK_IMPORTED_MODULE_13__["AccountDetailsComponent"],
-        _components_account_edit_modal_account_edit_modal_component__WEBPACK_IMPORTED_MODULE_14__["AccountEditModalComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+        _components_account_edit_modal_account_edit_modal_component__WEBPACK_IMPORTED_MODULE_14__["AccountEditModalComponent"],
+        _components_account_transactions_account_transactions_component__WEBPACK_IMPORTED_MODULE_15__["AccountTransactionsComponent"],
+        _components_account_transaction_header_account_transaction_header_component__WEBPACK_IMPORTED_MODULE_16__["AccountTransactionHeaderComponent"],
+        _components_account_transactions_list_account_transactions_list_component__WEBPACK_IMPORTED_MODULE_17__["AccountTransactionsListComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
         src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"],
         _accounts_routing_module__WEBPACK_IMPORTED_MODULE_3__["AccountsRoutingModule"],
         _ngrx_component__WEBPACK_IMPORTED_MODULE_1__["ReactiveComponentModule"]] }); })();
@@ -263,6 +272,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountCardComponent", function() { return AccountCardComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _account_details_account_details_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../account-details/account-details.component */ "w7hj");
+/* harmony import */ var _account_transactions_account_transactions_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../account-transactions/account-transactions.component */ "bMOU");
+
 
 
 class AccountCardComponent {
@@ -271,13 +282,14 @@ class AccountCardComponent {
     }
 }
 AccountCardComponent.ɵfac = function AccountCardComponent_Factory(t) { return new (t || AccountCardComponent)(); };
-AccountCardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccountCardComponent, selectors: [["app-account-card"]], decls: 3, vars: 0, consts: [[1, "b1-full-data"], [1, "b1-page-card", "b1-bg-light"]], template: function AccountCardComponent_Template(rf, ctx) { if (rf & 1) {
+AccountCardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccountCardComponent, selectors: [["app-account-card"]], decls: 4, vars: 0, consts: [[1, "b1-full-data"], [1, "b1-page-card", "b1-bg-light"]], template: function AccountCardComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "app-account-details");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "account-transactions");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, directives: [_account_details_account_details_component__WEBPACK_IMPORTED_MODULE_1__["AccountDetailsComponent"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGFjY291bnQtY2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxzQkFBQTtFQUNBLE9BQUE7QUFDSiIsImZpbGUiOiJhY2NvdW50LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgIGZsZXg6IDE7XHJcbn1cclxuIl19 */"] });
+    } }, directives: [_account_details_account_details_component__WEBPACK_IMPORTED_MODULE_1__["AccountDetailsComponent"], _account_transactions_account_transactions_component__WEBPACK_IMPORTED_MODULE_2__["AccountTransactionsComponent"]], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGFjY291bnQtY2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxzQkFBQTtFQUNBLE9BQUE7QUFDSiIsImZpbGUiOiJhY2NvdW50LWNhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgIGZsZXg6IDE7XHJcbn1cclxuIl19 */"] });
 
 
 /***/ }),
@@ -723,6 +735,168 @@ AccountHeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](3, 1, "components.acct.detailAccount"), " ");
     } }, pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__["TranslatePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhY2NvdW50LWhlYWRlci5jb21wb25lbnQuc2NzcyJ9 */"] });
+
+
+/***/ }),
+
+/***/ "Z3YE":
+/*!****************************************************************************************************************!*\
+  !*** ./src/app/modules/accounts/components/account-transaction-header/account-transaction-header.component.ts ***!
+  \****************************************************************************************************************/
+/*! exports provided: AccountTransactionHeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountTransactionHeaderComponent", function() { return AccountTransactionHeaderComponent; });
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ "Wgwc");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../@shared/components/b1-daterangepicker/b1-daterangepicker.directive */ "+6QK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "sYmb");
+
+
+
+
+
+const _c0 = function () { return { applyLabel: "ok", format: "DD-MM-YYYY" }; };
+const _c1 = function () { return { customRangeLabel: "Custom range" }; };
+class AccountTransactionHeaderComponent {
+    constructor() {
+        this.ranges = {
+            'shared.picker.today': [dayjs__WEBPACK_IMPORTED_MODULE_0___default()(), dayjs__WEBPACK_IMPORTED_MODULE_0___default()()],
+            Yesterday: [dayjs__WEBPACK_IMPORTED_MODULE_0___default()().add(1, 'days'), dayjs__WEBPACK_IMPORTED_MODULE_0___default()().subtract(1, 'days')],
+            'Last 7 Days': [dayjs__WEBPACK_IMPORTED_MODULE_0___default()().subtract(7, 'days'), dayjs__WEBPACK_IMPORTED_MODULE_0___default()()],
+            'Last 30 Days': [dayjs__WEBPACK_IMPORTED_MODULE_0___default()().subtract(30, 'days'), dayjs__WEBPACK_IMPORTED_MODULE_0___default()()],
+            'This Month': [dayjs__WEBPACK_IMPORTED_MODULE_0___default()().startOf('month'), dayjs__WEBPACK_IMPORTED_MODULE_0___default()().endOf('month')]
+        };
+    }
+    ngOnInit() {
+    }
+}
+AccountTransactionHeaderComponent.ɵfac = function AccountTransactionHeaderComponent_Factory(t) { return new (t || AccountTransactionHeaderComponent)(); };
+AccountTransactionHeaderComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AccountTransactionHeaderComponent, selectors: [["account-transaction-header"]], decls: 33, vars: 15, consts: [[1, "b1-page-actions", 2, "display", "none"], [1, "b1-page-actions__left"], [1, "b1-title3"], [1, "b1-page-icons", 2, "margin-left", "0"], ["ng-if", "IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'"], ["ng-click", "histCtrl.showShareWindow()", "ng-disabled", "importCtrl.state.isLoading", 1, "b1-page-icon", "ub-icons", "ub-icons-icon-file"], ["ng-click", "histCtrl.showExportStatementWindow()", "ng-disabled", "importCtrl.state.isLoading", 1, "b1-page-icon", "ub-icons", "ub-icons-icon-export"], [1, "b1-page-actions__right", "b1-flex", "b1-align-center", 2, "width", "auto"], [1, "b1-base", "b1-page-data__subtitle", "b1-light"], [1, "b1-page-inputWithIcon", "m-l-20"], ["date-range-picker", "", "type", "text", "ng-model", "histCtrl.datePicker.date", "picker", "histCtrl.datePicker.picker", "picker-classes", "extra-class-names", "min", "histCtrl.datePicker.minDate", "max", "histCtrl.datePicker.maxDate", "id", "calendar", "name", "calendar", "readonly", "", "options", "histCtrl.datePicker.options", 1, "b1-datepicker__input", "b1-rangepicker"], ["for", "calendar", 1, "ub-icons", "ub-icons-icon-calendar"], ["ng-class", "{'loading' : histCtrl.states.file.isLoading || histCtrl.states.turnover.isLoading || histCtrl.states.statement.isLoading || histCtrl.states.transaction.isLoading || histCtrl.states.acct.isLoading}", 1, "b1-page-hr"], [1, "account-actions"], [1, "account-actions_title"], [1, "account-actions_buttons"], [1, "account-actions_calendar"], [1, "b1-page-inputWithIcon"], ["b1-daterangepicker", "", "startKey", "start", "endKey", "end", "name", "daterange", "readonly", "", 1, "b1-datepicker__input", "b1-rangepicker", 3, "locale", "ngModel", "ranges", "ngModelChange"]], template: function AccountTransactionHeaderComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](4, "translate");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](7, "button", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](9, "button", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](13, "translate");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](15, "input", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](16, "label", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](17, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "div", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](22, "translate");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](26, "button", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](28, "button", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "input", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function AccountTransactionHeaderComponent_Template_input_ngModelChange_31_listener($event) { return ctx.selected = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](32, "label", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind1"](4, 7, "components.acct.accountTurnovers"), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind1"](13, 9, "components.acct.period"), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind1"](22, 11, "components.acct.accountTurnovers"), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("locale", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](13, _c0))("ngModel", ctx.selected)("ranges", ctx.ranges)("locale", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](14, _c1));
+    } }, directives: [_shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_2__["DaterangepickerDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"]], pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslatePipe"]], styles: [".account-actions[_ngcontent-%COMP%] {\n  padding: 16px;\n  height: 76px;\n}\n@media (max-width: 812px) {\n  .account-actions[_ngcontent-%COMP%] {\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n    height: auto;\n  }\n}\n.account-actions_title[_ngcontent-%COMP%] {\n  float: left;\n}\n@media (max-width: 812px) {\n  .account-actions_title[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n.account-actions_buttons[_ngcontent-%COMP%] {\n  margin-left: 16px;\n  float: left;\n}\n@media (max-width: 812px) {\n  .account-actions_buttons[_ngcontent-%COMP%] {\n    margin-top: 8px;\n    margin-left: 0;\n  }\n}\n.account-actions_calendar[_ngcontent-%COMP%] {\n  float: right;\n}\n@media (max-width: 812px) {\n  .account-actions_calendar[_ngcontent-%COMP%] {\n    flex: 1;\n    margin-top: 8px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGFjY291bnQtdHJhbnNhY3Rpb24taGVhZGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLFlBQUE7QUFDSjtBQUNJO0VBSko7SUFLUSxhQUFBO0lBQ0EsbUJBQUE7SUFDQSxlQUFBO0lBQ0EsWUFBQTtFQUVOO0FBQ0Y7QUFESTtFQUlJLFdBQUE7QUFBUjtBQUhRO0VBREo7SUFFUSxXQUFBO0VBTVY7QUFDRjtBQUhJO0VBS0ksaUJBQUE7RUFDQSxXQUFBO0FBQ1I7QUFOUTtFQURKO0lBRVEsZUFBQTtJQUNBLGNBQUE7RUFTVjtBQUNGO0FBTEk7RUFLSSxZQUFBO0FBR1I7QUFQUTtFQURKO0lBRVEsT0FBQTtJQUNBLGVBQUE7RUFVVjtBQUNGIiwiZmlsZSI6ImFjY291bnQtdHJhbnNhY3Rpb24taGVhZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFjY291bnQtYWN0aW9ucyB7XHJcbiAgICBwYWRkaW5nOiAxNnB4O1xyXG4gICAgaGVpZ2h0OiA3NnB4O1xyXG4gICAgLy9qdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICBAbWVkaWEgKG1heC13aWR0aDogODEycHgpIHtcclxuICAgICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICAgICAgZmxleC13cmFwOiB3cmFwO1xyXG4gICAgICAgIGhlaWdodDogYXV0bztcclxuICAgIH1cclxuICAgICZfdGl0bGUge1xyXG4gICAgICAgIEBtZWRpYSAobWF4LXdpZHRoOiA4MTJweCkge1xyXG4gICAgICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICB9XHJcbiAgICAgICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICB9XHJcbiAgICAmX2J1dHRvbnMge1xyXG4gICAgICAgIEBtZWRpYSAobWF4LXdpZHRoOiA4MTJweCkge1xyXG4gICAgICAgICAgICBtYXJnaW4tdG9wOiA4cHg7XHJcbiAgICAgICAgICAgIG1hcmdpbi1sZWZ0OiAwO1xyXG4gICAgICAgIH1cclxuICAgICAgICBtYXJnaW4tbGVmdDogMTZweDtcclxuICAgICAgICBmbG9hdDogbGVmdDtcclxuICAgIH1cclxuICAgICZfY2FsZW5kYXIge1xyXG4gICAgICAgIEBtZWRpYSAobWF4LXdpZHRoOiA4MTJweCkge1xyXG4gICAgICAgICAgICBmbGV4OiAxO1xyXG4gICAgICAgICAgICBtYXJnaW4tdG9wOiA4cHg7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGZsb2F0OiByaWdodDtcclxuICAgIH1cclxufVxyXG4iXX0= */"] });
+
+
+/***/ }),
+
+/***/ "bMOU":
+/*!****************************************************************************************************!*\
+  !*** ./src/app/modules/accounts/components/account-transactions/account-transactions.component.ts ***!
+  \****************************************************************************************************/
+/*! exports provided: AccountTransactionsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountTransactionsComponent", function() { return AccountTransactionsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _account_transaction_header_account_transaction_header_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../account-transaction-header/account-transaction-header.component */ "Z3YE");
+/* harmony import */ var _account_transactions_list_account_transactions_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../account-transactions-list/account-transactions-list.component */ "eHs7");
+
+
+
+class AccountTransactionsComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+AccountTransactionsComponent.ɵfac = function AccountTransactionsComponent_Factory(t) { return new (t || AccountTransactionsComponent)(); };
+AccountTransactionsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccountTransactionsComponent, selectors: [["account-transactions"]], decls: 2, vars: 0, template: function AccountTransactionsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "account-transaction-header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "account-transactions-list");
+    } }, directives: [_account_transaction_header_account_transaction_header_component__WEBPACK_IMPORTED_MODULE_1__["AccountTransactionHeaderComponent"], _account_transactions_list_account_transactions_list_component__WEBPACK_IMPORTED_MODULE_2__["AccountTransactionsListComponent"]], styles: ["[_nghost-%COMP%] {\n  margin-top: 38px;\n}\n@media (max-width: 812px) {\n  [_nghost-%COMP%] {\n    margin-top: 32px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGFjY291bnQtdHJhbnNhY3Rpb25zLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7QUFDSjtBQUFJO0VBRko7SUFHUSxnQkFBQTtFQUdOO0FBQ0YiLCJmaWxlIjoiYWNjb3VudC10cmFuc2FjdGlvbnMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgICBtYXJnaW4tdG9wOiAzOHB4O1xyXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogMzJweDtcclxuICAgIH1cclxufVxyXG4iXX0= */"] });
+
+
+/***/ }),
+
+/***/ "eHs7":
+/*!**************************************************************************************************************!*\
+  !*** ./src/app/modules/accounts/components/account-transactions-list/account-transactions-list.component.ts ***!
+  \**************************************************************************************************************/
+/*! exports provided: AccountTransactionsListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountTransactionsListComponent", function() { return AccountTransactionsListComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+class AccountTransactionsListComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+AccountTransactionsListComponent.ɵfac = function AccountTransactionsListComponent_Factory(t) { return new (t || AccountTransactionsListComponent)(); };
+AccountTransactionsListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccountTransactionsListComponent, selectors: [["account-transactions-list"]], decls: 2, vars: 0, template: function AccountTransactionsListComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "account-transactions-list works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhY2NvdW50LXRyYW5zYWN0aW9ucy1saXN0LmNvbXBvbmVudC5zY3NzIn0= */"] });
 
 
 /***/ }),
@@ -1286,14 +1460,17 @@ AccountDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵ
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountsComponent", function() { return AccountsComponent; });
 /* harmony import */ var _actions_acct_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @actions/acct.actions */ "GAc8");
-/* harmony import */ var _selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @selectors/acct.selectors */ "mvWm");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "l7P3");
-/* harmony import */ var _components_accounts_header_accounts_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/accounts-header/accounts-header.component */ "umgc");
-/* harmony import */ var _components_accounts_tabs_accounts_tabs_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accounts-tabs/accounts-tabs.component */ "TNsa");
-/* harmony import */ var _components_accounts_actions_accounts_actions_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accounts-actions/accounts-actions.component */ "tqVM");
-/* harmony import */ var _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../@shared/components/b1-card-loader/b1-card-loader.component */ "M1yg");
-/* harmony import */ var _components_accounts_list_accounts_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/accounts-list/accounts-list.component */ "GnPv");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @selectors/acct.selectors */ "mvWm");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "l7P3");
+/* harmony import */ var _components_accounts_header_accounts_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accounts-header/accounts-header.component */ "umgc");
+/* harmony import */ var _components_accounts_tabs_accounts_tabs_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accounts-tabs/accounts-tabs.component */ "TNsa");
+/* harmony import */ var _components_accounts_actions_accounts_actions_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/accounts-actions/accounts-actions.component */ "tqVM");
+/* harmony import */ var _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../@shared/components/b1-card-loader/b1-card-loader.component */ "M1yg");
+/* harmony import */ var _components_accounts_list_accounts_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/accounts-list/accounts-list.component */ "GnPv");
+
+
 
 
 
@@ -1304,32 +1481,48 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AccountsComponent {
-    constructor(store) {
+    constructor(store, router) {
         this.store = store;
-        this.accounts$ = this.store.select(_selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_1__["accountsSelector"]);
-        this.isLoadingAccounts$ = this.store.select(_selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_1__["isLoadingAccountsSelector"]);
+        this.router = router;
+        this.accounts$ = this.store.select(_selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_2__["accountsSelector"]);
+        this.isLoadingAccounts$ = this.store.select(_selectors_acct_selectors__WEBPACK_IMPORTED_MODULE_2__["isLoadingAccountsSelector"]);
+        // subscribe to the router events. Store the subscription so we can
+        // unsubscribe later.
+        this.navigationSubscription = this.router.events.subscribe((e) => {
+            // If it is a NavigationEnd event re-initalise the component
+            if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
+                this.init();
+            }
+        });
     }
     ngOnInit() {
+    }
+    init() {
         this.store.dispatch(Object(_actions_acct_actions__WEBPACK_IMPORTED_MODULE_0__["loadAccounts"])({ reload: true }));
     }
+    ngOnDestroy() {
+        if (this.navigationSubscription) {
+            this.navigationSubscription.unsubscribe();
+        }
+    }
 }
-AccountsComponent.ɵfac = function AccountsComponent_Factory(t) { return new (t || AccountsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"])); };
-AccountsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AccountsComponent, selectors: [["app-accounts"]], decls: 8, vars: 1, consts: [[1, "b1-wrapper", "no-wrap-xs", "b1-full-screen"], [1, "full-screen", 2, "position", "relative"], [1, "b1-page-card", "b1-bg-light"], [3, "isLoading"]], template: function AccountsComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](1, "app-accounts-header");
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](3, "app-accounts-tabs");
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](5, "app-accounts-actions");
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](6, "b1-card-loader", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](7, "app-accounts-list");
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+AccountsComponent.ɵfac = function AccountsComponent_Factory(t) { return new (t || AccountsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_4__["Store"]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"])); };
+AccountsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: AccountsComponent, selectors: [["app-accounts"]], decls: 8, vars: 1, consts: [[1, "b1-wrapper", "no-wrap-xs", "b1-full-screen"], [1, "full-screen", 2, "position", "relative"], [1, "b1-page-card", "b1-bg-light"], [3, "isLoading"]], template: function AccountsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "app-accounts-header");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](2, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](3, "app-accounts-tabs");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](4, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](5, "app-accounts-actions");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](6, "b1-card-loader", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](7, "app-accounts-list");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("isLoading", ctx.isLoadingAccounts$);
-    } }, directives: [_components_accounts_header_accounts_header_component__WEBPACK_IMPORTED_MODULE_4__["AccountsHeaderComponent"], _components_accounts_tabs_accounts_tabs_component__WEBPACK_IMPORTED_MODULE_5__["AccountsTabsComponent"], _components_accounts_actions_accounts_actions_component__WEBPACK_IMPORTED_MODULE_6__["AccountsActionsComponent"], _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_7__["B1CardLoaderComponent"], _components_accounts_list_accounts_list_component__WEBPACK_IMPORTED_MODULE_8__["AccountsListComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhY2NvdW50cy5jb21wb25lbnQuc2NzcyJ9 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("isLoading", ctx.isLoadingAccounts$);
+    } }, directives: [_components_accounts_header_accounts_header_component__WEBPACK_IMPORTED_MODULE_5__["AccountsHeaderComponent"], _components_accounts_tabs_accounts_tabs_component__WEBPACK_IMPORTED_MODULE_6__["AccountsTabsComponent"], _components_accounts_actions_accounts_actions_component__WEBPACK_IMPORTED_MODULE_7__["AccountsActionsComponent"], _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_8__["B1CardLoaderComponent"], _components_accounts_list_accounts_list_component__WEBPACK_IMPORTED_MODULE_9__["AccountsListComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhY2NvdW50cy5jb21wb25lbnQuc2NzcyJ9 */"] });
 
 
 /***/ }),

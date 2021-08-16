@@ -263,7 +263,7 @@
     }
     .header-icon-close {
         position: absolute;
-        right: 32px;
+        right: 16px;
         transform: translateX(150px);
     }
     .open {
@@ -290,7 +290,6 @@
     }
     &-languages {
         @include mobile-select;
-        width: 60%;
         @media (max-width: 812px) {
             justify-content: flex-start;
         }

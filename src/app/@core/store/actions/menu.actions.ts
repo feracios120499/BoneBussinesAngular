@@ -27,3 +27,15 @@ export const closeMenu = createAction(
 export const openInfo = createAction(
     '[MENU] open info'
 );
+
+export const openCustomers = createAction(
+    '[MENU] open customers'
+);
+
+export const closeCustomers = createAction(
+    '[MENU] close customers'
+);
+
+export const toggleCustomers = createAction(
+    '[MENU] toggle customers'
+);

@@ -40,4 +40,9 @@ export const setCurrentClientId = createAction(
     props<{ clientId: string }>()
 );
 
+export const selectCurrentClientId = createAction(
+    '[USER] select current client id',
+    props<{ clientId: string }>()
+);
+
 

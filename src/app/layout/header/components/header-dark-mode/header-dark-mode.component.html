@@ -1,0 +1,14 @@
+<ng-container *ngrxLet="darkModeIsActive$ as darkMode">
+    <div class="invisible-xs h-100 w-100" (click)="setDarkMode(!darkMode)">
+        <a class="main-navbar__list__item__link b1-base">
+            <i b1-icon [icon]="darkMode?'adjust':'moon'"></i>
+        </a>
+    </div>
+    <div class="visible-xs" (click)="setDarkMode(!darkMode)">
+        <div class="info-theme">
+            <div [class.info-theme_light]="!darkMode" [class.info-theme_dark]="darkMode">
+                <i b1-icon [icon]="darkMode?'adjust':'moon'"></i>
+            </div>
+        </div>
+    </div>
+</ng-container>

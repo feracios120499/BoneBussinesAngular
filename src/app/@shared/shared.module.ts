@@ -24,6 +24,12 @@ import { WebClassDirective } from './directives/web-class.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
+import { DaterangepickerComponent } from './components/b1-daterangepicker/b1-daterangepicker.component';
+import { DaterangepickerDirective } from './components/b1-daterangepicker/b1-daterangepicker.directive';
+import { LOCALE_CONFIG } from './components/b1-daterangepicker/b1-daterangepicker.config';
+import { LocaleService } from './components/b1-daterangepicker/local.service';
+
+
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -45,7 +51,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
-    B1LinkComponent],
+    B1LinkComponent,
+    DaterangepickerComponent,
+    DaterangepickerDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -82,13 +90,15 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
-    B1LinkComponent
+    B1LinkComponent,
+    DaterangepickerComponent,
+    DaterangepickerDirective
   ],
   providers: [
     {
       provide: VIRTUAL_SCROLL_STRATEGY,
       useClass: CustomVirtualScrollStrategy,
-    },
+    }
   ]
 })
 export class SharedModule { }

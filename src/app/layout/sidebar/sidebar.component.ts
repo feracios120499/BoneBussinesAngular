@@ -1,10 +1,12 @@
-import { toggleCollapsed } from '@actions/menu.actions';
+import { toggleCollapsed, toggleCustomers } from '@actions/menu.actions';
+import { selectCurrentClientId, setCurrentClientId } from '@actions/user.actions';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { bankDateSelector } from '@selectors/app.selectors';
-import { isCollapsedSelector, isOpenMenuSelector, menuSelector, subMenuSelector } from '@selectors/menu.selectors';
+import { isCollapsedSelector, isOpenCustomersSelector, isOpenMenuSelector, menuSelector, subMenuSelector } from '@selectors/menu.selectors';
 import { callCenterPhonesLocalSelector, callCenterPhonesSelector, callCenterWorkSelector, ecpSupportPhonesSelector } from '@selectors/settings.selectors';
-import { countCustomersSelector, currentCustomerNameSelector, customersSelector } from '@selectors/user.selectors';
+import { countCustomersSelector, currentCustomerNameSelector, currentCustomerSelector, customersSelector } from '@selectors/user.selectors';
+import { Customer } from 'src/app/@shared/models/profile.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,11 +14,7 @@ import { countCustomersSelector, currentCustomerNameSelector, customersSelector 
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  constructor(private store: Store, private el: ElementRef) {
-    setTimeout(() => {
-      console.log(el.nativeElement.children[0].children[0].offsetWidth - el.nativeElement.children[0].children[0].clientWidth);
-    }, 3000);
-
+  constructor(private store: Store) {
 
   }
 
@@ -24,6 +22,7 @@ export class SidebarComponent implements OnInit {
   public subMenu$ = this.store.select(subMenuSelector);
   public customerName$ = this.store.select(currentCustomerNameSelector);
   public customers$ = this.store.select(customersSelector);
+  public currentCustomer$ = this.store.select(currentCustomerSelector);
   public bankDate$ = this.store.select(bankDateSelector);
   public callCenterPhones$ = this.store.select(callCenterPhonesSelector);
   public callCenterPhonesLocal$ = this.store.select(callCenterPhonesLocalSelector);
@@ -33,7 +32,7 @@ export class SidebarComponent implements OnInit {
   public isOpenMenu$ = this.store.select(isOpenMenuSelector);
   public countCustomers$ = this.store.select(countCustomersSelector);
 
-  public isOpenCustomersList = false;
+  public isOpenCustomersList$ = this.store.select(isOpenCustomersSelector);
 
   ngOnInit(): void {
   }
@@ -41,8 +40,13 @@ export class SidebarComponent implements OnInit {
   collapseToggle(): void {
     this.store.dispatch(toggleCollapsed());
   }
-  openCustomersList(): void {
-    this.isOpenCustomersList = !this.isOpenCustomersList;
+
+  toggleCustomers(): void {
+    this.store.dispatch(toggleCustomers());
+  }
+
+  setCustomer(customer: Customer): void {
+    this.store.dispatch(selectCurrentClientId({ clientId: customer.ClientId }));
   }
 
 }

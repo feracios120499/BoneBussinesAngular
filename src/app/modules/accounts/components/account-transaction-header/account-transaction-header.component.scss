@@ -1,0 +1,32 @@
+.account-actions {
+    padding: 16px;
+    height: 76px;
+    //justify-content: space-between;
+    @media (max-width: 812px) {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        height: auto;
+    }
+    &_title {
+        @media (max-width: 812px) {
+            width: 100%;
+        }
+        float: left;
+    }
+    &_buttons {
+        @media (max-width: 812px) {
+            margin-top: 8px;
+            margin-left: 0;
+        }
+        margin-left: 16px;
+        float: left;
+    }
+    &_calendar {
+        @media (max-width: 812px) {
+            flex: 1;
+            margin-top: 8px;
+        }
+        float: right;
+    }
+}

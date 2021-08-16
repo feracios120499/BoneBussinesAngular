@@ -5,13 +5,23 @@ import { currentAccountRouteParamsSelector, currentAccountSelector, editFormSele
 import { currentClientIdFilteredSelector } from '@selectors/user.selectors';
 import { AcctService } from '@services/acct.service';
 import { FormGroupState, SetValueAction } from 'ngrx-forms';
-import { of } from 'rxjs';
-import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { catchError, exhaustMap, filter, first, map, mapTo, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { AccountModel } from 'src/app/@shared/models/account.model';
 import * as acctActions from './../actions/acct.actions';
 import * as notifyActions from '../actions/notify.actions';
 import { TranslateService } from '@ngx-translate/core';
 import { AcctFilter, ACCT_FILTER_FORM } from '@stores/acct.store';
+import { setCurrentClientId } from '@actions/user.actions';
+// import { waitFor } from '../shared';
+
+
+// export function waitFor<T>(signal: Observable<any>) {
+//     return (source: Observable<T>) => signal.pipe(
+//         first(),
+//         switchMap(value => [source, value]),
+//     );
+// }
 
 @Injectable()
 export class AcctEffects {
@@ -22,15 +32,44 @@ export class AcctEffects {
         private store: Store,
         private translateService: TranslateService) { }
 
+
+
     loadAccounts$ = createEffect(() =>
         this.actions$.pipe(
             ofType(acctActions.loadAccounts),
-            switchMap(() => currentClientIdFilteredSelector(this.store)),
-            switchMap((clientId) =>
-                this.accountsService.getAccounts(clientId).pipe(
-                    map((accounts) => acctActions.setAccounts({ accounts }))
-                ))
-        ));
+            switchMap(() => currentClientIdFilteredSelector(this.store).pipe(take(1))),
+            tap(console.log),
+            // waitFor(currentClientIdFilteredSelector(this.store)),
+            switchMap((clientId) => this.accountsService.getAccounts(clientId).pipe(
+                map((accounts) => acctActions.setAccounts({ accounts })))
+            )
+        )
+        // combineLatest([
+        //     ofType(acctActions.loadAccounts),
+        //     currentClientIdFilteredSelector(this.store),
+        // ]).pipe(
+        //     switchMap(([, clientId]) => this.accountsService.getAccounts(clientId).pipe(
+        //         map((accounts) => acctActions.setAccounts({ accounts }))
+        //     )))
+    );
+    // this.actions$.pipe(
+    //     ofType(acctActions.loadAccounts),
+    //     // switchMap(() => currentClientIdFilteredSelector(this.store)),
+    //     combineLatest([this.actions$.pipe(ofType(setCurrentClientId))]).pipe(
+    //         switchMap(() =>
+    //             this.accountsService.getAccounts(clientId).pipe(
+    //                 map((accounts) => acctActions.setAccounts({ accounts }))
+    //             ))
+    //     ),
+
+    //     // switchMap(([clientId]) => this.accountsService.getAccounts(clientId).pipe(
+    //     //     map((accounts) => acctActions.setAccounts({ accounts }))
+    //     // ))
+    //     // switchMap(([, clientId]) =>
+    //     //     this.accountsService.getAccounts(clientId).pipe(
+    //     //         map((accounts) => acctActions.setAccounts({ accounts }))
+    //     //     ))
+
 
     setCurrencyFilterOther$ = createEffect(() =>
         this.actions$.pipe(

@@ -71,3 +71,8 @@ export const userPhoneSelector = createSelector(
     (profile) => profile?.PhoneNumber
 );
 
+export const isAvailableChangeCustomer = createSelector(
+    countCustomersSelector,
+    (countCustomers) => countCustomers >= 2
+);;
+

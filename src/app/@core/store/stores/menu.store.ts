@@ -8,6 +8,7 @@ export interface MenuState {
     isCollapsed: boolean;
     isOpen: boolean;
     isInfoOpen: boolean;
+    isCustomersOpen: boolean;
 }
 
 export const initialState: MenuState = {
@@ -15,5 +16,6 @@ export const initialState: MenuState = {
     subMenu: undefined,
     isCollapsed: false,
     isOpen: false,
-    isInfoOpen: false
+    isInfoOpen: false,
+    isCustomersOpen: false
 };

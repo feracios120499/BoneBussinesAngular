@@ -34,3 +34,8 @@ export const isOpenMenuOrInfoSelector = createSelector(
     menuStoreSelector,
     state => state.isOpen || state.isInfoOpen
 );
+
+export const isOpenCustomersSelector = createSelector(
+    menuStoreSelector,
+    state => state.isCustomersOpen
+);

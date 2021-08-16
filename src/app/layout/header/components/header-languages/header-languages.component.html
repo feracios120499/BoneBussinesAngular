@@ -1,0 +1,32 @@
+<ng-container *ngrxLet="currentLanguage$ as currentLanguage">
+    <ng-container *ngrxLet="languages$ as languages">
+        <div class="invisible-xs h-100 w-100" ngbDropdown #dropdown="ngbDropdown" display="static">
+            <a class="main-navbar__list__item__link b1-base" id="languages"
+                (click)="$event.stopPropagation(); dropdown.open();">
+                <span>{{ 'shared.languages.' + currentLanguage | translate }}</span>
+                <b class="caret"></b></a>
+            <ul class="b1-dropdown b1-animate fade-in-up" ngbDropdownMenu aria-labelledby="languages"
+                style="min-width: 160px;">
+                <li class="b1-dropdown__item" *ngFor="let language of languages">
+                    <a class="b1-dropdown__link b1-base"
+                        (click)="$event.stopPropagation(); setLanguage(language); dropdown.close();">
+                        {{ 'shared.languages.' + language | translate }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="visible-xs">
+            <div class="info-languages">
+                <span class="info-language">
+                    {{ 'shared.languages.' + currentLanguage | translate }}
+                </span>
+                <i b1-icon icon="chevron-down"></i>
+                <select name="tabs" id="tabs" #selectList (change)="setLanguage(selectList.value)">
+                    <option *ngFor="let language of languages" [value]="language"
+                        [selected]="language == currentLanguage">
+                        {{ 'shared.languages.' + language | translate }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>

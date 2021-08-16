@@ -19,6 +19,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderDarkModeComponent } from './layout/header/components/header-dark-mode/header-dark-mode.component';
+import { HeaderNotificationsComponent } from './layout/header/components/header-notifications/header-notifications.component';
+import { HeaderLanguagesComponent } from './layout/header/components/header-languages/header-languages.component';
+import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
+import { DaterangepickerDirective } from './@shared/components/b1-daterangepicker/b1-daterangepicker.directive';
 
 
 @NgModule({
@@ -27,7 +32,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     B1GlobalLoaderComponent,
     AuthorizedLayoutComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderDarkModeComponent,
+    HeaderNotificationsComponent,
+    HeaderLanguagesComponent,
+    HeaderProfileComponent
   ],
   imports: [
     CommonModule,

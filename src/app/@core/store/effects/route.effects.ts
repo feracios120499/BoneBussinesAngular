@@ -1,6 +1,7 @@
 import * as authActions from '@actions/auth.actions';
 import * as acctActions from '@actions/acct.actions';
 import * as routeActions from '@actions/route.actions';
+import * as userActions from '@actions/user.actions';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -20,7 +21,7 @@ export class RouteEffects {
 
     dashboardEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(authActions.authLoadProfileSuccess),
+            ofType(...[authActions.authLoadProfileSuccess, userActions.selectCurrentClientId]),
             map(() => routeActions.routeTo({ route: 'accounts' }))
         )
     );

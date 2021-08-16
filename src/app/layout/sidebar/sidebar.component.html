@@ -118,23 +118,27 @@
                     <i b1-icon icon="arrows"></i>
                 </a>
             </div>
-            <div class="main-sidemenu__customers" *ngrxLet="countCustomers$ as countCustomers">
-                <div class="main-sidemenu__customers-button">
-                    <div class="b1-large b1-bold">{{customerName$ | ngrxPush}}</div>
-                    <div *ngIf="countCustomers >= 2" (click)="openCustomersList()">
-                        <div class="main-sidemenu__customers-change">
+            <ng-container *ngrxLet="isOpenCustomersList$ as isOpenCustomersList">
+                <div class="main-sidemenu__customers" [class.open]="isOpenCustomersList">
+                    <div class="main-sidemenu__customers-button" [class.open]="isOpenCustomersList"
+                        (click)="toggleCustomers()">
+                        <div class="main-sidemenu__customers-name" [class.open]="isOpenCustomersList">{{customerName$ |
+                            ngrxPush}}</div>
+                        <div class="main-sidemenu__customers-change" [class.open]="isOpenCustomersList">
                             <span class="b1-mr-2">змінити клієнта</span>
                             <i b1-icon icon="chevron-up"></i>
                         </div>
-                        <div class="main-sidemenu__customers-list" [class.open]="isOpenCustomersList"
-                            *ngrxLet="customers$ as customers">
-                            <div *ngFor="let customer of customers">
-                                {{customer.Name}}
-                            </div>
+                    </div>
+                    <div class="main-sidemenu__customers-list" *ngrxLet="customers$ as customers">
+                        <div class="main-sidemenu__customers-item" *ngFor="let customer of customers"
+                            (click)="setCustomer(customer)" [class.active]="(currentCustomer$ | ngrxPush) == customer">
+                            {{customer.Name}}
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+
+
             <!-- <div class="dropdown">
                 <ul class="b1-dropdown b1-bg-light" role="menu" ngbDropdown #dropdown="ngbDropdown" mobile-more>
                     <li class="b1-dropdown__item">

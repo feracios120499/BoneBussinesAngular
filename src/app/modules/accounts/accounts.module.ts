@@ -15,6 +15,9 @@ import { AccountComponent } from './views/account/account.component';
 import { AccountCardComponent } from './components/account-card/account-card.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { AccountEditModalComponent } from './components/account-edit-modal/account-edit-modal.component';
+import { AccountTransactionsComponent } from './components/account-transactions/account-transactions.component';
+import { AccountTransactionHeaderComponent } from './components/account-transaction-header/account-transaction-header.component';
+import { AccountTransactionsListComponent } from './components/account-transactions-list/account-transactions-list.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,10 @@ import { AccountEditModalComponent } from './components/account-edit-modal/accou
         AccountComponent,
         AccountCardComponent,
         AccountDetailsComponent,
-        AccountEditModalComponent
+        AccountEditModalComponent,
+        AccountTransactionsComponent,
+        AccountTransactionHeaderComponent,
+        AccountTransactionsListComponent
     ],
     imports: [
         CommonModule,

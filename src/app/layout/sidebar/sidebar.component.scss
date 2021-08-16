@@ -187,18 +187,34 @@
                 display: block;
             }
             position: absolute;
-            bottom: 0;
+            top: calc(100% - 72px);
             width: 100%;
+            height: 100%;
             left: 0;
             right: 0;
             z-index: 500;
+            transition: all 350ms $animation-timing;
+            background-color: $color-dark-200;
+            &.open {
+                top: 0;
+                background-color: $color-dark-100;
+            }
             &-button {
                 height: 72px;
                 display: flex;
-                background-color: $color-dark-200;
                 align-items: center;
                 flex-direction: column;
                 justify-content: center;
+                &.open {
+                    border-bottom: 1.2px solid var(--color-light-500);
+                    // border-top: 1.2px solid var(--color-light-500);
+                }
+            }
+            &-name {
+                transition: font-size 350ms $animation-timing;
+                &.open {
+                    font-size: 0;
+                }
             }
             &-change {
                 @include base;
@@ -206,13 +222,39 @@
                 color: $color-light-400;
                 display: flex;
                 align-items: center;
+                & i {
+                    transition: transform 350ms $animation-timing;
+                }
+                & span {
+                    transition: font-size 350ms $animation-timing;
+                }
+                &.open {
+                    & i {
+                        transform: rotate(180deg);
+                    }
+                    & span {
+                        font-size: 20px;
+                    }
+                }
             }
             &-list {
-                height: 0;
-                opacity: 0;
-                &.open {
-                    height: auto;
-                    opacity: 1;
+                padding: 16px;
+                background-color: $color-dark-100;
+                height: 100%;
+            }
+            &-item {
+                @include medium;
+                @include light;
+                min-height: 40px;
+                padding: 16px;
+                border-radius: 8px;
+                margin-bottom: 8px;
+                background-color: rgba($color-light, 0.2);
+
+                &.active {
+                    border: none;
+                    padding: 17px;
+                    background: $linear-gradient;
                 }
             }
         }

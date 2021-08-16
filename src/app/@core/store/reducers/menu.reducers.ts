@@ -13,8 +13,16 @@ export const menuReducers = createReducer(
         (state) => ({ ...state, isInfoOpen: true })
     ),
     on(
+        menuActions.openCustomers,
+        (state) => ({ ...state, isCustomersOpen: true })
+    ),
+    on(
+        menuActions.closeCustomers,
+        (state) => ({ ...state, isCustomersOpen: false })
+    ),
+    on(
         menuActions.closeMenu,
-        (state) => ({ ...state, isOpen: false, isInfoOpen: false })
+        (state) => ({ ...state, isOpen: false, isInfoOpen: false, isCustomersOpen: false })
     ),
     on(
         menuActions.toggleCollapsed,

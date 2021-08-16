@@ -1,5 +1,7 @@
 import { ActionCreator, createAction } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
+import { Observable } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 export function createHTTPActions<RequestPayload = void, ResponsePayload = void, ErrorPayload = void>(
     actionType: string,
@@ -22,3 +24,5 @@ export function createHTTPActions<RequestPayload = void, ResponsePayload = void,
         createAction(`${actionType} Error`, (payload: ErrorPayload) => ({ payload })),
     ];
 }
+
+
