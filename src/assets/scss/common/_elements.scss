@@ -1012,6 +1012,11 @@
 .b1-modal {
   &-data {
     color: var(--color-dark);
+    @media (max-width: 812px) {
+      max-height: calc(100vh - 80px);
+      max-height: calc(var(--app-height) - 80px);
+      overflow: scroll;
+    }
   }
   &-header {
     width: 100%;
