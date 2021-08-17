@@ -1,23 +1,17 @@
-<div class="b1-page-actions" style="display: none;">
+<!-- <div class="b1-page-actions" style="display: none;">
     <div class="b1-page-actions__left">
         <div class="b1-title3">
             {{'components.acct.accountTurnovers' | translate}}
         </div>
         <div class="b1-page-icons" style="margin-left:0">
 
-            <!-- <button ng-click="histCtrl.showStatementWindow()"
-                class="b1-button-primary b1-button-primary_filled b1-mr-4 b1-ml-4"
-                ng-disabled="importCtrl.state.isLoading">
-                <i class="ub-icons ub-icons-icon-statement"></i>
-                {{'components.acct.getStatement' | translate}}
-            </button> -->
-            <!-- tooltips tooltip-template="{{'components.acct.share' | translate}}" -->
+
             <div ng-if="IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'">
                 <button ng-click="histCtrl.showShareWindow()" class="b1-page-icon ub-icons ub-icons-icon-file"
                     ng-disabled="importCtrl.state.isLoading">
                 </button>
             </div>
-            <!-- tooltips tooltip-template="{{'components.acct.geExportStatement' | translate}}" -->
+  
             <div>
                 <button ng-click="histCtrl.showExportStatementWindow()"
                     class="b1-page-icon ub-icons ub-icons-icon-export" ng-disabled="importCtrl.state.isLoading">
@@ -37,13 +31,10 @@
             <label for="calendar" class="ub-icons ub-icons-icon-calendar"></label>
         </div>
     </div>
-</div>
-<div class="b1-page-hr"
-    ng-class="{'loading' : histCtrl.states.file.isLoading || histCtrl.states.turnover.isLoading || histCtrl.states.statement.isLoading || histCtrl.states.transaction.isLoading || histCtrl.states.acct.isLoading}">
+</div> -->
 
-</div>
 
-<div class="account-actions">
+<div class="account-actions" *ngrxLet="form$ as form">
     <div class="account-actions_title">
         <div class="b1-title3">
             {{'components.acct.accountTurnovers' | translate}}
@@ -60,25 +51,29 @@
         </button> -->
             <!-- tooltips tooltip-template="{{'components.acct.share' | translate}}" -->
             <div ng-if="IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'">
-                <button ng-click="histCtrl.showShareWindow()" class="b1-page-icon ub-icons ub-icons-icon-file"
+                <button ng-click="histCtrl.showShareWindow()" class="b1-page-icon" b1-icon icon="file-details"
                     ng-disabled="importCtrl.state.isLoading">
                 </button>
             </div>
             <!-- tooltips tooltip-template="{{'components.acct.geExportStatement' | translate}}" -->
             <div>
-                <button ng-click="histCtrl.showExportStatementWindow()"
-                    class="b1-page-icon ub-icons ub-icons-icon-export" ng-disabled="importCtrl.state.isLoading">
+                <button ng-click="histCtrl.showExportStatementWindow()" class="b1-page-icon" b1-icon icon="export"
+                    ng-disabled="importCtrl.state.isLoading">
                 </button>
             </div>
         </div>
 
     </div>
-    <div class="account-actions_calendar">
+    <form class="account-actions_calendar" [ngrxFormState]="form">
         <div class="b1-page-inputWithIcon">
-            <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker
-                [locale]="{applyLabel: 'ok', format: 'DD-MM-YYYY'}" startKey="start" endKey="end" [(ngModel)]="selected"
-                name="daterange" [ranges]="ranges" [locale]="{customRangeLabel:'Custom range'}" readonly />
-            <label for="calendar" class="ub-icons ub-icons-icon-calendar"></label>
+            <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker startKey="start" endKey="end"
+                [ngrxFormControlState]="form.controls.range" [ngrxValueConverter]="rangeValueConverter" name="daterange"
+                [ranges]="ranges" readonly />
+            <label for="calendar" b1-icon icon="calendar"></label>
         </div>
-    </div>
+    </form>
+</div>
+<div class="b1-page-hr"
+    ng-class="{'loading' : histCtrl.states.file.isLoading || histCtrl.states.turnover.isLoading || histCtrl.states.statement.isLoading || histCtrl.states.transaction.isLoading || histCtrl.states.acct.isLoading}">
+
 </div>

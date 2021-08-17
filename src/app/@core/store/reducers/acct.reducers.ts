@@ -55,6 +55,10 @@ export const acctReducers = wrapReducerWithFormStateUpdate(
         on(
             acctActions.setEditFormInitState,
             (state) => ({ ...state, editForm: initialEditFormState })
+        ),
+        on(
+            acctActions.loadTurnoversSuccess,
+            (state, action) => ({ ...state, turnovers: action.payload })
         )
 
     ),

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { currentAccountRouteParamsSelector, currentAccountSelector, editFormSelector, formSelector } from '@selectors/acct.selectors';
+import { currentAccountRouteParamsSelector, currentAccountSelector, editFormSelector, filterTransactionsSelector, formSelector } from '@selectors/acct.selectors';
 import { currentClientIdFilteredSelector } from '@selectors/user.selectors';
 import { AcctService } from '@services/acct.service';
-import { FormGroupState, SetValueAction } from 'ngrx-forms';
+import { Boxed, FormGroupState, SetValueAction } from 'ngrx-forms';
 import { combineLatest, Observable, of } from 'rxjs';
 import { catchError, exhaustMap, filter, first, map, mapTo, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { AccountModel } from 'src/app/@shared/models/account.model';
 import * as acctActions from './../actions/acct.actions';
 import * as notifyActions from '../actions/notify.actions';
 import { TranslateService } from '@ngx-translate/core';
-import { AcctFilter, ACCT_FILTER_FORM } from '@stores/acct.store';
+import { AcctFilter, AcctTransactionsFilter, ACCT_FILTER_FORM, ACCT_TRANSACTIONS_FILTER_FORM, DateRange } from '@stores/acct.store';
 import { setCurrentClientId } from '@actions/user.actions';
+import dayjs from 'dayjs';
 // import { waitFor } from '../shared';
 
 
@@ -175,5 +176,51 @@ export class AcctEffects {
         this.actions$.pipe(
             ofType(acctActions.updateAccountSuccess),
             map(() => notifyActions.successNotification({ message: this.translateService.instant('componets.acct.updateAccountSuccess') }))
+        ));
+
+    updateRangeTransactions$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<SetValueAction<Boxed<DateRange>>>(SetValueAction.TYPE),
+            filter((formControl: SetValueAction<Boxed<DateRange>>) => formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)),
+            withLatestFrom(this.store.select(filterTransactionsSelector)),
+            filter(
+                ([formControl, form]: [SetValueAction<Boxed<DateRange>>, FormGroupState<AcctTransactionsFilter>]) =>
+                    formControl.controlId === form.controls.range.id),
+            map(([formControl]) =>
+                acctActions.updateRangeTransactions(
+                    {
+                        start: dayjs(formControl.value.value.start),
+                        end: dayjs(formControl.value.value.end)
+                    }
+                ))
+        ));
+    updateRangeTransactionsEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(acctActions.updateRangeTransactions),
+            switchMap((action) => [acctActions.loadTurnoversRequest({ start: action.start, end: action.end })])
+        ));
+
+    loadTurnovers$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(acctActions.loadTurnoversRequest),
+            switchMap(
+                action => currentClientIdFilteredSelector(this.store).pipe(
+                    take(1),
+                    map((clientId) => ({ clientId, data: action.payload }))
+                )
+            ),
+            withLatestFrom(this.store.select(currentAccountRouteParamsSelector)),
+            switchMap(([payload, routeParams]) =>
+                this.accountsService.getTurnovers(
+                    routeParams.bankId,
+                    routeParams.accountId,
+                    payload.clientId,
+                    payload.data.start,
+                    payload.data.end
+                ).pipe(
+                    map(turnovers => acctActions.loadTurnoversSuccess(turnovers)),
+                    catchError(error => of(acctActions.loadTurnoversFailure(error.error.Message)))
+                )
+            )
         ));
 }

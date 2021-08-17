@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { filterTransactionsSelector } from '@selectors/acct.selectors';
+import { DateRange, rangeValueConverter } from '@stores/acct.store';
 import dayjs from 'dayjs';
+import { Boxed, NgrxValueConverters } from 'ngrx-forms';
 
 @Component({
   selector: 'account-transaction-header',
@@ -8,15 +12,16 @@ import dayjs from 'dayjs';
 })
 export class AccountTransactionHeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private store: Store) { }
+  form$ = this.store.select(filterTransactionsSelector);
   public selected: any;
+  public rangeValueConverter = rangeValueConverter;
   ranges: any = {
     'shared.picker.today': [dayjs(), dayjs()],
-    Yesterday: [dayjs().add(1, 'days'), dayjs().subtract(1, 'days')],
-    'Last 7 Days': [dayjs().subtract(7, 'days'), dayjs()],
-    'Last 30 Days': [dayjs().subtract(30, 'days'), dayjs()],
-    'This Month': [dayjs().startOf('month'), dayjs().endOf('month')]
+    'shared.picker.currentMonth': [dayjs().startOf('month'), dayjs()],
+    'shared.picker.month1': [dayjs().subtract(1, 'month'), dayjs()],
+    'shared.picker.month2': [dayjs().subtract(2, 'month'), dayjs()],
+    'shared.picker.month3': [dayjs().subtract(3, 'month'), dayjs()],
   };
 
   ngOnInit(): void {

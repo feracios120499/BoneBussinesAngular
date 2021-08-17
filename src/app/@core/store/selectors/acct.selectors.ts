@@ -92,3 +92,8 @@ export const currentAccountRouteParamsSelector = createSelector(
     ({ bankId, accountId }) => ({ bankId: (bankId as string) || '', accountId: parseInt(accountId || '', 10) })
 );
 
+export const filterTransactionsSelector = createSelector(
+    featureSelector,
+    state => state.transactionsFilterForm
+);
+

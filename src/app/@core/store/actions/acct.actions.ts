@@ -4,6 +4,7 @@ import { createAction, props } from '@ngrx/store';
 import { AccountModel } from 'src/app/@shared/models/account.model';
 import { createHTTPActions } from '../shared';
 import { AcctEdit } from '@stores/acct.store';
+import { Dayjs } from 'dayjs';
 // loadAccounts action
 export const loadAccounts = createAction('[ACCT] load accounts', props<{ reload: boolean }>());
 
@@ -47,3 +48,16 @@ export const [
     updateAccountSuccess,
     updateAccountFailure
 ] = createHTTPActions<AcctEdit, AccountModel, string>('[ACCT] update account');
+
+
+export const updateRangeTransactions = createAction(
+    '[ACCT] update range',
+    props<{ start: Dayjs, end: Dayjs }>()
+);
+
+
+export const [
+    loadTurnoversRequest,
+    loadTurnoversSuccess,
+    loadTurnoversFailure
+] = createHTTPActions<{ start: Dayjs, end: Dayjs }, any, string>('[ACCT] load turnovers');

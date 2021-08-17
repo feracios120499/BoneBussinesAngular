@@ -34,13 +34,14 @@
                         <th colspan="5" class="month drp-animate">
                             <ng-container *ngIf="showDropdowns && calendarVariables.left.dropdowns">
                                 <div class="dropdowns">
-                                    {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}}
+                                    {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()] |
+                                    translate | titlecase}}
                                     <select class="monthselect" (change)="monthChanged($event, sideEnum.left)">
                                         <option
                                             [disabled]="(calendarVariables.left.dropdowns.inMinYear && m < calendarVariables.left.minDate.month()) || (calendarVariables.left.dropdowns.inMaxYear && m > calendarVariables.left.maxDate.month())"
                                             *ngFor="let m of calendarVariables.left.dropdowns.monthArrays" [value]="m"
                                             [selected]="calendarVariables.left.dropdowns.currentMonth == m">
-                                            {{locale.monthNames[m]}}
+                                            {{locale.monthNames[m] | translate | titlecase}}
                                         </option>
                                     </select>
                                 </div>
@@ -55,7 +56,8 @@
                                 </div>
                             </ng-container>
                             <ng-container *ngIf="!showDropdowns || !calendarVariables.left.dropdowns">
-                                {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}} {{
+                                {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()] | translate |
+                                titlecase}} {{
                                 calendarVariables?.left?.calendar[1][1].format(" YYYY")}}
                             </ng-container>
                         </th>
@@ -74,7 +76,8 @@
                         <th *ngIf="showWeekNumbers || showISOWeekNumbers" class="week">
                             <span>{{this.locale.weekLabel}}</span>
                         </th>
-                        <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek}}</span></th>
+                        <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek | translate |
+                                titlecase}}</span></th>
                     </tr>
                 </thead>
                 <tbody class="drp-animate">
@@ -160,13 +163,14 @@
                         <th colspan="5" class="month">
                             <ng-container *ngIf="showDropdowns && calendarVariables.right.dropdowns">
                                 <div class="dropdowns">
-                                    {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}}
+                                    {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()] |
+                                    translate | titlecase}}
                                     <select class="monthselect" (change)="monthChanged($event, sideEnum.right)">
                                         <option
                                             [disabled]="(calendarVariables.right.dropdowns.inMinYear && calendarVariables.right.minDate && m < calendarVariables.right.minDate.month()) || (calendarVariables.right.dropdowns.inMaxYear && calendarVariables.right.maxDate && m > calendarVariables.right.maxDate.month())"
                                             *ngFor="let m of calendarVariables.right.dropdowns.monthArrays" [value]="m"
                                             [selected]="calendarVariables.right.dropdowns.currentMonth == m">
-                                            {{locale.monthNames[m]}}
+                                            {{locale.monthNames[m] | translate | titlecase}}
                                         </option>
                                     </select>
                                 </div>
@@ -181,7 +185,8 @@
                                 </div>
                             </ng-container>
                             <ng-container *ngIf="!showDropdowns || !calendarVariables.right.dropdowns">
-                                {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}} {{
+                                {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()] | translate |
+                                titlecase}} {{
                                 calendarVariables?.right?.calendar[1][1].format(" YYYY")}}
                             </ng-container>
                         </th>
@@ -201,7 +206,8 @@
                         <th *ngIf="showWeekNumbers || showISOWeekNumbers" class="week">
                             <span>{{this.locale.weekLabel}}</span>
                         </th>
-                        <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek}}</span></th>
+                        <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek | translate |
+                                titlecase}}</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -271,7 +277,7 @@
     <div class="buttons" *ngIf="!autoApply && ( !rangesArray.length || (showCalInRanges && !singleDatePicker))">
         <div class="buttons_input">
             <button class="b1-buttton b1-button-small" [disabled]="applyBtn.disabled" type="button"
-                (click)="clickApply($event)">{{locale.applyLabel}}</button>
+                (click)="clickApply($event)">{{locale.applyLabel | translate}}</button>
         </div>
     </div>
 
@@ -288,12 +294,17 @@
                 <ul>
                     <li *ngFor="let range of rangesArray">
                         <button type="button" (click)="clickRange($event, range)" [disabled]="disableRange(range)"
-                            [ngClass]="{'active': range === chosenRange}">{{range | translate}}</button>
+                            [ngClass]="{'active': range === chosenRange, 'custom':range == this.locale.customRangeLabel}"
+                            [attr.id]="range">
+                            {{range | translate}}
+                            <i b1-icon icon="chevron-down" *ngIf="range == this.locale.customRangeLabel"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
-            <div class="md-drppicker modal-calendar" [class.open]="showCalInRanges">
-                <div class="calendar" [ngClass]="{right: singleDatePicker, left: !singleDatePicker}">
+            <div class="md-drppicker modal-calendar">
+                <div class="calendar" *ngIf="showCalInRanges"
+                    [ngClass]="{right: singleDatePicker, left: !singleDatePicker}">
                     <div class="calendar-table">
                         <table class="table-condensed" *ngIf="calendarVariables">
                             <thead>
@@ -312,7 +323,8 @@
                                     <th colspan="5" class="month drp-animate">
                                         <ng-container *ngIf="showDropdowns && calendarVariables.left.dropdowns">
                                             <div class="dropdowns">
-                                                {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}}
+                                                {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]
+                                                | translate | titlecase}}
                                                 <select class="monthselect"
                                                     (change)="monthChanged($event, sideEnum.left)">
                                                     <option
@@ -320,7 +332,7 @@
                                                         *ngFor="let m of calendarVariables.left.dropdowns.monthArrays"
                                                         [value]="m"
                                                         [selected]="calendarVariables.left.dropdowns.currentMonth == m">
-                                                        {{locale.monthNames[m]}}
+                                                        {{locale.monthNames[m] | translate | titlecase}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -337,7 +349,8 @@
                                             </div>
                                         </ng-container>
                                         <ng-container *ngIf="!showDropdowns || !calendarVariables.left.dropdowns">
-                                            {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()]}}
+                                            {{this.locale.monthNames[calendarVariables?.left?.calendar[1][1].month()] |
+                                            translate | titlecase}}
                                             {{
                                             calendarVariables?.left?.calendar[1][1].format(" YYYY")}}
                                         </ng-container>
@@ -357,7 +370,8 @@
                                     <th *ngIf="showWeekNumbers || showISOWeekNumbers" class="week">
                                         <span>{{this.locale.weekLabel}}</span>
                                     </th>
-                                    <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek}}</span></th>
+                                    <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek | translate |
+                                            titlecase}}</span></th>
                                 </tr>
                             </thead>
                             <tbody class="drp-animate">
@@ -424,7 +438,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="calendar right">
+                <div class="calendar right" *ngIf="showCalInRanges || singleDatePicker">
                     <div class="calendar-table">
                         <table class="table-condensed" *ngIf="calendarVariables">
                             <thead>
@@ -443,7 +457,8 @@
                                     <th colspan="5" class="month">
                                         <ng-container *ngIf="showDropdowns && calendarVariables.right.dropdowns">
                                             <div class="dropdowns">
-                                                {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}}
+                                                {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]
+                                                | translate | titlecase}}
                                                 <select class="monthselect"
                                                     (change)="monthChanged($event, sideEnum.right)">
                                                     <option
@@ -451,7 +466,7 @@
                                                         *ngFor="let m of calendarVariables.right.dropdowns.monthArrays"
                                                         [value]="m"
                                                         [selected]="calendarVariables.right.dropdowns.currentMonth == m">
-                                                        {{locale.monthNames[m]}}
+                                                        {{locale.monthNames[m] | translate | titlecase}}
                                                     </option>
                                                 </select>
                                             </div>
@@ -468,7 +483,8 @@
                                             </div>
                                         </ng-container>
                                         <ng-container *ngIf="!showDropdowns || !calendarVariables.right.dropdowns">
-                                            {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()]}}
+                                            {{this.locale.monthNames[calendarVariables?.right?.calendar[1][1].month()] |
+                                            translate | titlecase}}
                                             {{
                                             calendarVariables?.right?.calendar[1][1].format(" YYYY")}}
                                         </ng-container>
@@ -489,7 +505,8 @@
                                     <th *ngIf="showWeekNumbers || showISOWeekNumbers" class="week">
                                         <span>{{this.locale.weekLabel}}</span>
                                     </th>
-                                    <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek}}</span></th>
+                                    <th *ngFor="let dayofweek of locale.daysOfWeek"><span>{{dayofweek | translate |
+                                            titlecase}}</span></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -560,7 +577,6 @@
             <div class="modal-apply"
                 *ngIf="chosenRange === this.locale.customRangeLabel && this.startDate && this.endDate && !isSame()">
                 <div>
-                    {{this._old.start.format('DD.MM.YYYY')}}-{{this._old.end.format('DD.MM.YYYY')}}
                     {{this.startDate.format('DD.MM.YYYY')}}-{{this.endDate.format('DD.MM.YYYY')}}
                 </div>
 
@@ -568,7 +584,7 @@
                     class="b1-buttton b1-button-primary b1-button-primary_filled b1-base w-100 b1-flex b1-align-center b1-justify-center"
                     [disabled]="applyBtn.disabled" type="button" (click)="clickApply($event)">
                     <i b1-icon icon="check"></i>
-                    {{locale.applyLabel}}
+                    {{locale.applyLabel | translate}}
                 </button>
             </div>
         </div>

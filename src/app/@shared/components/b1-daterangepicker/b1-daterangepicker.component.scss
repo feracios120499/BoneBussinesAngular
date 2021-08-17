@@ -792,12 +792,24 @@ $input-height: 3rem !default;
         color: var(--color-primary-light);
         display: flex;
         align-items: center;
+        justify-content: space-between;
         min-height: 40px;
         width: 100%;
         padding: 12px;
         &.active {
             background: $linear-gradient;
             color: $color-light;
+        }
+    }
+    & .custom {
+        & [b1-icon] {
+            transition: all 300ms $animation-timing;
+        }
+
+        &.active {
+            & [b1-icon] {
+                transform: rotate(180deg);
+            }
         }
     }
     & li:not(:last-child) {

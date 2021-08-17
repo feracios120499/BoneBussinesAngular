@@ -2948,6 +2948,13 @@ textarea {
             color: $color-light;
             border-color: $color-primary;
         }
+        @media (max-width: 812px) {
+            &:not(:disabled) {
+                background-color: $color-primary !important;
+                color: $color-light;
+                border-color: $color-primary;
+            }
+        }
         &:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -2965,7 +2972,7 @@ textarea {
             outline: none;
         }
 
-        & input + label {
+        & label {
             transition: all 150ms $animation-timing;
             position: absolute;
             left: 8px;

@@ -27,6 +27,8 @@ import { DefaultLocaleConfig, LocaleConfig } from './b1-daterangepicker.config';
 import { LocaleService } from './local.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DateRange } from '@stores/acct.store';
+import { FormViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 const dayjs = _dayjs;
 
 // tslint:disable-next-line: no-conflicting-lifecycle
@@ -38,14 +40,13 @@ const dayjs = _dayjs;
         '(click)': 'open()',
         '(keyup)': 'inputChanged($event)'
     },
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DaterangepickerDirective), multi: true
-        }
-    ]
+    providers: [{
+        provide: NGRX_FORM_VIEW_ADAPTER,
+        useExisting: forwardRef(() => DaterangepickerDirective),
+        multi: true,
+    }],
 })
-export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
+export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, FormViewAdapter {
     public picker: DaterangepickerComponent;
     private _onChange = Function.prototype;
     private _onTouched = Function.prototype;
@@ -151,10 +152,10 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
         'startKey'
     ];
 
-    get value() {
+    get value(): DateRange {
         return this._value || null;
     }
-    set value(val) {
+    set value(val: DateRange) {
         this._value = val;
         this._onChange(val);
         this._changeDetectorRef.markForCheck();
@@ -186,6 +187,23 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
         this.picker = (componentRef.instance as DaterangepickerComponent);
         this.picker.inline = false; // set inline to false for all directive usage
     }
+    setViewValue(value: any): void {
+        // const valueCopy = { ...value };
+        // if (valueCopy.start && typeof valueCopy.start === 'string') {
+        //     valueCopy.start = dayjs(valueCopy.start);
+        // }
+        // if (valueCopy.end && typeof valueCopy.end === 'string') {
+        //     valueCopy.end = dayjs(valueCopy.end);
+        // }
+        this.writeValue(value);
+    }
+    setOnChangeCallback(fn: (value: any) => void): void {
+        this._onChange = fn;
+    }
+    setOnTouchedCallback(fn: () => void): void {
+        this._onTouched = fn;
+    }
+
     ngOnInit() {
         console.log('start');
         this.picker.startDateChanged.asObservable().subscribe((itemChanged: any) => {
@@ -248,10 +266,10 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
     }
 
     open(event?: any) {
-        debugger;
         if (this.disabled) {
             return;
         }
+        this.elementRef.nativeElement.classList.add('picker-open');
         this.picker.show(event);
         if (window.innerWidth > environment.mobileWidth) {
             setTimeout(() => {
@@ -261,6 +279,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck {
     }
 
     hide(e?: any) {
+        this.elementRef.nativeElement.classList.remove('picker-open');
         this.picker.hide(e);
     }
     toggle(e?: any) {
