@@ -1,5 +1,5 @@
+import { AcctActions } from '@actions/acct.actions';
 import * as authActions from '@actions/auth.actions';
-import * as acctActions from '@actions/acct.actions';
 import * as routeActions from '@actions/route.actions';
 import * as userActions from '@actions/user.actions';
 import { Injectable } from '@angular/core';
@@ -35,7 +35,7 @@ export class RouteEffects {
 
     detailAccount$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.goToDetail),
+            ofType(AcctActions.goToDetail),
             map((payload) => routeActions.routeTo({ route: `accounts/${payload.account.BankId}/${payload.account.Id}` }))
         ));
 }

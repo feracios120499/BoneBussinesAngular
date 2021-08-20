@@ -1,4 +1,4 @@
-import { setTab } from '@actions/acct.actions';
+import { AcctActions } from '@actions/acct.actions';
 import { Component, OnInit } from '@angular/core';
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { Store } from '@ngrx/store';
@@ -23,7 +23,7 @@ export class AccountsTabsComponent implements OnInit {
   }
 
   setTab(tab: AccountTab): void {
-    this.store.dispatch(setTab({ tab }));
+    this.store.dispatch(AcctActions.setTab({ tab }));
   }
 
   selectTab(tabString: string): void {

@@ -1,9 +1,10 @@
-import { setAccountName, setEditFormInitState, sumbitEditForm } from '@actions/acct.actions';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { AcctEdit } from '@stores/acct.store';
 import { editFormSelector } from '@selectors/acct.selectors';
+import { AcctActions } from '@actions/acct.actions';
 
 @Component({
   selector: 'app-account-edit-modal',
@@ -19,14 +20,14 @@ export class AccountEditModalComponent implements OnInit {
   editForm$ = this.store.select(editFormSelector);
 
   ngOnInit(): void {
-    this.store.dispatch(setEditFormInitState());
+    this.store.dispatch(AcctActions.setEditFormInitState());
     if (this.name) {
-      this.store.dispatch(setAccountName({ name: this.name }));
+      this.store.dispatch(AcctActions.setAccountName({ name: this.name }));
     }
   }
 
   save(): void {
-    this.store.dispatch(sumbitEditForm());
+    this.store.dispatch(AcctActions.sumbitEditForm());
     this.activeModal.close();
   }
 

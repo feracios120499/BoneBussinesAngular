@@ -1,7 +1,8 @@
-import { ActionCreator, createAction } from '@ngrx/store';
+import { ActionCreator, createAction, Store } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
+import { currentClientIdFilteredSelector } from '@selectors/user.selectors';
 import { Observable } from 'rxjs';
-import { first, switchMap } from 'rxjs/operators';
+import { first, map, switchMap, take } from 'rxjs/operators';
 
 export function createHTTPActions<RequestPayload = void, ResponsePayload = void, ErrorPayload = void>(
     actionType: string,
@@ -24,5 +25,13 @@ export function createHTTPActions<RequestPayload = void, ResponsePayload = void,
         createAction(`${actionType} Error`, (payload: ErrorPayload) => ({ payload })),
     ];
 }
+
+export function clientIdWithData<T>(store: Store, data: T): Observable<{ clientId: string, data: T }> {
+    return currentClientIdFilteredSelector(store).pipe(
+        take(1),
+        map(clientId => ({ clientId, data }))
+    );
+}
+
 
 

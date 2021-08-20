@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { currentAccountRouteParamsSelector, currentAccountSelector, editFormSelector, filterTransactionsSelector, formSelector } from '@selectors/acct.selectors';
 import { currentClientIdFilteredSelector } from '@selectors/user.selectors';
 import { AcctService } from '@services/acct.service';
@@ -8,12 +8,15 @@ import { Boxed, FormGroupState, SetValueAction } from 'ngrx-forms';
 import { combineLatest, Observable, of } from 'rxjs';
 import { catchError, exhaustMap, filter, first, map, mapTo, mergeMap, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { AccountModel } from 'src/app/@shared/models/account.model';
-import * as acctActions from './../actions/acct.actions';
+// import * as AcctActions from './../actions/acct.actions';
 import * as notifyActions from '../actions/notify.actions';
 import { TranslateService } from '@ngx-translate/core';
 import { AcctFilter, AcctTransactionsFilter, ACCT_FILTER_FORM, ACCT_TRANSACTIONS_FILTER_FORM, DateRange } from '@stores/acct.store';
 import { setCurrentClientId } from '@actions/user.actions';
 import dayjs from 'dayjs';
+import { TypedAction } from '@ngrx/store/src/models';
+import { clientIdWithData } from '../shared';
+import { AcctActions } from '@actions/acct.actions';
 // import { waitFor } from '../shared';
 
 
@@ -37,38 +40,38 @@ export class AcctEffects {
 
     loadAccounts$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.loadAccounts),
+            ofType(AcctActions.loadAccounts),
             switchMap(() => currentClientIdFilteredSelector(this.store).pipe(take(1))),
             tap(console.log),
             // waitFor(currentClientIdFilteredSelector(this.store)),
             switchMap((clientId) => this.accountsService.getAccounts(clientId).pipe(
-                map((accounts) => acctActions.setAccounts({ accounts })))
+                map((accounts) => AcctActions.setAccounts({ accounts })))
             )
         )
         // combineLatest([
-        //     ofType(acctActions.loadAccounts),
+        //     ofType(AcctActions.loadAccounts),
         //     currentClientIdFilteredSelector(this.store),
         // ]).pipe(
         //     switchMap(([, clientId]) => this.accountsService.getAccounts(clientId).pipe(
-        //         map((accounts) => acctActions.setAccounts({ accounts }))
+        //         map((accounts) => AcctActions.setAccounts({ accounts }))
         //     )))
     );
     // this.actions$.pipe(
-    //     ofType(acctActions.loadAccounts),
+    //     ofType(AcctActions.loadAccounts),
     //     // switchMap(() => currentClientIdFilteredSelector(this.store)),
     //     combineLatest([this.actions$.pipe(ofType(setCurrentClientId))]).pipe(
     //         switchMap(() =>
     //             this.accountsService.getAccounts(clientId).pipe(
-    //                 map((accounts) => acctActions.setAccounts({ accounts }))
+    //                 map((accounts) => AcctActions.setAccounts({ accounts }))
     //             ))
     //     ),
 
     //     // switchMap(([clientId]) => this.accountsService.getAccounts(clientId).pipe(
-    //     //     map((accounts) => acctActions.setAccounts({ accounts }))
+    //     //     map((accounts) => AcctActions.setAccounts({ accounts }))
     //     // ))
     //     // switchMap(([, clientId]) =>
     //     //     this.accountsService.getAccounts(clientId).pipe(
-    //     //         map((accounts) => acctActions.setAccounts({ accounts }))
+    //     //         map((accounts) => AcctActions.setAccounts({ accounts }))
     //     //     ))
 
 
@@ -108,53 +111,62 @@ export class AcctEffects {
 
     setAccountName$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.setAccountName),
+            ofType(AcctActions.setAccountName),
             withLatestFrom(this.store.select(editFormSelector)),
             map(([action, formControl]) => new SetValueAction(formControl.controls.name.id, action.name))
         ));
 
     loadCurrentAccount$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.loadCurrentAccount),
-            // delay(9000),
-            switchMap(() => currentClientIdFilteredSelector(this.store)),
+            ofType(AcctActions.loadCurrentAccount),
             withLatestFrom(
                 this.store.select(currentAccountSelector),
                 this.store.select(currentAccountRouteParamsSelector)
             ),
-            switchMap(([clientId, account, routeParams]) => {
+            map(([, account, routeParams]) => {
                 if (account) {
-                    return of(acctActions.loadCurrentAccountSuccess(account));
+                    return AcctActions.loadAccountSuccess(account);
                 }
                 else {
-                    return this.accountsService.getAccount(routeParams.bankId, routeParams.accountId, clientId).pipe(
-                        map(currentAccount => acctActions.loadCurrentAccountSuccess(currentAccount)),
-                        catchError(error => of(acctActions.loadCurrentAccountFailure(error.error.Message)))
-                    );
+                    return AcctActions.loadAccount({ accountId: routeParams.accountId, bankId: routeParams.bankId });
                 }
             })
         ));
 
-    loadCurrentAccountSuccess$ = createEffect(() =>
+    loadAccount$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctActions.loadAccount),
+            switchMap((action) => clientIdWithData(this.store, action.payload)),
+            switchMap((payload) =>
+                this.accountsService.getAccount(
+                    payload.data.bankId,
+                    payload.data.accountId,
+                    payload.clientId).pipe(
+                        map(account => AcctActions.loadAccountSuccess(account))
+                    )
+            )
+        ));
+
+    loadAccountSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(...[
-                acctActions.loadCurrentAccountSuccess,
-                acctActions.updateAccountSuccess
+                AcctActions.loadAccountSuccess,
+                AcctActions.updateAccountSuccess
             ]),
-            map((action) => acctActions.setCurrentAccount({ account: action.payload }))
+            map((action) => AcctActions.setCurrentAccount({ account: action.payload }))
         )
     );
 
     submitEditForm$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.sumbitEditForm),
+            ofType(AcctActions.sumbitEditForm),
             withLatestFrom(this.store.select(editFormSelector)),
-            map(([, form]) => acctActions.updateAccountRequest(form.value))
+            map(([, form]) => AcctActions.updateAccountRequest(form.value))
         ));
 
     updateAccountRequest$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.updateAccountRequest),
+            ofType(AcctActions.updateAccountRequest),
             switchMap((action) => currentClientIdFilteredSelector(this.store).pipe(map((clientId) => ({ clientId, action })))),
             withLatestFrom(this.store.select(currentAccountRouteParamsSelector)),
             switchMap(([payload, routeParams]) =>
@@ -166,15 +178,15 @@ export class AcctEffects {
                         withLatestFrom(this.store.select(currentAccountSelector)),
                         filter(([, account]) => account !== undefined),
                         map(([, account]) => account as AccountModel),
-                        map((account) => acctActions.updateAccountSuccess({ ...account, Name: payload.action.payload.name })),
-                        catchError((error) => of(acctActions.updateAccountFailure(error.error.Message)))
+                        map((account) => AcctActions.updateAccountSuccess({ ...account, Name: payload.action.payload.name })),
+                        catchError((error) => of(AcctActions.updateAccountFailure(error.error.Message)))
                     )
             ))
     );
 
     updateAccountSuccess$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.updateAccountSuccess),
+            ofType(AcctActions.updateAccountSuccess),
             map(() => notifyActions.successNotification({ message: this.translateService.instant('componets.acct.updateAccountSuccess') }))
         ));
 
@@ -187,7 +199,7 @@ export class AcctEffects {
                 ([formControl, form]: [SetValueAction<Boxed<DateRange>>, FormGroupState<AcctTransactionsFilter>]) =>
                     formControl.controlId === form.controls.range.id),
             map(([formControl]) =>
-                acctActions.updateRangeTransactions(
+                AcctActions.updateRangeTransactions(
                     {
                         start: dayjs(formControl.value.value.start),
                         end: dayjs(formControl.value.value.end)
@@ -196,13 +208,13 @@ export class AcctEffects {
         ));
     updateRangeTransactionsEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.updateRangeTransactions),
-            switchMap((action) => [acctActions.loadTurnoversRequest({ start: action.start, end: action.end })])
+            ofType(AcctActions.updateRangeTransactions),
+            switchMap((action) => [AcctActions.loadTurnoversRequest({ start: action.start, end: action.end })])
         ));
 
     loadTurnovers$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(acctActions.loadTurnoversRequest),
+            ofType(AcctActions.loadTurnoversRequest),
             switchMap(
                 action => currentClientIdFilteredSelector(this.store).pipe(
                     take(1),
@@ -218,8 +230,8 @@ export class AcctEffects {
                     payload.data.start,
                     payload.data.end
                 ).pipe(
-                    map(turnovers => acctActions.loadTurnoversSuccess(turnovers)),
-                    catchError(error => of(acctActions.loadTurnoversFailure(error.error.Message)))
+                    map(turnovers => AcctActions.loadTurnoversSuccess(turnovers)),
+                    catchError(error => of(AcctActions.loadTurnoversFailure(error.error.Message)))
                 )
             )
         ));

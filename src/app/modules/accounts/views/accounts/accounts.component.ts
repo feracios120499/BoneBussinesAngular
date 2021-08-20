@@ -1,9 +1,8 @@
-import { loadAccounts, setTab } from '@actions/acct.actions';
+import { AcctActions } from '@actions/acct.actions';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { Store } from '@ngrx/store';
-import { accountsSelector, countActiveAccountsSelector, countClosedAccountsSelector, currentTabSelector, isLoadingAccountsSelector } from '@selectors/acct.selectors';
+import { accountsSelector, isLoadingAccountsSelector } from '@selectors/acct.selectors';
 
 @Component({
   selector: 'app-accounts',
@@ -30,12 +29,12 @@ export class AccountsComponent implements OnInit, OnDestroy {
   accounts$ = this.store.select(accountsSelector);
   isLoadingAccounts$ = this.store.select(isLoadingAccountsSelector);
   ngOnInit(): void {
-
-
   }
+
   init(): void {
-    this.store.dispatch(loadAccounts({ reload: true }));
+    this.store.dispatch(AcctActions.loadAccounts({ reload: true }));
   }
+
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();

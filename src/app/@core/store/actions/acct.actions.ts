@@ -5,59 +5,69 @@ import { AccountModel } from 'src/app/@shared/models/account.model';
 import { createHTTPActions } from '../shared';
 import { AcctEdit } from '@stores/acct.store';
 import { Dayjs } from 'dayjs';
-// loadAccounts action
-export const loadAccounts = createAction('[ACCT] load accounts', props<{ reload: boolean }>());
+import { string } from 'mathjs';
+
+export namespace AcctActions {
+    // loadAccounts action
+    export const loadAccounts = createAction('[ACCT] load accounts', props<{ reload: boolean }>());
 
 
-// setAccounts action
-export const setAccounts = createAction('[ACCT] set accounts', props<{ accounts: AccountModel[] }>());
+    // setAccounts action
+    export const setAccounts = createAction('[ACCT] set accounts', props<{ accounts: AccountModel[] }>());
 
-// setTab action
-export const setTab = createAction('[ACCT] set tab', props<{ tab: AccountTab }>());
+    // setTab action
+    export const setTab = createAction('[ACCT] set tab', props<{ tab: AccountTab }>());
 
-export const goToDetail = createAction('[ACCT] go to detail', props<{ account: AccountModel }>());
+    export const goToDetail = createAction('[ACCT] go to detail', props<{ account: AccountModel }>());
 
-export const [
-    loadCurrentAccount,
-    loadCurrentAccountSuccess,
-    loadCurrentAccountFailure
-] = createHTTPActions<void, AccountModel, string>('[ACCT] load current account');
-
-export const setCurrentAccount = createAction(
-    '[ACCT] set current account',
-    props<{ account: AccountModel }>()
-);
-
-// setAccountName action
-export const setAccountName = createAction(
-    '[ACCT] set account name',
-    props<{ name: string }>()
-);
-
-// setEditFormInitState action
-export const setEditFormInitState = createAction('[ACCT] set edit form init state');
-
-// sumbitEditForm action
-export const sumbitEditForm = createAction(
-    '[ACCT] submit edit form'
-);
+    export const loadCurrentAccount = createAction('[ACCT] load current account');
 
 
-export const [
-    updateAccountRequest,
-    updateAccountSuccess,
-    updateAccountFailure
-] = createHTTPActions<AcctEdit, AccountModel, string>('[ACCT] update account');
+    export const [
+        loadAccount,
+        loadAccountSuccess,
+        loadAccountFailure
+    ] = createHTTPActions<{ accountId: number, bankId: string }, AccountModel, string>('[ACCT] load account');
+
+    export const setCurrentAccount = createAction(
+        '[ACCT] set current account',
+        props<{ account: AccountModel }>()
+    );
+
+    // setAccountName action
+    export const setAccountName = createAction(
+        '[ACCT] set account name',
+        props<{ name: string }>()
+    );
+
+    // setEditFormInitState action
+    export const setEditFormInitState = createAction('[ACCT] set edit form init state');
+
+    // sumbitEditForm action
+    export const sumbitEditForm = createAction(
+        '[ACCT] submit edit form'
+    );
 
 
-export const updateRangeTransactions = createAction(
-    '[ACCT] update range',
-    props<{ start: Dayjs, end: Dayjs }>()
-);
+    export const [
+        updateAccountRequest,
+        updateAccountSuccess,
+        updateAccountFailure
+    ] = createHTTPActions<AcctEdit, AccountModel, string>('[ACCT] update account');
 
 
-export const [
-    loadTurnoversRequest,
-    loadTurnoversSuccess,
-    loadTurnoversFailure
-] = createHTTPActions<{ start: Dayjs, end: Dayjs }, any, string>('[ACCT] load turnovers');
+    export const updateRangeTransactions = createAction(
+        '[ACCT] update range',
+        props<{ start: Dayjs, end: Dayjs }>()
+    );
+
+    export const loadTurnoversCurrentAccount = createAction('[ACCT] load turnovers current account');
+
+
+    export const [
+        loadTurnoversRequest,
+        loadTurnoversSuccess,
+        loadTurnoversFailure
+    ] = createHTTPActions<{ start: Dayjs, end: Dayjs }, any, string>('[ACCT] load turnovers');
+
+}

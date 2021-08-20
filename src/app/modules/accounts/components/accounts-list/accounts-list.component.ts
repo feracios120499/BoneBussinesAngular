@@ -1,9 +1,13 @@
-import { goToDetail } from '@actions/acct.actions';
-import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { accountsOnTabSelector, accountsSelector, filterAccountsSelector, FilterCurrencySelector, isLoadingAccountsSelector } from '@selectors/acct.selectors';
+import {
+  accountsOnTabSelector,
+  filterAccountsSelector,
+  FilterCurrencySelector,
+  isLoadingAccountsSelector
+} from '@selectors/acct.selectors';
 import { AccountModel } from 'src/app/@shared/models/account.model';
+import { AcctActions } from '@actions/acct.actions';
 
 @Component({
   selector: 'app-accounts-list',
@@ -23,6 +27,6 @@ export class AccountsListComponent implements AfterViewInit {
   }
 
   toDetail(account: AccountModel): void {
-    this.store.dispatch(goToDetail({ account }));
+    this.store.dispatch(AcctActions.goToDetail({ account }));
   }
 }

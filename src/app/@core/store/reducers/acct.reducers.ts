@@ -1,5 +1,4 @@
 
-import * as acctActions from '@actions/acct.actions';
 import { createReducer, on } from '@ngrx/store';
 import {
     onNgrxForms,
@@ -9,6 +8,7 @@ import {
 } from 'ngrx-forms';
 import { required, maxLength } from 'ngrx-forms/validation';
 import { AcctEdit, initialEditFormState, initialState } from '@stores/acct.store';
+import { AcctActions } from '@actions/acct.actions';
 
 
 
@@ -23,41 +23,41 @@ export const acctReducers = wrapReducerWithFormStateUpdate(
         onNgrxForms(),
 
         on(
-            acctActions.setAccounts,
+            AcctActions.setAccounts,
             (state, action) => ({ ...state, accounts: action.accounts })
         ),
         on(
-            acctActions.setTab,
+            AcctActions.setTab,
             (state, action) => ({ ...state, currentTab: action.tab })
         ),
         on(
-            acctActions.loadAccounts,
+            AcctActions.loadAccounts,
             (state) => ({ ...state, loadings: [...state.loadings, 'list'] })
         ),
         on(
-            acctActions.setAccounts,
+            AcctActions.setAccounts,
             (state) => ({ ...state, loadings: state.loadings.filter(p => p !== 'list') })
         ),
         on(
-            acctActions.goToDetail,
-            acctActions.setCurrentAccount,
+            AcctActions.goToDetail,
+            AcctActions.setCurrentAccount,
             (state, action) => ({ ...state, currentAccount: action.account })
         ),
         on(
-            acctActions.loadCurrentAccount,
+            AcctActions.loadAccount,
             (state) => ({ ...state, loadings: [...state.loadings, 'account'] })
         ),
         on(
-            acctActions.loadCurrentAccountSuccess,
-            acctActions.loadCurrentAccountFailure,
+            AcctActions.loadAccountSuccess,
+            AcctActions.loadAccountFailure,
             (state) => ({ ...state, loadings: state.loadings.filter(p => p !== 'account') })
         ),
         on(
-            acctActions.setEditFormInitState,
+            AcctActions.setEditFormInitState,
             (state) => ({ ...state, editForm: initialEditFormState })
         ),
         on(
-            acctActions.loadTurnoversSuccess,
+            AcctActions.loadTurnoversSuccess,
             (state, action) => ({ ...state, turnovers: action.payload })
         )
 
