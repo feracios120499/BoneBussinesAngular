@@ -26,6 +26,7 @@ import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
 import { B1PaymentModalComponent } from './components/b1-payment-modal/b1-payment-modal.component';
 import { B1StatementModalComponent } from './components/b1-statement-modal/b1-statement-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -64,7 +65,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     ScrollingModule,
     NgScrollbarModule,
     NgrxFormsModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    NgSelectModule
   ],
   exports: [
     CommonModule,
@@ -90,7 +92,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     MoreAutoDirectionDirective,
     B1LinkComponent,
     DaterangepickerComponent,
-    DaterangepickerDirective
+    DaterangepickerDirective,
+    NgSelectModule
   ],
   providers: [
     {
