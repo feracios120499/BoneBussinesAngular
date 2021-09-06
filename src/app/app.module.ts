@@ -24,6 +24,7 @@ import { HeaderNotificationsComponent } from './layout/header/components/header-
 import { HeaderLanguagesComponent } from './layout/header/components/header-languages/header-languages.component';
 import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
 import { DaterangepickerDirective } from './@shared/components/b1-daterangepicker/b1-daterangepicker.directive';
+import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
 
 
 @NgModule({
@@ -63,6 +64,11 @@ import { DaterangepickerDirective } from './@shared/components/b1-daterangepicke
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AngularDateHttpInterceptor,
       multi: true,
     },
     DatePipe

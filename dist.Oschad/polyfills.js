@@ -1,29 +1,18 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["polyfills"],{
+"use strict";
+(self["webpackChunkbone_bussines_angular"] = self["webpackChunkbone_bussines_angular"] || []).push([["polyfills"],{
 
-/***/ 2:
-/*!********************************!*\
-  !*** multi ./src/polyfills.ts ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! D:\BOneBussinesAngular\src\polyfills.ts */"hN/g");
-
-
-/***/ }),
-
-/***/ "N/DB":
+/***/ 34266:
 /*!*********************************************************!*\
   !*** ./node_modules/@angular/localize/fesm2015/init.js ***!
   \*********************************************************/
-/*! exports provided: $localize */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$localize", function() { return $localize; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$localize": () => (/* binding */ $localize)
+/* harmony export */ });
 /**
- * @license Angular v11.2.9
+ * @license Angular v12.2.2
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -225,97 +214,16 @@ function findEndOfBlock(cooked, raw) {
 _global.$localize = $localize;
 
 
-//# sourceMappingURL=init.js.map
 
 
 /***/ }),
 
-/***/ "hN/g":
-/*!**************************!*\
-  !*** ./src/polyfills.ts ***!
-  \**************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 47761:
+/*!***********************************************!*\
+  !*** ./node_modules/zone.js/fesm2015/zone.js ***!
+  \***********************************************/
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _angular_localize_init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/localize/init */ "N/DB");
-/* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! zone.js/dist/zone */ "pDpN");
-/* harmony import */ var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__);
-/***************************************************************************************************
- * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
- */
-
-/**
- * This file includes polyfills needed by Angular and is loaded before the app.
- * You can add your own extra polyfills to this file.
- *
- * This file is divided into 2 sections:
- *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
- *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
- *      file.
- *
- * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
- * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
- * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
- *
- * Learn more in https://angular.io/guide/browser-support
- */
-/***************************************************************************************************
- * BROWSER POLYFILLS
- */
-/**
- * IE11 requires the following for NgClass support on SVG elements
- */
-// import 'classlist.js';  // Run `npm install --save classlist.js`.
-/**
- * Web Animations `@angular/platform-browser/animations`
- * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
- * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
- */
-// import 'web-animations-js';  // Run `npm install --save web-animations-js`.
-/**
- * By default, zone.js will patch all possible macroTask and DomEvents
- * user can disable parts of macroTask/DomEvents patch by setting following flags
- * because those flags need to be set before `zone.js` being loaded, and webpack
- * will put import in the top of bundle, so user need to create a separate file
- * in this directory (for example: zone-flags.ts), and put the following flags
- * into that file, and then add the following code before importing zone.js.
- * import './zone-flags';
- *
- * The flags allowed in zone-flags.ts are listed here.
- *
- * The following flags will work for all browsers.
- *
- * (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
- * (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick
- * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
- *
- *  in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
- *  with the following flag, it will bypass `zone.js` patch for IE/Edge
- *
- *  (window as any).__Zone_enable_cross_context_check = true;
- *
- */
-/***************************************************************************************************
- * Zone JS is required by default for Angular itself.
- */
- // Included with Angular CLI.
-/***************************************************************************************************
- * APPLICATION IMPORTS
- */
-
-
-/***/ }),
-
-/***/ "pDpN":
-/*!*****************************************************!*\
-  !*** ./node_modules/zone.js/dist/zone-evergreen.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 /**
  * @license Angular v12.0.0-next.0
@@ -3274,7 +3182,88 @@ Zone.__load_patch('PromiseRejectionEvent', (global, Zone) => {
 });
 
 
+/***/ }),
+
+/***/ 7435:
+/*!**************************!*\
+  !*** ./src/polyfills.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _angular_localize_init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/localize/init */ 34266);
+/* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! zone.js */ 47761);
+/* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js__WEBPACK_IMPORTED_MODULE_1__);
+/***************************************************************************************************
+ * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
+ */
+
+/**
+ * This file includes polyfills needed by Angular and is loaded before the app.
+ * You can add your own extra polyfills to this file.
+ *
+ * This file is divided into 2 sections:
+ *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
+ *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
+ *      file.
+ *
+ * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
+ * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
+ * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
+ *
+ * Learn more in https://angular.io/guide/browser-support
+ */
+/***************************************************************************************************
+ * BROWSER POLYFILLS
+ */
+/**
+ * IE11 requires the following for NgClass support on SVG elements
+ */
+// import 'classlist.js';  // Run `npm install --save classlist.js`.
+/**
+ * Web Animations `@angular/platform-browser/animations`
+ * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
+ * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
+ */
+// import 'web-animations-js';  // Run `npm install --save web-animations-js`.
+/**
+ * By default, zone.js will patch all possible macroTask and DomEvents
+ * user can disable parts of macroTask/DomEvents patch by setting following flags
+ * because those flags need to be set before `zone.js` being loaded, and webpack
+ * will put import in the top of bundle, so user need to create a separate file
+ * in this directory (for example: zone-flags.ts), and put the following flags
+ * into that file, and then add the following code before importing zone.js.
+ * import './zone-flags';
+ *
+ * The flags allowed in zone-flags.ts are listed here.
+ *
+ * The following flags will work for all browsers.
+ *
+ * (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
+ * (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick
+ * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+ *
+ *  in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
+ *  with the following flag, it will bypass `zone.js` patch for IE/Edge
+ *
+ *  (window as any).__Zone_enable_cross_context_check = true;
+ *
+ */
+/***************************************************************************************************
+ * Zone JS is required by default for Angular itself.
+ */
+ // Included with Angular CLI.
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+
+
 /***/ })
 
-},[[2,"runtime"]]]);
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__(7435));
+/******/ }
+]);
 //# sourceMappingURL=polyfills.js.map

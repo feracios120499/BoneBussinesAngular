@@ -1,7 +1,7 @@
-import { logout } from '@actions/auth.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { userEmailSelector, userNameSelector, userPhoneSelector, userPictureSelector } from '@selectors/user.selectors';
+import { AuthActions } from '@store/auth/actions';
+import { UserSelectors } from '@store/user/selectors';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,10 +13,10 @@ export class HeaderProfileComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  public userName$ = this.store.select(userNameSelector);
-  public userPictureUrl$ = this.store.select(userPictureSelector);
-  public userEmail$ = this.store.select(userEmailSelector);
-  public userPhone$ = this.store.select(userPhoneSelector);
+  public userName$ = this.store.select(UserSelectors.userName);
+  public userPictureUrl$ = this.store.select(UserSelectors.userPicture);
+  public userEmail$ = this.store.select(UserSelectors.userEmail);
+  public userPhone$ = this.store.select(UserSelectors.userPhone);
   public links = [
     {
       translate: 'header.navbar.Profile',
@@ -34,7 +34,7 @@ export class HeaderProfileComponent implements OnInit {
 
 
   logout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(AuthActions.logout());
   }
 
   handleError(event: any): void {

@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[1].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[5].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[5].rules[1].use[1]!./src/styles.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 * {
   -webkit-locale: auto;
@@ -4208,6 +4211,7 @@ input[type=button].btn-block {
 @media (min-width: 576px) {
   .card-columns {
     column-count: 3;
+    grid-column-gap: 1.25rem;
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -9270,37 +9274,37 @@ h3 {
 }
 @font-face {
   font-family: "Futura PT";
-  src: url('FuturaPT-Heavy.eot') format("eot"), url('FuturaPT-Heavy.woff') format("woff"), url('FuturaPT-Heavy.ttf') format("truetype");
+  src: url('FuturaPT-Heavy.eot#') format("eot"), url('FuturaPT-Heavy.woff') format("woff"), url('FuturaPT-Heavy.ttf') format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
   font-family: "Futura PT";
-  src: url('FuturaPT-Medium.eot') format("eot"), url('FuturaPT-Medium.woff') format("woff"), url('FuturaPT-Medium.ttf') format("truetype");
+  src: url('FuturaPT-Medium.eot#') format("eot"), url('FuturaPT-Medium.woff') format("woff"), url('FuturaPT-Medium.ttf') format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Futura PT Book";
-  src: url('FuturaPT-Book.eot') format("eot"), url('FuturaPT-Book.woff') format("woff"), url('FuturaPT-Book.ttf') format("truetype");
+  src: url('FuturaPT-Book.eot#') format("eot"), url('FuturaPT-Book.woff') format("woff"), url('FuturaPT-Book.ttf') format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Futura PT";
-  src: url('FuturaPT-Light.eot') format("eot"), url('FuturaPT-Light.woff') format("woff"), url('FuturaPT-Light.ttf') format("truetype");
+  src: url('FuturaPT-Light.eot#') format("eot"), url('FuturaPT-Light.woff') format("woff"), url('FuturaPT-Light.ttf') format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: "Futura PT";
-  src: url('FuturaPT-Bold.eot') format("eot"), url('FuturaPT-Bold.woff') format("woff"), url('FuturaPT-Bold.ttf') format("truetype");
+  src: url('FuturaPT-Bold.eot#') format("eot"), url('FuturaPT-Bold.woff') format("woff"), url('FuturaPT-Bold.ttf') format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: "Futura PT Demi";
-  src: url('FuturaPT-Demi.eot') format("eot"), url('FuturaPT-Demi.woff') format("woff"), url('FuturaPT-Demi.ttf') format("truetype");
+  src: url('FuturaPT-Demi.eot#') format("eot"), url('FuturaPT-Demi.woff') format("woff"), url('FuturaPT-Demi.ttf') format("truetype");
   font-weight: 600;
   font-style: normal;
 }
@@ -11997,7 +12001,9 @@ body.dark-mode {
   .b1-modal-data {
     max-height: calc(100vh - 80px);
     max-height: calc(var(--app-height) - 80px);
-    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 .b1-modal-header {
@@ -12019,6 +12025,10 @@ body.dark-mode {
 }
 .b1-modal-close:hover {
   opacity: 0.4;
+}
+.b1-modal-body {
+  overflow: auto;
+  flex: 1;
 }
 .b1-modal-wrapper {
   padding: 32px 64px;
@@ -12648,7 +12658,7 @@ body.dark-mode {
   border-color: var(--color-info) !important;
   box-shadow: 0 0 0 3px rgba(0, 135, 158, 0.4) !important;
 }
-.b1-datepicker__input.picker-open + .b1-icons {
+.b1-datepicker__input.picker-open ~ [b1-icon] {
   color: var(--color-info) !important;
 }
 .b1-datepicker__addon {
@@ -17591,6 +17601,13 @@ textarea {
   color: #fff;
   border-color: #00879e;
 }
+@media (max-width: 812px) {
+  .b1-page-icon:not(:disabled) {
+    background-color: #00879e !important;
+    color: #fff;
+    border-color: #00879e;
+  }
+}
 .b1-page-icon:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -17606,7 +17623,7 @@ textarea {
   padding-left: 40px;
   outline: none;
 }
-.b1-page-inputWithIcon input + label {
+.b1-page-inputWithIcon label {
   transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
   position: absolute;
   left: 8px;
@@ -17698,7 +17715,7 @@ textarea {
   height: 450px;
 }
 .b1-page-data_auto {
-  height: auto;
+  min-height: auto;
   overflow: visible;
 }
 .b1-page-data__min {
@@ -17757,6 +17774,9 @@ textarea {
   border: 1px solid #fff;
 }
 .b1-page-data__row.selected .b1-page-checkbox-icon {
+  color: #fff;
+}
+.b1-page-data__row.selected .b1-color-dark-300 {
   color: #fff;
 }
 .b1-page-data__separator {
@@ -18367,6 +18387,42 @@ ngx-skeleton-loader .loader {
 .md-drppicker .drp-calendar.left.single {
   padding: 0;
 }
+.b1-transaction-type-credit, .b1-transaction-type-debit, .b1-transaction-type-loader {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+.b1-transaction-type-credit ngx-skeleton-loader, .b1-transaction-type-debit ngx-skeleton-loader, .b1-transaction-type-loader ngx-skeleton-loader {
+  width: 100% !important;
+  height: 100% !important;
+}
+.b1-transaction-type-credit ngx-skeleton-loader .loader, .b1-transaction-type-debit ngx-skeleton-loader .loader, .b1-transaction-type-loader ngx-skeleton-loader .loader {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+.b1-transaction-type-credit {
+  background-color: rgba(0, 158, 79, 0.2);
+  color: #009e4f;
+}
+.b1-transaction-type-debit {
+  background-color: rgba(255, 31, 31, 0.2);
+  color: #ff1f1f;
+}
+.payment-modal .modal-dialog {
+  width: 920px !important;
+  max-width: 100% !important;
+}
+.payment-window-loader ngx-skeleton-loader .progress {
+  background: var(--color-light-300) no-repeat !important;
+}
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[2]!./node_modules/ngx-toastr/toastr.css ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
 
 /* position */

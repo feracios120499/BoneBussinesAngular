@@ -3064,7 +3064,7 @@ textarea {
             height: 450px;
         }
         &_auto {
-            height: auto;
+            min-height: auto;
             overflow: visible;
         }
         &__min {
@@ -3117,6 +3117,9 @@ textarea {
                     border: 1px solid $color-light;
                 }
                 .b1-page-checkbox-icon {
+                    color: $color-light;
+                }
+                .b1-color-dark-300 {
                     color: $color-light;
                 }
             }
@@ -3790,5 +3793,49 @@ ngb-modal-window {
     }
     & .drp-calendar.left.single {
         padding: 0;
+    }
+}
+
+.b1-transaction-type {
+    &-credit,
+    &-debit,
+    &-loader {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        & ngx-skeleton-loader {
+            width: 100% !important;
+            height: 100% !important;
+            & .loader {
+                width: 100% !important;
+                height: 100% !important;
+                margin: 0 !important;
+            }
+        }
+    }
+    &-credit {
+        background-color: rgba($color-success, 0.2);
+        color: $color-success;
+    }
+    &-debit {
+        background-color: rgba($color-error, 0.2);
+        color: $color-error;
+    }
+}
+
+.payment-modal .modal-dialog {
+    width: 920px !important;
+    max-width: 100% !important;
+}
+
+.payment-window {
+    &-loader {
+        & ngx-skeleton-loader .progress {
+            background: var(--color-light-300) no-repeat !important;
+        }
     }
 }

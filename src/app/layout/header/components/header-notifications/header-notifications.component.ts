@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { countNotificationsSelector } from '@selectors/user.selectors';
+import { UserSelectors } from '@store/user/selectors';
 
 @Component({
   selector: 'header-notifications',
@@ -11,7 +11,7 @@ export class HeaderNotificationsComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  public countNotifications$ = this.store.select(countNotificationsSelector);
+  public countNotifications$ = this.store.select(UserSelectors.countNotifications);
 
   ngOnInit(): void {
   }

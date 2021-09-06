@@ -1,0 +1,277 @@
+@import "variables";
+.payment-window {
+    width: 920px;
+    color: var(--color-dark);
+    border-radius: 4px;
+    position: relative;
+    padding: 50px;
+    @media (max-width: 812px) {
+        padding: 16px;
+        width: 100%;
+    }
+    &-close {
+        position: absolute;
+        right: 9px;
+        top: 9px;
+        opacity: 0.2;
+        cursor: pointer;
+        transition: all 150ms $animation-timing;
+        &:hover {
+            opacity: 0.4;
+        }
+        font-size: 32px;
+        @media (max-width: 812px) {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+    }
+    &-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 12px;
+        @include base;
+        @media (max-width: 812px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    &-dates {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        &_error {
+            color: $color-error;
+        }
+
+        &_item {
+            display: flex;
+            @media (max-width: 812px) {
+                flex-direction: column;
+                &.valueDate {
+                    justify-content: flex-end;
+                    text-align: right;
+                }
+            }
+        }
+
+        &_name {
+            margin-right: 8px;
+            @media (max-width: 812px) {
+                margin-right: 4px;
+            }
+        }
+        &_value {
+            @media (max-width: 812px) {
+                opacity: 0.6;
+            }
+        }
+        @media (max-width: 812px) {
+            justify-content: space-between;
+        }
+    }
+    &-status {
+        position: relative;
+        @include base;
+        & > div {
+            @media (max-width: 812px) {
+                margin-left: 16px;
+            }
+        }
+        & *::before {
+            content: "";
+            position: absolute;
+            left: -16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            @media (max-width: 812px) {
+                left: 0;
+            }
+        }
+        & .b1-color-info::before {
+            background-color: $color-info;
+        }
+        & .b1-color-success::before {
+            background-color: $color-success;
+        }
+        & .b1-color-error::before {
+            background-color: $color-error;
+        }
+        &_info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            width: 320px;
+            @media (max-width: 812px) {
+                align-items: flex-start;
+                text-transform: lowercase;
+                width: auto;
+            }
+        }
+    }
+    &-separator {
+        margin: 0 16px;
+        @media (max-width: 812px) {
+            display: none;
+        }
+    }
+    &-header {
+        margin-bottom: 8px;
+        margin-right: 16px;
+        text-align: left;
+        margin-top: 0;
+        display: block;
+        @media (max-width: 812px) {
+            display: flex;
+            text-align: center;
+        }
+    }
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        @media (max-width: 812px) {
+            flex-direction: column;
+        }
+    }
+    &-sender,
+    &-recipient {
+        width: 400px;
+        background-color: rgba(var(--color-dark-rgb), 0.04);
+        border-radius: 8px;
+        padding: 34px;
+        &_title {
+            margin-bottom: 16px;
+            @include large;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 812px) {
+            width: 100%;
+            padding: 16px;
+        }
+    }
+    &-sender {
+        @media (max-width: 812px) {
+            margin-bottom: 16px;
+        }
+    }
+    &-purpose {
+        margin-top: 20px;
+        width: 100%;
+        background-color: rgba(var(--color-dark-rgb), 0.04);
+        border-radius: 8px;
+        padding: 34px;
+
+        @media (max-width: 812px) {
+            margin-top: 16px;
+            padding: 16px;
+        }
+    }
+    &-amount {
+        @media (min-width: 812px) {
+            & .col-md-6:last-child {
+                text-align: right;
+            }
+            margin-bottom: 16px;
+        }
+    }
+    &-name {
+        color: $color-light-500;
+        text-transform: lowercase;
+        @include base;
+    }
+    &-value {
+        color: var(--color-dark);
+        margin-bottom: 16px;
+        @include medium;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        @media (max-width: 812px) {
+            margin-bottom: 8px;
+            @include base;
+            @include bold;
+        }
+    }
+    // &-error {
+    //     margin-top: 2px;
+    //     background-image: url("../../../../assets/img/error.svg");
+    //     width: 16px;
+    //     height: 16px;
+    //     margin-left: 5px;
+    //     background-size: cover;
+    //     cursor: pointer;
+    // }
+    &-actions {
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        & button {
+            margin-right: 16px;
+        }
+    }
+
+    &-next {
+        position: absolute;
+        right: -150px;
+        width: 150px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 150ms $animation-timing;
+        border-radius: 4px;
+        font-size: 52px;
+        color: $color-light;
+        opacity: 0.4;
+        &:hover {
+            background-color: rgba($color-primary, 0.2);
+            color: $color-primary;
+            opacity: 1;
+        }
+    }
+    &-previous {
+        position: absolute;
+        left: -150px;
+        width: 150px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 150ms $animation-timing;
+        border-radius: 4px;
+        font-size: 52px;
+        color: $color-light;
+        opacity: 0.4;
+        &:hover {
+            background-color: rgba($color-primary, 0.2);
+            color: $color-primary;
+            opacity: 1;
+        }
+    }
+    &-loader {
+        width: 100%;
+        & ngx-skeleton-loader .progress {
+            background: $color-light-500 no-repeat !important;
+        }
+    }
+    &-footer {
+        margin-bottom: 0;
+        display: block;
+    }
+    &-loader {
+        width: calc(100% - 32px);
+    }
+}

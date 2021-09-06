@@ -1,13 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  accountsOnTabSelector,
-  filterAccountsSelector,
-  FilterCurrencySelector,
-  isLoadingAccountsSelector
-} from '@selectors/acct.selectors';
 import { AccountModel } from 'src/app/@shared/models/account.model';
-import { AcctActions } from '@actions/acct.actions';
+import { AcctActions } from '@store/acct/actions';
+import { AcctSelectors } from '@store/acct/selectors';
 
 @Component({
   selector: 'app-accounts-list',
@@ -18,10 +13,10 @@ export class AccountsListComponent implements AfterViewInit {
 
   constructor(private store: Store) { }
 
-  accounts$ = this.store.select(accountsOnTabSelector);
-  filter$ = this.store.select(filterAccountsSelector);
-  filterCurrency$ = this.store.select(FilterCurrencySelector);
-  isLoadingAccounts$ = this.store.select(isLoadingAccountsSelector);
+  accounts$ = this.store.select(AcctSelectors.accountsOnTab);
+  filter$ = this.store.select(AcctSelectors.filterAccounts);
+  filterCurrency$ = this.store.select(AcctSelectors.filterCurrency);
+  isLoadingAccounts$ = this.store.select(AcctSelectors.isLoadingAccounts);
   // isLoadingAccounts$ = of(true);
   ngAfterViewInit(): void {
   }

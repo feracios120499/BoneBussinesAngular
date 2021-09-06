@@ -1,9 +1,5 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { bankSelector } from '@selectors/public.selectors';
+import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IbanService } from '@services/iban.service';
-import { Observable } from 'rxjs';
-import { BankModel } from '../models/bank.model';
 
 
 @Directive({

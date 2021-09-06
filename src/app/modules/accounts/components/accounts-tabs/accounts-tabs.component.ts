@@ -1,8 +1,9 @@
-import { AcctActions } from '@actions/acct.actions';
 import { Component, OnInit } from '@angular/core';
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { Store } from '@ngrx/store';
-import { countActiveAccountsSelector, countClosedAccountsSelector, currentTabSelector } from '@selectors/acct.selectors';
+import { AcctActions } from '@store/acct/actions';
+import { AcctSelectors } from '@store/acct/selectors';
+
 
 @Component({
   selector: 'app-accounts-tabs',
@@ -14,9 +15,9 @@ export class AccountsTabsComponent implements OnInit {
   constructor(private store: Store) { }
   accountTab = AccountTab;
 
-  countActiveAccounts$ = this.store.select(countActiveAccountsSelector);
-  countClosedAccounts$ = this.store.select(countClosedAccountsSelector);
-  currentTab$ = this.store.select(currentTabSelector);
+  countActiveAccounts$ = this.store.select(AcctSelectors.countActiveAccounts);
+  countClosedAccounts$ = this.store.select(AcctSelectors.countClosedAccounts);
+  currentTab$ = this.store.select(AcctSelectors.currentTab);
 
   ngOnInit(): void {
     this.setTab(AccountTab.Active);

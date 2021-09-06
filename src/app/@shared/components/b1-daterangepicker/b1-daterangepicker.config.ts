@@ -60,4 +60,3 @@ export const DefaultLocaleConfig: LocaleConfig = {
     format: 'DD.MM.YYYY',
     displayFormat: 'DD.MM.YYYY'
 };
-console.log(dayjs.weekdaysMin(), dayjs.monthsShort());

@@ -1,11 +1,11 @@
-import { setGlobalLoader } from '@actions/app.actions';
-import { loadResources, setDarkMode } from '@actions/settings.actions';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { isOpenMenuOrInfoSelector, isOpenMenuSelector } from '@selectors/menu.selectors';
-import { currentLanguageSelector, darkModeSelector } from '@selectors/settings.selectors';
+import { AppActions } from '@store/app/actions';
+import { MenuSelectors } from '@store/menu/selectors';
+import { SettingsActions } from '@store/settings/actions';
+import { SettingsSelectors } from '@store/settings/selectors';
 import dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
@@ -20,9 +20,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   title = 'BOneBussinesAngular';
 
-  language$ = this.store.select(currentLanguageSelector);
-  darkMode$ = this.store.select(darkModeSelector);
-  isOpenMenu$ = this.store.select(isOpenMenuOrInfoSelector);
+  language$ = this.store.select(SettingsSelectors.currentLanguage);
+  darkMode$ = this.store.select(SettingsSelectors.darkMode);
+  isOpenMenu$ = this.store.select(MenuSelectors.isOpenMenuOrInfo);
   private lngSubscription$!: Subscription;
   private darkModeSubscription$!: Subscription;
   private routeEventSubscription$!: Subscription;
@@ -39,12 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
     this.globalLoaderStarter();
-    //this.store.dispatch(setDarkMode({ isActive: false }));
+    // this.store.dispatch(setDarkMode({ isActive: false }));
     this.lngSubscription$ = this.language$.subscribe(language => {
       this.translate.use(language);
     });
     this.darkModeSubscription$ = this.darkMode$.subscribe(darkMode => {
-      console.log('dark mode');
       if (darkMode) {
         document.body.classList.add('dark-mode');
       }
@@ -63,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
         document.body.classList.remove('menu-open');
       }
     });
-    this.store.dispatch(loadResources());
+    this.store.dispatch(SettingsActions.loadResources());
   }
 
   ngOnDestroy(): void {
@@ -75,14 +74,10 @@ export class AppComponent implements OnInit, OnDestroy {
   globalLoaderStarter(): void {
     this.routeEventSubscription$ = this.router.events.subscribe(event => {
       if (event instanceof RouteConfigLoadStart) {
-        this.store.dispatch(setGlobalLoader({ isLoading: true }));
+        this.store.dispatch(AppActions.setGlobalLoader({ isLoading: true }));
       } else if (event instanceof RouteConfigLoadEnd) {
-        this.store.dispatch(setGlobalLoader({ isLoading: false }));
+        this.store.dispatch(AppActions.setGlobalLoader({ isLoading: false }));
       }
     });
-  }
-
-  rangeSelected(event: any): void {
-    console.log(event);
   }
 }

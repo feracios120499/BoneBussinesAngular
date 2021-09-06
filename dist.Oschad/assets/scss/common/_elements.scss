@@ -1015,7 +1015,10 @@
     @media (max-width: 812px) {
       max-height: calc(100vh - 80px);
       max-height: calc(var(--app-height) - 80px);
-      overflow: scroll;
+      //overflow: scroll;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
   &-header {
@@ -1039,6 +1042,8 @@
     font-size: 32px;
   }
   &-body {
+    overflow: auto;
+    flex: 1;
   }
   &-wrapper {
     padding: 32px 64px;

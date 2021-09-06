@@ -1,19 +1,22 @@
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducerMap } from '@ngrx/store';
-import { acctReducers } from '@reducers/acct.reducers';
-import { appReducers } from '@reducers/app.reducers';
-import { authReducer } from '@reducers/auth.reducers';
-import { menuReducers } from '@reducers/menu.reducers';
-import { publicReducer } from '@reducers/public.reducers';
-import { settingsReducer } from '@reducers/settings.reducers';
-import { userReducer } from '@reducers/user.reducers';
-import { MenuState, MENU_KEY } from '@stores/menu.store';
-import { AcctState, ACCT_KEY } from '@stores/acct.store';
-import { AppState, APP_KEY } from '@stores/app.store';
-import { AuthState, AUTH_KEY } from '@stores/auth.store';
-import { PublicState, PUBLIC_KEY } from '@stores/public.store';
-import { SettingsState, SETTINGS_KEY } from '@stores/settings.store';
-import { UserState, USER_KEY } from '@stores/user.store';
+import { appReducers } from '@store/app/reducer';
+import { APP_KEY, AppState } from '@store/app/store';
+import { authReducer } from '@store/auth/reducer';
+import { AUTH_KEY, AuthState } from '@store/auth/store';
+import { menuReducers } from '@store/menu/reducer';
+import { MENU_KEY, MenuState } from '@store/menu/store';
+import { publicReducer } from '@store/public/reducer';
+import { PUBLIC_KEY, PublicState } from '@store/public/store';
+import { settingsReducer } from '@store/settings/reducer';
+import { SETTINGS_KEY, SettingsState } from '@store/settings/store';
+import { userReducer } from '@store/user/reducer';
+import { USER_KEY, UserState } from '@store/user/store';
+import { AcctState, ACCT_KEY } from './acct/store';
+import { acctReducer } from './acct/reducer';
+import { SharedState, SHARED_KEY } from './shared/store';
+import { sharedReducer } from './shared/reducer';
+
 
 
 export interface State {
@@ -24,6 +27,7 @@ export interface State {
   [ACCT_KEY]: AcctState;
   [PUBLIC_KEY]: PublicState;
   [MENU_KEY]: MenuState;
+  [SHARED_KEY]: SharedState;
   router: RouterReducerState;
 }
 
@@ -34,8 +38,9 @@ export const reducers: ActionReducerMap<State> = {
   [AUTH_KEY]: authReducer,
   [USER_KEY]: userReducer,
   [APP_KEY]: appReducers,
-  [ACCT_KEY]: acctReducers,
+  [ACCT_KEY]: acctReducer,
   [PUBLIC_KEY]: publicReducer,
   [MENU_KEY]: menuReducers,
+  [SHARED_KEY]: sharedReducer,
   router: routerReducer
 };

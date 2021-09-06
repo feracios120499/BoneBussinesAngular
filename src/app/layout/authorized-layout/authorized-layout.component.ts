@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserFacade } from '@core/facades/user.facade';
 import { Store } from '@ngrx/store';
-import { isCollapsedSelector, isOpenMenuSelector } from '@selectors/menu.selectors';
+import { MenuSelectors } from '@store/menu/selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,8 +13,8 @@ export class AuthorizedLayoutComponent implements OnInit, OnDestroy {
 
   private profile$ = this.userFacade.profile$;
   private profileSubscription$!: Subscription;
-  public isCollapsed$ = this.store.select(isCollapsedSelector);
-  public isOpen$ = this.store.select(isOpenMenuSelector);
+  public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
+  public isOpen$ = this.store.select(MenuSelectors.isOpenMenu);
   constructor(private userFacade: UserFacade, private store: Store) { }
 
   ngOnInit(): void {

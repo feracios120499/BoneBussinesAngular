@@ -1,7 +1,7 @@
-import { loginRequest, resetLogin } from '@actions/auth.actions';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { AuthActions } from '@store/auth/actions';
 import { AuthFacade } from 'src/app/@core/facades/auth.facade';
 
 import { LogInModel } from './../../models/login.model';
@@ -27,8 +27,8 @@ export class AuthLoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.store.dispatch(resetLogin());
-    this.store.dispatch(loginRequest({ data: { ...this.login } }));
+    this.store.dispatch(AuthActions.resetLogin());
+    this.store.dispatch(AuthActions.loginRequest({ data: { ...this.login } }));
   }
 
 }

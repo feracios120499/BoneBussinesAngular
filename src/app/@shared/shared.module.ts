@@ -1,33 +1,31 @@
+import { FixedSizeVirtualScrollStrategy, ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { B1IconDirective } from './directives/b1-icon.directive';
-
-import { CheckStateDirective } from './directives/check-state.directive';
-import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
-import { ReactiveComponentModule } from '@ngrx/component';
-import { FixedSizeVirtualScrollStrategy, ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
-import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ConnectFormDirective } from './directives/connect-form.directive';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
-import { MoneyPipe } from './pipes/money.pipe';
-import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
-import { IbanDirective } from './directives/iban.directive';
-import { MobileMoreDirective } from './directives/mobile-more.directive';
-
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { WebClassDirective } from './directives/web-class.directive';
-import { MobileClassDirective } from './directives/mobile-class.directive';
-import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
-import { B1LinkComponent } from './components/b1-link/b1-link.component';
+
+import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { DaterangepickerComponent } from './components/b1-daterangepicker/b1-daterangepicker.component';
 import { DaterangepickerDirective } from './components/b1-daterangepicker/b1-daterangepicker.directive';
-import { LOCALE_CONFIG } from './components/b1-daterangepicker/b1-daterangepicker.config';
-import { LocaleService } from './components/b1-daterangepicker/local.service';
+import { B1LinkComponent } from './components/b1-link/b1-link.component';
+import { B1IconDirective } from './directives/b1-icon.directive';
+import { CheckStateDirective } from './directives/check-state.directive';
+import { IbanDirective } from './directives/iban.directive';
+import { MobileClassDirective } from './directives/mobile-class.directive';
+import { MobileMoreDirective } from './directives/mobile-more.directive';
+import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
+import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
+import { WebClassDirective } from './directives/web-class.directive';
+import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
+import { MoneyPipe } from './pipes/money.pipe';
+import { B1PaymentModalComponent } from './components/b1-payment-modal/b1-payment-modal.component';
+import { B1StatementModalComponent } from './components/b1-statement-modal/b1-statement-modal.component';
 
 
 
@@ -42,7 +40,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     CheckStateDirective,
     B1IconDirective,
     B1CardLoaderComponent,
-    ConnectFormDirective,
     AccountFilterPipe,
     MoneyPipe,
     CdkVirtualScrollViewportPatchDirective,
@@ -53,7 +50,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     MoreAutoDirectionDirective,
     B1LinkComponent,
     DaterangepickerComponent,
-    DaterangepickerDirective],
+    DaterangepickerDirective,
+    B1PaymentModalComponent,
+    B1StatementModalComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -79,7 +78,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1CardLoaderComponent,
     ScrollingModule,
     NgScrollbarModule,
-    ConnectFormDirective,
     NgrxFormsModule,
     AccountFilterPipe,
     MoneyPipe,

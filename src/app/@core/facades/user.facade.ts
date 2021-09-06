@@ -1,25 +1,26 @@
-import { checkProfile, loadNotifications } from '@actions/user.actions';
+
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { countCustomersSelector, profileSelector } from '@selectors/user.selectors';
+import { UserActions } from '@store/user/actions';
+import { UserSelectors } from '@store/user/selectors';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserFacade {
 
-    public profile$ = this.store.select(profileSelector);
-    public countCustomers$ = this.store.select(countCustomersSelector);
+    public profile$ = this.store.select(UserSelectors.profile);
+    public countCustomers$ = this.store.select(UserSelectors.countCustomers);
     constructor(private store: Store) {
 
     }
 
     public loadProfile(): void {
-        console.log('load profile');
-        this.store.dispatch(checkProfile());
+        this.store.dispatch(UserActions.checkProfile());
     }
 
     public loadNotifications(): void {
-        this.store.dispatch(loadNotifications());
+        this.store.dispatch(UserActions.loadNotifications());
     }
 }

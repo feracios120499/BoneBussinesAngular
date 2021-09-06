@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { globalLoaderSelector } from '@selectors/app.selectors';
-import { Subscription } from 'rxjs';
+import { AppSelectors } from '@store/app/selectors';
 
 @Component({
   selector: 'b1-global-loader',
@@ -11,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class B1GlobalLoaderComponent implements OnInit {
 
-  public loading$ = this.store.select(globalLoaderSelector);
+  public loading$ = this.store.select(AppSelectors.globalLoader);
 
   constructor(private store: Store) { }
 

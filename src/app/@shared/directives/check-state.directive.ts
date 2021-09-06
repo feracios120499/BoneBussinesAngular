@@ -24,7 +24,6 @@ export class CheckStateDirective implements AfterViewInit, OnDestroy {
 
     this.eventsSubscription$ = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        console.log(this.router.url);
         if (!this.router.url.includes(this.checkState)) {
 
           this.elementRef.nativeElement.style.display = 'none';

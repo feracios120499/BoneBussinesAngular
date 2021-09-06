@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { formSelector } from '@selectors/acct.selectors';
-import { AcctFilter } from '@stores/acct.store';
-import { FormGroupState, setValue, SetValueAction } from 'ngrx-forms';
-import { Observable, of } from 'rxjs';
-import { Filter } from 'src/app/@shared/models/filter.model';
+import { AcctFilter } from '@store/acct/models/acct-filter.model';
+import { AcctSelectors } from '@store/acct/selectors';
+import { FormGroupState } from 'ngrx-forms';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accounts-actions',
@@ -15,7 +15,7 @@ export class AccountsActionsComponent implements OnInit {
 
   formState$: Observable<FormGroupState<AcctFilter>>;
   constructor(private store: Store) {
-    this.formState$ = store.select(formSelector);
+    this.formState$ = store.select(AcctSelectors.form).pipe(filter(p => !!p));
   }
 
   ngOnInit(): void {

@@ -31,7 +31,7 @@
       &.picker-open {
         border-color: var(--color-info) !important;
         box-shadow: 0 0 0 3px rgba($color-info, 0.4) !important;
-        & + .b1-icons {
+        & ~ [b1-icon] {
           color: var(--color-info) !important;
         }
       }

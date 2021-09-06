@@ -756,26 +756,25 @@ export class DaterangepickerComponent implements OnInit {
 
       this.calculateChosenLabel();
     }
-    if (this.isInvalidDate && this.startDate && this.endDate) {
-      // get if there are invalid date between range
+    // if (this.isInvalidDate && this.startDate && this.endDate) {
+    //   // get if there are invalid date between range
 
-      let d = this.startDate.clone();
-      while (d.isBefore(this.endDate)) {
-        if (this.isInvalidDate(d)) {
-          this.endDate = d.subtract(1, 'days');
-          this.calculateChosenLabel();
-          break;
-        }
-        d = d.add(1, 'days');
-      }
-    }
+    //   let d = this.startDate.clone();
+    //   while (d.isBefore(this.endDate)) {
+    //     if (this.isInvalidDate(d)) {
+    //       this.endDate = d.subtract(1, 'days');
+    //       this.calculateChosenLabel();
+    //       break;
+    //     }
+    //     d = d.add(1, 'days');
+    //   }
+    // }
     if (this.chosenLabel) {
       this.choosedDate.emit({ chosenLabel: this.chosenLabel, startDate: this.startDate, endDate: this.endDate });
     }
 
     this.datesUpdated.emit({ startDate: this.startDate, endDate: this.endDate });
     if (e || (this.closeOnAutoApply && !e)) {
-      console.log(this.startDate, this.endDate);
       this.hide('apply');
     }
   }
@@ -1103,7 +1102,6 @@ export class DaterangepickerComponent implements OnInit {
     if (this.isShown) { return; }
     this._old.start = this.startDate.clone();
     this._old.end = this.endDate?.clone();
-    console.log(this._old);
     const isMobile = window.innerWidth <= environment.mobileWidth;
     if (!isMobile) {
       this.isShown = true;

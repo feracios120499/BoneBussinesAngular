@@ -1,5 +1,5 @@
-import { resetLogin } from '@actions/auth.actions';
 import { Component, OnInit } from '@angular/core';
+import { AuthActions } from '@store/auth/actions';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -11,7 +11,7 @@ export class AuthComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(resetLogin());
+    this.store.dispatch(AuthActions.resetLogin());
   }
 
 }

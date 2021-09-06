@@ -14,7 +14,8 @@ const routes: Routes = [
       { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(p => p.DashboardModule) },
       { path: 'accounts', loadChildren: () => import('./modules/accounts/accounts.module').then(p => p.AccountsModule) }
     ]
-  }
+  },
+  { path: 'account', loadChildren: () => import('./modules/accounts/modules/account/account.module').then(m => m.AccountModule) }
 ];
 
 @NgModule({

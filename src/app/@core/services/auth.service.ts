@@ -25,7 +25,6 @@ export class AuthService extends BaseService {
   }
 
   loginWithData(loginData: LogInModel | undefined): Observable<Token> {
-    console.log(loginData);
     const params = new HttpParams()
       .set('grant_type', 'password')
       .set('username', loginData?.Username || '')

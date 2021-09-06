@@ -11,7 +11,6 @@ export abstract class BaseService {
 
   protected handleError(error: HttpErrorResponse): Observable<never> {
     // this.loading = false;
-    console.log(error);
     if (error.url) {
       if (error.url.indexOf('demo') > 0 && error.url.indexOf('.json') > 0) {
         if (error.url.indexOf('en-US') > 0) {

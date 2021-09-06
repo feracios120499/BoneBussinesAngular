@@ -1,8 +1,8 @@
-import { setGlobalLoader } from '@actions/app.actions';
-import { setDarkMode } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { darkModeSelector } from '@selectors/settings.selectors';
+import { AppActions } from '@store/app/actions';
+import { SettingsActions } from '@store/settings/actions';
+import { SettingsSelectors } from '@store/settings/selectors';
 
 @Component({
   selector: 'header-dark-mode',
@@ -13,15 +13,15 @@ export class HeaderDarkModeComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  darkModeIsActive$ = this.store.select(darkModeSelector);
+  darkModeIsActive$ = this.store.select(SettingsSelectors.darkMode);
   ngOnInit(): void {
   }
 
   setDarkMode(isActive: boolean): void {
-    this.store.dispatch(setGlobalLoader({ isLoading: true }));
-    this.store.dispatch(setDarkMode({ isActive }));
+    this.store.dispatch(AppActions.setGlobalLoader({ isLoading: true }));
+    this.store.dispatch(SettingsActions.setDarkMode({ isActive }));
     setTimeout(() => {
-      this.store.dispatch(setGlobalLoader({ isLoading: false }));
+      this.store.dispatch(AppActions.setGlobalLoader({ isLoading: false }));
     }, 200);
   }
 }

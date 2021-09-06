@@ -1,0 +1,6 @@
+<ng-container *ngrxLet="turnovers$ as turnovers">
+    <div class="b1-page-data b1-page-data_auto">
+        <account-turnovers-row *ngFor="let turnover of turnovers;trackBy:trackId" [turnover]="turnover">
+        </account-turnovers-row>
+    </div>
+</ng-container>

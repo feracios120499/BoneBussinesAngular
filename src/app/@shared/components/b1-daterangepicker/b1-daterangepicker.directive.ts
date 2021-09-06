@@ -1,34 +1,32 @@
 import {
-    Directive,
-    ViewContainerRef,
-    ComponentFactoryResolver,
-    ElementRef,
-    HostListener,
-    forwardRef,
     ChangeDetectorRef,
-    OnInit,
-    OnChanges,
-    SimpleChanges,
-    Input,
+    ComponentFactoryResolver,
+    Directive,
     DoCheck,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    HostBinding,
+    HostListener,
+    Input,
     KeyValueDiffer,
     KeyValueDiffers,
+    OnChanges,
+    OnInit,
     Output,
-    EventEmitter,
     Renderer2,
-    HostBinding,
-    ViewChild,
-    TemplateRef
+    SimpleChanges,
+    ViewContainerRef,
 } from '@angular/core';
-import { DaterangepickerComponent } from './b1-daterangepicker.component';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as _dayjs from 'dayjs';
-import { DefaultLocaleConfig, LocaleConfig } from './b1-daterangepicker.config';
-import { LocaleService } from './local.service';
-import { environment } from 'src/environments/environment';
+import { DateRange } from '@models/date-range.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DateRange } from '@stores/acct.store';
+import * as _dayjs from 'dayjs';
 import { FormViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
+import { environment } from 'src/environments/environment';
+
+import { DaterangepickerComponent } from './b1-daterangepicker.component';
+import { DefaultLocaleConfig, LocaleConfig } from './b1-daterangepicker.config';
+
 const dayjs = _dayjs;
 
 // tslint:disable-next-line: no-conflicting-lifecycle
@@ -205,7 +203,6 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
     }
 
     ngOnInit() {
-        console.log('start');
         this.picker.startDateChanged.asObservable().subscribe((itemChanged: any) => {
             this.startDateChanged.emit(itemChanged);
         });

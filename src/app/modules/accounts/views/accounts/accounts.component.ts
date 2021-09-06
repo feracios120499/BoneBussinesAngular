@@ -1,8 +1,10 @@
-import { AcctActions } from '@actions/acct.actions';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { accountsSelector, isLoadingAccountsSelector } from '@selectors/acct.selectors';
+import { AcctActions } from '@store/acct/actions';
+import { AcctDetailsActions } from '@store/acct/details/actions';
+import { AcctSelectors } from '@store/acct/selectors';
+
 
 @Component({
   selector: 'app-accounts',
@@ -26,12 +28,13 @@ export class AccountsComponent implements OnInit, OnDestroy {
       }
     });
   }
-  accounts$ = this.store.select(accountsSelector);
-  isLoadingAccounts$ = this.store.select(isLoadingAccountsSelector);
+  accounts$ = this.store.select(AcctSelectors.accountsSelector);
+  isLoadingAccounts$ = this.store.select(AcctSelectors.isLoadingAccounts);
   ngOnInit(): void {
   }
 
   init(): void {
+    //this.store.dispatch(AcctDetailsActions.initDetails());
     this.store.dispatch(AcctActions.loadAccounts({ reload: true }));
   }
 

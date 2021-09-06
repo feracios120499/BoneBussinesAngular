@@ -1,12 +1,12 @@
-import { toggleCollapsed, toggleCustomers } from '@actions/menu.actions';
-import { selectCurrentClientId, setCurrentClientId } from '@actions/user.actions';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { bankDateSelector } from '@selectors/app.selectors';
-import { isCollapsedSelector, isOpenCustomersSelector, isOpenMenuSelector, menuSelector, subMenuSelector } from '@selectors/menu.selectors';
-import { callCenterPhonesLocalSelector, callCenterPhonesSelector, callCenterWorkSelector, ecpSupportPhonesSelector } from '@selectors/settings.selectors';
-import { countCustomersSelector, currentCustomerNameSelector, currentCustomerSelector, customersSelector } from '@selectors/user.selectors';
-import { Customer } from 'src/app/@shared/models/profile.model';
+import { AppSelectors } from '@store/app/selectors';
+import { MenuActions } from '@store/menu/actions';
+import { MenuSelectors } from '@store/menu/selectors';
+import { SettingsSelectors } from '@store/settings/selectors';
+import { UserActions } from '@store/user/actions';
+import { UserSelectors } from '@store/user/selectors';
+import { Customer } from '@models/profile.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,35 +18,35 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  public menu$ = this.store.select(menuSelector);
-  public subMenu$ = this.store.select(subMenuSelector);
-  public customerName$ = this.store.select(currentCustomerNameSelector);
-  public customers$ = this.store.select(customersSelector);
-  public currentCustomer$ = this.store.select(currentCustomerSelector);
-  public bankDate$ = this.store.select(bankDateSelector);
-  public callCenterPhones$ = this.store.select(callCenterPhonesSelector);
-  public callCenterPhonesLocal$ = this.store.select(callCenterPhonesLocalSelector);
-  public callCenterWork$ = this.store.select(callCenterWorkSelector);
-  public ecpSupportPhone$ = this.store.select(ecpSupportPhonesSelector);
-  public isCollapsed$ = this.store.select(isCollapsedSelector);
-  public isOpenMenu$ = this.store.select(isOpenMenuSelector);
-  public countCustomers$ = this.store.select(countCustomersSelector);
+  public menu$ = this.store.select(MenuSelectors.menu);
+  public subMenu$ = this.store.select(MenuSelectors.subMenu);
+  public customerName$ = this.store.select(UserSelectors.currentCustomerName);
+  public customers$ = this.store.select(UserSelectors.customers);
+  public currentCustomer$ = this.store.select(UserSelectors.currentCustomer);
+  public bankDate$ = this.store.select(AppSelectors.bankDate);
+  public callCenterPhones$ = this.store.select(SettingsSelectors.callCenterPhones);
+  public callCenterPhonesLocal$ = this.store.select(SettingsSelectors.callCenterPhonesLocal);
+  public callCenterWork$ = this.store.select(SettingsSelectors.callCenterWork);
+  public ecpSupportPhone$ = this.store.select(SettingsSelectors.ecpSupportPhones);
+  public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
+  public isOpenMenu$ = this.store.select(MenuSelectors.isOpenMenu);
+  public countCustomers$ = this.store.select(UserSelectors.countCustomers);
 
-  public isOpenCustomersList$ = this.store.select(isOpenCustomersSelector);
+  public isOpenCustomersList$ = this.store.select(MenuSelectors.isOpenCustomers);
 
   ngOnInit(): void {
   }
 
   collapseToggle(): void {
-    this.store.dispatch(toggleCollapsed());
+    this.store.dispatch(MenuActions.toggleCollapsed());
   }
 
   toggleCustomers(): void {
-    this.store.dispatch(toggleCustomers());
+    this.store.dispatch(MenuActions.toggleCustomers());
   }
 
   setCustomer(customer: Customer): void {
-    this.store.dispatch(selectCurrentClientId({ clientId: customer.ClientId }));
+    this.store.dispatch(UserActions.selectCurrentClientId({ clientId: customer.ClientId }));
   }
 
 }

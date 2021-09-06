@@ -1,0 +1,41 @@
+<div class="b1-page-data__row transaction" *ngFor="let item of array">
+    <div class="b1-page-content_type transaction-type">
+        <div class="b1-transaction-type-loader">
+            <ngx-skeleton-loader appearance="circle">
+            </ngx-skeleton-loader>
+        </div>
+    </div>
+    <div class="transaction-body b1-ellipsis">
+        <div class="transaction-number">
+            <div webClass="w-50" mobileClass="w-100">
+                <ngx-skeleton-loader>
+                </ngx-skeleton-loader>
+            </div>
+            <div webClass="w-50" mobileClass="hidden">
+                <ngx-skeleton-loader>
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="transaction-correspondent b1-flex w-100">
+            <div webClass="w-50" mobileClass="w-100">
+                <ngx-skeleton-loader>
+                </ngx-skeleton-loader>
+            </div>
+            <div webClass="w-50" mobileClass="hidden">
+                <ngx-skeleton-loader>
+                </ngx-skeleton-loader>
+            </div>
+        </div>
+        <div class="transaction-amount">
+            <div webClass="w-50" mobileClass="w-100">
+                <ngx-skeleton-loader>
+                </ngx-skeleton-loader>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="transaction-more b1-card__col b1-card__col_dots">
+
+    </div>
+</div>

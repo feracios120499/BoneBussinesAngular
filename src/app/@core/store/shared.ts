@@ -1,8 +1,11 @@
-import { ActionCreator, createAction, Store } from '@ngrx/store';
+import { DateRange } from '@models/date-range.model';
+import { ActionCreator, createAction, DefaultProjectorFn, MemoizedSelector, Store } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
-import { currentClientIdFilteredSelector } from '@selectors/user.selectors';
+import { UserSelectors } from '@store/user/selectors';
+import dayjs from 'dayjs';
+import { box, Boxed, NgrxValueConverter } from 'ngrx-forms';
 import { Observable } from 'rxjs';
-import { first, map, switchMap, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 export function createHTTPActions<RequestPayload = void, ResponsePayload = void, ErrorPayload = void>(
     actionType: string,
@@ -27,10 +30,32 @@ export function createHTTPActions<RequestPayload = void, ResponsePayload = void,
 }
 
 export function clientIdWithData<T>(store: Store, data: T): Observable<{ clientId: string, data: T }> {
-    return currentClientIdFilteredSelector(store).pipe(
+    return UserSelectors.currentClientIdFiltered(store).pipe(
         take(1),
         map(clientId => ({ clientId, data }))
     );
+}
+
+export function clientIdWithoudData(store: Store): Observable<string> {
+    return UserSelectors.currentClientIdFiltered(store).pipe(
+        take(1)
+    );
+}
+
+export const rangeValueConverter: NgrxValueConverter<any, Boxed<DateRange>> = {
+    convertStateToViewValue: value => ({ start: value.value.start, end: value.value.end }),
+    convertViewToStateValue: value => box(
+        {
+            start: dayjs.isDayjs(value.start) ? value.start.toISOString() : value.start,
+            end: dayjs.isDayjs(value.end) ? value.end.toISOString() : value.end
+        })
+};
+
+
+export function notNullAndUndefined<T>(
+    store: Store,
+    selector: MemoizedSelector<object, T | undefined, DefaultProjectorFn<T | undefined>>): Observable<T> {
+    return store.select(selector).pipe(filter(p => !!p), map(p => p as T));
 }
 
 

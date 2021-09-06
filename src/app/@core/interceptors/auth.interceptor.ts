@@ -1,10 +1,10 @@
-import { logout, setToken } from '@actions/auth.actions';
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { tokenSelector } from '@selectors/auth.selectors';
 import { AuthService } from '@services/auth.service';
+import { AuthActions } from '@store/auth/actions';
+import { AuthSelectors } from '@store/auth/selectors';
 import { EMPTY, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   token: Token | undefined = undefined;
 
   constructor(private translate: TranslateService, private store: Store, private authService: AuthService) {
-    store.select(tokenSelector).subscribe(token => {
+    store.select(AuthSelectors.token).subscribe(token => {
       this.token = token;
     });
   }
@@ -40,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return this.authService.refreshToken(this.token?.refresh_token, this.token?.sessionId).pipe(
         tap((token) => {
-          this.store.dispatch(setToken({ token }));
+          this.store.dispatch(AuthActions.setToken({ token }));
           this.refreshTokenInProgress = false;
           this.tokenRefreshedSource.next();
         }),
@@ -93,7 +93,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   logout(): any {
-    this.store.dispatch(logout());
+    this.store.dispatch(AuthActions.logout());
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
     const requestFormated = this.formatRequest(req);
@@ -109,7 +109,6 @@ export class AuthInterceptor implements HttpInterceptor {
   formatRequest(request: HttpRequest<any>): HttpRequest<any> {
     const language = this.translate.currentLang === 'uk' ? 'uk-UA' : this.translate.currentLang === 'ru' ? 'ru-RU' : 'en-US';
     const prefix = request.url.indexOf('?') > 0 ? '&_=' : '?_=';
-    console.log(this.translate.currentLang);
     if (!request.url.includes('token')) {
       request = request.clone({
         setHeaders: {

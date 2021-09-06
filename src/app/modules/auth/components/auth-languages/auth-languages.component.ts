@@ -1,7 +1,9 @@
-import { setLanguage } from '@actions/settings.actions';
+
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { allowedLanguagesSelector, currentLanguageSelector } from '@selectors/settings.selectors';
+import { SettingsActions } from '@store/settings/actions';
+import { SettingsSelectors } from '@store/settings/selectors';
+
 
 @Component({
   selector: 'app-auth-languages',
@@ -10,8 +12,8 @@ import { allowedLanguagesSelector, currentLanguageSelector } from '@selectors/se
 })
 export class AuthLanguagesComponent implements OnInit {
 
-  language$ = this.store.select(currentLanguageSelector);
-  languages$ = this.store.select(allowedLanguagesSelector);
+  language$ = this.store.select(SettingsSelectors.currentLanguage);
+  languages$ = this.store.select(SettingsSelectors.allowedLanguages);
 
   constructor(private store: Store) { }
 
@@ -19,7 +21,7 @@ export class AuthLanguagesComponent implements OnInit {
   }
 
   setLanguage(language: string): void {
-    this.store.dispatch(setLanguage({ language }));
+    this.store.dispatch(SettingsActions.setLanguage({ language }));
   }
 
 }

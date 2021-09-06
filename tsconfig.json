@@ -43,9 +43,15 @@
       "@modules/*": [
         "./src/app/modules/*"
       ],
+      "@store/*": [
+        "./src/app/@core/store/*"
+      ],
       "@core/*": [
         "./src/app/@core/*"
       ],
+      "@models/*": [
+        "./src/app/@shared/models/*"
+      ]
     }
   },
   "angularCompilerOptions": {

@@ -1,7 +1,7 @@
-import { setLanguage } from '@actions/settings.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { allowedLanguagesSelector, currentLanguageSelector } from '@selectors/settings.selectors';
+import { SettingsActions } from '@store/settings/actions';
+import { SettingsSelectors } from '@store/settings/selectors';
 
 @Component({
   selector: 'header-languages',
@@ -12,13 +12,13 @@ export class HeaderLanguagesComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  public currentLanguage$ = this.store.select(currentLanguageSelector);
-  public languages$ = this.store.select(allowedLanguagesSelector);
+  public currentLanguage$ = this.store.select(SettingsSelectors.currentLanguage);
+  public languages$ = this.store.select(SettingsSelectors.allowedLanguages);
   ngOnInit(): void {
   }
 
   setLanguage(language: string): void {
-    this.store.dispatch(setLanguage({ language }));
+    this.store.dispatch(SettingsActions.setLanguage({ language }));
   }
 
 }
