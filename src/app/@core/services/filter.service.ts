@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import * as math from 'mathjs';
 import { DatePipe } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { divide } from 'mathjs';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class FilterService {
 
     }
     getMoneyString(money: number): string {
-        return math.divide(money, 100).toString();
+        return divide(money, 100).toString();
     }
 
     pushValue(values: string[], value: any): void {
