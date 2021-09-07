@@ -6,6 +6,8 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -43,8 +45,9 @@
       "@modules/*": [
         "./src/app/modules/*"
       ],
-      "@store/*": [
-        "./src/app/@core/store/*"
+      "@store*": [
+        "./src/app/@core/store*",
+        "./src/app/@core/store/index"
       ],
       "@core/*": [
         "./src/app/@core/*"
