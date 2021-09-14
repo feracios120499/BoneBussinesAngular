@@ -25,7 +25,7 @@ export const initialEditFormState = createFormGroupState<AcctEdit>(ACCT_EDIT_FOR
 
 export const initialTransactions = createFormGroupState<AcctTransactionsFilter>(ACCT_TRANSACTIONS_FILTER_FORM, {
     range: box({
-        start: dayjs(dayjs().subtract(3, 'year').format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString(),
+        start: dayjs(dayjs().format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString(),
         end: dayjs(dayjs().format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString()
     })
 });

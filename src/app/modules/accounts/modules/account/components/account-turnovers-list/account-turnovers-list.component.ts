@@ -13,6 +13,8 @@ export class AccountTurnoversListComponent implements OnInit {
   constructor(private store: Store) { }
 
   turnovers$ = this.store.select(AcctDetailsSelectors.turnovers);
+  isLoading$ = this.store.select(AcctDetailsSelectors.isLoadingTurnovers);
+  range$ = this.store.select(AcctDetailsSelectors.transactionsRangeString);
 
   ngOnInit(): void {
   }

@@ -1,6 +1,20 @@
 <ng-container *ngrxLet="turnovers$ as turnovers">
-    <div class="b1-page-data b1-page-data_auto">
-        <account-turnovers-row *ngFor="let turnover of turnovers;trackBy:trackId" [turnover]="turnover">
-        </account-turnovers-row>
-    </div>
+    <ng-container *ngrxLet="isLoading$ as isLoading">
+        <div class="b1-page-data b1-page-data_auto" *ngIf="turnovers && turnovers.length !== 0 && !isLoading">
+            <account-turnovers-row *ngFor="let turnover of turnovers;trackBy:trackId" [turnover]="turnover">
+            </account-turnovers-row>
+        </div>
+        <div class="b1-page-data" *ngIf="(!turnovers || turnovers.length === 0) && !isLoading">
+            <div class="b1-page-data_empty">
+                <img class="b1-page-data_empty_img" src="../../../../../../../assets/img/no-turnovers.svg"
+                    alt="no-turnovers">
+                <div class="b1-page-data_empty_title b1-title3">
+                    {{'components.acct.turnoversNotFoundTitle' | translate}}
+                </div>
+                <div class="b1-page-data_empty_subtitle b1-medium" *ngrxLet="range$ as range">
+                    {{'components.acct.turnoversNotFound' | translate: {start:range.start,end:range.end} }}
+                </div>
+            </div>
+        </div>
+    </ng-container>
 </ng-container>

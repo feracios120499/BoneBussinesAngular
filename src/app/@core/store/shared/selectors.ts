@@ -1,5 +1,6 @@
-import { createAction, createFeatureSelector, createSelector } from '@ngrx/store';
-import { SharedState, SHARED_KEY } from './store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+
+import { SHARED_KEY, SharedState } from './store';
 
 export namespace SharedSelectors {
     export const sharedStore = createFeatureSelector<SharedState>(SHARED_KEY);
@@ -13,5 +14,4 @@ export namespace SharedSelectors {
         sharedStore,
         (store) => store.currentPayment.loader
     );
-
 }

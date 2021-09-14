@@ -64,5 +64,17 @@ export const acctReducer = createReducer(
         AcctDetailsActions.loadTransactionDetailFailure,
         (state) =>
             ({ ...state, loadings: state.loadings.filter(p => p !== AcctLoadings.transaction) })
+    ),
+    on(
+        AcctDetailsActions.downloadStatementRequest,
+        AcctDetailsActions.sendStatementRequest,
+        (state) => ({ ...state, loadings: [...state.loadings, AcctLoadings.statement] })
+    ),
+    on(
+        AcctDetailsActions.downloadStatementSuccess,
+        AcctDetailsActions.sendStatementSuccess,
+        AcctDetailsActions.downloadStatementFailure,
+        AcctDetailsActions.sendStatementFailure,
+        (state) => ({ ...state, loadings: state.loadings.filter(p => p !== AcctLoadings.statement) })
     )
 );

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ResizeService } from '@services/resize.service';
+import { AcctActions } from '@store/acct/actions';
+import { AcctDetailsActions } from '@store/acct/details/actions';
 import { AcctDetailsSelectors } from '@store/acct/details/selectors';
+import { AppSelectors } from '@store/app/selectors';
 import { rangeValueConverter } from '@store/shared';
 import dayjs from 'dayjs';
 
@@ -11,9 +15,11 @@ import dayjs from 'dayjs';
 })
 export class AccountTurnoversHeaderComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private resizeService: ResizeService) { }
+
   form$ = this.store.select(AcctDetailsSelectors.filterTransactions);
   isLoading$ = this.store.select(AcctDetailsSelectors.isLoadingDetailsPage);
+  isMobile$ = this.resizeService.isMobile$;
   public selected: any;
   public rangeValueConverter = rangeValueConverter;
   ranges: any = {
@@ -25,5 +31,17 @@ export class AccountTurnoversHeaderComponent implements OnInit {
   };
 
   ngOnInit(): void {
+  }
+
+  showStatement(): void {
+    this.store.dispatch(AcctDetailsActions.showStatement());
+  }
+
+  showRequisites(): void {
+    this.store.dispatch(AcctDetailsActions.showRequisitesModal());
+  }
+
+  showExport(): void {
+    this.store.dispatch(AcctDetailsActions.showExportModal());
   }
 }

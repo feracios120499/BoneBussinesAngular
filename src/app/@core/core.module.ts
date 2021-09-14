@@ -66,7 +66,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 100, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({ maxAge: 100, logOnly: environment.production, serialize: true }),
     EffectsModule.forRoot([
       AuthEffects,
       RouteEffects,

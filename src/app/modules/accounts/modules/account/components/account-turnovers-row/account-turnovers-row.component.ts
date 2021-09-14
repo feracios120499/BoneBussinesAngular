@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Turnovers, UiTurnovers } from '@models/turnovers.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { UiTurnovers } from '@models/turnovers.model';
 import { Store } from '@ngrx/store';
 import { AcctDetailsActions } from '@store/acct/details/actions';
 import { AcctDetailsSelectors } from '@store/acct/details/selectors';

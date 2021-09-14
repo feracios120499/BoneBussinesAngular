@@ -58,25 +58,123 @@ export class AcctService extends BaseService {
         return this.http.get<Transaction>(`api/v1/acct/transactions/${bankId}/${transactionId}/${clientId}`);
     }
 
-    getStatements(
+    getStatement(
         bankId: string,
         accountId: number,
         clientId: string,
         start: Dayjs,
         end: Dayjs,
         format: string = 'PDF',
-        email?: string,
         compressed?: boolean): Observable<FileModel> {
 
         const startParam = `dateStart=${start.format('YYYY-MM-DD')}`;
         const endParam = `dateEnd=${end.format('YYYY-MM-DD')}`;
-        const emailParam = email ? `&email=${email}` : '';
         const compressedParam = compressed !== undefined ? `&compressed=${compressed}` : '';
 
-        return this.http.get<Blob>(`api/v1/acct/statements/getfile/${format}/${bankId}/${accountId}/${clientId}?${startParam}&${endParam}${emailParam}${compressedParam}`,
+        return this.http.get<Blob>(`api/v1/acct/statements/getfile/${format}/${bankId}/${accountId}/${clientId}?${startParam}&${endParam}${compressedParam}`,
             { responseType: 'blob' as 'json', observe: 'response' }).pipe(
-                map((response) => this.mapFile(response))
+                map((response) => this.mapFile(response)),
+                map((result) => ({ ...result, name: result.name || `statement.${format.toLowerCase()}` }))
             );
+    }
+
+    sendStatement(
+        bankId: string,
+        accountId: number,
+        clientId: string,
+        start: Dayjs,
+        end: Dayjs,
+        format: string = 'PDF',
+        email: string,
+        compressed?: boolean): Observable<never> {
+
+        const startParam = `dateStart=${start.format('YYYY-MM-DD')}`;
+        const endParam = `dateEnd=${end.format('YYYY-MM-DD')}`;
+        const compressedParam = compressed !== undefined ? `&compressed=${compressed}` : '';
+        const emailParam = `&email=${email}`;
+
+        return this.http.get<never>(`api/v1/acct/statements/sendfile/${format}/${bankId}/${accountId}/${clientId}?${startParam}&${endParam}${emailParam}${compressedParam}`);
+    }
+
+
+    getRequisites(
+        bankId: string,
+        accountId: number,
+        clientId: string,
+        format: string = 'PDF',
+        compressed?: boolean): Observable<FileModel> {
+
+        const compressedParam = compressed !== undefined ? `?compressed=${compressed}` : '';
+
+        return this.http.get<Blob>(`api/v1/acct/accounts/file/getdetails/${format}/${bankId}/${accountId}/${clientId}${compressedParam}`,
+            { responseType: 'blob' as 'json', observe: 'response' }).pipe(
+                map((response) => this.mapFile(response)),
+                map((result) => ({ ...result, name: result.name || `requisites.${format.toLowerCase()}` }))
+            );
+
+    }
+
+
+    sendRequisites(
+        bankId: string,
+        accountId: number,
+        clientId: string,
+        format: string = 'PDF',
+        email: string,
+        compressed?: boolean): Observable<never> {
+
+        const compressedParam = compressed !== undefined ? `&compressed=${compressed}` : '';
+        const emailParam = `?email=${email}`;
+
+        return this.http.get<never>(`api/v1/acct/accounts/file/senddetails/${format}/${bankId}/${accountId}/${clientId}${emailParam}${compressedParam}`);
+    }
+
+
+    getPrintTransaction(
+        bankId: string,
+        transactionId: string,
+        clientId: string,
+        format: string = 'HTML'): Observable<string> {
+        return this.http.get(`api/v1/acct/transactions/print/${format}/${transactionId}/${bankId}/${clientId}`, { responseType: 'text' });
+    }
+
+
+    getExportTurnovers(
+        bankId: string,
+        accountId: number,
+        clientId: string,
+        start: Dayjs,
+        end: Dayjs,
+        format: string = 'PDF',
+        compressed?: boolean): Observable<FileModel> {
+
+        const startParam = `dateStart=${start.format('YYYY-MM-DD')}`;
+        const endParam = `dateEnd=${end.format('YYYY-MM-DD')}`;
+        const compressedParam = compressed !== undefined ? `&compressed=${compressed}` : '';
+
+        return this.http.get<Blob>(`api/v1/acct/statements/getexport/${format}/${bankId}/${accountId}/${clientId}?${startParam}&${endParam}${compressedParam}`,
+            { responseType: 'blob' as 'json', observe: 'response' }).pipe(
+                map((response) => this.mapFile(response)),
+                map((result) => ({ ...result, name: result.name || `export.${format.toLowerCase()}` }))
+            );
+    }
+
+    sendExportTurnovers(
+        bankId: string,
+        accountId: number,
+        clientId: string,
+        start: Dayjs,
+        end: Dayjs,
+        format: string = 'PDF',
+        email: string,
+        compressed?: boolean): Observable<never> {
+
+        const startParam = `dateStart=${start.format('YYYY-MM-DD')}`;
+        const endParam = `dateEnd=${end.format('YYYY-MM-DD')}`;
+        const compressedParam = compressed !== undefined ? `&compressed=${compressed}` : '';
+        const emailParam = `&email=${email}`;
+
+        return this.http.get<never>(`api/v1/acct/statements/sendexport/${format}/${bankId}/${accountId}/${clientId}?${startParam}&${endParam}${emailParam}${compressedParam}`);
     }
 
     private mapFile(res: HttpResponse<Blob>): FileModel {

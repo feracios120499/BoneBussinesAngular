@@ -1,78 +1,39 @@
-<!-- <div class="b1-page-actions" style="display: none;">
-    <div class="b1-page-actions__left">
-        <div class="b1-title3">
-            {{'components.acct.accountTurnovers' | translate}}
-        </div>
-        <div class="b1-page-icons" style="margin-left:0">
-
-
-            <div ng-if="IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'">
-                <button ng-click="histCtrl.showShareWindow()" class="b1-page-icon ub-icons ub-icons-icon-file"
-                    ng-disabled="importCtrl.state.isLoading">
-                </button>
-            </div>
-  
-            <div>
-                <button ng-click="histCtrl.showExportStatementWindow()"
-                    class="b1-page-icon ub-icons ub-icons-icon-export" ng-disabled="importCtrl.state.isLoading">
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="b1-page-actions__right b1-flex b1-align-center" style="width: auto;">
-        <div class="b1-base b1-page-data__subtitle b1-light">
-            {{'components.acct.period' | translate}}
-        </div>
-        <div class="b1-page-inputWithIcon m-l-20">
-            <input date-range-picker class="b1-datepicker__input b1-rangepicker" type="text"
-                ng-model="histCtrl.datePicker.date" picker="histCtrl.datePicker.picker"
-                picker-classes="extra-class-names" min="histCtrl.datePicker.minDate" max="histCtrl.datePicker.maxDate"
-                id="calendar" name="calendar" readonly options="histCtrl.datePicker.options" />
-            <label for="calendar" class="ub-icons ub-icons-icon-calendar"></label>
-        </div>
-    </div>
-</div> -->
-
 <ng-container *ngrxLet="form$ as form">
-    <div class="account-actions" *ngIf="form">
-        <div class="account-actions_title">
-            <div class="b1-title3">
-                {{'components.acct.accountTurnovers' | translate}}
-            </div>
-        </div>
-        <div class="account-actions_buttons">
-            <div class="b1-page-icons" style="margin-left:0">
-
-                <!-- <button ng-click="histCtrl.showStatementWindow()"
-                class="b1-button-primary b1-button-primary_filled b1-mr-4 b1-ml-4"
-                ng-disabled="importCtrl.state.isLoading">
-                <i class="ub-icons ub-icons-icon-statement"></i>
-                {{'components.acct.getStatement' | translate}}
-            </button> -->
-                <!-- tooltips tooltip-template="{{'components.acct.share' | translate}}" -->
-                <div ng-if="IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'">
-                    <button ng-click="histCtrl.showShareWindow()" class="b1-page-icon" b1-icon icon="file-details"
-                        ng-disabled="importCtrl.state.isLoading">
-                    </button>
-                </div>
-                <!-- tooltips tooltip-template="{{'components.acct.geExportStatement' | translate}}" -->
-                <div>
-                    <button ng-click="histCtrl.showExportStatementWindow()" class="b1-page-icon" b1-icon icon="export"
-                        ng-disabled="importCtrl.state.isLoading">
-                    </button>
+    <ng-container *ngrxLet="isLoading$ as isLoading">
+        <div class="account-actions" *ngIf="form">
+            <div class="account-actions_title">
+                <div class="b1-title3">
+                    {{'components.acct.accountTurnovers' | translate}}
                 </div>
             </div>
+            <div class="account-actions_buttons" *ngrxLet="isMobile$ as isMobile">
+                <div class="b1-page-buttons">
 
-        </div>
-        <form class="account-actions_calendar" [ngrxFormState]="form">
-            <div class="b1-page-inputWithIcon">
-                <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker startKey="start" endKey="end"
-                    [ngrxFormControlState]="form.controls.range" [ngrxValueConverter]="rangeValueConverter"
-                    name="daterange" [ranges]="ranges" readonly />
-                <label for="calendar" b1-icon icon="calendar"></label>
+                    <button (click)="showStatement()" [disabled]="isLoading" class="b1-page-button">
+                        <div class="b1-page-icon" b1-icon icon="turnovers"></div>
+                        <span class="b1-page-button_text">{{'components.acct.getStatement' | translate}}</span>
+                    </button>
+
+                    <button (click)="showRequisites()" [disabled]="isLoading" class="b1-page-button">
+                        <div class="b1-page-icon" b1-icon icon="file-details"></div>
+                        <span class="b1-page-button_text">{{'components.acct.share' | translate}}</span>
+                    </button>
+                    <button (click)="showExport()" [disabled]="isLoading" class="b1-page-button">
+                        <div class="b1-page-icon" b1-icon icon="export"></div>
+                        <span class="b1-page-button_text">{{'components.acct.geExportStatement' | translate}}</span>
+                    </button>
+                </div>
+
             </div>
-        </form>
-    </div>
-    <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
-
+            <form class="account-actions_calendar" [ngrxFormState]="form">
+                <div class="b1-page-inputWithIcon">
+                    <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker startKey="start" endKey="end"
+                        [disabled]="isLoading" [ngrxFormControlState]="form.controls.range"
+                        [ngrxValueConverter]="rangeValueConverter" name="daterange" [ranges]="ranges" readonly />
+                    <label for="calendar" b1-icon icon="calendar"></label>
+                </div>
+            </form>
+        </div>
+        <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+    </ng-container>
 </ng-container>

@@ -3,5 +3,6 @@ export enum AcctLoadings {
     details = 'details',
     turnovers = 'turnovers',
     transactions = 'transactions',
-    transaction = 'transaction'
+    transaction = 'transaction',
+    statement = 'statement'
 }

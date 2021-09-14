@@ -1,19 +1,33 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { ResizeService } from '@services/resize.service';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[mobileClass]'
 })
-export class MobileClassDirective implements AfterViewInit {
+export class MobileClassDirective implements AfterViewInit, OnDestroy {
 
   @Input() mobileClass!: string;
 
-  constructor(private el: ElementRef) { }
+  private resizeSubscription?: Subscription;
+  constructor(private el: ElementRef, private resizeService: ResizeService) {
+
+  }
+
 
   ngAfterViewInit(): void {
-    if (window.screen.width <= environment.mobileWidth && this.mobileClass) {
-      this.el.nativeElement.className += ` ${this.mobileClass}`;
-    }
+    this.resizeSubscription = this.resizeService.isMobile$.subscribe((isMobile) => {
+      if (isMobile) {
+        this.mobileClass.split(' ').forEach((item) => this.el.nativeElement.classList.add(item));
+      }
+      else {
+        this.mobileClass.split(' ').forEach((item) => this.el.nativeElement.classList.remove(item));
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription?.unsubscribe();
   }
 
 }

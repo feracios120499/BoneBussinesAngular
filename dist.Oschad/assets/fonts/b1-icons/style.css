@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?gqf2jm');
-  src:  url('fonts/b1-icons.eot?gqf2jm#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?gqf2jm') format('truetype'),
-    url('fonts/b1-icons.woff?gqf2jm') format('woff'),
-    url('fonts/b1-icons.svg?gqf2jm#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?rmaq09');
+  src:  url('fonts/b1-icons.eot?rmaq09#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?rmaq09') format('truetype'),
+    url('fonts/b1-icons.woff?rmaq09') format('woff'),
+    url('fonts/b1-icons.svg?rmaq09#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,36 @@
 
 .b1-icons-icon-moon:before {
   content: "\e900";
+}
+.b1-icons-icon-file-txt:before {
+  content: "\e917";
+}
+.b1-icons-icon-file-html:before {
+  content: "\e918";
+}
+.b1-icons-icon-file-csv:before {
+  content: "\e919";
+}
+.b1-icons-icon-file-xls:before {
+  content: "\e91a";
+}
+.b1-icons-icon-file-xlsx:before {
+  content: "\e91b";
+}
+.b1-icons-icon-file-dbf:before {
+  content: "\e91c";
+}
+.b1-icons-icon-file-doc:before {
+  content: "\e91d";
+}
+.b1-icons-icon-file-pdf:before {
+  content: "\e91e";
+}
+.b1-icons-icon-file-rtf:before {
+  content: "\e91f";
+}
+.b1-icons-icon-download:before {
+  content: "\e916";
 }
 .b1-icons-icon-print:before {
   content: "\e915";
@@ -132,6 +162,9 @@
 }
 .b1-icons-icon-university:before {
   content: "\f19c";
+}
+.b1-icons-icon-send:before {
+  content: "\f1d8";
 }
 .b1-icons-icon-calculator:before {
   content: "\f1ec";

@@ -89,6 +89,9 @@ $input-height: 3rem !default;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        @media (max-width: 812px) {
+            padding-bottom: 120px;
+        }
         & .calendar {
             border: none !important;
             width: 100% !important;

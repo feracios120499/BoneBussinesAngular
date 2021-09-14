@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AccountModel } from '@models/account.model';
-import { DateRange } from '@models/date-range.model';
+import { DateRangeString } from '@models/date-range.model';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { StatusCode } from '@models/enums/status-code.enum';
 import { PaymentAccountModal, PaymentModal } from '@models/payment-modal.model';
+import { StatementModalResult } from '@models/statement-modal-result.model';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,10 +12,12 @@ import { AcctService } from '@services/acct.service';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData, notNullAndUndefined } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
+import { UserSelectors } from '@store/user/selectors';
 import dayjs from 'dayjs';
 import { Boxed, FormGroupState, SetValueAction } from 'ngrx-forms';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, filter, map, mergeMap, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { AcctActions } from '../actions';
 
 import { AcctTransactionsFilter } from '../models/acct-transaction-filter.model';
 import { AcctDetailsActions } from './actions';
@@ -107,15 +110,15 @@ export class AcctDetailsEffects implements OnRunEffects {
 
     updateRangeTransactions$ = createEffect(() =>
         this.actions$.pipe(
-            ofType<SetValueAction<Boxed<DateRange>>>(SetValueAction.TYPE),
-            filter((formControl: SetValueAction<Boxed<DateRange>>) => formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)),
+            ofType<SetValueAction<Boxed<DateRangeString>>>(SetValueAction.TYPE),
+            filter((formControl: SetValueAction<Boxed<DateRangeString>>) => formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)),
             withLatestFrom(
                 this.store.select(AcctDetailsSelectors.filterTransactions).pipe(
                     filter(p => !!p),
                     map(p => p as FormGroupState<AcctTransactionsFilter>))
             ),
             filter(
-                ([formControl, form]: [SetValueAction<Boxed<DateRange>>, FormGroupState<AcctTransactionsFilter>]) =>
+                ([formControl, form]: [SetValueAction<Boxed<DateRangeString>>, FormGroupState<AcctTransactionsFilter>]) =>
                     formControl.controlId === form.controls.range.id),
             map(_ => AcctDetailsActions.loadTurnoversCurrentAccount())
         ));
@@ -261,7 +264,8 @@ export class AcctDetailsEffects implements OnRunEffects {
     loadTransactionDetailSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AcctDetailsActions.loadTransactionDetailSuccess),
-            map((action) => {
+            withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount)),
+            map(([action, account]) => {
                 const transaction = action.payload;
                 const payment: PaymentModal = {
                     number: transaction.Number,
@@ -285,12 +289,126 @@ export class AcctDetailsEffects implements OnRunEffects {
                     },
                     actions: {}
                 };
-                payment.actions[PaymentAction.print] = () => console.log(transaction);
+                payment.actions[PaymentAction.print] = () =>
+                    this.store.dispatch(AcctDetailsActions.printTransactionRequest({
+                        transactionId: transaction.Id, bankId: account?.BankId
+                    }));
 
                 return SharedActions.setPayment({ payment });
             })
         ));
 
+    printTransactionRequest$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.printTransactionRequest),
+            switchMap(action => clientIdWithData(this.store, action.payload)),
+            switchMap(payload => this.accountsService.getPrintTransaction(
+                payload.data.bankId,
+                payload.data.transactionId,
+                payload.clientId
+            ).pipe(
+                map(html => AcctDetailsActions.printTransactionSuccess(html))
+            ))
+        ));
+
+    printTransactionSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.printTransactionSuccess),
+            map(action => SharedActions.printFile({ html: action.payload }))
+        ));
+
+    showStatement$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.showStatement),
+            withLatestFrom(
+                notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount),
+                this.store.select(UserSelectors.userEmail),
+                this.store.select(AcctDetailsSelectors.transactionsRange)
+            ),
+            map(([, account, email, range]) => SharedActions.showStatement({
+                config: {
+                    formats: account.StatementTypesList,
+                    isFree: account.IsStatementFree,
+                    email,
+                    start: range.start,
+                    end: range.end,
+                    callback: (data: StatementModalResult) => this.store.dispatch(AcctDetailsActions.loadStatement({ data }))
+                }
+            }))
+        ));
+
+    loadStatement$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.loadStatement),
+            map((action) =>
+                action.data.sendToEmail ?
+                    AcctDetailsActions.sendStatementRequest(action.data) :
+                    AcctDetailsActions.downloadStatementRequest(action.data)
+            )
+        ));
+
+    downloadStatement$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.downloadStatementRequest),
+            switchMap(action => clientIdWithData(this.store, action.payload).pipe(
+                withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount))
+            )),
+            switchMap(([payload, account]) => this.accountsService.getStatement(
+                account.BankId,
+                account.Id,
+                payload.clientId,
+                payload.data.range.start,
+                payload.data.range.end,
+                payload.data.format
+            ).pipe(map((file) => AcctDetailsActions.downloadStatementSuccess(file))))
+        ));
+
+    downloadStatementSucess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.downloadStatementSuccess),
+            map(action => SharedActions.saveFile({ file: action.payload }))
+        ));
+
+    sendStatement$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.sendStatementRequest),
+            switchMap(action => clientIdWithData(this.store, action.payload).pipe(
+                withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount))
+            )),
+            switchMap(([payload, account]) => this.accountsService.sendStatement(
+                account.BankId,
+                account.Id,
+                payload.clientId,
+                payload.data.range.start,
+                payload.data.range.end,
+                payload.data.format,
+                payload.data.email as string
+            ).pipe(map(() => AcctDetailsActions.sendStatementSuccess(undefined))))
+        ));
+
+    sendStatementSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.sendStatementSuccess),
+            map(() => NotifyActions.successNotification({ message: 'sucess', title: 'success' }))
+        ));
+
+
+    showRequisitesModal$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.showRequisitesModal),
+            withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount)),
+            map(([, account]) => AcctActions.openRequisitesModal({ account }))
+        ));
+
+    showExportModal$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AcctDetailsActions.showExportModal),
+            withLatestFrom(
+                notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount),
+                this.store.select(AcctDetailsSelectors.transactionsRange)
+            ),
+            map(([, account, range]) => AcctActions.openExportModal({ account, range }))
+        ));
     ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
         return this.actions$.pipe(
             ofType(AcctDetailsActions.initDetails),

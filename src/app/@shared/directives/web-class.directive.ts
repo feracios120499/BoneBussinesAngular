@@ -1,20 +1,33 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { ResizeService } from '@services/resize.service';
+import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[webClass]'
 })
-export class WebClassDirective implements AfterViewInit {
+export class WebClassDirective implements AfterViewInit, OnDestroy {
 
   @Input() webClass!: string;
-  constructor(private el: ElementRef) {
+
+  private resizeSubscription?: Subscription;
+  constructor(private el: ElementRef, private resizeService: ResizeService) {
 
   }
 
+
   ngAfterViewInit(): void {
-    if (window.screen.width > environment.mobileWidth && this.webClass) {
-      this.el.nativeElement.className += ' ' + this.webClass;
-    }
+    this.resizeSubscription = this.resizeService.isMobile$.subscribe((isMobile) => {
+      if (!isMobile) {
+        this.webClass.split(' ').forEach((item) => this.el.nativeElement.classList.add(item));
+      }
+      else {
+        this.webClass.split(' ').forEach((item) => this.el.nativeElement.classList.remove(item));
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription?.unsubscribe();
   }
 
 }

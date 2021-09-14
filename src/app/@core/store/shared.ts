@@ -1,4 +1,4 @@
-import { DateRange } from '@models/date-range.model';
+import { DateRangeString } from '@models/date-range.model';
 import { ActionCreator, createAction, DefaultProjectorFn, MemoizedSelector, Store } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
 import { UserSelectors } from '@store/user/selectors';
@@ -42,7 +42,7 @@ export function clientIdWithoudData(store: Store): Observable<string> {
     );
 }
 
-export const rangeValueConverter: NgrxValueConverter<any, Boxed<DateRange>> = {
+export const rangeValueConverter: NgrxValueConverter<any, Boxed<DateRangeString>> = {
     convertStateToViewValue: value => ({ start: value.value.start, end: value.value.end }),
     convertViewToStateValue: value => box(
         {

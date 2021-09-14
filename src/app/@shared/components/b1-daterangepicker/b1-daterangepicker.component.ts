@@ -13,6 +13,7 @@ import * as isoWeek from 'dayjs/plugin/isoWeek';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
+import { ModalService } from '@services/modal.service';
 dayjs.extend(isoWeek);
 
 export enum SideEnum {
@@ -74,7 +75,7 @@ export class DaterangepickerComponent implements OnInit {
   constructor(
     private el: ElementRef,
     private _ref: ChangeDetectorRef,
-    private modalService: NgbModal
+    private modalService: ModalService
   ) {
     this.choosedDate = new EventEmitter();
     this.rangeClicked = new EventEmitter();
@@ -277,7 +278,7 @@ export class DaterangepickerComponent implements OnInit {
       if (this.showCustomRangeLabel) {
         this.rangesArray.push(this.locale.customRangeLabel);
       }
-      this.showCalInRanges = (!this.rangesArray.length) || this.alwaysShowCalendars;
+      this.showCalInRanges = this.chosenRange === this.locale.customRangeLabel || (!this.rangesArray.length) || this.alwaysShowCalendars;
       if (!this.timePicker) {
         this.startDate = this.startDate.startOf('day');
         this.endDate = this.endDate?.endOf('day');
@@ -742,7 +743,7 @@ export class DaterangepickerComponent implements OnInit {
         } else {
           this.chosenRange = undefined;
         }
-        // if custom label: show calendar
+        // // if custom label: show calendar
         this.showCalInRanges = true;
       }
     }
@@ -1111,11 +1112,15 @@ export class DaterangepickerComponent implements OnInit {
     this.updateView();
 
     if (isMobile) {
-      this.modalRef = this.modalService.open(this.templateref);
-      this.showCalInRanges = this.chosenRange === this.locale.customRangeLabel;
-      this.modalRef.hidden.subscribe(() => {
-        this.hide('sub');
+      setTimeout(() => {
+        this.modalRef = this.modalService.open(this.templateref);
+
+        this.showCalInRanges = this.chosenRange === this.locale.customRangeLabel;
+        this.modalRef.hidden.subscribe(() => {
+          this.hide('sub');
+        });
       });
+
     }
     // this.isShown = true;
   }

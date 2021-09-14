@@ -701,30 +701,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _models_enums_payment_action_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @models/enums/payment-action.enum */ 15732);
 /* harmony import */ var _models_enums_status_code_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @models/enums/status-code.enum */ 35463);
-/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ngrx/effects */ 20275);
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ngrx/effects */ 20275);
 /* harmony import */ var _store_notify_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @store/notify/actions */ 31926);
 /* harmony import */ var _store_shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @store/shared */ 87687);
 /* harmony import */ var _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @store/shared/actions */ 60994);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dayjs */ 70160);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var ngrx_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngrx-forms */ 94441);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 81134);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs/operators */ 17163);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs/operators */ 33927);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs/operators */ 79902);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs/operators */ 9170);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 18293);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs/operators */ 98636);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs/operators */ 85816);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 22663);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 96958);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions */ 50081);
-/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./selectors */ 75873);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store */ 72024);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ngrx/store */ 17562);
-/* harmony import */ var _services_acct_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @services/acct.service */ 69935);
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ngx-translate/core */ 70325);
+/* harmony import */ var _store_user_selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @store/user/selectors */ 99662);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dayjs */ 70160);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var ngrx_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ngrx-forms */ 94441);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 81134);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs/operators */ 17163);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs/operators */ 33927);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs/operators */ 79902);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs/operators */ 9170);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs/operators */ 18293);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs/operators */ 98636);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs/operators */ 85816);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs/operators */ 22663);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! rxjs/operators */ 96958);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions */ 50197);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./actions */ 50081);
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./selectors */ 75873);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store */ 72024);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ngrx/store */ 17562);
+/* harmony import */ var _services_acct_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @services/acct.service */ 69935);
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @ngx-translate/core */ 70325);
+
+
 
 
 
@@ -749,35 +753,35 @@ class AcctDetailsEffects {
         this.store = store;
         this.accountsService = accountsService;
         this.translateService = translateService;
-        this.setAccountName$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.setAccountName), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.editForm)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([action, formControl]) => new ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.SetValueAction(formControl.controls.name.id, action.name))));
-        this.loadCurrentAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadCurrentAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.currentAccountRouteParams)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([, routeParams]) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadAccount({ accountId: routeParams.accountId, bankId: routeParams.bankId }))));
-        this.loadAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)((action) => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)((payload) => this.accountsService.getAccount(payload.data.bankId, payload.data.accountId, payload.clientId).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(account => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadAccountSuccess(account))))));
-        this.loadAccountSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(...[
-            _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadAccountSuccess,
-            _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountSuccess
-        ]), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.setCurrentAccount({ account: action.payload }))));
-        this.submitEditForm$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.sumbitEditForm), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.editForm)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([, form]) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountRequest(form.value))));
-        this.updateAccountRequest$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.currentAccountRouteParams)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(([payload, routeParams]) => this.accountsService.updateAccount(routeParams.bankId, routeParams.accountId, payload.clientId, payload.data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(([, account]) => account !== undefined), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([, account]) => account), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((account) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountSuccess(Object.assign(Object.assign({}, account), { Name: payload.data.name }))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)((error) => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountFailure(error.error.Message)))))));
-        this.updateAccountSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.updateAccountSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(() => _store_notify_actions__WEBPACK_IMPORTED_MODULE_2__.NotifyActions.successNotification({ message: this.translateService.instant('componets.acct.updateAccountSuccess') }))));
-        this.updateRangeTransactions$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.SetValueAction.TYPE), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)((formControl) => formControl.controlId.startsWith(_store__WEBPACK_IMPORTED_MODULE_8__.ACCT_TRANSACTIONS_FILTER_FORM)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.filterTransactions).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(p => !!p), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(p => p))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(([formControl, form]) => formControl.controlId === form.controls.range.id), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(_ => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversCurrentAccount())));
-        this.loadTurnoversCurrentAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversCurrentAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.currentAccountRouteParams), this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.transactionsRange)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([, routeParams, range]) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversRequest({
+        this.setAccountName$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.setAccountName), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.editForm)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([action, formControl]) => new ngrx_forms__WEBPACK_IMPORTED_MODULE_15__.SetValueAction(formControl.controls.name.id, action.name))));
+        this.loadCurrentAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadCurrentAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccountRouteParams)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, routeParams]) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadAccount({ accountId: routeParams.accountId, bankId: routeParams.bankId }))));
+        this.loadAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)((action) => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)((payload) => this.accountsService.getAccount(payload.data.bankId, payload.data.accountId, payload.clientId).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(account => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadAccountSuccess(account))))));
+        this.loadAccountSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(...[
+            _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadAccountSuccess,
+            _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountSuccess
+        ]), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.setCurrentAccount({ account: action.payload }))));
+        this.submitEditForm$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.sumbitEditForm), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.editForm)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, form]) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountRequest(form.value))));
+        this.updateAccountRequest$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccountRouteParams)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([payload, routeParams]) => this.accountsService.updateAccount(routeParams.bankId, routeParams.accountId, payload.clientId, payload.data).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)(([, account]) => account !== undefined), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, account]) => account), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((account) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountSuccess(Object.assign(Object.assign({}, account), { Name: payload.data.name }))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.catchError)((error) => (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.of)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountFailure(error.error.Message)))))));
+        this.updateAccountSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.updateAccountSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(() => _store_notify_actions__WEBPACK_IMPORTED_MODULE_2__.NotifyActions.successNotification({ message: this.translateService.instant('componets.acct.updateAccountSuccess') }))));
+        this.updateRangeTransactions$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(ngrx_forms__WEBPACK_IMPORTED_MODULE_15__.SetValueAction.TYPE), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)((formControl) => formControl.controlId.startsWith(_store__WEBPACK_IMPORTED_MODULE_10__.ACCT_TRANSACTIONS_FILTER_FORM)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.filterTransactions).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)(p => !!p), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(p => p))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)(([formControl, form]) => formControl.controlId === form.controls.range.id), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(_ => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversCurrentAccount())));
+        this.loadTurnoversCurrentAccount$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversCurrentAccount), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccountRouteParams), this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.transactionsRange)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, routeParams, range]) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversRequest({
             accountId: routeParams.accountId,
             bankId: routeParams.bankId,
             start: range.start,
             end: range.end
         }))));
-        this.loadTurnovers$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(payload => this.accountsService.getTurnovers(payload.data.bankId, payload.data.accountId, payload.clientId, payload.data.start, payload.data.end).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(turnovers => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversSuccess(turnovers)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)(error => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTurnoversFailure(error.error.Message)))))));
-        this.openTurnover$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.openTurnovers), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsRequest(action.id))));
-        this.closeTurnover$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.closeTurnovers), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.loadTurnovers)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.tap)(console.log), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(([action, loaders]) => loaders.includes(action.id)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(([action]) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsCancel({ id: action.id }))));
-        this.loadTransactions$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.turnover(action.payload))))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.mergeMap)(([payload, turnover]) => {
+        this.loadTurnovers$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(payload => this.accountsService.getTurnovers(payload.data.bankId, payload.data.accountId, payload.clientId, payload.data.start, payload.data.end).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(turnovers => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversSuccess(turnovers)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.catchError)(error => (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.of)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTurnoversFailure(error.error.Message)))))));
+        this.openTurnover$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.openTurnovers), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsRequest(action.id))));
+        this.closeTurnover$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.closeTurnovers), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.loadTurnovers)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.tap)(console.log), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)(([action, loaders]) => loaders.includes(action.id)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([action]) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsCancel({ id: action.id }))));
+        this.loadTransactions$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.turnover(action.payload))))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.mergeMap)(([payload, turnover]) => {
             if (turnover.Transactions && turnover.Transactions.length !== 0) {
-                return (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions: turnover.Transactions }));
+                return (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.of)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions: turnover.Transactions }));
             }
-            return this.accountsService.getTransactions(turnover.BankId, turnover.AccId, payload.clientId, dayjs__WEBPACK_IMPORTED_MODULE_5___default()(turnover.TurnoverDate), dayjs__WEBPACK_IMPORTED_MODULE_5___default()(turnover.TurnoverDate)).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)(transactions => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions })), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.takeUntil)(this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsCancel), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_15__.filter)(p => p.payload.id === turnover.Id))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)(error => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsFailure({ id: turnover.Id, error: error.error.Message }))));
+            return this.accountsService.getTransactions(turnover.BankId, turnover.AccId, payload.clientId, dayjs__WEBPACK_IMPORTED_MODULE_6___default()(turnover.TurnoverDate), dayjs__WEBPACK_IMPORTED_MODULE_6___default()(turnover.TurnoverDate)).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(transactions => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions })), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.takeUntil)(this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsCancel), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_17__.filter)(p => p.payload.id === turnover.Id))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.catchError)(error => (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.of)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsFailure({ id: turnover.Id, error: error.error.Message }))));
         })));
-        this.loadTransactionsFailure$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionsFailure), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.closeTurnovers({ id: action.payload.id }))));
-        this.loadTransactionDetail$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionDetailRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(payload => this.accountsService.getTransaction(payload.data.bankId, payload.data.id, payload.clientId).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((transaction) => _actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionDetailSuccess(transaction)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.catchError)((error) => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.of)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionDetailFailure(error.error.Message)))))));
-        this.showTransactionPartial$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.showTransactionPartial), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_11__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.switchMap)(([action, account]) => {
+        this.loadTransactionsFailure$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionsFailure), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((action) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.closeTurnovers({ id: action.payload.id }))));
+        this.loadTransactionDetail$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionDetailRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(payload => this.accountsService.getTransaction(payload.data.bankId, payload.data.id, payload.clientId).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((transaction) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionDetailSuccess(transaction)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.catchError)((error) => (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.of)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionDetailFailure(error.error.Message)))))));
+        this.showTransactionPartial$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.showTransactionPartial), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)(this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([action, account]) => {
             const transacion = action.transaction;
             const currentAccount = {
                 taxCode: account === null || account === void 0 ? void 0 : account.TaxCode,
@@ -800,11 +804,11 @@ class AcctDetailsEffects {
                 currencyCode: account === null || account === void 0 ? void 0 : account.CurrencyCode
             };
             return [
-                _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.setLoader({ loader: _selectors__WEBPACK_IMPORTED_MODULE_7__.AcctDetailsSelectors.isLoadingTransaction }),
+                _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.setPaymentLoader({ loader: _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.isLoadingTransaction }),
                 _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.showPayment({ payment })
             ];
         })));
-        this.loadTransactionDetailSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.loadTransactionDetailSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_12__.map)((action) => {
+        this.loadTransactionDetailSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadTransactionDetailSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([action, account]) => {
             const transaction = action.payload;
             const payment = {
                 number: transaction.Number,
@@ -828,16 +832,38 @@ class AcctDetailsEffects {
                 },
                 actions: {}
             };
-            payment.actions[_models_enums_payment_action_enum__WEBPACK_IMPORTED_MODULE_0__.PaymentAction.print] = () => console.log(transaction);
+            payment.actions[_models_enums_payment_action_enum__WEBPACK_IMPORTED_MODULE_0__.PaymentAction.print] = () => this.store.dispatch(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.printTransactionRequest({
+                transactionId: transaction.Id, bankId: account === null || account === void 0 ? void 0 : account.BankId
+            }));
             return _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.setPayment({ payment });
         })));
+        this.printTransactionRequest$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.printTransactionRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(payload => this.accountsService.getPrintTransaction(payload.data.bankId, payload.data.transactionId, payload.clientId).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(html => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.printTransactionSuccess(html))))));
+        this.printTransactionSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.printTransactionSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(action => _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.printFile({ html: action.payload }))));
+        this.showStatement$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.showStatement), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount), this.store.select(_store_user_selectors__WEBPACK_IMPORTED_MODULE_5__.UserSelectors.userEmail), this.store.select(_selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.transactionsRange)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, account, email, range]) => _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.showStatement({
+            config: {
+                formats: account.StatementTypesList,
+                isFree: account.IsStatementFree,
+                email,
+                start: range.start,
+                end: range.end,
+                callback: (data) => this.store.dispatch(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadStatement({ data }))
+            }
+        }))));
+        this.loadStatement$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.loadStatement), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((action) => action.data.sendToEmail ?
+            _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.sendStatementRequest(action.data) :
+            _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.downloadStatementRequest(action.data))));
+        this.downloadStatement$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.downloadStatementRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([payload, account]) => this.accountsService.getStatement(account.BankId, account.Id, payload.clientId, payload.data.range.start, payload.data.range.end, payload.data.format).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)((file) => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.downloadStatementSuccess(file))))));
+        this.downloadStatementSucess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.downloadStatementSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(action => _store_shared_actions__WEBPACK_IMPORTED_MODULE_4__.SharedActions.saveFile({ file: action.payload }))));
+        this.sendStatement$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.sendStatementRequest), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(action => (0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.clientIdWithData)(this.store, action.payload).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)))), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_16__.switchMap)(([payload, account]) => this.accountsService.sendStatement(account.BankId, account.Id, payload.clientId, payload.data.range.start, payload.data.range.end, payload.data.format, payload.data.email).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(() => _actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.sendStatementSuccess(undefined))))));
+        this.sendStatementSuccess$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.sendStatementSuccess), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(() => _store_notify_actions__WEBPACK_IMPORTED_MODULE_2__.NotifyActions.successNotification({ message: 'sucess', title: 'success' }))));
+        this.showRequisitesModal$ = (0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.createEffect)(() => this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.openRequisitesModal), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_13__.withLatestFrom)((0,_store_shared__WEBPACK_IMPORTED_MODULE_3__.notNullAndUndefined)(this.store, _selectors__WEBPACK_IMPORTED_MODULE_9__.AcctDetailsSelectors.currentAccount)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_14__.map)(([, account]) => _actions__WEBPACK_IMPORTED_MODULE_7__.AcctActions.openRequisitesModal({ account }))));
     }
     ngrxOnRunEffects(resolvedEffects$) {
-        return this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.initDetails), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_18__.tap)((action) => console.log(action)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_21__.exhaustMap)(() => resolvedEffects$.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.takeUntil)(this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_6__.AcctDetailsActions.destroyDetails))))));
+        return this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.initDetails), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.tap)((action) => console.log(action)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_23__.exhaustMap)(() => resolvedEffects$.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_22__.takeUntil)(this.actions$.pipe((0,_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.ofType)(_actions__WEBPACK_IMPORTED_MODULE_8__.AcctDetailsActions.destroyDetails))))));
     }
 }
-AcctDetailsEffects.ɵfac = function AcctDetailsEffects_Factory(t) { return new (t || AcctDetailsEffects)(_angular_core__WEBPACK_IMPORTED_MODULE_22__["ɵɵinject"](_ngrx_effects__WEBPACK_IMPORTED_MODULE_10__.Actions), _angular_core__WEBPACK_IMPORTED_MODULE_22__["ɵɵinject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_23__.Store), _angular_core__WEBPACK_IMPORTED_MODULE_22__["ɵɵinject"](_services_acct_service__WEBPACK_IMPORTED_MODULE_9__.AcctService), _angular_core__WEBPACK_IMPORTED_MODULE_22__["ɵɵinject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_24__.TranslateService)); };
-AcctDetailsEffects.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_22__["ɵɵdefineInjectable"]({ token: AcctDetailsEffects, factory: AcctDetailsEffects.ɵfac, providedIn: 'root' });
+AcctDetailsEffects.ɵfac = function AcctDetailsEffects_Factory(t) { return new (t || AcctDetailsEffects)(_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_ngrx_effects__WEBPACK_IMPORTED_MODULE_12__.Actions), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_25__.Store), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_services_acct_service__WEBPACK_IMPORTED_MODULE_11__.AcctService), _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵinject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_26__.TranslateService)); };
+AcctDetailsEffects.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjectable"]({ token: AcctDetailsEffects, factory: AcctDetailsEffects.ɵfac, providedIn: 'root' });
 
 
 /***/ }),
@@ -866,7 +892,7 @@ __webpack_require__.r(__webpack_exports__);
 const validateAndUpdateEditForm = (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.updateGroup)({
     name: (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.validate)(ngrx_forms_validation__WEBPACK_IMPORTED_MODULE_3__.required, (0,ngrx_forms_validation__WEBPACK_IMPORTED_MODULE_3__.maxLength)(70))
 });
-const acctDetailsReducer = (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.wrapReducerWithFormStateUpdate)((0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.createReducer)(_store__WEBPACK_IMPORTED_MODULE_1__.initialAcctDetailsState, (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.onNgrxForms)(), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.setCurrentAccount, (state, action) => (Object.assign(Object.assign({}, state), { account: action.account }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.setEditFormInitState, (state) => (Object.assign(Object.assign({}, state), { editForm: _store__WEBPACK_IMPORTED_MODULE_1__.initialEditFormState }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTurnoversSuccess, (state, action) => (Object.assign(Object.assign({}, state), { turnovers: action.payload }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.openTurnovers, (state, action) => (Object.assign(Object.assign({}, state), { openTurnovers: [...state.openTurnovers, action.id] }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.closeTurnovers, (state, action) => (Object.assign(Object.assign({}, state), { openTurnovers: state.openTurnovers.filter(p => p !== action.id) }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsRequest, (state, action) => (Object.assign(Object.assign({}, state), { loadTurnovers: [...state.loadTurnovers, action.payload] }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsFailure, _actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsSuccess, _actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsCancel, (state, action) => (Object.assign(Object.assign({}, state), { loadTurnovers: state.loadTurnovers.filter(p => p !== action.payload.id) }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsSuccess, (state, action) => {
+const acctDetailsReducer = (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.wrapReducerWithFormStateUpdate)((0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.createReducer)(_store__WEBPACK_IMPORTED_MODULE_1__.initialAcctDetailsState, (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_2__.onNgrxForms)(), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.setCurrentAccount, (state, action) => (Object.assign(Object.assign({}, state), { account: action.account }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.setEditFormInitState, (state) => (Object.assign(Object.assign({}, state), { editForm: _store__WEBPACK_IMPORTED_MODULE_1__.initialEditFormState }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTurnoversRequest, (state) => (Object.assign(Object.assign({}, state), { openTurnovers: [], loadTurnovers: [], turnovers: [] }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTurnoversSuccess, (state, action) => (Object.assign(Object.assign({}, state), { turnovers: action.payload }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.openTurnovers, (state, action) => (Object.assign(Object.assign({}, state), { openTurnovers: [...state.openTurnovers, action.id] }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.closeTurnovers, (state, action) => (Object.assign(Object.assign({}, state), { openTurnovers: state.openTurnovers.filter(p => p !== action.id) }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsRequest, (state, action) => (Object.assign(Object.assign({}, state), { loadTurnovers: [...state.loadTurnovers, action.payload] }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsFailure, _actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsSuccess, _actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsCancel, (state, action) => (Object.assign(Object.assign({}, state), { loadTurnovers: state.loadTurnovers.filter(p => p !== action.payload.id) }))), (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_4__.on)(_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.loadTransactionsSuccess, (state, action) => {
     var _a;
     return (Object.assign(Object.assign({}, state), { turnovers: (_a = state.turnovers) === null || _a === void 0 ? void 0 : _a.map(turnover => turnover.Id === action.payload.id ? Object.assign(Object.assign({}, turnover), { Transactions: action.payload.transactions }) :
             turnover) }));
@@ -910,12 +936,14 @@ var AcctDetailsSelectors;
     AcctDetailsSelectors.currentAccount = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, AcctDetailsSelectors.detailStore, AcctDetailsSelectors.currentAccountRouteParams, (acctState, detailState, routeParams) => { var _a; return (detailState === null || detailState === void 0 ? void 0 : detailState.account) || ((_a = acctState.accounts) === null || _a === void 0 ? void 0 : _a.find(p => p.Id === routeParams.accountId)); });
     AcctDetailsSelectors.filterTransactions = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.detailStore, state => state === null || state === void 0 ? void 0 : state.transactionsFilterForm);
     AcctDetailsSelectors.transactionsRange = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.filterTransactions, state => ({ start: dayjs__WEBPACK_IMPORTED_MODULE_1___default()(state === null || state === void 0 ? void 0 : state.value.range.value.start), end: dayjs__WEBPACK_IMPORTED_MODULE_1___default()(state === null || state === void 0 ? void 0 : state.value.range.value.end) }));
+    AcctDetailsSelectors.transactionsRangeString = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.transactionsRange, range => ({ start: range.start.format('DD.MM.YYYY'), end: range.end.format('DD.MM.YYYY') }));
     AcctDetailsSelectors.isLoadingCurrentAccount = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, state => state.loadings.indexOf(_models_acct_loadings_enum__WEBPACK_IMPORTED_MODULE_2__.AcctLoadings.details) >= 0);
     AcctDetailsSelectors.isLoadingTurnovers = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, state => state.loadings.indexOf(_models_acct_loadings_enum__WEBPACK_IMPORTED_MODULE_2__.AcctLoadings.turnovers) >= 0);
     AcctDetailsSelectors.isLoadingTransactions = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, state => state.loadings.indexOf(_models_acct_loadings_enum__WEBPACK_IMPORTED_MODULE_2__.AcctLoadings.transactions) >= 0);
-    AcctDetailsSelectors.isLoadingDetailsPage = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.isLoadingTurnovers, AcctDetailsSelectors.isLoadingCurrentAccount, AcctDetailsSelectors.isLoadingTransactions, 
+    AcctDetailsSelectors.isLoadingStatement = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, state => state.loadings.indexOf(_models_acct_loadings_enum__WEBPACK_IMPORTED_MODULE_2__.AcctLoadings.statement) >= 0);
+    AcctDetailsSelectors.isLoadingDetailsPage = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.isLoadingTurnovers, AcctDetailsSelectors.isLoadingCurrentAccount, AcctDetailsSelectors.isLoadingTransactions, AcctDetailsSelectors.isLoadingStatement, 
     // tslint:disable-next-line: no-shadowed-variable
-    (isLoadingTurnovers, isLoadingCurrentAccount, isLoadingTransactions) => isLoadingTurnovers || isLoadingCurrentAccount || isLoadingTransactions);
+    (isLoadingTurnovers, isLoadingCurrentAccount, isLoadingTransactions, isLoadingStatement) => isLoadingTurnovers || isLoadingCurrentAccount || isLoadingTransactions || isLoadingStatement);
     AcctDetailsSelectors.isLoadingTransaction = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(_selectors__WEBPACK_IMPORTED_MODULE_3__.AcctSelectors.acctStore, state => state.loadings.indexOf(_models_acct_loadings_enum__WEBPACK_IMPORTED_MODULE_2__.AcctLoadings.transaction) >= 0);
     AcctDetailsSelectors.currencyCode = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.currentAccount, (account) => account === null || account === void 0 ? void 0 : account.CurrencyCode);
     AcctDetailsSelectors.openTurnovers = (0,_ngrx_store__WEBPACK_IMPORTED_MODULE_5__.createSelector)(AcctDetailsSelectors.detailStore, (store) => store.openTurnovers);
@@ -958,7 +986,7 @@ const initialEditFormState = (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_1__.createFo
 });
 const initialTransactions = (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_1__.createFormGroupState)(ACCT_TRANSACTIONS_FILTER_FORM, {
     range: (0,ngrx_forms__WEBPACK_IMPORTED_MODULE_1__.box)({
-        start: dayjs__WEBPACK_IMPORTED_MODULE_0___default()(dayjs__WEBPACK_IMPORTED_MODULE_0___default()().subtract(3, 'year').format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString(),
+        start: dayjs__WEBPACK_IMPORTED_MODULE_0___default()(dayjs__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString(),
         end: dayjs__WEBPACK_IMPORTED_MODULE_0___default()(dayjs__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD'), 'YYYY-MM-DD').toISOString()
     })
 });
@@ -1932,20 +1960,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccountTurnoversHeaderComponent": () => (/* binding */ AccountTurnoversHeaderComponent)
 /* harmony export */ });
-/* harmony import */ var _store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @store/acct/details/selectors */ 75873);
-/* harmony import */ var _store_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @store/shared */ 87687);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ 70160);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngrx/store */ 17562);
-/* harmony import */ var _ngrx_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ngrx/component */ 87906);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ 54364);
-/* harmony import */ var _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../@shared/components/b1-card-loader/b1-card-loader.component */ 78296);
-/* harmony import */ var _shared_directives_b1_icon_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../@shared/directives/b1-icon.directive */ 14043);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 1707);
-/* harmony import */ var ngrx_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngrx-forms */ 94441);
-/* harmony import */ var _shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../@shared/components/b1-daterangepicker/b1-daterangepicker.directive */ 70912);
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ngx-translate/core */ 70325);
+/* harmony import */ var _store_acct_details_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @store/acct/details/actions */ 50081);
+/* harmony import */ var _store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @store/acct/details/selectors */ 75873);
+/* harmony import */ var _store_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @store/shared */ 87687);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dayjs */ 70160);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ngrx/store */ 17562);
+/* harmony import */ var _services_resize_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @services/resize.service */ 74296);
+/* harmony import */ var _ngrx_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ngrx/component */ 87906);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ 54364);
+/* harmony import */ var _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../@shared/components/b1-card-loader/b1-card-loader.component */ 78296);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var ngrx_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngrx-forms */ 94441);
+/* harmony import */ var _shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../../@shared/components/b1-daterangepicker/b1-daterangepicker.directive */ 70912);
+/* harmony import */ var _shared_directives_b1_icon_directive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../../@shared/directives/b1-icon.directive */ 14043);
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ 81288);
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ngx-translate/core */ 70325);
 
 
 
@@ -1959,77 +1990,146 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function AccountTurnoversHeaderComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](1, "div", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](2, "div", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipe"](4, "translate");
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](5, "div", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](6, "div", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](7, "div", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](8, "button", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](9, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](10, "button", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](11, "form", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](12, "div", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](13, "input", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](14, "label", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
+
+
+
+function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_3_Template(rf, ctx) { if (rf & 1) {
+    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_3_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r10); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](5); return ctx_r9.showStatement(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](1, "i", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](3, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const form_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]().ngrxLet;
-    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵpipeBind1"](4, 5, "components.acct.accountTurnovers"), " ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngrxFormState", form_r1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngrxFormControlState", form_r1.controls.range)("ngrxValueConverter", ctx_r2.rangeValueConverter)("ranges", ctx_r2.ranges);
+    const isLoading_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](3).ngrxLet;
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("disabled", isLoading_r3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](3, 2, "components.acct.getStatement"), " ");
+} }
+function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_4_Template(rf, ctx) { if (rf & 1) {
+    const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "button", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_4_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r13); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](5); return ctx_r12.showStatement(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const isLoading_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](3).ngrxLet;
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("disabled", isLoading_r3);
+} }
+function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_Template(rf, ctx) { if (rf & 1) {
+    const _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](1, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](2, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](3, AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_3_Template, 4, 4, "button", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](4, AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_button_4_Template, 1, 1, "button", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](5, "div", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](6, "button", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("click", function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_Template_button_click_6_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r16); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](4); return ctx_r15.showRequisites(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](7, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](8, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](9, "button", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](10, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const isMobile_r6 = ctx.ngrxLet;
+    const isLoading_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"](2).ngrxLet;
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", !isMobile_r6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", isMobile_r6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("disabled", isLoading_r3)("ngbTooltip", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](7, 7, "components.acct.share"))("disableTooltip", isMobile_r6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("disabled", isLoading_r3)("ngbTooltip", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](10, 9, "components.acct.geExportStatement"));
+} }
+function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](1, "div", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](2, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtext"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](4, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](5, AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_div_5_Template, 11, 11, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](6, "form", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](7, "div", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](8, "input", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](9, "label", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const isLoading_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]().ngrxLet;
+    const form_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]().ngrxLet;
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](4, 7, "components.acct.accountTurnovers"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngrxLet", ctx_r4.isMobile$);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngrxFormState", form_r1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("disabled", isLoading_r3)("ngrxFormControlState", form_r1.controls.range)("ngrxValueConverter", ctx_r4.rangeValueConverter)("ranges", ctx_r4.ranges);
+} }
+function AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementContainerStart"](0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](1, AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_div_1_Template, 10, 9, "div", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](2, "b1-card-loader", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementContainerEnd"]();
+} if (rf & 2) {
+    const form_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]().ngrxLet;
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", form_r1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("isLoading", ctx_r2.isLoading$);
 } }
 function AccountTurnoversHeaderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](1, AccountTurnoversHeaderComponent_ng_container_0_div_1_Template, 15, 7, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](2, "b1-card-loader", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementContainerEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementContainerStart"](0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](1, AccountTurnoversHeaderComponent_ng_container_0_ng_container_1_Template, 3, 2, "ng-container", 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
-    const form_r1 = ctx.ngrxLet;
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngIf", form_r1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("isLoading", ctx_r0.isLoading$);
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngrxLet", ctx_r0.isLoading$);
 } }
 class AccountTurnoversHeaderComponent {
-    constructor(store) {
+    constructor(store, resizeService) {
         this.store = store;
-        this.form$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsSelectors.filterTransactions);
-        this.isLoading$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsSelectors.isLoadingDetailsPage);
-        this.rangeValueConverter = _store_shared__WEBPACK_IMPORTED_MODULE_1__.rangeValueConverter;
+        this.resizeService = resizeService;
+        this.form$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_1__.AcctDetailsSelectors.filterTransactions);
+        this.isLoading$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_1__.AcctDetailsSelectors.isLoadingDetailsPage);
+        this.isMobile$ = this.resizeService.isMobile$;
+        this.rangeValueConverter = _store_shared__WEBPACK_IMPORTED_MODULE_2__.rangeValueConverter;
         this.ranges = {
-            'shared.picker.today': [dayjs__WEBPACK_IMPORTED_MODULE_2___default()(), dayjs__WEBPACK_IMPORTED_MODULE_2___default()()],
-            'shared.picker.currentMonth': [dayjs__WEBPACK_IMPORTED_MODULE_2___default()().startOf('month'), dayjs__WEBPACK_IMPORTED_MODULE_2___default()()],
-            'shared.picker.month1': [dayjs__WEBPACK_IMPORTED_MODULE_2___default()().subtract(1, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_2___default()()],
-            'shared.picker.month2': [dayjs__WEBPACK_IMPORTED_MODULE_2___default()().subtract(2, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_2___default()()],
-            'shared.picker.month3': [dayjs__WEBPACK_IMPORTED_MODULE_2___default()().subtract(3, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_2___default()()],
+            'shared.picker.today': [dayjs__WEBPACK_IMPORTED_MODULE_3___default()(), dayjs__WEBPACK_IMPORTED_MODULE_3___default()()],
+            'shared.picker.currentMonth': [dayjs__WEBPACK_IMPORTED_MODULE_3___default()().startOf('month'), dayjs__WEBPACK_IMPORTED_MODULE_3___default()()],
+            'shared.picker.month1': [dayjs__WEBPACK_IMPORTED_MODULE_3___default()().subtract(1, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_3___default()()],
+            'shared.picker.month2': [dayjs__WEBPACK_IMPORTED_MODULE_3___default()().subtract(2, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_3___default()()],
+            'shared.picker.month3': [dayjs__WEBPACK_IMPORTED_MODULE_3___default()().subtract(3, 'month'), dayjs__WEBPACK_IMPORTED_MODULE_3___default()()],
         };
     }
     ngOnInit() {
     }
+    showStatement() {
+        this.store.dispatch(_store_acct_details_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.showStatement());
+    }
+    showRequisites() {
+        this.store.dispatch(_store_acct_details_actions__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsActions.openRequisitesModal());
+    }
 }
-AccountTurnoversHeaderComponent.ɵfac = function AccountTurnoversHeaderComponent_Factory(t) { return new (t || AccountTurnoversHeaderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_7__.Store)); };
-AccountTurnoversHeaderComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineComponent"]({ type: AccountTurnoversHeaderComponent, selectors: [["account-turnovers-header"]], decls: 1, vars: 1, consts: [[4, "ngrxLet"], ["class", "account-actions", 4, "ngIf"], [3, "isLoading"], [1, "account-actions"], [1, "account-actions_title"], [1, "b1-title3"], [1, "account-actions_buttons"], [1, "b1-page-icons", 2, "margin-left", "0"], ["ng-if", "IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'"], ["ng-click", "histCtrl.showShareWindow()", "b1-icon", "", "icon", "file-details", "ng-disabled", "importCtrl.state.isLoading", 1, "b1-page-icon"], ["ng-click", "histCtrl.showExportStatementWindow()", "b1-icon", "", "icon", "export", "ng-disabled", "importCtrl.state.isLoading", 1, "b1-page-icon"], [1, "account-actions_calendar", 3, "ngrxFormState"], [1, "b1-page-inputWithIcon"], ["b1-daterangepicker", "", "startKey", "start", "endKey", "end", "name", "daterange", "readonly", "", 1, "b1-datepicker__input", "b1-rangepicker", 3, "ngrxFormControlState", "ngrxValueConverter", "ranges"], ["for", "calendar", "b1-icon", "", "icon", "calendar"]], template: function AccountTurnoversHeaderComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](0, AccountTurnoversHeaderComponent_ng_container_0_Template, 3, 2, "ng-container", 0);
+AccountTurnoversHeaderComponent.ɵfac = function AccountTurnoversHeaderComponent_Factory(t) { return new (t || AccountTurnoversHeaderComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_9__.Store), _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdirectiveInject"](_services_resize_service__WEBPACK_IMPORTED_MODULE_4__.ResizeService)); };
+AccountTurnoversHeaderComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineComponent"]({ type: AccountTurnoversHeaderComponent, selectors: [["account-turnovers-header"]], decls: 1, vars: 1, consts: [[4, "ngrxLet"], ["class", "account-actions", 4, "ngIf"], [3, "isLoading"], [1, "account-actions"], [1, "account-actions_title"], [1, "b1-title3"], ["class", "account-actions_buttons", 4, "ngrxLet"], [1, "account-actions_calendar", 3, "ngrxFormState"], [1, "b1-page-inputWithIcon"], ["b1-daterangepicker", "", "startKey", "start", "endKey", "end", "name", "daterange", "readonly", "", 1, "b1-datepicker__input", "b1-rangepicker", 3, "disabled", "ngrxFormControlState", "ngrxValueConverter", "ranges"], ["for", "calendar", "b1-icon", "", "icon", "calendar"], [1, "account-actions_buttons"], [1, "b1-page-icons", 2, "margin-left", "0"], ["class", "b1-button-primary b1-button-primary_filled b1-mr-4 b1-ml-4", "ng-disabled", "importCtrl.state.isLoading", 3, "disabled", "click", 4, "ngIf"], ["class", "b1-page-icon", "b1-icon", "", "icon", "turnovers", "ng-disabled", "importCtrl.state.isLoading", 3, "disabled", "click", 4, "ngIf"], ["ng-if", "IsEnableFunction('Accounts','Requisites') && accDetailCtrl.acc.CurrencyCode=='UAH'"], ["b1-icon", "", "icon", "file-details", "container", "body", "tooltipClass", "b1-base", 1, "b1-page-icon", 3, "disabled", "ngbTooltip", "disableTooltip", "click"], ["ng-click", "histCtrl.showExportStatementWindow()", "b1-icon", "", "icon", "export", "container", "body", "tooltipClass", "b1-base", 1, "b1-page-icon", 3, "disabled", "ngbTooltip"], ["ng-disabled", "importCtrl.state.isLoading", 1, "b1-button-primary", "b1-button-primary_filled", "b1-mr-4", "b1-ml-4", 3, "disabled", "click"], ["b1-icon", "", "icon", "turnovers"], ["b1-icon", "", "icon", "turnovers", "ng-disabled", "importCtrl.state.isLoading", 1, "b1-page-icon", 3, "disabled", "click"]], template: function AccountTurnoversHeaderComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](0, AccountTurnoversHeaderComponent_ng_container_0_Template, 2, 1, "ng-container", 0);
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("ngrxLet", ctx.form$);
-    } }, directives: [_ngrx_component__WEBPACK_IMPORTED_MODULE_8__.LetDirective, _angular_common__WEBPACK_IMPORTED_MODULE_9__.NgIf, _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_3__.B1CardLoaderComponent, _shared_directives_b1_icon_directive__WEBPACK_IMPORTED_MODULE_4__.B1IconDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.NgForm, ngrx_forms__WEBPACK_IMPORTED_MODULE_11__.NgrxFormDirective, ngrx_forms__WEBPACK_IMPORTED_MODULE_11__.NgrxStatusCssClassesDirective, _shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_5__.DaterangepickerDirective, ngrx_forms__WEBPACK_IMPORTED_MODULE_11__.NgrxDefaultViewAdapter, ngrx_forms__WEBPACK_IMPORTED_MODULE_11__.NgrxFormControlDirective], pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_12__.TranslatePipe], styles: [".account-actions[_ngcontent-%COMP%] {\n  padding: 16px;\n  height: 76px;\n}\n@media (max-width: 812px) {\n  .account-actions[_ngcontent-%COMP%] {\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n    height: auto;\n  }\n}\n.account-actions_title[_ngcontent-%COMP%] {\n  float: left;\n}\n@media (max-width: 812px) {\n  .account-actions_title[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n.account-actions_buttons[_ngcontent-%COMP%] {\n  margin-left: 16px;\n  float: left;\n}\n@media (max-width: 812px) {\n  .account-actions_buttons[_ngcontent-%COMP%] {\n    margin-top: 8px;\n    margin-left: 0;\n  }\n}\n.account-actions_calendar[_ngcontent-%COMP%] {\n  float: right;\n}\n@media (max-width: 812px) {\n  .account-actions_calendar[_ngcontent-%COMP%] {\n    flex: 1;\n    margin-top: 8px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjY291bnQtdHVybm92ZXJzLWhlYWRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxZQUFBO0FBQ0o7QUFDSTtFQUpKO0lBS1EsYUFBQTtJQUNBLG1CQUFBO0lBQ0EsZUFBQTtJQUNBLFlBQUE7RUFFTjtBQUNGO0FBREk7RUFJSSxXQUFBO0FBQVI7QUFIUTtFQURKO0lBRVEsV0FBQTtFQU1WO0FBQ0Y7QUFISTtFQUtJLGlCQUFBO0VBQ0EsV0FBQTtBQUNSO0FBTlE7RUFESjtJQUVRLGVBQUE7SUFDQSxjQUFBO0VBU1Y7QUFDRjtBQUxJO0VBS0ksWUFBQTtBQUdSO0FBUFE7RUFESjtJQUVRLE9BQUE7SUFDQSxlQUFBO0VBVVY7QUFDRiIsImZpbGUiOiJhY2NvdW50LXR1cm5vdmVycy1oZWFkZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYWNjb3VudC1hY3Rpb25zIHtcclxuICAgIHBhZGRpbmc6IDE2cHg7XHJcbiAgICBoZWlnaHQ6IDc2cHg7XHJcbiAgICAvL2p1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIEBtZWRpYSAobWF4LXdpZHRoOiA4MTJweCkge1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICAgICBmbGV4LXdyYXA6IHdyYXA7XHJcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgfVxyXG4gICAgJl90aXRsZSB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIH1cclxuICAgICAgICBmbG9hdDogbGVmdDtcclxuICAgIH1cclxuICAgICZfYnV0dG9ucyB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIG1hcmdpbi10b3A6IDhweDtcclxuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IDA7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxNnB4O1xyXG4gICAgICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgfVxyXG4gICAgJl9jYWxlbmRhciB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIGZsZXg6IDE7XHJcbiAgICAgICAgICAgIG1hcmdpbi10b3A6IDhweDtcclxuICAgICAgICB9XHJcbiAgICAgICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgfVxyXG59XHJcbiJdfQ== */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngrxLet", ctx.form$);
+    } }, directives: [_ngrx_component__WEBPACK_IMPORTED_MODULE_10__.LetDirective, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, _shared_components_b1_card_loader_b1_card_loader_component__WEBPACK_IMPORTED_MODULE_5__.B1CardLoaderComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_12__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_12__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.NgForm, ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.NgrxFormDirective, ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.NgrxStatusCssClassesDirective, _shared_components_b1_daterangepicker_b1_daterangepicker_directive__WEBPACK_IMPORTED_MODULE_6__.DaterangepickerDirective, ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.NgrxDefaultViewAdapter, ngrx_forms__WEBPACK_IMPORTED_MODULE_13__.NgrxFormControlDirective, _shared_directives_b1_icon_directive__WEBPACK_IMPORTED_MODULE_7__.B1IconDirective, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_14__.NgbTooltip], pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_15__.TranslatePipe], styles: [".account-actions[_ngcontent-%COMP%] {\n  padding: 16px;\n  height: 76px;\n}\n@media (max-width: 812px) {\n  .account-actions[_ngcontent-%COMP%] {\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n    height: auto;\n  }\n}\n.account-actions_title[_ngcontent-%COMP%] {\n  float: left;\n  order: 1;\n}\n@media (max-width: 812px) {\n  .account-actions_title[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n}\n.account-actions_buttons[_ngcontent-%COMP%] {\n  margin-left: 16px;\n  float: left;\n  order: 3;\n}\n@media (max-width: 812px) {\n  .account-actions_buttons[_ngcontent-%COMP%] {\n    margin-top: 8px;\n    margin-left: 0;\n  }\n}\n.account-actions_calendar[_ngcontent-%COMP%] {\n  float: right;\n  order: 2;\n}\n@media (max-width: 812px) {\n  .account-actions_calendar[_ngcontent-%COMP%] {\n    flex: 1;\n    margin-top: 8px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjY291bnQtdHVybm92ZXJzLWhlYWRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxZQUFBO0FBQ0o7QUFDSTtFQUpKO0lBS1EsYUFBQTtJQUNBLG1CQUFBO0lBQ0EsZUFBQTtJQUNBLFlBQUE7RUFFTjtBQUNGO0FBREk7RUFJSSxXQUFBO0VBQ0EsUUFBQTtBQUFSO0FBSlE7RUFESjtJQUVRLFdBQUE7RUFPVjtBQUNGO0FBSEk7RUFLSSxpQkFBQTtFQUNBLFdBQUE7RUFDQSxRQUFBO0FBQ1I7QUFQUTtFQURKO0lBRVEsZUFBQTtJQUNBLGNBQUE7RUFVVjtBQUNGO0FBTEk7RUFLSSxZQUFBO0VBQ0EsUUFBQTtBQUdSO0FBUlE7RUFESjtJQUVRLE9BQUE7SUFDQSxlQUFBO0VBV1Y7QUFDRiIsImZpbGUiOiJhY2NvdW50LXR1cm5vdmVycy1oZWFkZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYWNjb3VudC1hY3Rpb25zIHtcclxuICAgIHBhZGRpbmc6IDE2cHg7XHJcbiAgICBoZWlnaHQ6IDc2cHg7XHJcbiAgICAvL2p1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIEBtZWRpYSAobWF4LXdpZHRoOiA4MTJweCkge1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgICAgICBmbGV4LXdyYXA6IHdyYXA7XHJcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgfVxyXG4gICAgJl90aXRsZSB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIH1cclxuICAgICAgICBmbG9hdDogbGVmdDtcclxuICAgICAgICBvcmRlcjogMTtcclxuICAgIH1cclxuICAgICZfYnV0dG9ucyB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIG1hcmdpbi10b3A6IDhweDtcclxuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IDA7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxNnB4O1xyXG4gICAgICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgICAgIG9yZGVyOiAzO1xyXG4gICAgfVxyXG4gICAgJl9jYWxlbmRhciB7XHJcbiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDgxMnB4KSB7XHJcbiAgICAgICAgICAgIGZsZXg6IDE7XHJcbiAgICAgICAgICAgIG1hcmdpbi10b3A6IDhweDtcclxuICAgICAgICB9XHJcbiAgICAgICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgICAgIG9yZGVyOiAyO1xyXG4gICAgfVxyXG59XHJcbiJdfQ== */"] });
 
 
 /***/ }),
@@ -2050,34 +2150,87 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/component */ 87906);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 54364);
 /* harmony import */ var _account_turnovers_row_account_turnovers_row_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../account-turnovers-row/account-turnovers-row.component */ 33651);
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngx-translate/core */ 70325);
 
 
 
 
 
 
-function AccountTurnoversListComponent_ng_container_0_account_turnovers_row_2_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](0, "account-turnovers-row", 3);
+
+function AccountTurnoversListComponent_ng_container_0_ng_container_1_div_1_account_turnovers_row_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](0, "account-turnovers-row", 5);
 } if (rf & 2) {
-    const turnover_r3 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("turnover", turnover_r3);
+    const turnover_r7 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("turnover", turnover_r7);
+} }
+function AccountTurnoversListComponent_ng_container_0_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, AccountTurnoversListComponent_ng_container_0_ng_container_1_div_1_account_turnovers_row_1_Template, 1, 1, "account-turnovers-row", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const turnovers_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](2).ngrxLet;
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", turnovers_r1)("ngForTrackBy", ctx_r4.trackId);
+} }
+const _c0 = function (a0, a1) { return { start: a0, end: a1 }; };
+function AccountTurnoversListComponent_ng_container_0_ng_container_1_div_2_div_6_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipe"](2, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const range_r10 = ctx.ngrxLet;
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind2"](2, 1, "components.acct.turnoversNotFound", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpureFunction2"](4, _c0, range_r10.start, range_r10.end)), " ");
+} }
+function AccountTurnoversListComponent_ng_container_0_ng_container_1_div_2_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "img", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "div", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipe"](5, "translate");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](6, AccountTurnoversListComponent_ng_container_0_ng_container_1_div_2_div_6_Template, 3, 7, "div", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](5, 2, "components.acct.turnoversNotFoundTitle"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngrxLet", ctx_r5.range$);
+} }
+function AccountTurnoversListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, AccountTurnoversListComponent_ng_container_0_ng_container_1_div_1_Template, 2, 2, "div", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, AccountTurnoversListComponent_ng_container_0_ng_container_1_div_2_Template, 7, 4, "div", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
+} if (rf & 2) {
+    const isLoading_r3 = ctx.ngrxLet;
+    const turnovers_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]().ngrxLet;
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", turnovers_r1 && turnovers_r1.length !== 0 && !isLoading_r3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", (!turnovers_r1 || turnovers_r1.length === 0) && !isLoading_r3);
 } }
 function AccountTurnoversListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, AccountTurnoversListComponent_ng_container_0_account_turnovers_row_2_Template, 1, 1, "account-turnovers-row", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, AccountTurnoversListComponent_ng_container_0_ng_container_1_Template, 3, 2, "ng-container", 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
-    const turnovers_r1 = ctx.ngrxLet;
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", turnovers_r1)("ngForTrackBy", ctx_r0.trackId);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngrxLet", ctx_r0.isLoading$);
 } }
 class AccountTurnoversListComponent {
     constructor(store) {
         this.store = store;
         this.turnovers$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsSelectors.turnovers);
+        this.isLoading$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsSelectors.isLoadingTurnovers);
+        this.range$ = this.store.select(_store_acct_details_selectors__WEBPACK_IMPORTED_MODULE_0__.AcctDetailsSelectors.transactionsRangeString);
     }
     ngOnInit() {
     }
@@ -2086,11 +2239,11 @@ class AccountTurnoversListComponent {
     }
 }
 AccountTurnoversListComponent.ɵfac = function AccountTurnoversListComponent_Factory(t) { return new (t || AccountTurnoversListComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_ngrx_store__WEBPACK_IMPORTED_MODULE_3__.Store)); };
-AccountTurnoversListComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AccountTurnoversListComponent, selectors: [["account-turnovers-list"]], decls: 1, vars: 1, consts: [[4, "ngrxLet"], [1, "b1-page-data", "b1-page-data_auto"], [3, "turnover", 4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "turnover"]], template: function AccountTurnoversListComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](0, AccountTurnoversListComponent_ng_container_0_Template, 3, 2, "ng-container", 0);
+AccountTurnoversListComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AccountTurnoversListComponent, selectors: [["account-turnovers-list"]], decls: 1, vars: 1, consts: [[4, "ngrxLet"], ["class", "b1-page-data b1-page-data_auto", 4, "ngIf"], ["class", "b1-page-data", 4, "ngIf"], [1, "b1-page-data", "b1-page-data_auto"], [3, "turnover", 4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "turnover"], [1, "b1-page-data"], [1, "b1-page-data_empty"], ["src", "../../../../../../../assets/img/no-turnovers.svg", "alt", "no-turnovers", 1, "b1-page-data_empty_img"], [1, "b1-page-data_empty_title", "b1-title3"], ["class", "b1-page-data_empty_subtitle b1-medium", 4, "ngrxLet"], [1, "b1-page-data_empty_subtitle", "b1-medium"]], template: function AccountTurnoversListComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](0, AccountTurnoversListComponent_ng_container_0_Template, 2, 1, "ng-container", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngrxLet", ctx.turnovers$);
-    } }, directives: [_ngrx_component__WEBPACK_IMPORTED_MODULE_4__.LetDirective, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _account_turnovers_row_account_turnovers_row_component__WEBPACK_IMPORTED_MODULE_1__.AccountTurnoversRowComponent], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n}\n@media (max-width: 812px) {\n  [_nghost-%COMP%] {\n    margin-top: 16px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjY291bnQtdHVybm92ZXJzLWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxPQUFBO0FBQ0o7QUFBSTtFQUpKO0lBS1EsZ0JBQUE7RUFHTjtBQUNGIiwiZmlsZSI6ImFjY291bnQtdHVybm92ZXJzLWxpc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgIGZsZXg6IDE7XHJcbiAgICBAbWVkaWEgKG1heC13aWR0aDogODEycHgpIHtcclxuICAgICAgICBtYXJnaW4tdG9wOiAxNnB4O1xyXG4gICAgfVxyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [_ngrx_component__WEBPACK_IMPORTED_MODULE_4__.LetDirective, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _account_turnovers_row_account_turnovers_row_component__WEBPACK_IMPORTED_MODULE_1__.AccountTurnoversRowComponent], pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__.TranslatePipe], styles: ["[_nghost-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  flex: 1;\n}\n@media (max-width: 812px) {\n  [_nghost-%COMP%] {\n    margin-top: 16px;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjY291bnQtdHVybm92ZXJzLWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxPQUFBO0FBQ0o7QUFBSTtFQUpKO0lBS1EsZ0JBQUE7RUFHTjtBQUNGIiwiZmlsZSI6ImFjY291bnQtdHVybm92ZXJzLWxpc3QuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgIGZsZXg6IDE7XHJcbiAgICBAbWVkaWEgKG1heC13aWR0aDogODEycHgpIHtcclxuICAgICAgICBtYXJnaW4tdG9wOiAxNnB4O1xyXG4gICAgfVxyXG59XHJcbiJdfQ== */"] });
 
 
 /***/ }),

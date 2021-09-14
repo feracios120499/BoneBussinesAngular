@@ -18,6 +18,7 @@ import {
     SimpleChanges,
     ViewContainerRef,
 } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateRange } from '@models/date-range.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _dayjs from 'dayjs';
@@ -39,9 +40,8 @@ const dayjs = _dayjs;
         '(keyup)': 'inputChanged($event)'
     },
     providers: [{
-        provide: NGRX_FORM_VIEW_ADAPTER,
-        useExisting: forwardRef(() => DaterangepickerDirective),
-        multi: true,
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => DaterangepickerDirective), multi: true
     }],
 })
 export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, FormViewAdapter {
@@ -68,7 +68,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
     @Input()
     dateLimit?: number = undefined;
     @Input()
-    singleDatePicker?: boolean;
+    singleDatePicker = false;
     @Input()
     showWeekNumbers?: boolean;
     @Input()

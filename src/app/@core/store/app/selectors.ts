@@ -16,10 +16,5 @@ export namespace AppSelectors {
         UserSelectors.currentCustomer,
         (currentCustomer) => currentCustomer?.BankDate
     );
-
-    export const isMobile = createSelector(
-        appStore,
-        () => window.innerWidth <= environment.mobileWidth
-    );
 }
 

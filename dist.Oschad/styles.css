@@ -11700,9 +11700,6 @@ body.dark-mode {
 .modal-footer {
   border-top-color: var(--color-light-300);
 }
-.modal-backdrop {
-  background-color: #001731;
-}
 #toast-container .toast {
   font-size: 16px;
   font-family: "Futura PT Book", sans-serif;
@@ -12777,46 +12774,91 @@ body.dark-mode {
   border-color: var(--color-error);
   box-shadow: 0 0 0 3px rgba(255, 31, 31, 0.2);
 }
-.b1-input .form-control {
+.b1-input ng-select .ng-select-container {
+  cursor: pointer;
+}
+.b1-input ng-select.ng-select-opened .ng-select-container {
+  border-color: var(--color-info) !important;
+  box-shadow: 0 0 0 3px rgba(0, 135, 158, 0.4) !important;
+}
+.b1-input ng-select.ng-select-opened .ng-select-container .ng-arrow {
+  top: -2px;
+  border-color: transparent transparent #999;
+  border-width: 0 5px 5px;
+}
+.b1-input ng-select.ng-select-opened .ng-select-container .ng-arrow:hover {
+  border-color: transparent transparent #333;
+}
+.b1-input .form-control,
+.b1-input .ng-select-container {
   font-size: 16px;
   font-family: "Futura PT Book", sans-serif;
   line-height: 1.5;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  position: relative;
-  height: 38px;
-  z-index: 5;
-  width: 100%;
-  padding: 10px 16px;
-  background-color: transparent;
-  box-shadow: none;
-  color: var(--color-dark);
-  border: 1px solid var(--color-dark-500);
+  display: flex !important;
+  justify-content: left !important;
+  align-items: center !important;
+  position: relative !important;
+  height: 38px !important;
+  z-index: 5 !important;
+  width: 100% !important;
+  padding: 10px 16px !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--color-dark) !important;
+  border: 1px solid var(--color-dark-500) !important;
   border-radius: 4px;
   transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-.b1-input .form-control.ui-select-multiple {
+.b1-input .form-control.ng-select-open,
+.b1-input .ng-select-container.ng-select-open {
+  border-color: var(--color-info) !important;
+  box-shadow: 0 0 0 3px rgba(0, 135, 158, 0.4) !important;
+}
+.b1-input .form-control.ui-select-multiple,
+.b1-input .ng-select-container.ui-select-multiple {
   height: auto;
 }
-.b1-input .form-control:hover {
+.b1-input .form-control:hover,
+.b1-input .ng-select-container:hover {
   border-color: rgba(var(--color-dark-500-rgb), 0.8);
   box-shadow: none;
 }
-.b1-input .form-control:focus {
+.b1-input .form-control:focus,
+.b1-input .ng-select-container:focus {
   border-color: var(--color-info);
   box-shadow: 0 0 0 3px rgba(0, 135, 158, 0.4);
 }
-.b1-input .form-control:disabled, .b1-input .form-control.ng-disabled {
+.b1-input .form-control:disabled, .b1-input .form-control.ng-disabled,
+.b1-input .ng-select-container:disabled,
+.b1-input .ng-select-container.ng-disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
-.b1-input .form-control.ng-invalid.ng-touched, .b1-input .form-control.ngrx-forms-invalid.ngrx-forms-touched {
+.b1-input .form-control.ng-invalid.ng-touched, .b1-input .form-control.ngrx-forms-invalid.ngrx-forms-touched,
+.b1-input .ng-select-container.ng-invalid.ng-touched,
+.b1-input .ng-select-container.ngrx-forms-invalid.ngrx-forms-touched {
   border-color: var(--color-error);
 }
-.b1-input .form-control.ng-invalid.ng-touched:focus, .b1-input .form-control.ngrx-forms-invalid.ngrx-forms-touched:focus {
+.b1-input .form-control.ng-invalid.ng-touched:focus, .b1-input .form-control.ngrx-forms-invalid.ngrx-forms-touched:focus,
+.b1-input .ng-select-container.ng-invalid.ng-touched:focus,
+.b1-input .ng-select-container.ngrx-forms-invalid.ngrx-forms-touched:focus {
   border-color: var(--color-error);
   box-shadow: 0 0 0 3px rgba(255, 31, 31, 0.2);
+}
+.b1-input__select {
+  position: absolute;
+  opacity: 0;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+.b1-input__select_chevron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+  font-size: 14px;
 }
 .b1-input__validate-message {
   font-size: 14px;
@@ -12907,14 +12949,15 @@ body.dark-mode {
   color: var(--color-light) !important;
   box-shadow: none !important;
 }
-.ui-select-bootstrap > .ui-select-choices,
-.ui-select-bootstrap > .ui-select-no-choice {
+.ng-dropdown-panel-items {
   background-color: var(--color-light);
   margin-top: 8px;
   padding: 0;
   box-shadow: 0 8px 24px rgba(0, 23, 49, 0.2), 0 2px 4px rgba(0, 23, 49, 0.1), inset 0 0 2px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
-.ui-select-bootstrap .ui-select-choices-row > span {
+.ng-option > span {
   cursor: pointer;
   display: block;
   padding: 8px 16px;
@@ -12924,18 +12967,18 @@ body.dark-mode {
   color: var(--color-dark);
   white-space: nowrap;
 }
-.ui-select-bootstrap .ui-select-choices-row > span:hover, .ui-select-bootstrap .ui-select-choices-row > span:focus {
+.ng-option > span:hover, .ng-option > span:focus {
   text-decoration: none;
   color: var(--color-dark);
   background-color: var(--color-light-200);
 }
-.ui-select-bootstrap .ui-select-choices-row.active > span {
+.ng-option.ng-option-selected > span {
   color: #fff;
   text-decoration: none;
   outline: 0;
   background-color: var(--color-info) !important;
 }
-.ui-select-bootstrap .ui-select-choices-row.active > span:hover, .ui-select-bootstrap .ui-select-choices-row.active > span:focus {
+.ng-option.ng-option-selected > span:hover, .ng-option.ng-option-selected > span:focus {
   text-decoration: none;
   color: #fff;
   background-color: var(--color-info);
@@ -12987,6 +13030,22 @@ input.ng-invalid.ng-touched:focus,
 textarea.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched:focus {
   border-color: var(--color-error);
+}
+.ng-select .ng-arrow-wrapper {
+  width: 25px;
+  padding-right: 5px;
+}
+[dir=rtl] .ng-select .ng-arrow-wrapper {
+  padding-left: 5px;
+  padding-right: 0;
+}
+.ng-select .ng-arrow-wrapper:hover .ng-arrow {
+  border-top-color: #666;
+}
+.ng-select .ng-arrow-wrapper .ng-arrow {
+  border-color: #999 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 2.5px;
 }
 .b1-display {
   font-size: 64px;
@@ -17729,14 +17788,25 @@ textarea {
   justify-content: center;
   align-items: center;
 }
-.b1-page-data_empty img {
+@media (max-width: 812px) {
+  .b1-page-data_empty {
+    padding: 16px;
+  }
+}
+.b1-page-data_empty_img {
   width: 350px;
   height: auto;
 }
-.b1-page-data_empty span {
+.b1-page-data_empty_title {
+  margin-top: 40px;
+  color: var(--color-dark);
+  text-align: center;
+}
+.b1-page-data_empty_subtitle {
   color: var(--color-dark);
   opacity: 0.6;
-  margin-top: 40px;
+  margin-top: 8px;
+  text-align: center;
 }
 .b1-page-data__row {
   height: 90px;
@@ -18258,7 +18328,8 @@ ngx-skeleton-loader .loader {
 @media (max-width: 812px) {
   ngb-modal-window .modal-content {
     top: auto;
-    bottom: -100vh !important;
+    bottom: -100% !important;
+    bottom: calc(var(--app-height) * -1) !important;
     transition: bottom 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) !important;
   }
   ngb-modal-window.show .modal-content {
@@ -18419,6 +18490,28 @@ ngx-skeleton-loader .loader {
 }
 .payment-window-loader ngx-skeleton-loader .progress {
   background: var(--color-light-300) no-repeat !important;
+}
+ng-scrollbar {
+  --scrollbar-size: 8px;
+  --scrollbar-thumb-color: rgba(var(--color-dark-rgb), 0.5) !important;
+  --scrollbar-thumb-hover-color: rgba(var(--color-dark-rgb), 0.8) !important;
+  --scrollbar-hover-size: 12px !important;
+  --scrollbar-track-color: rgba(var(--color-dark-rgb), 0.1) !important;
+  --scrollbar-border-radius: 10px !important;
+}
+body.modal-open {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+.modal-backdrop.fade {
+  opacity: 0.5 !important;
+}
+.modal-backdrop.show {
+  opacity: 0.5 !important;
+}
+.modal-backdrop.no-animation {
+  opacity: 0.5 !important;
 }
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[2]!./node_modules/ngx-toastr/toastr.css ***!

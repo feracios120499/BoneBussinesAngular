@@ -28,7 +28,7 @@ export class AuthService extends BaseService {
     const params = new HttpParams()
       .set('grant_type', 'password')
       .set('username', loginData?.Username || '')
-      .set('userdata', loginData?.UserData || '')
+      .set('device', '{"ApplicationId":"CORP-LIGHT-WEB","DeviceModel":"Chrome","ApplicationVersion":"1.4.0","Os":"Windows64","Uuid":"ecbe8653-d63f-428a-91d9-c1ac7040443f","OsVersion":"Unknown"}')
       .set('client_id', 'CORP-LIGHT-WEB') // TODO add to environment
       .set('passphrase', loginData?.Password || '');
     const httpOptions = {

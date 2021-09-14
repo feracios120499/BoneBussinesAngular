@@ -13,14 +13,17 @@
             width: 100%;
         }
         float: left;
+        order: 1;
     }
     &_buttons {
         @media (max-width: 812px) {
             margin-top: 8px;
             margin-left: 0;
+            flex: 1;
         }
         margin-left: 16px;
         float: left;
+        order: 3;
     }
     &_calendar {
         @media (max-width: 812px) {
@@ -28,5 +31,6 @@
             margin-top: 8px;
         }
         float: right;
+        order: 2;
     }
 }

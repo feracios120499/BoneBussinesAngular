@@ -5,6 +5,7 @@ import { AcctEdit } from '@models/acct-edit.model';
 import { AcctDetailsActions } from './actions';
 import { initialEditFormState, initialAcctDetailsState } from './store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
+import { Statement } from '@angular/compiler';
 
 export const validateAndUpdateEditForm = updateGroup<AcctEdit>({
     name: validate(required, maxLength(70))
@@ -21,6 +22,10 @@ export const acctDetailsReducer = wrapReducerWithFormStateUpdate(
         on(
             AcctDetailsActions.setEditFormInitState,
             (state) => ({ ...state, editForm: initialEditFormState })
+        ),
+        on(
+            AcctDetailsActions.loadTurnoversRequest,
+            (state) => ({ ...state, openTurnovers: [], loadTurnovers: [], turnovers: [] })
         ),
         on(
             AcctDetailsActions.loadTurnoversSuccess,

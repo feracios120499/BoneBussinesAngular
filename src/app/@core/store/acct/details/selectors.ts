@@ -46,6 +46,11 @@ export namespace AcctDetailsSelectors {
         state => ({ start: dayjs(state?.value.range.value.start), end: dayjs(state?.value.range.value.end) })
     );
 
+    export const transactionsRangeString = createSelector(
+        transactionsRange,
+        range => ({ start: range.start.format('DD.MM.YYYY'), end: range.end.format('DD.MM.YYYY') })
+    );
+
     export const isLoadingCurrentAccount = createSelector(
         AcctSelectors.acctStore,
         state => state.loadings.indexOf(AcctLoadings.details) >= 0
@@ -61,13 +66,19 @@ export namespace AcctDetailsSelectors {
         state => state.loadings.indexOf(AcctLoadings.transactions) >= 0
     );
 
+    export const isLoadingStatement = createSelector(
+        AcctSelectors.acctStore,
+        state => state.loadings.indexOf(AcctLoadings.statement) >= 0
+    );
+
     export const isLoadingDetailsPage = createSelector(
         isLoadingTurnovers,
         isLoadingCurrentAccount,
         isLoadingTransactions,
+        isLoadingStatement,
         // tslint:disable-next-line: no-shadowed-variable
-        (isLoadingTurnovers, isLoadingCurrentAccount, isLoadingTransactions) =>
-            isLoadingTurnovers || isLoadingCurrentAccount || isLoadingTransactions
+        (isLoadingTurnovers, isLoadingCurrentAccount, isLoadingTransactions, isLoadingStatement) =>
+            isLoadingTurnovers || isLoadingCurrentAccount || isLoadingTransactions || isLoadingStatement
     );
 
     export const isLoadingTransaction = createSelector(

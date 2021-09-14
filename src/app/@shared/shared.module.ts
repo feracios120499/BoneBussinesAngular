@@ -24,9 +24,13 @@ import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-pat
 import { WebClassDirective } from './directives/web-class.directive';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
-import { B1PaymentModalComponent } from './components/b1-payment-modal/b1-payment-modal.component';
-import { B1StatementModalComponent } from './components/b1-statement-modal/b1-statement-modal.component';
+import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1-payment-modal.component';
+import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive';
+import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
+import { B1ExportTurnoversComponent } from './components/modals/b1-export-turnovers/b1-export-turnovers.component';
+import { B1StickyHeaderComponent } from './components/b1-sticky-header/b1-sticky-header.components';
 
 
 
@@ -53,7 +57,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     DaterangepickerComponent,
     DaterangepickerDirective,
     B1PaymentModalComponent,
-    B1StatementModalComponent],
+    B1StatementModalComponent,
+    NgSelectScrollDirective,
+    B1RequisitesModalComponent,
+    B1ExportTurnoversComponent,
+    B1StickyHeaderComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -93,7 +101,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1LinkComponent,
     DaterangepickerComponent,
     DaterangepickerDirective,
-    NgSelectModule
+    NgSelectModule,
+    NgSelectScrollDirective,
+    B1StickyHeaderComponent
   ],
   providers: [
     {

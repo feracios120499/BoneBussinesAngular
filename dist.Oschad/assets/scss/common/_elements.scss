@@ -703,10 +703,6 @@
   border-top-color: var(--color-light-300);
 }
 
-.modal-backdrop {
-  background-color: $color-dark;
-}
-
 #toast-container .toast {
   @include base;
   margin: 0 0 8px;

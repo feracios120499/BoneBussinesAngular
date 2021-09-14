@@ -1,7 +1,9 @@
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 
 export interface AccountModel {
+    RequisitesTypesList: string[];
     StatementTypesList: string[];
+    ExportTypesList: string[];
     IsStatementFree: boolean;
     IsOverdraft: boolean;
     IsCardAccount: boolean;

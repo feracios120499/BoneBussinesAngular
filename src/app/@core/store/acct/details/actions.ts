@@ -7,6 +7,8 @@ import { Turnovers } from '@models/turnovers.model';
 import { TurnoverTransaction } from '@models/turnover-transaction.model';
 import { ResponseError } from '@models/response-error.model';
 import { Transaction } from '@models/transaction.model';
+import { StatementModalResult } from '@models/statement-modal-result.model';
+import { FileModel } from '@models/file.model';
 
 
 export namespace AcctDetailsActions {
@@ -94,4 +96,36 @@ export namespace AcctDetailsActions {
         '[ACCT][Details] show transaction partial',
         props<{ transaction: TurnoverTransaction }>()
     );
+
+    export const showStatement = createAction(
+        '[ACCT][Details] show statement'
+    );
+
+    export const loadStatement = createAction(
+        '[ACCT][Details] load statement',
+        props<{ data: StatementModalResult }>()
+    );
+
+    export const [
+        downloadStatementRequest,
+        downloadStatementSuccess,
+        downloadStatementFailure
+    ] = createHTTPActions<StatementModalResult, FileModel, string>('[ACCT][Details] download statement');
+
+    export const [
+        sendStatementRequest,
+        sendStatementSuccess,
+        sendStatementFailure
+    ] = createHTTPActions<StatementModalResult, any | undefined, string>('[ACCT][Details] send statement');
+
+
+    export const showRequisitesModal = createAction('[ACCT][Details] show requisites modal');
+
+    export const showExportModal = createAction('[ACCT][Details] show export modal');
+
+    export const [
+        printTransactionRequest,
+        printTransactionSuccess,
+        printTransactionFailure
+    ] = createHTTPActions<{ transactionId: string, bankId: string }, string, string>('[ACCT][Details] print transaction');
 }

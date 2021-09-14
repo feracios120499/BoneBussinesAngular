@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { SharedActions } from './actions';
 import { initialState } from './store';
 
