@@ -16,14 +16,26 @@
         order: 1;
     }
     &_buttons {
-        @media (max-width: 812px) {
-            margin-top: 8px;
-            margin-left: 0;
-            flex: 1;
+        & .b1-page-more {
+            display: none;
         }
         margin-left: 16px;
         float: left;
         order: 3;
+        @media (max-width: 812px) {
+            margin-top: 8px;
+            margin-left: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            & .b1-page-buttons {
+                display: none;
+            }
+            & .b1-page-more {
+                display: flex;
+            }
+        }
     }
     &_calendar {
         @media (max-width: 812px) {

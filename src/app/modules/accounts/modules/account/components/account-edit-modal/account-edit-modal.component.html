@@ -1,12 +1,9 @@
 <div class="b1-modal-data" *ngrxLet="editForm$ as editForm">
     <div class="b1-modal-close">
-
         <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
     </div>
     <div class="b1-modal-header">
-        <div class="b1-title2">
-            {{'components.acct.editAccount' | translate}}
-        </div>
+        {{'components.acct.editAccount' | translate}}
     </div>
     <form class="b1-modal-body b1-modal-wrapper" name="form">
         <div class="row">
@@ -22,7 +19,8 @@
         </div>
     </form>
     <div class="b1-modal-footer" ngbAutofocus>
-        <button class="b1-button-primary " type="button" (click)="save()" [disabled]="editForm.isInvalid">
+        <button class="b1-button-primary b1-button-primary_filled" type="button" (click)="save()"
+            [disabled]="editForm.isInvalid">
             <i b1-icon icon="save"></i>
             {{'actions.save' | translate}}
         </button>

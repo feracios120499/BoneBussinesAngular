@@ -118,11 +118,11 @@
         margin-top: 40px;
       }
 
-      &:not(.without-label) {
-        @media (max-width: 767px) {
-          margin-top: 40px;
-        }
-      }
+      // &:not(.without-label) {
+      //   @media (max-width: 767px) {
+      //     margin-top: 40px;
+      //   }
+      // }
 
       &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);

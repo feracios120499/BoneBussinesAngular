@@ -33,6 +33,10 @@
     top: calc(100% + 8px);
     right: 0;
     z-index: 999;
+    & .b1-separator {
+      margin: 8px 0;
+      border-top: 2px solid var(--color-light-300);
+    }
     @media (max-width: 812px) {
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
@@ -1353,13 +1357,15 @@
       color: var(--color-light);
     }
 
-    & input[type="checkbox"]:hover + label {
-      border-radius: 50%;
-      border: 2px solid;
-      border-color: $color-primary;
-      color: var(--color-light);
-      background-color: $color-primary-200;
-      cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      & input[type="checkbox"]:hover + label {
+        border-radius: 50%;
+        border: 2px solid;
+        border-color: $color-primary;
+        color: var(--color-light);
+        background-color: $color-primary-200;
+        cursor: pointer;
+      }
     }
 
     & input[type="checkbox"] + label {

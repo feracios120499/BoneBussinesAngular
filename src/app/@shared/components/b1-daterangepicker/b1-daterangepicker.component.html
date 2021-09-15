@@ -276,18 +276,18 @@
     </div>
     <div class="buttons" *ngIf="!autoApply && ( !rangesArray.length || (showCalInRanges && !singleDatePicker))">
         <div class="buttons_input">
-            <button class="b1-buttton b1-button-small" [disabled]="applyBtn.disabled" type="button"
-                (click)="clickApply($event)">{{locale.applyLabel | translate}}</button>
+            <button class="b1-buttton b1-button-small" [disabled]="applyBtn.disabled || !startDate || !endDate"
+                type="button" (click)="clickApply($event)">{{locale.applyLabel | translate}}</button>
         </div>
     </div>
 
 
 </div>
 
-<ng-template #templateref>
+<ng-template #templateref let-modal>
     <div class="b1-modal-data">
-        <div class="b1-modal-header">
-
+        <div class="b1-modal-close">
+            <i b1-icon icon="cancel" (click)="modal.close()"></i>
         </div>
         <div class="b1-modal-body modal-body">
             <div class="modal-ranges">

@@ -133,7 +133,7 @@
 	"components.acct.acctStatement.format": "формат",
 	"components.acct.acctStatement.from": "с",
 	"components.acct.acctStatement.ok": "готово",
-	"components.acct.acctStatement.send2mail": "Отправить на e-mail",
+	"components.acct.acctStatement.send2mail": "отправить на e-mail",
 	"components.acct.acctStatement.to": "по",
 	"components.acct.active": "действующие",
 	"components.acct.allAccounts": "все счета",

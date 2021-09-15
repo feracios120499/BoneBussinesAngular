@@ -1,0 +1,101 @@
+<ng-container *ngrxLet="currencyCode$ as currencyCode">
+    <div class="b1-page-data__row turnover" [class.selected]="turnover.isOpen" (click)="toggleTurnover()">
+        <div class="b1-card__col b1-card__col_expand turnover-expand">
+            <span class="b1-card__expand" [class.rotate]="turnover.isOpen" [class.rotate-wise]="!turnover.isOpen">
+                <i b1-icon [icon]="'chevron-right'"></i>
+            </span>
+        </div>
+        <div class="turnover-body">
+            <div class="turnover-date">
+                <div class="b1-base b1-color-dark-300">
+                    {{'components.acct.acctDetail.turnoverDate' | translate}}
+                </div>
+                <div class="b1-base b1-bold">
+                    {{turnover.TurnoverDate | date:'dd.MM.yyyy'}}
+                </div>
+            </div>
+            <div class="turnover-money">
+                <div class="turnover-money_item balanceIn">
+                    <div class="b1-base b1-color-dark-300">
+                        {{'components.acct.headers.inputRemains' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold">
+                        {{turnover.BalanceIn / 100 | money : currencyCode}}
+                    </div>
+                </div>
+                <div class="turnover-money_item debit">
+                    <div class="b1-base b1-color-dark-300">
+                        {{'components.acct.headers.debit' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold">
+                        {{turnover.Debit / 100 | money : currencyCode}}
+                    </div>
+                </div>
+                <div class="turnover-money_item credit">
+                    <div class="b1-base b1-color-dark-300">
+                        {{'components.acct.headers.credit' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold">
+                        {{turnover.Credit / 100 | money :currencyCode}}
+                    </div>
+                </div>
+                <div class="turnover-money_item balanceOut">
+                    <div class="b1-base b1-color-dark-300">
+                        {{'components.acct.headers.outputRemains' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold">
+                        {{turnover.BalanceOut / 100 | money : currencyCode}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="b1-page-data b1-page-data_auto turnover-transactions"
+        [hidden]="!(turnover.isOpen && turnover.Transactions)">
+        <account-transaction-row *ngFor="let payment of turnover.Transactions;let last = last" [payment]="payment"
+            [class.last]="last">
+        </account-transaction-row>
+        <!-- <div class="b1-page-data__row" name="payment">
+            <div class="b1-page-content row">
+                <div class="col-lg-1 turnover-money_item">
+                    <div class="b1-flex b1-align-center">
+                        <div class="b1-page-content_type">
+                            <div class="b1-transaction-type-loader">
+                                <ngx-skeleton-loader appearance="circle">
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="b1-medium b1-ellipsis w-50">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                    <div class="b1-medium b1-page-data__subtitle b1-light w-50">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="b1-medium">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                    <div class="b1-medium">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="b1-title3 text-right">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="b1-page-data b1-page-data_auto" [hidden]="!(turnover.isOpen && !turnover.Transactions)">
+        <account-transaction-skeleton [count]="turnover.TransactionsCount">
+
+        </account-transaction-skeleton>
+    </div>
+</ng-container>

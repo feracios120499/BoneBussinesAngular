@@ -31,6 +31,7 @@ import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1ExportTurnoversComponent } from './components/modals/b1-export-turnovers/b1-export-turnovers.component';
 import { B1StickyHeaderComponent } from './components/b1-sticky-header/b1-sticky-header.components';
+import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
 
 
 
@@ -61,7 +62,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgSelectScrollDirective,
     B1RequisitesModalComponent,
     B1ExportTurnoversComponent,
-    B1StickyHeaderComponent],
+    B1StickyHeaderComponent,
+    B1PageButtonComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -103,7 +105,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     DaterangepickerDirective,
     NgSelectModule,
     NgSelectScrollDirective,
-    B1StickyHeaderComponent
+    B1StickyHeaderComponent,
+    B1PageButtonComponent
   ],
   providers: [
     {

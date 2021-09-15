@@ -11114,6 +11114,10 @@ body.dark-mode {
   right: 0;
   z-index: 999;
 }
+.b1-dropdown .b1-separator {
+  margin: 8px 0;
+  border-top: 2px solid var(--color-light-300);
+}
 @media (max-width: 812px) {
   .b1-dropdown {
     border-top-left-radius: 16px;
@@ -12004,12 +12008,48 @@ body.dark-mode {
   }
 }
 .b1-modal-header {
+  font-size: 28px;
+  font-family: "Futura PT Demi", sans-serif;
+  line-height: 1.25;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 32px;
   margin-bottom: 16px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .b1-modal-header {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+@media (max-width: 767px) {
+  .b1-modal-header {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+}
+@media (max-width: 812px) {
+  .b1-modal-header {
+    font-size: 24px;
+    font-family: "Futura PT Demi", sans-serif;
+    line-height: 1.25;
+    margin-bottom: 0;
+    margin-top: 16px;
+  }
+}
+@media (max-width: 812px) and (min-width: 768px) and (max-width: 991px) {
+  .b1-modal-header {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+}
+@media (max-width: 812px) and (max-width: 767px) {
+  .b1-modal-header {
+    font-size: 18px;
+    line-height: 1.25;
+  }
 }
 .b1-modal-close {
   position: absolute;
@@ -12023,9 +12063,23 @@ body.dark-mode {
 .b1-modal-close:hover {
   opacity: 0.4;
 }
+@media (max-width: 812px) {
+  .b1-modal-close {
+    right: 8px;
+    top: -48px;
+    font-size: 48px;
+    color: #fff;
+    opacity: 0.7;
+  }
+}
 .b1-modal-body {
   overflow: auto;
   flex: 1;
+}
+@media (max-width: 812px) {
+  .b1-modal-body {
+    padding-bottom: 32px;
+  }
 }
 .b1-modal-wrapper {
   padding: 32px 64px;
@@ -12041,9 +12095,23 @@ body.dark-mode {
   justify-content: center;
   margin-top: 16px;
   margin-bottom: 32px;
+  position: relative;
 }
 .b1-modal-footer button {
   margin-right: 16px;
+}
+@media (max-width: 812px) {
+  .b1-modal-footer:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: -25px;
+    right: 0px;
+    bottom: 0;
+    box-shadow: 0px -36px 30px 5px var(--color-light);
+  }
 }
 .b1-modal-container {
   height: 360px;
@@ -12304,13 +12372,15 @@ body.dark-mode {
   border-radius: 50%;
   color: var(--color-light);
 }
-.b1-group-checkboxs_item input[type=checkbox]:hover + label {
-  border-radius: 50%;
-  border: 2px solid;
-  border-color: #00879e;
-  color: var(--color-light);
-  background-color: #1a93a8;
-  cursor: pointer;
+@media (hover: hover) and (pointer: fine) {
+  .b1-group-checkboxs_item input[type=checkbox]:hover + label {
+    border-radius: 50%;
+    border: 2px solid;
+    border-color: #00879e;
+    color: var(--color-light);
+    background-color: #1a93a8;
+    cursor: pointer;
+  }
 }
 .b1-group-checkboxs_item input[type=checkbox] + label {
   border-radius: 50%;
@@ -12742,11 +12812,6 @@ body.dark-mode {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .b1-input__control {
-    margin-top: 40px;
-  }
-}
-@media (max-width: 767px) {
-  .b1-input__control:not(.without-label) {
     margin-top: 40px;
   }
 }
@@ -15313,6 +15378,7 @@ h3 {
 }
 body {
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: var(--color-light-200);
 }
 .app {
@@ -17627,49 +17693,103 @@ textarea {
   align-items: center;
   margin-left: 33px;
 }
-.b1-page-icon {
+.b1-page-buttons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.b1-page-more {
   cursor: pointer;
-  transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  transition: all 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+  flex-direction: column;
+  color: var(--color-primary-light);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-primary-light);
+  background-color: rgba(var(--color-primary-light-rgb), 0.2);
+}
+.b1-page-more_icon {
+  font-size: 24px;
+}
+.b1-page-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.b1-page-button {
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: transparent;
+  border: none;
+  color: var(--color-dark-100);
+  max-width: 100px;
+}
+.b1-page-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.b1-page-button_text {
+  font-size: 16px;
+  font-family: "Futura PT Book", sans-serif;
+  line-height: 1.5;
+  transition: all 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-top: 8px;
+  text-align: center;
+  line-height: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .b1-page-button:hover:not(:disabled) .b1-page-icon {
+    background-color: rgba(0, 135, 158, 0.4) !important;
+    color: #fff;
+    border-color: #00879e;
+  }
+  .b1-page-button:hover:not(:disabled) .b1-page-button_text {
+    color: #00879e;
+  }
+}
+.b1-page-button:active:not(:disabled) .b1-page-icon {
+  background-color: #00879e !important;
+  color: #fff;
+  border-color: #00879e;
+}
+.b1-page-button:active:not(:disabled) .b1-page-button_text {
+  color: #00879e;
+}
+@media (max-width: 812px) {
+  .b1-page-button:not(:disabled) .b1-page-icon {
+    background-color: #00879e !important;
+    color: #fff;
+    border-color: #00879e;
+  }
+  .b1-page-button:not(:disabled) .b1-page-button_text {
+    color: #00879e;
+  }
+}
+.b1-page-icon {
+  transition: all 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #ccc;
   color: var(--color-dark-100);
-  font-size: 20px;
+  font-size: 24px;
 }
 .b1-page-icon.ng-animate {
   transition: none !important;
 }
 .b1-page-icon_primary {
   border-color: #00879e;
-}
-@media (hover: hover) and (pointer: fine) {
-  .b1-page-icon:hover:not(:disabled) {
-    background-color: rgba(0, 135, 158, 0.4) !important;
-    color: #fff;
-    border-color: #00879e;
-  }
-}
-.b1-page-icon:active:not(:disabled) {
-  background-color: #00879e !important;
-  color: #fff;
-  border-color: #00879e;
-}
-@media (max-width: 812px) {
-  .b1-page-icon:not(:disabled) {
-    background-color: #00879e !important;
-    color: #fff;
-    border-color: #00879e;
-  }
-}
-.b1-page-icon:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 .b1-page-inputWithIcon {
   position: relative;
@@ -17828,8 +17948,10 @@ textarea {
     margin: 0 16px;
   }
 }
-.b1-page-data__row:not(.selected):not(.skeleton):hover {
-  background-image: linear-gradient(90.03deg, rgba(21, 109, 129, 0.1) 0.36%, rgba(54, 171, 197, 0.1) 99.98%);
+@media (hover: hover) and (pointer: fine) {
+  .b1-page-data__row:not(.selected):not(.skeleton):hover {
+    background-image: linear-gradient(90.03deg, rgba(21, 109, 129, 0.1) 0.36%, rgba(54, 171, 197, 0.1) 99.98%);
+  }
 }
 .b1-page-data__row.skeleton {
   cursor: auto;
@@ -17940,77 +18062,6 @@ textarea {
 }
 .b1-opacity-6 {
   opacity: 0.6;
-}
-.daterangepicker {
-  color: var(--color-dark-200) !important;
-  background-color: var(--color-light) !important;
-  border: 1px solid var(--color-light-200) !important;
-}
-.daterangepicker .drp-calendar.left {
-  border-left: 1px solid var(--color-light-200) !important;
-}
-.daterangepicker .show-ranges.ltr .drp-calendar.right {
-  border-right: 1px solid var(--color-light-200) !important;
-}
-.daterangepicker .drp-buttons {
-  border-top: 1px solid var(--color-light-200) !important;
-}
-.daterangepicker .calendar-table {
-  border: 1px solid var(--color-light-200) !important;
-}
-.daterangepicker .drp-selected {
-  color: var(--color-dark) !important;
-}
-.daterangepicker .calendar-table {
-  background-color: var(--color-light) !important;
-}
-.daterangepicker .drp-calendar.left .calendar-table {
-  padding-left: 0px;
-}
-.daterangepicker .monthselect {
-  color: var(--color-dark-200) !important;
-  background-color: var(--color-light) !important;
-}
-.daterangepicker .yearselect {
-  color: var(--color-dark-200) !important;
-  background-color: var(--color-light) !important;
-}
-.daterangepicker td.start-date,
-.daterangepicker td.end-date {
-  background-color: #00879e !important;
-  color: #fff !important;
-  border: none !important;
-}
-.daterangepicker td {
-  background-color: transparent !important;
-}
-.daterangepicker .in-range:not(.active) {
-  border-radius: 0 !important;
-  background-color: rgba(0, 135, 158, 0.2) !important;
-  color: var(--color-dark) !important;
-}
-.daterangepicker td.available:hover, .daterangepicker th.available:hover {
-  background-color: rgba(0, 135, 158, 0.4) !important;
-  color: var(--color-dark) !important;
-}
-.daterangepicker .prev span {
-  border: solid var(--color-dark) !important;
-  border-width: 0 2px 2px 0 !important;
-  border-radius: 0 !important;
-}
-.daterangepicker .next span {
-  border: solid var(--color-dark) !important;
-  border-width: 0 2px 2px 0 !important;
-  border-radius: 0 !important;
-}
-.daterangepicker .ranges li:hover {
-  background-color: rgba(0, 135, 158, 0.4) !important;
-}
-.daterangepicker .ranges li.active {
-  background-color: #00879e !important;
-}
-.daterangepicker .drp-calendar.left.single {
-  padding: 0;
 }
 .b1-ellipsis {
   white-space: nowrap;
@@ -18370,6 +18421,17 @@ ngx-skeleton-loader .loader {
   color: var(--color-dark-200) !important;
   background-color: var(--color-light) !important;
   border: 1px solid var(--color-light-200) !important;
+  padding: 0 !important;
+  transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+  color: var(--color-dark-200) !important;
+  background-color: var(--color-light) !important;
+  border: 1px solid var(--color-light-200) !important;
+}
+@media (min-width: 812px) {
+  .md-drppicker.shown.double {
+    width: 610px;
+    left: -450px !important;
+  }
 }
 .md-drppicker tr {
   display: flex;
@@ -18439,6 +18501,11 @@ ngx-skeleton-loader .loader {
   color: var(--color-dark) !important;
   border-radius: 0 !important;
 }
+.md-drppicker .prev, .md-drppicker .next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .md-drppicker .prev span {
   border: solid var(--color-dark) !important;
   border-width: 0 2px 2px 0 !important;
@@ -18449,8 +18516,18 @@ ngx-skeleton-loader .loader {
   border-width: 0 2px 2px 0 !important;
   border-radius: 0 !important;
 }
+.md-drppicker .ranges ul li:hover {
+  background-color: inherit !important;
+}
+.md-drppicker .ranges li button {
+  font-size: 14px;
+  font-family: "Futura PT Book", sans-serif;
+  line-height: 1.25;
+  transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+  color: var(--color-dark) !important;
+}
 .md-drppicker .ranges li button:hover {
-  background-color: rgba(0, 135, 158, 0.4) !important;
+  background-color: rgba(0, 135, 158, 0.2) !important;
 }
 .md-drppicker .ranges li button.active {
   background-color: #00879e !important;
@@ -18503,15 +18580,6 @@ body.modal-open {
   position: fixed !important;
   left: 0 !important;
   right: 0 !important;
-}
-.modal-backdrop.fade {
-  opacity: 0.5 !important;
-}
-.modal-backdrop.show {
-  opacity: 0.5 !important;
-}
-.modal-backdrop.no-animation {
-  opacity: 0.5 !important;
 }
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[2]!./node_modules/ngx-toastr/toastr.css ***!

@@ -2,10 +2,11 @@
 
     <ng-container *ngrxLet="isLoading$ as isLoading">
         <div class="payment-window b1-modal-data" *ngIf="payment">
+            <div class="b1-modal-close">
+                <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
+            </div>
             <div class="b1-modal-header payment-window-header ">
-                <div class="payment-window-close">
-                    <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
-                </div>
+
                 <div class="b1-large">
                     <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
                     <span>{{'components.pay.import.payment' | translate}}</span>

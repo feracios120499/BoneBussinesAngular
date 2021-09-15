@@ -11,11 +11,11 @@
         <div class="transaction-body b1-ellipsis">
             <div class="transaction-number">
                 <div class="b1-medium b1-ellipsis" webClass="b1-medium" mobileClass="b1-base bold">
-                    <span data-translate="components.pay.number">№</span>
+                    <span>{{'components.pay.number' | translate}}</span>
                     <span> {{payment.DocumentNumber || payment.DocumentId}}</span>
                 </div>
                 <div class="b1-medium b1-page-data__subtitle b1-light" webClass="b1-medium" mobileClass="b1-base">
-                    <span data-translate="components.pay.from">від</span>:
+                    <span>{{'components.pay.from' | translate}}</span>:
                     <span>{{payment.PayedDate || payment.CreateDate | date : 'dd.MM.yyyy'}} </span>
                 </div>
             </div>

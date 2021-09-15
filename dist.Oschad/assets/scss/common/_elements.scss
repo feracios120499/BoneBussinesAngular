@@ -33,6 +33,10 @@
     top: calc(100% + 8px);
     right: 0;
     z-index: 999;
+    & .b1-separator {
+      margin: 8px 0;
+      border-top: 2px solid var(--color-light-300);
+    }
     @media (max-width: 812px) {
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
@@ -1018,12 +1022,18 @@
     }
   }
   &-header {
+    @include title3;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 32px;
     margin-bottom: 16px;
+    @media (max-width: 812px) {
+      @include large;
+      margin-bottom: 0;
+      margin-top: 16px;
+    }
   }
   &-close {
     position: absolute;
@@ -1036,10 +1046,20 @@
       opacity: 0.4;
     }
     font-size: 32px;
+    @media (max-width: 812px) {
+      right: 8px;
+      top: -48px;
+      font-size: 48px;
+      color: $color-light;
+      opacity: 0.7;
+    }
   }
   &-body {
     overflow: auto;
     flex: 1;
+    @media (max-width: 812px) {
+      padding-bottom: 32px;
+    }
   }
   &-wrapper {
     padding: 32px 64px;
@@ -1057,6 +1077,20 @@
     margin-bottom: 32px;
     & button {
       margin-right: 16px;
+    }
+    position: relative;
+    @media (max-width: 812px) {
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: -25px;
+        right: 0px;
+        bottom: 0;
+        box-shadow: 0px -36px 30px 5px var(--color-light);
+      }
     }
   }
   &-container {
@@ -1323,13 +1357,15 @@
       color: var(--color-light);
     }
 
-    & input[type="checkbox"]:hover + label {
-      border-radius: 50%;
-      border: 2px solid;
-      border-color: $color-primary;
-      color: var(--color-light);
-      background-color: $color-primary-200;
-      cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      & input[type="checkbox"]:hover + label {
+        border-radius: 50%;
+        border: 2px solid;
+        border-color: $color-primary;
+        color: var(--color-light);
+        background-color: $color-primary-200;
+        cursor: pointer;
+      }
     }
 
     & input[type="checkbox"] + label {

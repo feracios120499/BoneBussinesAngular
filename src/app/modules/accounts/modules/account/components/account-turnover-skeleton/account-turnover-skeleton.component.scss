@@ -1,0 +1,16 @@
+.skeleton {
+    & .turnover {
+        &-money {
+            &_item {
+                @media (max-width: 812px) {
+                    &.balanceIn,
+                    &.balanceOut {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                    }
+                }
+            }
+        }
+    }
+}

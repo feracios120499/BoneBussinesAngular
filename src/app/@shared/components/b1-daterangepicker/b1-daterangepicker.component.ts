@@ -1130,7 +1130,7 @@ export class DaterangepickerComponent implements OnInit {
       return;
     }
     // incomplete date selection, revert to last values
-    if ((e === 'outside' && !this.endDate) || !this.endDate) {
+    if (e === 'outside') {
       if (this._old.start) {
         this.startDate = this._old.start.clone();
       }

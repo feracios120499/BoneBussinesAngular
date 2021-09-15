@@ -11,22 +11,23 @@ export class ModalService {
     }
 
     open(content: any, options?: NgbModalOptions | undefined): NgbModalRef {
-        const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        document.body.style.top = (offset * -1) + 'px';
+        if (!document.body.classList.contains('modal-open')) {
+            const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            document.body.style.top = (offset * -1) + 'px';
+            const modalRef = this.modalService.open(content, options);
 
+            modalRef.result.then(
+                () => {
+                    window.scrollTo(0, offset);
+                    document.body.style.top = 'auto';
+                },
+                () => {
+                    window.scrollTo(0, offset);
+                    document.body.style.top = 'auto';
+                });
 
-        const modalRef = this.modalService.open(content, options);
-
-        modalRef.result.then(
-            () => {
-                window.scrollTo(0, offset);
-                document.body.removeAttribute('style');
-            },
-            () => {
-                window.scrollTo(0, offset);
-                document.body.removeAttribute('style');
-            });
-
-        return modalRef;
+            return modalRef;
+        }
+        return this.modalService.open(content, options);
     }
 }

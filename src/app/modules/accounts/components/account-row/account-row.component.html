@@ -1,11 +1,11 @@
-<div class="account">
+<div class="account" mobileClass="b1-ellipsis">
     <div class="account-icon">
         <i b1-icon icon="university" class="b1-large" *ngIf="!account.IsCardAccount"
             [ngbTooltip]="'components.acct.currentAccount' | translate" placement="right"></i>
         <i b1-icon icon="account-card" class="b1-large" *ngIf="account.IsCardAccount"
             [ngbTooltip]="'components.acct.cardAccount' | translate" placement="right"></i>
     </div>
-    <div class="account-body">
+    <div class="account-body  b1-ellipsis">
         <div class="account-name b1-ellipsis">
             {{account.Name}}
             <div class="account-number" [iban]="account.Number">
@@ -37,8 +37,12 @@
         <div class="dropdown">
             <a class="b1-card__v-dots" (click)="$event.stopPropagation(); dropdown.open();">
             </a>
+
             <ul class="b1-dropdown b1-bg-light" webClass="b1-animate fade-in-up" role="menu" style="width: 360px;"
                 ngbDropdown #dropdown="ngbDropdown" mobile-more more-auto-direction>
+                <div class="b1-modal-close" webClass="hidden">
+                    <i b1-icon icon="cancel" (click)="$event.stopPropagation(); dropdown.close();"></i>
+                </div>
                 <li class="b1-dropdown__item" *ngIf="account.CurrencyCode == 'UAH'">
                     <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
                         ng-click="accountsCtrl.accActions.share(account)">

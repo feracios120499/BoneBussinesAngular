@@ -4,13 +4,13 @@
             <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
                 <app-account-row (click)="toDetail(account)"
                     *cdkVirtualFor="let account of accounts | accountsFilter :(filter$ | ngrxPush):(filterCurrency$ | ngrxPush)"
-                    class="b1-page-data__row" [account]="account">
+                    class="b1-page-data__row account-row" [account]="account">
                 </app-account-row>
             </cdk-virtual-scroll-viewport>
         </ng-scrollbar>
         <ng-container *ngIf="isLoading">
             <div class="b1-page-data b1-page-data_skeleton">
-                <div class="b1-page-data__row skeleton" *ngFor="let number of [0,1,2,3,4,5,6,]">
+                <div class="b1-page-data__row skeleton account-row" *ngFor="let number of [0,1,2,3,4,5,6,]">
                     <div class="account-skeleton">
                         <div class="account-skeleton-icon">
                             <ngx-skeleton-loader animation="pulse">

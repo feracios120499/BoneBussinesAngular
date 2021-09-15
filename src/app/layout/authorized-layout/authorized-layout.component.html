@@ -1,7 +1,5 @@
 <div class="app container app-aside-fixed" [class.menu-open]="isOpen$ | ngrxPush">
-    <b1-sticky-header>
-        <app-header></app-header>
-    </b1-sticky-header>
+    <app-header></app-header>
 
     <app-sidebar></app-sidebar>
     <div class="app-content fade-in" [class.b1-collapsed]="isCollapsed$ | ngrxPush">

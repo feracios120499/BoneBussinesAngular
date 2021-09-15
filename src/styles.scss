@@ -11,6 +11,7 @@
 
 body {
     overflow-y: scroll;
+    overflow-x: hidden;
     background-color: var(--color-light-200);
 }
 
@@ -21,7 +22,6 @@ body {
 .app-content {
     @include app-content;
 
-    padding-top: 90px;
     &.b1-collapsed {
         margin-left: 80px;
     }
@@ -2919,6 +2919,27 @@ textarea {
         align-items: flex-start;
         justify-content: space-between;
     }
+    &-more {
+        cursor: pointer;
+        transition: all 250ms $animation-timing;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: var(--color-primary-light);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--color-primary-light);
+        background-color: rgba(var(--color-primary-light-rgb), 0.2);
+        &_icon {
+            font-size: 24px;
+        }
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
     &-button {
         cursor: pointer;
         transition: all 250ms $animation-timing;
@@ -2988,8 +3009,8 @@ textarea {
         }
         transition: all 250ms $animation-timing;
         border-radius: 50%;
-        width: 56px;
-        height: 56px;
+        width: 44px;
+        height: 44px;
         background-color: transparent;
         display: flex;
         align-items: center;
@@ -3148,9 +3169,12 @@ textarea {
             transition: all 150ms $animation-timing, color 0ms;
             cursor: pointer;
             border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
-            &:not(.selected):not(.skeleton):hover {
-                @include hover-row;
+            @media (hover: hover) and (pointer: fine) {
+                &:not(.selected):not(.skeleton):hover {
+                    @include hover-row;
+                }
             }
+
             &.skeleton {
                 cursor: auto;
             }
@@ -3284,81 +3308,6 @@ textarea {
 }
 .b1-opacity-6 {
     opacity: 0.6;
-}
-
-//daterangepicker
-.daterangepicker {
-    color: var(--color-dark-200) !important;
-    background-color: var(--color-light) !important;
-    border: 1px solid var(--color-light-200) !important;
-    & .drp-calendar.left {
-        border-left: 1px solid var(--color-light-200) !important;
-    }
-    & .show-ranges.ltr .drp-calendar.right {
-        border-right: 1px solid var(--color-light-200) !important;
-    }
-    & .drp-buttons {
-        border-top: 1px solid var(--color-light-200) !important;
-    }
-    & .calendar-table {
-        border: 1px solid var(--color-light-200) !important;
-    }
-    & .drp-selected {
-        color: var(--color-dark) !important;
-    }
-    & .calendar-table {
-        background-color: var(--color-light) !important;
-    }
-    & .drp-calendar.left .calendar-table {
-        padding-left: 0px;
-    }
-    & .monthselect {
-        color: var(--color-dark-200) !important;
-        background-color: var(--color-light) !important;
-    }
-    & .yearselect {
-        color: var(--color-dark-200) !important;
-        background-color: var(--color-light) !important;
-    }
-    td.start-date,
-    td.end-date {
-        background-color: $color-primary !important;
-        color: $color-light !important;
-
-        border: none !important;
-    }
-    & td {
-        background-color: transparent !important;
-    }
-    & .in-range:not(.active) {
-        border-radius: 0 !important;
-        background-color: rgba($color-primary, 0.2) !important;
-        color: var(--color-dark) !important;
-    }
-    & td.available:hover,
-    & th.available:hover {
-        background-color: rgba($color-primary, 0.4) !important;
-        color: var(--color-dark) !important;
-    }
-    & .prev span {
-        border: solid var(--color-dark) !important;
-        border-width: 0 2px 2px 0 !important;
-        border-radius: 0 !important;
-    }
-    & .next span {
-        border: solid var(--color-dark) !important;
-        border-width: 0 2px 2px 0 !important;
-        border-radius: 0 !important;
-    }
-    & .ranges li:hover {
-        background-color: rgba($color-primary, 0.4) !important;
-    }
-    & .ranges li.active {
-        background-color: $color-primary !important;
-    }
-    & .drp-calendar.left.single {
-        padding: 0;
-    }
 }
 
 .b1-ellipsis {
@@ -3750,6 +3699,17 @@ ngb-modal-window {
 }
 
 .md-drppicker {
+    color: var(--color-dark-200) !important;
+    background-color: var(--color-light) !important;
+    border: 1px solid var(--color-light-200) !important;
+    padding: 0 !important;
+    transition: all 150ms $animation-timing !important;
+    &.shown.double {
+        @media (min-width: 812px) {
+            width: 610px;
+            left: -450px !important;
+        }
+    }
     & tr {
         display: flex;
         align-items: center;
@@ -3823,6 +3783,12 @@ ngb-modal-window {
         color: var(--color-dark) !important;
         border-radius: 0 !important;
     }
+    & .prev,
+    & .next {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     & .prev span {
         border: solid var(--color-dark) !important;
         border-width: 0 2px 2px 0 !important;
@@ -3833,8 +3799,16 @@ ngb-modal-window {
         border-width: 0 2px 2px 0 !important;
         border-radius: 0 !important;
     }
+    & .ranges ul li:hover {
+        background-color: inherit !important;
+    }
+    & .ranges li button {
+        @include small;
+        transition: all 150ms $animation-timing !important;
+        color: var(--color-dark) !important;
+    }
     & .ranges li button:hover {
-        background-color: rgba($color-primary, 0.4) !important;
+        background-color: rgba($color-primary, 0.2) !important;
     }
     & .ranges li button.active {
         background-color: $color-primary !important;
@@ -3902,14 +3876,4 @@ body.modal-open {
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
-}
-
-.modal-backdrop.fade {
-    opacity: 0.5 !important;
-}
-.modal-backdrop.show {
-    opacity: 0.5 !important;
-}
-.modal-backdrop.no-animation {
-    opacity: 0.5 !important;
 }

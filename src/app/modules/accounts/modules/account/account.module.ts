@@ -18,9 +18,10 @@ import {
   AccountTurnoversListComponent,
 } from './components/account-turnovers-list/account-turnovers-list.component';
 import { AccountTurnoversComponent } from './components/account-turnovers/account-turnovers.component';
-import { AccountTurnoversRowComponent } from './components/account-turnovers-row/account-turnovers-row.component';
+import { AccountTurnoversRowComponent } from './components/account-turnover-row/account-turnover-row.component';
 import { AccountTransactionRowComponent } from './components/account-transaction-row/account-transaction-row.component';
 import { AccountTransactionSkeletonComponent } from './components/account-transaction-skeleton/account-transaction-skeleton.component';
+import { AccountTurnoverSkeletonComponent } from './components/account-turnover-skeleton/account-turnover-skeleton.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AccountTransactionSkeletonComponent } from './components/account-transa
     AccountTurnoversListComponent,
     AccountTurnoversRowComponent,
     AccountTransactionRowComponent,
-    AccountTransactionSkeletonComponent
+    AccountTransactionSkeletonComponent,
+    AccountTurnoverSkeletonComponent
   ],
   imports: [
     CommonModule,
