@@ -76,7 +76,7 @@ export class MenuService extends BaseService {
             icon: 'money-bill-wave',
             dataRole:
                 'Director,Accountant,PaymentsManager,ForeignCurrencyPaymentsManager',
-            route: 'app.payments.incomings',
+            route: 'payments',
             // gaTrackEvent: '[\'left-menu\', \'view-payments\']',
             dataTranslate: 'aside.nav.DOCUMENTS',
             moduleName: 'Payments',

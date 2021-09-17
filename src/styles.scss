@@ -2807,6 +2807,14 @@ textarea {
         align-items: center;
         @media (max-width: 812px) {
             margin: 8px 16px;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+    }
+    &-menu {
+        overflow: scroll;
+        @media (max-width: 812px) {
+            width: 100%;
         }
     }
     &-card {

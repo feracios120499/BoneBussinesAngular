@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <ul class="b1-page-tabs">
+            <li class="b1-page-tabs__item" *ngFor="let tab of tabs" [routerLink]="tab.route" routerLinkActive="active">
+                <a class="b1-page-tabs__link b1-medium b1-bold">
+                    <i b1-icon [icon]="tab.icon" class="b1-mr-3"></i>
+                    <span>{{tab.label | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

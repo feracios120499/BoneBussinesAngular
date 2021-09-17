@@ -6,7 +6,7 @@ export const SETTINGS_KEY = 'settings';
 export interface SettingsState {
     currentLanguage: string;
     allowedLanguages: string[];
-    resources: Resources | undefined;
+
     darkModeActive: boolean;
 
 }
@@ -14,6 +14,6 @@ export interface SettingsState {
 export const initialState: SettingsState = {
     currentLanguage: 'uk',
     allowedLanguages: environment.languages,
-    resources: undefined,
+
     darkModeActive: false
 };

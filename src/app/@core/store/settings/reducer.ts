@@ -11,10 +11,6 @@ export const settingsReducer = createReducer(
         ...state,
         currentLanguage: action.language
     })),
-    on(SettingsActions.setResources, (state, action) => ({
-        ...state,
-        resources: action.resources
-    })),
     on(SettingsActions.setDarkMode, (state, action) => ({
         ...state,
         darkModeActive: action.isActive

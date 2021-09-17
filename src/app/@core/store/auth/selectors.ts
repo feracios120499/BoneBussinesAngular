@@ -9,11 +9,6 @@ export namespace AuthSelectors {
         state => state.phone
     );
 
-    export const loginData = createSelector(
-        authStore,
-        state => state.loginData
-    );
-
     export const error = createSelector(
         authStore,
         state => state.error

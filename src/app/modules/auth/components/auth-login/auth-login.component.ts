@@ -1,34 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginModel } from '@modules/auth/models/login.model';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '@store/auth/actions';
-import { AuthFacade } from 'src/app/@core/facades/auth.facade';
+import { AuthSelectors } from '@store/auth/selectors';
+import { Subscription } from 'rxjs';
 
-import { LogInModel } from './../../models/login.model';
 
 @Component({
   selector: 'auth-login',
   templateUrl: './auth-login.component.html',
-  styleUrls: ['./auth-login.component.scss']
+  styleUrls: ['./auth-login.component.scss', './../../views/auth/auth.component.scss']
 })
-export class AuthLoginComponent implements OnInit {
+export class AuthLoginComponent implements AfterViewInit, OnDestroy {
 
-  public loading$ = this.facade.isLoading$;
-  public error$ = this.facade.errorMessage$;
+  public loading$ = this.store.select(AuthSelectors.isLoading);
+  public error$ = this.store.select(AuthSelectors.error);
 
-  constructor(private store: Store, private facade: AuthFacade) { }
+  public formGroup: FormGroup;
+  private loadingSubscription: Subscription;
+  constructor(private store: Store) {
 
-  login = new LogInModel();
+    this.formGroup = new FormGroup({
+      userName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+    });
 
-  loginControl = new FormControl('', Validators.required);
-  passwordControl = new FormControl('', Validators.required);
-
-  ngOnInit(): void {
+    this.loadingSubscription = this.loading$.subscribe((isLoading) => {
+      if (isLoading) {
+        this.formGroup.disable();
+      }
+      else {
+        this.formGroup.enable();
+      }
+    });
+  }
+  ngAfterViewInit(): void {
+    const inputPassword = document.getElementById('password') as any;
+    inputPassword.addEventListener('change', (event: any) => {
+      this.formGroup.setValue({ userName: this.formGroup.value.userName, password: event.target.value });
+    });
   }
 
   onLogin(): void {
     this.store.dispatch(AuthActions.resetLogin());
-    this.store.dispatch(AuthActions.loginRequest({ data: { ...this.login } }));
+    const model = this.formGroup.value as LoginModel;
+    this.store.dispatch(AuthActions.loginRequest({ ...model }));
   }
+  ngOnDestroy(): void {
+    this.loadingSubscription?.unsubscribe();
+  }
+
 
 }

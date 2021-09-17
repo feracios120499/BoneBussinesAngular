@@ -7,10 +7,20 @@
                     <div class="main-sidemenu__head">
                         <div class="client">
                             <button class="client__button">
-                                {{customerName$ | ngrxPush}}
+                                <div mobileClass="hidden">
+                                    {{customerName$ | ngrxPush}}
+                                </div>
+                                <p class="bdate b1-small b1-flex b1-align-center b1-justify-center" webClass="hidden">
+                                    <span>{{'aside.nav.bankDate' | translate}}</span>:
+                                    <ng-container *ngrxLet="bankDate$ as bankDate">
+                                        <span class="b1-bold" *ngIf="bankDate">
+                                            {{bankDate | date:'dd.MM.yyyy'}}
+                                        </span>
+                                    </ng-container>
+                                </p>
                             </button>
                         </div>
-                        <p class="bdate b1-small">
+                        <p class="bdate b1-small" mobileClass="hidden">
                             <span>{{'aside.nav.bankDate' | translate}}</span>:
                             <ng-container *ngrxLet="bankDate$ as bankDate">
                                 <span class="b1-bold" *ngIf="bankDate">

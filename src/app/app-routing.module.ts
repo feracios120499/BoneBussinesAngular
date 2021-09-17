@@ -12,11 +12,10 @@ const routes: Routes = [
     component: AuthorizedLayoutComponent,
     children: [
       { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(p => p.DashboardModule) },
-      { path: 'accounts', loadChildren: () => import('./modules/accounts/accounts.module').then(p => p.AccountsModule) }
+      { path: 'accounts', loadChildren: () => import('./modules/accounts/accounts.module').then(p => p.AccountsModule) },
+      { path: 'payments', loadChildren: () => import('./modules/payments/payments.module').then(p => p.PaymentsModule) }
     ]
-  },
-  { path: 'account', loadChildren: () => import('./modules/accounts/modules/account/account.module').then(m => m.AccountModule) }
-];
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],

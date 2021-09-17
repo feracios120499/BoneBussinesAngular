@@ -1,33 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserFacade } from '@core/facades/user.facade';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuSelectors } from '@store/menu/selectors';
-import { Subscription } from 'rxjs';
+import { UserActions } from '@store/user/actions';
 
 @Component({
   selector: 'app-authorized-layout',
   templateUrl: './authorized-layout.component.html',
   styleUrls: ['./authorized-layout.component.scss']
 })
-export class AuthorizedLayoutComponent implements OnInit, OnDestroy {
+export class AuthorizedLayoutComponent implements OnInit {
 
-  private profile$ = this.userFacade.profile$;
-  private profileSubscription$!: Subscription;
   public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
   public isOpen$ = this.store.select(MenuSelectors.isOpenMenu);
-  constructor(private userFacade: UserFacade, private store: Store) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.userFacade.loadProfile();
-    this.profileSubscription$ = this.profile$.subscribe((profile) => {
-      if (profile) {
-        this.userFacade.loadNotifications();
-      }
-    });
+    this.store.dispatch(UserActions.loadProfileRequest());
   }
-
-  ngOnDestroy(): void {
-    this.profileSubscription$.unsubscribe();
-  }
-
 }

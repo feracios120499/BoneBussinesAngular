@@ -9,6 +9,10 @@ export const publicReducer = createReducer(
     initialState,
     on(
         PublicActions.loadBanksSuccess,
-        (state, action) => ({ ...state, banks: action.banks })
+        (state, action) => ({ ...state, banks: action.payload })
+    ),
+    on(
+        PublicActions.loadResourcesSuccess,
+        (state, action) => ({ ...state, resources: action.payload })
     )
 );

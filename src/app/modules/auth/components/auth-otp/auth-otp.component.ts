@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AuthFacade } from 'src/app/@core/facades/auth.facade';
+import { Store } from '@ngrx/store';
+import { AuthSelectors } from '@store/auth/selectors';
 
 @Component({
   selector: 'auth-otp',
@@ -9,10 +10,10 @@ import { AuthFacade } from 'src/app/@core/facades/auth.facade';
 export class AuthOtpComponent implements OnInit {
 
   LENGTH_OTP = 6;
-  constructor(private authFacade: AuthFacade) { }
+  constructor(private store: Store) { }
 
-  loading$ = this.authFacade.isLoading$;
-  error$ = this.authFacade.errorMessage$;
+  loading$ = this.store.select(AuthSelectors.isLoading);
+  error$ = this.store.select(AuthSelectors.error);
   otp = '';
 
   @Input() phone: string | undefined | null = '';

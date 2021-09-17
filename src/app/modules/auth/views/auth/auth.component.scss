@@ -15,12 +15,17 @@
     }
     &-auth {
         min-height: 100vh;
+        min-height: var(--app-height);
         background-color: $color-light;
+        display: flex;
+        @media (max-width: 992px) {
+            flex-direction: column;
+        }
     }
     &-header {
         @include base;
-        position: absolute;
         width: 100%;
+        flex: 0;
         @media (max-width: 992px) {
             background-color: $color-primary;
         }
@@ -49,7 +54,6 @@
             display: flex;
             align-items: center;
             padding: 28px 42px;
-            width: 60%;
             justify-content: space-between;
             @media (max-width: 992px) {
                 width: 100%;
@@ -77,16 +81,17 @@
     }
     &-content {
         min-height: 100vh;
+        min-height: var(--app-height);
         display: flex;
-        &-login {
-            margin-top: 71px;
-            width: 60%;
-            min-height: calc(100vh - 71px);
+        flex: 1;
+        flex-direction: column;
+        &-body {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 25px;
+            padding: 24px;
             overflow: hidden;
+            flex: 1;
             @media (max-width: 992px) {
                 width: 100%;
             }
@@ -203,16 +208,16 @@
     }
     &-footer {
         @include base;
-        position: absolute;
         width: 100%;
-        bottom: 0;
+        flex: 0;
         @media (max-width: 992px) {
             background-color: #00798e;
+            position: fixed;
+            bottom: 0;
         }
         &-content {
             display: flex;
             padding: 28px 42px;
-            width: 60%;
             justify-content: space-between;
 
             @media (max-width: 992px) {
@@ -342,7 +347,7 @@
         }
     }
     &-input {
-        background: none;
+        background: none !important;
         color: $color-dark;
         @include medium;
         @include light;
@@ -368,15 +373,30 @@
             outline: none;
             box-shadow: none;
         }
-
+        &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #fff inset;
+            & ~ label {
+                top: -16px;
+                font-size: 14px;
+            }
+        }
+        &:-webkit-autofill::first-line {
+            @include medium;
+            @include light;
+            line-height: 1.5 !important;
+        }
         &:focus ~ label,
-        &:valid ~ label,
+        &.ng-valid ~ label,
         &.ng-dirty ~ label {
             top: -16px;
             font-size: 14px;
         }
+        &:-webkit-autofill::first-line ~ label {
+            top: -16px;
+            font-size: 14px;
+        }
         &:focus ~ .cl-input-bar:before,
-        &:valid ~ .cl-input-bar:before {
+        &.ng-valid ~ .cl-input-bar:before {
             width: 100%;
         }
         &.ng-touched.ng-invalid ~ .cl-input-bar:before,

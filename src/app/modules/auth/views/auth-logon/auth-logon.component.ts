@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthFacade } from 'src/app/@core/facades/auth.facade';
-
-import { LogInModel } from './../../models/login.model';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '@store/auth/actions';
+import { AuthSelectors } from '@store/auth/selectors';
 
 @Component({
   selector: 'app-auth-logon',
@@ -10,16 +10,16 @@ import { LogInModel } from './../../models/login.model';
 })
 export class AuthLogonComponent implements OnInit {
 
-  constructor(private authFacade: AuthFacade) { }
+  constructor(private store: Store) { }
 
-  isNeedOtp$ = this.authFacade.isNeedOtp$;
-  phone$ = this.authFacade.phone$;
-  loginData: LogInModel | undefined = undefined;
+  isNeedOtp$ = this.store.select(AuthSelectors.isNeedOtp);
+  phone$ = this.store.select(AuthSelectors.phone);
+
   ngOnInit(): void {
   }
 
   logintOtp(otp: string): void {
-    this.authFacade.loginOtp(otp);
+    this.store.dispatch(AuthActions.loginWithOtpRequest(otp));
   }
 
 }

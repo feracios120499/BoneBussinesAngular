@@ -11,9 +11,9 @@ import { initialState } from './store';
 export const userReducer = createReducer(
     initialState,
     on(
-        AuthActions.authLoadProfileSuccess,
+        AuthActions.loadProfileSuccess,
         UserActions.loadProfileSuccess,
-        (state, action) => ({ ...state, profile: action.profile })
+        (state, action) => ({ ...state, profile: action.payload })
     ),
     on(
         UserActions.setNotifications,

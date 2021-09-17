@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { fromEvent, Observable, of } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,8 +15,10 @@ export class ResizeService {
         this.resizeObservable$ = fromEvent(window, 'resize');
         this.isMobile$ = this.resizeObservable$.pipe(
             startWith(window.innerWidth <= environment.mobileWidth),
-            map(() => window.innerWidth <= environment.mobileWidth)
+            map(() => window.innerWidth <= environment.mobileWidth),
+            tap(() => document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`))
         );
+        this.isMobile$.subscribe();
     }
 
 

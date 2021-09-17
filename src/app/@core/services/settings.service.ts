@@ -17,7 +17,5 @@ export class SettingsService extends BaseService {
         super();
     }
 
-    getResources(): Observable<Resources> {
-        return this.http.get<any>('api/v1/public/resources').pipe(map((response) => response.Result ? response.Result : response));
-    }
+
 }

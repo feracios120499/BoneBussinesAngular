@@ -1,22 +1,15 @@
 import { Profile } from '@models/profile.model';
 import { Notification } from '@models/notification.model';
 import { createAction, props } from '@ngrx/store';
+import { createHTTPActions } from '@store/shared';
 
 export namespace UserActions {
-    // loadProfileRequest action
-    export const loadProfileRequest = createAction('[USER] load profile');
 
-    // loadProfileSuccess action
-    export const loadProfileSuccess = createAction(
-        '[USER] load profile success',
-        props<{ profile: Profile }>()
-    );
-
-    // loadProfileFailure action
-    export const loadProfileFailure = createAction(
-        '[USER] load profile failure',
-        props<{ error: string }>()
-    );
+    export const [
+        loadProfileRequest,
+        loadProfileSuccess,
+        loadProfileFailure
+    ] = createHTTPActions<void, Profile, string>('[USER] load profile');
 
     export const checkProfile = createAction(
         '[USER] check profile'

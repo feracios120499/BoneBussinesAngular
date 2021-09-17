@@ -1,54 +1,53 @@
 <div class="cl-auth">
-  <div class="cl-header">
-    <div class="cl-header-content">
-      <div class="cl-header-left">
-        <!-- TODO click start demo -->
-        <a class="cl-header-demo">DEMO</a>
-        <img class="cl-header-logo" src="assets/img/site-logo.png" alt="Oschadbank logo" />
-        <div class="cl-header-languages">
-          <app-auth-languages></app-auth-languages>
-        </div>
-
-      </div>
-      <a routerLink="/auth/old" class="cl-header-old" checkState="auth/logon">
-        {{ 'owner.toOldVersion' | translate }}
-      </a>
-      <a routerLink="logon" class="cl-header-old" checkState="auth/old">
-        {{ 'owner.toNewVerison' | translate }}
-      </a>
-    </div>
-  </div>
   <div class="cl-content">
-    <div class="cl-content-login">
+    <div class="cl-header">
+      <div class="cl-header-content">
+        <div class="cl-header-left">
+          <!-- TODO click start demo -->
+          <a class="cl-header-demo">DEMO</a>
+          <img class="cl-header-logo" src="assets/img/site-logo-mini.png" alt="Oschadbank logo" />
+          <div class="cl-header-languages">
+            <app-auth-languages></app-auth-languages>
+          </div>
+
+        </div>
+        <a routerLink="/auth/old" class="cl-header-old" checkState="auth/logon">
+          {{ 'owner.toOldVersion' | translate }}
+        </a>
+        <a routerLink="logon" class="cl-header-old" checkState="auth/old">
+          {{ 'owner.toNewVerison' | translate }}
+        </a>
+      </div>
+    </div>
+    <div class="cl-content-body">
       <router-outlet></router-outlet>
     </div>
-    <!-- TODO add component auth-news -->
-    <div class="cl-content-news">
-
+    <div class="cl-footer">
+      <div class="cl-footer-content">
+        <!-- TODO add ngrx resource -->
+        <span class="cl-footer-copyright"></span>
+        <ul class="cl-footer-list">
+          <li>
+            <a class="cl-footer-version" href="">
+              <!-- TODO add ngrx version -->
+              <span>{{ 'footer.Version' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a class="cl-footer-instruction" href="" target="_blank">
+              <span>{{ 'footer.Information' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a class="cl-footer-feedback">
+              <span>{{ 'footer.Feedback' | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
-<div class="cl-footer">
-  <div class="cl-footer-content">
-    <!-- TODO add ngrx resource -->
-    <span class="cl-footer-copyright"></span>
-    <ul class="cl-footer-list">
-      <li>
-        <a class="cl-footer-version" href="">
-          <!-- TODO add ngrx version -->
-          <span>{{ 'footer.Version' | translate }}</span>
-        </a>
-      </li>
-      <li>
-        <a class="cl-footer-instruction" href="" target="_blank">
-          <span>{{ 'footer.Information' | translate }}</span>
-        </a>
-      </li>
-      <li>
-        <a class="cl-footer-feedback">
-          <span>{{ 'footer.Feedback' | translate }}</span>
-        </a>
-      </li>
-    </ul>
+  <div class="cl-content-news">
+
   </div>
 </div>

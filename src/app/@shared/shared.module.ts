@@ -106,7 +106,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgSelectModule,
     NgSelectScrollDirective,
     B1StickyHeaderComponent,
-    B1PageButtonComponent
+    B1PageButtonComponent,
+    ReactiveComponentModule
   ],
   providers: [
     {

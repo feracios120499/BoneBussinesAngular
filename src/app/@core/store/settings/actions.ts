@@ -8,12 +8,6 @@ export namespace SettingsActions {
         props<{ language: string }>()
     );
 
-    // SETTINGS set resources
-    export const setResources = createAction('[SETTINGS] set resources', props<{ resources: Resources }>());
-
-    // SETTINGS load resources
-    export const loadResources = createAction('[SETTINGS] load resources');
-
     // SETTINGS set dark mode
     export const setDarkMode = createAction(
         '[SETTINGS] set dark mode',

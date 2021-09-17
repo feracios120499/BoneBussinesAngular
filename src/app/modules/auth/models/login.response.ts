@@ -1,4 +1,4 @@
-export class LoginResponse {
-  public Type: string | undefined;
-  public Phone: string | undefined;
+export interface LoginResponse {
+  type: 'Token' | 'Otp';
+  phone?: string;
 }

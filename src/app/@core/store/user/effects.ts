@@ -39,8 +39,8 @@ export class UserEffects {
             ofType(UserActions.loadProfileRequest),
             switchMap(() =>
                 this.userService.getProfile().pipe(
-                    map((profile) => UserActions.loadProfileSuccess({ profile })),
-                    catchError((error) => of(UserActions.loadProfileFailure({ error: error.error.Message })))
+                    map((profile) => UserActions.loadProfileSuccess(profile)),
+                    catchError((error) => of(UserActions.loadProfileFailure(error.error.Message)))
                 )
             )
         ));
@@ -57,11 +57,11 @@ export class UserEffects {
 
     loadProfileSuccess$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(UserActions.loadProfileSuccess, AuthActions.authLoadProfileSuccess),
+            ofType(UserActions.loadProfileSuccess, AuthActions.loadProfileSuccess),
             withLatestFrom(this.store.select(UserSelectors.currentClientIdSelector)),
             map(([action, currentClientId]) => {
                 if (currentClientId === undefined) {
-                    return UserActions.setCurrentClientId({ clientId: action.profile.Customers[0].ClientId });
+                    return UserActions.setCurrentClientId({ clientId: action.payload.Customers[0].ClientId });
                 }
                 else {
                     return UserActions.setCurrentClientId({ clientId: currentClientId });

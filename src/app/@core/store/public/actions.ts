@@ -1,19 +1,19 @@
-import { createAction, props } from '@ngrx/store';
+import { Resources } from '@models/resources.model';
+import { createHTTPActions } from '@store/shared';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 
 export namespace PublicActions {
-    export const loadBanks = createAction(
-        '[PUBLIC] loadBanks',
-    );
 
-    export const loadBanksSuccess = createAction(
-        '[PUBLIC] load banks Success',
-        props<{ banks: BankModel[] }>()
-    );
+    export const [
+        loadBanksRequest,
+        loadBanksSuccess,
+        loadBanksFailure
+    ] = createHTTPActions<void, BankModel[], string>('[PUBLIC] load banks');
 
-    export const loadBanksFailure = createAction(
-        '[PUBLIC] load banks Failure',
-        props<{ error: string }>()
-    );
+    export const [
+        loadResourcesRequest,
+        loadResourcesSuccess,
+        loadResourcesFailure
+    ] = createHTTPActions<void, Resources, string>('[PUBLIC] load resource');
 }
 

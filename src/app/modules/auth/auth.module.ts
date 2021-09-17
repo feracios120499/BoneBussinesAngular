@@ -6,7 +6,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component';
 import { AuthErrorComponent } from './components/auth-error/auth-error.component';
-import { AuthInputComponent } from './components/auth-input/auth-input.component';
 import { AuthKeyComponent } from './components/auth-key/auth-key.component';
 import { AuthLanguagesComponent } from './components/auth-languages/auth-languages.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
@@ -20,7 +19,6 @@ import { AuthComponent } from './views/auth/auth.component';
 @NgModule({
   declarations: [
     AuthComponent,
-    AuthInputComponent,
     AuthLanguagesComponent,
     AuthLogonComponent,
     AuthLogonOldComponent,

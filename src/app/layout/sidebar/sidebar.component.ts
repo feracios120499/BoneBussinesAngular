@@ -7,6 +7,7 @@ import { SettingsSelectors } from '@store/settings/selectors';
 import { UserActions } from '@store/user/actions';
 import { UserSelectors } from '@store/user/selectors';
 import { Customer } from '@models/profile.model';
+import { PublicSelectors } from '@store/public/selectors';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,10 +25,10 @@ export class SidebarComponent implements OnInit {
   public customers$ = this.store.select(UserSelectors.customers);
   public currentCustomer$ = this.store.select(UserSelectors.currentCustomer);
   public bankDate$ = this.store.select(AppSelectors.bankDate);
-  public callCenterPhones$ = this.store.select(SettingsSelectors.callCenterPhones);
-  public callCenterPhonesLocal$ = this.store.select(SettingsSelectors.callCenterPhonesLocal);
-  public callCenterWork$ = this.store.select(SettingsSelectors.callCenterWork);
-  public ecpSupportPhone$ = this.store.select(SettingsSelectors.ecpSupportPhones);
+  public callCenterPhones$ = this.store.select(PublicSelectors.callCenterPhones);
+  public callCenterPhonesLocal$ = this.store.select(PublicSelectors.callCenterPhonesLocal);
+  public callCenterWork$ = this.store.select(PublicSelectors.callCenterWork);
+  public ecpSupportPhone$ = this.store.select(PublicSelectors.ecpSupportPhones);
   public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
   public isOpenMenu$ = this.store.select(MenuSelectors.isOpenMenu);
   public countCustomers$ = this.store.select(UserSelectors.countCustomers);

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserFacade } from '@core/facades/user.facade';
 import { Store } from '@ngrx/store';
 import { ResizeService } from '@services/resize.service';
-import { AppSelectors } from '@store/app/selectors';
 import { MenuActions } from '@store/menu/actions';
 import { MenuSelectors } from '@store/menu/selectors';
+import { PublicSelectors } from '@store/public/selectors';
 import { SettingsSelectors } from '@store/settings/selectors';
+import { UserSelectors } from '@store/user/selectors';
 
 @Component({
   selector: 'app-header',
@@ -15,10 +15,10 @@ import { SettingsSelectors } from '@store/settings/selectors';
 export class HeaderComponent implements OnInit {
 
 
-  constructor(private userFacade: UserFacade, private store: Store, private resizeService: ResizeService) { }
+  constructor(private store: Store, private resizeService: ResizeService) { }
 
-  public countCustomers$ = this.userFacade.countCustomers$;
-  public logo$ = this.store.select(SettingsSelectors.logo);
+  public countCustomers$ = this.store.select(UserSelectors.countCustomers);
+  public logo$ = this.store.select(PublicSelectors.logo);
   public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
   public isOpen$ = this.store.select(MenuSelectors.isOpenMenuOrInfo);
   public isOpenInfo$ = this.store.select(MenuSelectors.isOpenInfo);

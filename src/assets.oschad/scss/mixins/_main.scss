@@ -58,6 +58,10 @@
     align-items: center;
     z-index: 9;
     margin-left: 8px;
+    @media (max-width: 812px) {
+      @include title3;
+      @include light;
+    }
     &__icon {
       width: 20px;
       height: 24px;
@@ -69,7 +73,9 @@
       text-align: center;
       color: $color-light;
       transition: transform 0.3s $animation-timing, color 0.3s $animation-timing;
-
+      @media (max-width: 812px) {
+        width: 40px;
+      }
       &_opt {
         color: $color-light;
       }

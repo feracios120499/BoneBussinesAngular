@@ -26,7 +26,9 @@
     align-items: center;
     margin-bottom: 16px;
     @include head-tabs;
-
+    @media (max-width: 812px) {
+      justify-content: flex-start;
+    }
     &__item {
       height: 48px;
       border-radius: 8px;
@@ -42,6 +44,9 @@
 
       &.active {
         background-color: rgba($color-primary, 0.2);
+      }
+      @media (max-width: 812px) {
+        flex: 0 0 auto;
       }
     }
 

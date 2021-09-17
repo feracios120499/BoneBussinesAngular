@@ -19,35 +19,7 @@ export namespace SettingsSelectors {
         state => state.darkModeActive
     );
 
-    export const logo = createSelector(
-        settingsStore,
-        state => state.resources?.Owner.LogoImage || ''
-    );
 
-    export const callCenterPhones = createSelector(
-        settingsStore,
-        state => state.resources?.Owner.CallCenterPhone
-    );
-
-    export const callCenterPhonesLocal = createSelector(
-        settingsStore,
-        state => state.resources?.Owner.CallCenterPhoneLocal
-    );
-
-    export const callCenterWork = createSelector(
-        settingsStore,
-        state => {
-            return {
-                from: state.resources?.Owner.CallCenterWorkFrom,
-                to: state.resources?.Owner.CallCenterWorkTo
-            };
-        }
-    );
-
-    export const ecpSupportPhones = createSelector(
-        settingsStore,
-        state => state.resources?.Owner.ECPTechSupportPhone
-    );
 
 }
 
