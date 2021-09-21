@@ -150,10 +150,19 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
         'startKey'
     ];
 
-    get value(): DateRange {
-        return this._value || null;
+    get value(): DateRange | _dayjs.Dayjs {
+        if (this.singleDatePicker) {
+            return this._value?.startDate || null;
+        }
+        else {
+            return this._value || null;
+        }
+
     }
-    set value(val: DateRange) {
+    set value(val: DateRange | _dayjs.Dayjs) {
+        if ((val as any).startDate && this.singleDatePicker) {
+            val = (val as any).startDate;
+        }
         this._value = val;
         this._onChange(val);
         this._changeDetectorRef.markForCheck();
@@ -267,7 +276,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
             return;
         }
         this.elementRef.nativeElement.classList.add('picker-open');
-        this.picker.show(event);
+        this.picker.show(event, this.elementRef);
         if (window.innerWidth > environment.mobileWidth) {
             setTimeout(() => {
                 this.setPosition();

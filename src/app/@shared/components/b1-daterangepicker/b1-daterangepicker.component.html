@@ -5,9 +5,10 @@
     'hidden': !isShown && !inline,
     'inline': inline,
     'double': !singleDatePicker && showCalInRanges,
-    'show-ranges': rangesArray.length
+    'show-ranges': rangesArray.length,
+    'single': singleDatePicker
 }" [class]="'drops-' + drops + '-' + opens">
-    <div class="ranges">
+    <div class="ranges" *ngIf="!singleDatePicker">
         <ul>
             <li *ngFor="let range of rangesArray">
                 <button type="button" (click)="clickRange($event, range)" [disabled]="disableRange(range)"

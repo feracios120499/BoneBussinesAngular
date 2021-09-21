@@ -1,0 +1,15 @@
+.dates {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.agents {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    &-input {
+        width: 50%;
+    }
+}

@@ -32,6 +32,7 @@ import { B1RequisitesModalComponent } from './components/modals/b1-requisites-mo
 import { B1ExportTurnoversComponent } from './components/modals/b1-export-turnovers/b1-export-turnovers.component';
 import { B1StickyHeaderComponent } from './components/b1-sticky-header/b1-sticky-header.components';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
+import { WithinCountryFormComponent } from './components/forms/within-country-form/within-country-form.component';
 
 
 
@@ -63,7 +64,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1RequisitesModalComponent,
     B1ExportTurnoversComponent,
     B1StickyHeaderComponent,
-    B1PageButtonComponent],
+    B1PageButtonComponent,
+    WithinCountryFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -107,7 +109,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgSelectScrollDirective,
     B1StickyHeaderComponent,
     B1PageButtonComponent,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    WithinCountryFormComponent
   ],
   providers: [
     {

@@ -188,6 +188,7 @@ export class DaterangepickerComponent implements OnInit {
 
 
   private hiddenSub?: Subscription;
+  private element?: ElementRef;
   getMinDate(): _dayjs.Dayjs | undefined {
     return this._minDate;
   }
@@ -773,8 +774,13 @@ export class DaterangepickerComponent implements OnInit {
     if (this.chosenLabel) {
       this.choosedDate.emit({ chosenLabel: this.chosenLabel, startDate: this.startDate, endDate: this.endDate });
     }
+    if (!this.singleDatePicker) {
+      this.datesUpdated.emit({ startDate: this.startDate, endDate: this.endDate });
+    }
+    else {
+      this.datesUpdated.emit(this.startDate);
+    }
 
-    this.datesUpdated.emit({ startDate: this.startDate, endDate: this.endDate });
     if (e || (this.closeOnAutoApply && !e)) {
       this.hide('apply');
     }
@@ -1024,7 +1030,7 @@ export class DaterangepickerComponent implements OnInit {
 
     this.updateView();
 
-    if (this.autoApply && this.startDate && this.endDate) {
+    if (this.autoApply && this.startDate && this.endDate && !this.singleDatePicker) {
       this.clickApply();
     }
 
@@ -1099,7 +1105,10 @@ export class DaterangepickerComponent implements OnInit {
       }
     }
   }
-  show(e?: any): void {
+  show(e?: any, el?: ElementRef): void {
+
+    this.element = el;
+
     if (this.isShown) { return; }
     this._old.start = this.startDate.clone();
     this._old.end = this.endDate?.clone();
@@ -1147,6 +1156,7 @@ export class DaterangepickerComponent implements OnInit {
     // if picker is attached to a text input, update it
     this.updateElement();
     this.isShown = false;
+    this.element?.nativeElement.classList.remove('picker-open');
     this._ref.detectChanges();
     if (e && this.hiddenSub) {
       this.hiddenSub.unsubscribe();
@@ -1383,3 +1393,4 @@ export class DaterangepickerComponent implements OnInit {
     return this.endDate?.unix() === this._old.end?.unix() && this.startDate.unix() === this._old.start.unix();
   }
 }
+

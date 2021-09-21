@@ -6,7 +6,13 @@ export const environment = {
   production: false,
   languages: ['uk', 'ru', 'en'],
   defaultUserPictureUrl: 'assets/img/a0.jpg',
-  mobileWidth: 812
+  mobileWidth: 812,
+  payments: {
+    dates: {
+      documentDateMaxDaysFromBankDate: 30,
+      valueDateMaxDaysFromDocumentDate: 9
+    }
+  }
 };
 
 /*
