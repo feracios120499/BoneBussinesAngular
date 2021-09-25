@@ -1,0 +1,16 @@
+@import "variables";
+:host {
+    width: 100%;
+}
+.percent-input {
+    margin-left: 5px;
+    width: 45px;
+    height: 100%;
+    margin-top: 0;
+    border-radius: 5px;
+    padding-left: 2px;
+    @include small;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border: 1px solid var(--color-dark);
+}

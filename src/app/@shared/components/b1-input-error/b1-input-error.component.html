@@ -1,0 +1,28 @@
+<div class="b1-input__validate-message"
+    *ngIf="control && control.invalid && (control.touched || (form && form.submitted))">
+    <span *ngIf="error?.required">
+        {{'validate.required' | translate}}
+    </span>
+    <span *ngIf="error?.maxlength">
+        {{
+        'validate.maxlengthWithParams' | translate : {
+        maxLength:error?.maxlength.requiredLength,
+        actualLength:error?.maxlength.actualLength
+        }
+        }}
+    </span>
+    <span *ngIf="error?.ibanLength">
+        {{
+        'validate.ibanLength' | translate : {
+        requiredLength:error?.ibanLength.requiredLength,
+        actualLength:error?.ibanLength.actualLength
+        }
+        }}
+    </span>
+    <span *ngIf="error?.ibanFormat">
+        {{'validate.ibanFormat' | translate}}
+    </span>
+    <span *ngIf="error?.ibanCheckSum">
+        {{'validate.ibanCheckSum' | translate}}
+    </span>
+</div>

@@ -7,5 +7,9 @@ export namespace NotifyActions {
         '[NOTIFY] success notification',
         props<{ message: string, title?: string }>()
     );
-
+    // ERRORNotification action
+    export const errorNotification = createAction(
+        '[NOTIFY] error notification',
+        props<{ message: string, title?: string }>()
+    );
 }

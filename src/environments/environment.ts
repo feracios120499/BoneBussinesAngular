@@ -12,6 +12,9 @@ export const environment = {
       documentDateMaxDaysFromBankDate: 30,
       valueDateMaxDaysFromDocumentDate: 9
     }
+  },
+  tax: {
+    vat: 20
   }
 };
 

@@ -25,6 +25,7 @@ import { HeaderLanguagesComponent } from './layout/header/components/header-lang
 import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
 import { DaterangepickerDirective } from './@shared/components/b1-daterangepicker/b1-daterangepicker.directive';
 import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor'
     }),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    NgxMaskModule.forRoot(),
     AppRoutingModule,
     CoreModule,
     SharedModule

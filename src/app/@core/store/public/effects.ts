@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PublicService } from '@services/public.service';
+import { AppActions } from '@store/app/actions';
+import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -12,12 +14,26 @@ import { PublicActions } from './actions';
 export class PublicEffects {
     constructor(private actions$: Actions, private publicService: PublicService) { }
 
+    appStart$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AppActions.start),
+            map(() => PublicActions.loadBanksRequest())
+        ));
     loadBanks$ = createEffect(() => this.actions$.pipe(
         ofType(PublicActions.loadBanksRequest),
         switchMap(() =>
             this.publicService.getBanks().pipe(
                 map(banks => PublicActions.loadBanksSuccess(banks)),
                 catchError(error => of(PublicActions.loadBanksFailure(error.error.Message)))
+            )
+        )));
+
+    loadBank$ = createEffect(() => this.actions$.pipe(
+        ofType(PublicActions.loadBankRequest),
+        switchMap((action) =>
+            this.publicService.getBank(action.payload).pipe(
+                map(bank => PublicActions.loadBankSuccess(bank)),
+                catchError(error => of(PublicActions.loadBankFailure(error.error.Message)))
             )
         )));
 

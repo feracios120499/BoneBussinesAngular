@@ -1,0 +1,40 @@
+<textarea class="b1-input__control b1-input__control_textarea" name="purpose" id="purpose" [(ngModel)]="viewValue"
+    required [maxlength]="maxlength" (blur)="onBlur()" (ngModelChange)="onModelChange()"></textarea>
+<b1-input-error [control]="formControl" [form]="form"></b1-input-error>
+<div class="b1-mt-2">
+    <div class="b1-small">
+        <span>{{'components.pay.left' | translate}}</span>
+        <span class="b1-ml-2 b1-mr-2">{{maxlength - viewValue.length}}</span>
+        <span>{{'components.pay.symbols' | translate}}</span>
+    </div>
+</div>
+<fieldset (click)="checkSum($event)" class="b1-mt-5">
+    <div class="b1-small b1-bold b1-mt-3">
+        <!-- С ПДВ -->
+        <label class="b1-checkbox">
+            <input type="checkbox" class="b1-checkbox__hidden" name="type" [(ngModel)]="withVat"
+                (ngModelChange)="calcTaxes()" />
+            <i class="b1-checkbox__check"></i>
+            <span class="b1-checkbox__label b1-small b1-bold">{{'components.pay.withVAT' | translate}}
+            </span>
+        </label>
+        <input name="vatVaue" [(ngModel)]="withVatValue" [disabled]="!withVat" class="percent-input" (blur)="blurTax()"
+            mask="0*.00" maxlength="5" /> %
+        <!-- БЕЗ ПДВ -->
+        <label class="b1-checkbox b1-ml-4">
+            <input type="checkbox" class="b1-checkbox__hidden" name="type" ng-model="withoutVAT" ng-click="calcTaxes()"
+                ng-disabled="withVAT || budget" />
+            <i class="b1-checkbox__check"></i>
+            <span class="b1-checkbox__label b1-small b1-bold">{{'components.pay.withoutVAT' | translate}}
+            </span>
+        </label>
+        <!-- БЮДЖЕТ -->
+        <label class="b1-checkbox b1-ml-4">
+            <input type="checkbox" class="b1-checkbox__hidden" name="type" ng-model="budget"
+                ng-disabled="withVAT || withoutVAT || at1 || at2" />
+            <i class="b1-checkbox__check"></i>
+            <span class="b1-checkbox__label b1-small b1-bold">{{'components.pay.budget' | translate}}
+            </span>
+        </label>
+    </div>
+</fieldset>

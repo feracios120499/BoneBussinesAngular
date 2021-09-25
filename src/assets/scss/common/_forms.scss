@@ -1,5 +1,9 @@
 @import "variables.scss";
 
+@mixin input-invalid {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 3px rgba($color-error, 0.2) !important;
+}
 .b1 {
   &-datepicker {
     position: relative;
@@ -63,7 +67,7 @@
 
     &__label {
       @include base;
-      padding: 10px;
+      padding: 6px 10px;
       position: absolute;
       opacity: 0.6;
       transform: translateX(-100%);
@@ -118,12 +122,6 @@
         margin-top: 40px;
       }
 
-      // &:not(.without-label) {
-      //   @media (max-width: 767px) {
-      //     margin-top: 40px;
-      //   }
-      // }
-
       &:hover {
         border-color: rgba(var(--color-dark-rgb), 0.9);
         & + .b1-icons {
@@ -138,6 +136,10 @@
         border-color: var(--color-info);
         box-shadow: 0 0 0 3px rgba($color-info, 0.4);
       }
+      &.ng-valid.ng-dirty {
+        border-color: var(--color-info);
+        box-shadow: 0 0 0 3px rgba($color-info, 0.4);
+      }
 
       &:disabled,
       &.ng-disabled {
@@ -148,6 +150,7 @@
       &.ng-invalid.ng-touched,
       &.ngrx-forms-invalid.ngrx-forms-touched {
         border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.2);
       }
 
       &.ng-invalid.ng-touched:focus,
@@ -470,4 +473,16 @@ textarea.ng-invalid.ng-touched:focus {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.ng-submitted {
+  & .b1-input__control.ng-invalid {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+  }
+}
+b1-input-amount.ng-touched.ng-invalid {
+  & input {
+    @include input-invalid;
+  }
 }

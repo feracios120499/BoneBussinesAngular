@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '@services/auth.service';
 import { UserService } from '@services/user.service';
+import { NotifyActions } from '@store/notify/actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -21,6 +22,12 @@ export class AuthEffects {
             catchError(error => of(AuthActions.loginFailure(error.error.Message)))
         ))
     ));
+
+    loginError$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(AuthActions.loginFailure),
+            map((action) => NotifyActions.errorNotification({ message: action.payload, title: 'error' }))
+        ));
 
     loginWithOtp$ = createEffect(() =>
         this.action$.pipe(

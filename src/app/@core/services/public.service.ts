@@ -18,8 +18,12 @@ export class PublicService extends BaseService {
         super();
     }
 
+    getBank(bankCode: string): Observable<BankModel> {
+        return this.http.get<any>(`api/v1/public/banks/${bankCode}`).pipe(map((response) => response.Result ? response.Result : response));
+    }
+
     getBanks(): Observable<BankModel[]> {
-        return this.http.get<BankModel[]>(`api/v1/public/banks/`);
+        return this.http.get<any>(`api/v1/public/banks/`).pipe(map((response) => response.Result ? response.Result : response));
     }
 
     getResources(): Observable<Resources> {

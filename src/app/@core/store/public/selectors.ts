@@ -1,3 +1,4 @@
+import { BankModel } from '@models/bank.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { PUBLIC_KEY, PublicState } from './store';
@@ -10,9 +11,9 @@ export namespace PublicSelectors {
         state => state.banks
     );
 
-    export const bank = (bankCode: string) => createSelector(
+    export const bank = createSelector(
         banks,
-        (state) => state.find(p => p.BankCode === bankCode)
+        (state: BankModel[], props: { id: string }) => state.find(p => p.BankCode === props.id)
     );
 
     export const logo = createSelector(

@@ -321,6 +321,10 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
             if (val[this._endKey]) {
                 this.picker.setEndDate(val[this._endKey]);
             }
+            if (dayjs.isDayjs(val)) {
+                this.picker.setStartDate(val);
+                this.picker.setEndDate(val);
+            }
             this.picker.calculateChosenLabel();
             if (this.picker.chosenLabel) {
                 this._el.nativeElement.value = this.picker.chosenLabel;

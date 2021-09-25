@@ -28,6 +28,14 @@ export class NotifyEffects {
         { dispatch: false }
     );
 
+    showError$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(NotifyActions.errorNotification),
+            tap((action) => this.toastrService.error(action.message, action.title, this.getConfig()))
+        ),
+        { dispatch: false }
+    );
+
     getConfig(): Partial<IndividualConfig> {
         if (window.screen.width <= environment.mobileWidth) {
             return this.mobileConfig;

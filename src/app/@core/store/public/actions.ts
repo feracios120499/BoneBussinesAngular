@@ -11,6 +11,12 @@ export namespace PublicActions {
     ] = createHTTPActions<void, BankModel[], string>('[PUBLIC] load banks');
 
     export const [
+        loadBankRequest,
+        loadBankSuccess,
+        loadBankFailure
+    ] = createHTTPActions<string, BankModel, string>('[PUBLIC] load bank');
+
+    export const [
         loadResourcesRequest,
         loadResourcesSuccess,
         loadResourcesFailure

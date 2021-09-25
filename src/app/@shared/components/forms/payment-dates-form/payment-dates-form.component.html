@@ -1,0 +1,29 @@
+<div class="dates b1-mt-5" [formGroup]="paymentForm">
+    <div>
+        <div class="b1-flex b1-input">
+            <label class="b1-input__label b1-base">
+                {{'components.pay.paymentDate' | translate}}
+            </label>
+            <div class="b1-page-inputWithIcon">
+                <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
+                    [formControl]="documentDateControl" [minDate]="minDocumentDate" [maxDate]="maxDocumentDate"
+                    [singleDatePicker]="true" [closeOnAutoApply]="true" [autoApply]="true" readonly />
+                <label for="calendar" b1-icon icon="calendar"></label>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="b1-flex b1-input">
+            <label class="b1-input__label b1-base dates-label">
+                {{'components.pay.paymentValueDate' | translate}}
+            </label>
+            <div class="b1-page-inputWithIcon">
+                <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
+                    [formControl]="valueDateControl" [singleDatePicker]="true" [closeOnAutoApply]="true"
+                    [minDate]="minValueDate" [maxDate]="maxValueDate" [autoApply]="true" readonly />
+                <label for="calendar" b1-icon icon="calendar"></label>
+            </div>
+        </div>
+    </div>
+</div>

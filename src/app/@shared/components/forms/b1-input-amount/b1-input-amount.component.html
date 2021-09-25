@@ -1,0 +1,8 @@
+<div class="b1-input">
+    <label for="amount" class="b1-input__label">
+        {{label | translate}}
+    </label>
+    <input class="b1-input__control" type="text" name="amount" [mask]="mask" [(ngModel)]="viewValue"
+        [dropSpecialCharacters]="false" (ngModelChange)="updateValue()" (focus)="onInputFocus()" (blur)="onBlur()"
+        [disabled]="disabled" [maxlength]="15">
+</div>

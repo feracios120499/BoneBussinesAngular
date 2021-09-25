@@ -1,0 +1,11 @@
+.dates {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &-label {
+        width: 200%;
+        @media (min-width: 812px) {
+            text-align: right;
+        }
+    }
+}
