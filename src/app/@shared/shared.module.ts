@@ -28,6 +28,7 @@ import { B1RequisitesModalComponent } from './components/modals/b1-requisites-mo
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { B1IconDirective } from './directives/b1-icon.directive';
 import { CheckStateDirective } from './directives/check-state.directive';
+import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
 import { IbanDirective } from './directives/iban.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MobileMoreDirective } from './directives/mobile-more.directive';
@@ -74,7 +75,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1InputErrorComponent,
     OnlyNumbersDirective,
     B1InputAmountComponent,
-    PaymentPurposeFormComponent],
+    PaymentPurposeFormComponent,
+    DecimalNumbersDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -121,7 +123,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     ReactiveComponentModule,
     WithinCountryFormComponent,
     OnlyNumbersDirective,
-    NgxMaskModule
+    NgxMaskModule,
+    DecimalNumbersDirective
   ],
   providers: [
     {

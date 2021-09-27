@@ -14,17 +14,6 @@ import { round } from 'mathjs';
 })
 export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
 
-  get viewMaxLength(): number {
-    const regex = `^\\d+\\.`;
-
-    if (new RegExp(regex, 'gi').test(this.viewValue)) {
-      return this.maxlength;
-    }
-    else {
-      return this.maxlength - this.digits - 1;
-    }
-  }
-
   viewValue = '';
   disabled = false;
   @Input() digits = 2;
@@ -32,15 +21,11 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
   @Input() maxlength = 15;
   amount = 0;
 
-  mask = `0*.${'0'.repeat(this.digits)}`;
-
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
   writeValue(amount: number): void {
-    console.log(this.mask);
     this.amount = amount;
-    this.updateView();
   }
 
   registerOnChange(fn: any): void {
@@ -72,12 +57,7 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
   }
 
   onBlur(): void {
-    this.updateView();
     this.onTouched();
-  }
-
-  updateView(): void {
-    this.viewValue = round(this.amount / (Math.pow(10, this.digits)), this.digits).toFixed(this.digits).toString();
   }
 
   ngOnInit(): void {
