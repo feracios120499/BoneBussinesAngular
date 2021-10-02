@@ -28,6 +28,7 @@ import { B1RequisitesModalComponent } from './components/modals/b1-requisites-mo
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { B1IconDirective } from './directives/b1-icon.directive';
 import { CheckStateDirective } from './directives/check-state.directive';
+import { CheckValueInputDirective } from './directives/check-value.directive';
 import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
 import { IbanDirective } from './directives/iban.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
@@ -39,6 +40,8 @@ import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-pat
 import { WebClassDirective } from './directives/web-class.directive';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { MoneyPipe } from './pipes/money.pipe';
+import { B1AccountSelectComponent } from './components/forms/b1-account-select/b1-account-select.component';
+import { B1SinglePickerComponent } from './components/forms/b1-single-picker/b1-single-picker.component';
 
 
 
@@ -76,7 +79,10 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     OnlyNumbersDirective,
     B1InputAmountComponent,
     PaymentPurposeFormComponent,
-    DecimalNumbersDirective],
+    DecimalNumbersDirective,
+    CheckValueInputDirective,
+    B1AccountSelectComponent,
+    B1SinglePickerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -124,7 +130,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     WithinCountryFormComponent,
     OnlyNumbersDirective,
     NgxMaskModule,
-    DecimalNumbersDirective
+    DecimalNumbersDirective,
+    CheckValueInputDirective
   ],
   providers: [
     {

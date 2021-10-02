@@ -77,6 +77,27 @@ export namespace AcctSelectors {
         state => state.loadings.indexOf(AcctLoadings.list) >= 0
     );
 
+    // фильтруем открытые счета + сортируем сначала по гривне, а потом по дате активности
+    export const activeAccounts = createSelector(
+        accountsSelector,
+        (accounts) => accounts?.filter(p => p.Status === AccountTab.Active)?.sort(
+            (a, b) => a.CurrencyCode === b.CurrencyCode ?
+                ((a.LastActive || new Date()) > (b.LastActive || new Date()) ? 1 : 0)
+                : a.CurrencyCode === 'UAH' ? -1 : 1
+            // {
+            //     if (a.CurrencyCode === 'UAH' && b.CurrencyCode !== 'UAH') {
+            //         return -1;
+            //     }
+            //     else if (b.CurrencyCode === 'UAH' && a.CurrencyCode !== 'UAH') {
+            //         return 1;
+            //     }
+            //     else {
+            //         return (a.LastActive || new Date()) > (b.LastActive || new Date()) ? 1 : 0;
+            //     }
+            // }
+        )
+    );
+
 
 
 

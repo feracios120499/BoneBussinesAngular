@@ -54,6 +54,9 @@
       ],
       "@models/*": [
         "./src/app/@shared/models/*"
+      ],
+      "@forms/*": [
+        "./src/app/@shared/components/forms/*"
       ]
     }
   },

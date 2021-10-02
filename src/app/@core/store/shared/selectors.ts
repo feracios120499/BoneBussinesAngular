@@ -21,4 +21,9 @@ export namespace SharedSelectors {
         UserSelectors.currentCustomer,
         (currentCustomser) => dayjs(currentCustomser?.BankDate)
     );
+
+    export const createPayment = createSelector(
+        sharedStore,
+        (state) => state.createPayment?.payment
+    );
 }

@@ -1,0 +1,11 @@
+:host {
+    position: relative;
+}
+.create {
+    &-content {
+        position: relative;
+        @media (max-width: 812px) {
+            padding-top: 64px;
+        }
+    }
+}

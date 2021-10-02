@@ -39,6 +39,27 @@
           color: var(--color-info) !important;
         }
       }
+      &:disabled,
+      &.ng-disabled {
+        // & input {
+        //   cursor: not-allowed;
+        //   opacity: 0.6;
+        // }
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      &.ng-invalid.ng-touched,
+      &.ngrx-forms-invalid.ngrx-forms-touched {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+      }
+
+      &.ng-invalid.ng-touched:focus,
+      &.ngrx-forms-invalid.ngrx-forms-touched:focus {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+      }
     }
 
     &__addon {
@@ -65,12 +86,45 @@
     position: relative;
     width: 100%;
 
+    & :disabled,
+    & .ng-disabled {
+      & input {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+
+    & .ng-invalid.ng-touched,
+    & .ngrx-forms-invalid.ngrx-forms-touched {
+      & input:not(.no-validate) {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+        & ~ [b1-icon] {
+          color: var(--color-error);
+        }
+      }
+    }
+
+    & .ng-invalid.ng-touched:focus,
+    & .ngrx-forms-invalid.ngrx-forms-touched:focus {
+      & input:not(.no-validate) {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+        & ~ [b1-icon] {
+          color: var(--color-error);
+        }
+      }
+    }
+
     &__label {
       @include base;
       padding: 6px 10px;
       position: absolute;
       opacity: 0.6;
       transform: translateX(-100%);
+      &:not(.not-lower) {
+        text-transform: lowercase;
+      }
 
       &_top {
         transform: none;
@@ -136,7 +190,7 @@
         border-color: var(--color-info);
         box-shadow: 0 0 0 3px rgba($color-info, 0.4);
       }
-      &.ng-valid.ng-dirty {
+      &.ng-valid.ng-has-value {
         border-color: var(--color-info);
         box-shadow: 0 0 0 3px rgba($color-info, 0.4);
       }

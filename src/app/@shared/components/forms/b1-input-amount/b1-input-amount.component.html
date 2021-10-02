@@ -5,4 +5,7 @@
     <input class="b1-input__control" name="amount" [(ngModel)]="viewValue" decimalNumbers [autocomplete]="false"
         (ngModelChange)="updateValue()" (focus)="onInputFocus()" (blur)="onBlur()" [disabled]="disabled"
         [maxlength]="15">
+    <ng-content>
+
+    </ng-content>
 </div>

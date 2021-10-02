@@ -58,5 +58,8 @@ export function notNullAndUndefined<T>(
     return store.select(selector).pipe(filter(p => !!p), map(p => p as T));
 }
 
+export function required<T>(source$: Observable<T | undefined>): Observable<T> {
+    return source$.pipe(filter(p => !!p), map(p => p as T));
+}
 
 

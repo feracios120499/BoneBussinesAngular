@@ -1,12 +1,22 @@
-<div class="row">
-    <div class="col-md-12">
-        <ul class="b1-page-tabs">
-            <li class="b1-page-tabs__item" *ngFor="let tab of tabs" [routerLink]="tab.route" routerLinkActive="active">
-                <a class="b1-page-tabs__link b1-medium b1-bold">
-                    <i b1-icon [icon]="tab.icon" class="b1-mr-3"></i>
-                    <span>{{tab.label | translate}}</span>
-                </a>
-            </li>
-        </ul>
+<ul class="b1-page-tabs b1-base b1-bold payment-tabs">
+    <li class="b1-page-tabs__item" *ngFor="let tab of tabs" (click)="selectTab(tab)"
+        [class.active]="tab === currentTab">
+        <a class="b1-page-tabs__link b1-medium b1-bold">
+            <i b1-icon [icon]="tab.icon" class="b1-mr-3"></i>
+            <span>{{tab.label | translate}}</span>
+        </a>
+    </li>
+</ul>
+
+<div class="payment-tabs-mobile" *ngIf="showTabs$ | ngrxPush">
+    <div>
+        <i b1-icon [icon]="currentTab.icon" class="b1-mr-3"></i>
+        <span>{{currentTab.label | translate}}</span>
     </div>
+    <i b1-icon icon="chevron-down" class="payment-tabs-list_chevron chevron"></i>
+    <select name="tabs" id="tabs" class="payment-tabs-list" #selectList (change)="selectTab(selectList.value)">
+        <option *ngFor="let tab of tabs" [value]="tab">
+            {{tab.label | translate}}
+        </option>
+    </select>
 </div>

@@ -26,6 +26,13 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
 
   writeValue(amount: number): void {
     this.amount = amount;
+    if (this.amount) {
+      this.viewValue = (this.amount / Math.pow(10, this.digits)).toFixed(this.digits);
+    }
+    else {
+      this.viewValue = '';
+    }
+
   }
 
   registerOnChange(fn: any): void {

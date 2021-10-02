@@ -1,0 +1,39 @@
+@import "variables";
+
+::ng-deep {
+    .ng-option.ng-option-disabled > span:hover,
+    .ng-option.ng-option-disabled > span:focus {
+        background: none !important;
+    }
+}
+
+.accounts {
+    @media (max-width: 812px) {
+        display: none;
+    }
+    &-mobile {
+        display: none;
+        @media (max-width: 812px) {
+            display: flex;
+        }
+    }
+    &-modal {
+        padding: 0;
+        margin-top: 16px;
+    }
+}
+
+.account {
+    display: flex;
+    padding: 16px;
+    color: var(--color-dark);
+    &.active {
+        @include selected-row;
+        color: $color-light;
+    }
+    &-body {
+        margin-left: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { withinCountryReducer } from '@store/payments/within-country-payment/reducer';
+import { WITHIN_COUNTRY_KEY } from '@store/payments/within-country-payment/store';
+import { SharedModule } from 'src/app/@shared/shared.module';
 
+import { CreateTabsComponent } from './components/create-tabs/create-tabs.component';
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
-import { CreateMyAccountsModule } from './modules/create-my-accounts/create-my-accounts.module';
-import { CreateTabsComponent } from './components/create-tabs/create-tabs.component';
-import { SharedModule } from 'src/app/@shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { SharedModule } from 'src/app/@shared/shared.module';
   imports: [
     CommonModule,
     CreateRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature(WITHIN_COUNTRY_KEY, withinCountryReducer)
   ]
 })
 export class CreateModule { }

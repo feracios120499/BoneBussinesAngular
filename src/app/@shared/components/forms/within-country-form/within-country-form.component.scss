@@ -8,5 +8,18 @@
         min-height: 44px;
         display: flex;
         align-items: center;
+        @media (max-width: 812px) {
+            width: 80%;
+        }
+    }
+    &-button {
+        @media (max-width: 812px) {
+            display: none;
+        }
+        &_mobile {
+            @media (min-width: 812px) {
+                display: none;
+            }
+        }
     }
 }

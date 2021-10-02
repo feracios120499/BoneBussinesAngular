@@ -15,6 +15,14 @@ export const sharedReducer = createReducer(
     on(
         SharedActions.setPaymentLoader,
         (state, action) => ({ ...state, currentPayment: { ...state.currentPayment, loader: action.loader } })
+    ),
+    on(
+        SharedActions.setCreatePayment,
+        (state, action) => ({ ...state, createPayment: { ...state.createPayment, payment: action.payment } })
+    ),
+    on(
+        SharedActions.clearCreatePayment,
+        (state) => ({ ...state, createPayment: undefined })
     )
 );
 

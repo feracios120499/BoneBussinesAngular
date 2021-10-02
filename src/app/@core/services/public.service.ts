@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,5 +29,11 @@ export class PublicService extends BaseService {
 
     getResources(): Observable<Resources> {
         return this.http.get<any>('api/v1/public/resources').pipe(map((response) => response.Result ? response.Result : response));
+    }
+
+    getPayTypes(): Observable<PaymentType[]> {
+        return this.http.get<any>(`api/v1/pay/paymentTypeCodes`).pipe(
+            map((response) => response.Result ? response.Result as PaymentType[] : response as PaymentType[])
+        );
     }
 }

@@ -16,6 +16,8 @@ import { AcctState, ACCT_KEY } from './acct/store';
 import { acctReducer } from './acct/reducer';
 import { SharedState, SHARED_KEY } from './shared/store';
 import { sharedReducer } from './shared/reducer';
+import { WithinCountryPaymentState, WITHIN_COUNTRY_KEY } from './payments/within-country-payment/store';
+import { withinCountryReducer } from './payments/within-country-payment/reducer';
 
 
 
@@ -29,6 +31,7 @@ export interface State {
   [MENU_KEY]: MenuState;
   [SHARED_KEY]: SharedState;
   router: RouterReducerState;
+  [key: string]: any;
 }
 
 

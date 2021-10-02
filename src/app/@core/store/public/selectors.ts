@@ -1,5 +1,8 @@
 import { BankModel } from '@models/bank.model';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
+import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 import { PUBLIC_KEY, PublicState } from './store';
 
@@ -44,5 +47,11 @@ export namespace PublicSelectors {
     export const ecpSupportPhones = createSelector(
         publicStore,
         state => state.resources?.Owner.ECPTechSupportPhone
+    );
+
+
+    export const payTypes = createSelector(
+        publicStore,
+        state => state.payTypes
     );
 }

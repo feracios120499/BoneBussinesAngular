@@ -5,7 +5,8 @@ export class IbanHelper {
         /^(UA[0-9]{27})$/mg
     ];
 
-    public static getBankId(iban: string): string {
+    public static getBankId(iban?: string): string | undefined {
+        if (!iban) { return; }
         return iban.substr(4, 6);
     }
 

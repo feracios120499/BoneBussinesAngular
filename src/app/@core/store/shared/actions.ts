@@ -1,6 +1,7 @@
 import { FileModel } from '@models/file.model';
 import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
 import { RequisitesModalConfig } from '@models/modals/requisites-modal-config.model';
+import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { StatementModalConfig } from '@models/statement-modal-config.model';
 import { createAction, DefaultProjectorFn, MemoizedSelector, props } from '@ngrx/store';
@@ -23,6 +24,10 @@ export namespace SharedActions {
     export const saveFile = createAction('[SHARED] save file', props<{ file: FileModel }>());
 
     export const printFile = createAction('[SHARED] print file', props<{ html: string }>());
+
+    export const setCreatePayment = createAction(`[SHARED] set create payment`, props<{ payment: PaymentForm }>());
+
+    export const clearCreatePayment = createAction('[SHARED] clear create payment');
 }
 
 

@@ -1,0 +1,97 @@
+<div class="b1-confirm" *ngrxLet="payment$ as payment">
+    <div class="b1-confirm-container">
+        <div class="b1-confirm-block">
+            <div class="b1-confirm-title">
+                {{'components.pay.payer' | translate}}
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.analytics.accName' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    {{payment.sender.name}}
+                </div>
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.pay.import.senderAccNumber' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    <div [iban]="payment.sender.accNumber"></div>
+                </div>
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.pay.import.taxCode' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    <span>{{payment.sender.taxCode}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="b1-confirm-block">
+            <div class="b1-confirm-title">
+                {{'components.pay.recipient' | translate}}
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.analytics.accName' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    {{payment.recipient.name}}
+                </div>
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.pay.import.recipientAccNumber' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    <div [iban]="payment.recipient.accNumber"></div>
+                </div>
+            </div>
+            <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                    {{'components.pay.import.taxCode' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    <span>{{payment.recipient.taxCode}}</span>
+                </div>
+            </div>
+            <div class="b1-confirm-group" *ngIf="payment.additionalDetails">
+                <div class="b1-confirm-label">
+                    {{'components.pay.import.recipientDetails' | translate}}
+                </div>
+                <div class="b1-confirm-value">
+                    {{payment.additionalDetails}}
+                </div>
+            </div>
+        </div>
+        <div class="b1-confirm-block b1-confirm-block_bottom">
+            <div class="row">
+                <div class="col-md-6 b1-ellipsis">
+                    <div class="b1-confirm-group">
+                        <div class="b1-confirm-label">
+                            {{'components.pay.purpose' | translate}}
+                        </div>
+                        <div class="b1-confirm-value b1-ellipsis">
+                            {{payment.purpose}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 b1-ellipsis">
+                    <div class="b1-confirm-group text-right">
+                        <div class="b1-confirm-label">
+                            {{'components.pay.amount' | translate}}
+                        </div>
+                        <div class="b1-confirm-value b1-ellipsis">
+                            <span>{{(payment.amount / 100) | money:''}}</span>
+                            <span>{{payment.sender.accCurrencyCode}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

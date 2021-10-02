@@ -1,0 +1,7 @@
+<input class="b1-datepicker__input b1-singlepicker b1-base date" [ngClass]="class" b1-daterangepicker
+    [(ngModel)]="value" (ngModelChange)="onModelChange()" [minDate]="min" [maxDate]="max" [singleDatePicker]="true"
+    (blur)="onBlur()" [closeOnAutoApply]="true" [autoApply]="true" readonly />
+<label for="calendar" b1-icon icon="calendar"></label>
+
+<input type="date" class="b1-datepicker__input b1-singlepicker b1-base date-mobile" [(ngModel)]="nativeValue"
+    (ngModelChange)="onNativeModelChange()" [min]="nativeMin" [max]="nativeMax" (blur)="onBlur()" #picker />

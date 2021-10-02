@@ -18,6 +18,9 @@
     padding: 32px;
     width: 100%;
     margin: 0 auto;
+    @media (max-width: 812px) {
+      padding: 16px;
+    }
   }
 
   &-head-tabs {

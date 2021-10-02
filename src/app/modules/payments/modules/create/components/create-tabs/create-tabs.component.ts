@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { PaySelectors } from '@store/payments/selectors';
 
 @Component({
   selector: 'payment-create-tabs',
@@ -8,7 +10,7 @@ import { Store } from '@ngrx/store';
 })
 export class CreateTabsComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private router: Router, private store: Store) { }
 
   tabs = [
     {
@@ -30,7 +32,15 @@ export class CreateTabsComponent implements OnInit {
       label: 'components.pay.actions.swift'
     }
   ];
+
+  currentTab = this.tabs[0];
+  showTabs$ = this.store.select(PaySelectors.showCreateTabs);
   ngOnInit(): void {
+  }
+
+  selectTab(tab: any): void {
+    this.currentTab = tab;
+    this.router.navigate(tab.route);
   }
 
 }

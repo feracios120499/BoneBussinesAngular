@@ -5,10 +5,12 @@
                 {{'components.pay.paymentDate' | translate}}
             </label>
             <div class="b1-page-inputWithIcon">
-                <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
+                <b1-single-picker [formControl]="documentDateControl" [min]="minDocumentDate" [max]="maxDocumentDate">
+                </b1-single-picker>
+                <!-- <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
                     [formControl]="documentDateControl" [minDate]="minDocumentDate" [maxDate]="maxDocumentDate"
                     [singleDatePicker]="true" [closeOnAutoApply]="true" [autoApply]="true" readonly />
-                <label for="calendar" b1-icon icon="calendar"></label>
+                <label for="calendar" b1-icon icon="calendar"></label> -->
             </div>
         </div>
     </div>
@@ -19,10 +21,12 @@
                 {{'components.pay.paymentValueDate' | translate}}
             </label>
             <div class="b1-page-inputWithIcon">
-                <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
+                <b1-single-picker [formControl]="valueDateControl" [min]="minValueDate" [max]="maxValueDate">
+                </b1-single-picker>
+                <!-- <input class="b1-datepicker__input b1-singlepicker b1-base" b1-daterangepicker
                     [formControl]="valueDateControl" [singleDatePicker]="true" [closeOnAutoApply]="true"
                     [minDate]="minValueDate" [maxDate]="maxValueDate" [autoApply]="true" readonly />
-                <label for="calendar" b1-icon icon="calendar"></label>
+                <label for="calendar" b1-icon icon="calendar"></label> -->
             </div>
         </div>
     </div>

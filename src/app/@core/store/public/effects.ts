@@ -4,7 +4,7 @@ import { PublicService } from '@services/public.service';
 import { AppActions } from '@store/app/actions';
 import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 import { PublicActions } from './actions';
 
@@ -17,7 +17,10 @@ export class PublicEffects {
     appStart$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AppActions.start),
-            map(() => PublicActions.loadBanksRequest())
+            mergeMap(() => [
+                // PublicActions.loadBanksRequest(),
+                PublicActions.loadPayTypesReuqest()
+            ])
         ));
     loadBanks$ = createEffect(() => this.actions$.pipe(
         ofType(PublicActions.loadBanksRequest),
@@ -47,4 +50,13 @@ export class PublicEffects {
                 )
             )));
 
+    loadPayTypes$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PublicActions.loadPayTypesReuqest),
+            switchMap(_ =>
+                this.publicService.getPayTypes().pipe(
+                    map(resources => PublicActions.loadPayTypesSuccess(resources)),
+                    catchError(error => of(PublicActions.loadPayTypesFailure(error.error.Message)))
+                )
+            )));
 }

@@ -151,17 +151,23 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
     ];
 
     get value(): DateRange | _dayjs.Dayjs {
+        console.log(this._value);
         if (this.singleDatePicker) {
-            return this._value?.startDate || null;
+            return this._value[this._startKey] || null;
         }
         else {
             return this._value || null;
         }
 
     }
-    set value(val: DateRange | _dayjs.Dayjs) {
-        if ((val as any).startDate && this.singleDatePicker) {
-            val = (val as any).startDate;
+    set value(val: DateRange | _dayjs.Dayjs | undefined) {
+        if (this.singleDatePicker) {
+            if (this._startKey in (val as any)) {
+                val = (val as any)[this._startKey];
+            }
+        }
+        if (dayjs.isDayjs(val)) {
+            val = dayjs(val.format('YYYY-MM-DD'), 'YYYY-MM-DD');
         }
         this._value = val;
         this._onChange(val);
@@ -313,6 +319,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
         this._disabled = state;
     }
     private setValue(val: any) {
+
         if (val) {
             this.value = val;
             if (val[this._startKey]) {

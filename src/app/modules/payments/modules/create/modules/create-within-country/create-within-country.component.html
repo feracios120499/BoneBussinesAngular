@@ -1,1 +1,16 @@
-<within-country-form></within-country-form>
+<ng-container *ngrxLet="progress$ as progress">
+    <ng-container *ngIf="progress === 'form'">
+        <within-country-form #form [senderAccounts]="senderAccounts$" [(ngModel)]="paymentForm">
+        </within-country-form>
+
+        <div class="w-100 b1-flex b1-align-center b1-justify-center b1-mt-5 b1-mb-5">
+            <div class="b1-button-primary" (click)="toConfirm()">
+                <i b1-icon icon="check"></i>
+                {{'components.pay.confirmPayment' | translate}}
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="progress === 'confirm'">
+        <confirm-within-country></confirm-within-country>
+    </ng-container>
+</ng-container>
