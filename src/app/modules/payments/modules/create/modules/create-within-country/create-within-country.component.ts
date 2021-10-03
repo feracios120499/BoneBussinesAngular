@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { WithinCountryFormComponent } from '@forms/within-country-form/within-country-form.component';
 import { PaymentForm } from '@models/payment-form.model';
 import { Store } from '@ngrx/store';
 import { State } from '@store';
 import { WithinCountryActions } from '@store/payments/within-country-payment/actions';
-import { withinCountryReducer } from '@store/payments/within-country-payment/reducer';
 import { WithinCountryPaymentSelectors } from '@store/payments/within-country-payment/selectors';
-import { WITHIN_COUNTRY_KEY } from '@store/payments/within-country-payment/store';
 import { SharedActions } from '@store/shared/actions';
 import { SharedSelectors } from '@store/shared/selectors';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import {
+  WithinCountryFormComponent,
+} from 'src/app/@shared/modules/shared-payment/components/within-country-form/within-country-form.component';
 
 @Component({
   selector: 'app-create-within-country',

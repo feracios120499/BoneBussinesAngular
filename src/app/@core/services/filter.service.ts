@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { divide } from 'mathjs';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +10,7 @@ export class FilterService {
 
     }
     getMoneyString(money: number): string {
-        return divide(money, 100).toString();
+        return (money / 100).toFixed(2);
     }
 
     pushValue(values: string[], value: any): void {

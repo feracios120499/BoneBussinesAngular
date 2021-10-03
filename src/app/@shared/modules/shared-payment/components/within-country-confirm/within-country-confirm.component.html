@@ -1,4 +1,11 @@
 <div class="b1-confirm" *ngrxLet="payment$ as payment">
+    <div class="b1-confirm-header">
+        <div class="b1-back" (click)="toForm()">
+            <i b1-icon icon="chevron-left" class="b1-medium"></i>
+        </div>
+        <div class="b1-title2">Перевiрте iнформацiю</div>
+        <div class="b1-medium b1-light b1-opacity-80">{{'components.pay.actions.inUrainePay' | translate}}</div>
+    </div>
     <div class="b1-confirm-container">
         <div class="b1-confirm-block">
             <div class="b1-confirm-title">
@@ -93,5 +100,11 @@
 
         </div>
 
+    </div>
+
+    <div class="b1-flex b1-justify-center b1-align-center">
+        <div class="b1-button-primary">
+            save
+        </div>
     </div>
 </div>

@@ -13,24 +13,15 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
-import { DaterangepickerComponent } from './components/b1-daterangepicker/b1-daterangepicker.component';
-import { DaterangepickerDirective } from './components/b1-daterangepicker/b1-daterangepicker.directive';
-import { B1InputErrorComponent } from './components/b1-input-error/b1-input-error.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
-import { B1InputAmountComponent } from './components/forms/b1-input-amount/b1-input-amount.component';
-import { PaymentDatesFormComponent } from './components/forms/payment-dates-form/payment-dates-form.component';
-import { PaymentPurposeFormComponent } from './components/forms/payment-purpose-form/payment-purpose-form.component';
-import { WithinCountryFormComponent } from './components/forms/within-country-form/within-country-form.component';
 import { B1ExportTurnoversComponent } from './components/modals/b1-export-turnovers/b1-export-turnovers.component';
 import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1-payment-modal.component';
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
-import { B1IconDirective } from './directives/b1-icon.directive';
 import { CheckStateDirective } from './directives/check-state.directive';
 import { CheckValueInputDirective } from './directives/check-value.directive';
 import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
-import { IbanDirective } from './directives/iban.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MobileMoreDirective } from './directives/mobile-more.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
@@ -38,10 +29,10 @@ import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
 import { WebClassDirective } from './directives/web-class.directive';
+import { B1DirectivesModule } from './modules/b1-directives/b1-directives.module';
+import { B1FormsModule } from './modules/b1-forms/b1-forms.module';
+import { B1PipesModule } from './modules/b1-pipes/b1-pipes.module';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
-import { MoneyPipe } from './pipes/money.pipe';
-import { B1AccountSelectComponent } from './components/forms/b1-account-select/b1-account-select.component';
-import { B1SinglePickerComponent } from './components/forms/b1-single-picker/b1-single-picker.component';
 
 
 
@@ -54,35 +45,23 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
 @NgModule({
   declarations: [
     CheckStateDirective,
-    B1IconDirective,
     B1CardLoaderComponent,
     AccountFilterPipe,
-    MoneyPipe,
     CdkVirtualScrollViewportPatchDirective,
-    IbanDirective,
     MobileMoreDirective,
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
     B1LinkComponent,
-    DaterangepickerComponent,
-    DaterangepickerDirective,
     B1PaymentModalComponent,
     B1StatementModalComponent,
     NgSelectScrollDirective,
     B1RequisitesModalComponent,
     B1ExportTurnoversComponent,
     B1PageButtonComponent,
-    WithinCountryFormComponent,
-    PaymentDatesFormComponent,
-    B1InputErrorComponent,
     OnlyNumbersDirective,
-    B1InputAmountComponent,
-    PaymentPurposeFormComponent,
     DecimalNumbersDirective,
-    CheckValueInputDirective,
-    B1AccountSelectComponent,
-    B1SinglePickerComponent],
+    CheckValueInputDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -96,7 +75,10 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgrxFormsModule,
     NgxSkeletonLoaderModule,
     NgSelectModule,
-    NgxMaskModule
+    NgxMaskModule,
+    B1DirectivesModule,
+    B1FormsModule,
+    B1PipesModule
   ],
   exports: [
     CommonModule,
@@ -106,32 +88,26 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgbModule,
     CheckStateDirective,
     NgOtpInputModule,
-    B1IconDirective,
     B1CardLoaderComponent,
     ScrollingModule,
     NgScrollbarModule,
     NgrxFormsModule,
     AccountFilterPipe,
-    MoneyPipe,
     CdkVirtualScrollViewportPatchDirective,
-    IbanDirective,
     MobileMoreDirective,
     NgxSkeletonLoaderModule,
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
     B1LinkComponent,
-    DaterangepickerComponent,
-    DaterangepickerDirective,
     NgSelectModule,
     NgSelectScrollDirective,
     B1PageButtonComponent,
     ReactiveComponentModule,
-    WithinCountryFormComponent,
     OnlyNumbersDirective,
     NgxMaskModule,
     DecimalNumbersDirective,
-    CheckValueInputDirective
+    CheckValueInputDirective,
   ],
   providers: [
     {

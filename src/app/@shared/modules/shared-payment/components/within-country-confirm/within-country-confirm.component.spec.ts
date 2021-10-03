@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmWithinCountryComponent } from './confirm-within-country.component';
+import { WithinCountryConfirmComponent } from './within-country-confirm.component';
 
 describe('ConfirmWithinCountryComponent', () => {
-  let component: ConfirmWithinCountryComponent;
-  let fixture: ComponentFixture<ConfirmWithinCountryComponent>;
+  let component: WithinCountryConfirmComponent;
+  let fixture: ComponentFixture<WithinCountryConfirmComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmWithinCountryComponent ]
+      declarations: [WithinCountryConfirmComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmWithinCountryComponent);
+    fixture = TestBed.createComponent(WithinCountryConfirmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

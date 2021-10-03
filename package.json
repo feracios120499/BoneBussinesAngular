@@ -37,7 +37,6 @@
     "dayjs": "^1.10.6",
     "deepmerge": "^4.2.2",
     "file-saver": "^2.0.5",
-    "mathjs": "^9.4.4",
     "ng-otp-input": "^1.7.1",
     "ngrx-forms": "^6.3.5",
     "ngrx-store-localstorage": "^11.0.0",

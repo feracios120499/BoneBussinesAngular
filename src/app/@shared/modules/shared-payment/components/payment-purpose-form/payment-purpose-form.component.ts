@@ -1,12 +1,9 @@
-import { Component, forwardRef, Input, OnChanges, OnInit, Optional, Self, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PaymentType } from '@models/payment-type.model';
 import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
 import { PublicSelectors } from '@store/public/selectors';
 import { Dayjs } from 'dayjs';
-import { round } from 'mathjs';
-import { setValue } from 'ngrx-forms';
 import { environment } from 'src/environments/environment';
 
 @Component({

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PublicService } from '@services/public.service';
+import { PublicService } from '@services/abstract/public.service';
 import { AppActions } from '@store/app/actions';
-import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 

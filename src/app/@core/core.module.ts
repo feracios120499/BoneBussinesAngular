@@ -4,6 +4,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { PublicService } from '@services/abstract/public.service';
+import { DemoPublicService } from '@services/demo/public.service';
+import { HttpPublicService } from '@services/public.service';
 import { reducers } from '@store';
 import { AcctEffects } from '@store/acct/effects';
 import { AuthActions } from '@store/auth/actions';
@@ -59,6 +62,7 @@ export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionRed
 
 const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, localStorageSyncReducer];
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -80,6 +84,12 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
     StoreRouterConnectingModule.forRoot(),
   ],
   declarations: [],
-  exports: [StoreModule, StoreDevtoolsModule, EffectsModule]
+  exports: [StoreModule, StoreDevtoolsModule, EffectsModule],
+  providers: [
+    {
+      provide: PublicService,
+      useClass: HttpPublicService
+    }
+  ]
 })
 export class CoreModule { }

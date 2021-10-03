@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, NgForm, Validators } from '@angular/forms';
 import { BankModel } from '@models/bank.model';
 import { PaymentForm } from '@models/payment-form.model';
@@ -12,7 +12,7 @@ import { ModelControl } from 'src/app/@shared/types/model-controls.type';
 import { RecursivePartial } from 'src/app/@shared/types/recursive-partial.type';
 import { ibanValidator } from 'src/app/@shared/validators/iban.validator';
 
-import { IbanHelper } from '../../../helpers/iban.helper';
+import { IbanHelper } from '../../../../helpers/iban.helper';
 
 @Component({
   selector: 'within-country-form',
@@ -26,7 +26,7 @@ import { IbanHelper } from '../../../helpers/iban.helper';
 })
 export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
 
-  constructor(private banksService: BanksStoreService) {
+  constructor(private banksService: BanksStoreService, private detector: ChangeDetectorRef) {
     const controls: ModelControl<WithinCountryForm> = {
       docNumberAuto: this.docNumberAutoControl,
       docNumber: this.docNumberControl,
@@ -51,8 +51,11 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
   }
 
   set bankName(bankName: string | undefined) {
-    this.recipientBankNameControl.setValue(bankName);
-    this.recipientBankNameControl.updateValueAndValidity();
+    setTimeout(() => {
+      this.recipientBankNameControl.setValue(bankName);
+      this.recipientBankNameControl.updateValueAndValidity();
+    });
+
   }
 
   get additionalDetailsPlaceholder(): string {
@@ -119,7 +122,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
   private onTouched = () => { };
 
   ngAfterViewInit(): void {
-    this.formGroup.valueChanges.pipe(
+    this.subscriptions.push(this.formGroup.valueChanges.pipe(
       distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
       tap((form: WithinCountryForm) => {
         const paymentForm: RecursivePartial<PaymentForm> = {
@@ -149,7 +152,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
         this.onChange(paymentForm);
         // this.detector.detectChanges();
       })
-    ).subscribe();
+    ).subscribe());
   }
 
 

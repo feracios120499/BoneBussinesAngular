@@ -22,6 +22,9 @@ import { AccountTurnoversRowComponent } from './components/account-turnover-row/
 import { AccountTransactionRowComponent } from './components/account-transaction-row/account-transaction-row.component';
 import { AccountTransactionSkeletonComponent } from './components/account-transaction-skeleton/account-transaction-skeleton.component';
 import { AccountTurnoverSkeletonComponent } from './components/account-turnover-skeleton/account-turnover-skeleton.component';
+import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module';
+import { B1PipesModule } from 'src/app/@shared/modules/b1-pipes/b1-pipes.module';
+import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
 
 
 @NgModule({
@@ -44,7 +47,10 @@ import { AccountTurnoverSkeletonComponent } from './components/account-turnover-
     SharedModule,
     AccountRoutingModule,
     ReactiveComponentModule,
-    EffectsModule.forFeature([AcctDetailsEffects])
+    EffectsModule.forFeature([AcctDetailsEffects]),
+    B1FormsModule,
+    B1PipesModule,
+    B1DirectivesModule
   ]
 })
 export class AccountModule { }

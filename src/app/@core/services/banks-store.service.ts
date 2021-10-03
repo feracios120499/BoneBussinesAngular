@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { PublicActions } from '@store/public/actions';
 import { PublicSelectors } from '@store/public/selectors';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -23,9 +23,7 @@ export class BanksStoreService {
             first(),
             switchMap((bank) => {
                 if (bank) {
-                    return this.store.pipe(
-                        select(PublicSelectors.bank, { id: bankCode })
-                    );
+                    return of(bank);
                 }
                 this.store.dispatch(PublicActions.loadBankRequest(bankCode));
                 return this.actions$.pipe(

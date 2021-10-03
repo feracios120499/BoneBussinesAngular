@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 import { BaseService } from './base.service';
+import { PublicService } from './abstract/public.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class PublicService extends BaseService {
+export class HttpPublicService extends BaseService implements PublicService {
 
     /**
      *
