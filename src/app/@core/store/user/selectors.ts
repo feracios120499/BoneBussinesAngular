@@ -14,12 +14,12 @@ export namespace UserSelectors {
 
     export const countCustomers = createSelector(
         userStore,
-        state => state.profile?.Customers.length ?? 0
+        state => state.profile?.customers.length ?? 0
     );
 
     export const customers = createSelector(
         profile,
-        state => state?.Customers
+        state => state?.customers
     );
 
     export const notifications = createSelector(
@@ -34,13 +34,13 @@ export namespace UserSelectors {
 
     export const userName = createSelector(
         userStore,
-        state => state.profile?.UserDisplayName || state.profile?.UserInternationalName || state.profile?.Email
+        state => state.profile?.userDisplayName || state.profile?.userInternationalName || state.profile?.email
     );
 
     // TODO fix this shit
     export const userPicture = createSelector(
         userStore,
-        state => state.profile?.UserPictureUrl ? `http://10.10.10.130/Bars.API.Web.Client/api/v1${state.profile?.UserPictureUrl}` : environment.defaultUserPictureUrl
+        state => state.profile?.userPictureUrl ? `http://10.10.10.130/Bars.API.Web.Client/api/v1${state.profile?.userPictureUrl}` : environment.defaultUserPictureUrl
     );
 
     export const currentClientIdSelector = createSelector(
@@ -55,22 +55,22 @@ export namespace UserSelectors {
     export const currentCustomer = createSelector(
         profile,
         currentClientIdSelector,
-        (profile, currentClientId) => profile?.Customers?.find(p => p.ClientId === currentClientId)
+        (profile, currentClientId) => profile?.customers?.find(p => p.clientId === currentClientId)
     );
 
     export const currentCustomerName = createSelector(
         currentCustomer,
-        (currentCustomer) => currentCustomer?.Name
+        (currentCustomer) => currentCustomer?.name
     );
 
     export const userEmail = createSelector(
         profile,
-        (profile) => profile?.Email
+        (profile) => profile?.email
     );
 
     export const userPhone = createSelector(
         profile,
-        (profile) => profile?.PhoneNumber
+        (profile) => profile?.phoneNumber
     );
 
     export const isAvailableChange = createSelector(
