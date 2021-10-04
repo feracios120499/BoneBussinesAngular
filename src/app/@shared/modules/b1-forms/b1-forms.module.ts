@@ -12,6 +12,9 @@ import { B1PipesModule } from '../b1-pipes/b1-pipes.module';
 import { B1DirectivesModule } from '../b1-directives/b1-directives.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { B1SelectComponent } from './components/b1-select/b1-select.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -23,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     B1InputErrorComponent,
     DaterangepickerComponent,
     DaterangepickerDirective,
+    B1SelectComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     B1PipesModule,
     B1DirectivesModule,
     NgxSkeletonLoaderModule,
-    NgSelectModule
+    NgSelectModule,
+    ReactiveComponentModule,
+    ScrollingModule
   ],
   exports: [
     B1AccountSelectComponent,

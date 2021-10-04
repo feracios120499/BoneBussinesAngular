@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 import { BaseService } from './base.service';

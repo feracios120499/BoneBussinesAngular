@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { B1DirectivesModule } from '../b1-directives/b1-directives.module';
 
@@ -11,6 +12,7 @@ import { PaymentDatesFormComponent } from './components/payment-dates-form/payme
 import { PaymentPurposeFormComponent } from './components/payment-purpose-form/payment-purpose-form.component';
 import { WithinCountryConfirmComponent } from './components/within-country-confirm/within-country-confirm.component';
 import { WithinCountryFormComponent } from './components/within-country-form/within-country-form.component';
+import { PaymentResultComponent } from './components/payment-result/payment-result.component';
 
 
 
@@ -20,6 +22,7 @@ import { WithinCountryFormComponent } from './components/within-country-form/wit
     PaymentPurposeFormComponent,
     WithinCountryFormComponent,
     PaymentDatesFormComponent,
+    PaymentResultComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { WithinCountryFormComponent } from './components/within-country-form/wit
     TranslateModule,
     B1PipesModule,
     B1DirectivesModule,
-    NgSelectModule
+    NgSelectModule,
+    ReactiveComponentModule
   ],
   exports: [
     WithinCountryConfirmComponent,

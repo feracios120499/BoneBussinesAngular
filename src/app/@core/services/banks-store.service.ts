@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { PublicActions } from '@store/public/actions';
 import { PublicSelectors } from '@store/public/selectors';
 import { Observable, of } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { first, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -20,8 +20,10 @@ export class BanksStoreService {
     getBank(bankCode: string): Observable<BankModel | undefined> {
         return this.store.pipe(
             select(PublicSelectors.bank, { id: bankCode }),
+            tap(console.log),
             first(),
             switchMap((bank) => {
+
                 if (bank) {
                     return of(bank);
                 }

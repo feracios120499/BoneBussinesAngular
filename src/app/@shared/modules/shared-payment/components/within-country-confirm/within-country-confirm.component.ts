@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaymentForm } from '@models/payment-form.model';
 import { Store } from '@ngrx/store';
 import { WithinCountryActions } from '@store/payments/within-country-payment/actions';
 import { WithinCountryPaymentSelectors } from '@store/payments/within-country-payment/selectors';
@@ -20,6 +21,14 @@ export class WithinCountryConfirmComponent implements OnInit {
 
   toForm(): void {
     this.store.dispatch(WithinCountryActions.setProgress({ progress: 'form' }));
+  }
+
+  save(payment: PaymentForm): void {
+    this.store.dispatch(WithinCountryActions.createRequest({
+      ...payment,
+      saveAsTemplate: false,
+      status: 'NEW'
+    }));
   }
 
 }

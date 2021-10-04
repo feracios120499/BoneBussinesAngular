@@ -20,12 +20,10 @@ import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
-import { CheckValueInputDirective } from './directives/check-value.directive';
 import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MobileMoreDirective } from './directives/mobile-more.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
-import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
 import { WebClassDirective } from './directives/web-class.directive';
@@ -55,13 +53,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1LinkComponent,
     B1PaymentModalComponent,
     B1StatementModalComponent,
-    NgSelectScrollDirective,
     B1RequisitesModalComponent,
     B1ExportTurnoversComponent,
     B1PageButtonComponent,
     OnlyNumbersDirective,
-    DecimalNumbersDirective,
-    CheckValueInputDirective],
+    DecimalNumbersDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -101,13 +97,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     MoreAutoDirectionDirective,
     B1LinkComponent,
     NgSelectModule,
-    NgSelectScrollDirective,
     B1PageButtonComponent,
     ReactiveComponentModule,
     OnlyNumbersDirective,
     NgxMaskModule,
     DecimalNumbersDirective,
-    CheckValueInputDirective,
   ],
   providers: [
     {

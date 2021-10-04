@@ -55,6 +55,18 @@
       "@models/*": [
         "./src/app/@shared/models/*"
       ],
+      "@b1-types/*": [
+        "./src/app/@shared/types/*"
+      ],
+      "@validators/*": [
+        "./src/app/@shared/validators/*"
+      ],
+      "@helpers/*": [
+        "./src/app/@shared/helpers/*"
+      ],
+      "@methods/*": [
+        "./src/app/@shared/methods/*"
+      ],
       "@forms/*": [
         "./src/app/@shared/components/forms/*"
       ]

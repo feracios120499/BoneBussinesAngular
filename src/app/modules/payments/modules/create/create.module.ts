@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { WithinCountryEffects } from '@store/payments/within-country-payment/effects';
 import { withinCountryReducer } from '@store/payments/within-country-payment/reducer';
 import { WITHIN_COUNTRY_KEY } from '@store/payments/within-country-payment/store';
 import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
@@ -21,7 +23,10 @@ import { CreateComponent } from './create.component';
     CreateRoutingModule,
     SharedModule,
     B1DirectivesModule,
-    StoreModule.forFeature(WITHIN_COUNTRY_KEY, withinCountryReducer)
+    StoreModule.forFeature(WITHIN_COUNTRY_KEY, withinCountryReducer),
+    EffectsModule.forFeature([
+      WithinCountryEffects
+    ])
   ]
 })
 export class CreateModule { }

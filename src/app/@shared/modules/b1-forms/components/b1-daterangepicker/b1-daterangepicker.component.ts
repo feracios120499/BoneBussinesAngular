@@ -1106,13 +1106,13 @@ export class DaterangepickerComponent implements OnInit {
     }
   }
   show(e?: any, el?: ElementRef): void {
-
+    const isMobile = window.innerWidth <= environment.mobileWidth;
     this.element = el;
 
-    if (this.isShown) { return; }
+    if (this.isShown || (this.singleDatePicker && isMobile)) { return; }
     this._old.start = this.startDate.clone();
     this._old.end = this.endDate?.clone();
-    const isMobile = window.innerWidth <= environment.mobileWidth;
+
     if (!isMobile) {
       this.isShown = true;
     }

@@ -5,7 +5,7 @@ export interface PaymentForm {
     amount: number;
     number?: string;
     paymentDate: Date;
-    valueDate: Date;
+    paymentValueDate: Date;
     purpose: string;
 
     sender: PaymentAccount;

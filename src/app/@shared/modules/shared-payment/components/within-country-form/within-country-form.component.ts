@@ -1,18 +1,17 @@
 import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, NgForm, Validators } from '@angular/forms';
+import { ModelControl } from '@b1-types/model-controls.type';
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
+import { IbanHelper } from '@helpers/iban.helper';
+import { markFormGroupTouched } from '@methods/form-group-touched.method';
 import { BankModel } from '@models/bank.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
 import { WithinCountryForm } from '@models/within-country-form.model';
 import { BanksStoreService } from '@services/banks-store.service';
+import { ibanValidator } from '@validators/iban.validator';
 import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
-import { markFormGroupTouched } from 'src/app/@shared/methods/form-group-touched.method';
-import { ModelControl } from 'src/app/@shared/types/model-controls.type';
-import { RecursivePartial } from 'src/app/@shared/types/recursive-partial.type';
-import { ibanValidator } from 'src/app/@shared/validators/iban.validator';
-
-import { IbanHelper } from '../../../../helpers/iban.helper';
 
 @Component({
   selector: 'within-country-form',
@@ -55,7 +54,6 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
       this.recipientBankNameControl.setValue(bankName);
       this.recipientBankNameControl.updateValueAndValidity();
     });
-
   }
 
   get additionalDetailsPlaceholder(): string {
@@ -112,7 +110,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
   // --
 
   // PURPOSE
-  purposeControl = new FormControl('', [Validators.required]);
+  purposeControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(160)]);
 
   amountControl = new FormControl(0, [Validators.required, Validators.min(1)]);
 
@@ -139,7 +137,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
           amount: form.amount,
           purpose: form.purpose,
           paymentDate: (form as any).documentDate?.toDate(),
-          valueDate: (form as any).valueDate?.toDate(),
+          paymentValueDate: (form as any).valueDate?.toDate(),
           recipient: {
             accCurrencyCode: form.senderAccount?.currencyCode,
             accNumber: form.recipientAccountNumber,

@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       amount: 12300,
       purpose: '33',
       paymentDate: new Date('2021-10-01T21:00:00.000Z'),
-      valueDate: new Date('2021-10-01T21:00:00.000Z'),
+      paymentValueDate: new Date('2021-10-01T21:00:00.000Z'),
       recipient: {
         accCurrencyCode: 'UAH',
         accNumber: 'UA233004650000026002301907973',

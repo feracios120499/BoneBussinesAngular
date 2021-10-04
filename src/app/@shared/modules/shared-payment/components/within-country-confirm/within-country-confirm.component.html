@@ -102,9 +102,10 @@
 
     </div>
 
-    <div class="b1-flex b1-justify-center b1-align-center">
-        <div class="b1-button-primary">
-            save
+    <div class="b1-confirm-actions">
+        <div class="b1-button-primary" (click)="save(payment)">
+            <i b1-icon icon="save"></i>
+            {{'actions.save' | translate}}
         </div>
     </div>
 </div>
