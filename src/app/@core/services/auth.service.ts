@@ -10,11 +10,13 @@ import { LoginResponse } from './../../modules/auth/models/login.response';
 import { Token } from './../../modules/auth/models/token.model';
 import { BaseService } from './base.service';
 
+
+const CONTENT_TYPE = 'Content-Type';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends BaseService {
-
   device: Device;
   constructor(private http: HttpClient) {
     super();
@@ -57,10 +59,9 @@ export class AuthService extends BaseService {
 
   private getToken(params: HttpParams): Observable<Token> {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
+      headers: new HttpHeaders()
     };
+    httpOptions.headers.append(CONTENT_TYPE, 'application/x-www-form-urlencoded');
     return this.http.post<Token>('api/v1/auth/token', params, httpOptions);
   }
 
@@ -72,18 +73,18 @@ export class AuthService extends BaseService {
       .set('client_id', 'CORP-LIGHT-WEB'); // TODO add to environment
 
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
+      headers: new HttpHeaders()
     };
+    httpOptions.headers.append(CONTENT_TYPE, 'application/x-www-form-urlencoded');
     return this.http.post<Token>('api/v1/auth/token', params, httpOptions);
   }
 
   private getUuid(): string {
     let uuid = localStorage.getItem('uuid');
     if (!uuid) {
-      uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        // tslint:disable-next-line: no-bitwise
+        const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
       });
       localStorage.setItem('uuid', uuid);
@@ -92,7 +93,6 @@ export class AuthService extends BaseService {
   }
 
   private detectOS(): OS {
-
     if (navigator.appVersion.indexOf('Mac') !== -1) {
       return 'MacOS';
     }
@@ -104,8 +104,7 @@ export class AuthService extends BaseService {
     if (navigator.appVersion.indexOf('Win') !== -1) {
       if (navigator.userAgent.indexOf('WOW64') > -1 || navigator.userAgent.indexOf('Win64') > -1 || window.navigator.platform === 'Win64') {
         return 'Windows64';
-      }
-      else {
+      } else {
         return 'Windows32';
       }
     }

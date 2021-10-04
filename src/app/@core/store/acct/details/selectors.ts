@@ -31,7 +31,7 @@ export namespace AcctDetailsSelectors {
         AcctSelectors.acctStore,
         detailStore,
         currentAccountRouteParams,
-        (acctState, detailState, routeParams) => detailState?.account || acctState.accounts?.find(p => p.Id === routeParams.accountId)
+        (acctState, detailState, routeParams) => detailState?.account || acctState.accounts?.find(p => p.id === routeParams.accountId)
     );
 
 
@@ -88,7 +88,7 @@ export namespace AcctDetailsSelectors {
 
     export const currencyCode = createSelector(
         currentAccount,
-        (account) => account?.CurrencyCode
+        (account) => account?.currencyCode
     );
 
     export const openTurnovers = createSelector(

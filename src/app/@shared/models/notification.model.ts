@@ -1,18 +1,18 @@
 export interface TextItem {
-    Id: number;
-    Title: string;
-    Text: string;
-    Type: string;
+    id: number;
+    title: string;
+    text: string;
+    type: string;
 }
 
 export interface Notification {
-    MessageDevices: any[];
-    TextItem: TextItem;
-    Id: number;
-    UserId: string;
-    TextItemId: number;
-    SendDate: Date;
-    IsRead: boolean;
-    Redirect?: any;
-    Lang: string;
+    messageDevices: any[];
+    textItem: TextItem;
+    id: number;
+    userId: string;
+    textItemId: number;
+    sendDate: Date;
+    isRead: boolean;
+    redirect?: any;
+    lang: string;
 }

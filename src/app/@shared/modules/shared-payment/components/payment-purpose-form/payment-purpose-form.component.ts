@@ -17,7 +17,6 @@ import { environment } from 'src/environments/environment';
   }]
 })
 export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlValueAccessor {
-
   @Input() maxlength = 160;
   @Input() formControl!: FormControl;
   @Input() form!: FormGroupDirective;
@@ -70,15 +69,13 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
 
   onModelChange(): void {
     this.setValue(this.viewValue);
-
   }
 
   private setValue(value: string): void {
     this.onChange(this.viewValue);
     this.formControl?.updateValueAndValidity();
-
-    console.log(this.formControl);;
   }
+
   checkSum(event: any): void {
     if (!this.amount) {
       this.amount = 0;
@@ -147,13 +144,13 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
       this.taxCode = this.pad(this.taxCode, 8);
     }
     console.log(this.registerDate);
-    this.addedText = '*'
-      + ';' + (this.payType?.Code || '')
-      + ';' + (this.taxCode || '')
-      + ';' + (this.explanatoryInfo || '')
-      + ';' + (this.registerDate ? this.registerDate.format('DD.MM.YYYY') : '')
-      + ';' + (this.conclusionNumber || '')
-      + ';' + (this.billNumber || '');
+    this.addedText = '*' +
+      ';' + (this.payType?.code || '') +
+      ';' + (this.taxCode || '') +
+      ';' + (this.explanatoryInfo || '') +
+      ';' + (this.registerDate ? this.registerDate.format('DD.MM.YYYY') : '') +
+      ';' + (this.conclusionNumber || '') +
+      ';' + (this.billNumber || '');
 
     this.addText(this.addedText);
   }
@@ -162,8 +159,8 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     if (this.addedText) {
       const index = this.viewValue.indexOf(this.addedText);
       if (index >= 0) {
-        this.viewValue = this.viewValue.slice(0, index)
-          + this.viewValue.slice(index + this.addedText.length);
+        this.viewValue = this.viewValue.slice(0, index) +
+          this.viewValue.slice(index + this.addedText.length);
         this.setValue(this.viewValue);
       }
       this.addedText = '';
@@ -179,11 +176,12 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
 
   private pad(num: string, size: number): string {
     let s = num + '';
-    while (s.length < size) { s = '0' + s; }
+    while (s.length < size) {
+      s = '0' + s;
+    }
     return s;
   }
 
   ngOnInit(): void {
   }
-
 }

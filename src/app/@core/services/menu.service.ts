@@ -32,7 +32,6 @@ export interface SubMenu {
 })
 
 export class MenuService extends BaseService {
-
     private menu: Menu = {
         accounts: {
             ngClass: '{active:$state.includes(\'app.acct\')}',
@@ -207,10 +206,10 @@ export class MenuService extends BaseService {
 
     getMenuForCustomer(customer: Customer): Array<MenuItem> {
         const result = new Array<MenuItem>();
-        customer.MenuSettings.forEach((item) => {
-            const menuItem = { ...this.menu[item.Name] };
+        customer.menuSettings.forEach((item) => {
+            const menuItem = { ...this.menu[item.name] };
             if (menuItem) {
-                menuItem.position = item.Number;
+                menuItem.position = item.number;
                 result.push(menuItem);
             }
         });

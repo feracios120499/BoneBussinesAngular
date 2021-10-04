@@ -37,6 +37,6 @@ export class RouteEffects {
     detailAccount$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AcctActions.goToDetail),
-            map((payload) => RouteActions.routeTo({ route: `accounts/${payload.account.BankId}/${payload.account.Id}` }))
+            map((payload) => RouteActions.routeTo({ route: `accounts/${payload.account.bankId}/${payload.account.id}` }))
         ));
 }

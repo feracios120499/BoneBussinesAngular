@@ -5,8 +5,7 @@ import { SelectAccount } from '@models/select-account.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from '@services/modal.service';
-
-import { combineLatest, concat, merge, Observable, Subject, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +19,6 @@ import { filter } from 'rxjs/operators';
   }]
 })
 export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
-
   constructor(private modalService: ModalService) { }
 
   @Input('selectAccounts') selectAccounts$!: Observable<SelectAccountsList>;
@@ -43,12 +41,12 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
   private setAccount(account?: AccountModel): void {
     this.currentAccount = account;
     const selectAccount: SelectAccount | undefined = account ? {
-      id: account.Id,
-      number: account.Number,
-      name: account.Name,
-      currencyCode: account.CurrencyCode,
-      currencyId: account.CurrencyId,
-      taxCode: account.TaxCode
+      id: account.id,
+      number: account.number,
+      name: account.name,
+      currencyCode: account.currencyCode,
+      currencyId: account.currencyId,
+      taxCode: account.taxCode
     } : undefined;
     this.selectValue = selectAccount;
     this.onChange(selectAccount);
@@ -77,18 +75,16 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
       const accounts = select.accounts;
       let account: AccountModel | undefined;
       if (value.id) {
-        account = accounts.find(p => p.Id === value.id);
-      }
-      else {
+        account = accounts.find(p => p.id === value.id);
+      } else {
         account = accounts.find(
-          p => p.Number === value.number &&
-            (p.CurrencyCode === value.currencyCode || p.CurrencyId === value.currencyId)
+          p => p.number === value.number &&
+            (p.currencyCode === value.currencyCode || p.currencyId === value.currencyId)
         );
       }
       if (account) {
         this.setAccount(account);
-      }
-      else if (accounts.length > 0) {
+      } else if (accounts.length > 0) {
         this.setAccount(accounts[0]);
       }
     });
@@ -107,5 +103,4 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
     this.setAccount(account);
     this.modal?.close();
   }
-
 }

@@ -11,7 +11,9 @@ import { WithinCountryForm } from '@models/within-country-form.model';
 import { BanksStoreService } from '@services/banks-store.service';
 import { ibanValidator } from '@validators/iban.validator';
 import { Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import {
+  distinctUntilChanged, filter, map, switchMap, tap
+} from 'rxjs/operators';
 
 @Component({
   selector: 'within-country-form',
@@ -24,7 +26,6 @@ import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operator
   }]
 })
 export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
-
   constructor(private banksService: BanksStoreService, private detector: ChangeDetectorRef) {
     const controls: ModelControl<WithinCountryForm> = {
       docNumberAuto: this.docNumberAutoControl,
@@ -154,9 +155,10 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
   }
 
 
-
   writeValue(form: PaymentForm | undefined): void {
-    if (!form) { return; }
+    if (!form) {
+      return;
+    }
     const formValue: WithinCountryForm = {
       docNumberAuto: !form.number,
       docNumber: form.number,
@@ -192,17 +194,16 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(p => p?.unsubscribe());
+    this.subscriptions.forEach((p) => p?.unsubscribe());
   }
 
 
   private docNumberAutoChange(source$: Observable<boolean>): Observable<boolean> {
     return source$.pipe(
-      tap(docNumberAuto => {
+      tap((docNumberAuto) => {
         if (!docNumberAuto) {
           this.docNumberControl.addValidators(this.docNumberValidators);
-        }
-        else {
+        } else {
           this.docNumberControl.removeValidators(this.docNumberValidators);
         }
 
@@ -215,21 +216,20 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
 
   private recipientAccountNumberChange(source$: Observable<string>): Observable<BankModel | undefined> {
     return source$.pipe(
-      tap(_ => this.bankName = ''),
-      filter(value => IbanHelper.isIban(value) && IbanHelper.validateFormat(value)),
-      map(value => IbanHelper.getBankId(value) as string),
-      switchMap(id => this.banksService.getBank(id)),
-      tap(payload => this.bankName = payload?.Name)
+      tap(() => this.bankName = ''),
+      filter((value) => IbanHelper.isIban(value) && IbanHelper.validateFormat(value)),
+      map((value) => IbanHelper.getBankId(value) as string),
+      switchMap((id) => this.banksService.getBank(id)),
+      tap((payload) => this.bankName = payload?.name)
     );
   }
 
   private recipientTaxCodeChange(source$: Observable<string>): Observable<string> {
     return source$.pipe(
-      tap(taxCode => {
+      tap((taxCode) => {
         if (/[0]{10}/.test(taxCode)) {
           this.additionalDetailsControl.addValidators(Validators.required);
-        }
-        else {
+        } else {
           this.additionalDetailsControl.removeValidators(Validators.required);
         }
         this.additionalDetailsControl.updateValueAndValidity();
@@ -243,5 +243,4 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
     this.paymentForm.onSubmit(null as any);
     return this.formGroup.valid;
   }
-
 }

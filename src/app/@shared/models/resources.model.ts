@@ -1,29 +1,29 @@
 export interface Resources {
-    Owner: Owner;
+    owner: Owner;
 }
 
 export interface Owner {
-    Name: string;
-    ShortName: string;
-    Slogan: string;
-    LogoImage: string;
-    CallCenterPhone: string[];
-    CallCenterWorkFrom: string;
-    CallCenterWorkTo: string;
-    CallCenterPhoneLocal: string[];
-    ECPTechSupportPhone: string[];
-    Copyright: string;
-    DefaulеWebAppSettings: string;
-    ValueAddedTax: string;
-    AdvertisementTax1: string;
-    AdvertisementTax2: string;
-    BarsCryptorUpdatePath: string;
-    BarsCryptorMinimumVersion: string;
-    BarsCryptorCurrentVersion: string;
-    Version: string;
-    Currencies: string[];
-    CloudWin64Url: string;
-    CloudWin32Url: string;
-    CloudLinuxUrl: string;
-    CloudMacUrl: string;
+    name: string;
+    shortName: string;
+    slogan: string;
+    logoImage: string;
+    callCenterPhone: string[];
+    callCenterWorkFrom: string;
+    callCenterWorkTo: string;
+    callCenterPhoneLocal: string[];
+    ecpTechSupportPhone: string[];
+    copyright: string;
+    defaulеWebAppSettings: string;
+    valueAddedTax: string;
+    advertisementTax1: string;
+    advertisementTax2: string;
+    barsCryptorUpdatePath: string;
+    barsCryptorMinimumVersion: string;
+    barsCryptorCurrentVersion: string;
+    version: string;
+    currencies: string[];
+    cloudWin64Url: string;
+    cloudWin32Url: string;
+    cloudLinuxUrl: string;
+    cloudMacUrl: string;
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PaymentStatus } from '@models/payments/payment-status.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-payment-result',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentResultComponent implements OnInit {
 
-  constructor() { }
+  // tslint:disable-next-line: no-input-rename
+  @Input('status') status$!: Observable<PaymentStatus>;
+
+  constructor(private store: Store) {
+    // this.status.subscribe()
+    // this.store.select(this.selector).subscribe((status) => this.status = status);
+  }
 
   ngOnInit(): void {
+
   }
 
 }

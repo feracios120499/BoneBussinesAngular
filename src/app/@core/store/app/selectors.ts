@@ -14,7 +14,7 @@ export namespace AppSelectors {
 
     export const bankDate = createSelector(
         UserSelectors.currentCustomer,
-        (currentCustomer) => currentCustomer?.BankDate
+        (currentCustomer) => currentCustomer?.bankDate
     );
 }
 

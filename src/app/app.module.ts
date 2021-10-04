@@ -3,6 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CamelCaseInterceptor } from '@core/interceptors/camel-case.interceptor';
 import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -48,7 +49,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient]
       }
     }),
@@ -74,12 +75,17 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
       useClass: AngularDateHttpInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CamelCaseInterceptor,
+      multi: true,
+    },
     DatePipe
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+export function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

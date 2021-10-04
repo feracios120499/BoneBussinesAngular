@@ -11,8 +11,6 @@ import { first, map, switchMap, tap } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class BanksStoreService {
-
-
     constructor(private store: Store, private actions$: Actions) {
 
     }
@@ -23,7 +21,6 @@ export class BanksStoreService {
             tap(console.log),
             first(),
             switchMap((bank) => {
-
                 if (bank) {
                     return of(bank);
                 }
@@ -33,7 +30,7 @@ export class BanksStoreService {
                     map((action) => {
                         if (action.type === PublicActions.loadBankSuccess.type) {
                             const bankResponse = action.payload as BankModel;
-                            if (bankResponse.BankCode === bankCode) {
+                            if (bankResponse.bankCode === bankCode) {
                                 return bankResponse;
                             }
                         }

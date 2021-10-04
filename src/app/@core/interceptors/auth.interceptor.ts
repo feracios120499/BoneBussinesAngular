@@ -12,7 +12,6 @@ import { Token } from './../../modules/auth/models/token.model';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   endpoint = 'https://bobusiness.unity-bars.com/Bars.API.Web.Client/';
   token: Token | undefined = undefined;
 
@@ -38,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
     } else {
       this.refreshTokenInProgress = true;
 
-      return this.authService.refreshToken(this.token?.refresh_token, this.token?.sessionId).pipe(
+      return this.authService.refreshToken(this.token?.refreshToken, this.token?.sessionId).pipe(
         tap((token) => {
           this.store.dispatch(AuthActions.setToken({ token }));
           this.refreshTokenInProgress = false;
@@ -53,7 +52,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   handleResponseError(error: any, request: HttpRequest<any>, next: HttpHandler): any {
-
     // Invalid token error
     if (error.status === 401) {
       return this.refreshToken().pipe(
@@ -124,7 +122,6 @@ export class AuthInterceptor implements HttpInterceptor {
       });
 
       return request;
-
     }
     request = request.clone({
       url: this.endpoint + request.url,
@@ -137,7 +134,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.token && !request.url.includes('token')) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + this.token.access_token
+          Authorization: 'Bearer ' + this.token.accessToken
         }
       });
     }

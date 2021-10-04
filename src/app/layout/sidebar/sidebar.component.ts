@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Customer } from '@models/profile.model';
 import { Store } from '@ngrx/store';
 import { AppSelectors } from '@store/app/selectors';
 import { MenuActions } from '@store/menu/actions';
 import { MenuSelectors } from '@store/menu/selectors';
-import { SettingsSelectors } from '@store/settings/selectors';
+import { PublicSelectors } from '@store/public/selectors';
 import { UserActions } from '@store/user/actions';
 import { UserSelectors } from '@store/user/selectors';
-import { Customer } from '@models/profile.model';
-import { PublicSelectors } from '@store/public/selectors';
 
 @Component({
   selector: 'app-sidebar',
@@ -47,7 +46,6 @@ export class SidebarComponent implements OnInit {
   }
 
   setCustomer(customer: Customer): void {
-    this.store.dispatch(UserActions.selectCurrentClientId({ clientId: customer.ClientId }));
+    this.store.dispatch(UserActions.selectCurrentClientId({ clientId: customer.clientId }));
   }
-
 }

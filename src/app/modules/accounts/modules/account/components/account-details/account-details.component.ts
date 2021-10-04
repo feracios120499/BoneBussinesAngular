@@ -24,7 +24,7 @@ export class AccountDetailsComponent implements OnInit {
 
   editAccount(account: AccountModel): void {
     const modalRef = this.modalService.open(AccountEditModalComponent);
-    modalRef.componentInstance.name = account.Name;
+    modalRef.componentInstance.name = account.name;
   }
 
 }

@@ -96,7 +96,7 @@ export class AcctDetailsEffects implements OnRunEffects {
                         withLatestFrom(this.store.select(AcctDetailsSelectors.currentAccount)),
                         filter(([, account]) => account !== undefined),
                         map(([, account]) => account as AccountModel),
-                        map((account) => AcctDetailsActions.updateAccountSuccess({ ...account, Name: payload.data.name })),
+                        map((account) => AcctDetailsActions.updateAccountSuccess({ ...account, name: payload.data.name })),
                         catchError((error) => of(AcctDetailsActions.updateAccountFailure(error.error.Message)))
                     )
             ))
@@ -111,7 +111,9 @@ export class AcctDetailsEffects implements OnRunEffects {
     updateRangeTransactions$ = createEffect(() =>
         this.actions$.pipe(
             ofType<SetValueAction<Boxed<DateRangeString>>>(SetValueAction.TYPE),
-            filter((formControl: SetValueAction<Boxed<DateRangeString>>) => formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)),
+            filter(
+                (formControl: SetValueAction<Boxed<DateRangeString>>) => formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)
+            ),
             withLatestFrom(
                 this.store.select(AcctDetailsSelectors.filterTransactions).pipe(
                     filter(p => !!p),
@@ -235,24 +237,24 @@ export class AcctDetailsEffects implements OnRunEffects {
             switchMap(([action, account]) => {
                 const transacion = action.transaction;
                 const currentAccount: Partial<PaymentAccountModal> = {
-                    taxCode: account?.TaxCode,
-                    number: account?.Number,
-                    name: account?.Name
+                    taxCode: account?.taxCode,
+                    number: account?.number,
+                    name: account?.name
                 };
                 const correspondentAccount: Partial<PaymentAccountModal> = {
-                    number: transacion.CorrespondentAccountNumber,
-                    name: transacion.CorrespondentName
+                    number: transacion.correspondentAccountNumber,
+                    name: transacion.correspondentName
                 };
                 const payment: Partial<PaymentModal> = {
-                    purpose: transacion.Purpose,
-                    payedDate: transacion.PayedDate,
-                    documentDate: transacion.CreateDate,
-                    amount: transacion.Credit || transacion.Debit,
-                    sender: transacion.Credit > transacion.Debit ? correspondentAccount : currentAccount,
-                    recipient: transacion.Credit > transacion.Debit ? currentAccount : correspondentAccount,
-                    number: transacion.DocumentNumber,
+                    purpose: transacion.purpose,
+                    payedDate: transacion.payedDate,
+                    documentDate: transacion.createDate,
+                    amount: transacion.credit || transacion.debit,
+                    sender: transacion.credit > transacion.debit ? correspondentAccount : currentAccount,
+                    recipient: transacion.credit > transacion.debit ? currentAccount : correspondentAccount,
+                    number: transacion.documentNumber,
                     statusCode: StatusCode.bankPaid,
-                    currencyCode: account?.CurrencyCode
+                    currencyCode: account?.currencyCode
                 };
                 return [
                     SharedActions.setPaymentLoader({ loader: AcctDetailsSelectors.isLoadingTransaction }),
@@ -268,30 +270,30 @@ export class AcctDetailsEffects implements OnRunEffects {
             map(([action, account]) => {
                 const transaction = action.payload;
                 const payment: PaymentModal = {
-                    number: transaction.Number,
-                    documentDate: transaction.DocumentDate,
-                    valueDate: transaction.ValueDate,
+                    number: transaction.number,
+                    documentDate: transaction.documentDate,
+                    valueDate: transaction.valueDate,
                     statusCode: StatusCode.bankPaid,
-                    payedDate: transaction.PayedDate,
-                    purpose: transaction.Purpose,
-                    amount: transaction.Amount,
-                    amountString: transaction.AmountString,
-                    currencyCode: transaction.Sender.AccCurrencyCode || transaction.Recipient.AccCurrencyCode,
+                    payedDate: transaction.payedDate,
+                    purpose: transaction.purpose,
+                    amount: transaction.amount,
+                    amountString: transaction.amountString,
+                    currencyCode: transaction.sender.accCurrencyCode || transaction.recipient.accCurrencyCode,
                     sender: {
-                        name: transaction.Sender.Name,
-                        number: transaction.Sender.AccNumber,
-                        taxCode: transaction.Sender.TaxCode
+                        name: transaction.sender.name,
+                        number: transaction.sender.accNumber,
+                        taxCode: transaction.sender.taxCode
                     },
                     recipient: {
-                        name: transaction.Recipient.Name,
-                        number: transaction.Recipient.AccNumber,
-                        taxCode: transaction.Recipient.TaxCode
+                        name: transaction.recipient.name,
+                        number: transaction.recipient.accNumber,
+                        taxCode: transaction.recipient.taxCode
                     },
                     actions: {}
                 };
                 payment.actions[PaymentAction.print] = () =>
                     this.store.dispatch(AcctDetailsActions.printTransactionRequest({
-                        transactionId: transaction.Id, bankId: account?.BankId
+                        transactionId: transaction.id, bankId: account?.bankId
                     }));
 
                 return SharedActions.setPayment({ payment });
@@ -327,8 +329,8 @@ export class AcctDetailsEffects implements OnRunEffects {
             ),
             map(([, account, email, range]) => SharedActions.showStatement({
                 config: {
-                    formats: account.StatementTypesList,
-                    isFree: account.IsStatementFree,
+                    formats: account.statementTypesList,
+                    isFree: account.isStatementFree,
                     email,
                     start: range.start,
                     end: range.end,
@@ -354,8 +356,8 @@ export class AcctDetailsEffects implements OnRunEffects {
                 withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount))
             )),
             switchMap(([payload, account]) => this.accountsService.getStatement(
-                account.BankId,
-                account.Id,
+                account.bankId,
+                account.id,
                 payload.clientId,
                 payload.data.range.start,
                 payload.data.range.end,
@@ -376,8 +378,8 @@ export class AcctDetailsEffects implements OnRunEffects {
                 withLatestFrom(notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount))
             )),
             switchMap(([payload, account]) => this.accountsService.sendStatement(
-                account.BankId,
-                account.Id,
+                account.bankId,
+                account.id,
                 payload.clientId,
                 payload.data.range.start,
                 payload.data.range.end,
@@ -419,6 +421,5 @@ export class AcctDetailsEffects implements OnRunEffects {
             )
         );
     }
-
 }
 

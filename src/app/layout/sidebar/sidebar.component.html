@@ -142,7 +142,7 @@
                     <div class="main-sidemenu__customers-list" *ngrxLet="customers$ as customers">
                         <div class="main-sidemenu__customers-item" *ngFor="let customer of customers"
                             (click)="setCustomer(customer)" [class.active]="(currentCustomer$ | ngrxPush) == customer">
-                            {{customer.Name}}
+                            {{customer.name}}
                         </div>
                     </div>
                 </div>

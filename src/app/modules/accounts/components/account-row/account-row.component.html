@@ -1,34 +1,34 @@
 <div class="account" mobileClass="b1-ellipsis">
     <div class="account-icon">
-        <i b1-icon icon="university" class="b1-large" *ngIf="!account.IsCardAccount"
+        <i b1-icon icon="university" class="b1-large" *ngIf="!account.isCardAccount"
             [ngbTooltip]="'components.acct.currentAccount' | translate" placement="right"></i>
-        <i b1-icon icon="account-card" class="b1-large" *ngIf="account.IsCardAccount"
+        <i b1-icon icon="account-card" class="b1-large" *ngIf="account.isCardAccount"
             [ngbTooltip]="'components.acct.cardAccount' | translate" placement="right"></i>
     </div>
     <div class="account-body  b1-ellipsis">
         <div class="account-name b1-ellipsis">
-            {{account.Name}}
-            <div class="account-number" [iban]="account.Number">
+            {{account.name}}
+            <div class="account-number" [iban]="account.number">
             </div>
         </div>
         <div class="account-date">
             <span>{{'components.acct.acctDetail.turnoverDate' | translate}}</span>
             <span class="b1-ml-2 b1-mr-2">-</span>
-            <span>{{account.LastActive | date:'dd.MM.yyyy'}}</span>
+            <span>{{account.lastActive | date:'dd.MM.yyyy'}}</span>
         </div>
         <div class="account-amount">
             <div class="account-balance">
-                <span>{{account.Balance / 100 | money}}</span>
-                <span class="b1-ml-2">{{account.CurrencyCode}}</span>
+                <span>{{account.balance / 100 | money}}</span>
+                <span class="b1-ml-2">{{account.currencyCode}}</span>
             </div>
             <div class="account-turns">
                 <div class="account-turns-debit">
                     <i b1-icon icon="chevron-down"></i>
-                    {{account.DebitTurns / 100 | money}}
+                    {{account.debitTurns / 100 | money}}
                 </div>
                 <div class="account-turns-credit">
                     <i b1-icon icon="chevron-up"></i>
-                    {{account.CreditTurns / 100 | money}}
+                    {{account.creditTurns / 100 | money}}
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <div class="b1-modal-close" webClass="hidden">
                     <i b1-icon icon="cancel" (click)="$event.stopPropagation(); dropdown.close();"></i>
                 </div>
-                <li class="b1-dropdown__item" *ngIf="account.CurrencyCode == 'UAH'">
+                <li class="b1-dropdown__item" *ngIf="account.currencyCode == 'UAH'">
                     <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
                         ng-click="accountsCtrl.accActions.share(account)">
                         <i b1-icon icon="file-details" class="b1-mr-3 b1-medium"></i>

@@ -1,10 +1,10 @@
 <ng-container *ngrxLet="currencyCode$ as currencyCode">
     <div class="b1-page-data__row transaction" (click)="showTransaction()">
         <div class="b1-page-content_type transaction-type">
-            <div class="b1-transaction-type-credit" *ngIf="payment.Credit > payment.Debit">
+            <div class="b1-transaction-type-credit" *ngIf="payment.credit > payment.debit">
                 <i b1-icon icon="arrow-up"></i>
             </div>
-            <div class="b1-transaction-type-debit" *ngIf="payment.Credit < payment.Debit">
+            <div class="b1-transaction-type-debit" *ngIf="payment.credit < payment.debit">
                 <i b1-icon icon="arrow-down"></i>
             </div>
         </div>
@@ -12,36 +12,36 @@
             <div class="transaction-number">
                 <div class="b1-medium b1-ellipsis" webClass="b1-medium" mobileClass="b1-base bold">
                     <span>{{'components.pay.number' | translate}}</span>
-                    <span> {{payment.DocumentNumber || payment.DocumentId}}</span>
+                    <span> {{payment.documentNumber || payment.documentId}}</span>
                 </div>
                 <div class="b1-medium b1-page-data__subtitle b1-light" webClass="b1-medium" mobileClass="b1-base">
                     <span>{{'components.pay.from' | translate}}</span>:
-                    <span>{{payment.PayedDate || payment.CreateDate | date : 'dd.MM.yyyy'}} </span>
+                    <span>{{payment.payedDate || payment.createDate | date : 'dd.MM.yyyy'}} </span>
                 </div>
             </div>
             <div class="transaction-correspondent">
                 <div class="b1-medium" style="display: flex; align-items: center;">
                     <span class="b1-ellipsis">
-                        {{payment.CorrespondentName}}
+                        {{payment.correspondentName}}
                     </span>
                 </div>
                 <div id="purpose" class="b1-medium b1-page-data__subtitle b1-word-wrap b1-IE-word b1-light">
-                    {{payment.Purpose}}
+                    {{payment.purpose}}
                 </div>
             </div>
             <div class="transaction-amount">
                 <div class="b1-title3 text-right">
-                    <span class="b1-large b1-bold" *ngIf="payment.Credit > payment.Debit">
-                        {{payment.Credit / 100 | money : currencyCode}}
+                    <span class="b1-large b1-bold" *ngIf="payment.credit > payment.debit">
+                        {{payment.credit / 100 | money : currencyCode}}
                     </span>
-                    <span class="b1-large b1-bold" *ngIf="payment.Credit < payment.Debit">
-                        {{payment.Debit / 100 | money : currencyCode}}
+                    <span class="b1-large b1-bold" *ngIf="payment.credit < payment.debit">
+                        {{payment.debit / 100 | money : currencyCode}}
                     </span>
                 </div>
             </div>
         </div>
 
-        <div class="transaction-more b1-card__col b1-card__col_dots" id="dropdown{{payment.Id}}">
+        <div class="transaction-more b1-card__col b1-card__col_dots" id="dropdown{{payment.id}}">
             <div class="dropdown">
                 <a class="b1-card__v-dots" data-toggle="dropdown" uib-dropdown-toggle="" aria-haspopup="true"
                     onclick="$(this).offset().top - $('.b1-page-data').offset().top - $(this).next().height() < 0 ? $(this).next().addClass('b1-dropdown_down').removeClass('b1-dropdown_up') : $(this).next().addClass('b1-dropdown_up').removeClass('b1-dropdown_down')"
@@ -57,7 +57,7 @@
                     </li>
                     <li class="b1-dropdown__item" ng-show="currency === 'UAH'">
                         <a class="b1-dropdown__link b1-base" href=""
-                            ng-click="CreatePayment(payment.DocumentId, payment.BankId, payment.Credit < payment.Debit)">
+                            ng-click="CreatePayment(payment.DocumentId, payment.BankId, payment.credit < payment.debit)">
                             <i class="ub-icons ub-icons-icon-country b1-mr-3"></i>
                             {{'components.pay.correspondents.createPayment'|translate}}
                         </a>

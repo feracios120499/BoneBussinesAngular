@@ -20,13 +20,11 @@ import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-
 
 @Injectable()
 export class AcctEffects {
-
     constructor(
         private actions$: Actions,
         private accountsService: AcctService,
         private store: Store,
         private translateService: TranslateService) { }
-
 
 
     loadAccounts$ = createEffect(() =>
@@ -82,17 +80,16 @@ export class AcctEffects {
             map(([action, email]) => {
                 const config: RequisitesModalConfig = {
                     email,
-                    formats: action.account.RequisitesTypesList,
+                    formats: action.account.requisitesTypesList,
                     callback: (result) => {
                         const model = {
-                            accountId: action.account.Id,
-                            bankId: action.account.BankId,
+                            accountId: action.account.id,
+                            bankId: action.account.bankId,
                             format: result.format,
                         };
                         if (result.sendToEmail) {
                             this.store.dispatch(AcctActions.sendRequisitesRequest({ ...model, email: result.email as string }));
-                        }
-                        else {
+                        } else {
                             this.store.dispatch(AcctActions.downloadRequisitesRequest({ ...model }));
                         }
                     }
@@ -108,21 +105,20 @@ export class AcctEffects {
             map(([action, email]) => {
                 const config: ExportTurnoverModalConfig = {
                     email,
-                    formats: action.account.ExportTypesList,
+                    formats: action.account.exportTypesList,
                     start: action.range?.start,
                     end: action.range?.end,
                     callback: (result) => {
                         const model = {
-                            accountId: action.account.Id,
-                            bankId: action.account.BankId,
+                            accountId: action.account.id,
+                            bankId: action.account.bankId,
                             format: result.format,
                             start: result.range.start,
                             end: result.range.end
                         };
                         if (result.sendToEmail) {
                             this.store.dispatch(AcctActions.sendExportTurnoversRequest({ ...model, email: result.email as string }));
-                        }
-                        else {
+                        } else {
                             this.store.dispatch(AcctActions.downloadExportTurnoversRequest({ ...model }));
                         }
                     }

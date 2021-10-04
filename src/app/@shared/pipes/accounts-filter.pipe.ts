@@ -1,17 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { AccountModel } from '@models/account.model';
+import { FilterCurrency } from '@models/filter.model';
 import { FilterService } from '@services/filter.service';
-import { AccountModel } from '../models/account.model';
-import { FilterCurrency, FilterCurrencyType } from '../models/filter.model';
 
 @Pipe({ name: 'accountsFilter' })
 export class AccountFilterPipe implements PipeTransform {
-
     constructor(private filterService: FilterService) {
     }
 
     transform(accounts?: AccountModel[], filter?: string, filterCurrency?: FilterCurrency): AccountModel[] {
         if (!accounts) {
-            return new Array<AccountModel>();
+            return [];
         }
 
         if (!filter && (!filterCurrency || !filterCurrency.currencies || filterCurrency.currencies.length === 0)) {
@@ -19,9 +18,9 @@ export class AccountFilterPipe implements PipeTransform {
         }
 
         if (!!filterCurrency && !!filterCurrency.currencies && filterCurrency.currencies.length !== 0) {
-            accounts = filterCurrency.type === FilterCurrencyType.Include ?
-                accounts.filter(p => filterCurrency.currencies.indexOf(p.CurrencyCode) >= 0) :
-                accounts.filter(p => filterCurrency.currencies.indexOf(p.CurrencyCode) === -1);
+            accounts = filterCurrency.type === 'include' ?
+                accounts.filter(p => filterCurrency.currencies.indexOf(p.currencyCode) >= 0) :
+                accounts.filter(p => filterCurrency.currencies.indexOf(p.currencyCode) === -1);
         }
 
         if (!!filter) {
@@ -37,24 +36,22 @@ export class AccountFilterPipe implements PipeTransform {
     }
 
     private getFilterArray(account: AccountModel): string[] {
-        const filterArray = new Array<string>();
+        const filterArray: string[] = [];
 
-        this.filterService.pushValue(filterArray, account.CurrencyCode);
-        this.filterService.pushValue(filterArray, account.Name);
-        this.filterService.pushValue(filterArray, account.Number);
-        this.filterService.pushValue(filterArray, account.BankId);
+        this.filterService.pushValue(filterArray, account.currencyCode);
+        this.filterService.pushValue(filterArray, account.name);
+        this.filterService.pushValue(filterArray, account.number);
+        this.filterService.pushValue(filterArray, account.bankId);
 
-        this.filterService.pushDateValue(filterArray, account.LastActive);
-        this.filterService.pushDateValue(filterArray, account.OpeningDate);
-        this.filterService.pushDateValue(filterArray, account.ClosingDate);
+        this.filterService.pushDateValue(filterArray, account.lastActive);
+        this.filterService.pushDateValue(filterArray, account.openingDate);
+        this.filterService.pushDateValue(filterArray, account.closingDate);
 
-        this.filterService.pushMoneyValue(filterArray, account.Balance);
-        this.filterService.pushMoneyValue(filterArray, account.PlannedBalance);
-        this.filterService.pushMoneyValue(filterArray, account.CreditTurns);
-        this.filterService.pushMoneyValue(filterArray, account.DebitTurns);
+        this.filterService.pushMoneyValue(filterArray, account.balance);
+        this.filterService.pushMoneyValue(filterArray, account.plannedBalance);
+        this.filterService.pushMoneyValue(filterArray, account.creditTurns);
+        this.filterService.pushMoneyValue(filterArray, account.debitTurns);
 
         return filterArray;
     }
-
-
 }

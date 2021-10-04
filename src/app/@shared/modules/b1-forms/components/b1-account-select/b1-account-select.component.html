@@ -8,11 +8,11 @@
             <ng-template ng-label-tmp let-item="item">
                 <div class="b1-base b1-light b1-flex b1-align-center b1-justify-between">
                     <span>
-                        {{item.Name}}
+                        {{item.name}}
                     </span>
                     <span>
-                        <span>{{item.Balance / 100 || 0 | money : ''}}</span>
-                        <span class="b1-ml-2">{{item.CurrencyCode}}</span>
+                        <span>{{item.balance / 100 || 0 | money : ''}}</span>
+                        <span class="b1-ml-2">{{item.currencyCode}}</span>
                     </span>
                 </div>
             </ng-template>
@@ -21,19 +21,19 @@
                     <div class="b1-flex b1-justify-between b1-align-center">
                         <div>
                             <div class="b1-flex b1-align-center">
-                                <i b1-icon [icon]="account.IsCardAccount? 'account-card' :'university'"
+                                <i b1-icon [icon]="account.isCardAccount? 'account-card' :'university'"
                                     class="b1-base"></i>
                                 <div class="b1-ml-3">
-                                    {{account.Name}}
-                                    <div class="b1-bold" [iban]="account.Number">
+                                    {{account.name}}
+                                    <div class="b1-bold" [iban]="account.number">
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                         <div class="b1-bold">
-                            <span>{{account.Balance / 100 || 0 | money : ''}}</span>
-                            <span class="b1-ml-2">{{account.CurrencyCode}}</span>
+                            <span>{{account.balance / 100 || 0 | money : ''}}</span>
+                            <span class="b1-ml-2">{{account.currencyCode}}</span>
                         </div>
                     </div>
                 </ng-option>
@@ -67,7 +67,7 @@
         </ng-select>
         <div class="b1-input__control accounts-mobile" (click)="openModal()">
             <div class="b1-base b1-light  b1-flex b1-align-center">
-                {{currentAccount?.Name}}
+                {{currentAccount?.name}}
             </div>
             <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
         </div>
@@ -84,14 +84,14 @@
                 <div class="account" *ngFor="let account of selectAccounts.accounts"
                     [class.active]="account === currentAccount" (click)="selectAccount(account)">
                     <div class="account-icon">
-                        <i b1-icon [icon]="account.IsCardAccount? 'account-card' :'university'" class="b1-medium"></i>
+                        <i b1-icon [icon]="account.isCardAccount? 'account-card' :'university'" class="b1-medium"></i>
                     </div>
                     <div class="account-body b1-base b1-light b1-ellipsis">
-                        <div class="b1-ellipsis">{{account.Name}}</div>
-                        <div [iban]="account.Number"></div>
+                        <div class="b1-ellipsis">{{account.name}}</div>
+                        <div [iban]="account.number"></div>
                         <div class="b1-medium b1-mt-2">
-                            <span>{{account.Balance / 100 || 0 | money : ''}}</span>
-                            <span class="b1-ml-2">{{account.CurrencyCode}}</span>
+                            <span>{{account.balance / 100 || 0 | money : ''}}</span>
+                            <span class="b1-ml-2">{{account.currencyCode}}</span>
                         </div>
                     </div>
                 </div>

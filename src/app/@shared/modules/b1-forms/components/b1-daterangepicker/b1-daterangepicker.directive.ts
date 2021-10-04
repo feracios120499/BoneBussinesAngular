@@ -49,7 +49,7 @@ export class DaterangepickerDirective implements OnInit, OnChanges, DoCheck, For
     private _onChange = Function.prototype;
     private _onTouched = Function.prototype;
     private _validatorChange = Function.prototype;
-    // tslint:disable-next-line: variable-name
+
     private _disabled = false;
     private _value: any;
     private localeDiffer?: KeyValueDiffer<string, any>;

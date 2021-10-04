@@ -1,4 +1,4 @@
-<div class="screen-loader-wrapper" [class.loaded]="!(loading$ | async)">
+<div class="screen-loader-wrapper" [class.loaded]="loaded$ | ngrxPush">
   <div class="screen-loader"></div>
   <div class="screen-loader-section"></div>
 </div>

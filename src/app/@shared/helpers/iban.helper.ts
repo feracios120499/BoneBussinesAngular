@@ -6,7 +6,9 @@ export class IbanHelper {
     ];
 
     public static getBankId(iban?: string): string | undefined {
-        if (!iban) { return; }
+        if (!iban) {
+            return;
+        }
         return iban.substr(4, 6);
     }
 
@@ -18,11 +20,17 @@ export class IbanHelper {
     }
 
     public static isIban(iban: string): boolean {
-        if (!iban) { return false; }
+        if (!iban) {
+            return false;
+        }
 
-        if (iban.length !== this.ibanLength) { return false; }
+        if (iban.length !== this.ibanLength) {
+            return false;
+        }
 
-        if (!this.isLetter(iban[0]) || !this.isLetter(iban[1])) { return false; }
+        if (!this.isLetter(iban[0]) || !this.isLetter(iban[1])) {
+            return false;
+        }
 
         return true;
     }
@@ -43,11 +51,15 @@ export class IbanHelper {
 
     // Перевірка контрольного розряду IBAN
     public static validateCheckSum(iban: string): boolean {
-        if (!iban) { return false; }
+        if (!iban) {
+            return false;
+        }
         const asciiShift = 55;
         iban = iban.toUpperCase();
 
-        if (!iban.match(/^[A-Z0-9]/i)) { return false; }
+        if (!iban.match(/^[A-Z0-9]/i)) {
+            return false;
+        }
 
         iban = iban.replace(/ /g, '');
         const rearrangedIban = iban.substr(4, iban.length - 4) + iban.substr(0, 4);

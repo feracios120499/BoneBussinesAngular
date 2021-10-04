@@ -1,4 +1,3 @@
-import { PaymentAction } from './enums/payment-action.enum';
 import { StatusCode } from './enums/status-code.enum';
 
 export interface PaymentModal {

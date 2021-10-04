@@ -5,25 +5,25 @@
                 <div class="b1-account-header_card">
                     <div class="b1-flex b1-align-center b1-justify-between">
                         <div class="b1-medium b1-ellipsis">
-                            {{account.Name}}
+                            {{account.name}}
                         </div>
                         <div class="b1-large b1-ml-2 b1-hover-info pointer" (click)="editAccount(account)">
                             <i b1-icon icon="edit"></i>
                         </div>
                     </div>
                     <div class="b1-large b1-mt-6">
-                        {{account.Balance / 100 | money : ''}}
-                        {{account.CurrencyCode}}
+                        {{account.balance / 100 | money : ''}}
+                        {{account.currencyCode}}
                     </div>
                     <div class="b1-base b1-bold">
                         <div class="b1-flex b1-align-center">
                             <div class="b1-color-error b1-mr-5 b1-light">
                                 <i b1-icon icon="chevron-down" class="b1-mr-2"></i>
-                                <span>{{account.DebitTurns / 100 | money:''}}</span>
+                                <span>{{account.debitTurns / 100 | money:''}}</span>
                             </div>
                             <div class="b1-color-success b1-light">
                                 <i b1-icon icon="chevron-up" class="b1-mr-2"></i>
-                                <span>{{account.CreditTurns / 100 | money:''}}</span>
+                                <span>{{account.creditTurns / 100 | money:''}}</span>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                                 {{'components.pay.account' | translate}}
                             </div>
                             <div class="b1-base b1-bold b1-ellipsis">
-                                <span [iban]="account.Number"></span>
+                                <span [iban]="account.number"></span>
                             </div>
                         </div>
                     </div>
@@ -45,8 +45,8 @@
                                 {{'components.acct.acctDetail.futureBalance' | translate}}
                             </div>
                             <div class="b1-base b1-bold b1-ellipsis">
-                                {{account.PlannedBalance / 100 | money : ''}}
-                                {{account.CurrencyCode}}
+                                {{account.plannedBalance / 100 | money : ''}}
+                                {{account.currencyCode}}
                             </div>
                         </div>
                         <div class="col-4">
@@ -54,7 +54,7 @@
                                 {{'components.acct.acctDetail.turnoverDate' | translate}}
                             </div>
                             <div class="b1-base b1-bold b1-ellipsis">
-                                {{account.LastActive | date : 'dd.MM.yyyy'}}
+                                {{account.lastActive | date : 'dd.MM.yyyy'}}
                             </div>
                         </div>
 

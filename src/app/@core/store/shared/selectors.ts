@@ -19,7 +19,7 @@ export namespace SharedSelectors {
 
     export const bankDate = createSelector(
         UserSelectors.currentCustomer,
-        (currentCustomser) => dayjs(currentCustomser?.BankDate)
+        (currentCustomser) => dayjs(currentCustomser?.bankDate)
     );
 
     export const createPayment = createSelector(

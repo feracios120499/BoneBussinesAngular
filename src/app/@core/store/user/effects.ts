@@ -26,8 +26,7 @@ export class UserEffects {
             map(([, profile]) => {
                 if (profile !== undefined) {
                     return UserActions.profileExist();
-                }
-                else {
+                } else {
                     return UserActions.loadProfileRequest();
                 }
             })
@@ -50,7 +49,7 @@ export class UserEffects {
             ofType(UserActions.loadNotifications),
             withLatestFrom(this.store.select(UserSelectors.profile)),
             switchMap(([, profile]) =>
-                this.notificationsService.getNotifications(profile?.UserId || '').pipe(
+                this.notificationsService.getNotifications(profile?.userId || '').pipe(
                     map((notifications) => UserActions.setNotifications({ notifications }))
                 ))
         ));
@@ -61,9 +60,8 @@ export class UserEffects {
             withLatestFrom(this.store.select(UserSelectors.currentClientIdSelector)),
             map(([action, currentClientId]) => {
                 if (currentClientId === undefined) {
-                    return UserActions.setCurrentClientId({ clientId: action.payload.Customers[0].ClientId });
-                }
-                else {
+                    return UserActions.setCurrentClientId({ clientId: action.payload.customers[0].clientId });
+                } else {
                     return UserActions.setCurrentClientId({ clientId: currentClientId });
                 }
             })

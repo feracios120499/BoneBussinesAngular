@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AcctActions } from '@store/acct/actions';
-import { AcctDetailsActions } from '@store/acct/details/actions';
 import { AcctSelectors } from '@store/acct/selectors';
 
 
@@ -12,7 +11,6 @@ import { AcctSelectors } from '@store/acct/selectors';
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit, OnDestroy {
-
   navigationSubscription;
 
   constructor(
@@ -34,7 +32,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
 
   init(): void {
-    //this.store.dispatch(AcctDetailsActions.initDetails());
     this.store.dispatch(AcctActions.loadAccounts({ reload: true }));
   }
 
@@ -43,8 +40,4 @@ export class AccountsComponent implements OnInit, OnDestroy {
       this.navigationSubscription.unsubscribe();
     }
   }
-
-
-
-
 }

@@ -1,25 +1,25 @@
 export interface Transaction {
-    Id: string;
-    Number: string;
-    DocumentDate: Date;
-    CreatedDate: Date;
-    PayedDate: Date;
-    ValueDate: Date;
-    Sender: TransactionAccount;
-    Recipient: TransactionAccount;
-    Purpose: string;
-    Amount: number;
-    AmountString: string;
-    State: string;
+    id: string;
+    number: string;
+    documentDate: Date;
+    createdDate: Date;
+    payedDate: Date;
+    valueDate: Date;
+    sender: TransactionAccount;
+    recipient: TransactionAccount;
+    purpose: string;
+    amount: number;
+    amountString: string;
+    state: string;
 }
 
 export interface TransactionAccount {
-    BankCode: string;
-    BankName: string;
-    TaxCode: string;
-    Name: string;
-    AccNumber: string;
-    AccId?: any;
-    AccCurrencyCode: string;
-    AccCurrencyId: number;
+    bankCode: string;
+    bankName: string;
+    taxCode: string;
+    name: string;
+    accNumber: string;
+    accId?: any;
+    accCurrencyCode: string;
+    accCurrencyId: number;
 }

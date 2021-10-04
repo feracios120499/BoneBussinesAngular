@@ -2,10 +2,8 @@ export interface Filter {
     filter: string | undefined;
 }
 
-export enum FilterCurrencyType {
-    Include = 'INCLUDE',
-    Exclude = 'EXCLUDE'
-}
+export type FilterCurrencyType = 'include' | 'exclude';
+
 export interface FilterCurrency {
     type: FilterCurrencyType;
     currencies: string[];

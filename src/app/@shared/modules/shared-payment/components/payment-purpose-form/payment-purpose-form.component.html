@@ -52,26 +52,26 @@
             <ng-template ng-label-tmp let-item="item">
                 <div class="b1-base b1-flex b1-align-center">
                     <span>
-                        {{item.Code}}
+                        {{item.code}}
                     </span>
                     <span class="b1-ml-2 b1-mr-2">
                         -
                     </span>
                     <span>
-                        {{item.Description}}
+                        {{item.description}}
                     </span>
                 </div>
             </ng-template>
             <ng-option *ngFor="let payType of payTypes" [value]="payType">
                 <div class="b1-flex b1-base b1-light">
                     <span class="b1-bold">
-                        {{payType.Code}}
+                        {{payType.code}}
                     </span>
                     <span class="b1-ml-2 b1-mr-2">
                         -
                     </span>
                     <span>
-                        {{payType.Description}}
+                        {{payType.description}}
                     </span>
                 </div>
 
