@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { PaymentsService } from '@services/payments.service';
+import { PaymentsService } from '@services/payments/payments.service';
 import { clientIdWithData } from '@store/shared';
 import { of } from 'rxjs';
 import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+
 import { PayActions } from '../actions';
-import { PayEffects } from '../effects';
 import { WithinCountryActions } from './actions';
 import { WithinCountryPaymentSelectors } from './selectors';
 
@@ -37,6 +37,22 @@ export class WithinCountryEffects {
             map(action => PayActions.loadPaymentRequest(action.payload))
         ));
 
+    reloadPayment$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(
+                PayActions.signPaymentSuccess,
+                PayActions.signPaymentFailure
+            ),
+            withLatestFrom(this.store.select(WithinCountryPaymentSelectors.createdPayment)),
+            map(([_, payment]) => PayActions.loadPaymentRequest(payment?.id as string))
+        ));
+
+    setPayment$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PayActions.loadPaymentSuccess),
+            map(action => WithinCountryActions.setCreatedPayment({ payment: action.payload }))
+        ))
+
     toResult$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PayActions.loadPaymentSuccess),
@@ -44,6 +60,4 @@ export class WithinCountryEffects {
             filter(([_, progress]) => progress !== 'result'),
             map(_ => WithinCountryActions.setProgress({ progress: 'result' }))
         ));
-
-
 }

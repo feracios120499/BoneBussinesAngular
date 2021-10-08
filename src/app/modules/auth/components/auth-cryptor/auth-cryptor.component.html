@@ -1,0 +1,23 @@
+<div class="cl-content-form auth-key">
+    <div class="b1-flex b1-align-center-b1-justify-center b1-flex-direction" *ngrxLet="tokens$ as tokens">
+        <ng-select class="auth-select" [editableSearchTerm]="false" [searchable]="false" [clearable]="false"
+            [placeholder]="'components.auth.Deviсe' | translate"
+            [notFoundText]="'components.auth.Device.empty' | translate" [ngModel]="token"
+            (change)="tokenChange($event)">
+            <ng-option *ngFor="let token of tokens" [value]="token">
+                {{token.name}}
+            </ng-option>
+        </ng-select>
+        <ng-container *ngrxLet="keys$ as keys">
+            <ng-select class="auth-select" [editableSearchTerm]="false" [searchable]="false" [clearable]="false"
+                [placeholder]="'components.auth.Key' | translate"
+                [notFoundText]="'components.auth.Key.empty' | translate" [ngModel]="key" (change)="keyChange($event)">
+                <ng-option *ngFor="let key of keys" [value]="key">
+                    {{key.name}}
+                </ng-option>
+            </ng-select>
+        </ng-container>
+        <auth-button [disabled]="!key || !token" (authClick)="onLogin()" label="bid.Enter">
+        </auth-button>
+    </div>
+</div>

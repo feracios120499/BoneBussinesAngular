@@ -1,0 +1,27 @@
+.result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 812px) {
+        flex-direction: column;
+    }
+    &-img {
+        width: 200px;
+    }
+    &-body {
+        display: flex;
+        flex-direction: column;
+        @media (max-width: 812px) {
+            flex: 1;
+        }
+    }
+    &-text {
+        @media (max-width: 812px) {
+            display: flex;
+            flex: 1;
+        }
+    }
+    &-actions {
+    }
+}

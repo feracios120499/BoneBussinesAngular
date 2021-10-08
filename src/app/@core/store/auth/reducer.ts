@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
+import { CryptorKey } from '@services/sign/models/cryptor-key.model';
+import { CryptorToken } from '@services/sign/models/cryptor-token.model';
 import { AuthActions } from './actions';
 import { initialState } from './store';
-
 
 
 export const authReducer = createReducer(
@@ -37,5 +38,25 @@ export const authReducer = createReducer(
     on(
         AuthActions.resetLogin,
         () => ({ ...initialState })
+    ),
+    on(
+        AuthActions.setCryptorKeys,
+        (state, action) => ({ ...state, cryptor: { ...state.cryptor, keys: action.keys } })
+    ),
+    on(
+        AuthActions.setCryptorTokens,
+        (state, action) => ({ ...state, cryptor: { ...state.cryptor, tokens: action.tokens } })
+    ),
+    on(
+        AuthActions.setCryptorToken,
+        (state, action) => ({ ...state, cryptor: { ...state.cryptor, token: action.token } })
+    ),
+    on(
+        AuthActions.setCryptorKey,
+        (state, action) => ({ ...state, cryptor: { ...state.cryptor, key: action.key } })
+    ),
+    on(
+        AuthActions.loginCryptorSuccess,
+        (state) => ({ ...state, userKey: { token: state.cryptor.token as CryptorToken, key: state.cryptor.key as CryptorKey } })
     )
 );

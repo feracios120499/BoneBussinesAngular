@@ -22,7 +22,7 @@ export class RouteEffects {
 
     dashboardEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(...[AuthActions.loadProfileSuccess, UserActions.selectCurrentClientId]),
+            ofType(AuthActions.loadProfileSuccess, UserActions.selectCurrentClientId),
             map(() => RouteActions.routeTo({ route: 'accounts' }))
         )
     );

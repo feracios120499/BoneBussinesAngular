@@ -7,7 +7,6 @@ import { NgScrollbar } from 'ngx-scrollbar';
     selector: 'ng-select'
 })
 export class NgSelectScrollDirective implements OnInit {
-
     constructor(
         private viewContainerRef: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver,
@@ -19,7 +18,9 @@ export class NgSelectScrollDirective implements OnInit {
             setTimeout(() => {
                 const panel = document.querySelector('ng-dropdown-panel#' + this.select.dropdownId + ' .ng-option')?.parentElement;
 
-                if (!panel) { return; }
+                if (!panel) {
+                    return;
+                }
 
                 const componentFactory = this.componentFactoryResolver
                     .resolveComponentFactory(NgScrollbar);
@@ -31,19 +32,20 @@ export class NgSelectScrollDirective implements OnInit {
                     const host = componentRef.location.nativeElement.querySelector('.ng-scroll-content');
                     host.appendChild(panel);
                     const element = document.querySelector('ng-dropdown-panel#' + this.select.dropdownId + ' .ng-dropdown-panel-items');
-                    if (!element) { return; }
+                    if (!element) {
+                        return;
+                    }
 
                     element?.appendChild(componentRef.location.nativeElement);
                     element?.classList.add('with-ng-scrollbar');
+                    console.log(panel.clientHeight);
                     if (panel.clientHeight < 240) {
-                        (element as any).style.height = panel.clientHeight + 'px';
-                    }
-                    else {
+                        (element as any).style.height = panel.clientHeight + 2 + 'px';
+                    } else {
                         (element as any).style.height = '240px';
                     }
                 });
             });
-
         });
     }
 }

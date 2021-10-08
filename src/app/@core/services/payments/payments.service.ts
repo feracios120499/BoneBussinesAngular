@@ -4,7 +4,7 @@ import { CreateWithinCountryModel } from '@models/payments/create-within-country
 import { PaymentCommon } from '@models/payments/payment-common.model';
 import { StatusResponse } from '@models/status-response.model';
 import { Observable } from 'rxjs';
-import { BaseService } from './base.service';
+import { BaseService } from '../base.service';
 
 
 @Injectable({

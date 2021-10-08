@@ -15,7 +15,6 @@ import { WithinCountryFormComponent } from './components/within-country-form/wit
 import { PaymentResultComponent } from './components/payment-result/payment-result.component';
 
 
-
 @NgModule({
   declarations: [
     WithinCountryConfirmComponent,
@@ -40,7 +39,7 @@ import { PaymentResultComponent } from './components/payment-result/payment-resu
     PaymentPurposeFormComponent,
     WithinCountryFormComponent,
     PaymentDatesFormComponent,
-
+    PaymentResultComponent
   ]
 })
 export class SharedPaymentModule { }

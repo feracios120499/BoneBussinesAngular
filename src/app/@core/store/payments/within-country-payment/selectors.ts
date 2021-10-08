@@ -1,3 +1,4 @@
+import { PaymentStatus } from '@models/payments/payment-status.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AcctSelectors } from '@store/acct/selectors';
@@ -14,7 +15,6 @@ export namespace WithinCountryPaymentSelectors {
     );
 
 
-
     export const progress = createSelector(
         withinCountryState,
         (state) => state.progress
@@ -23,5 +23,10 @@ export namespace WithinCountryPaymentSelectors {
     export const payment = createSelector(
         withinCountryState,
         (state) => state.payment
+    );
+
+    export const createdPayment = createSelector(
+        withinCountryState,
+        (state) => state.createdPayment
     );
 }

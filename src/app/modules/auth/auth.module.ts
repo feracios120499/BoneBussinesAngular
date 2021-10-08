@@ -14,6 +14,8 @@ import { AuthPhoneComponent } from './components/auth-phone/auth-phone.component
 import { AuthLogonOldComponent } from './views/auth-logon-old/auth-logon-old.component';
 import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
 import { AuthComponent } from './views/auth/auth.component';
+import { AuthCryptorComponent } from './components/auth-cryptor/auth-cryptor.component';
+import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
 
 
 @NgModule({
@@ -28,9 +30,10 @@ import { AuthComponent } from './views/auth/auth.component';
     AuthKeyComponent,
     AuthButtonComponent,
     AuthErrorComponent,
-    AuthOtpComponent
+    AuthOtpComponent,
+    AuthCryptorComponent
   ],
-  imports: [CommonModule, AuthRoutingModule, SharedModule],
+  imports: [CommonModule, AuthRoutingModule, SharedModule, B1DirectivesModule],
   exports: [],
 })
 export class AuthModule { }

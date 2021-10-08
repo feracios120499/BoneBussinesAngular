@@ -12,5 +12,9 @@ export const withinCountryReducer = createReducer(
     on(
         payActions.setPayment,
         (state, action) => ({ ...state, payment: action.payment })
+    ),
+    on(
+        payActions.setCreatedPayment,
+        (state, action) => ({ ...state, createdPayment: action.payment })
     )
 );

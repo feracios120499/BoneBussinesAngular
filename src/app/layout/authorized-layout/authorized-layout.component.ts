@@ -9,12 +9,11 @@ import { UserActions } from '@store/user/actions';
   styleUrls: ['./authorized-layout.component.scss']
 })
 export class AuthorizedLayoutComponent implements OnInit {
-
   public isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
   public isOpen$ = this.store.select(MenuSelectors.isOpenMenu);
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.loadProfileRequest());
+    this.store.dispatch(UserActions.checkProfile());
   }
 }

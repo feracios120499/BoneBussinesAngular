@@ -31,7 +31,7 @@ const saveStoresLogout = [SETTINGS_KEY, PUBLIC_KEY];
 const saveStoresChangeCustomer = [...saveStoresLogout, USER_KEY, AUTH_KEY];
 const keys: Keys = [
   { settings: ['currentLanguage', 'darkModeActive'] },
-  { auth: ['token'] },
+  { auth: ['token', 'userKey'] },
   { user: ['currentClientId'] }
 ];
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -57,7 +57,6 @@ export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionRed
     return reducer(state, action);
   };
 }
-
 
 
 const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, localStorageSyncReducer];

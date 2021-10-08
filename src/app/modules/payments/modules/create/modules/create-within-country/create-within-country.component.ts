@@ -1,13 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PaymentForm } from '@models/payment-form.model';
+import { PaymentCommon } from '@models/payments/payment-common.model';
+import { PaymentStatus } from '@models/payments/payment-status.model';
 import { Store } from '@ngrx/store';
 import { State } from '@store';
 import { WithinCountryActions } from '@store/payments/within-country-payment/actions';
 import { WithinCountryPaymentSelectors } from '@store/payments/within-country-payment/selectors';
+import { required } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
 import { SharedSelectors } from '@store/shared/selectors';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import {
   WithinCountryFormComponent,
 } from 'src/app/@shared/modules/shared-payment/components/within-country-form/within-country-form.component';
@@ -18,7 +21,6 @@ import {
   styleUrls: ['./create-within-country.component.scss']
 })
 export class CreateWithinCountryComponent implements OnInit, OnDestroy {
-
   @ViewChild('form') form!: WithinCountryFormComponent;
 
   private paymentSubscription: Subscription;
@@ -31,6 +33,7 @@ export class CreateWithinCountryComponent implements OnInit, OnDestroy {
 
   senderAccounts$ = this.store.select(WithinCountryPaymentSelectors.senderAccounts);
   progress$ = this.store.select(WithinCountryPaymentSelectors.progress);
+  status$ = this.store.select(WithinCountryPaymentSelectors.createdPayment).pipe(required, map(payment => this.mapToStatus(payment)));
 
   paymentForm?: PaymentForm;
 
@@ -39,7 +42,6 @@ export class CreateWithinCountryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
     this.paymentSubscription?.unsubscribe();
   }
 
@@ -50,4 +52,12 @@ export class CreateWithinCountryComponent implements OnInit, OnDestroy {
     }
   }
 
+  private mapToStatus(payment: PaymentCommon): PaymentStatus {
+    const status: PaymentStatus = {
+      id: payment.id,
+      status: payment.status,
+      number: payment.number as string
+    };
+    return status;
+  }
 }

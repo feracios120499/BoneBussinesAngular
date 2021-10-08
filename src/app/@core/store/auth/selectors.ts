@@ -29,4 +29,28 @@ export namespace AuthSelectors {
         state => state.isNeedOtp
     );
 
+    export const cryptorTokens = createSelector(
+        authStore,
+        state => state.cryptor.tokens
+    );
+
+    export const cryptorKeys = createSelector(
+        authStore,
+        state => state.cryptor.keys
+    );
+
+    export const cryptorToken = createSelector(
+        authStore,
+        state => state.cryptor.token
+    );
+
+    export const cryptorKey = createSelector(
+        authStore,
+        state => state.cryptor.key
+    );
+
+    export const currentCryptorKey = createSelector(
+        authStore,
+        state => state.userKey
+    );
 }

@@ -13,4 +13,7 @@
     <ng-container *ngIf="progress === 'confirm'">
         <within-country-confirm></within-country-confirm>
     </ng-container>
+    <ng-container *ngIf="progress === 'result'">
+        <payment-result [status]="status$"></payment-result>
+    </ng-container>
 </ng-container>

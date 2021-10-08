@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@services/auth.service';
+import { CRYPTOR_URL } from '@services/sign/bars-cryptor.service';
 import { AuthActions } from '@store/auth/actions';
 import { AuthSelectors } from '@store/auth/selectors';
 import { EMPTY, Observable, Subject, throwError } from 'rxjs';
@@ -105,6 +106,9 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   formatRequest(request: HttpRequest<any>): HttpRequest<any> {
+    if (this.isCryptor(request.url)) {
+      return request;
+    }
     const language = this.translate.currentLang === 'uk' ? 'uk-UA' : this.translate.currentLang === 'ru' ? 'ru-RU' : 'en-US';
     const prefix = request.url.indexOf('?') > 0 ? '&_=' : '?_=';
     if (!request.url.includes('token')) {
@@ -144,6 +148,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   isStaticFileRequest(url: string): boolean {
     return url.indexOf('i18n') >= 0 || url.indexOf('.svg') >= 0;
+  }
+
+  isCryptor(url: string): boolean {
+    return url.indexOf(CRYPTOR_URL) >= 0;
   }
 
   customDate(date: Date, separator: string): string {

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Browsers } from '@modules/auth/models/browser.type';
 import { Device } from '@modules/auth/models/device.model';
-import { LoginModel } from '@modules/auth/models/login.model';
+import { LoginModel, LoginSignModel } from '@modules/auth/models/login.model';
 import { OS } from '@modules/auth/models/os.type';
 import { Observable } from 'rxjs';
 
@@ -41,6 +41,21 @@ export class AuthService extends BaseService {
       .set('device', JSON.stringify(this.device))
       .set('client_id', 'CORP-LIGHT-WEB') // TODO add to environment
       .set('passphrase', data.password);
+
+    return this.getToken(params);
+  }
+
+  loginBySign(data: LoginSignModel): Observable<Token> {
+    const params = new HttpParams()
+      .set('grant_type', 'password')
+      .set('mode', 'key')
+      .set('KeyId', data.keyId)
+      .set('Buffer', data.buffer)
+      .set('Sign', data.sign)
+      .set('ModuleName', data.moduleName)
+      .set('TokenId', data.tokenId)
+      .set('device', JSON.stringify(this.device))
+      .set('client_id', 'CORP-LIGHT-WEB'); // TODO add to environment
 
     return this.getToken(params);
   }
