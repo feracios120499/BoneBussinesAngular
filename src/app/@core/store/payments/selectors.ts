@@ -1,12 +1,28 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { WithinCountryPaymentSelectors } from './within-country-payment/selectors';
-import { WithinCountryPaymentState, WITHIN_COUNTRY_KEY } from './within-country-payment/store';
+
+import { PAY_KEY, PayState } from './store';
 
 export namespace PaySelectors {
 
-    const withinCountryState = createFeatureSelector<WithinCountryPaymentState>(WITHIN_COUNTRY_KEY);
-    export const showCreateTabs = createSelector(
-        withinCountryState,
-        (state) => state.progress === 'form'
+    export const payState = createFeatureSelector<PayState>(PAY_KEY);
+
+    export const paymentLoading = createSelector(
+        payState,
+        (state) => state.loadings.includes('payment')
+    );
+
+    export const onSignLoading = createSelector(
+        payState,
+        (state) => state.loadings.includes('onSign')
+    );
+
+    export const signLoading = createSelector(
+        payState,
+        (state) => state.loadings.includes('sign')
+    );
+
+    export const toBankLoading = createSelector(
+        payState,
+        (state) => state.loadings.includes('toBank')
     );
 }

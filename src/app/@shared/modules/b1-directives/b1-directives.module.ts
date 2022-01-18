@@ -4,7 +4,7 @@ import { IbanDirective } from './directives/iban.directive';
 import { B1IconDirective } from './directives/b1-icon.directive';
 import { CheckValueInputDirective } from './directives/check-value.directive';
 import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive';
-
+import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive
     IbanDirective,
     B1IconDirective,
     CheckValueInputDirective,
-    NgSelectScrollDirective
+    NgSelectScrollDirective,
+    DecimalNumbersDirective
   ],
   imports: [
     CommonModule
@@ -21,7 +22,8 @@ import { NgSelectScrollDirective } from './directives/ng-select-scroll.directive
     IbanDirective,
     B1IconDirective,
     CheckValueInputDirective,
-    NgSelectScrollDirective
+    NgSelectScrollDirective,
+    DecimalNumbersDirective
   ]
 })
 export class B1DirectivesModule { }

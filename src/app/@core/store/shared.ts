@@ -62,4 +62,20 @@ export function required<T>(source$: Observable<T | undefined>): Observable<T> {
     return source$.pipe(filter(p => !!p), map(p => p as T));
 }
 
+export function removeItem<T>(arr: Array<T>, value: T): Array<T> {
+    const findIndex = arr.indexOf(value);
+    if (findIndex > -1) {
+        return arr.filter((_, index) => index !== findIndex);
+    }
+    return arr;
+}
+
+export function pushIfNotExist<T>(arr: Array<T>, value: T): Array<T> {
+    const findIndex = arr.indexOf(value);
+    if (findIndex === -1) {
+        return [...arr, value];
+    }
+    return arr;
+}
+
 

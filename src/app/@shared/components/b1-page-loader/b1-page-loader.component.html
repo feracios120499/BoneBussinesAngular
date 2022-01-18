@@ -1,0 +1,6 @@
+<ng-container *ngrxLet="loading$ as loading">
+    <div class="b1-page-hr b1-page-hr__transparent page-loader loading" [class.collapsed]="isCollapsed$ | ngrxPush"
+        *ngIf="loading">
+
+    </div>
+</ng-container>

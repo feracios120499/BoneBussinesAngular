@@ -1,0 +1,21 @@
+.page-loader {
+    left: 240px;
+    width: calc(100% - 240px);
+    position: fixed;
+    top: 0;
+    margin: 0;
+    background: var(--color-light);
+    height: 4px;
+    &::before {
+        height: 4px;
+    }
+
+    &.collapsed {
+        left: 80px;
+        width: calc(100% - 80px);
+    }
+    @media (max-width: 812px) {
+        left: 0;
+        width: 100%;
+    }
+}

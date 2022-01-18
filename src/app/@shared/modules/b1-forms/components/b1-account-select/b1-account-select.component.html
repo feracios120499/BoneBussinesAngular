@@ -1,101 +1,116 @@
 <ng-container *ngrxLet="selectAccounts$ as selectAccounts">
-    <div class="b1-input" [ngClass]="class">
-        <label class="b1-input__label b1-base">
-            {{label | translate}}
-        </label>
-        <ng-select class="accounts" [editableSearchTerm]="false" [searchable]="false" [clearable]="false"
-            [(ngModel)]="currentAccount" (ngModelChange)="changeAccount()" [loading]="selectAccounts.isLoading">
-            <ng-template ng-label-tmp let-item="item">
-                <div class="b1-base b1-light b1-flex b1-align-center b1-justify-between">
-                    <span>
-                        {{item.name}}
-                    </span>
-                    <span>
-                        <span>{{item.balance / 100 || 0 | money : ''}}</span>
-                        <span class="b1-ml-2">{{item.currencyCode}}</span>
-                    </span>
-                </div>
-            </ng-template>
-            <ng-container *ngIf="!selectAccounts.isLoading">
-                <ng-option *ngFor="let account of selectAccounts.accounts" [value]="account">
-                    <div class="b1-flex b1-justify-between b1-align-center">
-                        <div>
-                            <div class="b1-flex b1-align-center">
-                                <i b1-icon [icon]="account.isCardAccount? 'account-card' :'university'"
-                                    class="b1-base"></i>
-                                <div class="b1-ml-3">
-                                    {{account.name}}
-                                    <div class="b1-bold" [iban]="account.number">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="b1-bold">
-                            <span>{{account.balance / 100 || 0 | money : ''}}</span>
-                            <span class="b1-ml-2">{{account.currencyCode}}</span>
-                        </div>
-                    </div>
-                </ng-option>
-
-            </ng-container>
-
-            <ng-container *ngIf="selectAccounts.isLoading">
-                <ng-option *ngFor="let item of array" [disabled]="true">
-                    <div class="b1-flex b1-justify-between b1-align-center">
-                        <div class="width-45">
-                            <div>
-                                <ngx-skeleton-loader>
-
-                                </ngx-skeleton-loader>
-                            </div>
-                            <div>
-                                <ngx-skeleton-loader>
-
-                                </ngx-skeleton-loader>
-                            </div>
-
-                        </div>
-                        <div class="width-30">
-                            <ngx-skeleton-loader>
-
-                            </ngx-skeleton-loader>
-                        </div>
-                    </div>
-                </ng-option>
-            </ng-container>
-        </ng-select>
-        <div class="b1-input__control accounts-mobile" (click)="openModal()">
-            <div class="b1-base b1-light  b1-flex b1-align-center">
-                {{currentAccount?.name}}
-            </div>
-            <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
+  <div class="b1-input" [ngClass]="class">
+    <label class="b1-input__label b1-base">
+      {{ label | translate }}
+    </label>
+    <ng-select
+      class="accounts"
+      [editableSearchTerm]="false"
+      [searchable]="false"
+      [clearable]="false"
+      [(ngModel)]="currentAccount"
+      (ngModelChange)="changeAccount()"
+      [loading]="selectAccounts.isLoading">
+      <ng-template ng-label-tmp let-item="item">
+        <div
+          class="b1-base b1-light b1-flex b1-align-center b1-justify-between"
+          *ngIf="currentAccount">
+          <span>
+            {{ item.name }}
+          </span>
+          <span>
+            <span>{{ item / 100 || 0 | money: '' }}</span>
+            <span class="b1-ml-2">{{ item.currencyCode }}</span>
+          </span>
         </div>
+      </ng-template>
+      <ng-container *ngIf="!selectAccounts.isLoading">
+        <ng-option
+          *ngFor="let account of selectAccounts.accounts"
+          [value]="account">
+          <div class="b1-flex b1-justify-between b1-align-center">
+            <div>
+              <div class="b1-flex b1-align-center">
+                <i
+                  b1-icon
+                  [icon]="account.isCardAccount ? 'account-card' : 'university'"
+                  class="b1-base"></i>
+                <div class="b1-ml-3">
+                  {{ account.name }}
+                  <div class="b1-bold" [iban]="account.number"></div>
+                </div>
+              </div>
+            </div>
+            <div class="b1-bold">
+              <span>{{ account.balance / 100 || 0 | money: '' }}</span>
+              <span class="b1-ml-2">{{ account.currencyCode }}</span>
+            </div>
+          </div>
+        </ng-option>
+      </ng-container>
+
+      <ng-container *ngIf="selectAccounts.isLoading">
+        <ng-option *ngFor="let item of array" [disabled]="true">
+          <div class="b1-flex b1-justify-between b1-align-center">
+            <div class="width-45">
+              <div>
+                <ngx-skeleton-loader> </ngx-skeleton-loader>
+              </div>
+              <div>
+                <ngx-skeleton-loader> </ngx-skeleton-loader>
+              </div>
+            </div>
+            <div class="width-30">
+              <ngx-skeleton-loader> </ngx-skeleton-loader>
+            </div>
+          </div>
+        </ng-option>
+      </ng-container>
+
+      <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+        <div class="ng-option disabled not-found">
+          {{ labelNotFound | translate }}
+        </div>
+      </ng-template>
+    </ng-select>
+    <div class="b1-input__control accounts-mobile" (click)="openModal()">
+      <div class="b1-base b1-light b1-flex b1-align-center">
+        {{ currentAccount?.name }}
+      </div>
+      <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
     </div>
-    <ng-template #templateref let-modal>
-        <div class="b1-modal-data">
-            <div class="b1-modal-close">
-                <i b1-icon icon="cancel" (click)="modal.close()"></i>
+    <ng-content></ng-content>
+  </div>
+  <ng-template #templateref let-modal>
+    <div class="b1-modal-data">
+      <div class="b1-modal-close">
+        <i b1-icon icon="cancel" (click)="modal.close()"></i>
+      </div>
+      <div class="b1-modal-header">
+        {{ 'shared.selectAccount' | translate }}
+      </div>
+      <div class="b1-modal-body accounts-modal">
+        <div
+          class="account"
+          *ngFor="let account of selectAccounts.accounts"
+          [class.active]="account === currentAccount"
+          (click)="selectAccount(account)">
+          <div class="account-icon">
+            <i
+              b1-icon
+              [icon]="account.isCardAccount ? 'account-card' : 'university'"
+              class="b1-medium"></i>
+          </div>
+          <div class="account-body b1-base b1-light b1-ellipsis">
+            <div class="b1-ellipsis">{{ account.name }}</div>
+            <div [iban]="account.number"></div>
+            <div class="b1-medium b1-mt-2">
+              <span>{{ account.balance / 100 || 0 | money: '' }}</span>
+              <span class="b1-ml-2">{{ account.currencyCode }}</span>
             </div>
-            <div class="b1-modal-header">
-                {{'shared.selectAccount' | translate}}
-            </div>
-            <div class="b1-modal-body accounts-modal">
-                <div class="account" *ngFor="let account of selectAccounts.accounts"
-                    [class.active]="account === currentAccount" (click)="selectAccount(account)">
-                    <div class="account-icon">
-                        <i b1-icon [icon]="account.isCardAccount? 'account-card' :'university'" class="b1-medium"></i>
-                    </div>
-                    <div class="account-body b1-base b1-light b1-ellipsis">
-                        <div class="b1-ellipsis">{{account.name}}</div>
-                        <div [iban]="account.number"></div>
-                        <div class="b1-medium b1-mt-2">
-                            <span>{{account.balance / 100 || 0 | money : ''}}</span>
-                            <span class="b1-ml-2">{{account.currencyCode}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </ng-template>
+      </div>
+    </div>
+  </ng-template>
 </ng-container>

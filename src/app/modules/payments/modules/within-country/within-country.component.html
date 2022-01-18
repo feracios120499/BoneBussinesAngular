@@ -1,0 +1,35 @@
+<ng-container *ngrxLet="progress$ as progress">
+  <div
+    class="b1-form-container b1-color-dark"
+    [hidden]="progress !== 'form'"
+    *ngIf="progress !== 'result'">
+    <within-country-form
+      #form
+      [senderAccounts]="senderAccounts$"
+      [(ngModel)]="paymentForm">
+    </within-country-form>
+    <div class="b1-mt-5">
+      <b1-sup-documents [(ngModel)]="supDocuments"></b1-sup-documents>
+    </div>
+
+    <div
+      class="
+        w-100
+        b1-flex b1-align-center b1-justify-center b1-mt-5 b1-mb-5
+        confirm
+      ">
+      <div class="b1-button-primary full-mobile" (click)="toConfirm()">
+        <i b1-icon icon="check"></i>
+        {{ 'components.pay.confirmPayment' | translate }}
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="progress === 'confirm'">
+    <within-country-confirm></within-country-confirm>
+  </ng-container>
+  <ng-container *ngIf="progress === 'result'">
+    <payment-result
+      [status]="status$"
+      [isLoading]="isLoading$"></payment-result>
+  </ng-container>
+</ng-container>

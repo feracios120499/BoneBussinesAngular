@@ -1,4 +1,5 @@
 import { PaymentAccount } from './payment-account.model';
+import { PaymentSupDoc } from './payments/payment-sup-doc.model';
 
 export interface PaymentForm {
     additionalDetails?: string;
@@ -10,4 +11,6 @@ export interface PaymentForm {
 
     sender: PaymentAccount;
     recipient: PaymentAccount;
+
+    attachedSupDocs?: PaymentSupDoc[];
 }

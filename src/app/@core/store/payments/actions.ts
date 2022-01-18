@@ -13,4 +13,14 @@ export namespace PayActions {
         signPayment,
         signPaymentSuccess,
         signPaymentFailure] = createHTTPActions<string, SignSaveResponse, string>('[PAY] sign payment');
+
+    export const [
+        onSignPayment,
+        onSignPaymentSuccess,
+        onSignPaymentFailure] = createHTTPActions<string, void, string>('[PAY] on sign payment');
+
+    export const [
+        toBankPayment,
+        toBankPaymentSuccess,
+        toBankPaymentFailure] = createHTTPActions<string, void, string>('[PAY] to bank payment');
 }

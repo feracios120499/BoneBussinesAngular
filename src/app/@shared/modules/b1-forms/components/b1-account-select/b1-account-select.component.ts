@@ -19,14 +19,17 @@ import { filter } from 'rxjs/operators';
   }]
 })
 export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService) {
+    console.log(this.selectAccounts$);
+  }
 
   @Input('selectAccounts') selectAccounts$!: Observable<SelectAccountsList>;
   @Input() class = '';
   @Input() label = 'components.pay.accountFrom';
+  @Input() labelNotFound = 'components.acct.noActiveAccount';
   @ViewChild('templateref') public templateref!: TemplateRef<any>;
 
-  private selectValue?: SelectAccount;
+  selectValue?: SelectAccount;
   private modal?: NgbModalRef;
   private selectValueChange: Subject<SelectAccount> = new Subject<SelectAccount>();
 
@@ -39,21 +42,23 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
 
 
   private setAccount(account?: AccountModel): void {
-    this.currentAccount = account;
-    const selectAccount: SelectAccount | undefined = account ? {
-      id: account.id,
-      number: account.number,
-      name: account.name,
-      currencyCode: account.currencyCode,
-      currencyId: account.currencyId,
-      taxCode: account.taxCode
-    } : undefined;
-    this.selectValue = selectAccount;
-    this.onChange(selectAccount);
+    setTimeout(() => {
+      this.currentAccount = account;
+      const selectAccount: SelectAccount | undefined = account ? {
+        id: account.id,
+        number: account.number,
+        name: account.name,
+        currencyCode: account.currencyCode,
+        currencyId: account.currencyId,
+        taxCode: account.taxCode,
+        balance: account.balance
+      } : undefined;
+      this.selectValue = selectAccount;
+      this.onChange(selectAccount);
+    });
   }
 
   writeValue(obj: SelectAccount | undefined): void {
-    this.selectValue = obj;
     this.selectValueChange.next(obj);
   }
 
@@ -71,8 +76,14 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
 
   ngOnInit(): void {
     const change$ = combineLatest([this.selectAccounts$, this.selectValueChange]);
-    this.changeSubcription = change$.pipe(filter(([select, value]) => !!select && !!value)).subscribe(([select, value]) => {
+    this.changeSubcription = change$.pipe(filter(([select, value]) => !!select)).subscribe(([select, value]) => {
       const accounts = select.accounts;
+
+      value = value || this.selectValue;
+      if (!value) {
+        this.setAccount(accounts[0]);
+        return;
+      }
       let account: AccountModel | undefined;
       if (value.id) {
         account = accounts.find(p => p.id === value.id);
@@ -84,7 +95,7 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
       }
       if (account) {
         this.setAccount(account);
-      } else if (accounts.length > 0) {
+      } else {
         this.setAccount(accounts[0]);
       }
     });

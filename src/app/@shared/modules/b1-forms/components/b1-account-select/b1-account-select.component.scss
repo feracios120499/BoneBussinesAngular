@@ -37,3 +37,11 @@
         flex-direction: column;
     }
 }
+.not-found {
+    min-height: 44px;
+    display: flex !important;
+    align-items: center;
+    @include medium;
+    @include light;
+    padding: 8px 16px;
+}

@@ -1,0 +1,11 @@
+<div *ngIf="documents" class="b1-documents">
+  <div class="b1-documents-list">
+    <div
+      class="b1-documents-list_item"
+      *ngFor="let doc of documents"
+      [ngbTooltip]="doc.supDoc.fileName + '.' + doc.supDoc.fileExt">
+      <i b1-icon icon="file-pdf"></i>
+      <span>{{ doc.supDoc.fileName }}</span>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,9 @@
-import { CreateWithinCountryModel } from './create-within-country.modal';
+import { StatusCode } from '@models/enums/status-code.enum';
+import { PaymentForm } from '@models/payment-form.model';
 
-export interface PaymentCommon extends CreateWithinCountryModel {
+export interface PaymentCommon extends PaymentForm {
     amountString: string;
     isNeedMySign: boolean;
     id: string;
+    statusId: StatusCode;
 }

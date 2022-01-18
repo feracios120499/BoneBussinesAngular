@@ -13,6 +13,8 @@ import { PaymentPurposeFormComponent } from './components/payment-purpose-form/p
 import { WithinCountryConfirmComponent } from './components/within-country-confirm/within-country-confirm.component';
 import { WithinCountryFormComponent } from './components/within-country-form/within-country-form.component';
 import { PaymentResultComponent } from './components/payment-result/payment-result.component';
+import { MyAccountsFormComponent } from './components/my-accounts-form/my-accounts-form.component';
+import { MyAccountsConfirmComponent } from './components/my-accounts-confirm/my-accounts-confirm.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { PaymentResultComponent } from './components/payment-result/payment-resu
     WithinCountryFormComponent,
     PaymentDatesFormComponent,
     PaymentResultComponent,
+    MyAccountsFormComponent,
+    MyAccountsConfirmComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,9 @@ import { PaymentResultComponent } from './components/payment-result/payment-resu
     PaymentPurposeFormComponent,
     WithinCountryFormComponent,
     PaymentDatesFormComponent,
-    PaymentResultComponent
+    PaymentResultComponent,
+    MyAccountsFormComponent,
+    MyAccountsConfirmComponent
   ]
 })
 export class SharedPaymentModule { }

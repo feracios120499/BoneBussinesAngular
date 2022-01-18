@@ -8,9 +8,9 @@ describe('WithinCountryFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WithinCountryFormComponent ]
+      declarations: [WithinCountryFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

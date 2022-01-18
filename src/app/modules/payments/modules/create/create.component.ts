@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaymentForm } from '@models/payment-form.model';
 import { Store } from '@ngrx/store';
 import { AcctActions } from '@store/acct/actions';
+import { PayFormsSelectors } from '@store/payments/forms/selectors';
 import { PaySelectors } from '@store/payments/selectors';
-import { withinCountryReducer } from '@store/payments/within-country-payment/reducer';
-import { WITHIN_COUNTRY_KEY } from '@store/payments/within-country-payment/store';
 import { SharedActions } from '@store/shared/actions';
+import { SupDocumentsActions } from '@store/sup-documents/actions';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +13,6 @@ import { SharedActions } from '@store/shared/actions';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit, OnDestroy {
-
   constructor(private store: Store) {
     const payment: PaymentForm = {
       number: '',
@@ -42,18 +41,14 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.store.dispatch(SharedActions.setCreatePayment({ payment }));
   }
 
-  showTabs$ = this.store.select(PaySelectors.showCreateTabs);
+  showTabs$ = this.store.select(PayFormsSelectors.showCreateTabs);
 
   ngOnDestroy(): void {
 
   }
 
   ngOnInit(): void {
-
     this.store.dispatch(AcctActions.loadAccounts({ reload: false }));
+    this.store.dispatch(SupDocumentsActions.loadDocuments());
   }
-
-
-
-
 }

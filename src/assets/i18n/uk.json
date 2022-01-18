@@ -162,6 +162,7 @@
 	"components.acct.newPaymentInUkraine": "по Україні",
 	"components.acct.noActiveAccount": "Рахунки, з яких можливо здійснювати грошові операції відсутні",
 	"components.acct.noActiveAccountRecepient": "Немає активного рахунку отримувача!",
+	"components.acct.noActiveAccountRecepientWithCurrency": "Рахунки з валютою {{currency}}, на які можливо здійснювати грошові операції відсутні",
 	"components.acct.noActiveFcAccount": "Рахунки, з яких можливо здійснювати грошові операції в іноземній влаюті відсутні",
 	"components.acct.notFound": "Рахунків не знайдено",
 	"components.acct.period": "період",

@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
-import { B1PaymentModalComponent } from 'src/app/@shared/components/modals/b1-payment-modal/b1-payment-modal.component';
-import { B1StatementModalComponent } from 'src/app/@shared/components/modals/b1-statement-modal/b1-statement-modal.component';
-import { SharedActions } from './actions';
-import { saveAs } from 'file-saver';
 import { ModalService } from '@services/modal.service';
-import { B1RequisitesModalComponent } from 'src/app/@shared/components/modals/b1-requisites-modal/b1-requisites-modal.component';
-import { B1ExportTurnoversComponent } from 'src/app/@shared/components/modals/b1-export-turnovers/b1-export-turnovers.component';
+import { saveAs } from 'file-saver';
+import { tap } from 'rxjs/operators';
+import {
+    B1ExportTurnoversComponent,
+} from 'src/app/@shared/components/modals/b1-export-turnovers/b1-export-turnovers.component';
+import { B1PaymentModalComponent } from 'src/app/@shared/components/modals/b1-payment-modal/b1-payment-modal.component';
+import {
+    B1RequisitesModalComponent,
+} from 'src/app/@shared/components/modals/b1-requisites-modal/b1-requisites-modal.component';
+import {
+    B1StatementModalComponent,
+} from 'src/app/@shared/components/modals/b1-statement-modal/b1-statement-modal.component';
+
+import { SharedActions } from './actions';
 
 @Injectable()
 export class SharedEffects {
@@ -68,12 +74,13 @@ export class SharedEffects {
         this.actions$.pipe(
             ofType(SharedActions.printFile),
             tap((action) => {
-
                 const file = action.html;
 
                 const printWindow = window.open('about:blank', '', 'width=700,height=600');
 
-                if (!printWindow) { return; }
+                if (!printWindow) {
+                    return;
+                }
 
                 printWindow.document.write(file);
 
@@ -82,7 +89,9 @@ export class SharedEffects {
                 printWindow.focus();
 
                 printWindow.document.body.onload = () => {
-                    if (!printWindow) { return; }
+                    if (!printWindow) {
+                        return;
+                    }
                     // continue to print
                     printWindow.print();
                     printWindow.close();

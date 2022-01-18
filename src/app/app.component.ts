@@ -6,9 +6,7 @@ import { ResizeService } from '@services/resize.service';
 import { AppActions } from '@store/app/actions';
 import { MenuSelectors } from '@store/menu/selectors';
 import { PublicActions } from '@store/public/actions';
-import { SettingsActions } from '@store/settings/actions';
 import { SettingsSelectors } from '@store/settings/selectors';
-import dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,7 +15,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   constructor(private translate: TranslateService, private store: Store, private router: Router, private resizeService: ResizeService) {
   }
   title = 'BOneBussinesAngular';
@@ -30,7 +27,6 @@ export class AppComponent implements OnInit, OnDestroy {
   private openMenuSubscription$!: Subscription;
 
   ngOnInit(): void {
-
     this.globalLoaderStarter();
     this.store.dispatch(AppActions.start());
     // this.store.dispatch(setDarkMode({ isActive: false }));
@@ -42,8 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         document.body.classList.add('menu-open');
-      }
-      else {
+      } else {
         document.body.classList.remove('menu-open');
       }
     });

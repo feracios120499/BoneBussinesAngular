@@ -1,16 +1,68 @@
 <ng-container *ngrxLet="status$ as status">
-    <div class="result">
-        <div class="result-img">
-            123
-        </div>
-        <div class="result-body">
-            <div class="result-text">
-                312
-            </div>
-            <div class="result-actions">
-                455
-            </div>
-        </div>
-
+  <div class="result" *ngrxLet="result$ as result">
+    <div class="result-img">
+      <img [src]="result.image" />
     </div>
+    <div class="result-body" *ngrxLet="isLoading$ as isLoading">
+      <div class="result-text">
+        <div class="result-text_title">
+          {{ result.title | translate | firstTitle }}
+        </div>
+        <div class="result-text_status">
+          <div class="b1-badge" [ngClass]="'b1-bg-' + result.class">
+            {{ result.statusName | translate }}
+          </div>
+        </div>
+        <div class="result-text_info">
+          <div class="b1-flex b1-align-center">
+            <span class="b1-opacity-80">{{
+              'components.pay.innerNumber' | translate
+            }}</span>
+            <span class="b1-ml-3 b1-bold">{{ status.id }}</span>
+          </div>
+          <div class="b1-mt-2 b1-flex b1-align-center">
+            <span class="b1-opacity-80">{{
+              'components.pay.paymentNumber' | translate
+            }}</span>
+            <span class="b1-ml-3 b1-bold">{{ status.number }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <div class="result-buttons">
+          <button
+            class="b1-button-primary full-mobile"
+            (click)="onSign(status.id)"
+            *ngIf="result.action == 'sendOnSign'"
+            [disabled]="isLoading">
+            <i b1-icon icon="on-sign"></i>
+            {{ 'components.pay.onSign' | translate }}
+          </button>
+          <button
+            class="b1-button-primary full-mobile"
+            (click)="sign(status.id)"
+            *ngIf="result.action == 'sign'"
+            [disabled]="isLoading">
+            <i b1-icon icon="sign"></i>
+            {{ 'components.pay.sign' | translate }}
+          </button>
+          <button
+            class="b1-button-primary full-mobile"
+            (click)="toBank(status.id)"
+            *ngIf="result.action == 'sendToBank'"
+            [disabled]="isLoading">
+            <i b1-icon icon="send"></i>
+            {{ 'components.pay.sendToBank' | translate }}
+          </button>
+        </div>
+        <button
+          class="b1-hover-info result-new b1-medium b1-light"
+          [disabled]="isLoading"
+          (click)="createNew()">
+          <i b1-icon icon="new-document" class="b1-mr-3"></i>
+          {{ 'components.pay.createNewPayment' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
 </ng-container>

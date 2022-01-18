@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { PaymentsSignService } from '@services/payments/payments-sign.service';
 import { PaymentsService } from '@services/payments/payments.service';
 import { BarsCryptorService } from '@services/sign/bars-cryptor.service';
+import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData } from '@store/shared';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -55,7 +56,42 @@ export class PayEffects {
                         );
                     }
                     return of(PayActions.signPaymentFailure(signResponse.error?.message as string));
-                })
+                }),
+                catchError(error => of(PayActions.signPaymentFailure(error.message)))
             )),
+        ));
+
+    onSign$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PayActions.onSignPayment),
+            switchMap(action => clientIdWithData(this.store, action.payload)),
+            switchMap(payload => this.paymentsService.onSign(payload.data, payload.clientId).pipe(
+                map(response =>
+                    response.isSuccess ?
+                        PayActions.onSignPaymentSuccess() :
+                        PayActions.onSignPaymentFailure(response.message as string)
+                ),
+                catchError(error => of(PayActions.onSignPaymentFailure(error.error.message)))
+            ))
+        ));
+
+    toBank$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PayActions.toBankPayment),
+            switchMap(action => clientIdWithData(this.store, action.payload)),
+            switchMap(payload => this.paymentsService.toBank(payload.data, payload.clientId).pipe(
+                map(response =>
+                    response.isSuccess ?
+                        PayActions.toBankPaymentSuccess() :
+                        PayActions.toBankPaymentFailure(response.message as string)
+                ),
+                catchError(error => of(PayActions.toBankPaymentFailure(error.error.message)))
+            ))
+        ));
+
+    signPaymentFailure$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PayActions.signPaymentFailure),
+            map(action => NotifyActions.errorNotification({ message: action.payload }))
         ));
 }

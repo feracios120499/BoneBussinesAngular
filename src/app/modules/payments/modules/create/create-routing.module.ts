@@ -10,12 +10,12 @@ const routes: Routes = [
       {
         path: 'within-country',
         loadChildren: () =>
-          import('./modules/create-within-country/create-within-country.module').then(p => p.CreateWithinCountryModule),
+          import('./../within-country/within-country.module').then(p => p.WithinCountryModule),
       },
       {
         path: 'my-accounts',
         loadChildren: () =>
-          import('./modules/create-my-accounts/create-my-accounts.module').then(p => p.CreateMyAccountsModule)
+          import('./../my-accounts/my-accounts.module').then(p => p.MyAccountsModule)
       },
       { path: '', redirectTo: 'within-country' }
     ]

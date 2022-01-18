@@ -26,7 +26,6 @@ export class AcctService extends BaseService {
 
     getAccounts(clientId: string): Observable<AccountModel[]> {
         return this.http.get<AccountModel[]>(`api/v1/acct/accounts/${clientId}`).pipe(map(accounts => {
-            console.log(accounts);
             accounts.forEach(account => this.mapAccount(account));
             return accounts;
         }));

@@ -1,27 +1,100 @@
+@import 'variables';
+
 .result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  @media (max-width: 812px) {
+    flex-direction: column;
+    padding: 16px;
+  }
+  &-img {
+    height: 400px;
+    width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     @media (max-width: 812px) {
-        flex-direction: column;
+      height: 190px;
+      width: 100%;
     }
-    &-img {
-        width: 200px;
+    & img {
+      width: 320px;
+      @media (max-width: 812px) {
+        width: auto;
+        height: 190px;
+      }
     }
-    &-body {
-        display: flex;
-        flex-direction: column;
-        @media (max-width: 812px) {
-            flex: 1;
-        }
+  }
+  &-body {
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    @media (max-width: 812px) {
+      flex: 1;
+      margin-left: 0;
+      width: 100%;
+      align-items: center;
+      margin-top: 16px;
     }
-    &-text {
-        @media (max-width: 812px) {
-            display: flex;
-            flex: 1;
-        }
+  }
+  &-text {
+    @media (max-width: 812px) {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
     }
-    &-actions {
+    &_title {
+      @include title3;
+
+      @media (max-width: 812px) {
+        margin-top: 8px;
+        text-align: center;
+      }
     }
+    &_status {
+      @include base;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+    }
+    &_info {
+      margin: 32px 0;
+      @include medium;
+      @include light;
+      @media (max-width: 812px) {
+        margin: 16px 0;
+      }
+    }
+  }
+  &-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 812px) {
+      align-items: center;
+    }
+  }
+  &-buttons {
+    margin-bottom: 16px;
+    @media (max-width: 812px) {
+      order: 2;
+      margin-bottom: 0;
+      width: 100%;
+    }
+  }
+  &-new {
+    @media (max-width: 812px) {
+      order: 1;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

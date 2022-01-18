@@ -6,4 +6,5 @@ export interface PaymentAccount {
     bankCode: string;
     name: string;
     taxCode: string;
+    balance?: number;
 }

@@ -2,7 +2,7 @@
     <label for="amount" class="b1-input__label">
         {{label | translate}}
     </label>
-    <input class="b1-input__control" name="amount" [(ngModel)]="viewValue" decimalNumbers [autocomplete]="false"
+    <input autocomplete="nope" class="b1-input__control" [(ngModel)]="viewValue" decimalNumbers [autocomplete]="false"
         (ngModelChange)="updateValue()" (focus)="onInputFocus()" (blur)="onBlur()" [disabled]="disabled"
         [maxlength]="15">
     <ng-content>

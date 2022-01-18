@@ -1,0 +1,147 @@
+<div class="b1-confirm" *ngrxLet="payment$ as payment">
+  <ng-container *ngrxLet="isLoading$ as isLoading">
+    <div class="b1-confirm-header">
+      <div class="b1-back" (click)="toForm(isLoading)">
+        <i b1-icon icon="chevron-left" class="b1-medium"></i>
+      </div>
+      <div class="b1-title2">Перевiрте iнформацiю</div>
+      <div class="b1-medium b1-light b1-opacity-80">
+        {{ 'components.pay.actions.innerPay' | translate }}
+      </div>
+    </div>
+    <div class="b1-confirm-container">
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.payer' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.analytics.accName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ payment.sender.name }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.import.senderAccNumber' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            <div [iban]="payment.sender.accNumber"></div>
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.acct.acctDetail.accountBalans' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            <span>{{ (payment.sender.balance || 0) / 100 | money }}</span>
+            <span class="b1-ml-2">{{ payment.sender.accCurrencyCode }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.recipient' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.analytics.accName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ payment.recipient.name }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.import.recipientAccNumber' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            <div [iban]="payment.recipient.accNumber"></div>
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.acct.acctDetail.accountBalans' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            <span>{{ (payment.recipient.balance || 0) / 100 | money }}</span>
+            <span class="b1-ml-2">{{ payment.recipient.accCurrencyCode }}</span>
+          </div>
+        </div>
+        <div class="b1-confirm-group" *ngIf="payment.additionalDetails">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.import.recipientDetails' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ payment.additionalDetails }}
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block b1-confirm-block_bottom">
+        <div class="b1-confirm-double">
+          <div class="b1-confirm-group">
+            <div class="b1-confirm-label">
+              {{ 'components.pay.purpose' | translate }}
+            </div>
+            <div class="b1-confirm-value">
+              {{ payment.purpose }}
+            </div>
+          </div>
+          <div class="b1-confirm-group b1-confirm-double_right">
+            <div class="b1-confirm-label">
+              {{ 'components.pay.amount' | translate }}
+            </div>
+            <div class="b1-confirm-value">
+              <span>{{ payment.amount / 100 | money: '' }}</span>
+              <span>{{ payment.sender.accCurrencyCode }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="b1-mt-5 b1-separator"></div>
+    <b1-list-documents
+      [documents]="payment.attachedSupDocs"></b1-list-documents>
+    <div class="b1-mt-5">
+      <div class="b1-input">
+        <label class="b1-small b1-checkbox noselect">
+          <input
+            type="checkbox"
+            class="b1-checkbox__hidden"
+            [(ngModel)]="saveAsTemplate"
+            (ngModelChange)="saveAsTemplateChange(payment)" />
+          <i class="b1-checkbox__check"></i>
+          <span class="b1-checkbox__label b1-base">
+            {{ 'components.pay.saveAsTemplate' | translate }}
+          </span>
+        </label>
+      </div>
+    </div>
+    <div class="b1-mt-5" [hidden]="!saveAsTemplate">
+      <div class="b1-input">
+        <label class="b1-input__label b1-base">
+          {{ 'components.pay.templateName' | translate }}
+        </label>
+        <input class="b1-input__control" [formControl]="templateNameControl" />
+        <b1-input-error [control]="templateNameControl"> </b1-input-error>
+      </div>
+    </div>
+    <div class="b1-confirm-actions">
+      <button
+        class="b1-button-primary full-mobile"
+        (click)="save(payment)"
+        [disabled]="isLoading">
+        <i b1-icon icon="save"></i>
+        {{ 'actions.save' | translate }}
+      </button>
+      <button
+        class="b1-button-primary b1-button-primary_filled full-mobile"
+        (click)="saveSignAndToBank(payment)"
+        [disabled]="isLoading">
+        <i b1-icon icon="send"></i>
+        {{ 'components.pay.sendToBank' | translate }}
+      </button>
+    </div>
+  </ng-container>
+</div>

@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserSelectors } from '@store/user/selectors';
-import { environment } from 'src/environments/environment';
 
 import { APP_KEY, AppState } from './store';
 
@@ -15,6 +14,11 @@ export namespace AppSelectors {
     export const bankDate = createSelector(
         UserSelectors.currentCustomer,
         (currentCustomer) => currentCustomer?.bankDate
+    );
+
+    export const pageLoader = createSelector(
+        appStore,
+        state => state.pageLoader
     );
 }
 

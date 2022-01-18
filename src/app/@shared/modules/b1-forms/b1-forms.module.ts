@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { B1DirectivesModule } from '../b1-directives/b1-directives.module';
@@ -15,7 +16,9 @@ import { DaterangepickerDirective } from './components/b1-daterangepicker/b1-dat
 import { B1InputAmountComponent } from './components/b1-input-amount/b1-input-amount.component';
 import { B1InputErrorComponent } from './components/b1-input-error/b1-input-error.component';
 import { B1SinglePickerComponent } from './components/b1-single-picker/b1-single-picker.component';
-
+import { B1SupDocumentsComponent } from './components/b1-sup-documents/b1-sup-documents.component';
+import { B1ListDocumentsComponent } from './components/b1-list-documents/b1-list-documents.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -26,6 +29,8 @@ import { B1SinglePickerComponent } from './components/b1-single-picker/b1-single
     B1InputErrorComponent,
     DaterangepickerComponent,
     DaterangepickerDirective,
+    B1SupDocumentsComponent,
+    B1ListDocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +41,9 @@ import { B1SinglePickerComponent } from './components/b1-single-picker/b1-single
     NgxSkeletonLoaderModule,
     NgSelectModule,
     ReactiveComponentModule,
-    ScrollingModule
+    ScrollingModule,
+    NgScrollbarModule,
+    NgbTooltipModule
   ],
   exports: [
     B1AccountSelectComponent,
@@ -44,7 +51,9 @@ import { B1SinglePickerComponent } from './components/b1-single-picker/b1-single
     B1InputAmountComponent,
     B1InputErrorComponent,
     DaterangepickerComponent,
-    DaterangepickerDirective
+    DaterangepickerDirective,
+    B1SupDocumentsComponent,
+    B1ListDocumentsComponent
   ]
 })
 export class B1FormsModule { }

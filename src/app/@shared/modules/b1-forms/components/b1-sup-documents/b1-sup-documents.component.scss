@@ -1,0 +1,16 @@
+.document {
+  &-row {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+    height: 90px;
+  }
+  &-edit {
+    &_row {
+      display: grid;
+      grid-template-columns: 80% 20%;
+      align-items: center;
+      justify-items: flex-end;
+    }
+  }
+}

@@ -5,4 +5,5 @@ export interface SelectAccount {
     currencyId?: number;
     name: string;
     taxCode: string;
+    balance?: number;
 }

@@ -5,4 +5,5 @@ export interface PaymentStatus {
     id: string;
     number: string;
     status: StatusCode;
+    attachedSupDocs?: [];
 }

@@ -12,13 +12,11 @@ import { settingsReducer } from '@store/settings/reducer';
 import { SETTINGS_KEY, SettingsState } from '@store/settings/store';
 import { userReducer } from '@store/user/reducer';
 import { USER_KEY, UserState } from '@store/user/store';
-import { AcctState, ACCT_KEY } from './acct/store';
-import { acctReducer } from './acct/reducer';
-import { SharedState, SHARED_KEY } from './shared/store';
-import { sharedReducer } from './shared/reducer';
-import { WithinCountryPaymentState, WITHIN_COUNTRY_KEY } from './payments/within-country-payment/store';
-import { withinCountryReducer } from './payments/within-country-payment/reducer';
 
+import { acctReducer } from './acct/reducer';
+import { ACCT_KEY, AcctState } from './acct/store';
+import { sharedReducer } from './shared/reducer';
+import { SHARED_KEY, SharedState } from './shared/store';
 
 
 export interface State {
@@ -33,7 +31,6 @@ export interface State {
   router: RouterReducerState;
   [key: string]: any;
 }
-
 
 
 export const reducers: ActionReducerMap<State> = {

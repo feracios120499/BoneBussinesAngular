@@ -5,7 +5,6 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
     providedIn: 'root'
 })
 export class ModalService {
-
     constructor(private modalService: NgbModal) {
 
     }
@@ -14,8 +13,8 @@ export class ModalService {
         if (!document.body.classList.contains('modal-open')) {
             const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             document.body.style.top = (offset * -1) + 'px';
-            const modalRef = this.modalService.open(content, options);
 
+            const modalRef = this.modalService.open(content, options);
             modalRef.result.then(
                 () => {
                     window.scrollTo(0, offset);
@@ -25,6 +24,7 @@ export class ModalService {
                     window.scrollTo(0, offset);
                     document.body.style.top = 'auto';
                 });
+
 
             return modalRef;
         }

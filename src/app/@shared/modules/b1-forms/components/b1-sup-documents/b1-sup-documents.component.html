@@ -1,0 +1,94 @@
+<div class="b1-hover-info b1-medium b1-light" (click)="openModal()">
+  <i b1-icon icon="attach" class="b1-mr-3"></i>
+  {{ 'components.pay.addSupDocs' | translate }}
+</div>
+
+<div class="document-edit" *ngFor="let document of selectedDocuments">
+  <div class="document-edit_row b1-mt-5">
+    <div class="b1-input">
+      <label class="b1-input__label b1-base">
+        {{ 'components.pay.supportingDoc' | translate }}
+      </label>
+      <div>
+        <input
+          class="b1-input__control b1-base"
+          disabled
+          readonly
+          [(ngModel)]="document.supDoc.fileName" />
+      </div>
+    </div>
+    <button
+      class="b1-page-more agents-button_mobile"
+      (click)="delete(document)">
+      <i b1-icon icon="delete" class="b1-page-more_icon"></i>
+    </button>
+  </div>
+  <div class="b1-input b1-mt-5">
+    <label class="b1-input__label b1-base">
+      {{ 'components.pay.comment' | translate }}
+    </label>
+    <div>
+      <input class="b1-input__control b1-base" [(ngModel)]="document.comment" />
+    </div>
+  </div>
+</div>
+
+<ng-template #templateref let-modal>
+  <div class="b1-modal-data">
+    <div class="b1-modal-close">
+      <i b1-icon icon="cancel" (click)="modal.close()"></i>
+    </div>
+    <div class="b1-modal-header">
+      <div class="b1-title3">
+        {{ 'components.supDocuments.chooseSupDocument' | translate }}
+      </div>
+      <div class="b1-medium b1-light">
+        максимальна кількість {{ maxCountDocuments }}
+      </div>
+    </div>
+    <div class="b1-modal-body">
+      <div class="b1-modal-container invisible-xs">
+        <ng-scrollbar>
+          <ng-container *ngTemplateOutlet="documents"></ng-container>
+        </ng-scrollbar>
+      </div>
+      <div class="b1-modal-container visible-xs">
+        <ng-container *ngTemplateOutlet="documents"></ng-container>
+      </div>
+    </div>
+    <div class="b1-modal-footer" ngbAutofocus>
+      <button
+        class="b1-button-primary b1-button-primary_filled"
+        type="button"
+        [disabled]="selectedInModal.length === 0"
+        (click)="save()">
+        <i b1-icon icon="plus"></i>
+        {{ 'actions.add' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #documents>
+  <ng-container *ngrxLet="documents$ as documents">
+    <div
+      class="b1-modal-container_row"
+      *ngFor="let document of documents"
+      [class.selected]="isSelected(document)"
+      (click)="clickOnDocument(document)">
+      <div class="document-row">
+        <div class="b1-modal-document_icon">
+          <i b1-icon icon="file-pdf"></i>
+        </div>
+        <div>
+          <div class="b1-medium b1-ellipsis">
+            {{ document.fileName }}
+          </div>
+          <div class="b1-medium b1-light b1-ellipsis">
+            {{ document.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

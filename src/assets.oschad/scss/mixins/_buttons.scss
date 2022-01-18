@@ -52,6 +52,15 @@
     border: 2px solid $color-light-400;
     color: $color-dark;
   }
+
+  &.full-mobile {
+    @media (max-width: 812px) {
+      width: 100%;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 @mixin button-primary {
   @include button;
@@ -237,4 +246,3 @@
     }
   }
 }
-

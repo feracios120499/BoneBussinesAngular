@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { PaySelectors } from '@store/payments/selectors';
+import { PayFormsSelectors } from '@store/payments/forms/selectors';
 
 @Component({
   selector: 'payment-create-tabs',
@@ -9,8 +9,7 @@ import { PaySelectors } from '@store/payments/selectors';
   styleUrls: ['./create-tabs.component.scss']
 })
 export class CreateTabsComponent implements OnInit {
-
-  constructor(private router: Router, private store: Store) { }
+  constructor(private router: Router, private store: Store, private route: ActivatedRoute) { }
 
   tabs = [
     {
@@ -33,14 +32,18 @@ export class CreateTabsComponent implements OnInit {
     }
   ];
 
-  currentTab = this.tabs[0];
-  showTabs$ = this.store.select(PaySelectors.showCreateTabs);
+  currentTab = this.tabs.find(p => this.router.url.includes(p.route)) || this.tabs[0];
+  currentIndex = this.tabs.indexOf(this.currentTab);
+  showTabs$ = this.store.select(PayFormsSelectors.showCreateTabs);
   ngOnInit(): void {
   }
 
   selectTab(tab: any): void {
     this.currentTab = tab;
-    this.router.navigate(tab.route);
+    this.router.navigate([tab.route], { relativeTo: this.route });
   }
 
+  selectTabByIndex(): void {
+    this.selectTab(this.tabs[this.currentIndex]);
+  }
 }

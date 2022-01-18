@@ -12,7 +12,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   }]
 })
 export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
-
   viewValue = '';
   disabled = false;
   @Input() digits = 2;
@@ -27,11 +26,9 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
     this.amount = amount;
     if (this.amount) {
       this.viewValue = (this.amount / Math.pow(10, this.digits)).toFixed(this.digits);
-    }
-    else {
+    } else {
       this.viewValue = '';
     }
-
   }
 
   registerOnChange(fn: any): void {
@@ -49,8 +46,7 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
   updateValue(): void {
     if (!this.viewValue) {
       this.amount = 0;
-    }
-    else {
+    } else {
       this.amount = Math.round(parseFloat(parseFloat(this.viewValue).toFixed(this.digits)) * Math.pow(10, this.digits));
     }
     this.onChange(this.amount);
@@ -68,5 +64,4 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
   }
-
 }

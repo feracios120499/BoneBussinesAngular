@@ -82,19 +82,19 @@ export namespace AcctSelectors {
             (a, b) => a.currencyCode === b.currencyCode ?
                 ((a.lastActive || new Date()) > (b.lastActive || new Date()) ? 1 : 0) :
                 a.currencyCode === 'UAH' ? -1 : 1
-            // {
-            //     if (a.CurrencyCode === 'UAH' && b.CurrencyCode !== 'UAH') {
-            //         return -1;
-            //     }
-            //     else if (b.CurrencyCode === 'UAH' && a.CurrencyCode !== 'UAH') {
-            //         return 1;
-            //     }
-            //     else {
-            //         return (a.LastActive || new Date()) > (b.LastActive || new Date()) ? 1 : 0;
-            //     }
-            // }
         )
     );
 
+    // TODO добавить признак что с счета можно списывать в платежах, на беке
+    export const senderPaymentAccounts = createSelector(
+        activeAccounts,
+        (accounts) => accounts
+    );
+
+    // TODO добавить признак что с счета можно списывать в платежах, на беке
+    export const recipientPaymentAccounts = createSelector(
+        activeAccounts,
+        (accounts) => accounts
+    );
 
 }

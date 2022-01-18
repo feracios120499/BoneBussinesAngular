@@ -15,12 +15,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
+import { B1PageLoaderComponent } from './components/b1-page-loader/b1-page-loader.component';
 import { B1ExportTurnoversComponent } from './components/modals/b1-export-turnovers/b1-export-turnovers.component';
 import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1-payment-modal.component';
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
-import { DecimalNumbersDirective } from './directives/decimal-numbers.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
 import { MobileMoreDirective } from './directives/mobile-more.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
@@ -31,7 +31,6 @@ import { B1DirectivesModule } from './modules/b1-directives/b1-directives.module
 import { B1FormsModule } from './modules/b1-forms/b1-forms.module';
 import { B1PipesModule } from './modules/b1-pipes/b1-pipes.module';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
-
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -57,7 +56,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ExportTurnoversComponent,
     B1PageButtonComponent,
     OnlyNumbersDirective,
-    DecimalNumbersDirective],
+    B1PageLoaderComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -101,7 +100,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     ReactiveComponentModule,
     OnlyNumbersDirective,
     NgxMaskModule,
-    DecimalNumbersDirective,
+    B1PageLoaderComponent
   ],
   providers: [
     {
