@@ -157,7 +157,7 @@ export class AcctDetailsEffects implements OnRunEffects {
                     payload.data.end
                 ).pipe(
                     map(turnovers => AcctDetailsActions.loadTurnoversSuccess(turnovers)),
-                    catchError(error => of(AcctDetailsActions.loadTurnoversFailure(error.error.Message)))
+                    catchError(error => { console.log(error); return of(AcctDetailsActions.loadTurnoversFailure(error.error.Message)) })
                 )
             )
         ));
@@ -186,22 +186,22 @@ export class AcctDetailsEffects implements OnRunEffects {
                 )
             ),
             mergeMap(([payload, turnover]) => {
-                if (turnover.Transactions && turnover.Transactions.length !== 0) {
-                    return of(AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions: turnover.Transactions }));
+                if (turnover.transactions && turnover.transactions.length !== 0) {
+                    return of(AcctDetailsActions.loadTransactionsSuccess({ id: turnover.id, transactions: turnover.transactions }));
                 }
                 return this.accountsService.getTransactions(
-                    turnover.BankId,
-                    turnover.AccId,
+                    turnover.bankId,
+                    turnover.accId,
                     payload.clientId,
-                    dayjs(turnover.TurnoverDate),
-                    dayjs(turnover.TurnoverDate)
+                    dayjs(turnover.turnoverDate),
+                    dayjs(turnover.turnoverDate)
                 ).pipe(
-                    map(transactions => AcctDetailsActions.loadTransactionsSuccess({ id: turnover.Id, transactions })),
+                    map(transactions => AcctDetailsActions.loadTransactionsSuccess({ id: turnover.id, transactions })),
                     takeUntil(
-                        this.actions$.pipe(ofType(AcctDetailsActions.loadTransactionsCancel), filter(p => p.payload.id === turnover.Id))
+                        this.actions$.pipe(ofType(AcctDetailsActions.loadTransactionsCancel), filter(p => p.payload.id === turnover.id))
                     ),
                     catchError(error => of(
-                        AcctDetailsActions.loadTransactionsFailure({ id: turnover.Id, error: error.error.Message }),
+                        AcctDetailsActions.loadTransactionsFailure({ id: turnover.id, error: error.error.Message }),
                     ))
                 );
             }

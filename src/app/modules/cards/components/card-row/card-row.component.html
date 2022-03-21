@@ -1,0 +1,36 @@
+<div class="b1-page-data__row card-row">
+  <div class="card-row-image" *ngrxLet="image$ as image">
+    <img [src]="image" />
+  </div>
+  <div class="card-row-body">
+    <div class="card-row-number">
+      <div class="b1-large b1-bold">
+        {{ card.name }}
+      </div>
+
+      <b1-card-number
+        [cardNumber]="card.number"
+        cardNumberClass="b1-mt-3 b1-medium b1-light b1-page-data__subtitle"></b1-card-number>
+    </div>
+    <div class="card-row-type">
+      <div class="b1-large b1-bold">
+        {{ card.type }}
+      </div>
+      <div class="b1-mt-3 b1-medium b1-light b1-page-data__subtitle">
+        <span>{{ 'components.corpcard.expired' | translate }}</span>
+        <span>-</span>
+        <span>{{ card.expired }}</span>
+      </div>
+    </div>
+    <div class="card-row-status b1-large b1-light">
+      <div class="b1-status">
+        <div class="b1-status b1-color-info">
+          {{
+            'components.corpcards.plasticStatus.' + card.plasticStatus
+              | translate
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

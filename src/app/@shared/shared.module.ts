@@ -31,6 +31,9 @@ import { B1DirectivesModule } from './modules/b1-directives/b1-directives.module
 import { B1FormsModule } from './modules/b1-forms/b1-forms.module';
 import { B1PipesModule } from './modules/b1-pipes/b1-pipes.module';
 import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
+import { B1PageSeparatorComponent } from './components/b1-page-separator/b1-page-separator.component';
+import { CardNumberPipe } from './pipes/card-number.pipe';
+import { B1CardNumberComponent } from './components/b1-card-number/b1-card-number.component';
 
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
@@ -44,6 +47,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     CheckStateDirective,
     B1CardLoaderComponent,
     AccountFilterPipe,
+    CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
     MobileMoreDirective,
     WebClassDirective,
@@ -56,7 +60,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ExportTurnoversComponent,
     B1PageButtonComponent,
     OnlyNumbersDirective,
-    B1PageLoaderComponent],
+    B1PageLoaderComponent,
+    B1PageSeparatorComponent,
+    B1CardNumberComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -88,6 +94,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgScrollbarModule,
     NgrxFormsModule,
     AccountFilterPipe,
+    CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
     MobileMoreDirective,
     NgxSkeletonLoaderModule,
@@ -100,7 +107,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     ReactiveComponentModule,
     OnlyNumbersDirective,
     NgxMaskModule,
-    B1PageLoaderComponent
+    B1PageLoaderComponent,
+    B1PageSeparatorComponent,
+    B1CardNumberComponent
   ],
   providers: [
     {

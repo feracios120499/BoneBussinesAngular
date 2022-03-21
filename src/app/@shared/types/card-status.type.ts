@@ -1,0 +1,1 @@
+export type CardStatus = 'Undefined' | 'Closed' | 'Active' | 'Blocked' | 'UserBlocked';

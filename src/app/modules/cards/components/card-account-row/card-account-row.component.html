@@ -1,0 +1,48 @@
+<div
+  class="b1-page-data__row card-account"
+  [class.selected]="cardAccount.isOpen"
+  (click)="toggleCardAccount()">
+  <div class="b1-card__col b1-card__col_expand card-account-expand">
+    <span
+      class="b1-card__expand"
+      [class.rotate]="cardAccount.isOpen"
+      [class.rotate-wise]="!cardAccount.isOpen">
+      <i b1-icon [icon]="'chevron-right'"></i>
+    </span>
+  </div>
+  <div class="card-account-body">
+    <div class="card-account-number b1-large">
+      <div [iban]="cardAccount.number"></div>
+    </div>
+    <div class="card-account-currency">
+      <div class="b1-base b1-color-dark-300">
+        {{ 'components.acct.acctDetail.currency' | translate }}
+      </div>
+      <div class="b1-base b1-bold">
+        {{ cardAccount.currency }}
+      </div>
+    </div>
+    <div class="card-account-count">
+      <div class="b1-base b1-color-dark-300">
+        {{ 'components.acct.acctDetail.cardsAmount' | translate }}
+      </div>
+      <div class="b1-base b1-bold">
+        {{ cardAccount.cards.length }}
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngrxLet="viewState$ as viewState">
+  <ng-container *ngIf="cardAccount.isOpen">
+    <div class="card-account-cards" *ngIf="viewState == 'cards'">
+      <app-card-styled
+        *ngFor="let card of cardAccount.cards"
+        [card]="card"></app-card-styled>
+    </div>
+    <div class="card-account-list" *ngIf="viewState == 'list'">
+      <app-card-row
+        *ngFor="let card of cardAccount.cards"
+        [card]="card"></app-card-row>
+    </div>
+  </ng-container>
+</ng-container>

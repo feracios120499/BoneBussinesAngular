@@ -1,0 +1,12 @@
+<div class="b1-wrapper no-wrap-xs b1-full-screen">
+  <app-cards-header></app-cards-header>
+
+  <div style="position: relative" class="full-screen">
+    <div class="b1-page-card b1-bg-light">
+      <app-cards-actions></app-cards-actions>
+
+      <b1-card-loader [isLoading]="isLoadingCards$"></b1-card-loader>
+      <app-cards-list></app-cards-list>
+    </div>
+  </div>
+</div>

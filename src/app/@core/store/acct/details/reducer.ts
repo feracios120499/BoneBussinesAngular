@@ -56,8 +56,8 @@ export const acctDetailsReducer = wrapReducerWithFormStateUpdate(
             ({
                 ...state,
                 turnovers: state.turnovers?.map(turnover =>
-                    turnover.Id === action.payload.id ?
-                        { ...turnover, Transactions: action.payload.transactions } :
+                    turnover.id === action.payload.id ?
+                        { ...turnover, transactions: action.payload.transactions } :
                         turnover
                 )
             })

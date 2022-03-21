@@ -1,0 +1,30 @@
+<div class="b1-page-title">
+  <div class="b1-title2">
+    {{ 'aside.nav.CORPCARDS' | translate }}
+  </div>
+  <div class="b1-page-menu">
+    <div class="b1-flex">
+      <ul class="b1-head-tabs">
+        <li
+          routerLink="incomings"
+          routerLinkActive="active"
+          class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.corpcard.header.cards' | translate }}
+          </a>
+        </li>
+        <li
+          routerLink="create"
+          routerLinkActive="active"
+          class="b1-head-tabs__item"
+          class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.corpcard.header.applications' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<b1-page-separator mobileClass="hidden"></b1-page-separator>

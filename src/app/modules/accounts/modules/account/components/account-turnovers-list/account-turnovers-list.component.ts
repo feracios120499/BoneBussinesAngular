@@ -20,7 +20,7 @@ export class AccountTurnoversListComponent implements OnInit {
   }
 
   trackId(index: number, turnover: UiTurnovers): string | undefined {
-    return turnover ? turnover.Id : undefined;
+    return turnover ? turnover.id : undefined;
   }
 
 }

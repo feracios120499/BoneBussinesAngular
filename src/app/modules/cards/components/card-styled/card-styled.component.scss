@@ -1,0 +1,125 @@
+@import 'variables';
+.corpcards {
+  &__card {
+    position: relative;
+    padding: 32px 20px;
+    margin: 8px 0;
+    height: 184px;
+    width: 288px;
+    border-radius: 12px;
+    margin: 0 16px;
+
+    z-index: 1;
+    overflow: hidden;
+    transition: all 150ms $animation-timing;
+    background-image: linear-gradient(#333333, #555555);
+    color: $color-light;
+    transform: translateY(-2px)
+      matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    background-size: auto 200%;
+    background-position-y: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 0 0;
+
+    &_mastercard {
+      background-color: $color-dark-100;
+      background-image: linear-gradient(180deg, #404040 0%, #262626 100%);
+
+      color: $color-light;
+      box-shadow: 0 12px 24px rgba(#262626, 0.25);
+    }
+    &_visa {
+      background-color: $color-dark-100;
+      background-image: linear-gradient(180deg, #421fd5 0%, #211ecc 100%);
+
+      color: $color-light;
+      box-shadow: 0 12px 24px rgba(#211ecc, 0.25);
+    }
+    &_prostir {
+      background-color: $color-dark-100;
+      background-image: linear-gradient(180deg, #046ade 0%, #0560c8 100%);
+
+      color: $color-light;
+      box-shadow: 0 12px 24px rgba(#0560c8, 0.25);
+    }
+    &_animated:hover {
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba($color-dark, 0.25);
+      transform: translateY(0)
+        matrix3d(1, 0, 0, 0, 0, 1, 0, 0.00005, 0, 0, 1, 0, 0, 0, 0, 1);
+      background-position-y: bottom;
+    }
+    &_animated:active {
+      box-shadow: none;
+      transform: translateY(0)
+        matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      background-position-y: center;
+    }
+    &__status {
+      position: absolute;
+      right: 16px;
+      top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__block {
+        display: flex;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      &__card {
+        right: 88px;
+        top: 24px;
+      }
+    }
+    &__card-number {
+      width: 100%;
+
+      word-break: break-all;
+      margin-bottom: 16px;
+    }
+    &__bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__exp-date {
+      flex: 0 1 50%;
+    }
+    &__fullname {
+      flex: 1 0 50%;
+      text-align: right;
+      white-space: nowrap;
+    }
+    &__type {
+      position: absolute;
+      left: 20px;
+      top: 24px;
+      height: 40px;
+      width: 80px;
+      background-position: left center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      &_mastercard {
+        background-image: url('../../../../../assets/img/mastercard.svg');
+      }
+      &_visa {
+        background-image: url(../../../../../assets/img/visa.svg);
+      }
+      &_prostir {
+        height: 32px;
+        bottom: 24px;
+        background-image: url(../../../../../assets/img/prostir.svg);
+      }
+    }
+    &_fixed-size {
+      width: 354px;
+    }
+  }
+}

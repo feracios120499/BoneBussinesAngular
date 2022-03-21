@@ -205,7 +205,7 @@
       opacity: 0.6;
       cursor: pointer;
       font-size: 16px;
-      transition: all 0.15s $animation-timing;
+      transition: all 250ms $animation-timing !important;
 
       &:hover {
         opacity: 1;

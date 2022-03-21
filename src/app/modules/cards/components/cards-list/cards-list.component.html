@@ -1,0 +1,5 @@
+<div class="b1-page-data" *ngrxLet="cardAccounts$ as cardAccounts">
+  <app-card-account-row
+    *ngFor="let cardAccount of cardAccounts; trackBy: trackId"
+    [cardAccount]="cardAccount"></app-card-account-row>
+</div>

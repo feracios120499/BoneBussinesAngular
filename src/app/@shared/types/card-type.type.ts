@@ -1,0 +1,1 @@
+export type CardType = 'MasterCard' | 'Visa' | 'Prostir' | 'Undefined';

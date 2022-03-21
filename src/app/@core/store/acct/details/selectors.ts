@@ -107,12 +107,12 @@ export namespace AcctDetailsSelectors {
         loadTurnovers,
         (store, openArray, loadArray) =>
             store.turnovers?.map(value =>
-                ({ ...value, isOpen: openArray.includes(value.Id), isLoading: loadArray.includes(value.Id) } as UiTurnovers)
+                ({ ...value, isOpen: openArray.includes(value.id), isLoading: loadArray.includes(value.id) } as UiTurnovers)
             )
     );
 
     export const turnover = (id: string) => createSelector(
         turnovers,
-        (items) => items?.find(p => p.Id === id)
+        (items) => items?.find(p => p.id === id)
     );
 }

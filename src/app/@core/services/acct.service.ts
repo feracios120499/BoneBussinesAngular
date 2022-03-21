@@ -46,7 +46,7 @@ export class AcctService extends BaseService {
         const endFormated = end.format('YYYY-MM-DD');
         const url = `api/v1/acct/dayturnovers/${bankId}/${accountId}/${clientId}?dateStart=${startFormated}&dateEnd=${endFormated}`;
         return this.http.get<Turnovers[]>(url)
-            .pipe(map(turnovers => turnovers.map(value => ({ ...value, id: `${value.TurnoverDate.toISOString()}_${value.AccId}_${value.BankId}` }))));
+            .pipe(map(turnovers => turnovers.map(value => ({ ...value, id: `${value.turnoverDate.toISOString()}_${value.accId}_${value.bankId}` }))));
     }
 
     getTransactions(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<TurnoverTransaction[]> {

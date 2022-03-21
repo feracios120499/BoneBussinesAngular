@@ -24,10 +24,10 @@ export class AccountTurnoversRowComponent implements OnInit {
 
   toggleTurnover(): void {
     if (this.turnover.isOpen) {
-      this.store.dispatch(AcctDetailsActions.closeTurnovers({ id: this.turnover.Id }));
+      this.store.dispatch(AcctDetailsActions.closeTurnovers({ id: this.turnover.id }));
     }
     else {
-      this.store.dispatch(AcctDetailsActions.openTurnovers({ id: this.turnover.Id }));
+      this.store.dispatch(AcctDetailsActions.openTurnovers({ id: this.turnover.id }));
     }
   }
 

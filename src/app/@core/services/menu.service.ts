@@ -119,7 +119,7 @@ export class MenuService extends BaseService {
             ngValue: 'corpcards',
             icon: 'credit-card',
             dataRole: 'Director,Accountant',
-            route: 'app.corpcards.index',
+            route: 'cards',
             // gaTrackEvent: '[\'left-menu\', \'view-salary\']',
             dataTranslate: 'aside.nav.CORPCARDS',
             moduleName: 'CorpCards',

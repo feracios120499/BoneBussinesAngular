@@ -1,0 +1,52 @@
+<div
+  class="corpcards__card corpcards__card_animated"
+  [ngClass]="'corpcards__card_' + type"
+  (click)="showDetails()">
+  <div
+    class="corpcards__card__type"
+    [ngClass]="'corpcards__card__type_' + type"></div>
+  <div class="corpcards__card__status">
+    <div
+      class="corpcards__card__status__block"
+      [ngClass]="backgroundColor"
+      placement="left"
+      [ngbTooltip]="
+        'components.corpcard.statusesPlastic.' + card.plasticStatus | translate
+      "
+      tooltipClass="b1-base"
+      toolt>
+      <i b1-icon [icon]="icon"></i>
+    </div>
+    <div class="b1-micro" style="margin-top: 4px; opacity: 0.6">
+      {{ 'components.corpcard.plastic' | translate }}
+    </div>
+  </div>
+  <div class="corpcards__card__card-number">
+    <b1-card-number
+      [cardNumber]="card.number"
+      cardNumberClass="b1-ellipsis b1-medium b1-light "></b1-card-number>
+  </div>
+  <div class="corpcards__card__bottom-row">
+    <div
+      class="corpcards__card__exp-date b1-medium b1-light"
+      ng-class="{ 'text-danger': card.IsAbleToReissue }">
+      <span>
+        {{ card.expired }}
+        <i
+          ng-if="card.IsAbleToReissue"
+          class="fa fa-info-circle"
+          [ngbTooltip]="
+            ('components.corpcard.IsAbleToReissue' | translate) +
+            ' ' +
+            card.expired
+          "
+          tooltipClass="b1-base"></i>
+      </span>
+    </div>
+    <div class="corpcards__card__fullname">
+      <p class="b1-ellipsis b1-medium b1-light">
+        {{ card.fullNameEng }}
+      </p>
+    </div>
+  </div>
+</div>

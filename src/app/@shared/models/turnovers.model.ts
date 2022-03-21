@@ -1,20 +1,20 @@
 import { TurnoverTransaction } from './turnover-transaction.model';
 
 export interface Turnovers {
-    Id: string;
-    AccId: number;
-    BankId: string;
-    TransactionsCount: number;
-    TurnoverDate: Date;
-    Debit: number;
-    DebitEquivalent: number;
-    Credit: number;
-    CreditEquivalent: number;
-    BalanceIn: number;
-    BalanceInEquivalent: number;
-    BalanceOut: number;
-    BalanceOutEquivalent: number;
-    Transactions?: TurnoverTransaction[];
+    id: string;
+    accId: number;
+    bankId: string;
+    transactionsCount: number;
+    turnoverDate: Date;
+    debit: number;
+    debitEquivalent: number;
+    credit: number;
+    creditEquivalent: number;
+    balanceIn: number;
+    balanceInEquivalent: number;
+    balanceOut: number;
+    balanceOutEquivalent: number;
+    transactions?: TurnoverTransaction[];
 }
 
 export interface UiTurnovers extends Turnovers {

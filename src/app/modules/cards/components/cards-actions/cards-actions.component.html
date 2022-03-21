@@ -1,0 +1,44 @@
+<div class="b1-page-actions">
+  <div
+    class="b1-page-actions__left b1-corpcards-filters"
+    *ngrxLet="viewState$ as viewState">
+    <div
+      class="b1-corpcards-filters__item"
+      (click)="setViewState('cards')"
+      [class.active]="viewState == 'cards'">
+      <div class="b1-flex b1-align-center b1-corpcards-filters__link">
+        <span class="b1-mr-3">
+          {{ 'components.corpcard.cards' | translate }}
+        </span>
+        <i b1-icon icon="block"></i>
+      </div>
+    </div>
+    <div
+      class="b1-corpcards-filters__item"
+      (click)="setViewState('list')"
+      [class.active]="viewState == 'list'">
+      <div class="b1-flex b1-align-center b1-corpcards-filters__link">
+        <span class="b1-mr-3">
+          {{ 'components.corpcard.list' | translate }}
+        </span>
+        <i b1-icon icon="list"></i>
+      </div>
+    </div>
+  </div>
+  <div
+    class="b1-page-actions__right"
+    name="search"
+    *ngrxLet="formState$ as formState">
+    <div class="b1-page-inputWithIcon width-100">
+      <input
+        class="b1-input__control without-label b1-base b1-page-input resize"
+        name="search"
+        id="search"
+        type="text"
+        placeholder="{{ 'shared.search' | translate }}"
+        [ngrxFormControlState]="formState.controls.filter" />
+      <label b1-icon icon="search" class="resize" for="search"></label>
+    </div>
+  </div>
+  <!-- <div data-ng-include=" 'app/components/acct/views/accounts-list.html' "></div> -->
+</div>
