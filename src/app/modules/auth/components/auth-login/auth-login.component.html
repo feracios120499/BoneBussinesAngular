@@ -2,26 +2,41 @@
 <auth-input label="components.auth.YourPassword" type="password" [(ngModel)]="login.Password"
   [control]="passwordControl"></auth-input> -->
 
-<form *ngrxLet="loading$ as isLoading" [formGroup]="formGroup">
+<form
+  *ngrxLet="isLoading$ as isLoading"
+  [formGroup]="formGroup"
+  (ngSubmit)="onLogin()">
   <div class="cl-group">
-    <input class="cl-input" formControlName="userName" type="text" name="email" id="email" />
+    <input
+      class="cl-input"
+      formControlName="userName"
+      type="text"
+      name="email"
+      id="email" />
     <label class="cl-input-label">
-      {{'logon.EmailOrPhone' | translate}}
+      {{ 'logon.EmailOrPhone' | translate }}
     </label>
     <span class="cl-input-bar"></span>
-    <i class="fa fa-lock cl-input-icon" style="font-size: 20px;"></i>
+    <i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>
   </div>
+
   <div class="cl-group">
-    <input class="cl-input" formControlName="password" type="password" name="password" id="password"
+    <input
+      class="cl-input"
+      formControlName="password"
+      type="password"
+      name="password"
+      id="password"
       autocomplete="on" />
     <label class="cl-input-label">
-      {{'components.auth.YourPassword' | translate}}
+      {{ 'components.auth.YourPassword' | translate }}
     </label>
     <span class="cl-input-bar"></span>
-    <i class="fa fa-lock cl-input-icon" style="font-size: 20px;"></i>
+    <i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>
   </div>
+
+  <auth-button type="submit" [isLoading]="isLoading" label="bid.Enter">
+  </auth-button>
 </form>
 
-<auth-button (authClick)="onLogin()" [isLoading]="loading$ | async" label="bid.Enter">
-</auth-button>
-<auth-error [message]="error$ | async"></auth-error>
+<auth-error [message]="errorMessage"></auth-error>
