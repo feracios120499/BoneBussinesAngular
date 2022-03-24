@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+type TButtonType = 'button' | 'submit';
+
 @Component({
   selector: 'auth-button',
   templateUrl: './auth-button.component.html',
-  styleUrls: ['./auth-button.component.scss']
+  styleUrls: ['./auth-button.component.scss'],
 })
 export class AuthButtonComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Output() authClick = new EventEmitter();
+  @Input() type: TButtonType = 'button';
   @Input() isLoading: boolean | null = false;
   @Input() disabled: boolean | null = false;
   @Input() label = '';
@@ -17,7 +19,5 @@ export class AuthButtonComponent implements OnInit {
   onClick(): void {
     this.authClick.emit();
   }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

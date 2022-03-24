@@ -19,57 +19,24 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "@selectors/*": [
-        "./src/app/@core/store/selectors/*"
-      ],
-      "@actions/*": [
-        "./src/app/@core/store/actions/*"
-      ],
-      "@reducers/*": [
-        "./src/app/@core/store/reducers/*"
-      ],
-      "@stores/*": [
-        "./src/app/@core/store/stores/*"
-      ],
-      "@effects/*": [
-        "./src/app/@core/store/effects/*"
-      ],
-      "@services/*": [
-        "./src/app/@core/services/*"
-      ],
-      "@modules/*": [
-        "./src/app/modules/*"
-      ],
-      "@store*": [
-        "./src/app/@core/store*",
-        "./src/app/@core/store/index"
-      ],
-      "@core/*": [
-        "./src/app/@core/*"
-      ],
-      "@models/*": [
-        "./src/app/@shared/models/*"
-      ],
-      "@b1-types/*": [
-        "./src/app/@shared/types/*"
-      ],
-      "@validators/*": [
-        "./src/app/@shared/validators/*"
-      ],
-      "@helpers/*": [
-        "./src/app/@shared/helpers/*"
-      ],
-      "@methods/*": [
-        "./src/app/@shared/methods/*"
-      ],
-      "@forms/*": [
-        "./src/app/@shared/components/forms/*"
-      ]
+      "@selectors/*": ["./src/app/@core/store/selectors/*"],
+      "@actions/*": ["./src/app/@core/store/actions/*"],
+      "@reducers/*": ["./src/app/@core/store/reducers/*"],
+      "@stores/*": ["./src/app/@core/store/stores/*"],
+      "@effects/*": ["./src/app/@core/store/effects/*"],
+      "@services/*": ["./src/app/@core/services/*"],
+      "@modules/*": ["./src/app/modules/*"],
+      "@store*": ["./src/app/@core/store*", "./src/app/@core/store/index"],
+      "@core/*": ["./src/app/@core/*"],
+      "@models/*": ["./src/app/@shared/models/*"],
+      "@b1-types/*": ["./src/app/@shared/types/*"],
+      "@validators/*": ["./src/app/@shared/validators/*"],
+      "@helpers/*": ["./src/app/@shared/helpers/*"],
+      "@methods/*": ["./src/app/@shared/methods/*"],
+      "@forms/*": ["./src/app/@shared/components/forms/*"],
+      "@mixins/*": ["./src/app/@shared/mixins/*"]
     }
   },
   "angularCompilerOptions": {
