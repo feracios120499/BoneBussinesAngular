@@ -19,11 +19,13 @@ import {
   pattern,
   phoneRegExp,
 } from '@validators/pattern.validator';
+import { ModelControl } from '@b1-types/model-controls.type';
+import { IAuthLoginForm } from '../../models/auth-login-form.model';
 
 const { required, minLength, maxLength } = Validators;
 const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
   min: 3,
-  max: 90
+  max: 90,
 };
 
 @Component({
@@ -39,9 +41,18 @@ export class AuthLoginComponent
   extends BaseFormComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
-  public isLoading$ = this.store.select(AuthSelectors.isLoading);
-  public form!: FormGroup;
-  public errorMessage = '';
+  isLoading$ = this.store.select(AuthSelectors.isLoading);
+  form!: FormGroup;
+  userNameControl = new FormControl('', [
+    required,
+    pattern([emailRegExp, phoneRegExp]),
+  ]);
+  passwordControl = new FormControl('', [
+    required,
+    minLength(PASSWORD_LENGTH.min),
+    maxLength(PASSWORD_LENGTH.max),
+  ]);
+  errorMessage = '';
   private unlistenPasswordChange!: () => void;
 
   constructor(
@@ -53,17 +64,11 @@ export class AuthLoginComponent
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      userName: new FormControl('', [
-        required,
-        pattern([emailRegExp, phoneRegExp])
-      ]),
-      password: new FormControl('', [
-        required,
-        minLength(PASSWORD_LENGTH.min),
-        maxLength(PASSWORD_LENGTH.max)
-      ]),
-    });
+    const controls: ModelControl<IAuthLoginForm> = {
+      userName: this.userNameControl,
+      password: this.passwordControl,
+    };
+    this.form = new FormGroup(controls);
     super.ngOnInit();
   }
 

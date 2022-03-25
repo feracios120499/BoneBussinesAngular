@@ -23,7 +23,7 @@ export abstract class BaseControlComponent
 {
   @Input() controlId: number | string = generateId();
   @Input() name?: string;
-  @Input() c!: AbstractControl;
+  @Input() formControl!: AbstractControl;
 
   value!: TValue;
   isDisabled = false;
@@ -41,7 +41,7 @@ export abstract class BaseControlComponent
 
   ngAfterViewInit(): void {
     if (this.formControlRef.nativeElement.form) {
-      this.checkRequiredProps(['c']);
+      this.checkRequiredProps(['formControl']);
     }
     if (!this.labelRef.nativeElement.textContent) {
       throw new Error('Label text is required!');

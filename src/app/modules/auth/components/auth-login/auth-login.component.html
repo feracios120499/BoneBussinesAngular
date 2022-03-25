@@ -3,20 +3,18 @@
   [formGroup]="form"
   (ngSubmit)="onLogin()">
   <app-auth-input
-    formControlName="userName"
     name="email"
     controlId="email"
-    [c]="form.get('userName')!">
+    [formControl]="userNameControl">
     {{ 'logon.EmailOrPhone' | translate }}
   </app-auth-input>
 
   <app-auth-input
-    formControlName="password"
     controlId="password"
     name="password"
     type="password"
     autocomplete="on"
-    [c]="form.get('password')!">
+    [formControl]="passwordControl">
     {{ 'components.auth.YourPassword' | translate }}
   </app-auth-input>
 
