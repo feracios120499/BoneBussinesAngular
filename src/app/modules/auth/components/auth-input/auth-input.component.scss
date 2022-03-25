@@ -1,0 +1,140 @@
+@import 'variables';
+
+:host(.cl-group) {
+  display: block;
+
+  position: relative;
+  margin-top: 32px;
+  & tooltip {
+    width: 100%;
+  }
+  &.ng-valid,
+  &.ng-dirty {
+    .cl-input {
+      & ~ label {
+        top: -16px;
+        font-size: 14px;
+      }
+    }
+  }
+  &.ng-valid {
+    .cl-input {
+      & ~ .cl-input-bar:before {
+        width: 100%;
+      }
+    }
+  }
+  &.ng-invalid.ng-touched,
+  &.ng-invalid.ng-dirty,
+  &.ng-invalid.ng-not-empty {
+    .cl-input {
+      &,
+      &:invalid {
+        & ~ .cl-input-bar:before {
+          width: 100%;
+          background: $color-error;
+        }
+        & ~ .cl-input-icon {
+          color: $color-error;
+        }
+      }
+    }
+  }
+  &.ng-dirty {
+    .cl-input {
+      & ~ .cl-input-icon {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .cl {
+    &-input {
+      background: none !important;
+      color: $color-dark;
+      @include medium;
+      @include light;
+      padding: 8px 12px 8px 0;
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      border-bottom: 2px solid $color-light-500;
+      padding-right: 30px;
+      line-height: 1.5 !important;
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: transparent;
+      }
+      &.mobile::placeholder {
+        color: $color-dark;
+      }
+      &:invalid {
+        outline: none;
+        box-shadow: none;
+      }
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #fff inset;
+        & ~ label {
+          top: -16px;
+          font-size: 14px;
+        }
+      }
+      &:-webkit-autofill::first-line {
+        @include medium;
+        @include light;
+        line-height: 1.5 !important;
+      }
+      &:focus ~ label {
+        top: -16px;
+        font-size: 14px;
+      }
+      &:-webkit-autofill::first-line ~ label {
+        top: -16px;
+        font-size: 14px;
+      }
+      &:focus ~ .cl-input-bar:before,
+      &:focus ~ .cl-input-icon,
+      &:valid ~ .cl-input-icon {
+        color: $color-primary;
+      }
+      &-label {
+        color: $color-light-500;
+        @include base;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 0;
+        top: 12px;
+        transition: all 0.15s ease-out;
+      }
+      &-bar {
+        position: relative;
+        display: block;
+        width: 100%;
+        &:before {
+          content: '';
+          height: 2px;
+          width: 0;
+          bottom: 0px;
+          position: absolute;
+          background: $color-primary;
+          transition: all 0.15s ease-out;
+          left: 0%;
+        }
+      }
+      &-icon {
+        position: absolute;
+        right: 8px;
+        bottom: 12px;
+        color: $color-light-500;
+      }
+      &[type='password'] {
+        letter-spacing: 0.3em;
+      }
+    }
+  }
+}

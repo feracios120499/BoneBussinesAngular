@@ -1,0 +1,15 @@
+<input
+  class="cl-input"
+  [id]="controlId"
+  [type]="type"
+  [value]="value"
+  [attr.name]="name"
+  [attr.autocomplete]="autocomplete"
+  [disabled]="isDisabled"
+  #formControlRef />
+<label class="cl-input-label" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<span class="cl-input-bar"></span>
+<i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>

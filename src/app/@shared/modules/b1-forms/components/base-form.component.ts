@@ -18,13 +18,13 @@ type TStatus = 'PENDING' | 'VALID' | 'INVALID' | 'DISABLED';
 type TError = string | undefined;
 
 @Component({
-  template: ``,
+  template: '',
 })
 export abstract class BaseFormComponent
   extends withDestroy()
   implements OnInit
 {
-  abstract formGroup: FormGroup;
+  abstract form: FormGroup;
   abstract isLoading$: Observable<boolean>;
   abstract errorMessage: string;
   private isSubmitted: boolean = false;
@@ -40,7 +40,11 @@ export abstract class BaseFormComponent
     this.isLoading$
       .pipe(takeUntil(this.destroy$))
       .subscribe((isLoading: boolean) => {
-        isLoading ? this.disableForm() : this.enableForm();
+        if (isLoading) {
+          this.disableForm();
+        } else {
+          this.enableForm();
+        }
       });
   }
 
@@ -48,19 +52,19 @@ export abstract class BaseFormComponent
     action: TypedAction<any>,
     errorSelector: MemoizedSelector<Object, TError>
   ): void {
-    if (this.isSubmitted || this.formGroup.pending) {
+    if (this.isSubmitted || this.form.pending) {
       return;
     }
-    this.formGroup.markAllAsTouched();
+    this.form.markAllAsTouched();
     this.errorMessage = '';
-    this.updateTreeValidity(this.formGroup);
+    this.updateTreeValidity(this.form);
 
     let submitObs: Observable<string> | undefined;
 
-    if (this.formGroup.pending) {
-      submitObs = this.formGroup.statusChanges.pipe(
+    if (this.form.pending) {
+      submitObs = this.form.statusChanges.pipe(
         takeUntil(this.destroy$),
-        startWith(this.formGroup.status),
+        startWith(this.form.status),
         skip(1),
         take(1),
         filter((status: TStatus) => {
@@ -70,15 +74,15 @@ export abstract class BaseFormComponent
           return this.sendRequest(action, errorSelector);
         })
       );
-    } else if (this.formGroup.valid) {
+    } else if (this.form.valid) {
       submitObs = this.sendRequest(action, errorSelector);
     }
 
     submitObs?.subscribe({
       error: (error: string) => {
         this.errorMessage = error;
-        this.updateTreeValidity(this.formGroup);
-        this.enableForm();
+        this.updateTreeValidity(this.form);
+        // this.enableForm();
         this.changeDetectorRef?.markForCheck();
       },
     });
@@ -119,11 +123,11 @@ export abstract class BaseFormComponent
 
   private enableForm(): void {
     this.isSubmitted = false;
-    this.formGroup.enable();
+    this.form.enable();
   }
 
   private disableForm(): void {
     this.isSubmitted = true;
-    this.formGroup.disable();
+    this.form.disable();
   }
 }

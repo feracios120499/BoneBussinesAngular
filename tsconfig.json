@@ -35,7 +35,7 @@
       "@validators/*": ["./src/app/@shared/validators/*"],
       "@helpers/*": ["./src/app/@shared/helpers/*"],
       "@methods/*": ["./src/app/@shared/methods/*"],
-      "@forms/*": ["./src/app/@shared/components/forms/*"],
+      "@forms/*": ["./src/app/@shared/modules/b1-forms/components/*"],
       "@mixins/*": ["./src/app/@shared/mixins/*"]
     }
   },

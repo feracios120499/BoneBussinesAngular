@@ -15,6 +15,7 @@ import { AuthLogonOldComponent } from './views/auth-logon-old/auth-logon-old.com
 import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { AuthCryptorComponent } from './components/auth-cryptor/auth-cryptor.component';
+import { AuthInputComponent } from './components/auth-input/auth-input.component';
 import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
 
 
@@ -31,7 +32,8 @@ import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-dir
     AuthButtonComponent,
     AuthErrorComponent,
     AuthOtpComponent,
-    AuthCryptorComponent
+    AuthCryptorComponent,
+    AuthInputComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, B1DirectivesModule],
   exports: [],
