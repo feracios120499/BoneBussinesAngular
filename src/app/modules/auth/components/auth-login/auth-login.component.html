@@ -1,39 +1,22 @@
-<!-- <auth-input label="logon.EmailOrPhone" type="text" [(ngModel)]="login.Username" [control]="loginControl"></auth-input>
-<auth-input label="components.auth.YourPassword" type="password" [(ngModel)]="login.Password"
-  [control]="passwordControl"></auth-input> -->
-
 <form
   *ngrxLet="isLoading$ as isLoading"
-  [formGroup]="formGroup"
+  [formGroup]="form"
   (ngSubmit)="onLogin()">
-  <div class="cl-group">
-    <input
-      class="cl-input"
-      formControlName="userName"
-      type="text"
-      name="email"
-      id="email" />
-    <label class="cl-input-label">
-      {{ 'logon.EmailOrPhone' | translate }}
-    </label>
-    <span class="cl-input-bar"></span>
-    <i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>
-  </div>
+  <app-auth-input
+    name="email"
+    controlId="email"
+    [formControl]="userNameControl">
+    {{ 'logon.EmailOrPhone' | translate }}
+  </app-auth-input>
 
-  <div class="cl-group">
-    <input
-      class="cl-input"
-      formControlName="password"
-      type="password"
-      name="password"
-      id="password"
-      autocomplete="on" />
-    <label class="cl-input-label">
-      {{ 'components.auth.YourPassword' | translate }}
-    </label>
-    <span class="cl-input-bar"></span>
-    <i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>
-  </div>
+  <app-auth-input
+    controlId="password"
+    name="password"
+    type="password"
+    autocomplete="on"
+    [formControl]="passwordControl">
+    {{ 'components.auth.YourPassword' | translate }}
+  </app-auth-input>
 
   <auth-button type="submit" [isLoading]="isLoading" label="bid.Enter">
   </auth-button>

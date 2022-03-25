@@ -3,13 +3,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
+  Renderer2,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { withDestroy } from '@mixins/with-destroy.mixin';
-import { BaseFormComponent } from 'src/app/@shared/modules/b1-forms/components/base-form.component';
+import { BaseFormComponent } from '@forms/base-form.component';
 import { AuthActions } from '@store/auth/actions';
 import { AuthSelectors } from '@store/auth/selectors';
 import { LoginModel } from '@modules/auth/models/login.model';
@@ -18,6 +19,8 @@ import {
   pattern,
   phoneRegExp,
 } from '@validators/pattern.validator';
+import { ModelControl } from '@b1-types/model-controls.type';
+import { IAuthLoginForm } from '../../models/auth-login-form.model';
 
 const { required, minLength, maxLength } = Validators;
 const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
@@ -35,44 +38,63 @@ const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLoginComponent
-  extends withDestroy(BaseFormComponent)
-  implements OnInit, AfterViewInit
+  extends BaseFormComponent
+  implements OnInit, AfterViewInit, OnDestroy
 {
-  public isLoading$ = this.store.select(AuthSelectors.isLoading);
-  public formGroup!: FormGroup;
-  public errorMessage = '';
+  isLoading$ = this.store.select(AuthSelectors.isLoading);
+  form!: FormGroup;
+  userNameControl = new FormControl('', [
+    required,
+    pattern([emailRegExp, phoneRegExp]),
+  ]);
+  passwordControl = new FormControl('', [
+    required,
+    minLength(PASSWORD_LENGTH.min),
+    maxLength(PASSWORD_LENGTH.max),
+  ]);
+  errorMessage = '';
+  private unlistenPasswordChange!: () => void;
 
-  constructor(store: Store, changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    store: Store,
+    changeDetectorRef: ChangeDetectorRef,
+    private renderer: Renderer2
+  ) {
     super(store, changeDetectorRef);
   }
 
   ngOnInit(): void {
-    this.formGroup = new FormGroup({
-      userName: new FormControl('', [
-        required,
-        pattern([emailRegExp, phoneRegExp]),
-      ]),
-      password: new FormControl('', [
-        required,
-        minLength(PASSWORD_LENGTH.min),
-        maxLength(PASSWORD_LENGTH.max),
-      ]),
-    });
+    const controls: ModelControl<IAuthLoginForm> = {
+      userName: this.userNameControl,
+      password: this.passwordControl,
+    };
+    this.form = new FormGroup(controls);
+    super.ngOnInit();
   }
 
   ngAfterViewInit(): void {
-    const inputPassword = document.getElementById('password') as any;
-    inputPassword.addEventListener('change', (event: any) => {
-      this.formGroup.setValue({
-        userName: this.formGroup.value.userName,
-        password: event.target.value,
-      });
-    });
+    const passwordInput = document.getElementById(
+      'password'
+    )! as HTMLInputElement;
+    this.unlistenPasswordChange = this.renderer.listen(
+      passwordInput,
+      'change',
+      (event: Event) => {
+        this.form.setValue({
+          userName: this.form.value.userName,
+          password: (event.target as HTMLInputElement).value,
+        });
+      }
+    );
   }
 
   onLogin(): void {
     this.store.dispatch(AuthActions.resetLogin());
-    const model = this.formGroup.value as LoginModel;
+    const model = this.form.value as LoginModel;
     this.submit(AuthActions.loginRequest({ ...model }), AuthSelectors.error);
+  }
+
+  ngOnDestroy(): void {
+    this.unlistenPasswordChange();
   }
 }

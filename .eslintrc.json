@@ -45,6 +45,7 @@
         "selector": "typeLike",
         "format": ["PascalCase"]
       }
-    ]
+    ],
+    "brace-style": "off"
   }
 }
