@@ -1,0 +1,8 @@
+<ng-container *ngrxLet="users$ as users">
+  <app-user-item
+    (click)="toDetail(user, i)"
+    *ngFor="let user of users; index as i"
+    [class.selected]="selectedItem === i"
+    [user]="user">
+  </app-user-item>
+</ng-container>

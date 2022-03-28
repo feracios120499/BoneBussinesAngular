@@ -1,0 +1,25 @@
+<!-- <div class="user-item__image" *ngIf="user.PictureUrl"><img src="">
+  <div class="user-item__lock" *ngIf="user.IsDisable"><i class="ub-icons ub-icons-icon-lock"></i></div>
+</div> -->
+<div class="user-item__letters">
+  DV
+  <div class="user-item__lock" *ngIf="'user.IsDisable'">
+    <i b1-icon icon="lock"></i>
+  </div>
+</div>
+
+<div class="user-item__name b1-ellipsis">Darth Veider</div>
+<div class="user-item__subtitle">darthveider@ub.com</div>
+<div class="user-item__subtitle">+1450767877</div>
+
+<div class="user-item__actions b1-card__col b1-card__col_dots">
+  <!-- <div ngbDropdown #dropdown="ngbDropdown" display="static">
+    <a class="b1-card__v-dots" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+    <ul class="b1-dropdown b1-animate fade-in-up" ngbDropdownMenu aria-labelledby="actions" style="min-width: 160px;">
+      <li class="b1-dropdown__item" *ngFor="let action of actions">
+        <a class="b1-dropdown__link b1-base" (click.stop)="triggerAction(action); dropdown.close();">
+          {{ 'shared.languages.' + action | translate }}</a>
+      </li>
+    </ul>
+  </div> -->
+</div>

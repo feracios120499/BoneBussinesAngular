@@ -17,7 +17,7 @@
                 </ng-option>
             </ng-select>
         </ng-container>
-        <auth-button [disabled]="!key || !token" (authClick)="onLogin()" label="bid.Enter">
+        <auth-button [isDisabled]="!key || !token" (authClick)="onLogin()" label="bid.Enter">
         </auth-button>
     </div>
 </div>

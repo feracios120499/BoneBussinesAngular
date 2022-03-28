@@ -1,0 +1,80 @@
+:host(.user-item) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  border: 2px solid rgba(var(--color-dark-rgb), 0.14);
+  border-radius: 12px;
+  transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  cursor: pointer;
+
+  &.selected {
+    background-image: linear-gradient(90.03deg, #156d81 0.36%, #36abc5 99.98%);
+    color: var(--color-light);
+  }
+
+  &:hover:not(.selected) {
+    background-color: rgba(0, 135, 158, 0.1);
+    border-color: #00879e;
+  }
+}
+
+.user-item__image {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.user-item__lock {
+  position: absolute;
+  bottom: -13px;
+  right: -3px;
+  font-size: 24px;
+  font-family: 'Futura PT Demi', sans-serif;
+  line-height: 1.25;
+  color: #001731;
+}
+
+.user-item__letters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #00879e;
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Futura PT Demi', sans-serif;
+  line-height: 1.25;
+}
+
+.user-item__name {
+  margin-top: 16px;
+  max-width: 320px;
+  font-size: 16px;
+  font-family: 'Futura PT Demi', sans-serif;
+  line-height: 1.5;
+}
+
+// .b1-ellipsis {
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+// }
+
+.user-item__subtitle {
+  margin-top: 8px;
+  font-size: 16px;
+  font-family: 'Futura PT Book', sans-serif;
+  line-height: 1.5;
+  color: rgba(var(--color-dark-rgb), 0.6);
+}
+
+.user-item__actions {
+  position: absolute;
+  top: 11px;
+  right: 10px;
+}
