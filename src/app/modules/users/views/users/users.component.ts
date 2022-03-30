@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { of } from 'rxjs';
-// import { delay } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { UsersActions } from '@store/users/actions';
+import { UsersSelectors } from '@store/users/selectors';
 
 @Component({
   selector: 'app-users',
@@ -8,7 +11,12 @@ import { of } from 'rxjs';
   styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent {
-  // FOR DEMO PURPOSE ONLY:
-  isLoadingUsers$ = of(false) /* .pipe(delay(3000)) */;
+export class UsersComponent implements OnInit {
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoading);
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(UsersActions.loadUsersRequest());
+  }
 }

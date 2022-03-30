@@ -41,6 +41,9 @@ import { B1CardNumberComponent } from './components/b1-card-number/b1-card-numbe
 import { B1ButtonComponent } from './components/b1-button/b1-button.component';
 import { B1ContentWrapperComponent } from './components/b1-content-wrapper/b1-content-wrapper.component';
 import { StopPropagationDirective } from './directives/stop-propagation.directive';
+import { B1DropdownComponent } from './components/b1-dropdown/b1-dropdown.component';
+import { InitialsPipe } from './pipes/initials.pipe';
+import { FilterByTermPipe } from './pipes/filter-by-term.pipe';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -72,6 +75,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ButtonComponent,
     B1ContentWrapperComponent,
     StopPropagationDirective,
+    B1DropdownComponent,
+    InitialsPipe,
+    FilterByTermPipe,
   ],
   imports: [
     CommonModule,
@@ -123,6 +129,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ButtonComponent,
     B1ContentWrapperComponent,
     StopPropagationDirective,
+    B1DropdownComponent,
+    InitialsPipe,
+    FilterByTermPipe,
   ],
   providers: [
     {

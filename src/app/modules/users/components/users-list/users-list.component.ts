@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { of } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { ResizeService } from '@services/resize.service';
+import { User } from '@models/users/user.model';
+import { UsersSelectors } from '@store/users/selectors';
 
 @Component({
   selector: 'app-users-list',
@@ -14,17 +15,16 @@ import { ResizeService } from '@services/resize.service';
   },
 })
 export class UsersListComponent {
-  @Input() isLoading = false;
+  users$: Observable<User[]> = this.store.select(UsersSelectors.usersSelector);
+  filterTerm$: Observable<string> = this.store.select(
+    UsersSelectors.filterTerm
+  );
+  filterKeys: string[] = ['displayName', 'phoneNumber', 'email'];
   selectedItem?: number;
 
-  constructor(private store: Store, private resizeService: ResizeService) {}
+  constructor(private store: Store) {}
 
-  // FOR DEMO PURPOSE ONLY:
-  users$ = of([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]);
-  isMobile$ = this.resizeService.isMobile$;
-
-  toDetail(user: { id: number }, index: number): void {
+  toDetail(user: User): void {
     console.log('user selected: ', user);
-    this.selectedItem = index;
   }
 }

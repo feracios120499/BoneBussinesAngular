@@ -23,6 +23,7 @@ import { SharedEffects } from '@store/shared/effects';
 import { UserActions } from '@store/user/actions';
 import { UserEffects } from '@store/user/effects';
 import { USER_KEY } from '@store/user/store';
+import { UsersEffects } from '@store/users/effects';
 import deepmerge from 'deepmerge';
 import { Keys, localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from 'src/environments/environment';
@@ -32,43 +33,55 @@ const saveStoresChangeCustomer = [...saveStoresLogout, USER_KEY, AUTH_KEY];
 const keys: Keys = [
   { settings: ['currentLanguage', 'darkModeActive'] },
   { auth: ['token', 'userKey'] },
-  { user: ['currentClientId'] }
+  { user: ['currentClientId'] },
 ];
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync(
-    {
-      keys,
-      rehydrate: true
-    })(reducer);
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return localStorageSync({
+    keys,
+    rehydrate: true,
+  })(reducer);
 }
 
-export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+export function clearOnLogoutMetaReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
   return (state, action) => {
     if (action.type === AuthActions.logout.type) {
       let saveState = {};
-      saveStoresLogout.forEach((key) => saveState = deepmerge(saveState, { [key]: state[key] }));
+      saveStoresLogout.forEach(
+        (key) => (saveState = deepmerge(saveState, { [key]: state[key] }))
+      );
       return reducer(saveState, action);
     }
     if (action.type === UserActions.selectCurrentClientId.type) {
       let saveState = {};
-      saveStoresChangeCustomer.forEach((key) => saveState = deepmerge(saveState, { [key]: state[key] }));
+      saveStoresChangeCustomer.forEach(
+        (key) => (saveState = deepmerge(saveState, { [key]: state[key] }))
+      );
       return reducer(saveState, action);
     }
     return reducer(state, action);
   };
 }
 
-
-const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, localStorageSyncReducer];
-
+const metaReducers: Array<MetaReducer<any, any>> = [
+  clearOnLogoutMetaReducer,
+  localStorageSyncReducer,
+];
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 100, logOnly: environment.production, serialize: true }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 100,
+      logOnly: environment.production,
+      serialize: true,
+    }),
     EffectsModule.forRoot([
       AuthEffects,
       RouteEffects,
@@ -78,7 +91,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
       PublicEffects,
       NotifyEffects,
       MenuEffects,
-      SharedEffects
+      SharedEffects,
+      UsersEffects,
     ]),
     StoreRouterConnectingModule.forRoot(),
   ],
@@ -87,8 +101,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
   providers: [
     {
       provide: PublicService,
-      useClass: HttpPublicService
-    }
-  ]
+      useClass: HttpPublicService,
+    },
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

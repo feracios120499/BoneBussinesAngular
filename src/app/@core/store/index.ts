@@ -17,7 +17,8 @@ import { acctReducer } from './acct/reducer';
 import { ACCT_KEY, AcctState } from './acct/store';
 import { sharedReducer } from './shared/reducer';
 import { SHARED_KEY, SharedState } from './shared/store';
-
+import { usersReducer } from './users/reducer';
+import { UsersState, USERS_KEY } from './users/store';
 
 export interface State {
   [SETTINGS_KEY]: SettingsState;
@@ -28,10 +29,10 @@ export interface State {
   [PUBLIC_KEY]: PublicState;
   [MENU_KEY]: MenuState;
   [SHARED_KEY]: SharedState;
+  [USERS_KEY]: UsersState;
   router: RouterReducerState;
   [key: string]: any;
 }
-
 
 export const reducers: ActionReducerMap<State> = {
   [SETTINGS_KEY]: settingsReducer,
@@ -42,5 +43,6 @@ export const reducers: ActionReducerMap<State> = {
   [PUBLIC_KEY]: publicReducer,
   [MENU_KEY]: menuReducers,
   [SHARED_KEY]: sharedReducer,
-  router: routerReducer
+  [USERS_KEY]: usersReducer,
+  router: routerReducer,
 };

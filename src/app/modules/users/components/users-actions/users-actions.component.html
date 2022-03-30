@@ -1,6 +1,3 @@
-<!-- <ng-container *ngrxLet="formState$ as formState"> -->
-<!-- <div class="b1-page-actions" *ngrxLet="formState$ as formState"> -->
-
 <div class="b1-page-actions">
   <div class="b1-page-actions__left">
     <div class="b1-page-icons" style="margin-left: 0">
@@ -11,16 +8,17 @@
       </app-b1-button>
     </div>
   </div>
-  <!-- <form novalidate [ngrxFormState]="formState"> -->
+
   <form class="b1-page-actions__right" name="search" novalidate>
     <div class="b1-page-inputWithIcon width-100">
-      <!-- <input class="b1-input__control without-label b1-base b1-page-input resize" name="search" id="search" type="text" placeholder="пошук" [ngrxFormControlState]="formState.controls.filter" /> -->
       <input
         class="b1-input__control without-label b1-base b1-page-input resize"
         name="search"
         id="search"
         type="text"
-        placeholder="пошук" />
+        [attr.placeholder]="'shared.search' | translate"
+        [ngModel]="filterTerm$ | ngrxPush"
+        (ngModelChange)="onUsersFilter($event)" />
       <label b1-icon icon="search" class="resize" for="search"></label>
     </div>
   </form>
