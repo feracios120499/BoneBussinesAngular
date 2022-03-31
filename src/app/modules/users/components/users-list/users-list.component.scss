@@ -1,0 +1,13 @@
+$screen-tablet: 812px;
+
+:host(.users-list) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-auto-rows: minmax(224px, auto);
+  grid-gap: 24px;
+  margin: 12px 0;
+
+  @media (max-width: $screen-tablet) {
+    margin: 26px 0;
+  }
+}

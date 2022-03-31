@@ -1,0 +1,24 @@
+.b1-dropdown {
+  &_left {
+    right: 0;
+    left: auto;
+  }
+  &__item_bordered {
+    $margin-bottom: 18px;
+    $separator-height: 2px;
+    position: relative;
+    margin-bottom: $margin-bottom;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -$margin-bottom;
+      padding: 8px 0;
+      width: 100%;
+      box-sizing: border-box;
+      height: $margin-bottom;
+      background-color: var(--color-light-300);
+      background-clip: content-box;
+      cursor: auto;
+    }
+  }
+}

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?xe79nc');
-  src:  url('fonts/b1-icons.eot?xe79nc#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?xe79nc') format('truetype'),
-    url('fonts/b1-icons.woff?xe79nc') format('woff'),
-    url('fonts/b1-icons.svg?xe79nc#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?ufwc5g');
+  src:  url('fonts/b1-icons.eot?ufwc5g#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?ufwc5g') format('truetype'),
+    url('fonts/b1-icons.woff?ufwc5g') format('woff'),
+    url('fonts/b1-icons.svg?ufwc5g#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.b1-icons-icon-lock:before {
+  content: "\e92f";
+}
 .b1-icons-icon-list:before {
   content: "\e92d";
 }

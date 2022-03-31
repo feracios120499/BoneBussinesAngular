@@ -1,4 +1,4 @@
-export interface IAuthLoginForm {
+export interface AuthLoginForm {
   userName: string;
   password: string;
 }

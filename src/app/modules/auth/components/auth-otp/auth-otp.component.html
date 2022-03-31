@@ -10,5 +10,5 @@
   </div>
 </div>
 <auth-button label="bid.Accept" (authClick)="onSendOtp()" [isLoading]="loading$ | async"
-  [disabled]="otp.length != LENGTH_OTP"></auth-button>
+  [isDisabled]="otp.length != LENGTH_OTP"></auth-button>
 <auth-error [message]="error$ | async"></auth-error>

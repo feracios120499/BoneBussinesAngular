@@ -1,0 +1,7 @@
+<button
+  class="b1-button-primary b1-button-primary_filled"
+  [disabled]="isDisabled"
+  (click)="btnClick.emit()">
+  <i *ngIf="icon" b1-icon [icon]="icon"></i>
+  {{ label | translate }}
+</button>
