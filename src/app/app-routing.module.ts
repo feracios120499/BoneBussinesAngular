@@ -6,20 +6,47 @@ import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized
 const routes: Routes = [
   { path: '', redirectTo: '/auth/logon', pathMatch: 'full' },
   { path: 'auth', redirectTo: '/auth/logon', pathMatch: 'full' },
-  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(p => p.AuthModule) },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((p) => p.AuthModule),
+  },
   {
     path: '',
     component: AuthorizedLayoutComponent,
     children: [
-      { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(p => p.DashboardModule) },
-      { path: 'accounts', loadChildren: () => import('./modules/accounts/accounts.module').then(p => p.AccountsModule) },
-      { path: 'payments', loadChildren: () => import('./modules/payments/payments.module').then(p => p.PaymentsModule) },
-      { path: 'cards', loadChildren: () => import('./modules/cards/cards.module').then(m => m.CardsModule) }
-    ]
-  }];
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (p) => p.DashboardModule
+          ),
+      },
+      {
+        path: 'accounts',
+        loadChildren: () =>
+          import('./modules/accounts/accounts.module').then(
+            (p) => p.AccountsModule
+          ),
+      },
+      {
+        path: 'payments',
+        loadChildren: () =>
+          import('./modules/payments/payments.module').then(
+            (p) => p.PaymentsModule
+          ),
+      },
+      {
+        path: 'cards',
+        loadChildren: () =>
+          import('./modules/cards/cards.module').then((m) => m.CardsModule),
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

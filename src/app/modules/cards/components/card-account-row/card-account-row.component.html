@@ -36,11 +36,13 @@
   <ng-container *ngIf="cardAccount.isOpen">
     <div class="card-account-cards" *ngIf="viewState == 'cards'">
       <app-card-styled
+        (click)="goToDetails(card.id, cardAccount.id)"
         *ngFor="let card of cardAccount.cards"
         [card]="card"></app-card-styled>
     </div>
     <div class="card-account-list" *ngIf="viewState == 'list'">
       <app-card-row
+        (click)="goToDetails(card.id, cardAccount.id)"
         *ngFor="let card of cardAccount.cards"
         [card]="card"></app-card-row>
     </div>
