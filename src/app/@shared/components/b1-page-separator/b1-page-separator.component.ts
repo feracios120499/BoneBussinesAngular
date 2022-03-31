@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-type SizeType = 'small' | 'medium' | 'large' | 'large';
+type SizeType = 'small' | 'medium' | 'large';
 
 const BOTTOM_MARGINS: Readonly<{ [key in SizeType]: number }> = {
   small: 0,
@@ -14,7 +14,7 @@ const BOTTOM_MARGINS: Readonly<{ [key in SizeType]: number }> = {
   styleUrls: ['./b1-page-separator.component.scss'],
 })
 export class B1PageSeparatorComponent {
-  @Input() size: 'small' | 'medium' | 'large' = 'large';
+  @Input() size: SizeType = 'large';
 
   get margin(): number {
     return BOTTOM_MARGINS[this.size];

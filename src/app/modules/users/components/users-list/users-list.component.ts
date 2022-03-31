@@ -19,7 +19,6 @@ export class UsersListComponent {
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
   );
-  filterKeys: string[] = ['displayName', 'phoneNumber', 'email'];
   selectedItem?: number;
 
   constructor(private store: Store) {}

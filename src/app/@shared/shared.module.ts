@@ -17,6 +17,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MobileMoreModule } from './directives/mobile-more/mobile-more.module';
 import { StopPropagationModule } from './directives/stop-propagation/stop-propagation.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1ContentWrapperModule } from '@ui/b1-content-wrapper/b1-content-wrapper.module';
 
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
@@ -39,8 +41,6 @@ import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { B1PageSeparatorComponent } from './components/b1-page-separator/b1-page-separator.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { B1CardNumberComponent } from './components/b1-card-number/b1-card-number.component';
-import { B1ButtonComponent } from './components/b1-button/b1-button.component';
-import { B1ContentWrapperComponent } from './components/b1-content-wrapper/b1-content-wrapper.component';
 import { InitialsPipe } from './pipes/initials.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { UsersFilterPipe } from './pipes/users-filter.pipe';
@@ -71,8 +71,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1PageLoaderComponent,
     B1PageSeparatorComponent,
     B1CardNumberComponent,
-    B1ButtonComponent,
-    B1ContentWrapperComponent,
     InitialsPipe,
     FilterPipe,
     UsersFilterPipe,
@@ -96,6 +94,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1PipesModule,
     MobileMoreModule,
     StopPropagationModule,
+    B1ButtonModule,
+    B1ContentWrapperModule,
   ],
   exports: [
     CommonModule,
@@ -125,13 +125,13 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1PageLoaderComponent,
     B1PageSeparatorComponent,
     B1CardNumberComponent,
-    B1ButtonComponent,
-    B1ContentWrapperComponent,
     InitialsPipe,
     FilterPipe,
     UsersFilterPipe,
     MobileMoreModule,
     StopPropagationModule,
+    B1ButtonModule,
+    B1ContentWrapperModule,
   ],
   providers: [
     {
