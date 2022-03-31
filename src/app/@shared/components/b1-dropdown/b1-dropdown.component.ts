@@ -17,7 +17,7 @@ export interface ActionButton {
 }
 
 @Component({
-  selector: 'app-b1-dropdown',
+  selector: 'b1-dropdown',
   templateUrl: './b1-dropdown.component.html',
   styleUrls: ['./b1-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

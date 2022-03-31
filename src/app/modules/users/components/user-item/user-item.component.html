@@ -15,13 +15,13 @@
 <div class="user-item__subtitle">{{ user.email }}</div>
 <div class="user-item__subtitle">{{ user.phoneNumber }}</div>
 
-<div class="user-item__actions b1-card__col b1-card__col_dots">
-  <app-b1-dropdown
+<div class="user-item__more b1-card__col b1-card__col_dots">
+  <b1-dropdown
     label="user's actions"
     [buttons]="actionButtons"
     display="static"
     [top]="true"
     minWidth="180px">
     <a class="b1-card__v-dots"></a>
-  </app-b1-dropdown>
+  </b1-dropdown>
 </div>

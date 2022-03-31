@@ -12,7 +12,9 @@ import { UsersSelectors } from '@store/users/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit {
-  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoading);
+  isLoadingUsers$: Observable<boolean> = this.store.select(
+    UsersSelectors.isLoadingUsers
+  );
 
   constructor(private store: Store) {}
 

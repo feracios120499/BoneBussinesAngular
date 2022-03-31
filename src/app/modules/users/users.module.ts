@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/@shared/shared.module';
-import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 
 import { UsersComponent } from './views/users/users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -21,7 +21,7 @@ import { UserItemComponent } from './components/user-item/user-item.component';
   imports: [
     CommonModule,
     SharedModule,
-    B1DirectivesModule,
+    B1DropdownModule,
     RouterModule.forChild([
       {
         path: '',

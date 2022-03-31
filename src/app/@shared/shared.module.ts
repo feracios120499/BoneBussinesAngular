@@ -15,6 +15,8 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MobileMoreModule } from './directives/mobile-more/mobile-more.module';
+import { StopPropagationModule } from './directives/stop-propagation/stop-propagation.module';
 
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
@@ -26,7 +28,6 @@ import { B1RequisitesModalComponent } from './components/modals/b1-requisites-mo
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
-import { MobileMoreDirective } from './directives/mobile-more.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
@@ -40,10 +41,9 @@ import { CardNumberPipe } from './pipes/card-number.pipe';
 import { B1CardNumberComponent } from './components/b1-card-number/b1-card-number.component';
 import { B1ButtonComponent } from './components/b1-button/b1-button.component';
 import { B1ContentWrapperComponent } from './components/b1-content-wrapper/b1-content-wrapper.component';
-import { StopPropagationDirective } from './directives/stop-propagation.directive';
-import { B1DropdownComponent } from './components/b1-dropdown/b1-dropdown.component';
 import { InitialsPipe } from './pipes/initials.pipe';
-import { FilterByTermPipe } from './pipes/filter-by-term.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { UsersFilterPipe } from './pipes/users-filter.pipe';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -58,7 +58,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
-    MobileMoreDirective,
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
@@ -74,10 +73,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1CardNumberComponent,
     B1ButtonComponent,
     B1ContentWrapperComponent,
-    StopPropagationDirective,
-    B1DropdownComponent,
     InitialsPipe,
-    FilterByTermPipe,
+    FilterPipe,
+    UsersFilterPipe,
   ],
   imports: [
     CommonModule,
@@ -96,6 +94,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1DirectivesModule,
     B1FormsModule,
     B1PipesModule,
+    MobileMoreModule,
+    StopPropagationModule,
   ],
   exports: [
     CommonModule,
@@ -112,7 +112,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
-    MobileMoreDirective,
     NgxSkeletonLoaderModule,
     WebClassDirective,
     MobileClassDirective,
@@ -128,10 +127,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1CardNumberComponent,
     B1ButtonComponent,
     B1ContentWrapperComponent,
-    StopPropagationDirective,
-    B1DropdownComponent,
     InitialsPipe,
-    FilterByTermPipe,
+    FilterPipe,
+    UsersFilterPipe,
+    MobileMoreModule,
+    StopPropagationModule,
   ],
   providers: [
     {

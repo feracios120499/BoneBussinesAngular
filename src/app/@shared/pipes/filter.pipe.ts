@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FilterService } from '@services/filter.service';
 
 @Pipe({
-  name: 'filterByTerm',
+  name: 'filter',
 })
-export class FilterByTermPipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
   constructor(private filterService: FilterService) {}
 
   transform<T>(arr: T[], terms: string = '', filterKeys: string[]): T[] {

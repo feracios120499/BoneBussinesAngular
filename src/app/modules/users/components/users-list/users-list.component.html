@@ -2,7 +2,7 @@
   <app-user-item
     (click)="toDetail(user); selectedItem = i"
     *ngFor="
-      let user of users | filterByTerm: (filterTerm$ | ngrxPush):filterKeys;
+      let user of users | usersFilter: (filterTerm$ | ngrxPush);
       index as i
     "
     [class.selected]="selectedItem === i"

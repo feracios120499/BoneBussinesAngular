@@ -1,15 +1,16 @@
 import { User } from '@models/users/user.model';
+import { UsersLoadings } from './models/users-loadings.enum';
 
 export const USERS_KEY = 'users';
 
 export interface UsersState {
   users: User[];
-  isLoading: boolean;
+  loadings: UsersLoadings[];
   filterTerm: string;
 }
 
 export const initialState: UsersState = {
   users: [],
-  isLoading: false,
+  loadings: [],
   filterTerm: '',
 };

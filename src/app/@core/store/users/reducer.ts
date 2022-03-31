@@ -1,13 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 import { UsersActions } from './actions';
 import { initialState } from './store';
+import { UsersLoadings } from './models/users-loadings.enum';
 
 export const usersReducer = createReducer(
   initialState,
-  on(UsersActions.loadUsersRequest, (state) => ({ ...state, isLoading: true })),
+  on(UsersActions.loadUsersRequest, (state) => ({
+    ...state,
+    loadings: [...state.loadings, UsersLoadings.list],
+  })),
   on(UsersActions.loadUsersSuccess, UsersActions.loadUsersFailure, (state) => ({
     ...state,
-    isLoading: false,
+    loadings: state.loadings.filter((p) => p !== UsersLoadings.list),
   })),
   on(UsersActions.loadUsersSuccess, (state, action) => ({
     ...state,
