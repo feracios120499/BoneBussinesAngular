@@ -3,5 +3,15 @@
   <app-cards-header></app-cards-header>
   <div style="position: relative" class="full-screen">
     <app-card-details-tabs></app-card-details-tabs>
+    <div class="b1-page-card b1-bg-light" *ngrxLet="currentTab$ as currentTab">
+      <div class="b1-wrapper card-wrapper">
+        <app-card-details-info
+          *ngIf="currentTab == 'info'"></app-card-details-info>
+        <app-card-details-limits
+          *ngIf="currentTab == 'limits'"></app-card-details-limits>
+        <app-card-details-services
+          *ngIf="currentTab == 'services'"></app-card-details-services>
+      </div>
+    </div>
   </div>
 </div>

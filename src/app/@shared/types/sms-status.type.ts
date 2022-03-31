@@ -1,0 +1,1 @@
+export type SmsStatus = 'Active' | 'NotActive' | 'TurnedOff';
