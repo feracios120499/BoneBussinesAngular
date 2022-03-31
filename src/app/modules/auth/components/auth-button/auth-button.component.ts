@@ -1,23 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-type TButtonType = 'button' | 'submit';
+import { Component } from '@angular/core';
+import { BaseButtonComponent } from 'src/app/@shared/components/base-button.component';
 
 @Component({
   selector: 'auth-button',
   templateUrl: './auth-button.component.html',
   styleUrls: ['./auth-button.component.scss'],
 })
-export class AuthButtonComponent implements OnInit {
-  constructor() {}
-
-  @Output() authClick = new EventEmitter();
-  @Input() type: TButtonType = 'button';
-  @Input() isLoading: boolean | null = false;
-  @Input() disabled: boolean | null = false;
-  @Input() label = '';
-
-  onClick(): void {
-    this.authClick.emit();
-  }
-  ngOnInit(): void {}
-}
+export class AuthButtonComponent extends BaseButtonComponent {}

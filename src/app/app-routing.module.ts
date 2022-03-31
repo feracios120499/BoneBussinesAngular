@@ -41,6 +41,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/cards/cards.module').then((m) => m.CardsModule),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./modules/users/users.module').then((m) => m.UsersModule),
+      },
     ],
   },
 ];

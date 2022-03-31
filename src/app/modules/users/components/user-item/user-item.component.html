@@ -1,0 +1,27 @@
+<div *ngIf="user.pictureUrl" class="user-item__image">
+  <img [src]="user.pictureUrl" />
+  <div class="user-item__lock" *ngIf="user.isDisable">
+    <i b1-icon icon="lock"></i>
+  </div>
+</div>
+<div *ngIf="!user.pictureUrl" class="user-item__letters">
+  {{ user.firstName + ' ' + user.lastName | initials }}
+  <div class="user-item__lock" *ngIf="user.isDisable">
+    <i b1-icon icon="lock"></i>
+  </div>
+</div>
+
+<div class="user-item__name b1-ellipsis">{{ user.displayName }}</div>
+<div class="user-item__subtitle">{{ user.email }}</div>
+<div class="user-item__subtitle">{{ user.phoneNumber }}</div>
+
+<div class="user-item__more b1-card__col b1-card__col_dots">
+  <b1-dropdown
+    label="user's actions"
+    [buttons]="actionButtons"
+    display="static"
+    [top]="true"
+    minWidth="180px">
+    <a class="b1-card__v-dots"></a>
+  </b1-dropdown>
+</div>

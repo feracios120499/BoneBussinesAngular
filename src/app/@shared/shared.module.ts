@@ -1,4 +1,8 @@
-import { FixedSizeVirtualScrollStrategy, ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
+import {
+  FixedSizeVirtualScrollStrategy,
+  ScrollingModule,
+  VIRTUAL_SCROLL_STRATEGY,
+} from '@angular/cdk/scrolling';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +15,10 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MobileMoreModule } from './directives/mobile-more/mobile-more.module';
+import { StopPropagationModule } from './directives/stop-propagation/stop-propagation.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1ContentWrapperModule } from '@ui/b1-content-wrapper/b1-content-wrapper.module';
 
 import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
@@ -22,7 +30,6 @@ import { B1RequisitesModalComponent } from './components/modals/b1-requisites-mo
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
 import { MobileClassDirective } from './directives/mobile-class.directive';
-import { MobileMoreDirective } from './directives/mobile-more.directive';
 import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
@@ -34,7 +41,9 @@ import { AccountFilterPipe } from './pipes/accounts-filter.pipe';
 import { B1PageSeparatorComponent } from './components/b1-page-separator/b1-page-separator.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { B1CardNumberComponent } from './components/b1-card-number/b1-card-number.component';
-
+import { InitialsPipe } from './pipes/initials.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { UsersFilterPipe } from './pipes/users-filter.pipe';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -49,7 +58,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
-    MobileMoreDirective,
     WebClassDirective,
     MobileClassDirective,
     MoreAutoDirectionDirective,
@@ -62,7 +70,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     OnlyNumbersDirective,
     B1PageLoaderComponent,
     B1PageSeparatorComponent,
-    B1CardNumberComponent],
+    B1CardNumberComponent,
+    InitialsPipe,
+    FilterPipe,
+    UsersFilterPipe,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -79,7 +91,11 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgxMaskModule,
     B1DirectivesModule,
     B1FormsModule,
-    B1PipesModule
+    B1PipesModule,
+    MobileMoreModule,
+    StopPropagationModule,
+    B1ButtonModule,
+    B1ContentWrapperModule,
   ],
   exports: [
     CommonModule,
@@ -96,7 +112,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
-    MobileMoreDirective,
     NgxSkeletonLoaderModule,
     WebClassDirective,
     MobileClassDirective,
@@ -109,14 +124,21 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgxMaskModule,
     B1PageLoaderComponent,
     B1PageSeparatorComponent,
-    B1CardNumberComponent
+    B1CardNumberComponent,
+    InitialsPipe,
+    FilterPipe,
+    UsersFilterPipe,
+    MobileMoreModule,
+    StopPropagationModule,
+    B1ButtonModule,
+    B1ContentWrapperModule,
   ],
   providers: [
     {
       provide: VIRTUAL_SCROLL_STRATEGY,
       useClass: CustomVirtualScrollStrategy,
     },
-    DecimalPipe
-  ]
+    DecimalPipe,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

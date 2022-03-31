@@ -1,0 +1,69 @@
+@import 'variables';
+
+:host(.user-item) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  border: 2px solid rgba(var(--color-dark-rgb), 0.14);
+  border-radius: 12px;
+  transition: all 150ms $animation-timing;
+  cursor: pointer;
+  &.selected {
+    background-image: $linear-gradient;
+    color: var(--color-light);
+  }
+  &:hover:not(.selected) {
+    background-color: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+  }
+}
+
+.user-item {
+  &__image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    & img {
+      border-radius: 50%;
+    }
+  }
+  &__lock {
+    position: absolute;
+    bottom: -15px;
+    right: -5px;
+    @include large;
+    color: $color-dark;
+  }
+  &__letters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: $color-primary;
+    color: $color-light;
+    @include medium;
+    @include bold;
+  }
+  &__name {
+    margin-top: 16px;
+    max-width: 320px;
+    @include base;
+    @include bold;
+  }
+  &__subtitle {
+    margin-top: 8px;
+    @include base;
+    @include light;
+    color: rgba(var(--color-dark-rgb), 0.6);
+  }
+  &__more {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+  }
+}

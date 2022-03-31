@@ -20,7 +20,7 @@ import {
   phoneRegExp,
 } from '@validators/pattern.validator';
 import { ModelControl } from '@b1-types/model-controls.type';
-import { IAuthLoginForm } from '../../models/auth-login-form.model';
+import { AuthLoginForm } from '../../models/auth-login-form.model';
 
 const { required, minLength, maxLength } = Validators;
 const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
@@ -64,7 +64,7 @@ export class AuthLoginComponent
   }
 
   ngOnInit(): void {
-    const controls: ModelControl<IAuthLoginForm> = {
+    const controls: ModelControl<AuthLoginForm> = {
       userName: this.userNameControl,
       password: this.passwordControl,
     };
