@@ -1,0 +1,4 @@
+@import "variables";
+.card-tabs {
+    @include tabs;
+}
