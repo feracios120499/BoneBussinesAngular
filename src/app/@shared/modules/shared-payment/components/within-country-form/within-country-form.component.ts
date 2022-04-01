@@ -41,7 +41,7 @@ export class WithinCountryFormComponent
       recipientBankName: this.recipientBankNameControl,
       amount: this.amountControl,
       purpose: this.purposeControl,
-      additionalDetails: this.additionalDetailsControl,
+      additionalDetails: this.additionalDetailsControl
     };
 
     this.formGroup = new FormGroup(controls);
