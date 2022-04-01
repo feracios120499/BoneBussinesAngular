@@ -132,6 +132,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     StopPropagationModule,
     B1ButtonModule,
     B1ContentWrapperModule,
+    B1DirectivesModule,
   ],
   providers: [
     {

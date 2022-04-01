@@ -558,3 +558,9 @@ b1-account-select.ng-invalid.ng-touched:focus {
     @include input-invalid;
   }
 }
+
+b1-input.ng-touched.ng-invalid {
+  & input {
+    @include input-invalid;
+  }
+}

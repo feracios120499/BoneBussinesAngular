@@ -14,13 +14,11 @@ import { BaseFormComponent } from '@forms/base-form.component';
 import { AuthActions } from '@store/auth/actions';
 import { AuthSelectors } from '@store/auth/selectors';
 import { LoginModel } from '@modules/auth/models/login.model';
-import {
-  emailRegExp,
-  pattern,
-  phoneRegExp,
-} from '@validators/pattern.validator';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { AuthLoginForm } from '../../models/auth-login-form.model';
+import { pattern } from '@validators/pattern.validator';
+import { emailRegExp } from '@validators/email.validator';
+import { phoneRegExp } from '@validators/phone.validator';
 
 const { required, minLength, maxLength } = Validators;
 const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
@@ -69,10 +67,10 @@ export class AuthLoginComponent
       password: this.passwordControl,
     };
     this.form = new FormGroup(controls);
-    super.ngOnInit();
   }
 
   ngAfterViewInit(): void {
+    super.ngAfterViewInit();
     const passwordInput = document.getElementById(
       'password'
     )! as HTMLInputElement;

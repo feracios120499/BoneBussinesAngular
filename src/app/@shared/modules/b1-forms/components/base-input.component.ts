@@ -16,10 +16,16 @@ export abstract class BaseInputComponent
   @Input() min?: number | string;
   @Input() max?: number | string;
   @Input() autocomplete?: 'on' | 'off';
+  @Input() transform: 'uppercase' | 'lowercase' | 'none' = 'none';
+  @Input() mask: string = '';
+  @Input() patterns!: { [key: string]: { pattern: RegExp } };
 
   private decimals!: number;
 
   ngOnInit(): void {
+    // if (this.mask) {
+    //   this.checkRequiredProps(['patterns']);
+    // }
     this.decimals = Math.abs(Math.round(this.toFixed));
   }
 

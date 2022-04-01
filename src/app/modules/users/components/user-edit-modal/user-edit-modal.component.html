@@ -1,0 +1,26 @@
+<b1-modal-container>
+  <ng-container slot="header">
+    {{ 'components.admin.createEmployeeWithoutSignature' | translate }}
+  </ng-container>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" #formRef slot="body">
+    <b1-input
+      name="phone"
+      controlId="newUserPhone"
+      placeholder="+38(___) ___-__-__"
+      [mask]="'(___) ___-__-__'"
+      [patterns]="phonePatterns"
+      [formControl]="phoneControl"
+      #phoneRef>
+      {{ 'components.admin.cellPhone' | translate }}
+    </b1-input>
+  </form>
+
+  <b1-button
+    slot="footer"
+    type="submit"
+    label="actions.continue"
+    icon="arrow-right"
+    (btnClick)="formRef.submit()">
+  </b1-button>
+</b1-modal-container>

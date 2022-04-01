@@ -1,4 +1,9 @@
-import { Component, ChangeDetectorRef, Optional, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  Optional,
+  AfterViewInit,
+} from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { Observable, throwError } from 'rxjs';
 import {
@@ -22,7 +27,7 @@ type TError = string | undefined;
 })
 export abstract class BaseFormComponent
   extends withDestroy()
-  implements OnInit
+  implements AfterViewInit
 {
   abstract form: FormGroup;
   abstract isLoading$: Observable<boolean>;
@@ -36,7 +41,7 @@ export abstract class BaseFormComponent
     super();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.isLoading$
       .pipe(takeUntil(this.destroy$))
       .subscribe((isLoading: boolean) => {

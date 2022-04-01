@@ -10,8 +10,7 @@ type TEvent = 'input' | 'change';
 export abstract class BaseFieldControlComponent extends BaseValidatableControlComponent {
   @Input() updateOn: TEvent = 'input';
   @Input() onTouched: boolean = true;
-
-  placeholder = ' ';
+  @Input() placeholder = '';
 
   @HostListener('input', ['$event'])
   onControlInput(evt: Event): boolean | void {

@@ -1,0 +1,36 @@
+<label class="b1-input__label b1-input__label_top" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<input
+  class="b1-input__control"
+  [style.textTransform]="transform"
+  [id]="controlId"
+  [type]="type"
+  [value]="value"
+  [attr.name]="name"
+  [attr.autocomplete]="autocomplete"
+  [attr.placeholder]="placeholder"
+  [disabled]="isDisabled"
+  #formControlRef
+  [mask]="mask"
+  prefix="+38"
+  [specialCharacters]="['+', '-', '(', ')', ' ']"
+  [patterns]="patterns"
+  [showMaskTyped]="true"
+  [validation]="true" />
+
+<p
+  *ngIf="
+    formControl &&
+    formControl.invalid &&
+    (formControl.dirty || formControl.touched)
+  "
+  class="b1-input__validate-message">
+  {{ errorText }}
+</p>
+
+<pre><code>formControl status: {{ formControl.status | json }}</code></pre>
+<pre><code>formControl value: {{ formControl.value | json }}</code></pre>
+<pre><code>formControl errors: {{ formControl.errors | json }}</code></pre>
+<pre><code>input value: {{ formControlRef.value | json }}</code></pre>
