@@ -10,10 +10,9 @@ import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-dir
 import { CardsEffect } from '@store/cards/effects';
 import { EffectsModule } from '@ngrx/effects';
 import { CardAccountRowComponent } from './components/card-account-row/card-account-row.component';
-import { CardStyledComponent } from './components/card-styled/card-styled.component';
 import { CardRowComponent } from './components/card-row/card-row.component';
-import { CardsHeaderComponent } from './modules/cards-header/cards-header.component';
 import { CardsHeaderModule } from './modules/cards-header/cards-header.module';
+import { CardStyledModule } from './components/card-styled/card-styled.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { CardsHeaderModule } from './modules/cards-header/cards-header.module';
     CardsListComponent,
     CardsActionsComponent,
     CardAccountRowComponent,
-    CardStyledComponent,
     CardRowComponent,
   ],
   imports: [
@@ -30,6 +28,7 @@ import { CardsHeaderModule } from './modules/cards-header/cards-header.module';
     CardsRoutingModule,
     B1DirectivesModule,
     CardsHeaderModule,
+    CardStyledModule,
     EffectsModule.forFeature([CardsEffect]),
   ],
 })

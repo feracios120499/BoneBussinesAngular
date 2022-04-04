@@ -13,16 +13,24 @@ import { B1IconDirective } from 'src/app/@shared/modules/b1-directives/directive
 import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
 import { EffectsModule } from '@ngrx/effects';
 import { CardDetailsEffects } from '@store/cards/details/effects';
+import { CardStyledModule } from '@modules/cards/components/card-styled/card-styled.module';
 
 @NgModule({
-  declarations: [CardDetailsComponent, CardDetailsTabsComponent, CardDetailsInfoComponent, CardDetailsLimitsComponent, CardDetailsServicesComponent],
+  declarations: [
+    CardDetailsComponent,
+    CardDetailsTabsComponent,
+    CardDetailsInfoComponent,
+    CardDetailsLimitsComponent,
+    CardDetailsServicesComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
     CardDetailsRoutingModule,
     CardsHeaderModule,
     B1DirectivesModule,
-    EffectsModule.forFeature([CardDetailsEffects])
+    CardStyledModule,
+    EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })
-export class CardDetailsModule { }
+export class CardDetailsModule {}

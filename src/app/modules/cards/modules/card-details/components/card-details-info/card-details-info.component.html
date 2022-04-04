@@ -1,1 +1,5 @@
-<p>card-details-info works!</p>
+<ng-container *ngrxLet="card$ as card">
+  <div *ngIf="card">
+    <app-card-styled [card]="card" [animated]="false"></app-card-styled>
+  </div>
+</ng-container>
