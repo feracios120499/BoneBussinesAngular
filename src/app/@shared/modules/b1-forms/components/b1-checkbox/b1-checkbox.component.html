@@ -1,0 +1,13 @@
+<label class="b1-checkbox__toggle">
+  <input
+    type="checkbox"
+    autocomplete="off"
+    [(ngModel)]="value"
+    (ngModelChange)="handleValue($any(value))"
+    #formControlRef />
+  <i></i>
+</label>
+
+<span class="b1-checkbox__label" tabindex="0" #labelRef>
+  <ng-content></ng-content>
+</span>

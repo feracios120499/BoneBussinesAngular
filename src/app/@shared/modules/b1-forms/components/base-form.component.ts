@@ -5,7 +5,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
-import { Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import {
   take,
   filter,
@@ -55,7 +55,7 @@ export abstract class BaseFormComponent
 
   protected submit(
     action: TypedAction<any>,
-    errorSelector: MemoizedSelector<Object, TError>
+    errorSelector: MemoizedSelector<Object, TError> | null = null
   ): void {
     if (this.isSubmitted || this.form.pending) {
       return;
@@ -109,11 +109,13 @@ export abstract class BaseFormComponent
 
   private sendRequest(
     action: TypedAction<any>,
-    errorSelector: MemoizedSelector<Object, TError>
+    errorSelector: MemoizedSelector<Object, TError> | null
   ): Observable<string> {
-    const requestObs: Observable<string> = this.store
-      .select(errorSelector)
-      .pipe(
+    let requestObs: Observable<string | never>;
+    if (!errorSelector) {
+      requestObs = EMPTY;
+    } else {
+      requestObs = this.store.select(errorSelector).pipe(
         filter((error: TError) => {
           return !!error;
         }),
@@ -122,6 +124,7 @@ export abstract class BaseFormComponent
           return throwError(error);
         })
       );
+    }
     this.store.dispatch(action);
     return requestObs;
   }

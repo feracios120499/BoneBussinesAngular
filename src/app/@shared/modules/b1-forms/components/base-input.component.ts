@@ -17,15 +17,10 @@ export abstract class BaseInputComponent
   @Input() max?: number | string;
   @Input() autocomplete?: 'on' | 'off';
   @Input() transform: 'uppercase' | 'lowercase' | 'none' = 'none';
-  @Input() mask: string = '';
-  @Input() patterns!: { [key: string]: { pattern: RegExp } };
 
   private decimals!: number;
 
   ngOnInit(): void {
-    // if (this.mask) {
-    //   this.checkRequiredProps(['patterns']);
-    // }
     this.decimals = Math.abs(Math.round(this.toFixed));
   }
 
@@ -46,9 +41,9 @@ export abstract class BaseInputComponent
     super.writeValue(val);
   }
 
-  protected handleValue(value: string): void {
+  handleValue(value: string): void {
     const val: string = this.getVal(value);
-    super.handleValue(val);
+    this.onChange(val);
   }
 
   private getVal(value: string): string {

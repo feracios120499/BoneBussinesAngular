@@ -7,13 +7,14 @@
   [style.textTransform]="transform"
   [id]="controlId"
   [type]="type"
-  [(ngModel)]="value"
-  (ngModelChange)="handleValue($any(value))"
+  [value]="value"
   [attr.name]="name"
-  [attr.autocomplete]="autocomplete"
   [attr.placeholder]="placeholder"
-  [disabled]="isDisabled"
-  #formControlRef />
+  [formControl]="$any(formControl)"
+  #formControlRef
+  [mask]="mask"
+  [prefix]="prefix"
+  [showMaskTyped]="true" />
 
 <p
   *ngIf="

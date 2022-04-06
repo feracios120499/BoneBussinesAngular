@@ -28,6 +28,7 @@ export abstract class BaseValidatableControlComponent
       required: () => ({ text: 'validate.required' }),
       email: () => ({ text: 'validate.invalidEmail' }),
       phone: () => ({ text: 'validate.invalidPhone' }),
+      mask: () => ({ text: 'validate.mustMatchThePattern' }),
       pattern: () => ({
         text: 'is not properly formatted.',
         value: this.formControl.errors!.pattern['value'],

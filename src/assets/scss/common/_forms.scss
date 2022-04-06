@@ -539,9 +539,13 @@ textarea.ng-invalid.ng-touched:focus {
     box-shadow: 0 0 0 3px rgba($color-error, 0.2);
   }
 }
-b1-input-amount.ng-touched.ng-invalid {
-  & input {
-    @include input-invalid;
+b1-input-amount,
+b1-input,
+b1-masked-input {
+  &.ng-touched.ng-invalid {
+    & input {
+      @include input-invalid;
+    }
   }
 }
 
@@ -555,12 +559,6 @@ b1-account-select.ng-invalid.ng-touched {
 b1-account-select.ng-invalid.ng-touched:focus {
   & .ng-select-container,
   & .b1-input__control {
-    @include input-invalid;
-  }
-}
-
-b1-input.ng-touched.ng-invalid {
-  & input {
     @include input-invalid;
   }
 }

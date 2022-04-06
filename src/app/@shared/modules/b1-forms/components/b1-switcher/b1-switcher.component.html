@@ -1,0 +1,16 @@
+<label class="b1-switcher__toggle" style="flex-shrink: 0">
+  <input
+    type="checkbox"
+    autocomplete="off"
+    [(ngModel)]="value"
+    (ngModelChange)="handleValue($any(value))"
+    #formControlRef />
+  <i></i>
+</label>
+
+<span
+  class="b1-switcher__label b1-medium b1-bold b1-ml-3"
+  tabindex="0"
+  #labelRef>
+  <ng-content></ng-content>
+</span>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
 import { B1InputModule } from '@forms/b1-input/b1-input.module';
+import { B1MaskedInputModule } from '@forms/b1-masked-input/b1-masked-input.module';
+import { B1SwitcherListModule } from '@forms/b1-switcher-list/b1-switcher-list.module';
 
 import { UsersComponent } from './views/users/users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -23,11 +24,12 @@ import { UserEditModalComponent } from './components/user-edit-modal/user-edit-m
     UserEditModalComponent,
   ],
   imports: [
-    CommonModule,
     SharedModule,
     B1DropdownModule,
     B1ModalContainerModule,
     B1InputModule,
+    B1MaskedInputModule,
+    B1SwitcherListModule,
     RouterModule.forChild([
       {
         path: '',

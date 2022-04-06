@@ -4,7 +4,8 @@
       <b1-button
         label="components.admin.addEmployee"
         icon="plus"
-        (click)="onUserAdd()">
+        (click)="onUserAdd()"
+        [isDisabled]="isLoadingRoles$ | ngrxPush">
       </b1-button>
     </div>
   </div>

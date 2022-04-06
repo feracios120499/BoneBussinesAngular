@@ -10,12 +10,21 @@ export namespace UsersSelectors {
     (state) => state.users
   );
 
+  export const filterTerm = createSelector(
+    usersStore,
+    (state) => state.filterTerm
+  );
+
+  export const rolesSelector = createSelector(
+    usersStore,
+    (state) => state.roles
+  );
+
   export const isLoadingUsers = createSelector(usersStore, (state) =>
     state.loadings.includes(UsersLoadings.list)
   );
 
-  export const filterTerm = createSelector(
-    usersStore,
-    (state) => state.filterTerm
+  export const isLoadingRoles = createSelector(usersStore, (state) =>
+    state.loadings.includes(UsersLoadings.roles)
   );
 }

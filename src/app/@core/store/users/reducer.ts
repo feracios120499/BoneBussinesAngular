@@ -20,5 +20,17 @@ export const usersReducer = createReducer(
   on(UsersActions.filterUsers, (state, action) => ({
     ...state,
     filterTerm: action.term,
+  })),
+  on(UsersActions.loadRolesRequest, (state) => ({
+    ...state,
+    loadings: [...state.loadings, UsersLoadings.roles],
+  })),
+  on(UsersActions.loadRolesSuccess, UsersActions.loadRolesFailure, (state) => ({
+    ...state,
+    loadings: state.loadings.filter((p) => p !== UsersLoadings.roles),
+  })),
+  on(UsersActions.loadRolesSuccess, (state, action) => ({
+    ...state,
+    roles: action.payload,
   }))
 );

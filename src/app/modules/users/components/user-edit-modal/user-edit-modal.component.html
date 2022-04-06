@@ -1,26 +1,44 @@
-<b1-modal-container>
+<b1-modal-container [isLoading$]="isLoading$">
   <ng-container slot="header">
     {{ 'components.admin.createEmployeeWithoutSignature' | translate }}
   </ng-container>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" #formRef slot="body">
-    <b1-input
-      name="phone"
+  <form slot="body" [formGroup]="form" (ngSubmit)="onSubmit()" #f="ngForm">
+    <b1-masked-input
+      name="phoneNumber"
       controlId="newUserPhone"
-      placeholder="+38(___) ___-__-__"
-      [mask]="'(___) ___-__-__'"
-      [patterns]="phonePatterns"
       [formControl]="phoneControl"
-      #phoneRef>
+      mask="(000) 000-00-00"
+      prefix="+38">
       {{ 'components.admin.cellPhone' | translate }}
+    </b1-masked-input>
+
+    <b1-input
+      class="b1-mt-6"
+      name="email"
+      controlId="newUserEmail"
+      [formControl]="emailControl"
+      transform="lowercase">
+      {{ 'components.admin.email' | translate }}
     </b1-input>
+
+    <b1-switcher-list
+      class="b1-mt-6"
+      [formGroup]="$any(roleControlsArray)"
+      [labels]="roleControlLabels">
+      {{ 'components.admin.modules' | translate }}
+    </b1-switcher-list>
   </form>
 
   <b1-button
     slot="footer"
-    type="submit"
     label="actions.continue"
     icon="arrow-right"
-    (btnClick)="formRef.submit()">
+    [isDisabled]="
+      form.invalid ||
+      !form.value.roles.includes(true) ||
+      (isLoading$ | ngrxPush)
+    "
+    (btnClick)="f.ngSubmit.emit()">
   </b1-button>
 </b1-modal-container>
