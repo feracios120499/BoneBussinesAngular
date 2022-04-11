@@ -1,0 +1,21 @@
+<div class="b1-modal b1-bg-light">
+  <div class="b1-wrapper text-center">
+    <span class="b1-title3">{{ 'shared.confirmation' | translate }}</span>
+  </div>
+  <div class="b1-modal__body b1-wrapper">
+    <div
+      class="b1-medium"
+      style="word-break: break-word"
+      [outerHTML]="config.text"></div>
+  </div>
+  <div class="b1-modal__footer b1-wrapper text-center" ngbAutofocus>
+    <button class="b1-button-error" (click)="close()">
+      <i b1-icon icon="cancel"></i>
+      {{ 'shared.No' | translate }}
+    </button>
+    <button class="b1-button-primary" (click)="ok()">
+      <i b1-icon icon="check"></i>
+      {{ 'shared.Yes' | translate }}
+    </button>
+  </div>
+</div>

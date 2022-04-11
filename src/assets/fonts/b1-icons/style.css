@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?ufwc5g');
-  src:  url('fonts/b1-icons.eot?ufwc5g#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?ufwc5g') format('truetype'),
-    url('fonts/b1-icons.woff?ufwc5g') format('woff'),
-    url('fonts/b1-icons.svg?ufwc5g#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?f53vwn');
+  src:  url('fonts/b1-icons.eot?f53vwn#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?f53vwn') format('truetype'),
+    url('fonts/b1-icons.woff?f53vwn') format('woff'),
+    url('fonts/b1-icons.svg?f53vwn#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,137 +25,164 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.b1-icons-icon-lock:before {
-  content: "\e92f";
+.b1-icons-icon-spinner:before {
+  content: "\e934";
 }
-.b1-icons-icon-list:before {
-  content: "\e92d";
-}
-.b1-icons-icon-block:before {
-  content: "\e92e";
-}
-.b1-icons-icon-moon:before {
+.b1-icons-icon-cash:before {
   content: "\e900";
 }
-.b1-icons-icon-delete:before {
-  content: "\e927";
+.b1-icons-icon-internet:before {
+  content: "\e901";
 }
-.b1-icons-icon-not-allowed:before {
-  content: "\e925";
+.b1-icons-icon-shop:before {
+  content: "\e902";
 }
-.b1-icons-icon-plus:before {
-  content: "\e926";
+.b1-icons-icon-internet-payment:before {
+  content: "\e903";
 }
-.b1-icons-icon-attach:before {
-  content: "\e924";
+.b1-icons-icon-moon:before {
+  content: "\e904";
 }
-.b1-icons-icon-new-document:before {
-  content: "\e923";
+.b1-icons-icon-user:before {
+  content: "\e905";
 }
-.b1-icons-icon-on-sign:before {
-  content: "\e922";
+.b1-icons-icon-exit:before {
+  content: "\e906";
 }
-.b1-icons-icon-sign:before {
-  content: "\e921";
-}
-.b1-icons-icon-more:before {
-  content: "\e920";
-}
-.b1-icons-icon-file-txt:before {
-  content: "\e917";
-}
-.b1-icons-icon-file-html:before {
-  content: "\e918";
-}
-.b1-icons-icon-file-csv:before {
-  content: "\e919";
-}
-.b1-icons-icon-file-xls:before {
-  content: "\e91a";
-}
-.b1-icons-icon-file-xlsx:before {
-  content: "\e91b";
-}
-.b1-icons-icon-file-dbf:before {
-  content: "\e91c";
-}
-.b1-icons-icon-file-doc:before {
-  content: "\e91d";
-}
-.b1-icons-icon-file-pdf:before {
-  content: "\e91e";
-}
-.b1-icons-icon-file-rtf:before {
-  content: "\e91f";
-}
-.b1-icons-icon-download:before {
-  content: "\e916";
-}
-.b1-icons-icon-print:before {
-  content: "\e915";
-}
-.b1-icons-icon-export:before {
-  content: "\e914";
-}
-.b1-icons-icon-turnovers:before {
-  content: "\e913";
-}
-.b1-icons-icon-calendar:before {
-  content: "\e912";
-}
-.b1-icons-icon-menu:before {
-  content: "\e911";
-}
-.b1-icons-icon-cancel:before {
-  content: "\e90f";
-}
-.b1-icons-icon-save:before {
-  content: "\e910";
-}
-.b1-icons-icon-edit:before {
-  content: "\e90e";
-}
-.b1-icons-icon-file-details:before {
-  content: "\e90d";
-}
-.b1-icons-icon-country:before {
-  content: "\e90a";
-}
-.b1-icons-icon-swift:before {
-  content: "\e90b";
-}
-.b1-icons-icon-cards:before {
-  content: "\e90c";
-}
-.b1-icons-icon-search:before {
-  content: "\e909";
-}
-.b1-icons-icon-account-card:before {
-  content: "\e908";
-}
-.b1-icons-icon-book-reader:before {
+.b1-icons-icon-settings:before {
   content: "\e907";
 }
 .b1-icons-icon-wallet:before {
-  content: "\e904";
+  content: "\e908";
 }
 .b1-icons-icon-coins:before {
-  content: "\e905";
+  content: "\e909";
 }
 .b1-icons-icon-money-bill-wave:before {
-  content: "\e906";
+  content: "\e90a";
 }
-.b1-icons-icon-piggy-bank:before {
-  content: "\1f308";
+.b1-icons-icon-book-reader:before {
+  content: "\e90b";
 }
-.b1-icons-icon-user:before {
-  content: "\e901";
+.b1-icons-icon-account-card:before {
+  content: "\e90c";
 }
-.b1-icons-icon-exit:before {
-  content: "\e902";
+.b1-icons-icon-search:before {
+  content: "\e90d";
 }
-.b1-icons-icon-settings:before {
-  content: "\e903";
+.b1-icons-icon-country:before {
+  content: "\e90e";
+}
+.b1-icons-icon-swift:before {
+  content: "\e90f";
+}
+.b1-icons-icon-cards:before {
+  content: "\e910";
+}
+.b1-icons-icon-file-details:before {
+  content: "\e911";
+}
+.b1-icons-icon-edit:before {
+  content: "\e912";
+}
+.b1-icons-icon-cancel:before {
+  content: "\e913";
+}
+.b1-icons-icon-save:before {
+  content: "\e914";
+}
+.b1-icons-icon-menu:before {
+  content: "\e915";
+}
+.b1-icons-icon-calendar:before {
+  content: "\e916";
+}
+.b1-icons-icon-turnovers:before {
+  content: "\e917";
+}
+.b1-icons-icon-export:before {
+  content: "\e918";
+}
+.b1-icons-icon-print:before {
+  content: "\e919";
+}
+.b1-icons-icon-download:before {
+  content: "\e91a";
+}
+.b1-icons-icon-file-txt:before {
+  content: "\e91b";
+}
+.b1-icons-icon-file-html:before {
+  content: "\e91c";
+}
+.b1-icons-icon-file-csv:before {
+  content: "\e91d";
+}
+.b1-icons-icon-file-xls:before {
+  content: "\e91e";
+}
+.b1-icons-icon-file-xlsx:before {
+  content: "\e91f";
+}
+.b1-icons-icon-file-dbf:before {
+  content: "\e920";
+}
+.b1-icons-icon-file-doc:before {
+  content: "\e921";
+}
+.b1-icons-icon-file-pdf:before {
+  content: "\e922";
+}
+.b1-icons-icon-file-rtf:before {
+  content: "\e923";
+}
+.b1-icons-icon-more:before {
+  content: "\e924";
+}
+.b1-icons-icon-sign:before {
+  content: "\e925";
+}
+.b1-icons-icon-on-sign:before {
+  content: "\e926";
+}
+.b1-icons-icon-new-document:before {
+  content: "\e927";
+}
+.b1-icons-icon-attach:before {
+  content: "\e928";
+}
+.b1-icons-icon-not-allowed:before {
+  content: "\e929";
+}
+.b1-icons-icon-plus:before {
+  content: "\e92a";
+}
+.b1-icons-icon-delete:before {
+  content: "\e92b";
+}
+.b1-icons-icon-uniE92C:before {
+  content: "\e92c";
+}
+.b1-icons-icon-uniE92D:before {
+  content: "\e92d";
+}
+.b1-icons-icon-uniE92E:before {
+  content: "\e92e";
+}
+.b1-icons-icon-uniE92F:before {
+  content: "\e92f";
+}
+.b1-icons-icon-uniE930:before {
+  content: "\e930";
+}
+.b1-icons-icon-list:before {
+  content: "\e931";
+}
+.b1-icons-icon-block:before {
+  content: "\e932";
+}
+.b1-icons-icon-lock:before {
+  content: "\e933";
 }
 .b1-icons-icon-mobile:before {
   content: "\e958";
@@ -189,30 +216,6 @@
 }
 .b1-icons-icon-build-purpose:before {
   content: "\eae3";
-}
-.b1-icons-icon-action .path1:before {
-  content: "\e928";
-  color: rgb(0, 24, 51);
-}
-.b1-icons-icon-action .path2:before {
-  content: "\e929";
-  margin-left: -1em;
-  color: rgb(0, 24, 51);
-}
-.b1-icons-icon-action .path3:before {
-  content: "\e92a";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.b1-icons-icon-action .path4:before {
-  content: "\e92b";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.b1-icons-icon-action .path5:before {
-  content: "\e92c";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .b1-icons-icon-check:before {
   content: "\f00c";
@@ -267,4 +270,7 @@
 }
 .b1-icons-icon-basket:before {
   content: "\f291";
+}
+.b1-icons-icon-piggy-bank:before {
+  content: "\1f308";
 }

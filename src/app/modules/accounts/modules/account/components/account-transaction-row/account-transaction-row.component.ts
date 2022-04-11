@@ -1,30 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { TurnoverTransaction } from '@models/turnover-transaction.model';
 import { Store } from '@ngrx/store';
 import { AcctDetailsActions } from '@store/acct/details/actions';
 import { AcctDetailsSelectors } from '@store/acct/details/selectors';
 
-
 @Component({
   selector: 'account-transaction-row',
   templateUrl: './account-transaction-row.component.html',
-  styleUrls: ['./account-transaction-row.component.scss']
+  styleUrls: ['./account-transaction-row.component.scss'],
 })
-
-
 export class AccountTransactionRowComponent implements OnInit {
   @Input() payment!: TurnoverTransaction;
 
-
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   currencyCode$ = this.store.select(AcctDetailsSelectors.currencyCode);
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   showTransaction(): void {
-    this.store.dispatch(AcctDetailsActions.showTransactionPartial({ transaction: this.payment }));
-    this.store.dispatch(AcctDetailsActions.loadTransactionDetailRequest({ id: this.payment.documentId, bankId: this.payment.bankId }));
+    this.store.dispatch(
+      AcctDetailsActions.showTransactionPartial({ transaction: this.payment })
+    );
+    this.store.dispatch(
+      AcctDetailsActions.loadTransactionDetailRequest({
+        id: this.payment.documentId,
+        bankId: this.payment.bankId,
+      })
+    );
   }
 }
-

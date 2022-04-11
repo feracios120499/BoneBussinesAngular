@@ -44,6 +44,7 @@ import { B1CardNumberComponent } from './components/b1-card-number/b1-card-numbe
 import { InitialsPipe } from './pipes/initials.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { UsersFilterPipe } from './pipes/users-filter.pipe';
+import { B1ConfirmModalComponent } from './components/modals/b1-confirm-modal/b1-confirm-modal.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -74,6 +75,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     InitialsPipe,
     FilterPipe,
     UsersFilterPipe,
+    B1ConfirmModalComponent,
   ],
   imports: [
     CommonModule,

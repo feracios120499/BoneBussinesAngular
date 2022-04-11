@@ -1,0 +1,100 @@
+<ng-container *ngrxLet="card$ as card">
+  <ng-container *ngrxLet="isCardLoading$ as isLoading">
+    <div *ngIf="card" class="info-container">
+      <div class="info-card">
+        <app-card-styled
+          [card]="card"
+          [animated]="false"
+          *ngIf="!isLoading"></app-card-styled>
+      </div>
+      <div class="info-data">
+        <div class="info-data_row">
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.pay.account' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <span [iban]="card.accountNumber"></span>
+            </div>
+          </div>
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.HoldAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <span>{{ card.holdAmount / 100 | money: card.currency }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="info-data_row">
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.AvailableAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <span>{{
+                card.availableAmount / 100 | money: card.currency
+              }}</span>
+            </div>
+          </div>
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.DepositAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <span>{{ card.depositAmount / 100 | money: card.currency }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="info-container">
+      <div class="info-card">
+        <app-card-styled-skeleton></app-card-styled-skeleton>
+      </div>
+      <div class="info-data">
+        <div class="info-data_row">
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.pay.account' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <ngx-skeleton-loader [theme]="{ width: '200px' }">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.HoldAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <ngx-skeleton-loader [theme]="{ width: '200px' }">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+        <div class="info-data_row">
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.AvailableAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <ngx-skeleton-loader [theme]="{ width: '200px' }">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="info-data_item">
+            <div class="b1-base b1-color-dark-300">
+              {{ 'components.corpcard.DepositAmount' | translate }}
+            </div>
+            <div class="b1-base b1-bold b1-ellipsis">
+              <ngx-skeleton-loader [theme]="{ width: '200px' }">
+              </ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

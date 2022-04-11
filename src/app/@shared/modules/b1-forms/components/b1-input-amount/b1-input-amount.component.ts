@@ -5,11 +5,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'b1-input-amount',
   templateUrl: './b1-input-amount.component.html',
   styleUrls: ['./b1-input-amount.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => B1InputAmountComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => B1InputAmountComponent),
+      multi: true,
+    },
+  ],
 })
 export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
   viewValue = '';
@@ -17,15 +19,18 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
   @Input() digits = 2;
   @Input() label = 'components.pay.amount';
   @Input() maxlength = 15;
+  @Input() labelTop = false;
   amount = 0;
 
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   writeValue(amount: number): void {
     this.amount = amount;
     if (this.amount) {
-      this.viewValue = (this.amount / Math.pow(10, this.digits)).toFixed(this.digits);
+      this.viewValue = (this.amount / Math.pow(10, this.digits)).toFixed(
+        this.digits
+      );
     } else {
       this.viewValue = '';
     }
@@ -47,7 +52,10 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
     if (!this.viewValue) {
       this.amount = 0;
     } else {
-      this.amount = Math.round(parseFloat(parseFloat(this.viewValue).toFixed(this.digits)) * Math.pow(10, this.digits));
+      this.amount = Math.round(
+        parseFloat(parseFloat(this.viewValue).toFixed(this.digits)) *
+          Math.pow(10, this.digits)
+      );
     }
     this.onChange(this.amount);
   }
@@ -62,6 +70,5 @@ export class B1InputAmountComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

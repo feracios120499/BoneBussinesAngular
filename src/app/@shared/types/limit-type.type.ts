@@ -1,0 +1,1 @@
+export type LimitType = 'ATM' | 'Internet' | 'Retail' | 'Hotel' | 'P2P' | 'Undefined';

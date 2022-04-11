@@ -2,41 +2,41 @@
   <ul class="b1-page-tabs b1-base b1-bold card-tabs">
     <li class="b1-page-tabs__item" [class.active]="currentTab == 'info'">
       <a (click)="setTab('info')" class="b1-filter-block__link">
-        <span class="b1-mr-2">{{
-          'components.corpcard.details' | translate
-        }}</span>
+        <span class="b1-mr-2">
+          {{ 'components.corpcard.details' | translate }}
+        </span>
       </a>
     </li>
     <li class="b1-page-tabs__item" [class.active]="currentTab == 'limits'">
       <a (click)="setTab('limits')" class="b1-filter-block__link">
-        <span class="b1-mr-2">{{
-          'components.corpcard.limits' | translate
-        }}</span>
+        <span class="b1-mr-2">
+          {{ 'components.corpcard.limits' | translate }}
+        </span>
       </a>
     </li>
     <li class="b1-page-tabs__item" [class.active]="currentTab == 'services'">
       <a (click)="setTab('services')" class="b1-filter-block__link">
-        <span class="b1-mr-2">{{
-          'components.corpcard.services' | translate
-        }}</span>
+        <span class="b1-mr-2">
+          {{ 'components.corpcard.services' | translate }}
+        </span>
       </a>
     </li>
   </ul>
   <div class="card-tabs-mobile">
     <div *ngIf="currentTab == 'info'">
-      <span class="b1-mr-2">{{
-        'components.corpcard.details' | translate
-      }}</span>
+      <span class="b1-mr-2">
+        {{ 'components.corpcard.details' | translate }}
+      </span>
     </div>
     <div *ngIf="currentTab == 'limits'">
-      <span class="b1-mr-2">{{
-        'components.corpcard.limits' | translate
-      }}</span>
+      <span class="b1-mr-2">
+        {{ 'components.corpcard.limits' | translate }}
+      </span>
     </div>
     <div *ngIf="currentTab == 'services'">
-      <span class="b1-mr-2">{{
-        'components.corpcard.services' | translate
-      }}</span>
+      <span class="b1-mr-2">
+        {{ 'components.corpcard.services' | translate }}
+      </span>
     </div>
     <i b1-icon icon="chevron-down" class="card-tabs-list_chevron"></i>
     <select

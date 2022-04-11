@@ -1,21 +1,40 @@
 <div
-  class="corpcards__card corpcards__card_animated"
+  class="corpcards__card"
   [ngClass]="'corpcards__card_' + type"
+  [class.corpcards__card_animated]="animated"
   (click)="showDetails()">
   <div
     class="corpcards__card__type"
     [ngClass]="'corpcards__card__type_' + type"></div>
+  <div
+    class="corpcards__card__status corpcards__card__status__card"
+    *ngIf="cardStatusBackgroundColor">
+    <div
+      class="corpcards__card__status__block"
+      [ngClass]="cardStatusBackgroundColor"
+      placement="left"
+      [ngbTooltip]="
+        'components.corpcard.statusesCard.' + card.plasticStatus | translate
+      "
+      tooltipClass="b1-base"
+      toolt>
+      <i b1-icon [icon]="cardStatusIcon!"></i>
+    </div>
+    <div class="b1-micro" style="margin-top: 4px; opacity: 0.6">
+      {{ 'components.corpcard.card' | translate }}
+    </div>
+  </div>
   <div class="corpcards__card__status">
     <div
       class="corpcards__card__status__block"
-      [ngClass]="backgroundColor"
+      [ngClass]="plasticStatusBackgroundColor"
       placement="left"
       [ngbTooltip]="
         'components.corpcard.statusesPlastic.' + card.plasticStatus | translate
       "
       tooltipClass="b1-base"
       toolt>
-      <i b1-icon [icon]="icon"></i>
+      <i b1-icon [icon]="plasticStatusIcon"></i>
     </div>
     <div class="b1-micro" style="margin-top: 4px; opacity: 0.6">
       {{ 'components.corpcard.plastic' | translate }}
