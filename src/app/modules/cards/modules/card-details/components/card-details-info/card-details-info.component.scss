@@ -1,0 +1,49 @@
+.info {
+  &-container {
+    display: flex;
+    align-items: center;
+    @media (max-width: 812px) {
+      flex-direction: column;
+    }
+  }
+  &-card {
+    width: 30%;
+    @media (max-width: 812px) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &-data {
+    width: 70%;
+    max-width: 600px;
+    @media (max-width: 812px) {
+      margin-top: 32px;
+      padding: 0 16px;
+      width: 100%;
+    }
+    &_row {
+      display: flex;
+      align-items: center;
+      @media (max-width: 812px) {
+        flex-direction: column;
+      }
+      &:first-child {
+        margin-bottom: 16px;
+        @media (max-width: 812px) {
+          margin-bottom: 0;
+        }
+      }
+    }
+    &_item {
+      width: 50%;
+      @media (max-width: 812px) {
+        width: 100%;
+        margin-top: 8px;
+      }
+      & ngx-skeleton-loader > span {
+        max-width: 200px;
+      }
+    }
+  }
+}

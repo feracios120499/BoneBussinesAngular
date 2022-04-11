@@ -1,1 +1,108 @@
-<p>card-details-limits works!</p>
+<ng-container *ngrxLet="limits$ as limits">
+  <ng-container *ngrxLet="isLimitsLoading as isLoading">
+    <div class="limits-container" *ngIf="!isLoading">
+      <div class="limits-item" *ngFor="let limit of limits">
+        <div class="limits-item_body">
+          <div class="limits-item_icon b1-large">
+            <i b1-icon icon="cash" *ngIf="limit.type == 'ATM'"></i>
+            <i
+              b1-icon
+              icon="internet-payment"
+              *ngIf="limit.type == 'Hotel'"></i>
+            <i b1-icon icon="internet" *ngIf="limit.type == 'Internet'"></i>
+            <i b1-icon icon="shop" *ngIf="limit.type == 'Retail'"></i>
+            <i b1-icon icon="cards" *ngIf="limit.type == 'P2P'"></i>
+          </div>
+          <div class="limits-item_info">
+            <div class="limits-item_name">
+              <span class="b1-large b1-light">{{
+                'components.corpcard.limits.' + limit.type | translate
+              }}</span>
+            </div>
+            <div class="limits-item_amount b1-large">
+              <div *ngIf="limit.value != 0 && limit.status != 'Suspended'">
+                {{ limit.value / 100 | money: (cardCurrency$ | ngrxPush) }}
+              </div>
+              <div class="b1-large" *ngIf="limit.status == 'Suspended'">
+                {{ 'components.corpcard.notLimited' | translate }}
+              </div>
+              <div
+                *ngIf="
+                  limit.value == 0 &&
+                  limit.isActive &&
+                  limit.status != 'Suspended'
+                ">
+                {{ 'components.corpcard.prohibited' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="limits-more b1-card__col b1-card__col_dot"
+          style="position: relative"
+          *ngrxLet="isLimitEditable$ as isLimitEditable">
+          <div class="dropdown" *ngIf="isLimitEditable">
+            <a
+              class="b1-card__v-dots"
+              (click)="$event.stopPropagation(); dropdown.open()">
+            </a>
+
+            <ul
+              class="b1-dropdown b1-bg-light"
+              webClass="b1-animate fade-in-up"
+              role="menu"
+              style="width: 180px"
+              ngbDropdown
+              #dropdown="ngbDropdown"
+              mobile-more
+              more-auto-direction>
+              <div class="b1-modal-close" webClass="hidden">
+                <i
+                  b1-icon
+                  icon="cancel"
+                  (click)="$event.stopPropagation(); dropdown.close()"></i>
+              </div>
+              <li class="b1-dropdown__item">
+                <a class="b1-dropdown__link b1-base" (click)="editLimit(limit)">
+                  <i b1-icon icon="edit" class="b1-mr-3"></i>
+                  {{ 'actions.edit' | translate }}
+                </a>
+              </li>
+              <li *ngIf="!(limit.status == 'Active')" class="b1-dropdown__item">
+                <a
+                  class="b1-dropdown__link b1-base"
+                  (click)="setDefaultLimit(limit)">
+                  <i b1-icon icon="spinner" class="b1-mr-3"></i>
+                  {{ 'components.corpcard.limitsAction.default' | translate }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="limits-container" *ngIf="isLoading">
+      <div class="limits-item" *ngFor="let number of [0, 1, 2, 3, 4]">
+        <div class="limits-item_body">
+          <div class="limits-item_icon skeleton">
+            <ngx-skeleton-loader
+              appearance="circle"
+              [theme]="{
+                height: '25px',
+                width: '25px',
+                display: 'flex'
+              }"></ngx-skeleton-loader>
+          </div>
+          <div class="limits-item_info">
+            <div class="limits-item_name skeleton">
+              <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+            <div class="limits-item_amount skeleton">
+              <ngx-skeleton-loader></ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

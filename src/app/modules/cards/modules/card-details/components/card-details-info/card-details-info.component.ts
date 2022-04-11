@@ -12,5 +12,7 @@ export class CardDetailsInfoComponent implements OnInit {
   constructor(private store: Store) {}
 
   card$ = this.store.select(CardDetailsSelectors.card);
+  isCardLoading$ = this.store.select(CardDetailsSelectors.isCardLoading);
+
   ngOnInit(): void {}
 }

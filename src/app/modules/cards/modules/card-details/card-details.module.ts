@@ -14,6 +14,11 @@ import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-dir
 import { EffectsModule } from '@ngrx/effects';
 import { CardDetailsEffects } from '@store/cards/details/effects';
 import { CardStyledModule } from '@modules/cards/components/card-styled/card-styled.module';
+import { CardDetailsHeaderComponent } from './components/card-details-header/card-details-header.component';
+import { CardStyledSkeletonModule } from '@modules/cards/components/card-styled-skeleton/card-styled-skeleton.module';
+import { B1PipesModule } from 'src/app/@shared/modules/b1-pipes/b1-pipes.module';
+import { EditLimitModalComponent } from './components/edit-limit-modal/edit-limit-modal.component';
+import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,8 @@ import { CardStyledModule } from '@modules/cards/components/card-styled/card-sty
     CardDetailsInfoComponent,
     CardDetailsLimitsComponent,
     CardDetailsServicesComponent,
+    CardDetailsHeaderComponent,
+    EditLimitModalComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +37,9 @@ import { CardStyledModule } from '@modules/cards/components/card-styled/card-sty
     CardsHeaderModule,
     B1DirectivesModule,
     CardStyledModule,
+    CardStyledSkeletonModule,
+    B1PipesModule,
+    B1FormsModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })

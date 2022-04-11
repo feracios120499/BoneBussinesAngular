@@ -1,0 +1,19 @@
+<ng-container *ngrxLet="currentTab$ as currentTab">
+  <div
+    class="b1-color-dark b1-flex b1-align-center b1-mb-5 card-deatils-header-wrapper">
+    <i
+      b1-icon
+      icon="chevron-left"
+      class="b1-hover-info b1-mr-5 b1-medium"
+      (click)="goToCards()"></i>
+    <span class="b1-title3" *ngIf="currentTab == 'info'">
+      {{ 'components.corpcard.title.details' | translate | titlecase }}
+    </span>
+    <span class="b1-title3" *ngIf="currentTab == 'limits'">
+      {{ 'components.corpcard.limits' | translate | titlecase }}
+    </span>
+    <span class="b1-title3" *ngIf="currentTab == 'services'">
+      {{ 'components.corpcard.services' | translate | titlecase }}
+    </span>
+  </div>
+</ng-container>

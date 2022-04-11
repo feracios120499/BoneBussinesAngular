@@ -1,11 +1,20 @@
 <div class="b1-input">
-    <label for="amount" class="b1-input__label">
-        {{label | translate}}
-    </label>
-    <input autocomplete="nope" class="b1-input__control" [(ngModel)]="viewValue" decimalNumbers [autocomplete]="false"
-        (ngModelChange)="updateValue()" (focus)="onInputFocus()" (blur)="onBlur()" [disabled]="disabled"
-        [maxlength]="15">
-    <ng-content>
-
-    </ng-content>
+  <label
+    for="amount"
+    class="b1-input__label"
+    [class.b1-input__label_top]="labelTop">
+    {{ label | translate }}
+  </label>
+  <input
+    autocomplete="nope"
+    class="b1-input__control"
+    [(ngModel)]="viewValue"
+    decimalNumbers
+    [autocomplete]="false"
+    (ngModelChange)="updateValue()"
+    (focus)="onInputFocus()"
+    (blur)="onBlur()"
+    [disabled]="disabled"
+    [maxlength]="15" />
+  <ng-content> </ng-content>
 </div>

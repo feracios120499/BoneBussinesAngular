@@ -13,6 +13,7 @@ import { CardAccountRowComponent } from './components/card-account-row/card-acco
 import { CardRowComponent } from './components/card-row/card-row.component';
 import { CardsHeaderModule } from './modules/cards-header/cards-header.module';
 import { CardStyledModule } from './components/card-styled/card-styled.module';
+import { CardStyledSkeletonComponent } from './components/card-styled-skeleton/card-styled-skeleton.component';
 
 @NgModule({
   declarations: [

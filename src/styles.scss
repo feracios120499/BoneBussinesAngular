@@ -3603,13 +3603,13 @@ auth-otp {
 .app-content {
   height: 100%;
 }
-@media (min-width: 768px) {
+@media (min-width: 812px) {
   .app-content {
     margin-left: 240px;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 821px) {
   .app-content {
     -webkit-transition: -webkit-transform 0.2s ease;
     -moz-transition: -moz-transform 0.2s ease;
