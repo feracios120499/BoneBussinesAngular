@@ -14,8 +14,8 @@ import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersActionsComponent {
-  isLoadingRoles$: Observable<boolean> = this.store.select(
-    UsersSelectors.isLoadingRoles
+  isLoading$: Observable<boolean> = this.store.select(
+    UsersSelectors.isLoadingUsersOrRoles
   );
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
@@ -24,7 +24,6 @@ export class UsersActionsComponent {
   constructor(private store: Store, private modalService: NgbModal) {}
 
   onUserAdd(): void {
-    // console.log('User add clicked!');
     this.modalService.open(UserEditModalComponent);
   }
 

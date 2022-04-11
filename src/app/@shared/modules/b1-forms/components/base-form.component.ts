@@ -131,11 +131,11 @@ export abstract class BaseFormComponent
 
   private enableForm(): void {
     this.isSubmitted = false;
-    this.form.enable();
+    // this.form.enable();
   }
 
   private disableForm(): void {
     this.isSubmitted = true;
-    this.form.disable();
+    // this.form.disable();
   }
 }

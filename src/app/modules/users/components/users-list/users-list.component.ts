@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { User } from '@models/users/user.model';
 import { UsersSelectors } from '@store/users/selectors';
+import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component';
 
 @Component({
   selector: 'app-users-list',
@@ -21,9 +23,10 @@ export class UsersListComponent {
   );
   selectedItem?: number;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private modalService: NgbModal) {}
 
-  toDetail(user: User): void {
-    console.log('user selected: ', user);
+  onUserEdit(user: User): void {
+    const modalRef = this.modalService.open(UserEditModalComponent);
+    modalRef.componentInstance.editingUser = user;
   }
 }

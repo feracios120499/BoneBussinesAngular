@@ -1,4 +1,7 @@
 export enum UsersLoadings {
-  list = 'list',
-  roles = 'roles',
+  userList = 'userlist',
+  roleList = 'roleList',
+  rolesEdit = 'rolesEdit',
+  nameEdit = 'nameEdit',
+  lockStateEdit = 'lockStateEdit',
 }

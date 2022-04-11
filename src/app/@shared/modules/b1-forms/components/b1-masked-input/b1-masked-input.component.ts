@@ -27,10 +27,13 @@ export class B1MaskedInputComponent
   // to escape warning about using 'disabled'-attribute
   // when passing 'formControl' to 'input'-element:
   setDisabledState(isDisabled: boolean): void {
-    this.renderer.setProperty(
-      this.formControlRef.nativeElement,
-      'disabled',
-      isDisabled
+    // needs to be wrapped in setTimout to avoid an error:
+    setTimeout(() =>
+      this.renderer.setProperty(
+        this.formControlRef.nativeElement,
+        'disabled',
+        isDisabled
+      )
     );
   }
 }
