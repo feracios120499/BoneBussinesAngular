@@ -1,19 +1,15 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
+  Input,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { BaseFormComponent } from '@forms/base-form.component';
-import { ModelControl } from '@b1-types/model-controls.type';
-import { UsersForm } from '@modules/users/models/users-form.model';
-import { email } from '@validators/email.validator';
-
-const { required } = Validators;
+import { UsersSelectors } from '@store/users/selectors';
+import { UsersActions } from '@store/users/actions';
+import { UserEditStep } from '@models/users/user-edit-step.enum';
+import { User } from '@models/users/user.model';
 
 @Component({
   selector: 'app-user-edit-modal',
@@ -21,32 +17,14 @@ const { required } = Validators;
   styleUrls: ['./user-edit-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserEditModalComponent
-  extends BaseFormComponent
-  implements OnInit
-{
-  form!: FormGroup;
-  // FOR DEMO PURPOSE ONLY:
-  isLoading$: Observable<boolean> = of(false);
-  errorMessage = '';
-  phoneControl = new FormControl('', [required]);
-  emailControl = new FormControl('', [required, email]);
-  // eslint-disable-next-line
-  phonePatterns = { _: { pattern: new RegExp('\\d') } };
+export class UserEditModalComponent implements OnInit {
+  @Input() editingUser?: User;
 
-  constructor(store: Store, changeDetectorRef: ChangeDetectorRef) {
-    super(store, changeDetectorRef);
-  }
+  currentEditStep$ = this.store.select(UsersSelectors.currentEditStep);
+  editStep = UserEditStep;
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    const controls: ModelControl<UsersForm> = {
-      phone: this.phoneControl,
-      email: this.emailControl,
-    };
-    this.form = new FormGroup(controls);
-  }
-
-  onSubmit(): void {
-    console.log('Form is submitted with value: ', this.form.value);
+    this.store.dispatch(UsersActions.resetUserEdition());
   }
 }

@@ -1,0 +1,12 @@
+<label class="b1-input__label b1-input__label_top" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<ng-container [formGroup]="$any(formArray)">
+  <b1-switcher
+    *ngFor="let control of formArray.controls; index as i"
+    [formControl]="$any(control)"
+    [formControlName]="i">
+    {{ labels[i] }}
+  </b1-switcher>
+</ng-container>

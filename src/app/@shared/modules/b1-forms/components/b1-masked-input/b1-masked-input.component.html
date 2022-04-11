@@ -1,0 +1,27 @@
+<label class="b1-input__label b1-input__label_top" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<input
+  class="b1-input__control"
+  [style.textTransform]="transform"
+  [id]="controlId"
+  [type]="type"
+  [value]="value"
+  [attr.name]="name"
+  [attr.placeholder]="placeholder"
+  [formControl]="$any(formControl)"
+  #formControlRef
+  [mask]="mask"
+  [prefix]="prefix"
+  [showMaskTyped]="true" />
+
+<p
+  *ngIf="
+    formControl &&
+    formControl.invalid &&
+    (formControl.dirty || formControl.touched)
+  "
+  class="b1-input__validate-message">
+  {{ errorText }}
+</p>

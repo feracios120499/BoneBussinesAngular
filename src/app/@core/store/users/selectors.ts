@@ -10,12 +10,50 @@ export namespace UsersSelectors {
     (state) => state.users
   );
 
-  export const isLoadingUsers = createSelector(usersStore, (state) =>
-    state.loadings.includes(UsersLoadings.list)
-  );
-
   export const filterTerm = createSelector(
     usersStore,
     (state) => state.filterTerm
+  );
+
+  export const currentEditStep = createSelector(
+    usersStore,
+    (state) => state.currentEditStep
+  );
+
+  export const rolesSelector = createSelector(
+    usersStore,
+    (state) => state.roles
+  );
+
+  export const foundUser = createSelector(
+    usersStore,
+    (state) => state.foundUser
+  );
+
+  export const userSignInData = createSelector(
+    usersStore,
+    (state) => state.userSignInData
+  );
+
+  export const isLoadingUsers = createSelector(usersStore, (state) =>
+    state.loadings.includes(UsersLoadings.userList)
+  );
+
+  export const isLoadingRoles = createSelector(usersStore, (state) =>
+    state.loadings.includes(UsersLoadings.roleList)
+  );
+
+  export const isLoadingUsersOrRoles = createSelector(usersStore, (state) =>
+    state.loadings.some(
+      (p) => p === UsersLoadings.userList || p === UsersLoadings.roleList
+    )
+  );
+
+  export const isLoadingRolesEdit = createSelector(usersStore, (state) =>
+    state.loadings.includes(UsersLoadings.rolesEdit)
+  );
+
+  export const isLoadingNameEdit = createSelector(usersStore, (state) =>
+    state.loadings.includes(UsersLoadings.nameEdit)
   );
 }

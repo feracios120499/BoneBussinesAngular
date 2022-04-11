@@ -1,0 +1,43 @@
+@import 'variables';
+
+.b1-checkbox__toggle {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+  margin: 0;
+  background-color: $color-primary;
+  border-radius: 30px;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    -webkit-clip-path: inset(100%);
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+
+  i {
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+    }
+    &::before {
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+      background-color: $color-light-400;
+      border-radius: 30px;
+      transition: all 0.2s;
+    }
+  }
+}

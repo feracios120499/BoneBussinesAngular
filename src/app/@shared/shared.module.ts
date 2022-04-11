@@ -19,8 +19,8 @@ import { MobileMoreModule } from './directives/mobile-more/mobile-more.module';
 import { StopPropagationModule } from './directives/stop-propagation/stop-propagation.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1ContentWrapperModule } from '@ui/b1-content-wrapper/b1-content-wrapper.module';
+import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 
-import { B1CardLoaderComponent } from './components/b1-card-loader/b1-card-loader.component';
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
 import { B1PageLoaderComponent } from './components/b1-page-loader/b1-page-loader.component';
@@ -55,7 +55,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
 @NgModule({
   declarations: [
     CheckStateDirective,
-    B1CardLoaderComponent,
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
@@ -98,6 +97,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     StopPropagationModule,
     B1ButtonModule,
     B1ContentWrapperModule,
+    B1CardLoaderModule,
   ],
   exports: [
     CommonModule,
@@ -107,7 +107,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgbModule,
     CheckStateDirective,
     NgOtpInputModule,
-    B1CardLoaderComponent,
     ScrollingModule,
     NgScrollbarModule,
     NgrxFormsModule,
@@ -135,6 +134,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ButtonModule,
     B1ContentWrapperModule,
     B1DirectivesModule,
+    B1CardLoaderModule,
   ],
   providers: [
     {

@@ -41,6 +41,8 @@ export abstract class BaseControlComponent
     super();
   }
 
+  abstract handleValue(value: TValue): void;
+
   ngAfterViewInit(): void {
     if (this.formControlRef.nativeElement.form) {
       this.checkRequiredProps(['formControl']);
@@ -78,7 +80,7 @@ export abstract class BaseControlComponent
     this.formControlRef.nativeElement.blur();
   }
 
-  protected onChange(value: string | File | FileList): void {}
+  protected onChange(value: string | boolean | File | FileList): void {}
 
   protected onFocusOut(): void {}
 }

@@ -1,5 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+
+import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 
 @Component({
   selector: 'b1-modal-container',
@@ -7,6 +15,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./b1-modal-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1ModalContainerComponent {
-  constructor(public activeModal: NgbActiveModal) {}
+export class B1ModalContainerComponent
+  extends withRequiredPropsCheck()
+  implements OnInit
+{
+  @Input() isLoading$!: Observable<boolean>;
+
+  constructor(public activeModal: NgbActiveModal) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.checkRequiredProps(['isLoading$']);
+  }
 }
