@@ -5,11 +5,11 @@ import { map } from 'rxjs/operators';
 
 import { BaseService } from '@services/base.service';
 import { User } from '@models/users/user.model';
-import { Role } from '@modules/users/models/role.model';
+import { Role } from '@models/users/role.model';
 import { FoundUser } from '@models/users/found-user.model';
 import { UserSignInError } from '@models/users/user-sign-in-error.model';
-import { UserNameModel } from '@models/users/user-name.model';
-import { UserSignInModel } from '@models/users/user-sign-in.model';
+import { UserNameForm } from '@models/users/user-name-form.model';
+import { UserRolesForm } from '@models/users/user-roles-form.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,17 +31,17 @@ export class UsersService extends BaseService {
 
   findUser(
     clientId: string,
-    data: Pick<User, 'phoneNumber' | 'email'>
+    userData: { phoneNumber: string; email: string }
   ): Observable<FoundUser | UserSignInError> {
     return this.http.post<FoundUser | UserSignInError>(
       `api/v1/users/find/${clientId}`,
-      data
+      userData
     );
   }
 
   createUser(
     clientId: string,
-    userData: UserNameModel & UserSignInModel
+    userData: UserNameForm & UserRolesForm
   ): Observable<User> {
     return this.http.post<User>(`api/v1/users/${clientId}`, userData);
   }
@@ -49,18 +49,16 @@ export class UsersService extends BaseService {
   restoreUser(
     clientId: string,
     userId: string,
-    data: { roles: string[] }
+    userData: { roles: string[] }
   ): Observable<User | UserSignInError> {
     return this.http.post<User | UserSignInError>(
       `api/v1/users/${userId}/attach/${clientId}`,
-      data
+      userData
     );
   }
 
-  deleteUser(clientId: string, userId: string): Observable<null> {
-    return this.http
-      .delete<null>(`api/v1/users/${userId}/${clientId}`)
-      .pipe(map(() => null));
+  deleteUser(clientId: string, userId: string): Observable<void> {
+    return this.http.delete<void>(`api/v1/users/${userId}/${clientId}`);
   }
 
   updateUserRoles(

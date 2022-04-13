@@ -1,18 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { UsersActions } from './actions';
 import { initialState } from './store';
-import { UsersLoadings } from './models/users-loadings.enum';
-import { UserEditStep } from '@models/users/user-edit-step.enum';
+import { pushIfNotExist, removeItem } from '@store/shared';
 
 export const usersReducer = createReducer(
   initialState,
   on(UsersActions.loadUsersRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, UsersLoadings.userList],
+    loadings: [...pushIfNotExist(state.loadings, 'userList')],
   })),
   on(UsersActions.loadUsersSuccess, UsersActions.loadUsersFailure, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== UsersLoadings.userList),
+    loadings: [...removeItem(state.loadings, 'userList')],
   })),
   on(UsersActions.loadUsersSuccess, (state, action) => ({
     ...state,
@@ -24,11 +24,11 @@ export const usersReducer = createReducer(
   })),
   on(UsersActions.loadRolesRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, UsersLoadings.roleList],
+    loadings: [...pushIfNotExist(state.loadings, 'roleList')],
   })),
   on(UsersActions.loadRolesSuccess, UsersActions.loadRolesFailure, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== UsersLoadings.roleList),
+    loadings: [...removeItem(state.loadings, 'roleList')],
   })),
   on(UsersActions.loadRolesSuccess, (state, action) => ({
     ...state,
@@ -39,7 +39,7 @@ export const usersReducer = createReducer(
     UsersActions.updateUserRolesRequest,
     (state) => ({
       ...state,
-      loadings: [...state.loadings, UsersLoadings.rolesEdit],
+      loadings: [...pushIfNotExist(state.loadings, 'userCreate')],
     })
   ),
   on(
@@ -49,13 +49,13 @@ export const usersReducer = createReducer(
     UsersActions.updateUserRolesFailure,
     (state) => ({
       ...state,
-      loadings: state.loadings.filter((p) => p !== UsersLoadings.rolesEdit),
+      loadings: [...removeItem(state.loadings, 'userCreate')],
     })
   ),
   on(UsersActions.signInUserSuccess, (state, action) => ({
     ...state,
     userSignInData: action.payload,
-    currentEditStep: UserEditStep.two,
+    progress: 'create',
   })),
   on(UsersActions.setFoundUser, (state, action) => ({
     ...state,
@@ -66,7 +66,7 @@ export const usersReducer = createReducer(
     UsersActions.restoreUserRequest,
     (state) => ({
       ...state,
-      loadings: [...state.loadings, UsersLoadings.nameEdit],
+      loadings: [...pushIfNotExist(state.loadings, 'userCreate')],
     })
   ),
   on(
@@ -76,25 +76,25 @@ export const usersReducer = createReducer(
     UsersActions.restoreUserFailure,
     (state) => ({
       ...state,
-      loadings: state.loadings.filter((p) => p !== UsersLoadings.nameEdit),
+      loadings: [...removeItem(state.loadings, 'userCreate')],
     })
   ),
   on(UsersActions.updateUserLockStateRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, UsersLoadings.lockStateEdit],
+    loadings: [...pushIfNotExist(state.loadings, 'lockStateEdit')],
   })),
   on(
     UsersActions.updateUserLockStateSuccess,
     UsersActions.updateUserLockStateFailure,
     (state) => ({
       ...state,
-      loadings: state.loadings.filter((p) => p !== UsersLoadings.lockStateEdit),
+      loadings: [...removeItem(state.loadings, 'lockStateEdit')],
     })
   ),
-  on(UsersActions.resetUserEdition, (state) => ({
+  on(UsersActions.resetUserCreation, (state) => ({
     ...state,
-    userSignInData: null,
+    // userSignInData: null,
     foundUser: null,
-    currentEditStep: UserEditStep.one,
+    progress: 'signIn',
   }))
 );

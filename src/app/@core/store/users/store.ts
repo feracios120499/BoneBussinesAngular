@@ -1,9 +1,8 @@
 import { FoundUser } from '@models/users/found-user.model';
-import { UserEditStep } from '@models/users/user-edit-step.enum';
-import { UsersLoadings } from './models/users-loadings.enum';
+import { UsersLoading } from './models/users-loading.type';
 import { User } from '@models/users/user.model';
-import { Role } from '@modules/users/models/role.model';
-import { UserSignInModel } from '@models/users/user-sign-in.model';
+import { Role } from '@models/users/role.model';
+import { UserCreateProgress } from '@b1-types/users/user-create-progress.type';
 
 export const USERS_KEY = 'users';
 
@@ -11,18 +10,16 @@ export interface UsersState {
   users: User[];
   filterTerm: string;
   roles: Role[];
-  currentEditStep: UserEditStep;
-  userSignInData: UserSignInModel | null;
+  progress: UserCreateProgress;
   foundUser: FoundUser | null;
-  loadings: UsersLoadings[];
+  loadings: UsersLoading[];
 }
 
 export const initialState: UsersState = {
   users: [],
   filterTerm: '',
   roles: [],
-  currentEditStep: UserEditStep.one,
-  userSignInData: null,
+  progress: 'signIn',
   foundUser: null,
   loadings: [],
 };

@@ -17,7 +17,7 @@ import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.compo
   },
 })
 export class UsersListComponent {
-  users$: Observable<User[]> = this.store.select(UsersSelectors.usersSelector);
+  users$: Observable<User[]> = this.store.select(UsersSelectors.userList);
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
   );

@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { UsersActions } from '@store/users/actions';
 import { UsersSelectors } from '@store/users/selectors';
-import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component';
+import { UserCreateModalComponent } from '../user-create-modal/user-create-modal.component';
 
 @Component({
   selector: 'app-users-actions',
@@ -24,7 +24,7 @@ export class UsersActionsComponent {
   constructor(private store: Store, private modalService: NgbModal) {}
 
   onUserAdd(): void {
-    this.modalService.open(UserEditModalComponent);
+    this.modalService.open(UserCreateModalComponent);
   }
 
   onUsersFilter(term: string): void {

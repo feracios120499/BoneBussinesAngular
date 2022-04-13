@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import {
-  catchError,
-  map,
-  switchMap,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -14,13 +8,12 @@ import { UsersService } from '@services/users/users.service';
 import { UsersActions } from './actions';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { User } from '@models/users/user.model';
-import { Role } from '@modules/users/models/role.model';
+import { Role } from '@models/users/role.model';
 import { FoundUser } from '@models/users/found-user.model';
 import { UserSignInError } from '@models/users/user-sign-in-error.model';
 import { UserSignInErrorStatus } from '@models/users/user-sign-in-error-status.enum';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
-import { UsersSelectors } from './selectors';
 
 @Injectable()
 export class UsersEffects {
@@ -110,10 +103,7 @@ export class UsersEffects {
   createUserRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.createUserRequest),
-      withLatestFrom(this.store.select(UsersSelectors.userSignInData)),
-      switchMap(([{ payload }, signInData]) =>
-        clientIdWithData(this.store, { ...payload, ...signInData! })
-      ),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data }) =>
         this.usersService.createUser(clientId, data).pipe(
           tap(console.log),
@@ -129,10 +119,7 @@ export class UsersEffects {
   restoreUserRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.restoreUserRequest),
-      withLatestFrom(this.store.select(UsersSelectors.userSignInData)),
-      switchMap(([{ payload: userId }, signInData]) =>
-        clientIdWithData(this.store, { userId, roles: signInData!.roles })
-      ),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data: { userId, roles } }) =>
         this.usersService.restoreUser(clientId, userId, { roles }).pipe(
           tap(console.log),

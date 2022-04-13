@@ -1,9 +1,20 @@
-<ng-container *ngrxLet="currentEditStep$ as currentEditStep">
-  <app-user-edit-roles-form
-    *ngIf="currentEditStep === editStep.one"
-    [editingUser]="editingUser">
-  </app-user-edit-roles-form>
+<b1-modal-container [isLoading$]="isLoading$">
+  <div slot="header" class="b1-title2">
+    {{ editingUser.displayName }}
+  </div>
 
-  <app-user-edit-name-form *ngIf="currentEditStep === editStep.two">
-  </app-user-edit-name-form>
-</ng-container>
+  <app-user-roles-form
+    slot="body"
+    [isLoading$]="isLoading$"
+    [(ngModel)]="userRolesForm"
+    #formRef>
+  </app-user-roles-form>
+
+  <b1-button
+    slot="footer"
+    label="actions.save"
+    icon="save"
+    [isDisabled]="!formRef.isValid || (isLoading$ | ngrxPush)"
+    (btnClick)="onUserEdit()">
+  </b1-button>
+</b1-modal-container>

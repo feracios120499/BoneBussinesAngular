@@ -13,8 +13,9 @@ import { UsersActionsComponent } from './components/users-actions/users-actions.
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UserEditModalComponent } from './components/user-edit-modal/user-edit-modal.component';
-import { UserEditRolesFormComponent } from './components/user-edit-roles-form/user-edit-roles-form.component';
-import { UserEditNameFormComponent } from './components/user-edit-name-form/user-edit-name-form.component';
+import { UserCreateModalComponent } from './components/user-create-modal/user-create-modal.component';
+import { UserRolesFormComponent } from './components/user-roles-form/user-roles-form.component';
+import { UserNameFormComponent } from './components/user-name-form/user-name-form.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { UserEditNameFormComponent } from './components/user-edit-name-form/user
     UsersListComponent,
     UserItemComponent,
     UserEditModalComponent,
-    UserEditRolesFormComponent,
-    UserEditNameFormComponent,
+    UserCreateModalComponent,
+    UserRolesFormComponent,
+    UserNameFormComponent,
   ],
   imports: [
     SharedModule,

@@ -1,0 +1,39 @@
+<b1-modal-container [isLoading$]="isLoading$">
+  <div slot="header" class="b1-large b1-bold">
+    {{ 'components.admin.createEmployeeWithoutSignature' | translate }}
+  </div>
+
+  <ng-container *ngrxLet="progress$ as progress" slot="body">
+    <app-user-roles-form
+      *ngIf="progress === 'signIn'"
+      [isLoading$]="isLoading$"
+      [(ngModel)]="userRolesForm"
+      #rolesFormRef>
+    </app-user-roles-form>
+
+    <app-user-name-form
+      *ngIf="progress === 'create'"
+      [isLoading$]="isLoading$"
+      [(ngModel)]="userNameForm"
+      #nameFormRef>
+    </app-user-name-form>
+  </ng-container>
+
+  <ng-container *ngrxLet="progress$ as progress" slot="footer">
+    <b1-button
+      *ngIf="progress === 'signIn'"
+      label="actions.continue"
+      icon="arrow-right"
+      [isDisabled]="!rolesFormRef?.isValid || (isLoading$ | ngrxPush)"
+      (btnClick)="onUserSignIn()">
+    </b1-button>
+
+    <b1-button
+      *ngIf="progress === 'create'"
+      label="actions.save"
+      icon="save"
+      [isDisabled]="isLoading$ | ngrxPush"
+      (btnClick)="onUserCreate()">
+    </b1-button>
+  </ng-container>
+</b1-modal-container>
