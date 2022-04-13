@@ -1,0 +1,50 @@
+<div class="b1-modal-data b1-light">
+  <div class="b1-modal-close">
+    <i b1-icon icon="cancel" (click)="ok()"></i>
+  </div>
+  <div class="b1-modal-header">
+    {{ 'shared.errorDetails' | translate }}
+  </div>
+  <div class="b1-modal-body b1-modal-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="b1-base b1-color-dark-300">
+          {{ 'shared.errorText' | translate }}
+        </div>
+        <div class="b1-base b1-bold word-break">
+          {{ error.message }}
+        </div>
+      </div>
+    </div>
+    <div class="row b1-mt-5">
+      <div class="col-md-12">
+        <div class="b1-base b1-color-dark-300">URL</div>
+        <div class="b1-base b1-bold word-break">
+          {{ error.url }}
+        </div>
+      </div>
+    </div>
+    <div class="row b1-mt-5">
+      <div class="col-md-12">
+        <div class="b1-base b1-color-dark-300">Session ID</div>
+        <div class="b1-base b1-bold word-break">
+          {{ error.sessionId }}
+        </div>
+      </div>
+    </div>
+    <div class="row b1-mt-5">
+      <div class="col-md-12">
+        <div class="b1-base b1-color-dark-300">Request ID</div>
+        <div class="b1-base b1-bold word-break">
+          {{ error.requestId }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b1-modal-footer" ngbAutofocus>
+    <button class="b1-button-primary" (click)="ok()">
+      <i b1-icon icon="check"></i>
+      Ok
+    </button>
+  </div>
+</div>

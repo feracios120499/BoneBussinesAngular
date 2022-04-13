@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardLimit } from '@models/cards/card-limit.model';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { CardDetailsActions } from '@store/cards/details/actions';
 import { CardDetailsSelectors } from '@store/cards/details/selectors';
 import { SharedActions } from '@store/shared/actions';
@@ -11,7 +12,10 @@ import { SharedActions } from '@store/shared/actions';
   styleUrls: ['./card-details-limits.component.scss'],
 })
 export class CardDetailsLimitsComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private translateService: TranslateService
+  ) {}
 
   limits$ = this.store.select(CardDetailsSelectors.limits);
   cardCurrency$ = this.store.select(CardDetailsSelectors.cardCurrency);
@@ -38,7 +42,9 @@ export class CardDetailsLimitsComponent implements OnInit {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: 'test',
+          text: this.translateService.instant(
+            'components.corpcard.limitDefaultConfirm'
+          ),
           callback: () =>
             this.store.dispatch(
               CardDetailsActions.setDefaultLimitRequest(limit)

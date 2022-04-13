@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?f53vwn');
-  src:  url('fonts/b1-icons.eot?f53vwn#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?f53vwn') format('truetype'),
-    url('fonts/b1-icons.woff?f53vwn') format('woff'),
-    url('fonts/b1-icons.svg?f53vwn#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?l3qr59');
+  src:  url('fonts/b1-icons.eot?l3qr59#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?l3qr59') format('truetype'),
+    url('fonts/b1-icons.woff?l3qr59') format('woff'),
+    url('fonts/b1-icons.svg?l3qr59#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.b1-icons-icon-card-turnovers:before {
+  content: "\e935";
+}
+.b1-icons-icon-sms:before {
+  content: "\e936";
+}
 .b1-icons-icon-spinner:before {
   content: "\e934";
 }

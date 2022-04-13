@@ -45,6 +45,8 @@ import { InitialsPipe } from './pipes/initials.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { UsersFilterPipe } from './pipes/users-filter.pipe';
 import { B1ConfirmModalComponent } from './components/modals/b1-confirm-modal/b1-confirm-modal.component';
+import { CustomToast } from '@ui/custom-toast/custom-toast.component';
+import { B1ErrorModalComponent } from './components/modals/b1-error-modal/b1-error-modal.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -75,6 +77,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     FilterPipe,
     UsersFilterPipe,
     B1ConfirmModalComponent,
+    CustomToast,
+    B1ErrorModalComponent,
   ],
   imports: [
     CommonModule,
