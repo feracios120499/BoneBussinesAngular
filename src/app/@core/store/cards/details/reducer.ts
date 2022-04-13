@@ -56,5 +56,23 @@ export const cardDetailsReducer = createReducer(
   on(CardDetailsActions.loadSmsStatusSuccess, (state, action) => ({
     ...state,
     smsStatus: action.payload,
-  }))
+  })),
+  on(
+    CardDetailsActions.updateLimitRequest,
+    CardDetailsActions.setDefaultLimitRequest,
+    (state, action) => ({
+      ...state,
+      loadings: [...pushIfNotExist(state.loadings, 'updateLimit')],
+    })
+  ),
+  on(
+    CardDetailsActions.updateLimitFailure,
+    CardDetailsActions.updateLimitSuccess,
+    CardDetailsActions.setDefaultLimitFailure,
+    CardDetailsActions.setDefaultLimitSuccess,
+    (state, action) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'updateLimit')],
+    })
+  )
 );

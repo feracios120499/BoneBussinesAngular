@@ -1,1 +1,1 @@
-export type DetailsLoading = 'info' | 'limits' | 'sms';
+export type DetailsLoading = 'info' | 'limits' | 'sms' | 'updateLimit';

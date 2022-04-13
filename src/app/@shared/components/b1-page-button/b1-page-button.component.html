@@ -1,5 +1,13 @@
-<button [disabled]="disabled" class="b1-page-button" [ngbTooltip]="label | translate" tooltipClass="b1-base"
-    (click)="click()">
-    <div class="b1-page-icon" b1-icon [icon]="icon"></div>
-    <!-- <ng-content></ng-content> -->
+<button
+  [disabled]="disabled"
+  class="b1-page-button"
+  [ngbTooltip]="label | translate"
+  tooltipClass="b1-base"
+  (click)="click()">
+  <div
+    class="b1-page-icon"
+    [class.b1-page-icon_primary]="primary"
+    b1-icon
+    [icon]="icon"></div>
+  <!-- <ng-content></ng-content> -->
 </button>

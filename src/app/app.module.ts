@@ -1,10 +1,15 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CamelCaseInterceptor } from '@core/interceptors/camel-case.interceptor';
 import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
+import { ServerErrorInteceptor } from '@core/interceptors/server-error.interceptor';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -21,13 +26,10 @@ import { AppComponent } from './app.component';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
 import { HeaderDarkModeComponent } from './layout/header/components/header-dark-mode/header-dark-mode.component';
 import { HeaderLanguagesComponent } from './layout/header/components/header-languages/header-languages.component';
-import {
-  HeaderNotificationsComponent,
-} from './layout/header/components/header-notifications/header-notifications.component';
+import { HeaderNotificationsComponent } from './layout/header/components/header-notifications/header-notifications.component';
 import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     HeaderDarkModeComponent,
     HeaderNotificationsComponent,
     HeaderLanguagesComponent,
-    HeaderProfileComponent
+    HeaderProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -50,8 +52,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
@@ -59,11 +61,9 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    B1DirectivesModule
+    B1DirectivesModule,
   ],
-  exports: [
-    ReactiveComponentModule
-  ],
+  exports: [ReactiveComponentModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -80,11 +80,16 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
       useClass: CamelCaseInterceptor,
       multi: true,
     },
-    DatePipe
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInteceptor,
+      multi: true,
+    },
+    DatePipe,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 export function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
