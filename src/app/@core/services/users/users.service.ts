@@ -7,7 +7,6 @@ import { BaseService } from '@services/base.service';
 import { User } from '@models/users/user.model';
 import { Role } from '@models/users/role.model';
 import { FoundUser } from '@models/users/found-user.model';
-import { UserSignInError } from '@models/users/user-sign-in-error.model';
 import { UserNameForm } from '@models/users/user-name-form.model';
 import { UserRolesForm } from '@models/users/user-roles-form.model';
 
@@ -32,11 +31,8 @@ export class UsersService extends BaseService {
   findUser(
     clientId: string,
     userData: { phoneNumber: string; email: string }
-  ): Observable<FoundUser | UserSignInError> {
-    return this.http.post<FoundUser | UserSignInError>(
-      `api/v1/users/find/${clientId}`,
-      userData
-    );
+  ): Observable<FoundUser> {
+    return this.http.post<FoundUser>(`api/v1/users/find/${clientId}`, userData);
   }
 
   createUser(
@@ -50,8 +46,8 @@ export class UsersService extends BaseService {
     clientId: string,
     userId: string,
     userData: { roles: string[] }
-  ): Observable<User | UserSignInError> {
-    return this.http.post<User | UserSignInError>(
+  ): Observable<User> {
+    return this.http.post<User>(
       `api/v1/users/${userId}/attach/${clientId}`,
       userData
     );

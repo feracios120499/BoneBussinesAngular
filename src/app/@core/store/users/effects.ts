@@ -10,10 +10,9 @@ import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { User } from '@models/users/user.model';
 import { Role } from '@models/users/role.model';
 import { FoundUser } from '@models/users/found-user.model';
-import { UserSignInError } from '@models/users/user-sign-in-error.model';
-import { UserSignInErrorStatus } from '@models/users/user-sign-in-error-status.enum';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
+import { ServerError } from '@models/errors/server-error.model';
 
 @Injectable()
 export class UsersEffects {
@@ -38,8 +37,11 @@ export class UsersEffects {
       switchMap((clientId: string) =>
         this.usersService.getUsers(clientId).pipe(
           map((users: User[]) => UsersActions.loadUsersSuccess(users)),
-          catchError((error) =>
-            of(UsersActions.loadUsersFailure(error.error.Message))
+          catchError((error: ServerError) =>
+            of(
+              UsersActions.loadUsersFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -53,8 +55,11 @@ export class UsersEffects {
       switchMap((clientId: string) =>
         this.usersService.getRoles(clientId).pipe(
           map((roles: Role[]) => UsersActions.loadRolesSuccess(roles)),
-          catchError((error) =>
-            of(UsersActions.loadRolesFailure(error.error.Message))
+          catchError((error: ServerError) =>
+            of(
+              UsersActions.loadRolesFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -67,24 +72,21 @@ export class UsersEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data: { roles, ...rest } }) =>
         this.usersService.findUser(clientId, { ...rest }).pipe(
-          map((res: FoundUser | UserSignInError) => {
-            if (res.hasOwnProperty('errorMessage')) {
-              const errorRes = res as UserSignInError;
-              if (errorRes.statusCode === UserSignInErrorStatus.notFound) {
-                return UsersActions.signInUserSuccess({ roles, ...rest });
-              } else {
-                return UsersActions.signInUserFailure(errorRes.errorMessage);
-              }
-            } else {
-              return UsersActions.signInFoundUser({
-                signInData: { roles, ...rest },
-                user: res as FoundUser,
-              });
+          map((user: FoundUser) =>
+            UsersActions.signInFoundUser({
+              user,
+              signInData: { roles, ...rest },
+            })
+          ),
+          catchError((error: ServerError) => {
+            if (error.status === 404) {
+              return of(UsersActions.signInUserSuccess({ roles, ...rest }));
             }
-          }),
-          catchError((error) =>
-            of(UsersActions.signInUserFailure(error.error.Message))
-          )
+            return of(
+              UsersActions.signInUserFailure(error.message),
+              UsersActions.showServerError({ error })
+            );
+          })
         )
       )
     )
@@ -106,10 +108,12 @@ export class UsersEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data }) =>
         this.usersService.createUser(clientId, data).pipe(
-          tap(console.log),
           map((user: User) => UsersActions.createUserSuccess(user)),
-          catchError((error) =>
-            of(UsersActions.createUserFailure(error.error.Message))
+          catchError((error: ServerError) =>
+            of(
+              UsersActions.createUserFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -122,17 +126,12 @@ export class UsersEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data: { userId, roles } }) =>
         this.usersService.restoreUser(clientId, userId, { roles }).pipe(
-          tap(console.log),
-          map((res: User | UserSignInError) => {
-            const errorRes = res as UserSignInError;
-            if (errorRes.hasOwnProperty('errorMessage')) {
-              return UsersActions.restoreUserFailure(errorRes.errorMessage);
-            } else {
-              return UsersActions.restoreUserSuccess(res as User);
-            }
-          }),
-          catchError((error) =>
-            of(UsersActions.restoreUserFailure(error.error.Message))
+          map((user: User) => UsersActions.restoreUserSuccess(user)),
+          catchError((error: ServerError) =>
+            of(
+              UsersActions.restoreUserFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -153,18 +152,6 @@ export class UsersEffects {
     )
   );
 
-  newUserError$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UsersActions.signInUserFailure, UsersActions.restoreUserFailure),
-      map((action) =>
-        NotifyActions.errorNotification({
-          message: action.payload,
-          title: this.translateService.instant('errors.error'),
-        })
-      )
-    )
-  );
-
   updateUserRolesRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.updateUserRolesRequest),
@@ -173,7 +160,10 @@ export class UsersEffects {
         this.usersService.updateUserRoles(clientId, userId, { roles }).pipe(
           map((user: User) => UsersActions.updateUserRolesSuccess(user)),
           catchError((error) =>
-            of(UsersActions.updateUserRolesFailure(error.error.Message))
+            of(
+              UsersActions.updateUserRolesFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -203,8 +193,11 @@ export class UsersEffects {
           .updateUserLockState(clientId, userId, { isLock })
           .pipe(
             map((user: User) => UsersActions.updateUserLockStateSuccess(user)),
-            catchError((error) =>
-              of(UsersActions.updateUserLockStateFailure(error.error.Message))
+            catchError((error: ServerError) =>
+              of(
+                UsersActions.updateUserLockStateFailure(error.message),
+                UsersActions.showServerError({ error })
+              )
             )
           )
       )
@@ -218,10 +211,10 @@ export class UsersEffects {
         let title: string;
         let message: string;
         if (isDisable) {
-          title = 'components.admin.locked';
+          title = 'notify.locked';
           message = 'components.admin.lockedSuccssMessage';
         } else {
-          title = 'components.admin.unlocked';
+          title = 'notify.unlocked';
           message = 'components.admin.unlockedSuccess';
         }
         return NotifyActions.successNotification({
@@ -239,8 +232,11 @@ export class UsersEffects {
       switchMap(({ clientId, data: userId }) =>
         this.usersService.deleteUser(clientId, userId).pipe(
           map(() => UsersActions.deleteUserSuccess()),
-          catchError((error) =>
-            of(UsersActions.deleteUserFailure(error.error.Message))
+          catchError((error: ServerError) =>
+            of(
+              UsersActions.deleteUserFailure(error.message),
+              UsersActions.showServerError({ error })
+            )
           )
         )
       )
@@ -256,6 +252,19 @@ export class UsersEffects {
           message: this.translateService.instant(
             'components.admin.userDeleted'
           ),
+        })
+      )
+    )
+  );
+
+  showServerError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.showServerError),
+      map(({ error }) =>
+        NotifyActions.serverErrorNotification({
+          error,
+          message: error.message,
+          title: this.translateService.instant('errors.error'),
         })
       )
     )

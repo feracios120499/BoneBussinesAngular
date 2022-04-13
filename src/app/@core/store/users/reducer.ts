@@ -52,9 +52,8 @@ export const usersReducer = createReducer(
       loadings: [...removeItem(state.loadings, 'userCreate')],
     })
   ),
-  on(UsersActions.signInUserSuccess, (state, action) => ({
+  on(UsersActions.signInUserSuccess, (state) => ({
     ...state,
-    userSignInData: action.payload,
     progress: 'create',
   })),
   on(UsersActions.setFoundUser, (state, action) => ({
@@ -93,7 +92,6 @@ export const usersReducer = createReducer(
   ),
   on(UsersActions.resetUserCreation, (state) => ({
     ...state,
-    // userSignInData: null,
     foundUser: null,
     progress: 'signIn',
   }))

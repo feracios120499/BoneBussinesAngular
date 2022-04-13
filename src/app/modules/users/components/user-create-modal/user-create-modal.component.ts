@@ -61,32 +61,27 @@ export class UserCreateModalComponent extends withDestroy() implements OnInit {
       });
   }
   onUserSignIn(): void {
-    console.log('roles form is valid: ', this.rolesFormRef.submitForm());
-    console.log('roles form value: ', this.userRolesForm);
     if (this.rolesFormRef.submitForm() && this.userRolesForm) {
       this.store.dispatch(UsersActions.signInUserRequest(this.userRolesForm));
     }
   }
 
   onUserCreate(): void {
-    console.log('name form is valid: ', this.nameFormRef.submitForm());
-    console.log('name form value: ', this.userNameForm);
-    if (this.userNameForm) {
-      if (this.foundUserId) {
-        this.store.dispatch(
-          UsersActions.restoreUserRequest({
-            userId: this.foundUserId,
-            roles: this.userRolesForm.roles,
-          })
-        );
-      } else {
-        this.store.dispatch(
-          UsersActions.createUserRequest({
-            ...this.userRolesForm,
-            ...this.userNameForm,
-          })
-        );
-      }
+    if (this.foundUserId) {
+      this.store.dispatch(
+        UsersActions.restoreUserRequest({
+          userId: this.foundUserId,
+          roles: this.userRolesForm.roles,
+        })
+      );
+      this.activeModal.close();
+    } else if (this.nameFormRef.submitForm() && this.userNameForm) {
+      this.store.dispatch(
+        UsersActions.createUserRequest({
+          ...this.userRolesForm,
+          ...this.userNameForm,
+        })
+      );
       this.activeModal.close();
     }
   }

@@ -7,9 +7,11 @@ import {
 
 import { Store } from '@ngrx/store';
 import { UsersActions } from '@store/users/actions';
+import { SharedActions } from '@store/shared/actions';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { User } from '@models/users/user.model';
 import { ActionButton } from '@ui/b1-dropdown/b1-dropdown.component';
+import { TranslateService } from '@ngx-translate/core';
 
 type UserState = 'locked' | 'unlocked';
 
@@ -41,7 +43,10 @@ export class UserItemComponent
 {
   @Input() user!: User;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private translateService: TranslateService
+  ) {
     super();
   }
 
@@ -79,12 +84,14 @@ export class UserItemComponent
   }
 
   private onUserDelete(user: User): void {
-    // FOR DEMO PURPOSE ONLY:
-    const isConfirmed: boolean = window.confirm(
-      `Ви впевнені, що бажаєте видалити користувача ${user.displayName}?`
+    this.store.dispatch(
+      SharedActions.showConfirm({
+        config: {
+          text: this.translateService.instant('components.admin.deleteConfirm'),
+          callback: () =>
+            this.store.dispatch(UsersActions.deleteUserRequest(user.id)),
+        },
+      })
     );
-    if (isConfirmed) {
-      this.store.dispatch(UsersActions.deleteUserRequest(user.id));
-    }
   }
 }
