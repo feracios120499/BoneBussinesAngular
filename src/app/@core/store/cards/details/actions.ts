@@ -50,4 +50,6 @@ export namespace CardDetailsActions {
     createHTTPActions<CardLimit, void, string>(
       `[${CARD_DETAILS_KEY}] update limit`
     );
+
+  export const goToCards = createAction(`[${CARD_DETAILS_KEY}] go to cards`);
 }

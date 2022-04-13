@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { EditLimitModalComponent } from '@modules/cards/modules/card-details/components/edit-limit-modal/edit-limit-modal.component';
 import { Actions, createEffect, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { CardsService } from '@services/cards/cards.service';
 import { ModalService } from '@services/modal.service';
+import { NotifyActions } from '@store/notify/actions';
+import { RouteActions } from '@store/route/actions';
 import { clientIdWithData } from '@store/shared';
 import { of } from 'rxjs';
 import {
@@ -25,7 +28,8 @@ export class CardDetailsEffects {
     private actions$: Actions,
     private store: Store,
     private cardsService: CardsService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translateService: TranslateService
   ) {}
 
   loadData$ = createEffect(() =>
@@ -54,7 +58,13 @@ export class CardDetailsEffects {
           .pipe(
             map((card) => CardDetailsActions.loadCardSuccess(card)),
             catchError((error) =>
-              of(CardDetailsActions.loadCardFailure(error.error.message))
+              of(
+                CardDetailsActions.loadCardFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.loadCard'),
+                })
+              )
             )
           )
       )
@@ -72,7 +82,13 @@ export class CardDetailsEffects {
           .pipe(
             map((limits) => CardDetailsActions.loadLimitsSuccess(limits)),
             catchError((error) =>
-              of(CardDetailsActions.loadLimitsFailure(error.error.message))
+              of(
+                CardDetailsActions.loadLimitsFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.loadLimits'),
+                })
+              )
             )
           )
       )
@@ -90,7 +106,15 @@ export class CardDetailsEffects {
           .pipe(
             map((limits) => CardDetailsActions.loadSmsStatusSuccess(limits)),
             catchError((error) =>
-              of(CardDetailsActions.loadSmsStatusFailure(error.error.message))
+              of(
+                CardDetailsActions.loadSmsStatusFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant(
+                    'errors.loadSmsStatus'
+                  ),
+                })
+              )
             )
           )
       )
@@ -117,20 +141,18 @@ export class CardDetailsEffects {
           .pipe(
             map((_) => CardDetailsActions.setDefaultLimitSuccess()),
             catchError((error) =>
-              of(CardDetailsActions.setDefaultLimitFailure(error.error.message))
+              of(
+                CardDetailsActions.setDefaultLimitFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant(
+                    'errors.setDefaultLimit'
+                  ),
+                })
+              )
             )
           )
       )
-    )
-  );
-
-  reloadLimits$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(
-        CardDetailsActions.setDefaultLimitSuccess,
-        CardDetailsActions.updateLimitSuccess
-      ),
-      map((_) => CardDetailsActions.loadLimitsRequest())
     )
   );
 
@@ -166,9 +188,65 @@ export class CardDetailsEffects {
           .pipe(
             map(() => CardDetailsActions.updateLimitSuccess()),
             catchError((error) =>
-              of(CardDetailsActions.updateLimitFailure(error.error.message))
+              of(
+                CardDetailsActions.updateLimitFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.updateLimit'),
+                })
+              )
             )
           )
+      )
+    )
+  );
+
+  updateLimitSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.updateLimitSuccess),
+      switchMap(() => [
+        CardDetailsActions.loadLimitsRequest(),
+        NotifyActions.successNotification({
+          message: this.translateService.instant(
+            'components.corpcard.success.changeLimit'
+          ),
+        }),
+      ])
+    )
+  );
+
+  setDefaultLimitSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.setDefaultLimitSuccess),
+      switchMap(() => [
+        CardDetailsActions.loadLimitsRequest(),
+        NotifyActions.successNotification({
+          message: this.translateService.instant(
+            'components.corpcard.success.setDefaultLimit'
+          ),
+        }),
+      ])
+    )
+  );
+
+  handleError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        CardDetailsActions.loadCardFailure,
+        CardDetailsActions.loadLimitsFailure,
+        CardDetailsActions.loadSmsStatusFailure
+      ),
+      map(() => CardDetailsActions.goToCards())
+    )
+  );
+
+  goToCards$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.goToCards),
+      map(() =>
+        RouteActions.routeTo({
+          route: `cards`,
+        })
       )
     )
   );
