@@ -32,7 +32,10 @@
       *ngIf="progress === 'create'"
       label="actions.save"
       icon="save"
-      [isDisabled]="isLoading$ | ngrxPush"
+      [isDisabled]="
+        (!nameFormRef?.isDisabled && !nameFormRef?.isValid) ||
+        (isLoading$ | ngrxPush)
+      "
       (btnClick)="onUserCreate()">
     </b1-button>
   </ng-container>
