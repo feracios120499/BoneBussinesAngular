@@ -15,4 +15,7 @@ export class CardDetailsServicesComponent implements OnInit {
   ngOnInit(): void {}
 
   showStatement(): void {}
+
+  activateSms(): void {}
+  disableSms(): void {}
 }

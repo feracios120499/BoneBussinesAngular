@@ -1,5 +1,5 @@
 <div
-  class="invisible-xs h-100 w-100"
+  class="h-100 w-100"
   ngbDropdown
   #dropdown="ngbDropdown"
   [display]="display">
@@ -13,7 +13,8 @@
     [attr.aria-labelledby]="label"
     [class.b1-dropdown_up]="top"
     [class.b1-dropdown_left]="left"
-    [ngStyle]="{ minWidth, maxWidth }">
+    [ngStyle]="{ minWidth, maxWidth }"
+    mobile-more>
     <li
       *ngFor="let button of buttons"
       class="b1-dropdown__item"
