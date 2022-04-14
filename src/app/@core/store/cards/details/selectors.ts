@@ -57,4 +57,9 @@ export namespace CardDetailsSelectors {
         )
       : false
   );
+
+  export const smsStatus = createSelector(
+    cardDetailsStore,
+    (store) => store.smsStatus
+  );
 }

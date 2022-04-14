@@ -11,6 +11,7 @@ export class CardDetailsServicesComponent implements OnInit {
   constructor(private store: Store) {}
 
   card$ = this.store.select(CardDetailsSelectors.card);
+  smsStatus$ = this.store.select(CardDetailsSelectors.smsStatus);
   ngOnInit(): void {}
 
   showStatement(): void {}

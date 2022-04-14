@@ -19,3 +19,34 @@
     </b1-page-button>
   </div>
 </div>
+
+<div class="services-row" *ngrxLet="smsStatus$ as smsStatus">
+  <div class="services-row_body">
+    <div class="services-row_name">
+      <i b1-icon icon="sms" class="services-row_icon"></i>
+      <div class="b1-flex b1-flex-direction">
+        {{ 'components.corpcard.services.smsinfo' | translate }}
+        <div class="b1-status b1-ml-4 b1-medium b1-light b1-mt-2">
+          <span class="b1-status b1-color-info" *ngIf="smsStatus">
+            {{
+              'components.corpcard.services.smsinfo.statuses.' +
+                smsStatus.status | translate
+            }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="services-row_value">
+      <span *ngIf="smsStatus">{{ smsStatus.phoneNumber }}</span>
+      <ngx-skeleton-loader *ngIf="!smsStatus"></ngx-skeleton-loader>
+    </div>
+  </div>
+  <div class="services-row_button">
+    <!-- <b1-page-button
+      (b1Click)="showStatement()"
+      icon="turnovers"
+      label="components.acct.getStatement"
+      [primary]="true">
+    </b1-page-button> -->
+  </div>
+</div>
