@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup" #formRef="ngForm">
+  <b1-masked-input
+    name="phoneNumber"
+    controlId="newUserPhone"
+    [formControl]="phoneControl"
+    mask="(000) 000-00-00"
+    prefix="+38">
+    {{ 'components.admin.cellPhone' | translate }}
+  </b1-masked-input>
+
+  <b1-input
+    class="b1-mt-6"
+    name="email"
+    controlId="newUserEmail"
+    [formControl]="emailControl"
+    transform="lowercase">
+    {{ 'components.admin.email' | translate }}
+  </b1-input>
+
+  <b1-switcher-list
+    class="b1-mt-6"
+    [formGroup]="$any(roleControlsArray)"
+    [labels]="roleLabels">
+    {{ 'components.admin.modules' | translate }}
+  </b1-switcher-list>
+</form>

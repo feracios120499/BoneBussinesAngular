@@ -1,0 +1,20 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-header">
+    <div class="b1-large b1-bold" style="padding: 0 64px">
+      <ng-content select="[slot=header]"></ng-content>
+    </div>
+    <div class="b1-modal-close">
+      <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
+    </div>
+  </div>
+
+  <div class="b1-modal-body b1-modal-wrapper">
+    <ng-content select="[slot=body]"></ng-content>
+  </div>
+
+  <b1-card-loader style="z-index: 1" [isLoading]="isLoading$"></b1-card-loader>
+
+  <div class="b1-modal-footer" ngbAutofocus>
+    <ng-content select="[slot=footer]"></ng-content>
+  </div>
+</div>

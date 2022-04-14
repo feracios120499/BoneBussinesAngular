@@ -20,7 +20,6 @@ import { B1SupDocumentsComponent } from './components/b1-sup-documents/b1-sup-do
 import { B1ListDocumentsComponent } from './components/b1-list-documents/b1-list-documents.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
   declarations: [
     B1AccountSelectComponent,
@@ -43,7 +42,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveComponentModule,
     ScrollingModule,
     NgScrollbarModule,
-    NgbTooltipModule
+    NgbTooltipModule,
   ],
   exports: [
     B1AccountSelectComponent,
@@ -53,7 +52,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     DaterangepickerComponent,
     DaterangepickerDirective,
     B1SupDocumentsComponent,
-    B1ListDocumentsComponent
-  ]
+    B1ListDocumentsComponent,
+  ],
 })
-export class B1FormsModule { }
+export class B1FormsModule {}

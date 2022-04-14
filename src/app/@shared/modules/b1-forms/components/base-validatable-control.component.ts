@@ -25,7 +25,10 @@ export abstract class BaseValidatableControlComponent
 
   private get validations(): { [key: string]: () => IErrorData } {
     return {
-      required: () => ({ text: 'is required.' }),
+      required: () => ({ text: 'validate.required' }),
+      email: () => ({ text: 'validate.invalidEmail' }),
+      phone: () => ({ text: 'validate.invalidPhone' }),
+      mask: () => ({ text: 'validate.mustMatchThePattern' }),
       pattern: () => ({
         text: 'is not properly formatted.',
         value: this.formControl.errors!.pattern['value'],
@@ -77,7 +80,16 @@ export abstract class BaseValidatableControlComponent
     };
   }
 
-  get error(): IErrorData | null {
+  get errorText(): string {
+    return `${this.translateService.instant(this.error!.text)}
+      ${this.errorValue}`;
+  }
+
+  private get errorValue(): Date | string | number {
+    return this.error!.value !== undefined ? this.error!.value : '';
+  }
+
+  private get error(): IErrorData | null {
     if (!this.formControl.errors) {
       return null;
     }

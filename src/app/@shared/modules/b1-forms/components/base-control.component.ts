@@ -8,6 +8,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { ControlValueAccessor, AbstractControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { generateId } from '@methods/generate-id.method';
@@ -34,10 +35,13 @@ export abstract class BaseControlComponent
 
   constructor(
     protected renderer: Renderer2,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected translateService: TranslateService
   ) {
     super();
   }
+
+  abstract handleValue(value: TValue): void;
 
   ngAfterViewInit(): void {
     if (this.formControlRef.nativeElement.form) {
@@ -76,7 +80,7 @@ export abstract class BaseControlComponent
     this.formControlRef.nativeElement.blur();
   }
 
-  protected onChange(value: string | File | FileList): void {}
+  protected onChange(value: string | boolean | File | FileList): void {}
 
   protected onFocusOut(): void {}
 }

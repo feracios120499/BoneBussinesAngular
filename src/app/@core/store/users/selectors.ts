@@ -1,21 +1,42 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UsersState, USERS_KEY } from './store';
-import { UsersLoadings } from './models/users-loadings.enum';
 
 export namespace UsersSelectors {
   export const usersStore = createFeatureSelector<UsersState>(USERS_KEY);
 
-  export const usersSelector = createSelector(
-    usersStore,
-    (state) => state.users
-  );
-
-  export const isLoadingUsers = createSelector(usersStore, (state) =>
-    state.loadings.includes(UsersLoadings.list)
-  );
+  export const userList = createSelector(usersStore, (state) => state.users);
 
   export const filterTerm = createSelector(
     usersStore,
     (state) => state.filterTerm
+  );
+
+  export const roleList = createSelector(usersStore, (state) => state.roles);
+
+  export const foundUser = createSelector(
+    usersStore,
+    (state) => state.foundUser
+  );
+
+  export const progress = createSelector(usersStore, (state) => state.progress);
+
+  export const isLoadingUsers = createSelector(usersStore, (state) =>
+    state.loadings.includes('userList')
+  );
+
+  export const isLoadingRoles = createSelector(usersStore, (state) =>
+    state.loadings.includes('roleList')
+  );
+
+  export const isLoadingUsersOrRoles = createSelector(usersStore, (state) =>
+    state.loadings.some((p) => p === 'userList' || p === 'roleList')
+  );
+
+  export const isLoadingUserCreate = createSelector(usersStore, (state) =>
+    state.loadings.includes('userCreate')
+  );
+
+  export const isLoadingUserEdit = createSelector(usersStore, (state) =>
+    state.loadings.includes('userEdit')
   );
 }

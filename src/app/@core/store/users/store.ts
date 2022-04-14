@@ -1,16 +1,25 @@
+import { FoundUser } from '@models/users/found-user.model';
+import { UsersLoading } from './models/users-loading.type';
 import { User } from '@models/users/user.model';
-import { UsersLoadings } from './models/users-loadings.enum';
+import { Role } from '@models/users/role.model';
+import { UserCreateProgress } from '@b1-types/users/user-create-progress.type';
 
 export const USERS_KEY = 'users';
 
 export interface UsersState {
   users: User[];
-  loadings: UsersLoadings[];
   filterTerm: string;
+  roles: Role[];
+  progress: UserCreateProgress;
+  foundUser: FoundUser | null;
+  loadings: UsersLoading[];
 }
 
 export const initialState: UsersState = {
   users: [],
-  loadings: [],
   filterTerm: '',
+  roles: [],
+  progress: 'signIn',
+  foundUser: null,
+  loadings: [],
 };

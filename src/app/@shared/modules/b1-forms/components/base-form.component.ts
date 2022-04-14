@@ -1,6 +1,11 @@
-import { Component, ChangeDetectorRef, Optional, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  Optional,
+  AfterViewInit,
+} from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
-import { Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import {
   take,
   filter,
@@ -22,7 +27,7 @@ type TError = string | undefined;
 })
 export abstract class BaseFormComponent
   extends withDestroy()
-  implements OnInit
+  implements AfterViewInit
 {
   abstract form: FormGroup;
   abstract isLoading$: Observable<boolean>;
@@ -36,7 +41,7 @@ export abstract class BaseFormComponent
     super();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.isLoading$
       .pipe(takeUntil(this.destroy$))
       .subscribe((isLoading: boolean) => {
@@ -50,7 +55,7 @@ export abstract class BaseFormComponent
 
   protected submit(
     action: TypedAction<any>,
-    errorSelector: MemoizedSelector<Object, TError>
+    errorSelector: MemoizedSelector<Object, TError> | null = null
   ): void {
     if (this.isSubmitted || this.form.pending) {
       return;
@@ -104,11 +109,13 @@ export abstract class BaseFormComponent
 
   private sendRequest(
     action: TypedAction<any>,
-    errorSelector: MemoizedSelector<Object, TError>
+    errorSelector: MemoizedSelector<Object, TError> | null
   ): Observable<string> {
-    const requestObs: Observable<string> = this.store
-      .select(errorSelector)
-      .pipe(
+    let requestObs: Observable<string | never>;
+    if (!errorSelector) {
+      requestObs = EMPTY;
+    } else {
+      requestObs = this.store.select(errorSelector).pipe(
         filter((error: TError) => {
           return !!error;
         }),
@@ -117,17 +124,18 @@ export abstract class BaseFormComponent
           return throwError(error);
         })
       );
+    }
     this.store.dispatch(action);
     return requestObs;
   }
 
   private enableForm(): void {
     this.isSubmitted = false;
-    this.form.enable();
+    // this.form.enable();
   }
 
   private disableForm(): void {
     this.isSubmitted = true;
-    this.form.disable();
+    // this.form.disable();
   }
 }
