@@ -172,7 +172,7 @@ export class MenuService extends BaseService {
       ngValue: 'agents',
       icon: 'agents',
       dataRole: 'Director,Accountant,PaymentsManager',
-      route: 'app.payments.recipients',
+      route: 'correspondents',
       dataTranslate: 'aside.nav.CORRESPONDENTS',
       moduleName: 'ClientAgents',
       position: 0,

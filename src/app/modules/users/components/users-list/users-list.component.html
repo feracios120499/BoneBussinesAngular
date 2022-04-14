@@ -1,11 +1,7 @@
 <ng-container *ngrxLet="users$ as users">
   <app-user-item
-    (click)="onUserEdit(user); selectedItem = i"
-    *ngFor="
-      let user of users | usersFilter: (filterTerm$ | ngrxPush);
-      index as i
-    "
-    [class.selected]="selectedItem === i"
-    [user]="user">
+    *ngFor="let user of users | usersFilter: (filterTerm$ | ngrxPush)"
+    [user]="user"
+    (click)="onUserEdit(user)">
   </app-user-item>
 </ng-container>

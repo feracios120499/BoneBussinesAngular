@@ -13,7 +13,7 @@ import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.compo
   styleUrls: ['./users-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'users-list',
+    class: 'users-list b1-page-data',
   },
 })
 export class UsersListComponent {
@@ -21,7 +21,6 @@ export class UsersListComponent {
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
   );
-  selectedItem?: number;
 
   constructor(private store: Store, private modalService: NgbModal) {}
 

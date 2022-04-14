@@ -7,7 +7,6 @@ import { FoundUser } from '@models/users/found-user.model';
 import { UserNameForm } from '@models/users/user-name-form.model';
 import { UserRolesForm } from '@models/users/user-roles-form.model';
 import { USERS_KEY } from './store';
-import { ServerError } from '@models/errors/server-error.model';
 
 export namespace UsersActions {
   export const [loadUsersRequest, loadUsersSuccess, loadUsersFailure] =
@@ -67,10 +66,5 @@ export namespace UsersActions {
 
   export const resetUserCreation = createAction(
     `[${USERS_KEY}] reset user creation`
-  );
-
-  export const showServerError = createAction(
-    `[${USERS_KEY}] show server error`,
-    props<{ error: ServerError }>()
   );
 }

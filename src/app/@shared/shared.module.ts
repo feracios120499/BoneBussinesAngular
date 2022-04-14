@@ -20,6 +20,9 @@ import { StopPropagationModule } from './directives/stop-propagation/stop-propag
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1ContentWrapperModule } from '@ui/b1-content-wrapper/b1-content-wrapper.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
+import { MoreAutoDirectionModule } from './directives/more-auto-direction/more-auto-direction.module';
+import { MobileClassModule } from './directives/mobile-class/mobile-class.module';
+import { WebClassModule } from './directives/web-class/web-class.module';
 
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
@@ -29,11 +32,8 @@ import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
-import { MobileClassDirective } from './directives/mobile-class.directive';
-import { MoreAutoDirectionDirective } from './directives/more-auto-direction.directive';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
-import { WebClassDirective } from './directives/web-class.directive';
 import { B1DirectivesModule } from './modules/b1-directives/b1-directives.module';
 import { B1FormsModule } from './modules/b1-forms/b1-forms.module';
 import { B1PipesModule } from './modules/b1-pipes/b1-pipes.module';
@@ -60,9 +60,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     AccountFilterPipe,
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
-    WebClassDirective,
-    MobileClassDirective,
-    MoreAutoDirectionDirective,
     B1LinkComponent,
     B1PaymentModalComponent,
     B1StatementModalComponent,
@@ -102,6 +99,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ButtonModule,
     B1ContentWrapperModule,
     B1CardLoaderModule,
+    MobileClassModule,
+    WebClassModule,
+    MoreAutoDirectionModule,
   ],
   exports: [
     CommonModule,
@@ -118,9 +118,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     CardNumberPipe,
     CdkVirtualScrollViewportPatchDirective,
     NgxSkeletonLoaderModule,
-    WebClassDirective,
-    MobileClassDirective,
-    MoreAutoDirectionDirective,
+    WebClassModule,
+    MobileClassModule,
+    MoreAutoDirectionModule,
     B1LinkComponent,
     NgSelectModule,
     B1PageButtonComponent,
