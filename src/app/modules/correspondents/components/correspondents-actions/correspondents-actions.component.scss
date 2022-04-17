@@ -1,0 +1,13 @@
+$screen-tablet: 812px;
+
+.b1-page-actions {
+  @media (max-width: $screen-tablet) {
+    flex-wrap: nowrap;
+    height: auto;
+    min-height: 90px;
+
+    &__right {
+      margin-left: 16px;
+    }
+  }
+}

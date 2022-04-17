@@ -1,0 +1,66 @@
+@import 'variables';
+
+$screen-tablet: 812px;
+
+:host(.correspondent-item) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 2px solid rgba(var(--color-dark-rgb), 0.14);
+  border-radius: 12px;
+  transition: all 150ms $animation-timing;
+  cursor: pointer;
+
+  &.selected {
+    background-image: $linear-gradient;
+    color: var(--color-light);
+  }
+
+  &:hover:not(.selected) {
+    background-color: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+  }
+
+  @media (max-width: $screen-tablet) {
+    padding: 16px 38px 16px 16px;
+  }
+}
+
+.correspondent-item {
+  &__name {
+    @include medium;
+    @include bold;
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+
+  &__info {
+    margin: auto 0;
+
+    & > div {
+      @include base;
+
+      &:not(:last-of-type) {
+        margin-bottom: 2px;
+      }
+
+      @media (max-width: $screen-tablet) {
+        @include small;
+      }
+    }
+  }
+
+  &__bank {
+    @include base;
+    margin-top: 10px;
+    margin-bottom: 7px;
+    color: $color-primary;
+  }
+
+  &__more {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+  }
+}

@@ -1,1 +1,26 @@
-<p>correspondent-item works!</p>
+<div class="correspondent-item__name">{{ correspondent.name }}</div>
+
+<div class="correspondent-item__info">
+  <div class="correspondent-item__account b1-ellipsis">
+    {{ correspondent.accNumber }}
+  </div>
+  <div class="correspondent-item__code">
+    {{
+      ('components.pay.code' | translate | titlecase) +
+        ' - ' +
+        correspondent.taxCode
+    }}
+  </div>
+  <!-- <div class="correspondent-item__country">Україна 🇺🇦</div> -->
+</div>
+
+<div class="correspondent-item__bank">{{ correspondent.bankName }}</div>
+
+<b1-dropdown
+  class="correspondent-item__more b1-card__col b1-card__col_dot"
+  label="correspondent's actions"
+  [buttons]="actionButtons"
+  menuWidth="250px"
+  scopeSelector="app-correspondents-list">
+  <a class="b1-card__v-dots"></a>
+</b1-dropdown>

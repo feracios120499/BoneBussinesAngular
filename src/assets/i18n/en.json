@@ -1814,6 +1814,7 @@
 	"errors.getSign": "error getting signature",
 	"errors.keysLoadError": "Bars Cryptor did not found any keys",
 	"errors.loadCard": "Card loading error",
+	"errors.loadCorrespondents": "Correspondents loading error",
 	"errors.loadDocumentError": "An error occurred while trying to download the document",
 	"errors.loadLimits": "Limit loading error",
 	"errors.loadRoles": "Roles loading error",

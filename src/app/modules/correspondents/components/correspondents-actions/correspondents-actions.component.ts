@@ -1,7 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+
+import { CorrespondentsSelectors } from '@store/correspondents/selectors';
+import { CorrespondentsActions } from '@store/correspondents/actions';
+import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
 
 @Component({
   selector: 'app-correspondents-actions',
@@ -10,17 +14,20 @@ import { Observable, of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsActionsComponent {
-  // FOR DEMO PURPOSE ONLY:
-  isLoading$: Observable<boolean> = of(false);
-  filterTerm$: Observable<string> = of('');
+  isLoading$: Observable<boolean> = this.store.select(
+    CorrespondentsSelectors.isLoadingCorrespondents
+  );
+  filterTerm$: Observable<string> = this.store.select(
+    CorrespondentsSelectors.filterTerm
+  );
 
   constructor(private store: Store, private modalService: NgbModal) {}
 
   onCorrespondentAdd(): void {
-    // this.modalService.open(CorrespondentCreateModalComponent);
+    this.modalService.open(CorrespondentModalComponent);
   }
 
   onCorrespondentsFilter(term: string): void {
-    // this.store.dispatch(CorrespondentsActions.filterCorrespondents({ term }));
+    this.store.dispatch(CorrespondentsActions.filterCorrespondents({ term }));
   }
 }

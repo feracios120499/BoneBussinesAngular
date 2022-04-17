@@ -12,7 +12,8 @@
     ngbDropdown
     #dropdown="ngbDropdown"
     mobile-more
-    more-auto-direction>
+    more-auto-direction
+    [parentSelector]="scopeSelector">
     <div class="b1-modal-close" webClass="hidden">
       <i b1-icon icon="cancel" (click.stop)="dropdown.close()"> </i>
     </div>

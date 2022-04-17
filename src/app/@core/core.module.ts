@@ -12,6 +12,7 @@ import { AcctEffects } from '@store/acct/effects';
 import { AuthActions } from '@store/auth/actions';
 import { AuthEffects } from '@store/auth/effects';
 import { AUTH_KEY } from '@store/auth/store';
+import { CorrespondentsEffects } from '@store/correspondents/effects';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
 import { PublicEffects } from '@store/public/effects';
@@ -93,6 +94,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [
       MenuEffects,
       SharedEffects,
       UsersEffects,
+      CorrespondentsEffects,
     ]),
     StoreRouterConnectingModule.forRoot(),
   ],

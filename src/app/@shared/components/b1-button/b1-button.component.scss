@@ -1,6 +1,13 @@
+@import 'variables';
+
 :host {
   display: block;
 }
 
-@media (max-width: 812px) {
+.b1-button-primary {
+  &.round {
+    @media (max-width: 812px) {
+      @include button-round;
+    }
+  }
 }

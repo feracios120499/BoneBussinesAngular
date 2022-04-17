@@ -29,8 +29,9 @@ export class B1DropdownComponent
   @Input() buttons!: ActionButton[];
   @Input() label!: string;
   @Input() menuWidth = 'auto';
+  @Input() scopeSelector!: string;
 
   ngOnInit(): void {
-    this.checkRequiredProps(['buttons', 'label']);
+    this.checkRequiredProps(['buttons', 'label', 'scopeSelector']);
   }
 }

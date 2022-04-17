@@ -1,0 +1,40 @@
+<form [formGroup]="formGroup" #formRef="ngForm">
+  <b1-input
+    name="name"
+    controlId="correspondentName"
+    [formControl]="nameControl">
+    {{ 'components.pay.recipientName' | translate }}
+  </b1-input>
+
+  <b1-input
+    class="b1-mt-6"
+    name="taxCode"
+    controlId="correspondentTaxCodeName"
+    [formControl]="taxCodeControl">
+    {{ 'components.pay.recipientCode' | translate }}
+  </b1-input>
+
+  <b1-input
+    class="b1-mt-6"
+    name="account"
+    controlId="correspondentAccount"
+    [formControl]="accountControl">
+    {{ 'components.pay.recipientAccount' | translate }}
+  </b1-input>
+
+  <b1-input
+    class="b1-mt-6"
+    name="bankCode"
+    controlId="correspondentBankCode"
+    [formControl]="bankCodeControl">
+    {{ 'components.pay.bankCode' | translate }}
+  </b1-input>
+
+  <b1-input
+    class="b1-mt-6"
+    name="bankName"
+    controlId="correspondentBankName"
+    [formControl]="bankNameControl">
+    {{ 'components.pay.bankName' | translate }}
+  </b1-input>
+</form>

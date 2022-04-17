@@ -1814,6 +1814,7 @@
 	"errors.getSign": "ошибка получения подписи",
 	"errors.keysLoadError": "Bars Cryptor не нашел ни одного ключа",
 	"errors.loadCard": "Ошибка загрузки карточки",
+	"errors.loadCorrespondents": "Ошибка загрузки корреспондентов",
 	"errors.loadDocumentError": "Произошла ошибка при попытке загрузить документ",
 	"errors.loadLimits": "Ошибка загрузки лимитов",
 	"errors.loadRoles": "Ошибка загрузки модулей",

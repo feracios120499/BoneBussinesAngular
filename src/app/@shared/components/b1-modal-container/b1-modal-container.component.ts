@@ -14,6 +14,9 @@ import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin'
   templateUrl: './b1-modal-container.component.html',
   styleUrls: ['./b1-modal-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'b1-modal-container',
+  },
 })
 export class B1ModalContainerComponent
   extends withRequiredPropsCheck()

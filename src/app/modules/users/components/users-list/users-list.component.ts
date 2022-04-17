@@ -13,7 +13,7 @@ import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.compo
   styleUrls: ['./users-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'users-list b1-page-data',
+    class: 'users-list',
   },
 })
 export class UsersListComponent {

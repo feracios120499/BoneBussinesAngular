@@ -4,6 +4,7 @@
       <b1-button
         label="components.pay.correspondents.addCorrespondent"
         icon="plus"
+        [mobileView]="true"
         (click)="onCorrespondentAdd()"
         [isDisabled]="isLoading$ | ngrxPush">
       </b1-button>
