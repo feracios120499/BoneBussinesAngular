@@ -15,6 +15,11 @@ import { USER_KEY, UserState } from '@store/user/store';
 
 import { acctReducer } from './acct/reducer';
 import { ACCT_KEY, AcctState } from './acct/store';
+import { correspondentsReducer } from './correspondents/reducer';
+import {
+  CorrespondentsState,
+  CORRESPONDENTS_KEY,
+} from './correspondents/store';
 import { sharedReducer } from './shared/reducer';
 import { SHARED_KEY, SharedState } from './shared/store';
 import { usersReducer } from './users/reducer';
@@ -30,6 +35,7 @@ export interface State {
   [MENU_KEY]: MenuState;
   [SHARED_KEY]: SharedState;
   [USERS_KEY]: UsersState;
+  [CORRESPONDENTS_KEY]: CorrespondentsState;
   router: RouterReducerState;
   [key: string]: any;
 }
@@ -44,5 +50,6 @@ export const reducers: ActionReducerMap<State> = {
   [MENU_KEY]: menuReducers,
   [SHARED_KEY]: sharedReducer,
   [USERS_KEY]: usersReducer,
+  [CORRESPONDENTS_KEY]: correspondentsReducer,
   router: routerReducer,
 };

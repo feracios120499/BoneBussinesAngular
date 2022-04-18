@@ -21,7 +21,6 @@ export class UsersListComponent {
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
   );
-  selectedItem?: number;
 
   constructor(private store: Store, private modalService: NgbModal) {}
 

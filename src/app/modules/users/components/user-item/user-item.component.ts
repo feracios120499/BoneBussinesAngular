@@ -87,7 +87,9 @@ export class UserItemComponent
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: this.translateService.instant('components.admin.deleteConfirm'),
+          text: `${this.translateService.instant(
+            'components.admin.deleteConfirm'
+          )} ${user.displayName}?`,
           callback: () =>
             this.store.dispatch(UsersActions.deleteUserRequest(user.id)),
         },

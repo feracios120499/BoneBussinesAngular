@@ -1,0 +1,30 @@
+<b1-modal-container [isLoading$]="isLoading$">
+  <ng-container slot="header">
+    <div
+      *ngIf="editingCorrespondent; else newCorrespondentTitle"
+      class="b1-title2">
+      {{ editingCorrespondent!.name }}
+    </div>
+
+    <ng-template #newCorrespondentTitle>
+      <div class="b1-large b1-bold">
+        {{ 'components.pay.correspondents.addingCorrespondent' | translate }}
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <app-correspondent-form
+    slot="body"
+    [isLoading$]="isLoading$"
+    [(ngModel)]="correspondentForm"
+    #formRef>
+  </app-correspondent-form>
+
+  <b1-button
+    slot="footer"
+    label="actions.save"
+    icon="save"
+    [isDisabled]="!formRef?.isValid || (isLoading$ | ngrxPush)"
+    (btnClick)="onSave()">
+  </b1-button>
+</b1-modal-container>

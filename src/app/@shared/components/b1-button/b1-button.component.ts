@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { BaseButtonComponent } from '../base-button.component';
 
@@ -8,4 +8,7 @@ import { BaseButtonComponent } from '../base-button.component';
   styleUrls: ['./b1-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1ButtonComponent extends BaseButtonComponent {}
+export class B1ButtonComponent extends BaseButtonComponent {
+  @Input() filled: boolean = true;
+  @Input() mobileView: boolean = false;
+}

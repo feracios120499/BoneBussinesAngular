@@ -40,7 +40,10 @@ export class UsersEffects {
           catchError((error: ServerError) =>
             of(
               UsersActions.loadUsersFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.loadUsers'),
+              })
             )
           )
         )
@@ -58,7 +61,10 @@ export class UsersEffects {
           catchError((error: ServerError) =>
             of(
               UsersActions.loadRolesFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.loadRoles'),
+              })
             )
           )
         )
@@ -84,7 +90,10 @@ export class UsersEffects {
             }
             return of(
               UsersActions.signInUserFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.signInUser'),
+              })
             );
           })
         )
@@ -112,7 +121,10 @@ export class UsersEffects {
           catchError((error: ServerError) =>
             of(
               UsersActions.createUserFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.createUser'),
+              })
             )
           )
         )
@@ -130,7 +142,10 @@ export class UsersEffects {
           catchError((error: ServerError) =>
             of(
               UsersActions.restoreUserFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.restoreUser'),
+              })
             )
           )
         )
@@ -143,7 +158,6 @@ export class UsersEffects {
       ofType(UsersActions.createUserSuccess, UsersActions.restoreUserSuccess),
       map(() =>
         NotifyActions.successNotification({
-          title: this.translateService.instant('components.admin.newUser'),
           message: this.translateService.instant(
             'components.admin.newUserIsAdded'
           ),
@@ -162,7 +176,12 @@ export class UsersEffects {
           catchError((error) =>
             of(
               UsersActions.updateUserRolesFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant(
+                  'errors.updateUserRoles'
+                ),
+              })
             )
           )
         )
@@ -175,7 +194,6 @@ export class UsersEffects {
       ofType(UsersActions.updateUserRolesSuccess),
       map(() =>
         NotifyActions.successNotification({
-          title: this.translateService.instant('shared.success'),
           message: this.translateService.instant(
             'components.admin.infoUpdatedSuccs'
           ),
@@ -196,7 +214,12 @@ export class UsersEffects {
             catchError((error: ServerError) =>
               of(
                 UsersActions.updateUserLockStateFailure(error.message),
-                UsersActions.showServerError({ error })
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant(
+                    'errors.updateUserLockState'
+                  ),
+                })
               )
             )
           )
@@ -208,17 +231,13 @@ export class UsersEffects {
     this.actions$.pipe(
       ofType(UsersActions.updateUserLockStateSuccess),
       map(({ payload: { isDisable } }) => {
-        let title: string;
         let message: string;
         if (isDisable) {
-          title = 'notify.locked';
           message = 'components.admin.lockedSuccssMessage';
         } else {
-          title = 'notify.unlocked';
           message = 'components.admin.unlockedSuccess';
         }
         return NotifyActions.successNotification({
-          title: this.translateService.instant(title),
           message: this.translateService.instant(message),
         });
       })
@@ -235,7 +254,10 @@ export class UsersEffects {
           catchError((error: ServerError) =>
             of(
               UsersActions.deleteUserFailure(error.message),
-              UsersActions.showServerError({ error })
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.error'),
+              })
             )
           )
         )
@@ -248,23 +270,9 @@ export class UsersEffects {
       ofType(UsersActions.deleteUserSuccess),
       map(() =>
         NotifyActions.successNotification({
-          title: this.translateService.instant('notify.deleted'),
           message: this.translateService.instant(
             'components.admin.userDeleted'
           ),
-        })
-      )
-    )
-  );
-
-  showServerError$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UsersActions.showServerError),
-      map(({ error }) =>
-        NotifyActions.serverErrorNotification({
-          error,
-          message: error.message,
-          title: this.translateService.instant('errors.error'),
         })
       )
     )

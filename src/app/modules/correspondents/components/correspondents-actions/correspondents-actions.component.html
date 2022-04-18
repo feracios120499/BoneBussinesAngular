@@ -1,0 +1,27 @@
+<div class="b1-page-actions">
+  <div class="b1-page-actions__left">
+    <div class="b1-page-icons" style="margin-left: 0">
+      <b1-button
+        label="components.pay.correspondents.addCorrespondent"
+        icon="plus"
+        [mobileView]="true"
+        (click)="onCorrespondentAdd()"
+        [isDisabled]="isLoading$ | ngrxPush">
+      </b1-button>
+    </div>
+  </div>
+
+  <form class="b1-page-actions__right" name="search" novalidate>
+    <div class="b1-page-inputWithIcon width-100">
+      <input
+        class="b1-input__control without-label b1-base b1-page-input resize"
+        name="search"
+        id="search"
+        type="text"
+        [attr.placeholder]="'shared.search' | translate"
+        [ngModel]="filterTerm$ | ngrxPush"
+        (ngModelChange)="onCorrespondentsFilter($event)" />
+      <label b1-icon icon="search" class="resize" for="search"></label>
+    </div>
+  </form>
+</div>

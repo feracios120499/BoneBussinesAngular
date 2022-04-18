@@ -1,0 +1,15 @@
+$screen-tablet: 812px;
+
+:host(.correspondents-list) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(346px, 1fr));
+  grid-auto-rows: minmax(218px, max-content);
+  grid-gap: 16px;
+  margin: 12px 0;
+
+  @media (max-width: $screen-tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin: 26px 0;
+    grid-auto-rows: minmax(125px, max-content);
+  }
+}

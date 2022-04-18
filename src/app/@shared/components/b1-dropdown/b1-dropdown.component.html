@@ -1,29 +1,33 @@
-<div
-  class="h-100 w-100"
-  ngbDropdown
-  #dropdown="ngbDropdown"
-  [display]="display">
+<div class="dropdown">
   <div (click.stop)="dropdown.open()">
     <ng-content></ng-content>
   </div>
 
   <ul
-    class="b1-dropdown b1-animate fade-in-up"
-    ngbDropdownMenu
+    class="b1-dropdown b1-bg-light"
+    webClass="b1-animate fade-in-up"
+    [style.width]="menuWidth"
+    role="menu"
     [attr.aria-labelledby]="label"
-    [class.b1-dropdown_up]="top"
-    [class.b1-dropdown_left]="left"
-    [ngStyle]="{ minWidth, maxWidth }"
-    mobile-more>
+    ngbDropdown
+    #dropdown="ngbDropdown"
+    mobile-more
+    more-auto-direction
+    [parentSelector]="scopeSelector">
+    <div class="b1-modal-close" webClass="hidden">
+      <i b1-icon icon="cancel" (click.stop)="dropdown.close()"> </i>
+    </div>
     <li
       *ngFor="let button of buttons"
       class="b1-dropdown__item"
       [class.b1-dropdown__item_bordered]="!!button.separate">
       <a
-        class="b1-dropdown__link b1-base"
+        class="b1-dropdown__link"
         [class.b1-dropdown__link_error]="!!button.danger"
+        webClass="b1-base"
+        mobileClass="b1-medium"
         (click.stop)="button.clickHandler($any($event)); dropdown.close()">
-        <i *ngIf="button.icon" b1-icon [icon]="button.icon" class="b1-mr-4"></i>
+        <i *ngIf="button.icon" b1-icon [icon]="button.icon" class="b1-mr-3"></i>
         <span>{{ button.translate | translate }}</span>
       </a>
     </li>

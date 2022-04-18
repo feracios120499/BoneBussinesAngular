@@ -1,0 +1,10 @@
+<ng-container *ngrxLet="correspondents$ as correspondents">
+  <app-correspondent-item
+    *ngFor="
+      let correspondent of correspondents
+        | correspondentsFilter: (filterTerm$ | ngrxPush)
+    "
+    [correspondent]="correspondent"
+    (click)="onCorrespondentEdit(correspondent)">
+  </app-correspondent-item>
+</ng-container>

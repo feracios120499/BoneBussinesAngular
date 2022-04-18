@@ -28,13 +28,10 @@ export class B1DropdownComponent
 {
   @Input() buttons!: ActionButton[];
   @Input() label!: string;
-  @Input() minWidth = 'auto';
-  @Input() maxWidth = 'none';
-  @Input() top = false;
-  @Input() left = true;
-  @Input() display: 'dynamic' | 'static' = 'dynamic';
+  @Input() menuWidth = 'auto';
+  @Input() scopeSelector!: string;
 
   ngOnInit(): void {
-    this.checkRequiredProps(['buttons', 'label']);
+    this.checkRequiredProps(['buttons', 'label', 'scopeSelector']);
   }
 }
