@@ -1,21 +1,153 @@
-<div class="services-row" *ngrxLet="card$ as card">
-  <div class="services-row_body">
-    <div class="services-row_name">
-      <i b1-icon icon="card-turnovers" class="services-row_icon"></i>
-      {{ 'components.corpcard.services.statement' | translate }}
+<ng-container *ngrxLet="card$ as card">
+  <div class="services-row">
+    <div class="services-row_body">
+      <div class="services-row_name">
+        <i b1-icon icon="card-turnovers" class="services-row_icon"></i>
+        {{ 'components.corpcard.services.statement' | translate }}
+      </div>
+      <div class="services-row_value">
+        <span *ngIf="card" [iban]="card.accountNumber"></span>
+        <ngx-skeleton-loader *ngIf="!card"></ngx-skeleton-loader>
+      </div>
     </div>
-    <div class="services-row_value">
-      <span *ngIf="card" [iban]="card.accountNumber"></span>
-      <ngx-skeleton-loader *ngIf="!card"></ngx-skeleton-loader>
+    <div class="services-row_button">
+      <b1-page-button
+        (b1Click)="showStatement()"
+        icon="turnovers"
+        label="components.acct.getStatement"
+        [disabled]="!card"
+        [primary]="true">
+      </b1-page-button>
     </div>
   </div>
-  <div class="services-row_button">
-    <b1-page-button
-      (b1Click)="showStatement()"
-      icon="turnovers"
-      label="components.acct.getStatement"
-      [disabled]="!card"
-      [primary]="true">
-    </b1-page-button>
+
+  <div class="services-row" *ngrxLet="smsStatus$ as smsStatus">
+    <div class="services-row_body">
+      <div class="services-row_name">
+        <i b1-icon icon="sms" class="services-row_icon"></i>
+        <div class="b1-flex b1-flex-direction">
+          {{ 'components.corpcard.services.smsinfo' | translate }}
+          <div class="b1-status b1-ml-4 b1-medium b1-light b1-mt-2">
+            <span class="b1-status b1-color-info" *ngIf="smsStatus">
+              {{
+                'components.corpcard.services.smsinfo.statuses.' +
+                  smsStatus.status | translate
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="services-row_value">
+        <span *ngIf="smsStatus">{{ smsStatus.phoneNumber }}</span>
+        <ngx-skeleton-loader *ngIf="!smsStatus"></ngx-skeleton-loader>
+      </div>
+    </div>
+    <div class="services-row_button">
+      <ng-container *ngIf="card && smsStatus && card.status == 'Active'">
+        <div *checkRole="['Director', 'Accountant']">
+          <b1-page-button
+            *ngIf="smsStatus.status == 'NotActive'"
+            (b1Click)="activateSms(card.id, smsStatus.phoneNumber)"
+            icon="mail"
+            label="components.corpcard.services.activeteSMS"
+            [disabled]="isLoadingSms$ | ngrxPush"
+            [primary]="true">
+          </b1-page-button>
+          <b1-page-button
+            *ngIf="smsStatus.status == 'Active'"
+            (b1Click)="disableSms(card.id, smsStatus.phoneNumber)"
+            icon="cancel"
+            label="components.corpcard.services.deactivateSMS"
+            [disabled]="isLoadingSms$ | ngrxPush"
+            [primary]="true">
+          </b1-page-button>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
+  <div class="services-row">
+    <div class="services-row_body">
+      <div class="services-row_name">
+        <i b1-icon icon="lock" class="services-row_icon"></i>
+        <div class="b1-flex b1-flex-direction">
+          {{ 'components.corpcard.services.statusCard' | translate }}
+          <div class="b1-status b1-ml-4 b1-medium b1-light b1-mt-2">
+            <span class="b1-status b1-color-info" *ngIf="card">
+              {{ 'components.corpcard.statusCard.' + card.status | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="services-row_value">
+        <span *ngIf="card">
+          <b1-card-number [cardNumber]="card.number"></b1-card-number>
+        </span>
+        <ngx-skeleton-loader *ngIf="!card"></ngx-skeleton-loader>
+      </div>
+    </div>
+    <div class="services-row_button">
+      <ng-container *ngIf="card">
+        <b1-page-button
+          *ngIf="card.status == 'Active'"
+          (b1Click)="lockCard(card.id)"
+          icon="lock"
+          label="components.corpcard.services.block"
+          [disabled]="isCardLoading$ | ngrxPush"
+          [primary]="true">
+        </b1-page-button>
+        <b1-page-button
+          *ngIf="card.status == 'UserBlocked'"
+          (b1Click)="unlockCard(card.id)"
+          icon="unlock"
+          label="components.corpcard.services.unblock"
+          [disabled]="isCardLoading$ | ngrxPush"
+          [primary]="true">
+        </b1-page-button>
+      </ng-container>
+    </div>
+  </div>
+  <div class="warning-row">
+    <b1-warning-block>
+      {{ 'components.corpcard.ifYouCantUnlockCardgoToBank' | translate }}
+    </b1-warning-block>
+  </div>
+
+  <div class="services-row" *ngrxLet="lastApplication$ as lastApplication">
+    <div class="services-row_body">
+      <div class="services-row_name">
+        <i b1-icon icon="account-card" class="services-row_icon"></i>
+        <div class="b1-flex b1-flex-direction">
+          {{ 'components.corpcard.services.reissue' | translate }}
+          <div class="b1-status b1-ml-4 b1-medium b1-light b1-mt-2">
+            <span class="b1-status b1-color-info" *ngIf="lastApplication">
+              {{
+                'shared.applicationStatus.' + lastApplication.statusCode
+                  | translate
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="services-row_value">
+        <span *ngIf="lastApplication">
+          <span>{{ 'components.applications.appnumber' | translate }}</span>
+          <span class="b1-ml-2 b1-mr-2">-</span>
+          <span>{{ lastApplication.id }}</span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="services-row_button"
+      *ngrxLet="isAbleToReissue$ as isAbleToReissue">
+      <ng-container *ngIf="card && card.status === 'Active'">
+        <b1-page-button
+          (b1Click)="reissueCard(card)"
+          icon="refresh"
+          label="components.corpcard.services.reissueButton"
+          [disabled]="!isAbleToReissue"
+          [primary]="true">
+        </b1-page-button>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

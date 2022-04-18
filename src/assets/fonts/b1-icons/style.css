@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?qh8g0w');
-  src:  url('fonts/b1-icons.eot?qh8g0w#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?qh8g0w') format('truetype'),
-    url('fonts/b1-icons.woff?qh8g0w') format('woff'),
-    url('fonts/b1-icons.svg?qh8g0w#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?1e5d1h');
+  src:  url('fonts/b1-icons.eot?1e5d1h#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?1e5d1h') format('truetype'),
+    url('fonts/b1-icons.woff?1e5d1h') format('woff'),
+    url('fonts/b1-icons.svg?1e5d1h#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,8 +25,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.b1-icons-icon-refresh:before {
+  content: "\e939";
+}
+.b1-icons-icon-mail:before {
+  content: "\e938";
+}
 .b1-icons-icon-unlock:before {
   content: "\e937";
+}
+.b1-icons-icon-card-turnovers:before {
+  content: "\e935";
+}
+.b1-icons-icon-sms:before {
+  content: "\e936";
+}
+.b1-icons-icon-spinner:before {
+  content: "\e934";
 }
 .b1-icons-icon-cash:before {
   content: "\e900";
@@ -183,15 +198,6 @@
 }
 .b1-icons-icon-lock:before {
   content: "\e933";
-}
-.b1-icons-icon-spinner:before {
-  content: "\e934";
-}
-.b1-icons-icon-card-turnovers:before {
-  content: "\e935";
-}
-.b1-icons-icon-sms:before {
-  content: "\e936";
 }
 .b1-icons-icon-mobile:before {
   content: "\e958";

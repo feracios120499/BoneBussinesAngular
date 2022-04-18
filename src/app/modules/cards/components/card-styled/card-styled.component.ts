@@ -16,17 +16,20 @@ export class CardStyledComponent implements OnInit {
   @Input() animated = true;
 
   type!: string;
-  plasticStatusBackgroundColor!: string;
-  plasticStatusIcon!: string;
+  plasticStatusBackgroundColor?: string;
+  plasticStatusIcon?: string;
   cardStatusIcon?: string;
   cardStatusBackgroundColor?: string;
   ngOnInit(): void {
     this.type = this.customCardService.getType(this.card.type);
-    this.plasticStatusBackgroundColor =
-      this.customCardService.getBackgroundColor(this.card.plasticStatus);
-    this.plasticStatusIcon = this.customCardService.getIcon(
-      this.card.plasticStatus
-    );
+    if (this.card.plasticStatus) {
+      this.plasticStatusBackgroundColor =
+        this.customCardService.getBackgroundColor(this.card.plasticStatus);
+      this.plasticStatusIcon = this.customCardService.getIcon(
+        this.card.plasticStatus
+      );
+    }
+
     console.log('depositAmount' in this.card);
     if ('depositAmount' in this.card) {
       this.cardStatusIcon = this.customCardService.getIcon(this.card.status);

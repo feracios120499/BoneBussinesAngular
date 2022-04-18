@@ -1,0 +1,36 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-close">
+    <i b1-icon icon="cancel" (click)="modal.close()"></i>
+  </div>
+  <div class="b1-modal-header">
+    {{ 'components.pay.confirmation' | translate }}
+  </div>
+  <div class="b1-modal-body b1-modal-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="b1-input">
+          <label for="comment" class="b1-input__label b1-input__label_top">
+            {{ 'components.pay.commentCardLock' | translate | lowercase }}
+          </label>
+          <input
+            class="b1-input__control b1-base"
+            [(ngModel)]="message"
+            maxlength="70"
+            name="comment"
+            id="comment"
+            placeholder="{{
+              'components.pay.commentLockCard' | translate | lowercase
+            }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b1-modal-footer">
+    <button
+      (click)="ok()"
+      class="b1-button b1-button-primary b1-button-primary_filled">
+      <i b1-icon icon="lock"></i>
+      {{ 'components.corpcard.services.block' | translate }}
+    </button>
+  </div>
+</div>

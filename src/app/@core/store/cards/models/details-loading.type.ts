@@ -1,1 +1,9 @@
-export type DetailsLoading = 'info' | 'limits' | 'sms' | 'updateLimit';
+export type DetailsLoading =
+  | 'info'
+  | 'limits'
+  | 'sms'
+  | 'updateLimit'
+  | 'updateSms'
+  | 'lockCard'
+  | 'unlockCard'
+  | 'reissueApplication';

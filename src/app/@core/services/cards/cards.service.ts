@@ -69,4 +69,36 @@ export class CardsService extends BaseService {
       limit
     );
   }
+
+  updateSmsStatus(
+    cardId: string,
+    phoneNumber: string,
+    isEnabled: boolean,
+    clientId: string
+  ): Observable<void> {
+    return this.http.put<void>(
+      `api/v1/acct/corpcards/smsService/${cardId}/${clientId}`,
+      { phoneNumber, isEnabled }
+    );
+  }
+
+  lockCard(
+    cardId: string,
+    message: string | undefined,
+    clientId: string
+  ): Observable<void> {
+    return this.http.put<void>(
+      `api/v1/acct/corpcards/lock/${cardId}/${clientId}`,
+      {
+        message,
+      }
+    );
+  }
+
+  unlockCard(cardId: string, clientId: string): Observable<void> {
+    return this.http.put<void>(
+      `api/v1/acct/corpcards/unlock/${cardId}/${clientId}`,
+      {}
+    );
+  }
 }

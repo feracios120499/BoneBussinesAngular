@@ -74,5 +74,45 @@ export const cardDetailsReducer = createReducer(
       ...state,
       loadings: [...removeItem(state.loadings, 'updateLimit')],
     })
-  )
+  ),
+  on(CardDetailsActions.updateSmsStatusRequest, (state, _) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'updateSms')],
+  })),
+  on(
+    CardDetailsActions.updateSmsStatusSuccess,
+    CardDetailsActions.updateSmsStatusFailure,
+    (state, _) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'updateSms')],
+    })
+  ),
+  on(CardDetailsActions.lockCardRequest, (state, _) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'lockCard')],
+  })),
+  on(
+    CardDetailsActions.lockCardSuccess,
+    CardDetailsActions.lockCardFailure,
+    (state, _) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'lockCard')],
+    })
+  ),
+  on(CardDetailsActions.unlockCardRequest, (state, _) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'unlockCard')],
+  })),
+  on(
+    CardDetailsActions.unlockCardSuccess,
+    CardDetailsActions.unlockCardFailure,
+    (state, _) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'unlockCard')],
+    })
+  ),
+  on(CardDetailsActions.loadLastReissueApplicationSuccess, (state, action) => ({
+    ...state,
+    lastApplication: action.payload,
+  }))
 );
