@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { RouteSelectors } from '@store/route/selectors';
+import { isAnyExist, isAnyExistArray } from '@store/shared';
 import { CardDetailsState, CARD_DETAILS_KEY } from './store';
 
 export namespace CardDetailsSelectors {
@@ -26,9 +27,8 @@ export namespace CardDetailsSelectors {
     (store) => store.loadings.length !== 0
   );
 
-  export const isCardLoading = createSelector(
-    cardDetailsStore,
-    (store) => store.loadings.indexOf('info') !== -1
+  export const isCardLoading = createSelector(cardDetailsStore, (store) =>
+    isAnyExistArray(store.loadings, ['info', 'lockCard', 'unlockCard'])
   );
 
   export const limits = createSelector(
@@ -61,5 +61,28 @@ export namespace CardDetailsSelectors {
   export const smsStatus = createSelector(
     cardDetailsStore,
     (store) => store.smsStatus
+  );
+
+  export const isSmsLoading = createSelector(
+    cardDetailsStore,
+    (store) =>
+      store.loadings.indexOf('sms') !== -1 ||
+      store.loadings.indexOf('updateSms') !== -1
+  );
+
+  export const lastApplication = createSelector(
+    cardDetailsStore,
+    (store) => store.lastApplication
+  );
+
+  export const isAbleToReissue = createSelector(
+    cardDetailsStore,
+    (store) =>
+      store.card !== undefined &&
+      store.card.isAbleToReissue &&
+      store.card.status !== 'Blocked' &&
+      store.card.status !== 'Closed' &&
+      !isAnyExist(store.loadings, 'reissueApplication') &&
+      store.lastApplication === undefined
   );
 }

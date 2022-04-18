@@ -19,6 +19,9 @@ import { CardStyledSkeletonModule } from '@modules/cards/components/card-styled-
 import { B1PipesModule } from 'src/app/@shared/modules/b1-pipes/b1-pipes.module';
 import { EditLimitModalComponent } from './components/edit-limit-modal/edit-limit-modal.component';
 import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module';
+import { LockCardConfirmComponent } from './components/lock-card-confirm/lock-card-confirm.component';
+import { B1WarningBlockModule } from '@ui/b1-warning-block/b1-warning-block.module';
+import { ReissueApplicationModalComponent } from './components/reissue-application-modal/reissue-application-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module'
     CardDetailsServicesComponent,
     CardDetailsHeaderComponent,
     EditLimitModalComponent,
+    LockCardConfirmComponent,
+    ReissueApplicationModalComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +45,7 @@ import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module'
     CardStyledSkeletonModule,
     B1PipesModule,
     B1FormsModule,
+    B1WarningBlockModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })

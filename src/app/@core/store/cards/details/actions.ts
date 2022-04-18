@@ -1,8 +1,11 @@
 import { CardDetails } from '@models/cards/card-details.model';
 import { CardLimit } from '@models/cards/card-limit.model';
 import { CardSmsStatus } from '@models/cards/card-sms-status.model';
+import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
+import { ReissueApplication } from '@models/cards/reissue-application.model';
 import { CardDetailsTabs } from '@modules/cards/modules/card-details/models/card-details-tabs.type';
 import { EditLimitConfig } from '@modules/cards/modules/card-details/models/edit-limit-config.modal';
+import { LockCardConfig } from '@modules/cards/modules/card-details/models/lock-card-config.modal';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { CARD_DETAILS_KEY } from './store';
@@ -52,4 +55,50 @@ export namespace CardDetailsActions {
     );
 
   export const goToCards = createAction(`[${CARD_DETAILS_KEY}] go to cards`);
+
+  export const [
+    updateSmsStatusRequest,
+    updateSmsStatusSuccess,
+    updateSmsStatusFailure,
+  ] = createHTTPActions<
+    { cardId: string; phoneNumber: string; isEnabled: boolean },
+    void,
+    string
+  >(`[${CARD_DETAILS_KEY}] update sms status`);
+
+  export const showConfirmLockCard = createAction(
+    `[${CARD_DETAILS_KEY}] show confirm lock card`,
+    props<{ config: LockCardConfig }>()
+  );
+
+  export const [lockCardRequest, lockCardSuccess, lockCardFailure] =
+    createHTTPActions<{ cardId: string; message?: string }, void, string>(
+      `[${CARD_DETAILS_KEY}] lock card`
+    );
+
+  export const [unlockCardRequest, unlockCardSuccess, unlockCardFailure] =
+    createHTTPActions<{ cardId: string }, void, string>(
+      `[${CARD_DETAILS_KEY}] unlock card`
+    );
+
+  export const [
+    loadLastReissueApplicationRequest,
+    loadLastReissueApplicationSuccess,
+    loadLastReissueApplicationFailure,
+  ] = createHTTPActions<void, ReissueApplicationDetails | undefined, string>(
+    `[${CARD_DETAILS_KEY}] load last reissue application`
+  );
+
+  export const [
+    createReissueApplicationRequest,
+    createReissueApplicationSuccess,
+    createReissueApplicationFailure,
+  ] = createHTTPActions<ReissueApplication, ReissueApplicationDetails, string>(
+    `[${CARD_DETAILS_KEY}] create reissue application`
+  );
+
+  export const showCreatedApplication = createAction(
+    `[${CARD_DETAILS_KEY}] show created application`,
+    props<{ application: ReissueApplicationDetails }>()
+  );
 }

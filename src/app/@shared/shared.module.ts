@@ -47,6 +47,8 @@ import { UsersFilterPipe } from './pipes/users-filter.pipe';
 import { B1ConfirmModalComponent } from './components/modals/b1-confirm-modal/b1-confirm-modal.component';
 import { CustomToast } from '@ui/custom-toast/custom-toast.component';
 import { B1ErrorModalComponent } from './components/modals/b1-error-modal/b1-error-modal.component';
+import { CheckRoleDirective } from './directives/check-role.directive';
+import { B1WarningBlockComponent } from './components/b1-warning-block/b1-warning-block.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -79,6 +81,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ConfirmModalComponent,
     CustomToast,
     B1ErrorModalComponent,
+    CheckRoleDirective,
   ],
   imports: [
     CommonModule,
@@ -139,6 +142,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ContentWrapperModule,
     B1DirectivesModule,
     B1CardLoaderModule,
+    CheckRoleDirective,
   ],
   providers: [
     {

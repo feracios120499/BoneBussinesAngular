@@ -1476,25 +1476,6 @@
   }
 }
 
-.b1-warning-block {
-  border-radius: 16px;
-  background-color: rgba($color-primary, 0.1);
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  &_icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $color-primary;
-    color: $color-light;
-    margin-right: 16px;
-    border-radius: 50%;
-  }
-}
-
 .b1-link {
   width: 100%;
   background: $linear-gradient;

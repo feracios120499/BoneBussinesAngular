@@ -24,7 +24,7 @@
       {{ 'components.corpcard.card' | translate }}
     </div>
   </div>
-  <div class="corpcards__card__status">
+  <div class="corpcards__card__status" *ngIf="plasticStatusBackgroundColor">
     <div
       class="corpcards__card__status__block"
       [ngClass]="plasticStatusBackgroundColor"
@@ -34,7 +34,7 @@
       "
       tooltipClass="b1-base"
       toolt>
-      <i b1-icon [icon]="plasticStatusIcon"></i>
+      <i b1-icon [icon]="plasticStatusIcon!"></i>
     </div>
     <div class="b1-micro" style="margin-top: 4px; opacity: 0.6">
       {{ 'components.corpcard.plastic' | translate }}

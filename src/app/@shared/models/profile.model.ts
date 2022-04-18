@@ -1,3 +1,5 @@
+import { UserRole } from '@b1-types/user-role.type';
+
 export interface MenuSetting {
   name: string;
   isDisplay: boolean;
@@ -19,7 +21,7 @@ export interface Customer {
   dateClosed?: any;
   signNumber: number;
   signCount: number;
-  roles: string[];
+  roles: UserRole[];
   bankDate: Date;
   edrpo: string;
   menuSettings: MenuSetting[];
