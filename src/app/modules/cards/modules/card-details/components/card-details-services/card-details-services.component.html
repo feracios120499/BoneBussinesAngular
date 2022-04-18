@@ -106,7 +106,9 @@
       </ng-container>
     </div>
   </div>
-  <div class="warning-row">
+  <div
+    class="warning-row"
+    *ngIf="card && (card.status == 'Blocked' || card.status == 'Closed')">
     <b1-warning-block>
       {{ 'components.corpcard.ifYouCantUnlockCardgoToBank' | translate }}
     </b1-warning-block>
@@ -149,5 +151,10 @@
         </b1-page-button>
       </ng-container>
     </div>
+  </div>
+  <div class="warning-row" *ngIf="isShowWarningReissue$ | ngrxPush">
+    <b1-warning-block>
+      {{ 'components.corpcard.services.reissueWarning' | translate }}
+    </b1-warning-block>
   </div>
 </ng-container>

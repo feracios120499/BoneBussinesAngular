@@ -1,1 +1,36 @@
-<app-card-styled [card]="card"></app-card-styled>
+<div class="b1-modal-data">
+  <div class="b1-modal-close">
+    <i b1-icon icon="cancel" (click)="modal.close()"></i>
+  </div>
+  <div class="b1-modal-header">
+    {{ 'components.corpcards.applicationCreatedSuccess' | translate }}
+  </div>
+  <div class="b1-modal-body b1-modal-wrapper">
+    <div class="b1-flex b1-justify-center width-100">
+      <app-card-styled [card]="card" [animated]="false"></app-card-styled>
+    </div>
+    <div class="b1-medium b1-light b1-mt-5">
+      <span>{{ 'components.pay.innerNumber' | translate | firstTitle }}</span>
+      <span class="b1-ml-2 b1-mr-2">-</span>
+      <span>{{ application.id }}</span>
+    </div>
+    <div class="b1-medium b1-light b1-mt-2">
+      {{
+        'components.corpcards.newExpireDate'
+          | translate
+            : {
+                oldExpiredDate: application.cardExpired,
+                newExpiredDate: application.newExpiredDate
+              }
+      }}
+    </div>
+  </div>
+  <div class="b1-modal-footer">
+    <button
+      class="b1-button-primary b1-button-primary_filled"
+      (click)="goToApplications()">
+      <i b1-icon icon="list"></i>
+      {{ 'components.corpcards.goToApplications' | translate }}
+    </button>
+  </div>
+</div>

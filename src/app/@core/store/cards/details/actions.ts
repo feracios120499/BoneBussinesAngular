@@ -101,4 +101,8 @@ export namespace CardDetailsActions {
     `[${CARD_DETAILS_KEY}] show created application`,
     props<{ application: ReissueApplicationDetails }>()
   );
+
+  export const goToApplications = createAction(
+    `[${CARD_DETAILS_KEY}] go to applications`
+  );
 }
