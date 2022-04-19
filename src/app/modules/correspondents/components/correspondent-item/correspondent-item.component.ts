@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { Correspondent } from '@models/correspondents/correspondent.model';
 import { ActionButton } from '@ui/b1-dropdown/b1-dropdown.component';
+import { SharedActions } from '@store/shared/actions';
+import { CorrespondentsActions } from '@store/correspondents/actions';
 
 @Component({
   selector: 'app-correspondent-item',
@@ -49,6 +51,7 @@ export class CorrespondentItemComponent
           this,
           this.correspondent
         ),
+        // TODO:
         icon: 'country',
       },
       {
@@ -79,16 +82,18 @@ export class CorrespondentItemComponent
 
   private onCorrespondentDelete(correspondent: Correspondent): void {
     console.log('Correspondent is deleted: ', correspondent);
-    // this.store.dispatch(
-    //   SharedActions.showConfirm({
-    //     config: {
-    //       text: `${this.translateService.instant(
-    //         'components.admin.deleteConfirm'
-    //       )} ${correspondent.displayName}?`,
-    //       callback: () =>
-    //         this.store.dispatch(CorrespondentsActions.deletecorrespondentRequest(correspondent.id)),
-    //     },
-    //   })
-    // );
+    this.store.dispatch(
+      SharedActions.showConfirm({
+        config: {
+          text: `${this.translateService.instant(
+            'components.pay.correspondents.deletingCofirm'
+          )} ${correspondent.name}?`,
+          callback: () =>
+            this.store.dispatch(
+              CorrespondentsActions.deleteCorrespondentRequest(correspondent.id)
+            ),
+        },
+      })
+    );
   }
 }

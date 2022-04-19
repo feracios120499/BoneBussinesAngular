@@ -25,5 +25,23 @@ export const correspondentsReducer = createReducer(
   on(CorrespondentsActions.filterCorrespondents, (state, action) => ({
     ...state,
     filterTerm: action.term,
-  }))
+  })),
+  on(
+    CorrespondentsActions.createCorrespondentRequest,
+    CorrespondentsActions.updateCorrespondentRequest,
+    (state) => ({
+      ...state,
+      loadings: [...pushIfNotExist(state.loadings, 'create')],
+    })
+  ),
+  on(
+    CorrespondentsActions.createCorrespondentSuccess,
+    CorrespondentsActions.createCorrespondentFailure,
+    CorrespondentsActions.updateCorrespondentSuccess,
+    CorrespondentsActions.updateCorrespondentFailure,
+    (state) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'create')],
+    })
+  )
 );

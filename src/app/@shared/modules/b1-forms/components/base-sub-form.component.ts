@@ -6,7 +6,7 @@ import {
   NgForm,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { withDestroy } from '@mixins/with-destroy.mixin';
@@ -21,7 +21,9 @@ export abstract class BaseSubFormComponent
   @Input() isLoading$!: Observable<boolean>;
   abstract formGroup: FormGroup;
   abstract formRef: NgForm;
-  private isSubmitted: boolean = false;
+  private isSubmitted = false;
+  private initialValue: any;
+  private formValueChanged = false;
 
   ngOnInit(): void {
     this.checkRequiredProps(['isLoading$']);
@@ -29,8 +31,20 @@ export abstract class BaseSubFormComponent
 
   ngAfterViewInit(): void {
     this.formGroup.valueChanges
-      .pipe(takeUntil(this.destroy$), this.formChange.bind(this))
-      .subscribe();
+      .pipe(
+        takeUntil(this.destroy$),
+        this.formChange.bind(this),
+        tap((value) => {
+          if (this.formGroup.pristine) {
+            this.initialValue = value;
+          }
+        }),
+        filter(() => this.formGroup.dirty)
+      )
+      .subscribe((value) => {
+        this.formValueChanged =
+          JSON.stringify(value) !== JSON.stringify(this.initialValue);
+      });
 
     this.isLoading$
       .pipe(takeUntil(this.destroy$))
@@ -41,6 +55,10 @@ export abstract class BaseSubFormComponent
           this.enableForm();
         }
       });
+  }
+
+  get isChanged(): boolean {
+    return this.formValueChanged;
   }
 
   get isValid(): boolean {

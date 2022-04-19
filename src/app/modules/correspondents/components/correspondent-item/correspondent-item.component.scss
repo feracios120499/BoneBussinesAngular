@@ -32,7 +32,7 @@ $screen-tablet: 812px;
     @include medium;
     @include bold;
     margin-top: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   &__info {
@@ -53,8 +53,8 @@ $screen-tablet: 812px;
 
   &__bank {
     @include base;
-    margin-top: 10px;
-    margin-bottom: 7px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     color: $color-primary;
   }
 

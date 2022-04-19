@@ -15,6 +15,8 @@ export abstract class BaseInputComponent
   @Input() toFixed: number = 0;
   @Input() min?: number | string;
   @Input() max?: number | string;
+  @Input() minLength?: number;
+  @Input() maxLength?: number;
   @Input() autocomplete?: 'on' | 'off';
   @Input() transform: 'uppercase' | 'lowercase' | 'none' = 'none';
 
