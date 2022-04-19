@@ -23,6 +23,7 @@ import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { MoreAutoDirectionModule } from './directives/more-auto-direction/more-auto-direction.module';
 import { MobileClassModule } from './directives/mobile-class/mobile-class.module';
 import { WebClassModule } from './directives/web-class/web-class.module';
+import { OnlyNumbersModule } from './directives/only-numbers/only-numbers.module';
 
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
@@ -32,7 +33,6 @@ import { B1PaymentModalComponent } from './components/modals/b1-payment-modal/b1
 import { B1RequisitesModalComponent } from './components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './components/modals/b1-statement-modal/b1-statement-modal.component';
 import { CheckStateDirective } from './directives/check-state.directive';
-import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { CdkVirtualScrollViewportPatchDirective } from './directives/virtual-patch.directive';
 import { B1DirectivesModule } from './modules/b1-directives/b1-directives.module';
 import { B1FormsModule } from './modules/b1-forms/b1-forms.module';
@@ -69,7 +69,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1RequisitesModalComponent,
     B1ExportTurnoversComponent,
     B1PageButtonComponent,
-    OnlyNumbersDirective,
     B1PageLoaderComponent,
     B1PageSeparatorComponent,
     B1CardNumberComponent,
@@ -107,6 +106,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     MobileClassModule,
     WebClassModule,
     MoreAutoDirectionModule,
+    OnlyNumbersModule,
   ],
   exports: [
     CommonModule,
@@ -130,7 +130,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     NgSelectModule,
     B1PageButtonComponent,
     ReactiveComponentModule,
-    OnlyNumbersDirective,
+    OnlyNumbersModule,
     NgxMaskModule,
     B1PageLoaderComponent,
     B1PageSeparatorComponent,

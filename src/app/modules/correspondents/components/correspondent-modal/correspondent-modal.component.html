@@ -24,7 +24,9 @@
     slot="footer"
     label="actions.save"
     icon="save"
-    [isDisabled]="!formRef?.isValid || (isLoading$ | ngrxPush)"
+    [isDisabled]="
+      !formRef?.isChanged || !formRef?.isValid || (isLoading$ | ngrxPush)
+    "
     (btnClick)="onSave()">
   </b1-button>
 </b1-modal-container>

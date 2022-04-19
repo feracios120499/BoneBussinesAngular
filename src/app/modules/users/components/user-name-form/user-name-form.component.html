@@ -1,23 +1,18 @@
 <form [formGroup]="formGroup" #formRef="ngForm">
-  <b1-input
-    name="lastName"
-    controlId="newUserLastName"
-    [formControl]="lastNameControl">
+  <b1-input [maxLength]="nameMaxLength" [formControl]="lastNameControl">
     {{ 'components.admin.lastName' | translate }}
   </b1-input>
 
   <b1-input
     class="b1-mt-6"
-    name="firstName"
-    controlId="newUserFirstName"
+    [maxLength]="nameMaxLength"
     [formControl]="firstNameControl">
     {{ 'components.admin.firstName' | translate }}
   </b1-input>
 
   <b1-input
     class="b1-mt-6"
-    name="secondName"
-    controlId="newUserSecondName"
+    [maxLength]="nameMaxLength"
     [formControl]="secondNameControl">
     {{ 'components.admin.secondName' | translate }}
   </b1-input>

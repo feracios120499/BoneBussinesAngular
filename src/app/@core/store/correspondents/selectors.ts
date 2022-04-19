@@ -19,4 +19,9 @@ export namespace CorrespondentsSelectors {
     correspondentsStore,
     (state) => state.loadings.includes('list')
   );
+
+  export const isLoadingCorrespondentCreate = createSelector(
+    correspondentsStore,
+    (state) => state.loadings.includes('create')
+  );
 }

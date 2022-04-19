@@ -1,1 +1,1 @@
-export type CorrespondentsLoading = 'list';
+export type CorrespondentsLoading = 'list' | 'create';
