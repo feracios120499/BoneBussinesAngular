@@ -3948,3 +3948,9 @@ body.modal-open {
 ngb-modal-backdrop {
   opacity: 0;
 }
+
+ngb-tooltip-window {
+  @media (max-width: 812px) {
+    display: none !important;
+  }
+}
