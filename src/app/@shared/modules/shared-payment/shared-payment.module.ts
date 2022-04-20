@@ -5,6 +5,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { B1DirectivesModule } from '../b1-directives/b1-directives.module';
+import { OnlyNumbersModule } from '../../directives/only-numbers/only-numbers.module';
 
 import { B1FormsModule } from '../b1-forms/b1-forms.module';
 import { B1PipesModule } from '../b1-pipes/b1-pipes.module';
@@ -15,7 +16,6 @@ import { WithinCountryFormComponent } from './components/within-country-form/wit
 import { PaymentResultComponent } from './components/payment-result/payment-result.component';
 import { MyAccountsFormComponent } from './components/my-accounts-form/my-accounts-form.component';
 import { MyAccountsConfirmComponent } from './components/my-accounts-confirm/my-accounts-confirm.component';
-
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { MyAccountsConfirmComponent } from './components/my-accounts-confirm/my-
     B1PipesModule,
     B1DirectivesModule,
     NgSelectModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    OnlyNumbersModule,
   ],
   exports: [
     WithinCountryConfirmComponent,
@@ -45,7 +46,7 @@ import { MyAccountsConfirmComponent } from './components/my-accounts-confirm/my-
     PaymentDatesFormComponent,
     PaymentResultComponent,
     MyAccountsFormComponent,
-    MyAccountsConfirmComponent
-  ]
+    MyAccountsConfirmComponent,
+  ],
 })
-export class SharedPaymentModule { }
+export class SharedPaymentModule {}

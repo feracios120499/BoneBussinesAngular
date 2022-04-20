@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,6 +13,8 @@ import { CorrespondentFormComponent } from '../correspondent-form/correspondent-
 import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
 import { Correspondent } from '@models/correspondents/correspondent.model';
 import { CorrespondentsActions } from '@store/correspondents/actions';
+import { CorrespondentsSelectors } from '@store/correspondents/selectors';
+import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
 
 @Component({
   selector: 'app-correspondent-modal',
@@ -22,8 +24,9 @@ import { CorrespondentsActions } from '@store/correspondents/actions';
 })
 export class CorrespondentModalComponent implements OnInit {
   @Input() editingCorrespondent?: Correspondent;
-  // FOR DEMO PURPOSE ONLY:
-  isLoading$: Observable<boolean> = of(false);
+  isLoading$: Observable<boolean> = this.store.select(
+    CorrespondentsSelectors.isLoadingCorrespondentCreate
+  );
   correspondentForm!: CorrespondentForm;
 
   @ViewChild('formRef') formRef!: CorrespondentFormComponent;
@@ -32,9 +35,16 @@ export class CorrespondentModalComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.editingCorrespondent) {
-      const { accNumber, bankCode, bankName, name, taxCode } =
+      const { accNumber, bankCode, bankName, name, taxCode, accCurrencyCode } =
         this.editingCorrespondent;
-      this.correspondentForm = { accNumber, bankCode, bankName, name, taxCode };
+      this.correspondentForm = {
+        accNumber,
+        bankCode,
+        bankName,
+        name,
+        taxCode,
+        accCurrencyCode,
+      };
     }
   }
 
@@ -42,8 +52,6 @@ export class CorrespondentModalComponent implements OnInit {
     if (!this.formRef.submitForm()) {
       return;
     }
-    console.log('Correspondent form is valid: ', this.formRef.isValid);
-
     if (this.editingCorrespondent) {
       this.updateCorrespondent();
     } else {
@@ -53,16 +61,21 @@ export class CorrespondentModalComponent implements OnInit {
   }
 
   updateCorrespondent(): void {
-    console.log('Correspondent is updated: ', this.correspondentForm);
-    // this.store.dispatch(
-    //   CorrespondentsActions.updateCorrespondentRequest(this.correspondentForm)
-    // );
+    const { id, creatingDate, userId } = this.editingCorrespondent!;
+    const model: CorrespondentUpdateModel = {
+      ...this.correspondentForm,
+      id,
+      creatingDate,
+      userId,
+    };
+    this.store.dispatch(
+      CorrespondentsActions.updateCorrespondentRequest(model)
+    );
   }
 
   createCorrespondent(): void {
-    console.log('Correspondent is updated: ', this.correspondentForm);
-    // this.store.dispatch(
-    //   CorrespondentsActions.createCorrespondentRequest(this.correspondentForm)
-    // );
+    this.store.dispatch(
+      CorrespondentsActions.createCorrespondentRequest(this.correspondentForm)
+    );
   }
 }
