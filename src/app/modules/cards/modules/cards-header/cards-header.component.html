@@ -1,12 +1,13 @@
 <div class="b1-page-title">
   <div class="b1-title2">
-    {{ 'aside.nav.CORPCARDS' | translate }}
+    <ng-content></ng-content>
   </div>
   <div class="b1-page-menu">
     <div class="b1-flex">
       <ul class="b1-head-tabs">
         <li
-          routerLink="incomings"
+          (click)="goTo('cards')"
+          [class.active]="isActive('/cards')"
           routerLinkActive="active"
           class="b1-head-tabs__item">
           <a class="b1-head-tabs__link b1-medium b1-color-dark">
@@ -14,7 +15,8 @@
           </a>
         </li>
         <li
-          routerLink="create"
+          (click)="goTo('cards/applications')"
+          [class.active]="isActive('/cards/applications')"
           routerLinkActive="active"
           class="b1-head-tabs__item"
           class="b1-head-tabs__item">

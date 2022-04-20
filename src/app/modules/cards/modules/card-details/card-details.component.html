@@ -1,6 +1,8 @@
 <div class="b1-wrapper no-wrap-xs b1-full-screen">
   <!-- <app-accounts-header></app-accounts-header> -->
-  <app-cards-header></app-cards-header>
+  <app-cards-header>
+    {{ 'components.corpcard.corpcard' | translate }}
+  </app-cards-header>
   <div style="position: relative" class="full-screen">
     <app-card-details-tabs></app-card-details-tabs>
     <div class="b1-page-card b1-bg-light" *ngrxLet="currentTab$ as currentTab">
