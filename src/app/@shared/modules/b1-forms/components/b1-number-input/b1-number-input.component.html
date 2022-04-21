@@ -1,0 +1,30 @@
+<label
+  class="b1-input__label b1-input__label_top b1-small b1-bold"
+  [for]="controlId"
+  #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<input
+  class="b1-input__control"
+  [id]="controlId"
+  type="text"
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))"
+  [attr.name]="name"
+  [attr.placeholder]="placeholder"
+  only-numbers
+  [minlength]="minLength"
+  [maxlength]="maxLength"
+  [disabled]="isDisabled"
+  #formControlRef />
+
+<p
+  *ngIf="
+    formControl &&
+    formControl.invalid &&
+    (formControl.dirty || formControl.touched)
+  "
+  class="b1-input__validate-message">
+  {{ error!.text | translate: error!.params }}
+</p>

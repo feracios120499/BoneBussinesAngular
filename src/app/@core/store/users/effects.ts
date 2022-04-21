@@ -256,7 +256,7 @@ export class UsersEffects {
               UsersActions.deleteUserFailure(error.message),
               NotifyActions.serverErrorNotification({
                 error,
-                message: this.translateService.instant('errors.error'),
+                message: this.translateService.instant('errors.deleteUser'),
               })
             )
           )

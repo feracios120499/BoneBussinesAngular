@@ -1,9 +1,17 @@
 <div class="b1-wrapper no-wrap-xs b1-full-screen">
   <!-- <app-accounts-header></app-accounts-header> -->
-  <app-cards-header></app-cards-header>
+  <app-cards-header>
+    {{ 'components.corpcard.title.applications' | translate }}
+  </app-cards-header>
   <div style="position: relative" class="full-screen">
-    <app-card-details-tabs></app-card-details-tabs>
-    <!-- <div class="b1-page-card b1-bg-light" *ngrxLet="currentTab$ as currentTab">
+    <app-reissue-applications-tabs></app-reissue-applications-tabs>
+    <div class="b1-page-card b1-bg-light">
+      <app-reissue-applications-actions></app-reissue-applications-actions>
+      <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+    </div>
+    <!-- <app-card-details-tabs></app-card-details-tabs>
+        
+      <div class="b1-page-card b1-bg-light" *ngrxLet="currentTab$ as currentTab">
         <div class="card-wrapper">
           <app-card-details-header></app-card-details-header>
           <app-card-details-info

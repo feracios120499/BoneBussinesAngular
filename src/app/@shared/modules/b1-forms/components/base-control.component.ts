@@ -22,7 +22,7 @@ export abstract class BaseControlComponent
   extends withRequiredPropsCheck()
   implements AfterViewInit, ControlValueAccessor
 {
-  @Input() controlId: number | string = generateId();
+  @Input() controlId: number | string = `control-${generateId()}`;
   @Input() name?: string;
   @Input() formControl!: AbstractControl;
 

@@ -15,7 +15,6 @@ import { UserNameForm } from '@models/users/user-name-form.model';
 import { distinctUntilObjectChanged } from '@custom-operators/distinct-until-object-changed.operator';
 
 const { required, maxLength } = Validators;
-const NAME_MAX_LENGTH = 256;
 
 @Component({
   selector: 'app-user-name-form',
@@ -29,14 +28,18 @@ export class UserNameFormComponent
   implements OnInit
 {
   formGroup!: FormGroup;
-  lastNameControl = new FormControl('', [required, maxLength(NAME_MAX_LENGTH)]);
+  nameMaxLength = 256;
+  lastNameControl = new FormControl('', [
+    required,
+    maxLength(this.nameMaxLength),
+  ]);
   firstNameControl = new FormControl('', [
     required,
-    maxLength(NAME_MAX_LENGTH),
+    maxLength(this.nameMaxLength),
   ]);
   secondNameControl = new FormControl('', [
     required,
-    maxLength(NAME_MAX_LENGTH),
+    maxLength(this.nameMaxLength),
   ]);
 
   @ViewChild('formRef') formRef!: NgForm;

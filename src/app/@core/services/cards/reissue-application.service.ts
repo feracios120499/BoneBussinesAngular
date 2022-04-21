@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CardReissueStatus } from '@b1-types/cards/card-reissue-status.type';
 import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { ReissueApplication } from '@models/cards/reissue-application.model';
+import { ReissueApplicationsCount } from '@models/cards/reissue-applications-count.model';
+import { ReissueCount } from '@models/cards/reissue-count.model';
 import { BaseService } from '@services/base.service';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -59,5 +62,32 @@ export class ReissueApplicationService extends BaseService {
           applications.length > 0 ? applications[0] : undefined
         )
       );
+  }
+
+  getCount(clientId: string): Observable<ReissueCount> {
+    return this.http
+      .get<ReissueApplicationsCount[]>(
+        `api/v1/corpcards/reissue/count/${clientId}`
+      )
+      .pipe(
+        map((list) => {
+          const count: ReissueCount = {};
+          list.forEach((value) => (count[value.statusId] = value.statusCount));
+          return count;
+        })
+      );
+  }
+
+  getApplications(
+    status: CardReissueStatus,
+    clientId: string
+  ): Observable<ReissueApplicationDetails[]> {
+    const filter =
+      status == 'ONMYSIGN'
+        ? `(StatusCode eq 'ONSIGN') and (IsNeedMySign eq true)`
+        : `(StatusCode eq '${status}')`;
+    return this.http.get<ReissueApplicationDetails[]>(
+      `api/v1/corpcards/reissue/${clientId}?$filter=${filter}&$orderby=CreateDate desc`
+    );
   }
 }

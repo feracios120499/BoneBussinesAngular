@@ -1,10 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 import { BaseControlComponent } from './base-control.component';
 
 interface IErrorData {
   text: string;
-  value?: Date | string | number;
+  params?: ValidationErrors;
 }
 
 @Component({
@@ -29,18 +30,45 @@ export abstract class BaseValidatableControlComponent
       email: () => ({ text: 'validate.invalidEmail' }),
       phone: () => ({ text: 'validate.invalidPhone' }),
       mask: () => ({ text: 'validate.mustMatchThePattern' }),
+      minlength: () => ({
+        text: 'validate.minlengthWithParams',
+        params: {
+          minLength: this.formControl.errors!.minlength['requiredLength'],
+          actualLength: this.formControl.errors!.minlength['actualLength'],
+        },
+      }),
+      maxlength: () => ({
+        text: 'validate.maxlengthWithParams',
+        params: {
+          maxLength: this.formControl.errors!.maxlength['requiredLength'],
+          actualLength: this.formControl.errors!.maxlength['actualLength'],
+        },
+      }),
+      ibanLength: () => ({
+        text: 'validate.ibanLength',
+        params: {
+          requiredLength: this.formControl.errors!.ibanLength['requiredLength'],
+          actualLength: this.formControl.errors!.ibanLength['actualLength'],
+        },
+      }),
+      ibanFormat: () => ({
+        text: 'validate.ibanFormat',
+      }),
+      ibanCheckSum: () => ({
+        text: 'validate.ibanCheckSum',
+      }),
       pattern: () => ({
         text: 'is not properly formatted.',
-        value: this.formControl.errors!.pattern['value'],
+        // value: this.formControl.errors!.pattern['value'],
       }),
       unique: () => ({ text: 'already exists.' }),
       uniqueInArray: () => ({
         text: 'with next value is already exists:',
-        value: this.formControl.errors!.uniqueInArray['value'],
+        // value: this.formControl.errors!.uniqueInArray['value'],
       }),
       uniqueForInArray: () => ({
         text: 'must belong to only one',
-        value: this.formControl.errors!.uniqueForInArray['value'],
+        // value: this.formControl.errors!.uniqueForInArray['value'],
       }),
       uniqueEmail: () => ({ text: 'already exists.' }),
       registeredEmail: () => ({
@@ -51,45 +79,28 @@ export abstract class BaseValidatableControlComponent
       sameAs: () => ({ text: 'must be equal to each other.' }),
       min: () => ({
         text: `can't be less than`,
-        value: this.formControl.errors!.min['value'],
+        // value: this.formControl.errors!.min['value'],
       }),
       max: () => ({
         text: `can't be greater than`,
-        value: this.formControl.errors!.max['value'],
-      }),
-      minlength: () => ({
-        text: `can't contain less than`,
-        value: this.formControl.errors!.minlength['requiredLength'],
-      }),
-      maxlength: () => ({
-        text: `can't contain symbols more than`,
-        value: this.formControl.errors!.maxlength['requiredLength'],
+        // value: this.formControl.errors!.max['value'],
       }),
       lessThan: () => ({
         text: `can't be less than`,
-        value: this.formControl.errors!.lessThan['value'],
+        // value: this.formControl.errors!.lessThan['value'],
       }),
       moreThan: () => ({
         text: `can't be greater than`,
-        value: this.formControl.errors!.moreThan['value'],
+        // value: this.formControl.errors!.moreThan['value'],
       }),
       acceptableFiles: () => ({
         text: 'must have one of the following formats:',
-        value: this.formControl.errors!.acceptableFiles['value'],
+        // value: this.formControl.errors!.acceptableFiles['value'],
       }),
     };
   }
 
-  get errorText(): string {
-    return `${this.translateService.instant(this.error!.text)}
-      ${this.errorValue}`;
-  }
-
-  private get errorValue(): Date | string | number {
-    return this.error!.value !== undefined ? this.error!.value : '';
-  }
-
-  private get error(): IErrorData | null {
+  get error(): IErrorData | null {
     if (!this.formControl.errors) {
       return null;
     }

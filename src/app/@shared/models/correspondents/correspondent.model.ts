@@ -4,7 +4,6 @@ export interface Correspondent {
   id: string;
   lastUseDate: Date;
   creatingDate: Date;
-  edrpo: string;
   userId: string;
   accCurrencyId: string;
   bankName: string;

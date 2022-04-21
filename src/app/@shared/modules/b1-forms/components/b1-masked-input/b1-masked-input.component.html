@@ -26,5 +26,5 @@
     (formControl.dirty || formControl.touched)
   "
   class="b1-input__validate-message">
-  {{ errorText }}
+  {{ error!.text | translate: error!.params }}
 </p>
