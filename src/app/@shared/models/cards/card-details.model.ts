@@ -18,7 +18,7 @@ export interface CardDetails {
   name: string;
   number: string;
   plasticStatus: PlasticStatus;
-  statementTypeList: string[];
+  statementTypesList: string[];
   status: CardStatus;
   type: CardType;
 }

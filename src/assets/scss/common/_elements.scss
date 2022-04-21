@@ -1133,6 +1133,9 @@
   }
   &-wrapper {
     padding: 32px 64px;
+    @media (max-width: 812px) {
+      padding: 32px;
+    }
   }
   &-search {
     padding: 0 48px;

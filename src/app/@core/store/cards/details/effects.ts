@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { CardStatementModalComponent } from '@modules/cards/modules/card-details/components/card-statement-modal/card-statement-modal.component';
 import { EditLimitModalComponent } from '@modules/cards/modules/card-details/components/edit-limit-modal/edit-limit-modal.component';
 import { LockCardConfirmComponent } from '@modules/cards/modules/card-details/components/lock-card-confirm/lock-card-confirm.component';
 import { ReissueApplicationModalComponent } from '@modules/cards/modules/card-details/components/reissue-application-modal/reissue-application-modal.component';
+import { CardStatementModalConfig } from '@modules/cards/modules/card-details/models/card-statement-modal-config.model';
 import {
   act,
   Actions,
@@ -14,9 +16,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { CardsService } from '@services/cards/cards.service';
 import { ReissueApplicationService } from '@services/cards/reissue-application.service';
 import { ModalService } from '@services/modal.service';
+import { AcctActions } from '@store/acct/actions';
 import { NotifyActions } from '@store/notify/actions';
 import { RouteActions } from '@store/route/actions';
 import { clientIdWithData } from '@store/shared';
+import { SharedActions } from '@store/shared/actions';
+import { UserSelectors } from '@store/user/selectors';
 import { of } from 'rxjs';
 import {
   catchError,
@@ -435,6 +440,101 @@ export class CardDetailsEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  showStatementModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CardDetailsActions.showStatementModal),
+        withLatestFrom(this.store.select(UserSelectors.userEmail)),
+        tap(([action, email]) => {
+          const modal = this.modalService.open(CardStatementModalComponent);
+          const config: CardStatementModalConfig = {
+            isFree: action.card.isStatementFree,
+            formats: action.card.statementTypesList,
+            email,
+            callback: (result) => {
+              const data = {
+                result,
+                accountId: action.card.accountId,
+                bankId: action.card.bankId,
+              };
+              this.store.dispatch(
+                result.sendToEmail
+                  ? AcctActions.sendStatementRequest(data)
+                  : AcctActions.downloadStatementRequest(data)
+              );
+            },
+            callbackCard: (result) => {
+              const data = {
+                result,
+                cardId: action.card.id,
+              };
+              this.store.dispatch(
+                result.sendToEmail
+                  ? CardDetailsActions.sendStatementRequest(data)
+                  : CardDetailsActions.downloadStatementRequest(data)
+              );
+            },
+          };
+          modal.componentInstance.config = config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  sendStatementRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.sendStatementRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.cardsService
+          .sendStatement(
+            payload.data.cardId,
+            payload.clientId,
+            payload.data.result.range.start,
+            payload.data.result.range.end,
+            payload.data.result.format,
+            payload.data.result.email as string
+          )
+          .pipe(
+            map((_) => CardDetailsActions.sendStatementSuccess()),
+            catchError((error) =>
+              of(CardDetailsActions.sendStatementFailure(error.message))
+            )
+          )
+      )
+    )
+  );
+
+  downloadStatementRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.downloadStatementRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.cardsService
+          .getStatement(
+            payload.data.cardId,
+            payload.clientId,
+            payload.data.result.range.start,
+            payload.data.result.range.end,
+            payload.data.result.format
+          )
+          .pipe(
+            map((file) => CardDetailsActions.downloadStatementSuccess(file)),
+            catchError((error) =>
+              of(CardDetailsActions.downloadStatementFailure(error.message))
+            )
+          )
+      )
+    )
+  );
+
+  downloadStatementSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.downloadStatementSuccess),
+      map((action) => SharedActions.saveFile({ file: action.payload }))
+    )
   );
   // disableSmsSuccess = createEffect(()=>
   // this.actions$.pipe(

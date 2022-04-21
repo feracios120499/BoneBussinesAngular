@@ -28,7 +28,9 @@ export class CardDetailsServicesComponent implements OnInit {
   );
   ngOnInit(): void {}
 
-  showStatement(): void {}
+  showStatement(card: CardDetails): void {
+    this.store.dispatch(CardDetailsActions.showStatementModal({ card }));
+  }
 
   activateSms(cardId: string, phoneNumber: string): void {
     this.updateSmsStatus(cardId, phoneNumber, true);
