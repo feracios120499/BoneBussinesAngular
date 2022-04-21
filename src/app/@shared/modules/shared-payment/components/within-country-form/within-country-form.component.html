@@ -48,11 +48,15 @@
       </div>
     </div>
 
-    <button class="b1-button-warning b1-button-warning_filled agents-button">
+    <button
+      class="b1-button-warning b1-button-warning_filled agents-button"
+      (click)="onCorrespondentListOpen()">
       <i b1-icon icon="agents"></i>
       {{ 'components.pay.correspondents.dictionary' | translate }}
     </button>
-    <button class="b1-page-more agents-button_mobile">
+    <button
+      class="b1-page-more agents-button_mobile"
+      (click)="onCorrespondentListOpen()">
       <i b1-icon icon="agents" class="b1-page-more_icon"></i>
     </button>
   </div>

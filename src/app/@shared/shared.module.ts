@@ -24,6 +24,7 @@ import { MoreAutoDirectionModule } from './directives/more-auto-direction/more-a
 import { MobileClassModule } from './directives/mobile-class/mobile-class.module';
 import { WebClassModule } from './directives/web-class/web-class.module';
 import { OnlyNumbersModule } from './directives/only-numbers/only-numbers.module';
+import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
 
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
@@ -50,6 +51,7 @@ import { B1ErrorModalComponent } from './components/modals/b1-error-modal/b1-err
 import { CorrespondentsFilterPipe } from './pipes/correspondents-filter.pipe';
 import { CheckRoleDirective } from './directives/check-role.directive';
 import { B1WarningBlockComponent } from './components/b1-warning-block/b1-warning-block.component';
+import { B1CorrespondentsModalComponent } from './components/modals/b1-correspondents-modal/b1-correspondents-modal.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -80,6 +82,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ErrorModalComponent,
     CorrespondentsFilterPipe,
     CheckRoleDirective,
+    B1CorrespondentsModalComponent,
   ],
   imports: [
     CommonModule,
@@ -107,6 +110,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     WebClassModule,
     MoreAutoDirectionModule,
     OnlyNumbersModule,
+    B1ModalContainerModule,
   ],
   exports: [
     CommonModule,

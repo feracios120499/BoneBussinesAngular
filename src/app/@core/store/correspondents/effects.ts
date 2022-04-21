@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  map,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -11,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CorrespondentsService } from '@services/correspondents/correspondents.service';
 import { ServerError } from '@models/errors/server-error.model';
 import { Correspondent } from '@models/correspondents/correspondent.model';
+import { CorrespondentsSelectors } from './selectors';
 
 @Injectable()
 export class CorrespondentsEffects {
@@ -48,6 +55,17 @@ export class CorrespondentsEffects {
           )
         )
       )
+    )
+  );
+
+  loadIfNotStoredCorrespondents$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CorrespondentsActions.loadIfNotStoredCorrespondents),
+      withLatestFrom(
+        this.store.select(CorrespondentsSelectors.correspondentList)
+      ),
+      filter(([_, correspondents]) => !correspondents.length),
+      map(() => CorrespondentsActions.loadCorrespondentsRequest())
     )
   );
 

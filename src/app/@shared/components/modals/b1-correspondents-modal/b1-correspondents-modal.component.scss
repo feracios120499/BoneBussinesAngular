@@ -1,0 +1,95 @@
+$screen-tablet: 812px;
+
+::ng-deep {
+  ng-scrollbar.virtual-scroll {
+    --scrollbar-size: 8px;
+    --scrollbar-thumb-color: rgba(var(--color-dark-rgb), 0.5) !important;
+    --scrollbar-thumb-hover-color: rgba(var(--color-dark-rgb), 0.8) !important;
+    --scrollbar-hover-size: 12px;
+    --scrollbar-track-color: rgba(var(--color-dark-rgb), 0.1);
+    --scrollbar-border-radius: 10px;
+  }
+}
+
+.b1-correspondents-modal {
+  &__body {
+    overflow: visible;
+  }
+
+  &__actions {
+    margin-top: 4px;
+
+    @media (max-width: $screen-tablet) {
+      margin-bottom: 8px;
+      padding: 16px;
+
+      .b1-modal-search {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  &__control {
+    margin-top: 0;
+  }
+
+  &__list {
+    height: 360px;
+    padding-bottom: 16px;
+
+    @media (max-width: $screen-tablet) {
+      margin-top: 8px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 48px;
+
+    @media (max-width: $screen-tablet) {
+      flex-direction: column;
+      align-items: stretch;
+      height: auto;
+      padding: 16px;
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
+      }
+
+      & > span {
+        width: 100%;
+
+        &:not(:last-of-type) {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  &__name {
+    width: 42%;
+  }
+
+  &__account {
+    width: 36%;
+  }
+
+  &__tax-code {
+    width: 128px;
+    text-align: right;
+
+    @media (max-width: $screen-tablet) {
+      text-align: left;
+    }
+  }
+}
+
+.b1-modal-container_header {
+  @media (max-width: $screen-tablet) {
+    display: none;
+  }
+}

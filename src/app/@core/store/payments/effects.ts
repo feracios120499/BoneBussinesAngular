@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { PaymentsSignService } from '@services/payments/payments-sign.service';
 import { PaymentsService } from '@services/payments/payments.service';
 import { BarsCryptorService } from '@services/sign/bars-cryptor.service';
+import { CorrespondentsActions } from '@store/correspondents/actions';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData } from '@store/shared';
+import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { PayActions } from './actions';
 
 
@@ -93,5 +96,20 @@ export class PayEffects {
         this.actions$.pipe(
             ofType(PayActions.signPaymentFailure),
             map(action => NotifyActions.errorNotification({ message: action.payload }))
+        ));
+
+      showCorrespondentsModal$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PayActions.showCorrespondentsModal),
+            tap(() => this.store.dispatch(CorrespondentsActions.loadIfNotStoredCorrespondents())),
+            map(() => {
+                const config: CorrespondentsModalConfig = {
+                    callback: (result) => {
+                      // FOR DEMO PURPOSE ONLY:
+                      console.log('[PAY EFFECTS] Correspondent is selected: ', result);
+                    }
+                };
+                return SharedActions.showCorrespondents({ config });
+            })
         ));
 }

@@ -1,0 +1,80 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-header">
+    <div class="b1-title3">
+      {{ 'components.pay.correspondents.chooseCorespondent' | translate }}
+    </div>
+    <div class="b1-modal-close">
+      <i
+        b1-icon
+        icon="cancel"
+        (click)="modal.close()"
+        (keyup.enter)="modal.close()"
+        tabindex="0"></i>
+    </div>
+  </div>
+
+  <div class="b1-correspondents-modal__body b1-modal-body">
+    <div class="b1-correspondents-modal__actions">
+      <div class="b1-modal-search">
+        <div class="b1-page-inputWithIcon width-100">
+          <input
+            class="b1-correspondents-modal__control b1-input__control b1-base b1-page-input resize"
+            name="search"
+            id="search"
+            type="text"
+            [attr.placeholder]="'shared.search' | translate"
+            [(ngModel)]="filterTerm" />
+          <label b1-icon icon="search" class="resize" for="search"></label>
+        </div>
+      </div>
+    </div>
+
+    <b1-card-loader [isLoading]="isLoading$" webClass="hidden"></b1-card-loader>
+
+    <div class="b1-modal-container_header b1-base">
+      <span class="b1-correspondents-modal__name">
+        {{ 'components.pay.recipient.recipient' | translate }}
+      </span>
+      <span class="b1-correspondents-modal__account">
+        {{ 'components.pay.recipient.iban' | translate }}
+      </span>
+      <span class="b1-correspondents-modal__tax-code">
+        {{ 'components.pay.recipient.taxCode' | translate }}
+      </span>
+    </div>
+
+    <div
+      class="b1-correspondents-modal__list"
+      *ngrxLet="correspondents$ as correspondents">
+      <ng-scrollbar class="virtual-scroll" [disabled]="isMobile$ | ngrxPush">
+        <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+          <div
+            *cdkVirtualFor="
+              let correspondent of correspondents
+                | correspondentsFilter: filterTerm
+            "
+            class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
+            (click)="onCorrespondentSelect(correspondent)">
+            <span
+              class="b1-correspondents-modal__name b1-ellipsis"
+              [ngbTooltip]="correspondent.name | translate"
+              placement="right"
+              tooltipClass="b1-base">
+              {{ correspondent.name }}
+            </span>
+            <span
+              class="b1-correspondents-modal__account b1-ellipsis"
+              [ngbTooltip]="correspondent.bankName | translate"
+              placement="left"
+              tooltipClass="b1-base"
+              [iban]="correspondent.accNumber">
+            </span>
+            <span class="b1-correspondents-modal__tax-code">
+              {{ correspondent.taxCode }}
+            </span>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </ng-scrollbar>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,21 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, NgForm, Validators } from '@angular/forms';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { IbanHelper } from '@helpers/iban.helper';
@@ -8,10 +24,18 @@ import { BankModel } from '@models/bank.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { WithinCountryForm } from '@models/payments/within-country-form.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
+import { Store } from '@ngrx/store';
 import { BanksStoreService } from '@services/banks-store.service';
+import { PayActions } from '@store/payments/actions';
 import { ibanValidator } from '@validators/iban.validator';
 import { Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'within-country-form',
@@ -26,10 +50,12 @@ import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operator
   ],
 })
 export class WithinCountryFormComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
+  implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit
+{
   constructor(
     private banksService: BanksStoreService,
-    private detector: ChangeDetectorRef
+    private detector: ChangeDetectorRef,
+    private store: Store
   ) {
     const controls: ModelControl<WithinCountryForm> = {
       docNumberAuto: this.docNumberAutoControl,
@@ -41,7 +67,7 @@ export class WithinCountryFormComponent
       recipientBankName: this.recipientBankNameControl,
       amount: this.amountControl,
       purpose: this.purposeControl,
-      additionalDetails: this.additionalDetailsControl
+      additionalDetails: this.additionalDetailsControl,
     };
 
     this.formGroup = new FormGroup(controls);
@@ -146,8 +172,8 @@ export class WithinCountryFormComponent
 
   private subscriptions: Subscription[] = [];
 
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   ngAfterViewInit(): void {
     this.subscriptions.push(
@@ -179,7 +205,7 @@ export class WithinCountryFormComponent
                 name: form.recipientName,
                 bankCode: IbanHelper.getBankId(form.recipientAccountNumber),
                 taxCode: form.recipientTaxCode,
-              }
+              },
             };
             this.onChange(paymentForm);
             // this.detector.detectChanges();
@@ -227,11 +253,17 @@ export class WithinCountryFormComponent
     this.onTouched = fn;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((p) => p?.unsubscribe());
+  }
+
+  onCorrespondentListOpen(): void {
+    // this.modalService.open(B1CorrespondentsModalComponent, {
+    //   windowClass: 'correspondents-modal',
+    // });
+    this.store.dispatch(PayActions.showCorrespondentsModal());
   }
 
   private docNumberAutoChange(
