@@ -6,8 +6,8 @@
         class="b1-page-checkbox"
         id="selectAll"
         name="selectAll"
-        [checked]="true"
-        ng-click="reissueCtrl.ToggleSelectAll()" />
+        [checked]="selectAll$ | ngrxPush"
+        (change)="selectAll()" />
       <label for="selectAll">
         <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
       </label>

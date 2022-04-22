@@ -1,0 +1,14 @@
+<ng-container *ngrxLet="applications$ as applications">
+  <ng-scrollbar
+    class="virtual-scroll b1-page-data"
+    [disabled]="isMobile$ | ngrxPush">
+    <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+      <app-reissue-applications-row
+        *cdkVirtualFor="let application of applications; trackBy: trackId"
+        [application]="application"
+        class="b1-page-data__row application-row"
+        [class.selected]="application.selected">
+      </app-reissue-applications-row>
+    </cdk-virtual-scroll-viewport>
+  </ng-scrollbar>
+</ng-container>

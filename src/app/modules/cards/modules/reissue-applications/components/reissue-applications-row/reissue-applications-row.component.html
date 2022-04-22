@@ -1,0 +1,48 @@
+<div class="b1-page-content">
+  <div id="checkbox{{ application.id }}">
+    <input
+      type="checkbox"
+      class="b1-page-checkbox"
+      [id]="application.id"
+      [checked]="application.selected"
+      (change)="selectApplication($event)" />
+    <label [for]="application.id" [id]="application.id">
+      <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
+    </label>
+  </div>
+  <div
+    class="b1-flex b1-align-center b1-justify-center b1-ml-6 application-icon">
+    <img [src]="getImage() | async" />
+  </div>
+  <div class="application-body">
+    <div class="application-body_item">
+      <div class="b1-medium">
+        <span>№</span>
+        <span>{{ application.id }}</span>
+      </div>
+      <div class="b1-page-data__subtitle b1-light">
+        <span>{{ 'components.pay.from' | translate }}</span>
+        <span class="b1-mr-2">:</span>
+        <span>{{ application.createDate | date: 'dd.MM.yyyy' }} </span>
+      </div>
+    </div>
+    <div class="application-body_item">
+      <div class="b1-medium">
+        {{ application.cardOwnerName }}
+      </div>
+      <div class="b1-page-data__subtitle b1-light">
+        <span [iban]="application.accountNumber"></span>
+      </div>
+    </div>
+    <div class="application-body_item">
+      <div class="application-body_number">
+        <b1-card-number [cardNumber]="application.cardNumber"></b1-card-number>
+      </div>
+      <div class="b1-page-data__subtitle b1-light application-body_expired">
+        <span>{{ application.cardExpired }}</span>
+        <span b1-icon icon="arrow-right" class="b1-ml-2 b1-mr-2"></span>
+        <span>{{ application.newExpiredDate }}</span>
+      </div>
+    </div>
+  </div>
+</div>

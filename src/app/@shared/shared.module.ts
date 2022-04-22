@@ -56,7 +56,7 @@ import { B1CorrespondentsModalComponent } from '@ui/modals/b1-correspondents-mod
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
-    super(50, 98, 98);
+    super(50, 120, 120);
   }
 }
 

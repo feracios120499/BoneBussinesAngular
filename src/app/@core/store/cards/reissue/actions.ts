@@ -23,4 +23,11 @@ export namespace CardReissueActions {
     createHTTPActions<void, ReissueCount, string>(
       `[${CARD_REISSUE_KEY}] load count`
     );
+
+  export const selectApplication = createAction(
+    `[${CARD_REISSUE_KEY}] select application`,
+    props<{ id: number }>()
+  );
+
+  export const selectAll = createAction(`[${CARD_REISSUE_KEY}] select all`);
 }
