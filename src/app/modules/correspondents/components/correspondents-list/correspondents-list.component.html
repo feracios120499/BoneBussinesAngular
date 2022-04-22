@@ -1,10 +1,24 @@
 <ng-container *ngrxLet="correspondents$ as correspondents">
-  <app-correspondent-item
-    *ngFor="
-      let correspondent of correspondents
-        | correspondentsFilter: (filterTerm$ | ngrxPush)
-    "
-    [correspondent]="correspondent"
-    (click)="onCorrespondentEdit(correspondent)">
-  </app-correspondent-item>
+  <ng-container
+    *ngIf="
+      correspondents
+        | correspondentsFilter
+          : (filterTerm$ | ngrxPush) as filteredCorrespondents
+    ">
+    <ng-container *ngIf="filteredCorrespondents.length; else notFound">
+      <div class="correspondents-list">
+        <app-correspondent-item
+          *ngFor="let correspondent of filteredCorrespondents"
+          [correspondent]="correspondent"
+          (click)="onCorrespondentEdit(correspondent)">
+        </app-correspondent-item>
+      </div>
+    </ng-container>
+  </ng-container>
 </ng-container>
+
+<ng-template #notFound>
+  <!-- TODO: CHANGE SVG-NAME -->
+  <b1-empty svgName="empty-users" header="components.correspondents.notFound">
+  </b1-empty>
+</ng-template>

@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Correspondent } from '@models/correspondents/correspondent.model';
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
+import { CorrespondentsActions } from '@store/correspondents/actions';
 import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
 
 @Component({
@@ -12,9 +13,6 @@ import { CorrespondentModalComponent } from '../correspondent-modal/corresponden
   templateUrl: './correspondents-list.component.html',
   styleUrls: ['./correspondents-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'correspondents-list',
-  },
 })
 export class CorrespondentsListComponent {
   correspondents$: Observable<Correspondent[]> = this.store.select(
@@ -25,6 +23,10 @@ export class CorrespondentsListComponent {
   );
 
   constructor(private store: Store, private modalService: NgbModal) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(CorrespondentsActions.resetCorrespondentFilter());
+  }
 
   onCorrespondentEdit(correspondent: Correspondent): void {
     const modalRef = this.modalService.open(CorrespondentModalComponent);

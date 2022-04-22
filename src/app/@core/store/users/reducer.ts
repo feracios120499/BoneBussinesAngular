@@ -22,6 +22,10 @@ export const usersReducer = createReducer(
     ...state,
     filterTerm: action.term,
   })),
+  on(UsersActions.resetUserFilter, (state) => ({
+    ...state,
+    filterTerm: '',
+  })),
   on(UsersActions.loadRolesRequest, (state) => ({
     ...state,
     loadings: [...pushIfNotExist(state.loadings, 'roleList')],

@@ -46,6 +46,7 @@
         "format": ["PascalCase"]
       }
     ],
-    "brace-style": "off"
+    "brace-style": "off",
+    "operator-linebreak": "off"
   }
 }

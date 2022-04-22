@@ -6,6 +6,7 @@ import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
 import { B1InputModule } from '@forms/b1-input/b1-input.module';
 import { B1NumberInputModule } from '@forms/b1-number-input/b1-number-input.module';
+import { B1EmptyModule } from '@ui/b1-empty/b1-empty.module';
 
 import { CorrespondentsComponent } from './views/correspondents/correspondents.component';
 import { CorrespondentsHeaderComponent } from './components/correspondents-header/correspondents-header.component';
@@ -14,6 +15,7 @@ import { CorrespondentsListComponent } from './components/correspondents-list/co
 import { CorrespondentItemComponent } from './components/correspondent-item/correspondent-item.component';
 import { CorrespondentFormComponent } from './components/correspondent-form/correspondent-form.component';
 import { CorrespondentModalComponent } from './components/correspondent-modal/correspondent-modal.component';
+import { CorrespondentsFilterModule } from 'src/app/@shared/pipes/correspondents-filter/correspondents-filter.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { CorrespondentModalComponent } from './components/correspondent-modal/co
     B1ModalContainerModule,
     B1InputModule,
     B1NumberInputModule,
+    B1EmptyModule,
+    CorrespondentsFilterModule,
     RouterModule.forChild([
       {
         path: '',

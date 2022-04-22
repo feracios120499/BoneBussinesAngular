@@ -10,7 +10,7 @@ import { SupDocumentsActions } from '@store/sup-documents/actions';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {
@@ -23,7 +23,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         accCurrencyId: 980,
         name: '123',
         bankCode: '303398',
-        taxCode: '12856150'
+        taxCode: '12856150',
       },
       amount: 12300,
       purpose: '33',
@@ -35,17 +35,15 @@ export class CreateComponent implements OnInit, OnDestroy {
         accCurrencyId: 980,
         name: '2323',
         bankCode: '300465',
-        taxCode: '1233333333'
-      }
+        taxCode: '1233333333',
+      },
     };
-    this.store.dispatch(SharedActions.setCreatePayment({ payment }));
+    // this.store.dispatch(SharedActions.setCreatePayment({ payment }));
   }
 
   showTabs$ = this.store.select(PayFormsSelectors.showCreateTabs);
 
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 
   ngOnInit(): void {
     this.store.dispatch(AcctActions.loadAccounts({ reload: false }));

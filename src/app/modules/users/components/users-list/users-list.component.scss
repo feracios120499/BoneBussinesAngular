@@ -1,6 +1,6 @@
 $screen-tablet: 812px;
 
-:host(.users-list) {
+.users-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-auto-rows: minmax(224px, max-content);
