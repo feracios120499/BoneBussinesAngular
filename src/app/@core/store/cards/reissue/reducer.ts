@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { pushIfNotExist, removeItem } from '@store/shared';
+import { isAnyExist, pushIfNotExist, removeItem } from '@store/shared';
 import { CardReissueActions } from './actions';
 import { initialState } from './store';
 
@@ -9,6 +9,8 @@ export const cardReissueReducer = createReducer(
     ...state,
     tab: action.tab,
     applications: [],
+    selectAll: false,
+    selectedApplications: [],
   })),
   on(CardReissueActions.loadCountSuccess, (state, action) => ({
     ...state,
@@ -35,5 +37,18 @@ export const cardReissueReducer = createReducer(
     CardReissueActions.loadCountFailure,
     CardReissueActions.loadCountSuccess,
     (state) => ({ ...state, loadings: removeItem(state.loadings, 'count') })
-  )
+  ),
+  on(CardReissueActions.selectApplication, (state, action) => ({
+    ...state,
+    selectedApplications: isAnyExist(state.selectedApplications, action.id)
+      ? removeItem(state.selectedApplications, action.id)
+      : pushIfNotExist(state.selectedApplications, action.id),
+  })),
+  on(CardReissueActions.selectAll, (state) => ({
+    ...state,
+    selectAll: !state.selectAll,
+    selectedApplications: state.selectAll
+      ? []
+      : state.applications.map((p) => p.id),
+  }))
 );

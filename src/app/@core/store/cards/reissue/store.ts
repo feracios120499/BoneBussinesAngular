@@ -10,6 +10,8 @@ export interface CardReissueState {
   count: ReissueCount;
   applications: ReissueApplicationDetails[];
   loadings: ReissueLoading[];
+  selectedApplications: number[];
+  selectAll: boolean;
 }
 
 export const initialState: CardReissueState = {
@@ -17,4 +19,6 @@ export const initialState: CardReissueState = {
   count: {},
   applications: [],
   loadings: [],
+  selectedApplications: [],
+  selectAll: false,
 };

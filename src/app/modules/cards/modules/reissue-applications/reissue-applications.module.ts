@@ -10,12 +10,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { CardReissueEffect } from '@store/cards/reissue/effects';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { ReissueApplicationsActionsComponent } from './components/reissue-applications-actions/reissue-applications-actions.component';
+import { ReissueApplicationsListComponent } from './components/reissue-applications-list/reissue-applications-list.component';
+import { ReissueApplicationsRowComponent } from './components/reissue-applications-row/reissue-applications-row.component';
 
 @NgModule({
   declarations: [
     ReissueApplicationsComponent,
     ReissueApplicationsTabsComponent,
     ReissueApplicationsActionsComponent,
+    ReissueApplicationsListComponent,
+    ReissueApplicationsRowComponent,
   ],
   imports: [
     CommonModule,

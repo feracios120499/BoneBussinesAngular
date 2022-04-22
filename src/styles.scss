@@ -3240,8 +3240,8 @@ textarea {
       z-index: 2;
       width: 90px;
       height: 90px;
-      top: -36px;
-      left: -18px;
+      top: 0;
+      left: 0;
     }
   }
 }
@@ -3300,7 +3300,7 @@ textarea {
   font-size: 16px;
   color: var(--color-dark);
 }
-.b1-page-checkbox:checked + label .b1-page-checkbox-icon {
+.b1-page-checkbox:checked + label > .b1-page-checkbox-icon {
   opacity: 1;
 }
 

@@ -5,7 +5,7 @@ export interface ReissueApplicationDetails extends ReissueApplication {
   id: number;
   statusCode: string;
   newExpiredDate: string;
-  createdDate: Dayjs;
+  createDate: Date;
   isNeedMySign: boolean;
   isNeedSign: boolean;
   visaStampCount: number;
