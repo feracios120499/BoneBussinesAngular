@@ -23,9 +23,14 @@ export class CardDetailsServicesComponent implements OnInit {
   isCardLoading$ = this.store.select(CardDetailsSelectors.isCardLoading);
   lastApplication$ = this.store.select(CardDetailsSelectors.lastApplication);
   isAbleToReissue$ = this.store.select(CardDetailsSelectors.isAbleToReissue);
+  isShowWarningReissue$ = this.store.select(
+    CardDetailsSelectors.isShowWarningReissue
+  );
   ngOnInit(): void {}
 
-  showStatement(): void {}
+  showStatement(card: CardDetails): void {
+    this.store.dispatch(CardDetailsActions.showStatementModal({ card }));
+  }
 
   activateSms(cardId: string, phoneNumber: string): void {
     this.updateSmsStatus(cardId, phoneNumber, true);
@@ -79,7 +84,7 @@ export class CardDetailsServicesComponent implements OnInit {
                 cardExpired: card.expired,
                 cardId: card.id,
                 cardNumber: card.number,
-                cardOwnerName: card.name,
+                cardOwnerName: card.fullNameEng,
                 cardType: card.type,
               })
             ),

@@ -481,7 +481,13 @@ export class AcctDetailsEffects implements OnRunEffects {
             start: range.start,
             end: range.end,
             callback: (data: StatementModalResult) =>
-              this.store.dispatch(AcctDetailsActions.loadStatement({ data })),
+              this.store.dispatch(
+                AcctDetailsActions.loadStatement({
+                  data,
+                  accountId: account.id,
+                  bankId: account.bankId,
+                })
+              ),
           },
         })
       )
@@ -493,80 +499,16 @@ export class AcctDetailsEffects implements OnRunEffects {
       ofType(AcctDetailsActions.loadStatement),
       map((action) =>
         action.data.sendToEmail
-          ? AcctDetailsActions.sendStatementRequest(action.data)
-          : AcctDetailsActions.downloadStatementRequest(action.data)
-      )
-    )
-  );
-
-  downloadStatement$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AcctDetailsActions.downloadStatementRequest),
-      switchMap((action) =>
-        clientIdWithData(this.store, action.payload).pipe(
-          withLatestFrom(
-            notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount)
-          )
-        )
-      ),
-      switchMap(([payload, account]) =>
-        this.accountsService
-          .getStatement(
-            account.bankId,
-            account.id,
-            payload.clientId,
-            payload.data.range.start,
-            payload.data.range.end,
-            payload.data.format
-          )
-          .pipe(
-            map((file) => AcctDetailsActions.downloadStatementSuccess(file))
-          )
-      )
-    )
-  );
-
-  downloadStatementSucess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AcctDetailsActions.downloadStatementSuccess),
-      map((action) => SharedActions.saveFile({ file: action.payload }))
-    )
-  );
-
-  sendStatement$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AcctDetailsActions.sendStatementRequest),
-      switchMap((action) =>
-        clientIdWithData(this.store, action.payload).pipe(
-          withLatestFrom(
-            notNullAndUndefined(this.store, AcctDetailsSelectors.currentAccount)
-          )
-        )
-      ),
-      switchMap(([payload, account]) =>
-        this.accountsService
-          .sendStatement(
-            account.bankId,
-            account.id,
-            payload.clientId,
-            payload.data.range.start,
-            payload.data.range.end,
-            payload.data.format,
-            payload.data.email as string
-          )
-          .pipe(map(() => AcctDetailsActions.sendStatementSuccess(undefined)))
-      )
-    )
-  );
-
-  sendStatementSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AcctDetailsActions.sendStatementSuccess),
-      map(() =>
-        NotifyActions.successNotification({
-          message: 'sucess',
-          title: 'success',
-        })
+          ? AcctActions.sendStatementRequest({
+              result: action.data,
+              accountId: action.accountId,
+              bankId: action.bankId,
+            })
+          : AcctActions.downloadStatementRequest({
+              result: action.data,
+              accountId: action.accountId,
+              bankId: action.bankId,
+            })
       )
     )
   );

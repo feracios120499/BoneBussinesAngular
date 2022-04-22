@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AccountCard } from '@models/cards/account-card.model';
 import { CardDetails } from '@models/cards/card-details.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { CardDetailsActions } from '@store/cards/details/actions';
 
 @Component({
   selector: 'app-reissue-application-modal',
@@ -9,7 +12,7 @@ import { ReissueApplicationDetails } from '@models/cards/reissue-application-det
   styleUrls: ['./reissue-application-modal.component.scss'],
 })
 export class ReissueApplicationModalComponent implements OnInit {
-  constructor() {}
+  constructor(public modal: NgbActiveModal, private store: Store) {}
 
   @Input() application!: ReissueApplicationDetails;
   card!: AccountCard;
@@ -24,5 +27,10 @@ export class ReissueApplicationModalComponent implements OnInit {
       name: this.application.cardOwnerName,
       type: this.application.cardType,
     };
+  }
+
+  goToApplications(): void {
+    this.store.dispatch(CardDetailsActions.goToApplications());
+    this.modal.close();
   }
 }

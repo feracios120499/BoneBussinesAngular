@@ -85,4 +85,11 @@ export namespace CardDetailsSelectors {
       !isAnyExist(store.loadings, 'reissueApplication') &&
       store.lastApplication === undefined
   );
+
+  export const isShowWarningReissue = createSelector(
+    cardDetailsStore,
+    (store) =>
+      !isAnyExist(store.loadings, 'reissueApplication') &&
+      store.lastApplication === undefined
+  );
 }

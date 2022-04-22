@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CardLimit } from '@models/cards/card-limit.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditLimitConfig } from '../../models/edit-limit-config.modal';
+import { EditLimitConfig } from '../../models/edit-limit-config.model';
 
 type LimitState = 'unlimit' | 'zero' | 'limit';
 

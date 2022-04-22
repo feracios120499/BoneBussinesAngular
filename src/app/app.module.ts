@@ -30,6 +30,7 @@ import { HeaderNotificationsComponent } from './layout/header/components/header-
 import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { ReissueApplicationsModule } from './modules/cards/modules/reissue-applications/reissue-applications.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     CoreModule,
     SharedModule,
     B1DirectivesModule,
+    ReissueApplicationsModule,
   ],
   exports: [ReactiveComponentModule],
   providers: [

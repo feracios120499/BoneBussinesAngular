@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CardDetailsActions } from '@store/cards/details/actions';
 import { CardDetailsSelectors } from '@store/cards/details/selectors';
 
 @Component({
@@ -14,5 +15,7 @@ export class CardDetailsHeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goToCards(): void {}
+  goToCards(): void {
+    this.store.dispatch(CardDetailsActions.goToCards());
+  }
 }

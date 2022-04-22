@@ -11,6 +11,13 @@ const routes: Routes = [
         (p) => p.CardDetailsModule
       ),
   },
+  {
+    path: 'applications',
+    loadChildren: () =>
+      import('./modules/reissue-applications/reissue-applications.module').then(
+        (m) => m.ReissueApplicationsModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -22,6 +22,7 @@ import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module'
 import { LockCardConfirmComponent } from './components/lock-card-confirm/lock-card-confirm.component';
 import { B1WarningBlockModule } from '@ui/b1-warning-block/b1-warning-block.module';
 import { ReissueApplicationModalComponent } from './components/reissue-application-modal/reissue-application-modal.component';
+import { CardStatementModalComponent } from './components/card-statement-modal/card-statement-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ReissueApplicationModalComponent } from './components/reissue-applicati
     EditLimitModalComponent,
     LockCardConfirmComponent,
     ReissueApplicationModalComponent,
+    CardStatementModalComponent,
   ],
   imports: [
     CommonModule,

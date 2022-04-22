@@ -10,122 +10,128 @@ import { Transaction } from '@models/transaction.model';
 import { StatementModalResult } from '@models/statement-modal-result.model';
 import { FileModel } from '@models/file.model';
 
-
 export namespace AcctDetailsActions {
+  export const loadCurrentAccount = createAction(
+    '[ACCT][Details] load current account'
+  );
 
-    export const loadCurrentAccount = createAction('[ACCT][Details] load current account');
+  export const [loadAccount, loadAccountSuccess, loadAccountFailure] =
+    createHTTPActions<
+      { accountId: number; bankId: string },
+      AccountModel,
+      string
+    >('[ACCT] load account');
 
-    export const [
-        loadAccount,
-        loadAccountSuccess,
-        loadAccountFailure
-    ] = createHTTPActions<{ accountId: number, bankId: string }, AccountModel, string>('[ACCT] load account');
+  export const setCurrentAccount = createAction(
+    '[ACCT] set current account',
+    props<{ account: AccountModel }>()
+  );
 
-    export const setCurrentAccount = createAction(
-        '[ACCT] set current account',
-        props<{ account: AccountModel }>()
-    );
+  // setAccountName action
+  export const setAccountName = createAction(
+    '[ACCT] set account name',
+    props<{ name: string }>()
+  );
 
-    // setAccountName action
-    export const setAccountName = createAction(
-        '[ACCT] set account name',
-        props<{ name: string }>()
-    );
+  // setEditFormInitState action
+  export const setEditFormInitState = createAction(
+    '[ACCT] set edit form init state'
+  );
 
-    // setEditFormInitState action
-    export const setEditFormInitState = createAction('[ACCT] set edit form init state');
+  // sumbitEditForm action
+  export const sumbitEditForm = createAction('[ACCT] submit edit form');
 
-    // sumbitEditForm action
-    export const sumbitEditForm = createAction(
-        '[ACCT] submit edit form'
-    );
+  export const [
+    updateAccountRequest,
+    updateAccountSuccess,
+    updateAccountFailure,
+  ] = createHTTPActions<AcctEdit, AccountModel, string>(
+    '[ACCT] update account'
+  );
 
+  export const updateRangeTransactions = createAction(
+    '[ACCT] update range',
+    props<{ start: Dayjs; end: Dayjs }>()
+  );
 
-    export const [
-        updateAccountRequest,
-        updateAccountSuccess,
-        updateAccountFailure
-    ] = createHTTPActions<AcctEdit, AccountModel, string>('[ACCT] update account');
+  export const loadTurnoversCurrentAccount = createAction(
+    '[ACCT] load turnovers current account'
+  );
 
+  export const [
+    loadTurnoversRequest,
+    loadTurnoversSuccess,
+    loadTurnoversFailure,
+  ] = createHTTPActions<
+    { accountId: number; bankId: string; start: Dayjs; end: Dayjs },
+    any,
+    string
+  >('[ACCT] load turnovers');
 
-    export const updateRangeTransactions = createAction(
-        '[ACCT] update range',
-        props<{ start: Dayjs, end: Dayjs }>()
-    );
+  export const initDetails = createAction('[ACCT][Details] init');
 
-    export const loadTurnoversCurrentAccount = createAction('[ACCT] load turnovers current account');
+  export const destroyDetails = createAction('[ACCT][Details] destroy');
 
-    export const [
-        loadTurnoversRequest,
-        loadTurnoversSuccess,
-        loadTurnoversFailure
-    ] = createHTTPActions<{ accountId: number, bankId: string, start: Dayjs, end: Dayjs }, any, string>('[ACCT] load turnovers');
+  export const [
+    loadTransactionsRequest,
+    loadTransactionsSuccess,
+    loadTransactionsFailure,
+  ] = createHTTPActions<
+    string,
+    { id: string; transactions: TurnoverTransaction[] },
+    { id: string; error: string }
+  >('[ACCT][Details] load transactions');
 
-    export const initDetails = createAction('[ACCT][Details] init');
+  export const loadTransactionsCancel = createAction(
+    '[ACCT][Details] load transactions cancel',
+    (payload: { id: string }) => ({ payload })
+  );
 
-    export const destroyDetails = createAction('[ACCT][Details] destroy');
+  export const openTurnovers = createAction(
+    '[ACCT][Details] open turnovers',
+    props<{ id: string }>()
+  );
 
-    export const [
-        loadTransactionsRequest,
-        loadTransactionsSuccess,
-        loadTransactionsFailure
-    ] = createHTTPActions<string, { id: string, transactions: TurnoverTransaction[] }, { id: string, error: string }>('[ACCT][Details] load transactions');
+  export const closeTurnovers = createAction(
+    '[ACCT][Details] close turnovers',
+    props<{ id: string }>()
+  );
 
-    export const loadTransactionsCancel = createAction(
-        '[ACCT][Details] load transactions cancel',
-        (payload: { id: string }) => ({ payload })
-    );
+  export const [
+    loadTransactionDetailRequest,
+    loadTransactionDetailSuccess,
+    loadTransactionDetailFailure,
+  ] = createHTTPActions<{ id: number; bankId: string }, Transaction, string>(
+    '[ACCT][Details] load transaction detail'
+  );
 
-    export const openTurnovers = createAction(
-        '[ACCT][Details] open turnovers',
-        props<{ id: string }>()
-    );
+  export const showTransactionPartial = createAction(
+    '[ACCT][Details] show transaction partial',
+    props<{ transaction: TurnoverTransaction }>()
+  );
 
-    export const closeTurnovers = createAction(
-        '[ACCT][Details] close turnovers',
-        props<{ id: string }>()
-    );
+  export const showStatement = createAction('[ACCT][Details] show statement');
 
-    export const [
-        loadTransactionDetailRequest,
-        loadTransactionDetailSuccess,
-        loadTransactionDetailFailure
-    ] = createHTTPActions<{ id: number, bankId: string }, Transaction, string>('[ACCT][Details] load transaction detail');
+  export const loadStatement = createAction(
+    '[ACCT][Details] load statement',
+    props<{ data: StatementModalResult; accountId: number; bankId: string }>()
+  );
 
-    export const showTransactionPartial = createAction(
-        '[ACCT][Details] show transaction partial',
-        props<{ transaction: TurnoverTransaction }>()
-    );
+  export const showRequisitesModal = createAction(
+    '[ACCT][Details] show requisites modal'
+  );
 
-    export const showStatement = createAction(
-        '[ACCT][Details] show statement'
-    );
+  export const showExportModal = createAction(
+    '[ACCT][Details] show export modal'
+  );
 
-    export const loadStatement = createAction(
-        '[ACCT][Details] load statement',
-        props<{ data: StatementModalResult }>()
-    );
-
-    export const [
-        downloadStatementRequest,
-        downloadStatementSuccess,
-        downloadStatementFailure
-    ] = createHTTPActions<StatementModalResult, FileModel, string>('[ACCT][Details] download statement');
-
-    export const [
-        sendStatementRequest,
-        sendStatementSuccess,
-        sendStatementFailure
-    ] = createHTTPActions<StatementModalResult, any | undefined, string>('[ACCT][Details] send statement');
-
-
-    export const showRequisitesModal = createAction('[ACCT][Details] show requisites modal');
-
-    export const showExportModal = createAction('[ACCT][Details] show export modal');
-
-    export const [
-        printTransactionRequest,
-        printTransactionSuccess,
-        printTransactionFailure
-    ] = createHTTPActions<{ transactionId: string, bankId: string }, string, string>('[ACCT][Details] print transaction');
+  export const [
+    printTransactionRequest,
+    printTransactionSuccess,
+    printTransactionFailure,
+  ] = createHTTPActions<
+    { transactionId: string; bankId: string },
+    string,
+    string
+  >('[ACCT][Details] print transaction');
 }
