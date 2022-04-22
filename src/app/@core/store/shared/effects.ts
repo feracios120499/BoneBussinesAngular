@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ModalService } from '@services/modal.service';
 import { B1ConfirmModalComponent } from '@ui/modals/b1-confirm-modal/b1-confirm-modal.component';
+import { B1CorrespondentsModalComponent } from '@ui/modals/b1-correspondents-modal/b1-correspondents-modal.component';
 import { saveAs } from 'file-saver';
 import { tap } from 'rxjs/operators';
 import { B1ExportTurnoversComponent } from 'src/app/@shared/components/modals/b1-export-turnovers/b1-export-turnovers.component';
@@ -121,6 +122,23 @@ export class SharedEffects {
           const modalRef = this.modalService.open(B1ConfirmModalComponent, {
             size: 'sm',
           });
+          modalRef.componentInstance.config = action.config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  showCorrespondentsModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SharedActions.showCorrespondents),
+        tap((action) => {
+          const modalRef = this.modalService.open(
+            B1CorrespondentsModalComponent,
+            {
+              windowClass: 'correspondents-modal',
+            }
+          );
           modalRef.componentInstance.config = action.config;
         })
       ),

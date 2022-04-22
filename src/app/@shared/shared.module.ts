@@ -24,6 +24,9 @@ import { MoreAutoDirectionModule } from './directives/more-auto-direction/more-a
 import { MobileClassModule } from './directives/mobile-class/mobile-class.module';
 import { WebClassModule } from './directives/web-class/web-class.module';
 import { OnlyNumbersModule } from './directives/only-numbers/only-numbers.module';
+import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
+import { CorrespondentsFilterModule } from './pipes/correspondents-filter/correspondents-filter.module';
+import { B1EmptyModule } from '@ui/b1-empty/b1-empty.module';
 
 import { B1LinkComponent } from './components/b1-link/b1-link.component';
 import { B1PageButtonComponent } from './components/b1-page-button/b1-page-button.component';
@@ -47,9 +50,9 @@ import { UsersFilterPipe } from './pipes/users-filter.pipe';
 import { B1ConfirmModalComponent } from './components/modals/b1-confirm-modal/b1-confirm-modal.component';
 import { CustomToast } from '@ui/custom-toast/custom-toast.component';
 import { B1ErrorModalComponent } from './components/modals/b1-error-modal/b1-error-modal.component';
-import { CorrespondentsFilterPipe } from './pipes/correspondents-filter.pipe';
 import { CheckRoleDirective } from './directives/check-role.directive';
 import { B1WarningBlockComponent } from './components/b1-warning-block/b1-warning-block.component';
+import { B1CorrespondentsModalComponent } from '@ui/modals/b1-correspondents-modal/b1-correspondents-modal.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -78,8 +81,8 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ConfirmModalComponent,
     CustomToast,
     B1ErrorModalComponent,
-    CorrespondentsFilterPipe,
     CheckRoleDirective,
+    B1CorrespondentsModalComponent,
   ],
   imports: [
     CommonModule,
@@ -107,6 +110,9 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     WebClassModule,
     MoreAutoDirectionModule,
     OnlyNumbersModule,
+    B1ModalContainerModule,
+    CorrespondentsFilterModule,
+    B1EmptyModule,
   ],
   exports: [
     CommonModule,
@@ -144,7 +150,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ContentWrapperModule,
     B1DirectivesModule,
     B1CardLoaderModule,
-    CorrespondentsFilterPipe,
     CheckRoleDirective,
   ],
   providers: [

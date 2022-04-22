@@ -4,9 +4,28 @@
   <div style="position: relative" class="full-screen">
     <div class="b1-page-card b1-bg-light">
       <app-correspondents-actions></app-correspondents-actions>
+
       <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
-      <b1-content-wrapper>
-        <app-correspondents-list></app-correspondents-list>
+
+      <b1-content-wrapper *ngrxLet="isLoading$ as isLoading">
+        <ng-container *ngrxLet="correspondents$ as correspondents">
+          <app-correspondents-list
+            *ngIf="correspondents.length"></app-correspondents-list>
+
+          <!-- TODO: CHANGE SVG-NAME -->
+          <b1-empty
+            *ngIf="!correspondents.length && !isLoading"
+            svgName="empty-users"
+            header="components.correspondents.doNotExist"
+            description="components.correspondents.displayIfAdd">
+            <b1-button
+              label="components.pay.correspondents.addCorrespondent"
+              icon="plus"
+              (click)="onCorrespondentAdd()"
+              [isDisabled]="isLoading">
+            </b1-button>
+          </b1-empty>
+        </ng-container>
       </b1-content-wrapper>
     </div>
   </div>

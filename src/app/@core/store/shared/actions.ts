@@ -1,12 +1,12 @@
 import { FileModel } from '@models/file.model';
 import { ConfirmModalConfig } from '@models/modals/confirm-modal-config.model';
+import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
 import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
 import { RequisitesModalConfig } from '@models/modals/requisites-modal-config.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { StatementModalConfig } from '@models/statement-modal-config.model';
 import {
-  Action,
   createAction,
   DefaultProjectorFn,
   MemoizedSelector,
@@ -59,6 +59,11 @@ export namespace SharedActions {
     props<{ payment: PaymentForm }>()
   );
 
+  export const setCreatePartialPayment = createAction(
+    '[SHARED] set create partial payment',
+    props<{ payment: Partial<PaymentForm> }>()
+  );
+
   export const clearCreatePayment = createAction(
     '[SHARED] clear create payment'
   );
@@ -66,5 +71,10 @@ export namespace SharedActions {
   export const showConfirm = createAction(
     '[SHARED] show confirm',
     props<{ config: ConfirmModalConfig }>()
+  );
+
+  export const showCorrespondents = createAction(
+    '[SHARED] show correspondents',
+    props<{ config: CorrespondentsModalConfig }>()
   );
 }

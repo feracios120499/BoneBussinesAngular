@@ -12,6 +12,8 @@ import { Correspondent } from '@models/correspondents/correspondent.model';
 import { ActionButton } from '@ui/b1-dropdown/b1-dropdown.component';
 import { SharedActions } from '@store/shared/actions';
 import { CorrespondentsActions } from '@store/correspondents/actions';
+import { PaymentAccount } from '@models/payment-account.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-correspondent-item',
@@ -30,7 +32,8 @@ export class CorrespondentItemComponent
 
   constructor(
     private store: Store,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) {
     super();
   }
@@ -68,7 +71,12 @@ export class CorrespondentItemComponent
   }
 
   private onCorrespondentCreatePayment(correspondent: Correspondent): void {
-    console.log('Payment is created with correspondent: ', correspondent);
+    const { name, accNumber, taxCode } = correspondent;
+    const recipient = { name, accNumber, taxCode } as PaymentAccount;
+    this.store.dispatch(
+      SharedActions.setCreatePartialPayment({ payment: { recipient } })
+    );
+    this.router.navigate(['/payments', 'create', 'within-country']);
   }
 
   private onCorrespondentCreateRegularPayment(
@@ -81,7 +89,6 @@ export class CorrespondentItemComponent
   }
 
   private onCorrespondentDelete(correspondent: Correspondent): void {
-    console.log('Correspondent is deleted: ', correspondent);
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {

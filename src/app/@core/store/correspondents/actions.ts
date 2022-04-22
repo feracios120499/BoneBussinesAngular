@@ -15,9 +15,17 @@ export namespace CorrespondentsActions {
     `[${CORRESPONDENTS_KEY}] load Correspondents`
   );
 
+  export const loadIfNotStoredCorrespondents = createAction(
+    `${[CORRESPONDENTS_KEY]} load if not stored correspondents`
+  );
+
   export const filterCorrespondents = createAction(
     `[${CORRESPONDENTS_KEY}] filter Correspondents`,
     props<{ term: string }>()
+  );
+
+  export const resetCorrespondentFilter = createAction(
+    `[${CORRESPONDENTS_KEY}] reset correspondent filter`
   );
 
   export const [
