@@ -225,19 +225,19 @@ export class WithinCountryFormComponent
       docNumberAuto: !form.number,
       docNumber: form.number,
       senderAccount: {
-        id: form.sender.accId,
-        number: form.sender.accNumber || '',
-        currencyCode: form.sender.accCurrencyCode,
-        currencyId: form.sender.accCurrencyId,
-        name: form.sender.name || '',
-        taxCode: form.sender.taxCode || '',
+        id: form.sender?.accId,
+        number: form.sender?.accNumber || '',
+        currencyCode: form.sender?.accCurrencyCode,
+        currencyId: form.sender?.accCurrencyId,
+        name: form.sender?.name || '',
+        taxCode: form.sender?.taxCode || '',
       },
       recipientName: form.recipient.name || '',
       recipientAccountNumber: form.recipient.accNumber || '',
       recipientBankName: '',
       recipientTaxCode: form.recipient.taxCode || '',
-      amount: form.amount,
-      purpose: form.purpose,
+      amount: form.amount || 0,
+      purpose: form.purpose || '',
       additionalDetails: form.additionalDetails,
     };
 
@@ -260,9 +260,6 @@ export class WithinCountryFormComponent
   }
 
   onCorrespondentListOpen(): void {
-    // this.modalService.open(B1CorrespondentsModalComponent, {
-    //   windowClass: 'correspondents-modal',
-    // });
     this.store.dispatch(PayActions.showCorrespondentsModal());
   }
 

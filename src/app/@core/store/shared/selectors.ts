@@ -5,25 +5,30 @@ import dayjs from 'dayjs';
 import { SHARED_KEY, SharedState } from './store';
 
 export namespace SharedSelectors {
-    export const sharedStore = createFeatureSelector<SharedState>(SHARED_KEY);
+  export const sharedStore = createFeatureSelector<SharedState>(SHARED_KEY);
 
-    export const payment = createSelector(
-        sharedStore,
-        (store) => store.currentPayment.payment
-    );
+  export const payment = createSelector(
+    sharedStore,
+    (store) => store.currentPayment.payment
+  );
 
-    export const loader = createSelector(
-        sharedStore,
-        (store) => store.currentPayment.loader
-    );
+  export const loader = createSelector(
+    sharedStore,
+    (store) => store.currentPayment.loader
+  );
 
-    export const bankDate = createSelector(
-        UserSelectors.currentCustomer,
-        (currentCustomser) => dayjs(currentCustomser?.bankDate)
-    );
+  export const bankDate = createSelector(
+    UserSelectors.currentCustomer,
+    (currentCustomser) => dayjs(currentCustomser?.bankDate)
+  );
 
-    export const createPayment = createSelector(
-        sharedStore,
-        (state) => state.createPayment?.payment
-    );
+  export const createPayment = createSelector(
+    sharedStore,
+    (state) => state.createPayment?.payment
+  );
+
+  export const createPartialPayment = createSelector(
+    sharedStore,
+    (state) => state.createPartialPayment?.payment
+  );
 }

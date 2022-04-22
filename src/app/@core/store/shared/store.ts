@@ -5,22 +5,24 @@ import { DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
 export const SHARED_KEY = 'shared';
 
 export interface SharedState {
-    currentPayment: CurrentPayment;
-    createPayment?: CreatePayment;
+  currentPayment: CurrentPayment;
+  createPayment?: CreatePayment;
+  createPartialPayment?: CreatePartialPayment;
 }
 
 export interface CurrentPayment {
-    payment?: Partial<PaymentModal>;
-    loader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>>;
+  payment?: Partial<PaymentModal>;
+  loader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>>;
 }
 
 export interface CreatePayment {
-    payment: PaymentForm;
+  payment: PaymentForm;
 }
 
+export interface CreatePartialPayment {
+  payment: Partial<PaymentForm>;
+}
 
 export const initialState: SharedState = {
-    currentPayment: {
-
-    }
+  currentPayment: {},
 };

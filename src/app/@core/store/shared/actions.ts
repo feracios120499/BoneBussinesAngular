@@ -7,7 +7,6 @@ import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { StatementModalConfig } from '@models/statement-modal-config.model';
 import {
-  Action,
   createAction,
   DefaultProjectorFn,
   MemoizedSelector,
@@ -58,6 +57,11 @@ export namespace SharedActions {
   export const setCreatePayment = createAction(
     `[SHARED] set create payment`,
     props<{ payment: PaymentForm }>()
+  );
+
+  export const setCreatePartialPayment = createAction(
+    '[SHARED] set create partial payment',
+    props<{ payment: Partial<PaymentForm> }>()
   );
 
   export const clearCreatePayment = createAction(
