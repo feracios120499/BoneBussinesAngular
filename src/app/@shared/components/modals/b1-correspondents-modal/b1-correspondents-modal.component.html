@@ -1,8 +1,9 @@
-<div class="b1-modal-data">
+<div *ngrxLet="isLoading$ as isLoading" class="b1-modal-data">
   <div class="b1-modal-header">
     <div class="b1-title3">
       {{ 'components.pay.correspondents.chooseCorespondent' | translate }}
     </div>
+
     <div class="b1-modal-close">
       <i
         b1-icon
@@ -35,9 +36,11 @@
       <span class="b1-correspondents-modal__name">
         {{ 'components.pay.recipient.recipient' | translate }}
       </span>
+
       <span class="b1-correspondents-modal__account">
         {{ 'components.pay.recipient.iban' | translate }}
       </span>
+
       <span class="b1-correspondents-modal__tax-code">
         {{ 'components.pay.recipient.taxCode' | translate }}
       </span>
@@ -46,35 +49,58 @@
     <div
       class="b1-correspondents-modal__list"
       *ngrxLet="correspondents$ as correspondents">
-      <ng-scrollbar class="virtual-scroll" [disabled]="isMobile$ | ngrxPush">
-        <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
-          <div
-            *cdkVirtualFor="
-              let correspondent of correspondents
-                | correspondentsFilter: filterTerm
-            "
-            class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
-            (click)="onCorrespondentSelect(correspondent)">
-            <span
-              class="b1-correspondents-modal__name b1-ellipsis"
-              [ngbTooltip]="correspondent.name | translate"
-              placement="right"
-              tooltipClass="b1-base">
-              {{ correspondent.name }}
-            </span>
-            <span
-              class="b1-correspondents-modal__account b1-ellipsis"
-              [ngbTooltip]="correspondent.bankName | translate"
-              placement="left"
-              tooltipClass="b1-base"
-              [iban]="correspondent.accNumber">
-            </span>
-            <span class="b1-correspondents-modal__tax-code">
-              {{ correspondent.taxCode }}
-            </span>
-          </div>
-        </cdk-virtual-scroll-viewport>
-      </ng-scrollbar>
+      <ng-container *ngIf="correspondents.length">
+        <ng-container
+          *ngIf="
+            correspondents
+              | correspondentsFilter: filterTerm as filteredCorrespondents
+          ">
+          <ng-scrollbar
+            *ngIf="filteredCorrespondents.length; else notFound"
+            class="virtual-scroll"
+            [disabled]="isMobile$ | ngrxPush">
+            <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+              <div
+                *cdkVirtualFor="let correspondent of filteredCorrespondents"
+                class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
+                (click)="onCorrespondentSelect(correspondent)">
+                <span
+                  class="b1-correspondents-modal__name b1-ellipsis"
+                  [ngbTooltip]="correspondent.name | translate"
+                  placement="right"
+                  tooltipClass="b1-base">
+                  {{ correspondent.name }}
+                </span>
+
+                <span
+                  class="b1-correspondents-modal__account b1-ellipsis"
+                  [ngbTooltip]="correspondent.bankName | translate"
+                  placement="left"
+                  tooltipClass="b1-base"
+                  [iban]="correspondent.accNumber">
+                </span>
+
+                <span class="b1-correspondents-modal__tax-code">
+                  {{ correspondent.taxCode }}
+                </span>
+              </div>
+            </cdk-virtual-scroll-viewport>
+          </ng-scrollbar>
+        </ng-container>
+      </ng-container>
+
+      <!-- TODO: CHANGE SVG-NAME -->
+      <b1-empty
+        *ngIf="!correspondents.length && !isLoading"
+        svgName="empty-users"
+        header="components.correspondents.doNotExist">
+      </b1-empty>
     </div>
   </div>
 </div>
+
+<ng-template #notFound>
+  <!-- TODO: CHANGE SVG-NAME -->
+  <b1-empty svgName="empty-users" header="components.correspondents.notFound">
+  </b1-empty>
+</ng-template>

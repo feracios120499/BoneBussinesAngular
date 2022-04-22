@@ -26,6 +26,10 @@ export const correspondentsReducer = createReducer(
     ...state,
     filterTerm: action.term,
   })),
+  on(CorrespondentsActions.resetCorrespondentFilter, (state) => ({
+    ...state,
+    filterTerm: '',
+  })),
   on(
     CorrespondentsActions.createCorrespondentRequest,
     CorrespondentsActions.updateCorrespondentRequest,

@@ -1,0 +1,14 @@
+<div class="b1-empty__img-wrapper">
+  <img [src]="'/assets/img/' + svgName + '.svg'" />
+</div>
+<h3 class="b1-empty__header b1-large b1-bold">
+  {{ header | translate }}
+</h3>
+
+<p *ngIf="description" class="b1-empty__description b1-medium">
+  {{ description! | translate }}
+</p>
+
+<div class="b1-empty__buttons">
+  <ng-content></ng-content>
+</div>

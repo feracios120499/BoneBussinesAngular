@@ -17,6 +17,10 @@ export namespace UsersActions {
     props<{ term: string }>()
   );
 
+  export const resetUserFilter = createAction(
+    `[${USERS_KEY}] reset user filter`
+  );
+
   export const [loadRolesRequest, loadRolesSuccess, loadRolesFailure] =
     createHTTPActions<void, Role[], string>(`[${USERS_KEY}] load roles`);
 

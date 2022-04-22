@@ -6,6 +6,7 @@ import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-containe
 import { B1InputModule } from '@forms/b1-input/b1-input.module';
 import { B1MaskedInputModule } from '@forms/b1-masked-input/b1-masked-input.module';
 import { B1SwitcherListModule } from '@forms/b1-switcher-list/b1-switcher-list.module';
+import { B1EmptyModule } from '@ui/b1-empty/b1-empty.module';
 
 import { UsersComponent } from './views/users/users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -36,6 +37,7 @@ import { UserNameFormComponent } from './components/user-name-form/user-name-for
     B1InputModule,
     B1MaskedInputModule,
     B1SwitcherListModule,
+    B1EmptyModule,
     RouterModule.forChild([
       {
         path: '',

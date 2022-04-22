@@ -1,7 +1,19 @@
 <ng-container *ngrxLet="users$ as users">
-  <app-user-item
-    *ngFor="let user of users | usersFilter: (filterTerm$ | ngrxPush)"
-    [user]="user"
-    (click)="onUserEdit(user)">
-  </app-user-item>
+  <ng-container
+    *ngIf="users | usersFilter: (filterTerm$ | ngrxPush) as filteredUsers">
+    <ng-container *ngIf="filteredUsers.length; else notFound">
+      <div class="users-list">
+        <app-user-item
+          *ngFor="let user of filteredUsers"
+          [user]="user"
+          (click)="onUserEdit(user)">
+        </app-user-item>
+      </div>
+    </ng-container>
+  </ng-container>
 </ng-container>
+
+<ng-template #notFound>
+  <b1-empty svgName="empty-users" header="components.users.notFound">
+  </b1-empty>
+</ng-template>

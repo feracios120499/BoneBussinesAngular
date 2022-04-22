@@ -24,6 +24,10 @@ export namespace CorrespondentsActions {
     props<{ term: string }>()
   );
 
+  export const resetCorrespondentFilter = createAction(
+    `[${CORRESPONDENTS_KEY}] reset correspondent filter`
+  );
+
   export const [
     createCorrespondentRequest,
     createCorrespondentSuccess,
