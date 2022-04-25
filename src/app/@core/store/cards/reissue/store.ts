@@ -12,6 +12,7 @@ export interface CardReissueState {
   loadings: ReissueLoading[];
   selectedApplications: number[];
   selectAll: boolean;
+  filter: string;
 }
 
 export const initialState: CardReissueState = {
@@ -21,4 +22,5 @@ export const initialState: CardReissueState = {
   loadings: [],
   selectedApplications: [],
   selectAll: false,
+  filter: '',
 };

@@ -35,8 +35,22 @@
         label="actions.delete"
         *ngIf="tab != 'BANKRECEIVED'"
         (b1Click)="removeApplications()"
+        [disabled]="isLoading"
         icon="delete">
       </b1-page-button>
     </div>
   </div>
+  <form class="b1-page-actions__right" name="search" novalidate>
+    <div class="b1-page-inputWithIcon width-100">
+      <input
+        class="b1-input__control without-label b1-base b1-page-input resize"
+        name="search"
+        id="search"
+        type="text"
+        [attr.placeholder]="'shared.search' | translate"
+        [ngModel]="filter$ | ngrxPush"
+        (ngModelChange)="onFilter($event)" />
+      <label b1-icon icon="search" class="resize" for="search"></label>
+    </div>
+  </form>
 </div>

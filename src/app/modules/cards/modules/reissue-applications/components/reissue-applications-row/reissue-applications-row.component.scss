@@ -1,9 +1,3 @@
-:host {
-  height: 90px;
-  @media (max-width: 812px) {
-    height: 180px;
-  }
-}
 .application {
   &-icon {
     width: 40px;

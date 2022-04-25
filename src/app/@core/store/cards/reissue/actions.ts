@@ -85,4 +85,9 @@ export namespace CardReissueActions {
   ] = createHTTPActions<number[], CardResponseResult[], string>(
     `[${CARD_REISSUE_KEY}] send to bank applications`
   );
+
+  export const filter = createAction(
+    `[${CARD_REISSUE_KEY}] filter`,
+    props<{ filter: string }>()
+  );
 }

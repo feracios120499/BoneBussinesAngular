@@ -13,6 +13,7 @@ export class ReissueApplicationsActionsComponent implements OnInit {
   tab$ = this.store.select(CardReissueSelectors.tab);
   selectAll$ = this.store.select(CardReissueSelectors.selectAll);
   isLoading$ = this.store.select(CardReissueSelectors.isLoading);
+  filter$ = this.store.select(CardReissueSelectors.filter);
 
   ngOnInit(): void {}
 
@@ -30,5 +31,9 @@ export class ReissueApplicationsActionsComponent implements OnInit {
 
   sendToBankApplications(): void {
     this.store.dispatch(CardReissueActions.confirmSendToBank());
+  }
+
+  onFilter(filter: string): void {
+    this.store.dispatch(CardReissueActions.filter({ filter }));
   }
 }
