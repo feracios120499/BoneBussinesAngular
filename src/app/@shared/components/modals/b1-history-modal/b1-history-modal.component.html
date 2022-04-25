@@ -1,0 +1,53 @@
+<div class="history">
+  <div class="history-header b1-bg-primary b1-large">
+    {{ config.title | translate }}
+    <div class="history-close">
+      <i b1-icon icon="cancel" (click)="modal.close()"></i>
+    </div>
+  </div>
+  <div class="history-content">
+    <div class="history-content_header">
+      <div>
+        <span>
+          {{ config.subtitle | translate }}
+        </span>
+        <span class="b1-color-primary">
+          {{ config.number }}
+        </span>
+      </div>
+      <div class="history-content_item b1-medium b1-light">
+        <span class="b1-color-light-500">
+          {{ 'components.pay.from' | translate }}
+        </span>
+        <span class="b1-color-primary">
+          {{ config.createDate | date: 'dd.MM.yyyy' }}
+        </span>
+      </div>
+    </div>
+    <ng-scrollbar class="virtual-scroll" [disabled]="isMobile$ | ngrxPush">
+      <div class="history-content_data">
+        <ul class="progress-tracker progress-tracker--vertical">
+          <li *ngFor="let item of config.history" class="progress-step">
+            <div class="progress-marker"></div>
+            <div class="progress-text" style="width: 100%">
+              <div class="b1-base">
+                {{ item.message }}
+              </div>
+              <div class="b1-base b1-color-light-500 b1-mt-2">
+                {{ item.userName }}
+              </div>
+              <div class="b1-mt-3 history-item">
+                <span class="b1-badge b1-bg-{{ getCss(item.statusId) }}">
+                  {{ config.statusPrefix + item.statusId | translate }}
+                </span>
+                <span class="b1-small b1-color-light-500">
+                  {{ item.statusDate | date: 'dd.MM.yyyy HH:mm:ss' }}
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </ng-scrollbar>
+  </div>
+</div>

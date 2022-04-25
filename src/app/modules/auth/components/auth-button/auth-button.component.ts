@@ -6,4 +6,8 @@ import { BaseButtonComponent } from 'src/app/@shared/components/base-button.comp
   templateUrl: './auth-button.component.html',
   styleUrls: ['./auth-button.component.scss'],
 })
-export class AuthButtonComponent extends BaseButtonComponent {}
+export class AuthButtonComponent extends BaseButtonComponent {
+  onClick(): void {
+    this.btnClick.emit();
+  }
+}

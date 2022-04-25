@@ -1,3 +1,6 @@
-<div class="b1-flex b1-justify-between card-number" [ngClass]="cardNumberClass">
+<div
+  class="b1-flex b1-justify-between card-number"
+  [ngClass]="cardNumberClass"
+  *ngIf="cardNumber">
   <span [outerHTML]="cardNumber | cardNumber"></span>
 </div>

@@ -8,12 +8,12 @@ import { AuthSelectors } from '@store/auth/selectors';
 @Component({
   selector: 'auth-cryptor',
   templateUrl: './auth-cryptor.component.html',
-  styleUrls: ['./auth-cryptor.component.scss']
+  styleUrls: ['./auth-cryptor.component.scss'],
 })
 export class AuthCryptorComponent implements OnInit {
   constructor(private store: Store) {
-    this.key$.subscribe(key => this.key = key);
-    this.token$.subscribe(token => this.token = token);
+    this.key$.subscribe((key) => (this.key = key));
+    this.token$.subscribe((token) => (this.token = token));
   }
   key?: CryptorKey;
   token?: CryptorToken;
@@ -37,7 +37,9 @@ export class AuthCryptorComponent implements OnInit {
 
   onLogin(): void {
     if (this.key && this.token) {
-      this.store.dispatch(AuthActions.loginCryptor({ key: this.key, token: this.token }));
+      this.store.dispatch(
+        AuthActions.loginCryptor({ key: this.key, token: this.token })
+      );
     }
   }
 }

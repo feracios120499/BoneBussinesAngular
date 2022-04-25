@@ -562,4 +562,15 @@ export class CardDetailsEffects {
       )
     )
   );
+
+  goToApplications$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardDetailsActions.goToApplications),
+      map(() =>
+        RouteActions.routeTo({
+          route: `cards/applications`,
+        })
+      )
+    )
+  );
 }

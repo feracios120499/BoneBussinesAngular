@@ -29,4 +29,9 @@ export namespace CardReissueSelectors {
     reissueStore,
     (store) => store.selectAll
   );
+
+  export const selectedIds = createSelector(
+    reissueStore,
+    (store) => store.selectedApplications
+  );
 }

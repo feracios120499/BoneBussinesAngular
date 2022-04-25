@@ -1,7 +1,7 @@
 <button
   class="cl-button"
   [type]="type"
-  (click)="(btnClick)"
+  (click)="onClick()"
   [disabled]="isDisabled || isLoading">
   <span *ngIf="!isLoading">{{ label | translate }}</span>
   <div class="loader" *ngIf="isLoading">

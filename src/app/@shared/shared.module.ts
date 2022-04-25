@@ -53,6 +53,7 @@ import { B1ErrorModalComponent } from './components/modals/b1-error-modal/b1-err
 import { CheckRoleDirective } from './directives/check-role.directive';
 import { B1WarningBlockComponent } from './components/b1-warning-block/b1-warning-block.component';
 import { B1CorrespondentsModalComponent } from '@ui/modals/b1-correspondents-modal/b1-correspondents-modal.component';
+import { B1HistoryModalComponent } from './components/modals/b1-history-modal/b1-history-modal.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -83,6 +84,7 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     B1ErrorModalComponent,
     CheckRoleDirective,
     B1CorrespondentsModalComponent,
+    B1HistoryModalComponent,
   ],
   imports: [
     CommonModule,

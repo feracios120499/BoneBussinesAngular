@@ -10,8 +10,8 @@ import { TypedAction } from '@ngrx/store/src/models';
 import { UserSelectors } from '@store/user/selectors';
 import dayjs from 'dayjs';
 import { box, Boxed, NgrxValueConverter } from 'ngrx-forms';
-import { Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
+import { filter, last, map, mergeMap, take, toArray } from 'rxjs/operators';
 
 export function createHTTPActions<
   RequestPayload = void,
@@ -123,4 +123,35 @@ export function isAnyExist<T>(arr1: Array<T>, value: T): boolean {
 }
 export function isAnyExistArray<T>(arr1: Array<T>, arr2: Array<T>): boolean {
   return arr1.some((r) => arr2.indexOf(r) >= 0);
+}
+
+export function forkJoinConcurrent<T>(
+  observables: Observable<T>[],
+  concurrent: number
+): Observable<T[]> {
+  // Convert the array of observables to a higher-order observable:
+  return from(observables).pipe(
+    // Merge each of the observables in the higher-order observable
+    // into a single stream:
+    mergeMap(
+      (observable, observableIndex) =>
+        observable.pipe(
+          // Like forkJoin, we're interested only in the last value:
+          last(),
+          // Combine the value with the index so that the stream of merged
+          // values - which could be in any order - can be sorted to match
+          // the order of the source observables:
+          map((value) => ({ index: observableIndex, value }))
+        ),
+      concurrent
+    ),
+    // Convert the stream of last values to an array:
+    toArray(),
+    // Sort the array of value/index pairs by index - so the value
+    // indices correspond to the source observable indices and then
+    // map the pair to the value:
+    map((pairs) =>
+      pairs.sort((l, r) => l.index - r.index).map((pair) => pair.value)
+    )
+  );
 }

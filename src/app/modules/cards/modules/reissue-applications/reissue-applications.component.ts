@@ -16,10 +16,12 @@ export class ReissueApplicationsComponent implements OnInit, OnDestroy {
   isLoading$ = this.store.select(CardReissueSelectors.isLoading);
   ngOnInit(): void {
     this.store.addReducer(CARD_REISSUE_KEY, cardReissueReducer);
+    this.store.dispatch(CardReissueActions.init());
     this.store.dispatch(CardReissueActions.setTab({ tab: 'ONMYSIGN' }));
   }
 
   ngOnDestroy(): void {
     this.store.removeReducer(CARD_REISSUE_KEY as never);
+    this.store.dispatch(CardReissueActions.destroy());
   }
 }

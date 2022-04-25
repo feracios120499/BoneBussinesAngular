@@ -17,4 +17,9 @@ export namespace NotifyActions {
     '[NOTIFY] server error notification',
     props<{ error: ServerError; message: string; title?: string }>()
   );
+
+  export const warningNotification = createAction(
+    '[NOTIFY] warning notification',
+    props<{ message: string; title?: string }>()
+  );
 }
