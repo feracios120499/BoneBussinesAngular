@@ -30,12 +30,7 @@ export class CorrespondentsEffects {
 
   loadCorrespondents$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(
-        CorrespondentsActions.loadCorrespondentsRequest,
-        CorrespondentsActions.createCorrespondentSuccess,
-        CorrespondentsActions.updateCorrespondentSuccess,
-        CorrespondentsActions.deleteCorrespondentSuccess
-      ),
+      ofType(CorrespondentsActions.loadCorrespondentsRequest),
       switchMap(() => clientIdWithoudData(this.store)),
       switchMap((clientId: string) =>
         this.correspondentsService.getCorrespondents(clientId).pipe(
@@ -97,13 +92,14 @@ export class CorrespondentsEffects {
   createCorrespondentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CorrespondentsActions.createCorrespondentSuccess),
-      map(() =>
+      switchMap(() => [
+        CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.pay.correspondents.newCorrespondentAdded'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 
@@ -135,13 +131,14 @@ export class CorrespondentsEffects {
   updateCorrespondentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CorrespondentsActions.updateCorrespondentSuccess),
-      map(() =>
+      switchMap(() => [
+        CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.admin.infoUpdatedSuccs'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 
@@ -173,13 +170,14 @@ export class CorrespondentsEffects {
   deleteCorrespondentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CorrespondentsActions.deleteCorrespondentSuccess),
-      map(() =>
+      switchMap(() => [
+        CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.pay.correspondents.correspondentDeleted'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 }

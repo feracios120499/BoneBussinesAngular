@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentsActions } from '@store/correspondents/actions';
 import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
+import { Correspondent } from '@models/correspondents/correspondent.model';
 
 @Component({
   selector: 'app-correspondents-actions',
@@ -14,6 +15,9 @@ import { CorrespondentModalComponent } from '../correspondent-modal/corresponden
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsActionsComponent {
+  correspondents$: Observable<Correspondent[]> = this.store.select(
+    CorrespondentsSelectors.correspondentList
+  );
   isLoading$: Observable<boolean> = this.store.select(
     CorrespondentsSelectors.isLoadingCorrespondents
   );

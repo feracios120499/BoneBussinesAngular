@@ -16,7 +16,7 @@ import {
 } from 'rxjs/operators';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
-import { BaseSubFormComponent } from '@forms/base-sub-form.component';
+import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
 import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { distinctUntilObjectChanged } from '@custom-operators/distinct-until-object-changed.operator';

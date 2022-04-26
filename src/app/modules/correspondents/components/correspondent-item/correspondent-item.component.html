@@ -1,9 +1,9 @@
 <div class="correspondent-item__name">{{ correspondent.name }}</div>
 
 <div class="correspondent-item__info">
-  <div class="correspondent-item__account b1-ellipsis">
-    {{ correspondent.accNumber }}
-  </div>
+  <div
+    class="correspondent-item__account b1-ellipsis"
+    [iban]="correspondent.accNumber"></div>
   <div class="correspondent-item__code">
     {{
       ('components.pay.code' | translate | titlecase) +

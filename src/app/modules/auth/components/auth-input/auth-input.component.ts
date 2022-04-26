@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
-import { BaseInputComponent } from '@forms/base-input.component';
+import { BaseInputComponent } from '@form-controls/base-input.component';
 
 @Component({
   selector: 'app-auth-input',

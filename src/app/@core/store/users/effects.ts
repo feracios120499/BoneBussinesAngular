@@ -25,14 +25,7 @@ export class UsersEffects {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(
-        UsersActions.loadUsersRequest,
-        UsersActions.createUserSuccess,
-        UsersActions.restoreUserSuccess,
-        UsersActions.updateUserRolesSuccess,
-        UsersActions.deleteUserSuccess,
-        UsersActions.updateUserLockStateSuccess
-      ),
+      ofType(UsersActions.loadUsersRequest),
       switchMap(() => clientIdWithoudData(this.store)),
       switchMap((clientId: string) =>
         this.usersService.getUsers(clientId).pipe(
@@ -53,7 +46,7 @@ export class UsersEffects {
 
   loadRoles$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UsersActions.loadUsersSuccess),
+      ofType(UsersActions.loadRolesRequest),
       switchMap(() => clientIdWithoudData(this.store)),
       switchMap((clientId: string) =>
         this.usersService.getRoles(clientId).pipe(
@@ -156,13 +149,14 @@ export class UsersEffects {
   newUserSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.createUserSuccess, UsersActions.restoreUserSuccess),
-      map(() =>
+      switchMap(() => [
+        UsersActions.loadUsersRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.admin.newUserIsAdded'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 
@@ -192,13 +186,14 @@ export class UsersEffects {
   updateUserRolesSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.updateUserRolesSuccess),
-      map(() =>
+      switchMap(() => [
+        UsersActions.loadUsersRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.admin.infoUpdatedSuccs'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 
@@ -230,16 +225,19 @@ export class UsersEffects {
   updateUserLockStateSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.updateUserLockStateSuccess),
-      map(({ payload: { isDisable } }) => {
+      switchMap(({ payload: { isDisable } }) => {
         let message: string;
         if (isDisable) {
           message = 'components.admin.lockedSuccssMessage';
         } else {
           message = 'components.admin.unlockedSuccess';
         }
-        return NotifyActions.successNotification({
-          message: this.translateService.instant(message),
-        });
+        return [
+          UsersActions.loadUsersRequest(),
+          NotifyActions.successNotification({
+            message: this.translateService.instant(message),
+          }),
+        ];
       })
     )
   );
@@ -268,13 +266,14 @@ export class UsersEffects {
   deleteUserSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UsersActions.deleteUserSuccess),
-      map(() =>
+      switchMap(() => [
+        UsersActions.loadUsersRequest(),
         NotifyActions.successNotification({
           message: this.translateService.instant(
             'components.admin.userDeleted'
           ),
-        })
-      )
+        }),
+      ])
     )
   );
 }

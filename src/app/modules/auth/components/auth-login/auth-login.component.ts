@@ -10,7 +10,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { BaseFormComponent } from '@forms/base-form.component';
+import { BaseFormComponent } from '@form-controls/base-form.component';
 import { AuthActions } from '@store/auth/actions';
 import { AuthSelectors } from '@store/auth/selectors';
 import { LoginModel } from '@modules/auth/models/login.model';

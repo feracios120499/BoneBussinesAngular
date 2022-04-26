@@ -7,21 +7,25 @@ import {
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CamelCaseInterceptor } from '@core/interceptors/camel-case.interceptor';
-import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
-import { ServerErrorInteceptor } from '@core/interceptors/server-error.interceptor';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { CoreModule } from './@core/core.module';
-import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
-import { B1GlobalLoaderComponent } from './@shared/components/b1-global-loader/b1-global-loader.component';
-import { B1DirectivesModule } from './@shared/modules/b1-directives/b1-directives.module';
+import { ReissueApplicationsModule } from '@modules/cards/modules/reissue-applications/reissue-applications.module';
+import { MobileClassModule } from '@directives/mobile-class/mobile-class.module';
+import { WebClassModule } from '@directives/web-class/web-class.module';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { SharedModule } from './@shared/shared.module';
+import { CoreModule } from '@core/core.module';
+import { ModalsModule } from '@modals/mobals.module';
+import { B1PageLoaderModule } from '@ui/b1-page-loader/b1-page-loader.module';
+import { B1LinkModule } from '@ui/b1-link/b1-link.module';
+
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
 import { HeaderDarkModeComponent } from './layout/header/components/header-dark-mode/header-dark-mode.component';
@@ -30,12 +34,16 @@ import { HeaderNotificationsComponent } from './layout/header/components/header-
 import { HeaderProfileComponent } from './layout/header/components/header-profile/header-profile.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ReissueApplicationsModule } from './modules/cards/modules/reissue-applications/reissue-applications.module';
+
+import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
+import { CamelCaseInterceptor } from '@core/interceptors/camel-case.interceptor';
+import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
+import { ServerErrorInteceptor } from '@core/interceptors/server-error.interceptor';
+import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    B1GlobalLoaderComponent,
     AuthorizedLayoutComponent,
     HeaderComponent,
     SidebarComponent,
@@ -62,7 +70,15 @@ import { ReissueApplicationsModule } from './modules/cards/modules/reissue-appli
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    B1DirectivesModule,
+    NgbModule,
+    ModalsModule,
+    MobileClassModule,
+    WebClassModule,
+    B1IconModule,
+    B1LinkModule,
+    B1PageLoaderModule,
+    B1GlobalLoaderModule,
+    ReactiveComponentModule,
     ReissueApplicationsModule,
   ],
   exports: [ReactiveComponentModule],

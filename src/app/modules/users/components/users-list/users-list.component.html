@@ -1,4 +1,4 @@
-<ng-container *ngrxLet="users$ as users">
+<!-- <ng-container *ngrxLet="users$ as users">
   <ng-container
     *ngIf="users | usersFilter: (filterTerm$ | ngrxPush) as filteredUsers">
     <ng-container *ngIf="filteredUsers.length; else notFound">
@@ -10,6 +10,48 @@
         </app-user-item>
       </div>
     </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #notFound>
+  <b1-empty svgName="empty-users" header="components.users.notFound">
+  </b1-empty>
+</ng-template> -->
+
+<ng-container *ngrxLet="isLoading$ as isLoading">
+  <ng-container *ngrxLet="users$ as users">
+    <ng-container *ngIf="!isLoading && users.length">
+      <ng-container
+        *ngIf="users | usersFilter: (filterTerm$ | ngrxPush) as filteredUsers">
+        <ng-container *ngIf="filteredUsers.length; else notFound">
+          <div class="users-list">
+            <app-user-item
+              *ngFor="let user of filteredUsers"
+              [user]="user"
+              (click)="onUserEdit(user)">
+            </app-user-item>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+      <app-user-skeleton *ngFor="let number of skeletonLength">
+      </app-user-skeleton>
+    </ng-container>
+
+    <b1-empty
+      *ngIf="!users.length && !isLoading"
+      svgName="empty-users"
+      header="components.users.doNotExist"
+      description="components.users.displayIfAdd">
+      <b1-button
+        label="components.admin.addEmployee"
+        icon="plus"
+        (click)="onUserAdd()"
+        [isDisabled]="isLoading">
+      </b1-button>
+    </b1-empty>
   </ng-container>
 </ng-container>
 

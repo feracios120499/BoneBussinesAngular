@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/@shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveComponentModule } from '@ngrx/component';
+
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
-import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
-import { B1InputModule } from '@forms/b1-input/b1-input.module';
-import { B1MaskedInputModule } from '@forms/b1-masked-input/b1-masked-input.module';
-import { B1SwitcherListModule } from '@forms/b1-switcher-list/b1-switcher-list.module';
-import { B1EmptyModule } from '@ui/b1-empty/b1-empty.module';
+import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1MaskedInputModule } from '@form-controls/b1-masked-input/b1-masked-input.module';
+import { B1SwitcherListModule } from '@form-controls/b1-switcher-list/b1-switcher-list.module';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
+import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-content-wrapper.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { InitialsModule } from '@pipes/initials/initials.module';
 
 import { UsersComponent } from './views/users/users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -17,6 +26,9 @@ import { UserEditModalComponent } from './components/user-edit-modal/user-edit-m
 import { UserCreateModalComponent } from './components/user-create-modal/user-create-modal.component';
 import { UserRolesFormComponent } from './components/user-roles-form/user-roles-form.component';
 import { UserNameFormComponent } from './components/user-name-form/user-name-form.component';
+import { UserSkeletonComponent } from './components/user-skeleton/user-skeleton.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
 
 @NgModule({
   declarations: [
@@ -29,15 +41,27 @@ import { UserNameFormComponent } from './components/user-name-form/user-name-for
     UserCreateModalComponent,
     UserRolesFormComponent,
     UserNameFormComponent,
+    UserSkeletonComponent,
   ],
   imports: [
-    SharedModule,
+    CommonModule,
+    TranslateModule,
+    ReactiveComponentModule,
+    FormsModule,
+    ReactiveFormsModule,
     B1DropdownModule,
     B1ModalContainerModule,
     B1InputModule,
     B1MaskedInputModule,
     B1SwitcherListModule,
     B1EmptyModule,
+    B1IconModule,
+    B1CardLoaderModule,
+    B1ContentWrapperModule,
+    B1ButtonModule,
+    InitialsModule,
+    NgxSkeletonLoaderModule,
+    UsersFilterModule,
     RouterModule.forChild([
       {
         path: '',

@@ -7,10 +7,9 @@ import { AcctDetailsSelectors } from '@store/acct/details/selectors';
 @Component({
   selector: 'account-turnover-row',
   templateUrl: './account-turnover-row.component.html',
-  styleUrls: ['./account-turnover-row.component.scss']
+  styleUrls: ['./account-turnover-row.component.scss'],
 })
-export class AccountTurnoversRowComponent implements OnInit {
-
+export class AccountTurnoverRowComponent implements OnInit {
   @Input() turnover!: UiTurnovers;
 
   constructor(private store: Store) {
@@ -19,16 +18,17 @@ export class AccountTurnoversRowComponent implements OnInit {
 
   currencyCode$ = this.store.select(AcctDetailsSelectors.currencyCode);
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleTurnover(): void {
     if (this.turnover.isOpen) {
-      this.store.dispatch(AcctDetailsActions.closeTurnovers({ id: this.turnover.id }));
-    }
-    else {
-      this.store.dispatch(AcctDetailsActions.openTurnovers({ id: this.turnover.id }));
+      this.store.dispatch(
+        AcctDetailsActions.closeTurnovers({ id: this.turnover.id })
+      );
+    } else {
+      this.store.dispatch(
+        AcctDetailsActions.openTurnovers({ id: this.turnover.id })
+      );
     }
   }
-
 }
