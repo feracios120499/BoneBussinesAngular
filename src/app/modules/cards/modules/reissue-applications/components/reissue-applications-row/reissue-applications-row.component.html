@@ -10,8 +10,7 @@
       <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
     </label>
   </div>
-  <div
-    class="b1-flex b1-align-center b1-justify-center b1-ml-6 application-icon">
+  <div class="b1-flex b1-align-center b1-justify-center b1-ml-6 application-icon">
     <img [src]="getImage() | async" />
   </div>
   <div class="application-body">
@@ -45,66 +44,15 @@
       </div>
     </div>
   </div>
-  <div
-    class="account-more b1-card__col b1-card__col_dot"
-    style="position: relative">
-    <div class="dropdown">
-      <a
-        class="b1-card__v-dots"
-        (click)="$event.stopPropagation(); dropdown.open()">
-      </a>
-
-      <ul
-        class="b1-dropdown b1-bg-light"
-        webClass="b1-animate fade-in-up"
-        role="menu"
-        style="width: 180px"
-        ngbDropdown
-        #dropdown="ngbDropdown"
-        mobile-more
-        more-auto-direction>
-        <div class="b1-modal-close" webClass="hidden">
-          <i
-            b1-icon
-            icon="cancel"
-            (click)="$event.stopPropagation(); dropdown.close()"></i>
-        </div>
-        <li class="b1-dropdown__item">
-          <a
-            class="b1-dropdown__link"
-            webClass="b1-base"
-            mobileClass="b1-medium"
-            (click)="showHistory()">
-            <i b1-icon icon="list" class="b1-mr-3"></i>
-            {{ 'shared.historyDocument' | translate }}
-          </a>
-        </li>
-        <li class="b1-dropdown__item">
-          <a
-            class="b1-dropdown__link"
-            webClass="b1-base"
-            mobileClass="b1-medium"
-            (click)="showSignes()">
-            <i b1-icon icon="sign" class="b1-mr-3"></i>
-            {{ 'components.pay.showSignes' | translate }}
-          </a>
-        </li>
-        <li
-          class="b1-dropdown__item"
-          *ngIf="
-            application.statusCode != 'BANKRECEIVED' &&
-            application.statusCode != 'BANKPAID'
-          ">
-          <a
-            class="b1-dropdown__link b1-dropdown__link_error"
-            webClass="b1-base"
-            mobileClass="b1-medium"
-            (click)="removeApplication()">
-            <i b1-icon icon="delete" class="b1-mr-3"></i>
-            {{ 'actions.delete' | translate }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <b1-dropdown class="application-more b1-card__col b1-card__col_dot" label="application actions" menuWidth="180px">
+    <a class="b1-card__v-dots" openButton></a>
+    <b1-dropdown-link icon="list" label="shared.historyDocument" (btnClick)="showHistory()"></b1-dropdown-link>
+    <b1-dropdown-link icon="sign" label="components.pay.showSignes" (btnClick)="showSignes()"></b1-dropdown-link>
+    <b1-dropdown-link
+      *ngIf="application.statusCode != 'BANKRECEIVED' && application.statusCode != 'BANKPAID'"
+      icon="delete"
+      label="actions.delete"
+      [danger]="true"
+      (btnClick)="removeApplication()"></b1-dropdown-link>
+  </b1-dropdown>
 </div>

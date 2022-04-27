@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { B1HistoryModalComponent } from '@modals/b1-history-modal/b1-history-modal.component';
 import { DocumentHistory } from '@models/document-history.model';
 import { HistoryModalConfig } from '@models/history-modal-config.model';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
@@ -11,7 +12,6 @@ import { SignService } from '@services/sign/sign.service';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
-import { B1HistoryModalComponent } from '@ui/modals/b1-history-modal/b1-history-modal.component';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { CardReissueActions } from './actions';

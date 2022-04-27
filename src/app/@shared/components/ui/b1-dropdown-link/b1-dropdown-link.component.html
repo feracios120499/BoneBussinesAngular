@@ -1,0 +1,11 @@
+<li class="b1-dropdown__item">
+  <a
+    class="b1-dropdown__link"
+    [class.b1-dropdown__link_error]="danger"
+    webClass="b1-base"
+    mobileClass="b1-medium"
+    (click.stop)="click()">
+    <i b1-icon [icon]="icon" class="b1-mr-3"></i>
+    <span>{{ label | translate }}</span>
+  </a>
+</li>
