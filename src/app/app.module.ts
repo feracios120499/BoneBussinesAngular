@@ -23,7 +23,7 @@ import { CoreModule } from '@core/core.module';
 import { ModalsModule } from '@modals/mobals.module';
 import { B1PageLoaderModule } from '@ui/b1-page-loader/b1-page-loader.module';
 import { B1LinkModule } from '@ui/b1-link/b1-link.module';
-
+import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -39,7 +39,7 @@ import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
 import { CamelCaseInterceptor } from '@core/interceptors/camel-case.interceptor';
 import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor';
 import { ServerErrorInteceptor } from '@core/interceptors/server-error.interceptor';
-import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.module';
+import { CustomToastModule } from '@ui/custom-toast/custom-toast.module';
 
 @NgModule({
   declarations: [
@@ -72,6 +72,7 @@ import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.modu
     SharedModule,
     NgbModule,
     ModalsModule,
+    CustomToastModule,
     MobileClassModule,
     WebClassModule,
     B1IconModule,
@@ -81,7 +82,6 @@ import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.modu
     ReactiveComponentModule,
     ReissueApplicationsModule,
   ],
-  exports: [ReactiveComponentModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

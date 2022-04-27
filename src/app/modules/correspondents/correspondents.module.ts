@@ -16,6 +16,7 @@ import { IbanModule } from '@directives/iban/iban.module';
 import { CorrespondentsFilterModule } from '@pipes/correspondents-filter/correspondents-filter.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { CorrespondentsComponent } from './views/correspondents/correspondents.component';
 import { CorrespondentsHeaderComponent } from './components/correspondents-header/correspondents-header.component';
@@ -53,6 +54,7 @@ import { CorrespondentModalComponent } from './components/correspondent-modal/co
     B1CardLoaderModule,
     B1ButtonModule,
     B1DropdownModule,
+    CheckValueModule,
     RouterModule.forChild([
       {
         path: '',

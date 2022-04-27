@@ -8,6 +8,7 @@ import { MoneyModule } from '@pipes/money/money.module';
 import { B1ListDocumentsModule } from '@form-controls/b1-list-documents/b1-list-documents.module';
 import { IbanModule } from '@directives/iban/iban.module';
 import { B1InputErrorModule } from '@form-controls/b1-input-error/b1-input-error.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { MyAccountsConfirmComponent } from './my-accounts-confirm.component';
 
@@ -23,6 +24,7 @@ import { MyAccountsConfirmComponent } from './my-accounts-confirm.component';
     B1ListDocumentsModule,
     IbanModule,
     B1InputErrorModule,
+    CheckValueModule,
   ],
   exports: [MyAccountsConfirmComponent],
 })

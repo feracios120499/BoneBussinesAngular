@@ -4,13 +4,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-user-skeleton',
   templateUrl: './user-skeleton.component.html',
   styleUrls: ['./user-skeleton.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'user-skeleton',
+  },
 })
 export class UserSkeletonComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

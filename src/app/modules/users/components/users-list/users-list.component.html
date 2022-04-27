@@ -36,8 +36,10 @@
     </ng-container>
 
     <ng-container *ngIf="isLoading">
-      <app-user-skeleton *ngFor="let number of skeletonLength">
-      </app-user-skeleton>
+      <div class="users-list">
+        <app-user-skeleton *ngFor="let number of 6 | numberToArray">
+        </app-user-skeleton>
+      </div>
     </ng-container>
 
     <b1-empty

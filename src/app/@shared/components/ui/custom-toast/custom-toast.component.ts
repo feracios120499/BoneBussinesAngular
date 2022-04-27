@@ -47,7 +47,7 @@ import { Subscription } from 'rxjs';
       {{ message }}
     </div>
     <div class="text-right b1-medium b1-italic b1-mt-4">
-      <!-- {{ 'shared.details' | translate }} -->
+      {{ 'shared.details' | translate }}
     </div>
     <div *ngIf="options.progressBar">
       <div class="toast-progress" [style.width]="width + '%'"></div>

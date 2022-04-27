@@ -12,6 +12,7 @@ import { CardsHeaderModule } from '../cards-header/cards-header.module';
 import { CheckRoleModule } from '@directives/check-role/check-role.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { IbanModule } from '@directives/iban/iban.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { ReissueApplicationsRoutingModule } from './reissue-applications-routing.module';
 
 import { ReissueApplicationsComponent } from './reissue-applications.component';
@@ -46,6 +47,7 @@ import { CardReissueEffect } from '@store/cards/reissue/effects';
     IbanModule,
     B1CardLoaderModule,
     B1CardNumberModule,
+    CheckValueModule,
     EffectsModule.forFeature([CardReissueEffect]),
     B1SkeletonModule,
     B1EmptyModule,
