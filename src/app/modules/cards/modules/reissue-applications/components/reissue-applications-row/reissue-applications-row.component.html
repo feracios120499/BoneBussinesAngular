@@ -45,4 +45,66 @@
       </div>
     </div>
   </div>
+  <div
+    class="account-more b1-card__col b1-card__col_dot"
+    style="position: relative">
+    <div class="dropdown">
+      <a
+        class="b1-card__v-dots"
+        (click)="$event.stopPropagation(); dropdown.open()">
+      </a>
+
+      <ul
+        class="b1-dropdown b1-bg-light"
+        webClass="b1-animate fade-in-up"
+        role="menu"
+        style="width: 180px"
+        ngbDropdown
+        #dropdown="ngbDropdown"
+        mobile-more
+        more-auto-direction>
+        <div class="b1-modal-close" webClass="hidden">
+          <i
+            b1-icon
+            icon="cancel"
+            (click)="$event.stopPropagation(); dropdown.close()"></i>
+        </div>
+        <li class="b1-dropdown__item">
+          <a
+            class="b1-dropdown__link"
+            webClass="b1-base"
+            mobileClass="b1-medium"
+            (click)="showHistory()">
+            <i b1-icon icon="list" class="b1-mr-3"></i>
+            {{ 'shared.historyDocument' | translate }}
+          </a>
+        </li>
+        <li class="b1-dropdown__item">
+          <a
+            class="b1-dropdown__link"
+            webClass="b1-base"
+            mobileClass="b1-medium"
+            (click)="showSignes()">
+            <i b1-icon icon="sign" class="b1-mr-3"></i>
+            {{ 'components.pay.showSignes' | translate }}
+          </a>
+        </li>
+        <li
+          class="b1-dropdown__item"
+          *ngIf="
+            application.statusCode != 'BANKRECEIVED' &&
+            application.statusCode != 'BANKPAID'
+          ">
+          <a
+            class="b1-dropdown__link b1-dropdown__link_error"
+            webClass="b1-base"
+            mobileClass="b1-medium"
+            (click)="removeApplication()">
+            <i b1-icon icon="delete" class="b1-mr-3"></i>
+            {{ 'actions.delete' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

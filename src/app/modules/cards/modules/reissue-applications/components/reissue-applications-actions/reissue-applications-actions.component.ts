@@ -12,10 +12,28 @@ export class ReissueApplicationsActionsComponent implements OnInit {
   constructor(private store: Store) {}
   tab$ = this.store.select(CardReissueSelectors.tab);
   selectAll$ = this.store.select(CardReissueSelectors.selectAll);
+  isLoading$ = this.store.select(CardReissueSelectors.isLoading);
+  filter$ = this.store.select(CardReissueSelectors.filter);
 
   ngOnInit(): void {}
 
   selectAll(): void {
     this.store.dispatch(CardReissueActions.selectAll());
+  }
+
+  signApplications(): void {
+    this.store.dispatch(CardReissueActions.confirmSign());
+  }
+
+  removeApplications(): void {
+    this.store.dispatch(CardReissueActions.confirmRemove());
+  }
+
+  sendToBankApplications(): void {
+    this.store.dispatch(CardReissueActions.confirmSendToBank());
+  }
+
+  onFilter(filter: string): void {
+    this.store.dispatch(CardReissueActions.filter({ filter }));
   }
 }

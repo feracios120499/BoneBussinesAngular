@@ -15,10 +15,11 @@ export class ReissueApplicationsListComponent implements OnInit {
   constructor(private store: Store, private resizeService: ResizeService) {}
 
   applications$ = this.store.select(CardReissueSelectors.applications);
+  isLoadingList$ = this.store.select(CardReissueSelectors.isLoadingList);
+  filter$ = this.store.select(CardReissueSelectors.filter);
+
   isMobile$ = this.resizeService.isMobile$;
-  ngOnInit(): void {
-    console.log('init');
-  }
+  ngOnInit(): void {}
 
   trackId(index: number, application: UiReissuApplication): string | undefined {
     return application ? `${application.id}.${index}` : undefined;

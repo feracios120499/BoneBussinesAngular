@@ -1,8 +1,4 @@
-import {
-  FixedSizeVirtualScrollStrategy,
-  ScrollingModule,
-  VIRTUAL_SCROLL_STRATEGY,
-} from '@angular/cdk/scrolling';
+import { FixedSizeVirtualScrollStrategy, ScrollingModule, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 

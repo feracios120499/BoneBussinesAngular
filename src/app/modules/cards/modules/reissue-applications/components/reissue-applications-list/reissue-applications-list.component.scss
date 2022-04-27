@@ -1,7 +1,15 @@
-.application-row {
+app-reissue-applications-row.application-row {
+  height: 90px;
   @media (max-width: 812px) {
     border-radius: 0;
     margin: 0;
+    height: 180px;
+  }
+}
+b1-skeleton.application-row {
+  height: 90px;
+  @media (max-width: 812px) {
+    height: 180px;
   }
 }
 

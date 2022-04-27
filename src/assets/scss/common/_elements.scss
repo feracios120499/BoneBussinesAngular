@@ -55,6 +55,11 @@
         opacity: 0.4;
         border-radius: 2px;
       }
+      @media (max-width: 812px) {
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--color-light-300);
+        }
+      }
     }
 
     &__link {

@@ -45,4 +45,13 @@ export class ReissueApplicationsRowComponent implements OnInit {
       this.application.selected
     );
   }
+
+  showHistory(): void {
+    this.store.dispatch(
+      CardReissueActions.showApplicationHistoryRequest(this.application)
+    );
+  }
+  showSignes(): void {}
+
+  removeApplication(): void {}
 }

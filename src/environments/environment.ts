@@ -10,12 +10,13 @@ export const environment = {
   payments: {
     dates: {
       documentDateMaxDaysFromBankDate: 30,
-      valueDateMaxDaysFromDocumentDate: 9
-    }
+      valueDateMaxDaysFromDocumentDate: 9,
+    },
   },
   tax: {
-    vat: 20
-  }
+    vat: 20,
+  },
+  defaultSignProvider: 'BarsCryptor',
 };
 
 /*

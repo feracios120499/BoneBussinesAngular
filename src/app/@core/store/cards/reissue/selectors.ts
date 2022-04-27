@@ -29,4 +29,23 @@ export namespace CardReissueSelectors {
     reissueStore,
     (store) => store.selectAll
   );
+
+  export const selectedIds = createSelector(
+    reissueStore,
+    (store) => store.selectedApplications
+  );
+
+  export const isLoadingList = createSelector(
+    reissueStore,
+    (store) =>
+      store.applications.length == 0 && isAnyExist(store.loadings, 'list')
+  );
+
+  export const isEmpty = createSelector(
+    reissueStore,
+    (store) =>
+      store.applications.length == 0 && !isAnyExist(store.loadings, 'list')
+  );
+
+  export const filter = createSelector(reissueStore, (store) => store.filter);
 }

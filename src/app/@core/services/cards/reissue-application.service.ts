@@ -6,6 +6,7 @@ import { ReissueApplicationDetails } from '@models/cards/reissue-application-det
 import { ReissueApplication } from '@models/cards/reissue-application.model';
 import { ReissueApplicationsCount } from '@models/cards/reissue-applications-count.model';
 import { ReissueCount } from '@models/cards/reissue-count.model';
+import { ReissueHistory } from '@models/cards/reissue-history.model';
 import { BaseService } from '@services/base.service';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -78,6 +79,15 @@ export class ReissueApplicationService extends BaseService {
       );
   }
 
+  getHistory(
+    applicationId: number,
+    clientId: string
+  ): Observable<ReissueHistory[]> {
+    return this.http.get<ReissueHistory[]>(
+      `api/v1/corpcards/reissue/history/${applicationId}/${clientId}`
+    );
+  }
+
   getApplications(
     status: CardReissueStatus,
     clientId: string
@@ -88,6 +98,26 @@ export class ReissueApplicationService extends BaseService {
         : `(StatusCode eq '${status}')`;
     return this.http.get<ReissueApplicationDetails[]>(
       `api/v1/corpcards/reissue/${clientId}?$filter=${filter}&$orderby=CreateDate desc`
+    );
+  }
+
+  removeApplications(
+    ids: number[],
+    clientId: string
+  ): Observable<CardResponseResult[]> {
+    return this.http.post<CardResponseResult[]>(
+      `api/v1/corpcards/reissue/remove/${clientId}`,
+      ids
+    );
+  }
+
+  sendToBank(
+    ids: number[],
+    clientId: string
+  ): Observable<CardResponseResult[]> {
+    return this.http.post<CardResponseResult[]>(
+      `api/v1/corpcards/reissue/toBank/${clientId}`,
+      ids
     );
   }
 }
