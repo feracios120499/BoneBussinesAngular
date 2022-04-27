@@ -3,6 +3,7 @@ import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { ReissueCount } from '@models/cards/reissue-count.model';
 import { ReissueHistory } from '@models/cards/reissue-history.model';
+import { ReissueSign } from '@models/cards/reissue-sign.model';
 import { SignResponse, SignSaveResponse } from '@models/sign-response.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
@@ -14,80 +15,56 @@ export namespace CardReissueActions {
 
   export const destroy = createAction(`[${CARD_REISSUE_KEY}] destroy`);
 
-  export const setTab = createAction(
-    `[${CARD_REISSUE_KEY}] set tab`,
-    props<{ tab: CardReissueStatus }>()
+  export const setTab = createAction(`[${CARD_REISSUE_KEY}] set tab`, props<{ tab: CardReissueStatus }>());
+
+  export const [loadApplicationsRequest, loadApplicationsSuccess, loadApplicationsFailure] = createHTTPActions<
+    void,
+    ReissueApplicationDetails[],
+    string
+  >(`[${CARD_REISSUE_KEY}] load applications`);
+
+  export const [loadCountRequest, loadCountSuccess, loadCountFailure] = createHTTPActions<void, ReissueCount, string>(
+    `[${CARD_REISSUE_KEY}] load count`
   );
 
-  export const [
-    loadApplicationsRequest,
-    loadApplicationsSuccess,
-    loadApplicationsFailure,
-  ] = createHTTPActions<void, ReissueApplicationDetails[], string>(
-    `[${CARD_REISSUE_KEY}] load applications`
-  );
-
-  export const [loadCountRequest, loadCountSuccess, loadCountFailure] =
-    createHTTPActions<void, ReissueCount, string>(
-      `[${CARD_REISSUE_KEY}] load count`
-    );
-
-  export const selectApplication = createAction(
-    `[${CARD_REISSUE_KEY}] select application`,
-    props<{ id: number }>()
-  );
+  export const selectApplication = createAction(`[${CARD_REISSUE_KEY}] select application`, props<{ id: number }>());
 
   export const selectAll = createAction(`[${CARD_REISSUE_KEY}] select all`);
 
   export const confirmSign = createAction(`[${CARD_REISSUE_KEY}] confirm sign`);
 
-  export const [
-    signApplicationsRequest,
-    signApplicationsSuccess,
-    signApplicationsFailure,
-  ] = createHTTPActions<number[], SignSaveResponse[], string>(
-    `[${CARD_REISSUE_KEY}] sign applications`
-  );
+  export const [signApplicationsRequest, signApplicationsSuccess, signApplicationsFailure] = createHTTPActions<
+    number[],
+    SignSaveResponse[],
+    string
+  >(`[${CARD_REISSUE_KEY}] sign applications`);
 
   export const signApplicationsError = createAction(
     `[${CARD_REISSUE_KEY}] sign applications Error`,
     props<{ errors: SignResponse[] }>()
   );
 
-  export const [
-    showApplicationHistoryRequest,
-    showApplicationHistorySuccess,
-    showApplicationHistoryFailure,
-  ] = createHTTPActions<ReissueApplicationDetails, ReissueHistory[], string>(
-    `[${CARD_REISSUE_KEY}] show history`
-  );
+  export const [showApplicationHistoryRequest, showApplicationHistorySuccess, showApplicationHistoryFailure] =
+    createHTTPActions<ReissueApplicationDetails, ReissueHistory[], string>(`[${CARD_REISSUE_KEY}] show history`);
 
-  export const confirmRemove = createAction(
-    `[${CARD_DETAILS_KEY}] confrim remove`
-  );
+  export const [showApplicationSignRequest, showApplicationSignSuccess, showApplicationSignFailure] = createHTTPActions<
+    ReissueApplicationDetails,
+    ReissueSign[],
+    string
+  >(`[${CARD_REISSUE_KEY}] show sign`);
 
-  export const [
-    removeApplicationsRequest,
-    removeApplicationsSuccess,
-    removeApplicationsFailure,
-  ] = createHTTPActions<number[], CardResponseResult[], string>(
-    `[${CARD_REISSUE_KEY}] remove applications`
-  );
+  export const confirmRemove = createAction(`[${CARD_DETAILS_KEY}] confrim remove`);
 
-  export const confirmSendToBank = createAction(
-    `[${CARD_DETAILS_KEY}] confrim send to bank`
-  );
+  export const [removeApplicationsRequest, removeApplicationsSuccess, removeApplicationsFailure] = createHTTPActions<
+    number[],
+    CardResponseResult[],
+    string
+  >(`[${CARD_REISSUE_KEY}] remove applications`);
 
-  export const [
-    sendToBankApplicationsRequest,
-    sendToBankApplicationsSuccess,
-    sendToBankApplicationsFailure,
-  ] = createHTTPActions<number[], CardResponseResult[], string>(
-    `[${CARD_REISSUE_KEY}] send to bank applications`
-  );
+  export const confirmSendToBank = createAction(`[${CARD_DETAILS_KEY}] confrim send to bank`);
 
-  export const filter = createAction(
-    `[${CARD_REISSUE_KEY}] filter`,
-    props<{ filter: string }>()
-  );
+  export const [sendToBankApplicationsRequest, sendToBankApplicationsSuccess, sendToBankApplicationsFailure] =
+    createHTTPActions<number[], CardResponseResult[], string>(`[${CARD_REISSUE_KEY}] send to bank applications`);
+
+  export const filter = createAction(`[${CARD_REISSUE_KEY}] filter`, props<{ filter: string }>());
 }
