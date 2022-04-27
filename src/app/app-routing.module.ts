@@ -53,6 +53,13 @@ const routes: Routes = [
             (m) => m.CorrespondentsModule
           ),
       },
+      {
+        path: 'instructions',
+        loadChildren: () =>
+          import('./modules/instructions/instructions.module').then(
+            (m) => m.InstructionsModule
+          ),
+      },
     ],
   },
 ];

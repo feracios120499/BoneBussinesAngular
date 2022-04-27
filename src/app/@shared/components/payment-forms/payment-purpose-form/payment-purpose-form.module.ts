@@ -13,6 +13,7 @@ import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { B1SinglePickerModule } from '@form-controls/b1-single-picker/b1-single-picker.module';
 
 import { PaymentPurposeFormComponent } from './payment-purpose-form.component';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 @NgModule({
   declarations: [PaymentPurposeFormComponent],
@@ -28,6 +29,7 @@ import { PaymentPurposeFormComponent } from './payment-purpose-form.component';
     OnlyNumbersModule,
     B1IconModule,
     B1SinglePickerModule,
+    CheckValueModule,
   ],
   exports: [PaymentPurposeFormComponent],
 })

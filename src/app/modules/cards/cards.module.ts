@@ -11,6 +11,7 @@ import { IbanModule } from '@directives/iban/iban.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { CardsHeaderModule } from './modules/cards-header/cards-header.module';
 import { CardStyledModule } from './components/card-styled/card-styled.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { CardsRoutingModule } from './cards-routing.module';
 
 import { CardRowComponent } from './components/card-row/card-row.component';
@@ -41,6 +42,7 @@ import { CardsEffect } from '@store/cards/effects';
     IbanModule,
     B1CardNumberModule,
     B1CardLoaderModule,
+    CheckValueModule,
     EffectsModule.forFeature([CardsEffect]),
   ],
 })

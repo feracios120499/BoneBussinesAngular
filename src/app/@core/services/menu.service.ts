@@ -182,7 +182,7 @@ export class MenuService extends BaseService {
       ngValue: 'instruction',
       icon: 'book-reader',
       dataRole: '',
-      route: 'app.docs.index',
+      route: 'instructions',
       dataTranslate: 'aside.nav.UserManual',
       moduleName: 'Instruction',
       position: 0,

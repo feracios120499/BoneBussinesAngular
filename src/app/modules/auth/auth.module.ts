@@ -10,6 +10,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { CheckStateModule } from '@directives/check-state/check-state.module';
 import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component';
@@ -53,6 +54,7 @@ import { AuthInputComponent } from './components/auth-input/auth-input.component
     NgSelectScrollModule,
     CheckStateModule,
     NgOtpInputModule,
+    CheckValueModule,
   ],
   exports: [],
 })

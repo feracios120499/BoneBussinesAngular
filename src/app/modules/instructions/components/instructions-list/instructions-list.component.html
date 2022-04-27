@@ -1,0 +1,18 @@
+<a
+  *ngFor="let instruction of instructions"
+  class="instructions__item"
+  [href]="instruction.url"
+  target="_blank">
+  <div class="instructions__item-body">
+    <div class="b1-title3">{{ instruction.title | translate }}</div>
+    <img [src]="'/assets/img/' + instruction.svgName + '.svg'" />
+  </div>
+
+  <div class="instructions__item-footer">
+    <div class="instructions__item-link">
+      <!-- TODO: ADD TRANSLATION TO I18: -->
+      {{ 'shared.view' | translate }}
+      <i class="b1-ml-3" b1-icon icon="arrow-right"></i>
+    </div>
+  </div>
+</a>

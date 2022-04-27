@@ -26,6 +26,7 @@ import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scr
 import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-daterangepicker.module';
 import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amount.module';
 import { FirstTitleModule } from '@pipes/first-title/first-title.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { CardDetailsComponent } from './card-details.component';
 import { CardDetailsTabsComponent } from './components/card-details-tabs/card-details-tabs.component';
@@ -83,6 +84,7 @@ import { CardDetailsEffects } from '@store/cards/details/effects';
     NgSelectScrollModule,
     B1InputAmountModule,
     FirstTitleModule,
+    CheckValueModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })
