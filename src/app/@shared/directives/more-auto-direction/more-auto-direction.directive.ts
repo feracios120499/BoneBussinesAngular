@@ -40,6 +40,7 @@ export class MoreAutoDirectionDirective implements OnInit, OnDestroy {
       .pipe(filter((p) => p === true))
       .subscribe(() => {
         setTimeout(() => {
+          this.el.nativeElement.classList.add('b1-dropdown_up');
           const elementTop = this.el.nativeElement.getBoundingClientRect().top;
           const parentTop = parentNode.getBoundingClientRect().top;
           const elementHeight = this.el.nativeElement.clientHeight;

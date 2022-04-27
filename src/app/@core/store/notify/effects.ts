@@ -40,6 +40,21 @@ export class NotifyEffects {
     { dispatch: false }
   );
 
+  showWarning$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(NotifyActions.warningNotification),
+        tap((action) =>
+          this.toastrService.warning(
+            action.message,
+            action.title,
+            this.getConfig()
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
   showError$ = createEffect(
     () =>
       this.actions$.pipe(

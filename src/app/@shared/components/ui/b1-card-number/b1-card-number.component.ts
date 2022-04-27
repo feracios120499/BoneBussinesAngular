@@ -1,18 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'b1-card-number',
   templateUrl: './b1-card-number.component.html',
-  styleUrls: ['./b1-card-number.component.scss']
+  styleUrls: ['./b1-card-number.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1CardNumberComponent implements OnInit {
-
-  constructor() { }
+export class B1CardNumberComponent implements OnInit, OnChanges {
+  constructor() {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 
   @Input() cardNumber!: string;
   @Input() cardNumberClass: string = '';
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,5 +1,5 @@
 <div class="b1-page-actions" *ngrxLet="tab$ as tab">
-  <div class="b1-page-actions__left">
+  <div class="b1-page-actions__left" *ngrxLet="isLoading$ as isLoading">
     <div>
       <input
         type="checkbox"
@@ -15,14 +15,42 @@
     <div class="b1-page-icons">
       <ng-container *checkRole="['Director', 'Accountant']">
         <button
-          ng-click="reissueCtrl.confirmSignApplications()"
+          (click)="signApplications()"
           *ngIf="tab == 'ONMYSIGN'"
           class="b1-button-primary b1-button-primary_filled b1-mr-4"
-          ng-disabled="reissueCtrl.state.isLoading || reissueCtrl.barsSignState.isLoading">
+          [disabled]="isLoading">
           <i b1-icon icon="sign"></i>
           {{ 'components.pay.sign' | translate }}
         </button>
       </ng-container>
+      <button
+        (click)="sendToBankApplications()"
+        *ngIf="tab == 'SIGNED'"
+        class="b1-button-primary b1-button-primary_filled b1-mr-4"
+        [disabled]="isLoading">
+        <i b1-icon icon="send"></i>
+        {{ 'components.pay.sendToBank' | translate }}
+      </button>
+      <b1-page-button
+        label="actions.delete"
+        *ngIf="tab != 'BANKRECEIVED'"
+        (b1Click)="removeApplications()"
+        [disabled]="isLoading"
+        icon="delete">
+      </b1-page-button>
     </div>
   </div>
+  <form class="b1-page-actions__right" name="search" novalidate>
+    <div class="b1-page-inputWithIcon width-100">
+      <input
+        class="b1-input__control without-label b1-base b1-page-input resize"
+        name="search"
+        id="search"
+        type="text"
+        [attr.placeholder]="'shared.search' | translate"
+        [ngModel]="filter$ | ngrxPush"
+        (ngModelChange)="onFilter($event)" />
+      <label b1-icon icon="search" class="resize" for="search"></label>
+    </div>
+  </form>
 </div>

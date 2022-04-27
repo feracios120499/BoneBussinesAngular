@@ -4,21 +4,25 @@ import { UserSelectors } from '@store/user/selectors';
 import { APP_KEY, AppState } from './store';
 
 export namespace AppSelectors {
-    export const appStore = createFeatureSelector<AppState>(APP_KEY);
+  export const appStore = createFeatureSelector<AppState>(APP_KEY);
 
-    export const globalLoader = createSelector(
-        appStore,
-        state => state.globalLoader
-    );
+  export const globalLoader = createSelector(
+    appStore,
+    (state) => state.globalLoader
+  );
 
-    export const bankDate = createSelector(
-        UserSelectors.currentCustomer,
-        (currentCustomer) => currentCustomer?.bankDate
-    );
+  export const bankDate = createSelector(
+    UserSelectors.currentCustomer,
+    (currentCustomer) => currentCustomer?.bankDate
+  );
 
-    export const pageLoader = createSelector(
-        appStore,
-        state => state.pageLoader
-    );
+  export const pageLoader = createSelector(
+    appStore,
+    (state) => state.pageLoader
+  );
+
+  export const signProvider = createSelector(
+    appStore,
+    (state) => state.signProvider
+  );
 }
-

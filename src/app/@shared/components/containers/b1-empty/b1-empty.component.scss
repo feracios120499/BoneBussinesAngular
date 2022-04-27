@@ -16,7 +16,9 @@ $screen-tablet: 812px;
 .b1-empty {
   &__img-wrapper {
     width: 350px;
-
+    & img {
+      width: 100%;
+    }
     @media (max-width: $screen-tablet) {
       width: 100%;
     }

@@ -2585,7 +2585,6 @@ textarea {
   z-index: 20;
   width: 14px;
   height: 14px;
-  padding-bottom: 2px;
   border-radius: 50%;
   -webkit-transition: background-color, border-color;
   transition: background-color, border-color;
@@ -2609,7 +2608,7 @@ textarea {
   content: '';
   display: block;
   position: absolute;
-  z-index: -10;
+  z-index: 10;
   top: 10px;
   right: -12px;
   width: 100%;
@@ -2912,7 +2911,6 @@ textarea {
     &__left {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
       & > .b1-title3 {
         @media (max-width: 812px) {
           width: 100%;
@@ -3957,5 +3955,33 @@ ngb-modal-backdrop {
 ngb-tooltip-window {
   @media (max-width: 812px) {
     display: none !important;
+  }
+}
+
+.left-modal {
+  & .modal-dialog {
+    transform: none !important;
+    position: fixed;
+    right: -360px;
+    top: 0;
+    height: 100%;
+    margin: 0;
+    width: 360px;
+    transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) !important;
+    @media (max-width: 812px) {
+      bottom: 100%;
+      right: 0;
+      width: 100%;
+    }
+  }
+  &.show .modal-dialog {
+    right: 0;
+    transform: none !important;
+    @media (max-width: 812px) {
+      bottom: 0;
+    }
+  }
+  & .modal-content {
+    height: 100%;
   }
 }

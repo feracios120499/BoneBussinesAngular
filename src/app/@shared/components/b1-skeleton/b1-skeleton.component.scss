@@ -1,0 +1,24 @@
+@import 'variables';
+
+:host {
+  overflow: hidden;
+  position: relative;
+  background: var(--color-light-300) !important;
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.5s;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
