@@ -9,6 +9,7 @@ import { B1AccountSelectModule } from '@form-controls/b1-account-select/b1-accou
 import { OnlyNumbersModule } from '@directives/only-numbers/only-numbers.module';
 import { PaymentPurposeFormModule } from '@payment-forms/payment-purpose-form/payment-purpose-form.module';
 import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amount.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { WithinCountryFormComponent } from './within-country-form.component';
 
@@ -24,6 +25,7 @@ import { WithinCountryFormComponent } from './within-country-form.component';
     OnlyNumbersModule,
     B1InputAmountModule,
     PaymentPurposeFormModule,
+    CheckValueModule,
   ],
   exports: [WithinCountryFormComponent],
 })

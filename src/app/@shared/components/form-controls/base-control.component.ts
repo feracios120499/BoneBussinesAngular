@@ -58,6 +58,8 @@ export abstract class BaseControlComponent
 
   writeValue(value: TValue): void {
     this.value = value;
+    // to trigger check-value.directive:
+    this.changeDetectorRef.detectChanges();
   }
 
   registerOnChange(fn: any): void {

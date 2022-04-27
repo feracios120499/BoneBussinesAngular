@@ -31,6 +31,7 @@ import { AccountTurnoverRowComponent } from './components/account-turnover-row/a
 import { AccountTransactionRowComponent } from './components/account-transaction-row/account-transaction-row.component';
 import { AccountTransactionSkeletonComponent } from './components/account-transaction-skeleton/account-transaction-skeleton.component';
 import { AccountTurnoverSkeletonComponent } from './components/account-turnover-skeleton/account-turnover-skeleton.component';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { AcctDetailsEffects } from '@store/acct/details/effects';
 
@@ -68,6 +69,7 @@ import { AcctDetailsEffects } from '@store/acct/details/effects';
     MoneyModule,
     B1DaterangepickerModule,
     B1CardLoaderModule,
+    CheckValueModule,
   ],
 })
 export class AccountModule {}

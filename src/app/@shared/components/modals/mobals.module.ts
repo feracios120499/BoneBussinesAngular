@@ -19,6 +19,7 @@ import { IbanModule } from '@directives/iban/iban.module';
 import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
 import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-daterangepicker.module';
 import { MoneyModule } from '@pipes/money/money.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { B1ExportTurnoversComponent } from './b1-export-turnovers/b1-export-turnovers.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
@@ -59,6 +60,7 @@ import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-cor
     NgSelectModule,
     B1DaterangepickerModule,
     MoneyModule,
+    CheckValueModule,
   ],
   exports: [
     B1PaymentModalComponent,

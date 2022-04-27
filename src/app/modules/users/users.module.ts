@@ -16,6 +16,7 @@ import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-content-wrapper.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { InitialsModule } from '@pipes/initials/initials.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { UsersComponent } from './views/users/users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -29,6 +30,7 @@ import { UserNameFormComponent } from './components/user-name-form/user-name-for
 import { UserSkeletonComponent } from './components/user-skeleton/user-skeleton.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
     InitialsModule,
     NgxSkeletonLoaderModule,
     UsersFilterModule,
+    CheckValueModule,
+    NumberToArrayModule,
     RouterModule.forChild([
       {
         path: '',

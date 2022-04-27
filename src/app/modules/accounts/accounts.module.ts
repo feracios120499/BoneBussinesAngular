@@ -13,13 +13,13 @@ import { IbanModule } from '@directives/iban/iban.module';
 import { MobileMoreModule } from '@directives/mobile-more/mobile-more.module';
 import { MoreAutoDirectionModule } from '@directives/more-auto-direction/more-auto-direction.module';
 import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
-
 import { MoneyModule } from '@pipes/money/money.module';
 import { WebClassModule } from '@directives/web-class/web-class.module';
 import { MobileClassModule } from '@directives/mobile-class/mobile-class.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { AccountsFilterModule } from '@pipes/accounts-filter/accounts-filter.module';
 import { AccountsRoutingModule } from './accounts-routing.module';
+import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { AccountRowComponent } from './components/account-row/account-row.component';
 import { AccountsActionsComponent } from './components/accounts-actions/accounts-actions.component';
@@ -58,6 +58,7 @@ import { AccountsComponent } from './views/accounts/accounts.component';
     B1CardLoaderModule,
     AccountsFilterModule,
     ScrollingModule,
+    CheckValueModule,
   ],
 })
 export class AccountsModule {}

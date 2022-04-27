@@ -23,7 +23,6 @@ export class UsersListComponent implements OnInit {
   filterTerm$: Observable<string> = this.store.select(
     UsersSelectors.filterTerm
   );
-  skeletonLength: string[] = this.numberToArray(6);
 
   constructor(private store: Store, private modalService: NgbModal) {}
 
@@ -38,9 +37,5 @@ export class UsersListComponent implements OnInit {
 
   onUserAdd(): void {
     this.modalService.open(UserCreateModalComponent);
-  }
-
-  private numberToArray(num: number): string[] {
-    return new Array(num).toString().split(',');
   }
 }
