@@ -28,6 +28,7 @@ import { B1StatementModalComponent } from './b1-statement-modal/b1-statement-mod
 import { B1ConfirmModalComponent } from './b1-confirm-modal/b1-confirm-modal.component';
 import { B1ErrorModalComponent } from './b1-error-modal/b1-error-modal.component';
 import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-correspondents-modal.component';
+import { B1HistoryModalComponent } from './b1-history-modal/b1-history-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-cor
     B1ConfirmModalComponent,
     B1ErrorModalComponent,
     B1CorrespondentsModalComponent,
+    B1HistoryModalComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +72,7 @@ import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-cor
     B1ConfirmModalComponent,
     B1ErrorModalComponent,
     B1CorrespondentsModalComponent,
+    B1HistoryModalComponent,
   ],
 })
 export class ModalsModule {}

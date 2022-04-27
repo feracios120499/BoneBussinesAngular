@@ -1,15 +1,9 @@
 <div class="correspondent-item__name">{{ correspondent.name }}</div>
 
 <div class="correspondent-item__info">
-  <div
-    class="correspondent-item__account b1-ellipsis"
-    [iban]="correspondent.accNumber"></div>
+  <div class="correspondent-item__account b1-ellipsis" [iban]="correspondent.accNumber"></div>
   <div class="correspondent-item__code">
-    {{
-      ('components.pay.code' | translate | titlecase) +
-        ' - ' +
-        correspondent.taxCode
-    }}
+    {{ ('components.pay.code' | translate | titlecase) + ' - ' + correspondent.taxCode }}
   </div>
   <!-- TODO: -->
   <!-- <div class="correspondent-item__country">Україна 🇺🇦</div> -->
@@ -20,8 +14,11 @@
 <b1-dropdown
   class="correspondent-item__more b1-card__col b1-card__col_dot"
   label="correspondent's actions"
-  [buttons]="actionButtons"
   menuWidth="250px"
   scopeSelector="app-correspondents-list">
   <a class="b1-card__v-dots"></a>
+  <b1-dropdown-link
+    icon="country"
+    translate="components.pay.correspondents.createPayment"
+    (btnClick)="onCorrespondentCreatePayment(correspondent)"></b1-dropdown-link>
 </b1-dropdown>

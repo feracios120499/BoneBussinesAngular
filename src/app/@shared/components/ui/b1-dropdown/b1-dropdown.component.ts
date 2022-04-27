@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 
@@ -22,16 +17,12 @@ export interface ActionButton {
   styleUrls: ['./b1-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1DropdownComponent
-  extends withRequiredPropsCheck()
-  implements OnInit
-{
-  @Input() buttons!: ActionButton[];
+export class B1DropdownComponent extends withRequiredPropsCheck() implements OnInit {
   @Input() label!: string;
   @Input() menuWidth = 'auto';
   @Input() scopeSelector!: string;
 
   ngOnInit(): void {
-    this.checkRequiredProps(['buttons', 'label', 'scopeSelector']);
+    this.checkRequiredProps(['label', 'scopeSelector']);
   }
 }

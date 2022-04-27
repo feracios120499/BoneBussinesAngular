@@ -1,6 +1,6 @@
 <div class="dropdown">
   <div (click.stop)="dropdown.open()">
-    <ng-content></ng-content>
+    <ng-content select="[openButton]"></ng-content>
   </div>
 
   <ul
@@ -17,19 +17,7 @@
     <div class="b1-modal-close" webClass="hidden">
       <i b1-icon icon="cancel" (click.stop)="dropdown.close()"> </i>
     </div>
-    <li
-      *ngFor="let button of buttons"
-      class="b1-dropdown__item"
-      [class.b1-dropdown__item_bordered]="!!button.separate">
-      <a
-        class="b1-dropdown__link"
-        [class.b1-dropdown__link_error]="!!button.danger"
-        webClass="b1-base"
-        mobileClass="b1-medium"
-        (click.stop)="button.clickHandler($any($event)); dropdown.close()">
-        <i *ngIf="button.icon" b1-icon [icon]="button.icon" class="b1-mr-3"></i>
-        <span>{{ button.translate | translate }}</span>
-      </a>
-    </li>
+    <ng-content select="b1-dropdown-link"></ng-content>
+    <ng-content select=".b1-separator"></ng-content>
   </ul>
 </div>

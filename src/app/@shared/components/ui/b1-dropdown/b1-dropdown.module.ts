@@ -11,9 +11,10 @@ import { WebClassModule } from '@directives/web-class/web-class.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 
 import { B1DropdownComponent } from './b1-dropdown.component';
+import { B1DropdownLinkComponent } from '@ui/b1-dropdown-link/b1-dropdown-link.component';
 
 @NgModule({
-  declarations: [B1DropdownComponent],
+  declarations: [B1DropdownComponent, B1DropdownLinkComponent],
   imports: [
     CommonModule,
     NgbModule,
@@ -25,6 +26,6 @@ import { B1DropdownComponent } from './b1-dropdown.component';
     MoreAutoDirectionModule,
     B1IconModule,
   ],
-  exports: [B1DropdownComponent],
+  exports: [B1DropdownComponent, B1DropdownLinkComponent],
 })
 export class B1DropdownModule {}

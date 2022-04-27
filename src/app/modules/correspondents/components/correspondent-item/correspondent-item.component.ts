@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -24,17 +19,10 @@ import { Router } from '@angular/router';
     class: 'correspondent-item',
   },
 })
-export class CorrespondentItemComponent
-  extends withRequiredPropsCheck()
-  implements OnInit
-{
+export class CorrespondentItemComponent extends withRequiredPropsCheck() implements OnInit {
   @Input() correspondent!: Correspondent;
 
-  constructor(
-    private store: Store,
-    private translateService: TranslateService,
-    private router: Router
-  ) {
+  constructor(private store: Store, private translateService: TranslateService, private router: Router) {
     super();
   }
 
@@ -42,18 +30,12 @@ export class CorrespondentItemComponent
     return [
       {
         translate: 'components.pay.correspondents.createPayment',
-        clickHandler: this.onCorrespondentCreatePayment.bind(
-          this,
-          this.correspondent
-        ),
+        clickHandler: this.onCorrespondentCreatePayment.bind(this, this.correspondent),
         icon: 'country',
       },
       {
         translate: 'components.pay.correspondents.createPaymentAuto',
-        clickHandler: this.onCorrespondentCreateRegularPayment.bind(
-          this,
-          this.correspondent
-        ),
+        clickHandler: this.onCorrespondentCreateRegularPayment.bind(this, this.correspondent),
         // TODO:
         icon: 'country',
       },
@@ -70,35 +52,25 @@ export class CorrespondentItemComponent
     this.checkRequiredProps(['correspondent']);
   }
 
-  private onCorrespondentCreatePayment(correspondent: Correspondent): void {
+  onCorrespondentCreatePayment(correspondent: Correspondent): void {
     const { name, accNumber, taxCode } = correspondent;
     const recipient = { name, accNumber, taxCode } as PaymentAccount;
-    this.store.dispatch(
-      SharedActions.setCreatePartialPayment({ payment: { recipient } })
-    );
+    this.store.dispatch(SharedActions.setCreatePartialPayment({ payment: { recipient } }));
     this.router.navigate(['/payments', 'create', 'within-country']);
   }
 
-  private onCorrespondentCreateRegularPayment(
-    correspondent: Correspondent
-  ): void {
-    console.log(
-      'Regular payment is created with correspondent: ',
-      correspondent
-    );
+  onCorrespondentCreateRegularPayment(correspondent: Correspondent): void {
+    console.log('Regular payment is created with correspondent: ', correspondent);
   }
 
-  private onCorrespondentDelete(correspondent: Correspondent): void {
+  onCorrespondentDelete(correspondent: Correspondent): void {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: `${this.translateService.instant(
-            'components.pay.correspondents.deletingCofirm'
-          )} ${correspondent.name}?`,
-          callback: () =>
-            this.store.dispatch(
-              CorrespondentsActions.deleteCorrespondentRequest(correspondent.id)
-            ),
+          text: `${this.translateService.instant('components.pay.correspondents.deletingCofirm')} ${
+            correspondent.name
+          }?`,
+          callback: () => this.store.dispatch(CorrespondentsActions.deleteCorrespondentRequest(correspondent.id)),
         },
       })
     );
