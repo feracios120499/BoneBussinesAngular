@@ -14,7 +14,7 @@ import { SharedActions } from '@store/shared/actions';
 import { SharedSelectors } from '@store/shared/selectors';
 import { merge, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WithinCountryFormComponent } from 'src/app/@shared/modules/shared-payment/components/within-country-form/within-country-form.component';
+import { WithinCountryFormComponent } from '@payment-forms/within-country-form/within-country-form.component';
 
 @Component({
   selector: 'pay-within-country',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ModalService } from '@services/modal.service';
-import { B1ErrorModalComponent } from '@ui/modals/b1-error-modal/b1-error-modal.component';
+import { B1ErrorModalComponent } from '@modals/b1-error-modal/b1-error-modal.component';
 import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { CustomToast } from '../../../@shared/components/custom-toast/custom-toast.component';
+import { CustomToast } from '@ui/custom-toast/custom-toast.component';
 
 import { NotifyActions } from './actions';
 

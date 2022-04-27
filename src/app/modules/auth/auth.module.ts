@@ -1,8 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgOtpInputModule } from 'ng-otp-input';
 
-import { SharedModule } from './../../@shared/shared.module';
+import { CheckStateModule } from '@directives/check-state/check-state.module';
+import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
 import { AuthRoutingModule } from './auth-routing.module';
+
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component';
 import { AuthErrorComponent } from './components/auth-error/auth-error.component';
@@ -16,8 +24,6 @@ import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { AuthCryptorComponent } from './components/auth-cryptor/auth-cryptor.component';
 import { AuthInputComponent } from './components/auth-input/auth-input.component';
-import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
-
 
 @NgModule({
   declarations: [
@@ -33,9 +39,21 @@ import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-dir
     AuthErrorComponent,
     AuthOtpComponent,
     AuthCryptorComponent,
-    AuthInputComponent
+    AuthInputComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule, SharedModule, B1DirectivesModule],
+  imports: [
+    CommonModule,
+    ReactiveComponentModule,
+    NgbModule,
+    AuthRoutingModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    NgSelectScrollModule,
+    CheckStateModule,
+    NgOtpInputModule,
+  ],
   exports: [],
 })
-export class AuthModule { }
+export class AuthModule {}

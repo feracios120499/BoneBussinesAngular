@@ -1,13 +1,16 @@
 <div class="b1-page-actions">
   <div class="b1-page-actions__left">
     <div class="b1-page-icons" style="margin-left: 0">
-      <b1-button
-        label="components.admin.addEmployee"
-        icon="plus"
-        [mobileView]="true"
-        (click)="onUserAdd()"
-        [isDisabled]="isLoading$ | ngrxPush">
-      </b1-button>
+      <ng-container *ngrxLet="users$ as users">
+        <b1-button
+          *ngIf="users.length"
+          label="components.admin.addEmployee"
+          icon="plus"
+          [mobileView]="true"
+          (click)="onUserAdd()"
+          [isDisabled]="isLoading$ | ngrxPush">
+        </b1-button>
+      </ng-container>
     </div>
   </div>
 

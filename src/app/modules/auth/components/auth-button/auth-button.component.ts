@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { BaseButtonComponent } from 'src/app/@shared/components/base-button.component';
+
+import { BaseButtonComponent } from '@ui/base-button.component';
 
 @Component({
   selector: 'auth-button',

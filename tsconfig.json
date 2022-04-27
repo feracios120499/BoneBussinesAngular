@@ -36,9 +36,14 @@
       "@helpers/*": ["./src/app/@shared/helpers/*"],
       "@methods/*": ["./src/app/@shared/methods/*"],
       "@custom-operators/*": ["./src/app/@shared/custom-operators/*"],
-      "@forms/*": ["./src/app/@shared/modules/b1-forms/components/*"],
-      "@mixins/*": ["./src/app/@shared/mixins/*"],
-      "@ui/*": ["./src/app/@shared/components/*"]
+      "@form-controls/*": ["./src/app/@shared/components/form-controls/*"],
+      "@payment-forms/*": ["./src/app/@shared/components/payment-forms/*"],
+      "@containers/*": ["./src/app/@shared/components/containers/*"],
+      "@modals/*": ["./src/app/@shared/components/modals/*"],
+      "@ui/*": ["./src/app/@shared/components/ui/*"],
+      "@directives/*": ["./src/app/@shared/directives/*"],
+      "@pipes/*": ["./src/app/@shared/pipes/*"],
+      "@mixins/*": ["./src/app/@shared/mixins/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/@shared/shared.module';
-import { B1ContentWrapperModule } from '@ui/b1-content-wrapper/b1-content-wrapper.module';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+
+import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-content-wrapper.module';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
-import { B1ModalContainerModule } from '@ui/b1-modal-container/b1-modal-container.module';
-import { B1InputModule } from '@forms/b1-input/b1-input.module';
-import { B1NumberInputModule } from '@forms/b1-number-input/b1-number-input.module';
-import { B1EmptyModule } from '@ui/b1-empty/b1-empty.module';
+import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1NumberInputModule } from '@form-controls/b1-number-input/b1-number-input.module';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { IbanModule } from '@directives/iban/iban.module';
+import { CorrespondentsFilterModule } from '@pipes/correspondents-filter/correspondents-filter.module';
+import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 import { CorrespondentsComponent } from './views/correspondents/correspondents.component';
 import { CorrespondentsHeaderComponent } from './components/correspondents-header/correspondents-header.component';
@@ -15,7 +24,6 @@ import { CorrespondentsListComponent } from './components/correspondents-list/co
 import { CorrespondentItemComponent } from './components/correspondent-item/correspondent-item.component';
 import { CorrespondentFormComponent } from './components/correspondent-form/correspondent-form.component';
 import { CorrespondentModalComponent } from './components/correspondent-modal/correspondent-modal.component';
-import { CorrespondentsFilterModule } from 'src/app/@shared/pipes/correspondents-filter/correspondents-filter.module';
 
 @NgModule({
   declarations: [
@@ -28,14 +36,23 @@ import { CorrespondentsFilterModule } from 'src/app/@shared/pipes/correspondents
     CorrespondentModalComponent,
   ],
   imports: [
-    SharedModule,
+    CommonModule,
+    ReactiveComponentModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
     B1ContentWrapperModule,
     B1DropdownModule,
     B1ModalContainerModule,
     B1InputModule,
     B1NumberInputModule,
     B1EmptyModule,
+    B1IconModule,
+    IbanModule,
     CorrespondentsFilterModule,
+    B1CardLoaderModule,
+    B1ButtonModule,
+    B1DropdownModule,
     RouterModule.forChild([
       {
         path: '',

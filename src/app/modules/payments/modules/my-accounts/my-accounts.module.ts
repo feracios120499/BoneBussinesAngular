@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyAccountsRoutingModule } from './my-accounts-routing.module';
-import { MyAccountsComponent } from './my-accounts.component';
-import { SharedPaymentModule } from 'src/app/@shared/modules/shared-payment/shared-payment.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { B1DirectivesModule } from 'src/app/@shared/modules/b1-directives/b1-directives.module';
-import { B1FormsModule } from 'src/app/@shared/modules/b1-forms/b1-forms.module';
 
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { MyAccountsFormModule } from '@payment-forms/my-accounts-form/my-accounts-form.module';
+import { B1SupDocumentsModule } from '@form-controls/b1-sup-documents/b1-sup-documents.module';
+import { MyAccountsConfirmModule } from '@payment-forms/my-accounts-confirm/my-accounts-confirm.module';
+import { PaymentResultModule } from '@payment-forms/payment-result/payment-result.module';
+import { MyAccountsRoutingModule } from './my-accounts-routing.module';
+
+import { MyAccountsComponent } from './my-accounts.component';
 
 @NgModule({
-  declarations: [
-    MyAccountsComponent
-  ],
+  declarations: [MyAccountsComponent],
   imports: [
     CommonModule,
     MyAccountsRoutingModule,
-    SharedPaymentModule,
     FormsModule,
     ReactiveComponentModule,
     TranslateModule,
-    B1DirectivesModule,
-    B1FormsModule
-  ]
+    MyAccountsFormModule,
+    MyAccountsConfirmModule,
+    PaymentResultModule,
+    B1SupDocumentsModule,
+    B1IconModule,
+  ],
 })
-export class MyAccountsModule { }
+export class MyAccountsModule {}

@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentsActions } from '@store/correspondents/actions';
-import { CorrespondentModalComponent } from '@modules/correspondents/components/correspondent-modal/correspondent-modal.component';
+import { CorrespondentModalComponent } from '../../components/correspondent-modal/correspondent-modal.component';
 import { Correspondent } from '@models/correspondents/correspondent.model';
 
 @Component({

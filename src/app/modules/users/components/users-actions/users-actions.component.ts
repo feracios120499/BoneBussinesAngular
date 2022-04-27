@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersActions } from '@store/users/actions';
 import { UsersSelectors } from '@store/users/selectors';
 import { UserCreateModalComponent } from '../user-create-modal/user-create-modal.component';
+import { User } from '@models/users/user.model';
 
 @Component({
   selector: 'app-users-actions',
@@ -14,6 +15,7 @@ import { UserCreateModalComponent } from '../user-create-modal/user-create-modal
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersActionsComponent {
+  users$: Observable<User[]> = this.store.select(UsersSelectors.userList);
   isLoading$: Observable<boolean> = this.store.select(
     UsersSelectors.isLoadingUsersOrRoles
   );
