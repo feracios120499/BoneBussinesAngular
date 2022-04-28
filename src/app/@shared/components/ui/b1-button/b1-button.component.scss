@@ -4,7 +4,7 @@
   display: block;
 }
 
-.b1-button-primary {
+.b1-button {
   &.round {
     @media (max-width: 812px) {
       @include button-round;

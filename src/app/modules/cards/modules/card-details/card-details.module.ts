@@ -40,6 +40,7 @@ import { ReissueApplicationModalComponent } from './components/reissue-applicati
 import { CardStatementModalComponent } from './components/card-statement-modal/card-statement-modal.component';
 
 import { CardDetailsEffects } from '@store/cards/details/effects';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { CardDetailsEffects } from '@store/cards/details/effects';
     B1InputAmountModule,
     FirstTitleModule,
     CheckValueModule,
+    B1ButtonModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })

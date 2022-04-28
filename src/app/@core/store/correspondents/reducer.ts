@@ -26,10 +26,6 @@ export const correspondentsReducer = createReducer(
     ...state,
     filterTerm: '',
   })),
-  on(CorrespondentsActions.clearModalRef, (state) => ({
-    ...state,
-    modalRef: null,
-  })),
   on(CorrespondentsActions.createCorrespondentRequest, CorrespondentsActions.updateCorrespondentRequest, (state) => ({
     ...state,
     loadings: [...pushIfNotExist(state.loadings, 'create')],

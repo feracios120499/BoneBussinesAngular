@@ -28,6 +28,7 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { SharedModule } from 'src/app/@shared/shared.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { SharedModule } from 'src/app/@shared/shared.module';
     FormsModule,
     B1DropdownModule,
     SharedModule,
+    B1ButtonModule,
   ],
 })
 export class ReissueApplicationsModule {}

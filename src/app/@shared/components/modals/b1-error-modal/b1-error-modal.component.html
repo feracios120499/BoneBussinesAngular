@@ -42,9 +42,6 @@
     </div>
   </div>
   <div class="b1-modal-footer" ngbAutofocus>
-    <button class="b1-button-primary" (click)="ok()">
-      <i b1-icon icon="check"></i>
-      Ok
-    </button>
+    <b1-button [filled]="false" icon="check" label="Ok" (btnClick)="ok()"></b1-button>
   </div>
 </div>

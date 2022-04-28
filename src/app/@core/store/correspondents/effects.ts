@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, filter, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -17,7 +17,6 @@ import { CorrespondentModalResult } from '@modules/correspondents/models/corresp
 import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
 import { CorrespondentModalComponent } from '@modules/correspondents/components/correspondent-modal/correspondent-modal.component';
 import { ModalService } from '@services/modal.service';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class CorrespondentsEffects {
@@ -184,24 +183,24 @@ export class CorrespondentsEffects {
         map(({ config }) => {
           const modalRef = this.modalService.open(CorrespondentModalComponent);
           modalRef.componentInstance.config = config;
-          return modalRef;
-        }),
-        mergeMap((modalRef: NgbModalRef) =>
-          this.actions$.pipe(
-            ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
-            tap(() => modalRef.close())
-          )
-        )
+          // return modalRef;
+        })
+        // mergeMap((modalRef: NgbModalRef) =>
+        //   this.actions$.pipe(
+        //     ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
+        //     tap(() => modalRef.close())
+        //   )
+        // )
       ),
     { dispatch: false }
   );
 
-  // closeCorrespondentModal$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
-  //     withLatestFrom(this.store.select(CorrespondentsSelectors.activeModalRef)),
-  //     tap(([_, modalRef]) => modalRef!.close()),
-  //     map(() => CorrespondentsActions.clearModalRef())
-  //   )
-  // );
+  closeCorrespondentModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
+        tap(() => this.modalService.close(CorrespondentModalComponent))
+      ),
+    { dispatch: false }
+  );
 }

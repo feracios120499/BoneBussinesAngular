@@ -21,6 +21,7 @@ import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-da
 import { MoneyModule } from '@pipes/money/money.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 import { B1ExportTurnoversComponent } from './b1-export-turnovers/b1-export-turnovers.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
@@ -67,6 +68,7 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     CheckValueModule,
     B1SkeletonModule,
     NumberToArrayModule,
+    B1ButtonModule,
   ],
   exports: [
     B1PaymentModalComponent,

@@ -31,9 +31,7 @@
             [(ngModel)]="result.type"
             formControlName="type" /><i class="b1-checkbox__check"></i>
           <span>
-            {{
-              'components.corpcard.services.statement.type.account' | translate
-            }}
+            {{ 'components.corpcard.services.statement.type.account' | translate }}
           </span>
         </label>
       </div>
@@ -115,19 +113,13 @@
               formControlName="format">
               <ng-template ng-label-tmp let-item="item">
                 <div class="b1-base b1-bold b1-flex b1-align-center">
-                  <i
-                    class="b1-mr-2 b1-title3"
-                    b1-icon
-                    [icon]="'file-' + item.toLowerCase()"></i>
+                  <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-' + item.toLowerCase()"></i>
                   {{ item }}
                 </div>
               </ng-template>
               <ng-option *ngFor="let format of config.formats" [value]="format">
                 <div class="b1-base b1-bold b1-flex b1-align-center">
-                  <i
-                    class="b1-mr-2 b1-title1"
-                    b1-icon
-                    [icon]="'file-' + format.toLowerCase()"></i>
+                  <i class="b1-mr-2 b1-title1" b1-icon [icon]="'file-' + format.toLowerCase()"></i>
                   {{ format }}
                 </div>
               </ng-option>
@@ -135,16 +127,10 @@
 
             <div class="b1-input__control formats-mobile">
               <div class="b1-base b1-bold b1-flex b1-align-center">
-                <i
-                  class="b1-mr-2 b1-title3"
-                  b1-icon
-                  [icon]="'file-' + result.format.toLowerCase()"></i>
+                <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-' + result.format.toLowerCase()"></i>
                 {{ result.format }}
               </div>
-              <i
-                b1-icon
-                icon="chevron-down"
-                class="b1-input__select_chevron"></i>
+              <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
               <select
                 [(ngModel)]="result.format"
                 name="tabs"
@@ -165,11 +151,7 @@
       <div class="col-md-12">
         <div class="b1-input b1-mt-5">
           <label class="b1-small b1-checkbox">
-            <input
-              type="checkbox"
-              class="b1-checkbox__hidden"
-              [(ngModel)]="agree"
-              formControlName="agree" />
+            <input type="checkbox" class="b1-checkbox__hidden" [(ngModel)]="agree" formControlName="agree" />
             <i class="b1-checkbox__check"></i>
             <span class="b1-checkbox__label b1-small b1-bold">
               {{ 'components.corpcard.thisFunctionIsPayConfirm' | translate }}
@@ -180,23 +162,18 @@
     </div>
   </form>
   <div class="b1-modal-footer" ngbAutofocus>
-    <button
-      class="b1-button-primary b1-button-primary_filled"
-      type="button"
-      (click)="ok()"
-      [disabled]="formGroup.invalid || (!config.isFree && !agree)"
-      *ngIf="!result.sendToEmail">
-      <i b1-icon icon="download"></i>
-      {{ 'shared.download' | translate }}
-    </button>
-    <button
-      class="b1-button-primary b1-button-primary_filled"
-      type="button"
-      (click)="ok()"
+    <b1-button
+      *ngIf="!result.sendToEmail"
+      icon="download"
+      label="shared.download"
+      (btnClick)="ok()"
+      [isDisabled]="formGroup.invalid || (!config.isFree && !agree)"></b1-button>
+
+    <b1-button
       *ngIf="result.sendToEmail"
-      [disabled]="formGroup.invalid || (!config.isFree && !agree)">
-      <i b1-icon icon="send"></i>
-      {{ 'shared.send' | translate }}
-    </button>
+      icon="send"
+      label="shared.send"
+      (btnClick)="ok()"
+      [isDisabled]="formGroup.invalid || (!config.isFree && !agree)"></b1-button>
   </div>
 </div>
