@@ -16,9 +16,21 @@
   label="correspondent's actions"
   menuWidth="250px"
   scopeSelector="app-correspondents-list">
-  <a class="b1-card__v-dots"></a>
+  <a class="b1-card__v-dots" slot="toggle"></a>
   <b1-dropdown-link
     icon="country"
-    translate="components.pay.correspondents.createPayment"
-    (btnClick)="onCorrespondentCreatePayment(correspondent)"></b1-dropdown-link>
+    label="components.pay.correspondents.createPayment"
+    (btnClick)="onCorrespondentCreatePayment()">
+  </b1-dropdown-link>
+  <!-- TODO: CHANGE ICON NAME -->
+  <b1-dropdown-link
+    icon="country"
+    label="components.pay.correspondents.createPaymentAuto"
+    (btnClick)="onCorrespondentCreateRegularPayment()">
+  </b1-dropdown-link>
+  <b1-dropdown-link
+    icon="delete"
+    label="actions.delete"
+    [danger]="true"
+    (btnClick)="onCorrespondentDelete()"></b1-dropdown-link>
 </b1-dropdown>

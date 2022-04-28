@@ -6,13 +6,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
+import { SharedModule } from '@shared';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { CorrespondentsFilterModule } from '@pipes/correspondents-filter/correspondents-filter.module';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
-import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 import { WebClassModule } from '@directives/web-class/web-class.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { IbanModule } from '@directives/iban/iban.module';
@@ -20,6 +20,7 @@ import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scr
 import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-daterangepicker.module';
 import { MoneyModule } from '@pipes/money/money.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 
 import { B1ExportTurnoversComponent } from './b1-export-turnovers/b1-export-turnovers.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
@@ -50,9 +51,8 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     ReactiveFormsModule,
     NgbModule,
     ReactiveComponentModule,
-    ScrollingModule,
+    SharedModule,
     NgScrollbarModule,
-    VirtualPatchModule,
     NgxSkeletonLoaderModule,
     B1CardLoaderModule,
     WebClassModule,
@@ -65,6 +65,8 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     B1DaterangepickerModule,
     MoneyModule,
     CheckValueModule,
+    B1SkeletonModule,
+    NumberToArrayModule,
   ],
   exports: [
     B1PaymentModalComponent,

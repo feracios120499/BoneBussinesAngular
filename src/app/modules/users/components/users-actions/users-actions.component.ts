@@ -16,12 +16,8 @@ import { User } from '@models/users/user.model';
 })
 export class UsersActionsComponent {
   users$: Observable<User[]> = this.store.select(UsersSelectors.userList);
-  isLoading$: Observable<boolean> = this.store.select(
-    UsersSelectors.isLoadingUsersOrRoles
-  );
-  filterTerm$: Observable<string> = this.store.select(
-    UsersSelectors.filterTerm
-  );
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoadingList);
+  filterTerm$: Observable<string> = this.store.select(UsersSelectors.filterTerm);
 
   constructor(private store: Store, private modalService: NgbModal) {}
 
