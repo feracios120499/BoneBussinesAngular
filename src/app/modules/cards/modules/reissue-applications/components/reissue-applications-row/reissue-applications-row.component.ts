@@ -3,10 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UiReissuApplication } from '@models/cards/ui-reissue-application.model';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { CustomCardsService } from '@services/cards/custom-card.service';
-import { CardReissueActions } from '@store/cards/reissue/actions';
+import { CustomCardsService } from '@modules/cards/services/custom-card-service/custom-card.service';
 import { SharedActions } from '@store/shared/actions';
 import { Observable } from 'rxjs';
+import { CardReissueActions } from '../../store/actions';
 
 @Component({
   selector: 'app-reissue-applications-row',

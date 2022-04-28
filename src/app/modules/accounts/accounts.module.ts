@@ -25,7 +25,7 @@ import { AccountsActionsComponent } from './components/accounts-actions/accounts
 import { AccountsHeaderComponent } from './components/accounts-header/accounts-header.component';
 import { AccountsListComponent } from './components/accounts-list/accounts-list.component';
 import { AccountsTabsComponent } from './components/accounts-tabs/accounts-tabs.component';
-import { AccountsComponent } from './views/accounts/accounts.component';
+import { AccountsComponent } from './accounts.component';
 
 @NgModule({
   declarations: [

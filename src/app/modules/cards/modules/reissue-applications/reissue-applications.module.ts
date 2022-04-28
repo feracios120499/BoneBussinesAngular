@@ -21,13 +21,13 @@ import { ReissueApplicationsListComponent } from './components/reissue-applicati
 import { ReissueApplicationsRowComponent } from './components/reissue-applications-row/reissue-applications-row.component';
 import { ReissueApplicationsFilterModule } from 'src/app/@shared/pipes/reissue-applications-filter/reissue-applications-filter.module';
 
-import { CardReissueEffect } from '@store/cards/reissue/effects';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { SharedModule } from 'src/app/@shared/shared.module';
+import { CardReissueEffect } from './store/effects';
 
 @NgModule({
   declarations: [

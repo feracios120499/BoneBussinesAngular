@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AccountModel } from '@models/account.model';
+import { AccountModel } from '@modules/accounts/models/account.model';
 import { FilterCurrency } from '@models/filter.model';
 import { FilterService } from '@services/filter.service';
 
@@ -7,37 +7,20 @@ import { FilterService } from '@services/filter.service';
 export class AccountsFilterPipe implements PipeTransform {
   constructor(private filterService: FilterService) {}
 
-  transform(
-    accounts?: AccountModel[],
-    filter?: string,
-    filterCurrency?: FilterCurrency
-  ): AccountModel[] {
+  transform(accounts?: AccountModel[], filter?: string, filterCurrency?: FilterCurrency): AccountModel[] {
     if (!accounts) {
       return [];
     }
 
-    if (
-      !filter &&
-      (!filterCurrency ||
-        !filterCurrency.currencies ||
-        filterCurrency.currencies.length === 0)
-    ) {
+    if (!filter && (!filterCurrency || !filterCurrency.currencies || filterCurrency.currencies.length === 0)) {
       return accounts;
     }
 
-    if (
-      !!filterCurrency &&
-      !!filterCurrency.currencies &&
-      filterCurrency.currencies.length !== 0
-    ) {
+    if (!!filterCurrency && !!filterCurrency.currencies && filterCurrency.currencies.length !== 0) {
       accounts =
         filterCurrency.type === 'include'
-          ? accounts.filter(
-              (p) => filterCurrency.currencies.indexOf(p.currencyCode) >= 0
-            )
-          : accounts.filter(
-              (p) => filterCurrency.currencies.indexOf(p.currencyCode) === -1
-            );
+          ? accounts.filter((p) => filterCurrency.currencies.indexOf(p.currencyCode) >= 0)
+          : accounts.filter((p) => filterCurrency.currencies.indexOf(p.currencyCode) === -1);
     }
 
     if (!!filter) {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthActions } from '@modules/auth/store/actions';
+import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
 import { CryptorKey } from '@services/sign/models/cryptor-key.model';
 import { CryptorToken } from '@services/sign/models/cryptor-token.model';
-import { AuthActions } from '@store/auth/actions';
-import { AuthSelectors } from '@store/auth/selectors';
 
 @Component({
   selector: 'auth-cryptor',
@@ -37,9 +37,7 @@ export class AuthCryptorComponent implements OnInit {
 
   onLogin(): void {
     if (this.key && this.token) {
-      this.store.dispatch(
-        AuthActions.loginCryptor({ key: this.key, token: this.token })
-      );
+      this.store.dispatch(AuthActions.loginCryptor({ key: this.key, token: this.token }));
     }
   }
 }

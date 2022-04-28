@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
-import { CorrespondentsActions } from '@store/correspondents/actions';
 import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
-import { Correspondent } from '@models/correspondents/correspondent.model';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
+import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
+import { CorrespondentsActions } from '@modules/correspondents/store/actions';
 
 @Component({
   selector: 'app-correspondents-actions',
@@ -15,15 +15,9 @@ import { Correspondent } from '@models/correspondents/correspondent.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsActionsComponent {
-  correspondents$: Observable<Correspondent[]> = this.store.select(
-    CorrespondentsSelectors.correspondentList
-  );
-  isLoading$: Observable<boolean> = this.store.select(
-    CorrespondentsSelectors.isLoadingCorrespondents
-  );
-  filterTerm$: Observable<string> = this.store.select(
-    CorrespondentsSelectors.filterTerm
-  );
+  correspondents$: Observable<Correspondent[]> = this.store.select(CorrespondentsSelectors.correspondentList);
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
+  filterTerm$: Observable<string> = this.store.select(CorrespondentsSelectors.filterTerm);
 
   constructor(private store: Store, private modalService: NgbModal) {}
 

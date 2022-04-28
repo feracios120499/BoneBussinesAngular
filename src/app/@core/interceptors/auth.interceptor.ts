@@ -1,11 +1,12 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthActions } from '@modules/auth/store/actions';
+import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '@services/auth.service';
+import { AuthService } from '@modules/auth/services/auth-service/auth.service';
 import { CRYPTOR_URL } from '@services/sign/bars-cryptor.service';
-import { AuthActions } from '@store/auth/actions';
-import { AuthSelectors } from '@store/auth/selectors';
+
 import { EMPTY, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
@@ -17,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   token: Token | undefined = undefined;
 
   constructor(private translate: TranslateService, private store: Store, private authService: AuthService) {
-    store.select(AuthSelectors.token).subscribe(token => {
+    store.select(AuthSelectors.token).subscribe((token) => {
       this.token = token;
     });
   }
@@ -29,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   refreshToken(): any {
     if (this.refreshTokenInProgress) {
-      return new Observable(observer => {
+      return new Observable((observer) => {
         this.tokenRefreshed$.subscribe(() => {
           observer.next();
           observer.complete();
@@ -48,7 +49,8 @@ export class AuthInterceptor implements HttpInterceptor {
           this.refreshTokenInProgress = false;
           this.logout();
           return EMPTY;
-        }));
+        })
+      );
     }
   }
 
@@ -60,14 +62,15 @@ export class AuthInterceptor implements HttpInterceptor {
           request = this.formatRequest(request);
           return next.handle(request);
         }),
-        catchError(e => {
+        catchError((e) => {
           if (e.status !== 401) {
             return this.handleResponseError(e, request, next);
           } else {
             this.logout();
             return EMPTY;
           }
-        }));
+        })
+      );
     }
 
     // Access denied error
@@ -96,33 +99,32 @@ export class AuthInterceptor implements HttpInterceptor {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
     const requestFormated = this.formatRequest(req);
-    return next.handle(requestFormated)
-      .pipe(
-        map((data: any) => {
-          return data;
-        }),
-        catchError(error => this.handleResponseError(error, req, next))
-      );
+    return next.handle(requestFormated).pipe(
+      map((data: any) => {
+        return data;
+      }),
+      catchError((error) => this.handleResponseError(error, req, next))
+    );
   }
 
   formatRequest(request: HttpRequest<any>): HttpRequest<any> {
     if (this.isCryptor(request.url)) {
       return request;
     }
-    const language = this.translate.currentLang === 'uk' ? 'uk-UA' : this.translate.currentLang === 'ru' ? 'ru-RU' : 'en-US';
+    const language =
+      this.translate.currentLang === 'uk' ? 'uk-UA' : this.translate.currentLang === 'ru' ? 'ru-RU' : 'en-US';
     const prefix = request.url.indexOf('?') > 0 ? '&_=' : '?_=';
     if (!request.url.includes('token')) {
       request = request.clone({
         setHeaders: {
-          'Use-Response-Wrapper': request.url.includes('token') ? 'true' : 'false'
-        }
+          'Use-Response-Wrapper': request.url.includes('token') ? 'true' : 'false',
+        },
       });
     }
 
-
     if (this.isStaticFileRequest(request.url)) {
       request = request.clone({
-        url: request.url + prefix + this.customDate(new Date(), '.')
+        url: request.url + prefix + this.customDate(new Date(), '.'),
       });
 
       return request;
@@ -130,16 +132,15 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({
       url: this.endpoint + request.url,
       setHeaders: {
-        'Accept-Language': language
+        'Accept-Language': language,
       },
-
     });
 
     if (this.token && !request.url.includes('token')) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + this.token.accessToken
-        }
+          Authorization: 'Bearer ' + this.token.accessToken,
+        },
       });
     }
 
@@ -157,9 +158,6 @@ export class AuthInterceptor implements HttpInterceptor {
   customDate(date: Date, separator: string): string {
     const mm = date.getMonth() + 1; // getMonth() is zero-based
     const dd = date.getDate();
-    return [(dd > 9 ? '' : '0') + dd,
-    (mm > 9 ? '' : '0') + mm,
-    date.getFullYear(),
-    ].join(separator);
+    return [(dd > 9 ? '' : '0') + dd, (mm > 9 ? '' : '0') + mm, date.getFullYear()].join(separator);
   }
 }

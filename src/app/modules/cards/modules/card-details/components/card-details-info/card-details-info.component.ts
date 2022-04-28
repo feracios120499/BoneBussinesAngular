@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardDetailsSelectors } from '@store/cards/details/selectors';
-import { notNullAndUndefined } from '@store/shared';
+import { CardDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-card-details-info',

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
 import { CorrespondentsModalResult } from '@models/modals/correspondents-modal-result.model';
 import { PaymentAccount } from '@models/payment-account.model';
+import { CorrespondentsActions } from '@modules/correspondents/store/actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { PaymentsSignService } from '@services/payments/payments-sign.service';
 import { PaymentsService } from '@services/payments/payments.service';
 import { BarsCryptorService } from '@services/sign/bars-cryptor.service';
-import { CorrespondentsActions } from '@store/correspondents/actions';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
@@ -34,9 +34,7 @@ export class PayEffects {
       switchMap((payload) =>
         this.paymentsService.getPayment(payload.data, payload.clientId).pipe(
           map((payment) => PayActions.loadPaymentSuccess(payment)),
-          catchError((error) =>
-            of(PayActions.loadPaymentFailure(error.error.Message))
-          )
+          catchError((error) => of(PayActions.loadPaymentFailure(error.error.Message)))
         )
       )
     )
@@ -51,28 +49,18 @@ export class PayEffects {
           switchMap((buffer) => this.cryptorService.signBuffer(buffer)),
           switchMap((signResponse) => {
             if (signResponse.isSuccess) {
-              return this.paymentsSignService
-                .addSignature({ ...signResponse }, payload.clientId)
-                .pipe(
-                  map((saveResponse) => {
-                    if (saveResponse.isSuccess) {
-                      return PayActions.signPaymentSuccess(saveResponse);
-                    }
-                    return PayActions.signPaymentFailure(
-                      saveResponse.error?.message as string
-                    );
-                  })
-                );
+              return this.paymentsSignService.addSignature({ ...signResponse }, payload.clientId).pipe(
+                map((saveResponse) => {
+                  if (saveResponse.isSuccess) {
+                    return PayActions.signPaymentSuccess(saveResponse);
+                  }
+                  return PayActions.signPaymentFailure(saveResponse.error?.message as string);
+                })
+              );
             }
-            return of(
-              PayActions.signPaymentFailure(
-                signResponse.error?.message as string
-              )
-            );
+            return of(PayActions.signPaymentFailure(signResponse.error?.message as string));
           }),
-          catchError((error) =>
-            of(PayActions.signPaymentFailure(error.message))
-          )
+          catchError((error) => of(PayActions.signPaymentFailure(error.message)))
         )
       )
     )
@@ -89,9 +77,7 @@ export class PayEffects {
               ? PayActions.onSignPaymentSuccess()
               : PayActions.onSignPaymentFailure(response.message as string)
           ),
-          catchError((error) =>
-            of(PayActions.onSignPaymentFailure(error.error.message))
-          )
+          catchError((error) => of(PayActions.onSignPaymentFailure(error.error.message)))
         )
       )
     )
@@ -108,9 +94,7 @@ export class PayEffects {
               ? PayActions.toBankPaymentSuccess()
               : PayActions.toBankPaymentFailure(response.message as string)
           ),
-          catchError((error) =>
-            of(PayActions.toBankPaymentFailure(error.error.message))
-          )
+          catchError((error) => of(PayActions.toBankPaymentFailure(error.error.message)))
         )
       )
     )
@@ -119,20 +103,14 @@ export class PayEffects {
   signPaymentFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PayActions.signPaymentFailure),
-      map((action) =>
-        NotifyActions.errorNotification({ message: action.payload })
-      )
+      map((action) => NotifyActions.errorNotification({ message: action.payload }))
     )
   );
 
   showCorrespondentsModal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PayActions.showCorrespondentsModal),
-      tap(() =>
-        this.store.dispatch(
-          CorrespondentsActions.loadIfNotStoredCorrespondents()
-        )
-      ),
+      tap(() => this.store.dispatch(CorrespondentsActions.loadIfNotStoredCorrespondents())),
       map(() => {
         const config: CorrespondentsModalConfig = {
           callback: (result: CorrespondentsModalResult) => {

@@ -1,9 +1,13 @@
+import { acctReducer } from '@modules/accounts/store/reducer';
+import { AcctState, ACCT_KEY } from '@modules/accounts/store/store';
+import { authReducer } from '@modules/auth/store/reducer';
+import { AuthState, AUTH_KEY } from '@modules/auth/store/store';
+import { correspondentsReducer } from '@modules/correspondents/store/reducer';
+import { CorrespondentsState, CORRESPONDENTS_KEY } from '@modules/correspondents/store/store';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducerMap } from '@ngrx/store';
 import { appReducers } from '@store/app/reducer';
 import { APP_KEY, AppState } from '@store/app/store';
-import { authReducer } from '@store/auth/reducer';
-import { AUTH_KEY, AuthState } from '@store/auth/store';
 import { menuReducers } from '@store/menu/reducer';
 import { MENU_KEY, MenuState } from '@store/menu/store';
 import { publicReducer } from '@store/public/reducer';
@@ -13,13 +17,6 @@ import { SETTINGS_KEY, SettingsState } from '@store/settings/store';
 import { userReducer } from '@store/user/reducer';
 import { USER_KEY, UserState } from '@store/user/store';
 
-import { acctReducer } from './acct/reducer';
-import { ACCT_KEY, AcctState } from './acct/store';
-import { correspondentsReducer } from './correspondents/reducer';
-import {
-  CorrespondentsState,
-  CORRESPONDENTS_KEY,
-} from './correspondents/store';
 import { sharedReducer } from './shared/reducer';
 import { SHARED_KEY, SharedState } from './shared/store';
 import { usersReducer } from './users/reducer';

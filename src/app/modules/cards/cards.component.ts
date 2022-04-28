@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardsActions } from '@store/cards/actions';
-import { cardsReducer } from '@store/cards/reducer';
-import { CardsSelectors } from '@store/cards/selectors';
-import { CARDS_KEY } from '@store/cards/store';
-import { of } from 'rxjs';
+import { CardsActions } from './store/actions';
+import { cardsReducer } from './store/reducer';
+import { CardsSelectors } from './store/selectors';
+import { CARDS_KEY } from './store/store';
 
 @Component({
   selector: 'app-cards',

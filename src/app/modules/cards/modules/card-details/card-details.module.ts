@@ -38,8 +38,7 @@ import { EditLimitModalComponent } from './components/edit-limit-modal/edit-limi
 import { LockCardConfirmComponent } from './components/lock-card-confirm/lock-card-confirm.component';
 import { ReissueApplicationModalComponent } from './components/reissue-application-modal/reissue-application-modal.component';
 import { CardStatementModalComponent } from './components/card-statement-modal/card-statement-modal.component';
-
-import { CardDetailsEffects } from '@store/cards/details/effects';
+import { CardDetailsEffects } from './store/effects';
 
 @NgModule({
   declarations: [

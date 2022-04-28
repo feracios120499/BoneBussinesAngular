@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Correspondent } from '@models/correspondents/correspondent.model';
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
-import { CorrespondentsActions } from '@store/correspondents/actions';
 import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
+import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
+import { CorrespondentsActions } from '@modules/correspondents/store/actions';
 
 @Component({
   selector: 'app-correspondents-list',

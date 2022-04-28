@@ -20,8 +20,8 @@ import { CardsListComponent } from './components/cards-list/cards-list.component
 import { CardsActionsComponent } from './components/cards-actions/cards-actions.component';
 import { CardAccountRowComponent } from './components/card-account-row/card-account-row.component';
 
-import { CardsEffect } from '@store/cards/effects';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { CardsEffect } from './store/effects';
 
 @NgModule({
   declarations: [CardsComponent, CardsListComponent, CardsActionsComponent, CardAccountRowComponent, CardRowComponent],

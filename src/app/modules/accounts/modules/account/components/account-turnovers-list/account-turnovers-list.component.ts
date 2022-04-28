@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Turnovers, UiTurnovers } from '@models/turnovers.model';
+import { UiTurnovers } from '@modules/accounts/models/turnovers.model';
 import { Store } from '@ngrx/store';
-import { AcctDetailsSelectors } from '@store/acct/details/selectors';
+import { AcctDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'account-turnovers-list',
   templateUrl: './account-turnovers-list.component.html',
-  styleUrls: ['./account-turnovers-list.component.scss']
+  styleUrls: ['./account-turnovers-list.component.scss'],
 })
 export class AccountTurnoversListComponent implements OnInit {
-
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   turnovers$ = this.store.select(AcctDetailsSelectors.turnovers);
   isLoading$ = this.store.select(AcctDetailsSelectors.isLoadingTurnovers);
   range$ = this.store.select(AcctDetailsSelectors.transactionsRangeString);
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   trackId(index: number, turnover: UiTurnovers): string | undefined {
     return turnover ? turnover.id : undefined;
   }
-
 }

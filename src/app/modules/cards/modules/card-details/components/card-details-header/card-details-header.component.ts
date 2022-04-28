@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardDetailsActions } from '@store/cards/details/actions';
-import { CardDetailsSelectors } from '@store/cards/details/selectors';
+import { CardDetailsActions } from '../../store/actions';
+import { CardDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-card-details-header',

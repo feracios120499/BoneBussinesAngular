@@ -26,23 +26,16 @@ export class WithinCountryComponent implements OnInit, OnDestroy {
 
   private paymentSubscription: Subscription;
   constructor(private store: Store<State>) {
-    const createPayment$: Observable<PaymentForm> = this.store
-      .select(SharedSelectors.createPayment)
-      .pipe(required);
+    const createPayment$: Observable<PaymentForm> = this.store.select(SharedSelectors.createPayment).pipe(required);
     const createPartialPayment$: Observable<Partial<PaymentForm>> = this.store
       .select(SharedSelectors.createPartialPayment)
       .pipe(required);
 
-    this.paymentSubscription = merge(
-      createPayment$,
-      createPartialPayment$
-    ).subscribe((payment) => {
+    this.paymentSubscription = merge(createPayment$, createPartialPayment$).subscribe((payment) => {
       this.paymentForm = payment;
       if (payment) {
         this.store.dispatch(SharedActions.clearCreatePayment());
-        this.supDocuments = payment.attachedSupDocs
-          ? payment.attachedSupDocs
-          : [];
+        this.supDocuments = payment.attachedSupDocs ? payment.attachedSupDocs : [];
       }
     });
   }
@@ -60,9 +53,7 @@ export class WithinCountryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(PayFormsActions.init());
-    this.store.dispatch(
-      AppActions.setPageLoader({ loader: PayFormsSelectors.pageLoader })
-    );
+    this.store.dispatch(AppActions.setPageLoader({ loader: PayFormsSelectors.pageLoader }));
   }
 
   ngOnDestroy(): void {

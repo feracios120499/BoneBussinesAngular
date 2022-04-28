@@ -1,4 +1,3 @@
-import { Correspondent } from '@models/correspondents/correspondent.model';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
 
-export interface CorrespondentsModalResult
-  extends Pick<Correspondent, 'name' | 'accNumber' | 'taxCode'> {}
+export interface CorrespondentsModalResult extends Pick<Correspondent, 'name' | 'accNumber' | 'taxCode'> {}

@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
+import { AcctActions } from '@modules/accounts/store/actions';
+import { AcctSelectors } from '@modules/accounts/store/selectors';
 import { Store } from '@ngrx/store';
-import { AcctActions } from '@store/acct/actions';
-import { AcctSelectors } from '@store/acct/selectors';
-
 
 @Component({
   selector: 'app-accounts-tabs',
   templateUrl: './accounts-tabs.component.html',
-  styleUrls: ['./accounts-tabs.component.scss']
+  styleUrls: ['./accounts-tabs.component.scss'],
 })
 export class AccountsTabsComponent implements OnInit {
-
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
   accountTab = AccountTab;
 
   countActiveAccounts$ = this.store.select(AcctSelectors.countActiveAccounts);
@@ -31,5 +29,4 @@ export class AccountsTabsComponent implements OnInit {
     const tab = tabString as keyof typeof AccountTab;
     this.setTab(AccountTab[tab]);
   }
-
 }

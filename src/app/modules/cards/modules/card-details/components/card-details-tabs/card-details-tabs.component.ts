@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardDetailsActions } from '@store/cards/details/actions';
-import { CardDetailsSelectors } from '@store/cards/details/selectors';
 import { CardDetailsTabs } from '../../models/card-details-tabs.type';
+import { CardDetailsActions } from '../../store/actions';
+import { CardDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-card-details-tabs',
@@ -17,8 +17,6 @@ export class CardDetailsTabsComponent implements OnInit {
   ngOnInit(): void {}
 
   setTab(tab: CardDetailsTabs | string): void {
-    this.store.dispatch(
-      CardDetailsActions.setTab({ tab: tab as unknown as CardDetailsTabs })
-    );
+    this.store.dispatch(CardDetailsActions.setTab({ tab: tab as unknown as CardDetailsTabs }));
   }
 }

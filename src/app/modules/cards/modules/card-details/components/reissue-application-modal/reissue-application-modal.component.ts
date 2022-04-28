@@ -4,7 +4,7 @@ import { CardDetails } from '@models/cards/card-details.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { CardDetailsActions } from '@store/cards/details/actions';
+import { CardDetailsActions } from '../../store/actions';
 
 @Component({
   selector: 'app-reissue-application-modal',

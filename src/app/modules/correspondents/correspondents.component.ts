@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
-import { CorrespondentsActions } from '@store/correspondents/actions';
+import { CorrespondentsSelectors } from './store/selectors';
+import { CorrespondentsActions } from './store/actions';
 
 @Component({
   selector: 'app-correspondents',
