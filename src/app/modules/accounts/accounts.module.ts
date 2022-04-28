@@ -6,13 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { SharedModule } from '@shared';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { IbanModule } from '@directives/iban/iban.module';
 import { MobileMoreModule } from '@directives/mobile-more/mobile-more.module';
 import { MoreAutoDirectionModule } from '@directives/more-auto-direction/more-auto-direction.module';
-import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 import { MoneyModule } from '@pipes/money/money.module';
 import { WebClassModule } from '@directives/web-class/web-class.module';
 import { MobileClassModule } from '@directives/mobile-class/mobile-class.module';
@@ -45,19 +44,17 @@ import { AccountsComponent } from './views/accounts/accounts.component';
     ReactiveComponentModule,
     NgrxFormsModule,
     NgScrollbarModule,
-    VirtualPatchModule,
     NgxSkeletonLoaderModule,
     WebClassModule,
     MobileClassModule,
     MobileMoreModule,
     MoreAutoDirectionModule,
-    VirtualPatchModule,
     B1IconModule,
     IbanModule,
     MoneyModule,
     B1CardLoaderModule,
     AccountsFilterModule,
-    ScrollingModule,
+    SharedModule,
     CheckValueModule,
   ],
 })

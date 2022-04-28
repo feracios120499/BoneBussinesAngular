@@ -16,13 +16,9 @@ import { UserCreateModalComponent } from '../user-create-modal/user-create-modal
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersListComponent implements OnInit {
-  isLoading$: Observable<boolean> = this.store.select(
-    UsersSelectors.isLoadingUsers
-  );
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isInitialLoadingUsers);
   users$: Observable<User[]> = this.store.select(UsersSelectors.userList);
-  filterTerm$: Observable<string> = this.store.select(
-    UsersSelectors.filterTerm
-  );
+  filterTerm$: Observable<string> = this.store.select(UsersSelectors.filterTerm);
 
   constructor(private store: Store, private modalService: NgbModal) {}
 

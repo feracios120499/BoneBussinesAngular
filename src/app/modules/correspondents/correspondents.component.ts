@@ -1,12 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentsActions } from '@store/correspondents/actions';
-import { CorrespondentModalComponent } from '../../components/correspondent-modal/correspondent-modal.component';
-import { Correspondent } from '@models/correspondents/correspondent.model';
 
 @Component({
   selector: 'app-correspondents',
@@ -15,20 +12,11 @@ import { Correspondent } from '@models/correspondents/correspondent.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsComponent implements OnInit {
-  correspondents$: Observable<Correspondent[]> = this.store.select(
-    CorrespondentsSelectors.correspondentList
-  );
-  isLoading$: Observable<boolean> = this.store.select(
-    CorrespondentsSelectors.isLoadingCorrespondents
-  );
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
 
-  constructor(private store: Store, private modalService: NgbModal) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(CorrespondentsActions.loadCorrespondentsRequest());
-  }
-
-  onCorrespondentAdd(): void {
-    this.modalService.open(CorrespondentModalComponent);
   }
 }

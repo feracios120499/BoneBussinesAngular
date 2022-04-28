@@ -15,12 +15,9 @@ import { CorrespondentModalComponent } from '../correspondent-modal/corresponden
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsListComponent {
-  correspondents$: Observable<Correspondent[]> = this.store.select(
-    CorrespondentsSelectors.correspondentList
-  );
-  filterTerm$: Observable<string> = this.store.select(
-    CorrespondentsSelectors.filterTerm
-  );
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isInitialLoadingCorrespondents);
+  correspondents$: Observable<Correspondent[]> = this.store.select(CorrespondentsSelectors.correspondentList);
+  filterTerm$: Observable<string> = this.store.select(CorrespondentsSelectors.filterTerm);
 
   constructor(private store: Store, private modalService: NgbModal) {}
 
@@ -31,5 +28,9 @@ export class CorrespondentsListComponent {
   onCorrespondentEdit(correspondent: Correspondent): void {
     const modalRef = this.modalService.open(CorrespondentModalComponent);
     modalRef.componentInstance.editingCorrespondent = correspondent;
+  }
+
+  onCorrespondentAdd(): void {
+    this.modalService.open(CorrespondentModalComponent);
   }
 }

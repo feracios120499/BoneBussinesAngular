@@ -7,7 +7,6 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1CardNumberModule } from '@ui/b1-card-number/b1-card-number.module';
-import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 import { CardsHeaderModule } from '../cards-header/cards-header.module';
 import { CheckRoleModule } from '@directives/check-role/check-role.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
@@ -46,7 +45,6 @@ import { SharedModule } from 'src/app/@shared/shared.module';
     TranslateModule,
     NgScrollbarModule,
     CheckRoleModule,
-    VirtualPatchModule,
     B1IconModule,
     IbanModule,
     B1CardLoaderModule,

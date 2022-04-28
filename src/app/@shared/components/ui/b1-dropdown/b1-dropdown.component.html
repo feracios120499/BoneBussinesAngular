@@ -1,6 +1,6 @@
 <div class="dropdown">
   <div (click.stop)="dropdown.open()">
-    <ng-content select="[openButton]"></ng-content>
+    <ng-content select="[slot=toggle]"></ng-content>
   </div>
 
   <ul

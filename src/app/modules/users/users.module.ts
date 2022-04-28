@@ -17,8 +17,11 @@ import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-conten
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { InitialsModule } from '@pipes/initials/initials.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 
-import { UsersComponent } from './views/users/users.component';
+import { UsersComponent } from './users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
 import { UsersActionsComponent } from './components/users-actions/users-actions.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
@@ -27,10 +30,6 @@ import { UserEditModalComponent } from './components/user-edit-modal/user-edit-m
 import { UserCreateModalComponent } from './components/user-create-modal/user-create-modal.component';
 import { UserRolesFormComponent } from './components/user-roles-form/user-roles-form.component';
 import { UserNameFormComponent } from './components/user-name-form/user-name-form.component';
-import { UserSkeletonComponent } from './components/user-skeleton/user-skeleton.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
-import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,6 @@ import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.modu
     UserCreateModalComponent,
     UserRolesFormComponent,
     UserNameFormComponent,
-    UserSkeletonComponent,
   ],
   imports: [
     CommonModule,
@@ -62,10 +60,10 @@ import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.modu
     B1ContentWrapperModule,
     B1ButtonModule,
     InitialsModule,
-    NgxSkeletonLoaderModule,
     UsersFilterModule,
     CheckValueModule,
     NumberToArrayModule,
+    B1SkeletonModule,
     RouterModule.forChild([
       {
         path: '',

@@ -1,24 +1,38 @@
-<ng-container *ngrxLet="correspondents$ as correspondents">
-  <ng-container
-    *ngIf="
-      correspondents
-        | correspondentsFilter
-          : (filterTerm$ | ngrxPush) as filteredCorrespondents
-    ">
-    <ng-container *ngIf="filteredCorrespondents.length; else notFound">
+<ng-container *ngrxLet="isLoading$ as isLoading">
+  <ng-container *ngrxLet="correspondents$ as correspondents">
+    <ng-container *ngIf="!isLoading && correspondents.length">
+      <ng-container *ngIf="correspondents | correspondentsFilter: (filterTerm$ | ngrxPush) as filteredCorrespondents">
+        <ng-container *ngIf="filteredCorrespondents.length; else notFound">
+          <div class="correspondents-list">
+            <app-correspondent-item
+              *ngFor="let correspondent of filteredCorrespondents"
+              [correspondent]="correspondent"
+              (click)="onCorrespondentEdit(correspondent)">
+            </app-correspondent-item>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
       <div class="correspondents-list">
-        <app-correspondent-item
-          *ngFor="let correspondent of filteredCorrespondents"
-          [correspondent]="correspondent"
-          (click)="onCorrespondentEdit(correspondent)">
-        </app-correspondent-item>
+        <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton>
       </div>
     </ng-container>
+
+    <!-- TODO: CHANGE SVG-NAME -->
+    <b1-empty
+      *ngIf="!correspondents.length && !isLoading"
+      svgName="empty-users"
+      header="components.correspondents.doNotExist"
+      description="components.correspondents.displayIfAdd">
+      <b1-button label="components.pay.correspondents.addCorrespondent" icon="plus" (click)="onCorrespondentAdd()">
+      </b1-button>
+    </b1-empty>
   </ng-container>
 </ng-container>
 
 <ng-template #notFound>
   <!-- TODO: CHANGE SVG-NAME -->
-  <b1-empty svgName="empty-users" header="components.correspondents.notFound">
-  </b1-empty>
+  <b1-empty svgName="empty-users" header="components.correspondents.notFound"></b1-empty>
 </ng-template>

@@ -5,12 +5,7 @@
     </div>
 
     <div class="b1-modal-close">
-      <i
-        b1-icon
-        icon="cancel"
-        (click)="modal.close()"
-        (keyup.enter)="modal.close()"
-        tabindex="0"></i>
+      <i b1-icon icon="cancel" (click)="modal.close()" (keyup.enter)="modal.close()" tabindex="0"></i>
     </div>
   </div>
 
@@ -46,61 +41,64 @@
       </span>
     </div>
 
-    <div
-      class="b1-correspondents-modal__list"
-      *ngrxLet="correspondents$ as correspondents">
-      <ng-container *ngIf="correspondents.length">
-        <ng-container
-          *ngIf="
-            correspondents
-              | correspondentsFilter: filterTerm as filteredCorrespondents
-          ">
-          <ng-scrollbar
-            *ngIf="filteredCorrespondents.length; else notFound"
-            class="virtual-scroll"
-            [disabled]="isMobile$ | ngrxPush">
-            <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
-              <div
-                *cdkVirtualFor="let correspondent of filteredCorrespondents"
-                class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
-                (click)="onCorrespondentSelect(correspondent)">
-                <span
-                  class="b1-correspondents-modal__name b1-ellipsis"
-                  [ngbTooltip]="correspondent.name | translate"
-                  placement="right"
-                  tooltipClass="b1-base">
-                  {{ correspondent.name }}
-                </span>
+    <ng-container *ngrxLet="isInitialLoading$ as isInitialLoading">
+      <div class="b1-correspondents-modal__list" *ngrxLet="correspondents$ as correspondents">
+        <ng-container *ngIf="!isInitialLoading && correspondents.length">
+          <ng-container *ngIf="correspondents | correspondentsFilter: filterTerm as filteredCorrespondents">
+            <ng-scrollbar
+              *ngIf="filteredCorrespondents.length; else notFound"
+              class="virtual-scroll"
+              [disabled]="isMobile$ | ngrxPush">
+              <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+                <div
+                  *cdkVirtualFor="let correspondent of filteredCorrespondents"
+                  class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
+                  (click)="onCorrespondentSelect(correspondent)">
+                  <span
+                    class="b1-correspondents-modal__name b1-ellipsis"
+                    [ngbTooltip]="correspondent.name | translate"
+                    placement="right"
+                    tooltipClass="b1-base">
+                    {{ correspondent.name }}
+                  </span>
 
-                <span
-                  class="b1-correspondents-modal__account b1-ellipsis"
-                  [ngbTooltip]="correspondent.bankName | translate"
-                  placement="left"
-                  tooltipClass="b1-base"
-                  [iban]="correspondent.accNumber">
-                </span>
+                  <span
+                    class="b1-correspondents-modal__account b1-ellipsis"
+                    [ngbTooltip]="correspondent.bankName | translate"
+                    placement="left"
+                    tooltipClass="b1-base"
+                    [iban]="correspondent.accNumber">
+                  </span>
 
-                <span class="b1-correspondents-modal__tax-code">
-                  {{ correspondent.taxCode }}
-                </span>
-              </div>
-            </cdk-virtual-scroll-viewport>
-          </ng-scrollbar>
+                  <span class="b1-correspondents-modal__tax-code">
+                    {{ correspondent.taxCode }}
+                  </span>
+                </div>
+              </cdk-virtual-scroll-viewport>
+            </ng-scrollbar>
+          </ng-container>
         </ng-container>
-      </ng-container>
 
-      <!-- TODO: CHANGE SVG-NAME -->
-      <b1-empty
-        *ngIf="!correspondents.length && !isLoading"
-        svgName="empty-users"
-        header="components.correspondents.doNotExist">
-      </b1-empty>
-    </div>
+        <ng-container *ngIf="isInitialLoading">
+          <div class="b1-correspondents-modal__list">
+            <b1-skeleton
+              *ngFor="let number of 4 | numberToArray"
+              class="b1-correspondents-modal__item b1-correspondents-modal__item_skeleton"></b1-skeleton>
+          </div>
+        </ng-container>
+
+        <!-- TODO: CHANGE SVG-NAME -->
+        <b1-empty
+          *ngIf="!correspondents.length && !isInitialLoading"
+          svgName="empty-users"
+          header="components.correspondents.doNotExist">
+        </b1-empty>
+      </div>
+    </ng-container>
   </div>
-</div>
 
-<ng-template #notFound>
-  <!-- TODO: CHANGE SVG-NAME -->
-  <b1-empty svgName="empty-users" header="components.correspondents.notFound">
-  </b1-empty>
-</ng-template>
+  <ng-template #notFound>
+    <!-- TODO: CHANGE SVG-NAME -->
+    <b1-empty svgName="empty-users" header="components.correspondents.notFound"> </b1-empty>
+  </ng-template>
+</div>
