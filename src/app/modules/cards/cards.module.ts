@@ -21,15 +21,10 @@ import { CardsActionsComponent } from './components/cards-actions/cards-actions.
 import { CardAccountRowComponent } from './components/card-account-row/card-account-row.component';
 
 import { CardsEffect } from '@store/cards/effects';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
 
 @NgModule({
-  declarations: [
-    CardsComponent,
-    CardsListComponent,
-    CardsActionsComponent,
-    CardAccountRowComponent,
-    CardRowComponent,
-  ],
+  declarations: [CardsComponent, CardsListComponent, CardsActionsComponent, CardAccountRowComponent, CardRowComponent],
   imports: [
     CommonModule,
     ReactiveComponentModule,
@@ -44,6 +39,7 @@ import { CardsEffect } from '@store/cards/effects';
     B1CardLoaderModule,
     CheckValueModule,
     EffectsModule.forFeature([CardsEffect]),
+    B1EmptyModule,
   ],
 })
 export class CardsModule {}

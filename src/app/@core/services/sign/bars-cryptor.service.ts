@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SignBuffer } from '@models/sign-buffer.model';
 import { SignResponse } from '@models/sign-response.model';
@@ -13,10 +13,7 @@ import { catchError, map, mergeMap, toArray } from 'rxjs/operators';
 import { CryptorKey, CryptorKeysResponse } from './models/cryptor-key.model';
 import { CryptorResponse } from './models/cryptor-response.model';
 import { CryptorSign } from './models/cryptor-sign.model';
-import {
-  CryptorToken,
-  CryptorTokensResponse,
-} from './models/cryptor-token.model';
+import { CryptorToken, CryptorTokensResponse } from './models/cryptor-token.model';
 import { BaseSignService } from './sign-interface.service';
 
 export const CRYPTOR_URL = 'https://local.barscryptor.net:31139';
@@ -32,11 +29,7 @@ export class BarsCryptorService implements BaseSignService {
     moduleName: string;
     tokenId: string;
   };
-  constructor(
-    private http: HttpClient,
-    private store: Store,
-    private translateService: TranslateService
-  ) {
+  constructor(private http: HttpClient, private store: Store, private translateService: TranslateService) {
     this.store.select(AuthSelectors.currentCryptorKey).subscribe((key) => {
       this.key = key;
       this.data = {
@@ -47,14 +40,12 @@ export class BarsCryptorService implements BaseSignService {
       };
     });
   }
-
+  test = false;
   getTokens(): Observable<CryptorToken[]> {
-    return this.http
-      .post<CryptorTokensResponse>(`${CRYPTOR_URL}/tokens`, {} as never)
-      .pipe(
-        map((response) => this.mapResponse(response, response.tokens)),
-        map((tokens) => tokens.sort((a, b) => (a.tokenId === 'vega2' ? -1 : 1)))
-      );
+    return this.http.post<CryptorTokensResponse>(`${CRYPTOR_URL}/tokens`, {} as never).pipe(
+      map((response) => this.mapResponse(response, response.tokens)),
+      map((tokens) => tokens.sort((a, b) => (a.tokenId === 'vega2' ? -1 : 1)))
+    );
   }
 
   init(token: CryptorToken): Observable<CryptorResponse> {
@@ -65,10 +56,7 @@ export class BarsCryptorService implements BaseSignService {
 
   getKeys(token: CryptorToken): Observable<CryptorKey[]> {
     return this.http
-      .post<CryptorKeysResponse>(
-        `${CRYPTOR_URL}/keys`,
-        this.toPascalCase(token)
-      )
+      .post<CryptorKeysResponse>(`${CRYPTOR_URL}/keys`, this.toPascalCase(token))
       .pipe(map((response) => this.mapResponse(response, response.keys)));
   }
 
@@ -107,11 +95,7 @@ export class BarsCryptorService implements BaseSignService {
     );
   }
 
-  signBufferByKey(
-    buffer: string,
-    key: CryptorKey,
-    token: CryptorToken
-  ): Observable<{ buffer: string; sign: string }> {
+  signBufferByKey(buffer: string, key: CryptorKey, token: CryptorToken): Observable<{ buffer: string; sign: string }> {
     return this.sign({
       idOper: key.id,
       keyId: key.id,
@@ -150,9 +134,7 @@ export class BarsCryptorService implements BaseSignService {
 
   private checkKey(): void {
     if (!this.key) {
-      throw new Error(
-        this.translateService.instant('components.supDocuments.errors.ecpLogin')
-      );
+      throw new Error(this.translateService.instant('components.supDocuments.errors.ecpLogin'));
     }
   }
 
@@ -171,9 +153,7 @@ export class BarsCryptorService implements BaseSignService {
       return Object.keys(obj).reduce(
         (result, key) => ({
           ...result,
-          [startCase(camelCase(key)).replace(/ /g, '')]: this.toPascalCase(
-            obj[key]
-          ),
+          [startCase(camelCase(key)).replace(/ /g, '')]: this.toPascalCase(obj[key]),
         }),
         {}
       );

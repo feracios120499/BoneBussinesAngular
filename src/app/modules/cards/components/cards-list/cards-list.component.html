@@ -1,5 +1,10 @@
-<div class="b1-page-data" *ngrxLet="cardAccounts$ as cardAccounts">
-  <app-card-account-row
-    *ngFor="let cardAccount of cardAccounts; trackBy: trackId"
-    [cardAccount]="cardAccount"></app-card-account-row>
-</div>
+<ng-container *ngrxLet="cardAccounts$ as cardAccounts">
+  <div class="b1-page-data" *ngIf="cardAccounts.length != 0">
+    <app-card-account-row
+      *ngFor="let cardAccount of cardAccounts; trackBy: trackId"
+      [cardAccount]="cardAccount"></app-card-account-row>
+  </div>
+  <div class="b1-page-data" *ngIf="cardAccounts.length == 0 && !(isLoading$ | ngrxPush)">
+    <b1-empty svgName="empty-cards" header="components.corpcards.notFound"> </b1-empty>
+  </div>
+</ng-container>

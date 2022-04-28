@@ -1,4 +1,7 @@
 :host {
   display: block;
   position: relative;
+  @media (max-width: 812px) {
+    margin-bottom: 16px;
+  }
 }

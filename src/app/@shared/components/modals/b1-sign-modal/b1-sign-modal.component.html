@@ -1,1 +1,52 @@
-<p>b1-sign-modal works!</p>
+<div class="sign">
+  <div class="sign-header b1-bg-primary b1-large">
+    {{ config.title | translate }}
+    <div class="sign-close">
+      <i b1-icon icon="cancel" (click)="modal.close()"></i>
+    </div>
+  </div>
+  <div class="sign-content">
+    <div class="sign-content_header">
+      <div>
+        <span>
+          {{ config.subtitle | translate }}
+        </span>
+        <span class="b1-color-primary">
+          {{ config.number }}
+        </span>
+      </div>
+      <div class="sign-content_item b1-medium b1-light">
+        <span class="b1-color-light-500">
+          {{ 'components.pay.from' | translate }}
+        </span>
+        <span class="b1-color-primary">
+          {{ config.createDate | date: 'dd.MM.yyyy' }}
+        </span>
+      </div>
+    </div>
+    <div class="sign-item" *ngFor="let sign of config.signes">
+      <div class="b1-badge b1-bg-primary">
+        {{ sign.visaId }}
+      </div>
+      <div class="sign-item_body">
+        <div class="b1-medium b1-light" *ngIf="sign.user">
+          <div>{{ sign.user.displayName }}</div>
+          <div class="b1-mt-2 b1-color-light-500" *ngIf="sign.date">
+            {{ sign.date | date: 'dd.MM.yyyy HH:mm:ss' }}
+          </div>
+        </div>
+        <div class="b1-medium b1-light" *ngIf="sign.potentialSigners">
+          <div class="b1-mb-2" *ngFor="let user of sign.potentialSigners">{{ user.displayName }}</div>
+        </div>
+        <div class="sign-item_status b1-mt-4">
+          <div class="b1-badge" [class.b1-bg-success]="sign.user" [class.b1-bg-warning]="!sign.user">
+            {{ (sign.user ? 'components.pay.signed' : 'components.pay.waiting') | translate }}
+          </div>
+          <div class="b1-badge b1-bg-info" *ngIf="sign.signProviderType">
+            {{ sign.signProviderType }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

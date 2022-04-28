@@ -1,0 +1,42 @@
+@import 'variables';
+.sign {
+  color: var(--color-dark);
+  &-header {
+    position: relative;
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-close {
+    cursor: pointer;
+  }
+  &-content {
+    padding: 32px;
+    &_item {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
+    margin-top: 32px;
+    padding: 16px 8px;
+    &_body {
+      margin-left: 32px;
+    }
+  }
+}
+:host,
+.sign,
+.sign-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

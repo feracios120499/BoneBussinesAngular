@@ -51,5 +51,45 @@ export const cardReissueReducer = createReducer(
     ...state,
     selectAll: !state.selectAll,
     selectedApplications: state.selectAll ? [] : state.applications.map((p) => p.id),
+  })),
+  on(CardReissueActions.showApplicationHistoryRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'history'),
+  })),
+  on(CardReissueActions.showApplicationHistoryFailure, CardReissueActions.showApplicationHistorySuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'history'),
+  })),
+  on(CardReissueActions.showApplicationSignRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'signes'),
+  })),
+  on(CardReissueActions.showApplicationSignFailure, CardReissueActions.showApplicationSignSuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'signes'),
+  })),
+  on(CardReissueActions.removeApplicationsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'delete'),
+  })),
+  on(CardReissueActions.removeApplicationsFailure, CardReissueActions.removeApplicationsSuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'delete'),
+  })),
+  on(CardReissueActions.sendToBankApplicationsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'bankSend'),
+  })),
+  on(CardReissueActions.sendToBankApplicationsFailure, CardReissueActions.sendToBankApplicationsSuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'bankSend'),
+  })),
+  on(CardReissueActions.signApplicationsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'sign'),
+  })),
+  on(CardReissueActions.signApplicationsFailure, CardReissueActions.signApplicationsSuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'sign'),
   }))
 );
