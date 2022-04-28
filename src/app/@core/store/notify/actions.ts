@@ -1,3 +1,4 @@
+import { ArrayNotification } from '@models/array-notification.model';
 import { ServerError } from '@models/errors/server-error.model';
 import { createAction, props } from '@ngrx/store';
 
@@ -21,5 +22,10 @@ export namespace NotifyActions {
   export const warningNotification = createAction(
     '[NOTIFY] warning notification',
     props<{ message: string; title?: string }>()
+  );
+
+  export const arrayNotification = createAction(
+    '[NOTIFY] array notification',
+    props<{ results: ArrayNotification[] }>()
   );
 }
