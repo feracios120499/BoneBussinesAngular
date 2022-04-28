@@ -1,11 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentsActions } from '@store/correspondents/actions';
-import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
 import { Correspondent } from '@models/correspondents/correspondent.model';
 
 @Component({
@@ -15,20 +13,14 @@ import { Correspondent } from '@models/correspondents/correspondent.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsActionsComponent {
-  correspondents$: Observable<Correspondent[]> = this.store.select(
-    CorrespondentsSelectors.correspondentList
-  );
-  isLoading$: Observable<boolean> = this.store.select(
-    CorrespondentsSelectors.isLoadingCorrespondents
-  );
-  filterTerm$: Observable<string> = this.store.select(
-    CorrespondentsSelectors.filterTerm
-  );
+  correspondents$: Observable<Correspondent[]> = this.store.select(CorrespondentsSelectors.correspondentList);
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
+  filterTerm$: Observable<string> = this.store.select(CorrespondentsSelectors.filterTerm);
 
-  constructor(private store: Store, private modalService: NgbModal) {}
+  constructor(private store: Store) {}
 
   onCorrespondentAdd(): void {
-    this.modalService.open(CorrespondentModalComponent);
+    this.store.dispatch(CorrespondentsActions.showCorrespondentModal());
   }
 
   onCorrespondentsFilter(term: string): void {

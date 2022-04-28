@@ -1,5 +1,6 @@
 import { CorrespondentsLoading } from './models/correspondents-loading.type';
 import { Correspondent } from '@models/correspondents/correspondent.model';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 export const CORRESPONDENTS_KEY = 'correspondents';
 

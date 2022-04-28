@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import {
-  catchError,
-  filter,
-  map,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -18,6 +12,12 @@ import { CorrespondentsService } from '@services/correspondents/correspondents.s
 import { ServerError } from '@models/errors/server-error.model';
 import { Correspondent } from '@models/correspondents/correspondent.model';
 import { CorrespondentsSelectors } from './selectors';
+import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.modal';
+import { CorrespondentModalResult } from '@modules/correspondents/models/correspondent-modal-result.model';
+import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
+import { CorrespondentModalComponent } from '@modules/correspondents/components/correspondent-modal/correspondent-modal.component';
+import { ModalService } from '@services/modal.service';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class CorrespondentsEffects {
@@ -25,7 +25,8 @@ export class CorrespondentsEffects {
     private actions$: Actions,
     private store: Store,
     private correspondentsService: CorrespondentsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalService: ModalService
   ) {}
 
   loadCorrespondents$ = createEffect(() =>
@@ -34,17 +35,13 @@ export class CorrespondentsEffects {
       switchMap(() => clientIdWithoudData(this.store)),
       switchMap((clientId: string) =>
         this.correspondentsService.getCorrespondents(clientId).pipe(
-          map((correspondents: Correspondent[]) =>
-            CorrespondentsActions.loadCorrespondentsSuccess(correspondents)
-          ),
+          map((correspondents: Correspondent[]) => CorrespondentsActions.loadCorrespondentsSuccess(correspondents)),
           catchError((error: ServerError) =>
             of(
               CorrespondentsActions.loadCorrespondentsFailure(error.message),
               NotifyActions.serverErrorNotification({
                 error,
-                message: this.translateService.instant(
-                  'errors.loadCorrespondents'
-                ),
+                message: this.translateService.instant('errors.loadCorrespondents'),
               })
             )
           )
@@ -56,9 +53,7 @@ export class CorrespondentsEffects {
   loadIfNotStoredCorrespondents$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CorrespondentsActions.loadIfNotStoredCorrespondents),
-      withLatestFrom(
-        this.store.select(CorrespondentsSelectors.correspondentList)
-      ),
+      withLatestFrom(this.store.select(CorrespondentsSelectors.correspondentList)),
       filter(([_, correspondents]) => !correspondents.length),
       map(() => CorrespondentsActions.loadCorrespondentsRequest())
     )
@@ -70,17 +65,13 @@ export class CorrespondentsEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data }) =>
         this.correspondentsService.createCorrespondent(clientId, data).pipe(
-          map((correspondent: Correspondent) =>
-            CorrespondentsActions.createCorrespondentSuccess(correspondent)
-          ),
+          map((correspondent: Correspondent) => CorrespondentsActions.createCorrespondentSuccess(correspondent)),
           catchError((error: ServerError) =>
             of(
               CorrespondentsActions.createCorrespondentFailure(error.message),
               NotifyActions.serverErrorNotification({
                 error,
-                message: this.translateService.instant(
-                  'errors.createCorrespondent'
-                ),
+                message: this.translateService.instant('errors.createCorrespondent'),
               })
             )
           )
@@ -95,9 +86,7 @@ export class CorrespondentsEffects {
       switchMap(() => [
         CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
-          message: this.translateService.instant(
-            'components.pay.correspondents.newCorrespondentAdded'
-          ),
+          message: this.translateService.instant('components.pay.correspondents.newCorrespondentAdded'),
         }),
       ])
     )
@@ -109,17 +98,13 @@ export class CorrespondentsEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data }) =>
         this.correspondentsService.updateCorrespondent(clientId, data).pipe(
-          map((correspondent: Correspondent) =>
-            CorrespondentsActions.updateCorrespondentSuccess(correspondent)
-          ),
+          map((correspondent: Correspondent) => CorrespondentsActions.updateCorrespondentSuccess(correspondent)),
           catchError((error) =>
             of(
               CorrespondentsActions.updateCorrespondentFailure(error.message),
               NotifyActions.serverErrorNotification({
                 error,
-                message: this.translateService.instant(
-                  'errors.updateCorrespondent'
-                ),
+                message: this.translateService.instant('errors.updateCorrespondent'),
               })
             )
           )
@@ -134,9 +119,7 @@ export class CorrespondentsEffects {
       switchMap(() => [
         CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
-          message: this.translateService.instant(
-            'components.admin.infoUpdatedSuccs'
-          ),
+          message: this.translateService.instant('components.admin.infoUpdatedSuccs'),
         }),
       ])
     )
@@ -147,22 +130,18 @@ export class CorrespondentsEffects {
       ofType(CorrespondentsActions.deleteCorrespondentRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap(({ clientId, data: correspondentId }) =>
-        this.correspondentsService
-          .deleteCorrespondent(clientId, correspondentId)
-          .pipe(
-            map(() => CorrespondentsActions.deleteCorrespondentSuccess()),
-            catchError((error: ServerError) =>
-              of(
-                CorrespondentsActions.deleteCorrespondentFailure(error.message),
-                NotifyActions.serverErrorNotification({
-                  error,
-                  message: this.translateService.instant(
-                    'errors.deleteCorrespondent'
-                  ),
-                })
-              )
+        this.correspondentsService.deleteCorrespondent(clientId, correspondentId).pipe(
+          map(() => CorrespondentsActions.deleteCorrespondentSuccess()),
+          catchError((error: ServerError) =>
+            of(
+              CorrespondentsActions.deleteCorrespondentFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.deleteCorrespondent'),
+              })
             )
           )
+        )
       )
     )
   );
@@ -173,11 +152,56 @@ export class CorrespondentsEffects {
       switchMap(() => [
         CorrespondentsActions.loadCorrespondentsRequest(),
         NotifyActions.successNotification({
-          message: this.translateService.instant(
-            'components.pay.correspondents.correspondentDeleted'
-          ),
+          message: this.translateService.instant('components.pay.correspondents.correspondentDeleted'),
         }),
       ])
     )
   );
+
+  showCorrespondentModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CorrespondentsActions.showCorrespondentModal),
+      map(({ editingCorrespondent }) => {
+        const config: CorrespondentModalConfig = {
+          editingCorrespondent,
+          callback: (result: CorrespondentModalResult) => {
+            if ((result as CorrespondentUpdateModel).id) {
+              this.store.dispatch(CorrespondentsActions.updateCorrespondentRequest(result as CorrespondentUpdateModel));
+            } else {
+              this.store.dispatch(CorrespondentsActions.createCorrespondentRequest(result));
+            }
+          },
+        };
+        return CorrespondentsActions.setCorrespondentModal({ config });
+      })
+    )
+  );
+
+  setCorrespondentModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CorrespondentsActions.setCorrespondentModal),
+        map(({ config }) => {
+          const modalRef = this.modalService.open(CorrespondentModalComponent);
+          modalRef.componentInstance.config = config;
+          return modalRef;
+        }),
+        mergeMap((modalRef: NgbModalRef) =>
+          this.actions$.pipe(
+            ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
+            tap(() => modalRef.close())
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
+  // closeCorrespondentModal$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
+  //     withLatestFrom(this.store.select(CorrespondentsSelectors.activeModalRef)),
+  //     tap(([_, modalRef]) => modalRef!.close()),
+  //     map(() => CorrespondentsActions.clearModalRef())
+  //   )
+  // );
 }

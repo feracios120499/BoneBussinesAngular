@@ -10,14 +10,10 @@ export const correspondentsReducer = createReducer(
     ...state,
     loadings: [...pushIfNotExist(state.loadings, 'list')],
   })),
-  on(
-    CorrespondentsActions.loadCorrespondentsSuccess,
-    CorrespondentsActions.loadCorrespondentsFailure,
-    (state) => ({
-      ...state,
-      loadings: [...removeItem(state.loadings, 'list')],
-    })
-  ),
+  on(CorrespondentsActions.loadCorrespondentsSuccess, CorrespondentsActions.loadCorrespondentsFailure, (state) => ({
+    ...state,
+    loadings: [...removeItem(state.loadings, 'list')],
+  })),
   on(CorrespondentsActions.loadCorrespondentsSuccess, (state, action) => ({
     ...state,
     correspondents: action.payload,
@@ -30,14 +26,14 @@ export const correspondentsReducer = createReducer(
     ...state,
     filterTerm: '',
   })),
-  on(
-    CorrespondentsActions.createCorrespondentRequest,
-    CorrespondentsActions.updateCorrespondentRequest,
-    (state) => ({
-      ...state,
-      loadings: [...pushIfNotExist(state.loadings, 'create')],
-    })
-  ),
+  on(CorrespondentsActions.clearModalRef, (state) => ({
+    ...state,
+    modalRef: null,
+  })),
+  on(CorrespondentsActions.createCorrespondentRequest, CorrespondentsActions.updateCorrespondentRequest, (state) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'create')],
+  })),
   on(
     CorrespondentsActions.createCorrespondentSuccess,
     CorrespondentsActions.createCorrespondentFailure,

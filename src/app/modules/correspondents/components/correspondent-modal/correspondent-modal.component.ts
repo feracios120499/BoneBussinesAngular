@@ -1,20 +1,15 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
+import { BaseB1ModalComponent } from '@modals/base-b1-modal.component';
 import { CorrespondentFormComponent } from '../correspondent-form/correspondent-form.component';
 import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
-import { Correspondent } from '@models/correspondents/correspondent.model';
-import { CorrespondentsActions } from '@store/correspondents/actions';
 import { CorrespondentsSelectors } from '@store/correspondents/selectors';
-import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
+import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.modal';
+import { CorrespondentModalResult } from '@modules/correspondents/models/correspondent-modal-result.model';
 
 @Component({
   selector: 'app-correspondent-modal',
@@ -22,21 +17,24 @@ import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-u
   styleUrls: ['./correspondent-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CorrespondentModalComponent implements OnInit {
-  @Input() editingCorrespondent?: Correspondent;
-  isLoading$: Observable<boolean> = this.store.select(
-    CorrespondentsSelectors.isLoadingCorrespondentCreate
-  );
+export class CorrespondentModalComponent extends withRequiredPropsCheck(BaseB1ModalComponent) implements OnInit {
+  @Input() config!: CorrespondentModalConfig;
+
+  result!: CorrespondentModalResult;
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondentCreate);
   correspondentForm!: CorrespondentForm;
 
   @ViewChild('formRef') formRef!: CorrespondentFormComponent;
 
-  constructor(private store: Store, private activeModal: NgbActiveModal) {}
+  constructor(modal: NgbActiveModal, private store: Store) {
+    super(modal);
+  }
 
   ngOnInit(): void {
-    if (this.editingCorrespondent) {
-      const { accNumber, bankCode, bankName, name, taxCode, accCurrencyCode } =
-        this.editingCorrespondent;
+    this.checkRequiredProps(['config']);
+
+    if (this.config.editingCorrespondent) {
+      const { accNumber, bankCode, bankName, name, taxCode, accCurrencyCode } = this.config.editingCorrespondent;
       this.correspondentForm = {
         accNumber,
         bankCode,
@@ -52,30 +50,108 @@ export class CorrespondentModalComponent implements OnInit {
     if (!this.formRef.submitForm()) {
       return;
     }
-    if (this.editingCorrespondent) {
-      this.updateCorrespondent();
+    if (this.config.editingCorrespondent) {
+      const { id, creatingDate, userId } = this.config.editingCorrespondent!;
+      this.result = {
+        ...this.correspondentForm,
+        id,
+        creatingDate,
+        userId,
+      };
     } else {
-      this.createCorrespondent();
+      this.result = this.correspondentForm;
     }
-    this.activeModal.close();
+    this.ok();
+    // this.activeModal.close();
   }
 
-  updateCorrespondent(): void {
-    const { id, creatingDate, userId } = this.editingCorrespondent!;
-    const model: CorrespondentUpdateModel = {
-      ...this.correspondentForm,
-      id,
-      creatingDate,
-      userId,
-    };
-    this.store.dispatch(
-      CorrespondentsActions.updateCorrespondentRequest(model)
-    );
-  }
+  // updateCorrespondent(): CorrespondentUpdateModel {
+  // this.store.dispatch(CorrespondentsActions.updateCorrespondentRequest(model));
+  // }
 
-  createCorrespondent(): void {
-    this.store.dispatch(
-      CorrespondentsActions.createCorrespondentRequest(this.correspondentForm)
-    );
-  }
+  // createCorrespondent(): void {
+  // this.store.dispatch(CorrespondentsActions.createCorrespondentRequest(this.correspondentForm));
+  // }
 }
+
+// import {
+//   Component,
+//   ChangeDetectionStrategy,
+//   ViewChild,
+//   Input,
+//   OnInit,
+// } from '@angular/core';
+// import { Observable } from 'rxjs';
+// import { Store } from '@ngrx/store';
+// import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+// import { CorrespondentFormComponent } from '../correspondent-form/correspondent-form.component';
+// import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
+// import { Correspondent } from '@models/correspondents/correspondent.model';
+// import { CorrespondentsActions } from '@store/correspondents/actions';
+// import { CorrespondentsSelectors } from '@store/correspondents/selectors';
+// import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
+
+// @Component({
+//   selector: 'app-correspondent-modal',
+//   templateUrl: './correspondent-modal.component.html',
+//   styleUrls: ['./correspondent-modal.component.scss'],
+//   changeDetection: ChangeDetectionStrategy.OnPush,
+// })
+// export class CorrespondentModalComponent implements OnInit {
+//   @Input() editingCorrespondent?: Correspondent;
+//   isLoading$: Observable<boolean> = this.store.select(
+//     CorrespondentsSelectors.isLoadingCorrespondentCreate
+//   );
+//   correspondentForm!: CorrespondentForm;
+
+//   @ViewChild('formRef') formRef!: CorrespondentFormComponent;
+
+//   constructor(private store: Store, private activeModal: NgbActiveModal) {}
+
+//   ngOnInit(): void {
+//     if (this.editingCorrespondent) {
+//       const { accNumber, bankCode, bankName, name, taxCode, accCurrencyCode } =
+//         this.editingCorrespondent;
+//       this.correspondentForm = {
+//         accNumber,
+//         bankCode,
+//         bankName,
+//         name,
+//         taxCode,
+//         accCurrencyCode,
+//       };
+//     }
+//   }
+
+//   onSave(): void {
+//     if (!this.formRef.submitForm()) {
+//       return;
+//     }
+//     if (this.editingCorrespondent) {
+//       this.updateCorrespondent();
+//     } else {
+//       this.createCorrespondent();
+//     }
+//     this.activeModal.close();
+//   }
+
+//   updateCorrespondent(): void {
+//     const { id, creatingDate, userId } = this.editingCorrespondent!;
+//     const model: CorrespondentUpdateModel = {
+//       ...this.correspondentForm,
+//       id,
+//       creatingDate,
+//       userId,
+//     };
+//     this.store.dispatch(
+//       CorrespondentsActions.updateCorrespondentRequest(model)
+//     );
+//   }
+
+//   createCorrespondent(): void {
+//     this.store.dispatch(
+//       CorrespondentsActions.createCorrespondentRequest(this.correspondentForm)
+//     );
+//   }
+// }

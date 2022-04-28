@@ -14,6 +14,6 @@ export abstract class BaseB1ModalComponent<T> {
 
   ok(): void {
     this.config.callback(this.result);
-    this.modal.close();
+    // this.modal.close();
   }
 }
