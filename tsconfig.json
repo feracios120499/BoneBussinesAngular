@@ -43,7 +43,8 @@
       "@ui/*": ["./src/app/@shared/components/ui/*"],
       "@directives/*": ["./src/app/@shared/directives/*"],
       "@pipes/*": ["./src/app/@shared/pipes/*"],
-      "@mixins/*": ["./src/app/@shared/mixins/*"]
+      "@mixins/*": ["./src/app/@shared/mixins/*"],
+      "@shared": ["./src/app/@shared/shared.module"]
     }
   },
   "angularCompilerOptions": {

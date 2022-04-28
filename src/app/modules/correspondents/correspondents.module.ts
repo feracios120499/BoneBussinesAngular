@@ -17,8 +17,10 @@ import { CorrespondentsFilterModule } from '@pipes/correspondents-filter/corresp
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
-import { CorrespondentsComponent } from './views/correspondents/correspondents.component';
+import { CorrespondentsComponent } from './correspondents.component';
 import { CorrespondentsHeaderComponent } from './components/correspondents-header/correspondents-header.component';
 import { CorrespondentsActionsComponent } from './components/correspondents-actions/correspondents-actions.component';
 import { CorrespondentsListComponent } from './components/correspondents-list/correspondents-list.component';
@@ -55,6 +57,8 @@ import { CorrespondentModalComponent } from './components/correspondent-modal/co
     B1ButtonModule,
     B1DropdownModule,
     CheckValueModule,
+    B1SkeletonModule,
+    NumberToArrayModule,
     RouterModule.forChild([
       {
         path: '',

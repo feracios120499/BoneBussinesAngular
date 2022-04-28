@@ -20,14 +20,12 @@
   label="user's actions"
   menuWidth="180px"
   scopeSelector="app-users-list">
-  <a class="b1-card__v-dots" openButton></a>
+  <a class="b1-card__v-dots" slot="toggle"></a>
   <b1-dropdown-link
-    [icon]="user.isDisable ? 'unlock' : 'lock'"
-    [label]="user.isDisable ? 'actions.unlock' : 'action.lock'"
-    (btnClick)="onUserLockStateChange(user)"></b1-dropdown-link>
-  <b1-dropdown-link
-    icon="delete"
-    label="actions.delete"
-    [danger]="true"
-    (btnClick)="onUserDelete(user)"></b1-dropdown-link>
+    [icon]="user.isDisable ? 'lock' : 'unlock'"
+    [label]="user.isDisable ? 'actions.unlock' : 'actions.lock'"
+    (btnClick)="onUserLockStateChange()">
+  </b1-dropdown-link>
+  <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true" (btnClick)="onUserDelete()">
+  </b1-dropdown-link>
 </b1-dropdown>

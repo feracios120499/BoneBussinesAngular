@@ -27,21 +27,21 @@ export class UserItemComponent extends withRequiredPropsCheck() implements OnIni
     this.checkRequiredProps(['user']);
   }
 
-  onUserLockStateChange(user: User): void {
+  onUserLockStateChange(): void {
     this.store.dispatch(
       UsersActions.updateUserLockStateRequest({
-        userId: user.id,
-        isLock: !user.isDisable,
+        userId: this.user.id,
+        isLock: !this.user.isDisable,
       })
     );
   }
 
-  onUserDelete(user: User): void {
+  onUserDelete(): void {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: `${this.translateService.instant('components.admin.deleteConfirm')} ${user.displayName}?`,
-          callback: () => this.store.dispatch(UsersActions.deleteUserRequest(user.id)),
+          text: `${this.translateService.instant('components.admin.deleteConfirm')} ${this.user.displayName}?`,
+          callback: () => this.store.dispatch(UsersActions.deleteUserRequest(this.user.id)),
         },
       })
     );

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -22,27 +17,17 @@ import { CorrespondentsModalResult } from '@models/modals/correspondents-modal-r
   styleUrls: ['./b1-correspondents-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1CorrespondentsModalComponent
-  extends withRequiredPropsCheck(BaseB1ModalComponent)
-  implements OnInit
-{
+export class B1CorrespondentsModalComponent extends withRequiredPropsCheck(BaseB1ModalComponent) implements OnInit {
   @Input() config!: CorrespondentsModalConfig;
 
-  correspondents$: Observable<Correspondent[]> = this.store.select(
-    CorrespondentsSelectors.correspondentList
-  );
-  isLoading$: Observable<boolean> = this.store.select(
-    CorrespondentsSelectors.isLoadingCorrespondents
-  );
+  correspondents$: Observable<Correspondent[]> = this.store.select(CorrespondentsSelectors.correspondentList);
+  isInitialLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isInitialLoadingCorrespondents);
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
   isMobile$ = this.resizeService.isMobile$;
   result!: CorrespondentsModalResult;
   filterTerm: string = '';
 
-  constructor(
-    modal: NgbActiveModal,
-    private store: Store,
-    private resizeService: ResizeService
-  ) {
+  constructor(modal: NgbActiveModal, private store: Store, private resizeService: ResizeService) {
     super(modal);
   }
 
