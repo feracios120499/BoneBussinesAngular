@@ -2,13 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SignBuffer } from '@models/sign-buffer.model';
 import { SignResponse } from '@models/sign-response.model';
+import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthSelectors } from '@store/auth/selectors';
 import { forkJoinConcurrent } from '@store/shared';
 import { camelCase, isPlainObject, startCase } from 'lodash';
-import { forkJoin, from, merge, Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, toArray } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { CryptorKey, CryptorKeysResponse } from './models/cryptor-key.model';
 import { CryptorResponse } from './models/cryptor-response.model';
@@ -40,7 +40,6 @@ export class BarsCryptorService implements BaseSignService {
       };
     });
   }
-  test = false;
   getTokens(): Observable<CryptorToken[]> {
     return this.http.post<CryptorTokensResponse>(`${CRYPTOR_URL}/tokens`, {} as never).pipe(
       map((response) => this.mapResponse(response, response.tokens)),

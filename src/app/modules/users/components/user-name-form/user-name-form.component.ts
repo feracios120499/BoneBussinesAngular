@@ -1,18 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
-import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
-import { ModelControl } from '@b1-types/model-controls.type';
-import { UserNameForm } from '@models/users/user-name-form.model';
 import { distinctUntilObjectChanged } from '@custom-operators/distinct-until-object-changed.operator';
+import { ModelControl } from '@b1-types/model-controls.type';
+import { UserNameForm } from '@modules/users/models/user-name-form.model';
+import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
 
 const { required, maxLength } = Validators;
 
@@ -23,24 +18,12 @@ const { required, maxLength } = Validators;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideValueAccessor(UserNameFormComponent)],
 })
-export class UserNameFormComponent
-  extends BaseSubFormComponent
-  implements OnInit
-{
+export class UserNameFormComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
   nameMaxLength = 256;
-  lastNameControl = new FormControl('', [
-    required,
-    maxLength(this.nameMaxLength),
-  ]);
-  firstNameControl = new FormControl('', [
-    required,
-    maxLength(this.nameMaxLength),
-  ]);
-  secondNameControl = new FormControl('', [
-    required,
-    maxLength(this.nameMaxLength),
-  ]);
+  lastNameControl = new FormControl('', [required, maxLength(this.nameMaxLength)]);
+  firstNameControl = new FormControl('', [required, maxLength(this.nameMaxLength)]);
+  secondNameControl = new FormControl('', [required, maxLength(this.nameMaxLength)]);
 
   @ViewChild('formRef') formRef!: NgForm;
 
@@ -67,9 +50,7 @@ export class UserNameFormComponent
     this.formGroup = new FormGroup(controls);
   }
 
-  protected formChange(
-    formValue$: Observable<UserNameForm>
-  ): Observable<UserNameForm> {
+  protected formChange(formValue$: Observable<UserNameForm>): Observable<UserNameForm> {
     return formValue$.pipe(
       map(() => this.formGroup.getRawValue()),
       distinctUntilObjectChanged(),

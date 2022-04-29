@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UiReissuApplication } from '@models/cards/ui-reissue-application.model';
 import { Store } from '@ngrx/store';
 import { ResizeService } from '@services/resize.service';
-import { CardReissueActions } from '@store/cards/reissue/actions';
-import { CardReissueSelectors } from '@store/cards/reissue/selectors';
+import { CardReissueSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-reissue-applications-list',

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthActions } from '@modules/auth/store/actions';
 import { Store } from '@ngrx/store';
-import { AuthActions } from '@store/auth/actions';
 import { UserSelectors } from '@store/user/selectors';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'header-profile',
   templateUrl: './header-profile.component.html',
-  styleUrls: ['./header-profile.component.scss', './../../header.component.scss']
+  styleUrls: ['./header-profile.component.scss', './../../header.component.scss'],
 })
 export class HeaderProfileComponent implements OnInit {
-
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   public userName$ = this.store.select(UserSelectors.userName);
   public userPictureUrl$ = this.store.select(UserSelectors.userPicture);
@@ -21,17 +20,15 @@ export class HeaderProfileComponent implements OnInit {
     {
       translate: 'header.navbar.Profile',
       icon: 'user',
-      url: '' // TODO add url
+      url: '', // TODO add url
     },
     {
       translate: 'header.navbar.Settings',
       icon: 'settings',
-      url: '' // TODO add url
-    }
+      url: '', // TODO add url
+    },
   ];
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   logout(): void {
     this.store.dispatch(AuthActions.logout());

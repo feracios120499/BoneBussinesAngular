@@ -1,32 +1,20 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  NgForm,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
-import { provideValueAccessor } from '@methods/provide-value-accessor.method';
-import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
-import { UsersSelectors } from '@store/users/selectors';
-import { ModelControl } from '@b1-types/model-controls.type';
-import { UserRolesForm } from '@models/users/user-roles-form.model';
-import { email } from '@validators/email.validator';
-import { Role } from '@models/users/role.model';
 import { distinctUntilObjectChanged } from '@custom-operators/distinct-until-object-changed.operator';
 import { listChangeRequired } from '@validators/list-change-required.validator';
 import { checklistRequired } from '@validators/checklist-required.validator';
+import { UserRolesForm } from '@modules/users/models/user-roles-form.model';
+import { provideValueAccessor } from '@methods/provide-value-accessor.method';
+import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
+import { email } from '@validators/email.validator';
+import { UsersSelectors } from '@modules/users/store/selectors';
+import { Role } from '@modules/users/models/role.model';
+import { ModelControl } from '@b1-types/model-controls.type';
 
 const { required } = Validators;
 
@@ -46,10 +34,7 @@ interface UserRolesFormValue extends Omit<UserRolesForm, 'roles'> {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideValueAccessor(UserRolesFormComponent)],
 })
-export class UserRolesFormComponent
-  extends BaseSubFormComponent
-  implements OnInit
-{
+export class UserRolesFormComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
   phoneControl = new FormControl('', [required]);
   emailControl = new FormControl('', [required, email]);
@@ -61,10 +46,7 @@ export class UserRolesFormComponent
 
   @ViewChild('formRef') formRef!: NgForm;
 
-  constructor(
-    private store: Store,
-    private translateService: TranslateService
-  ) {
+  constructor(private store: Store, private translateService: TranslateService) {
     super();
   }
 
@@ -109,9 +91,7 @@ export class UserRolesFormComponent
   }
 
   private initForm(): void {
-    this.rolesData.forEach(() =>
-      this.roleControlsArray.push(new FormControl(false))
-    );
+    this.rolesData.forEach(() => this.roleControlsArray.push(new FormControl(false)));
     this.initialRoleValues = [...(this.roleControlsArray.value as boolean[])];
     this.updateRolesValidator();
     const controls: ModelControl<UserRolesForm> = {
@@ -122,9 +102,7 @@ export class UserRolesFormComponent
     this.formGroup = new FormGroup(controls);
   }
 
-  protected formChange(
-    formValue$: Observable<UserRolesFormValue>
-  ): Observable<UserRolesFormValue> {
+  protected formChange(formValue$: Observable<UserRolesFormValue>): Observable<UserRolesFormValue> {
     return formValue$.pipe(
       map(() => this.formGroup.getRawValue()),
       distinctUntilObjectChanged(),
@@ -150,9 +128,7 @@ export class UserRolesFormComponent
 
   private convertRolesToString(roles: boolean[]): string[] {
     return roles
-      .map((checked: boolean, i: number) =>
-        checked ? this.rolesData[i].name : ''
-      )
+      .map((checked: boolean, i: number) => (checked ? this.rolesData[i].name : ''))
       .filter((name: string) => !!name);
   }
 
@@ -162,13 +138,9 @@ export class UserRolesFormComponent
 
   private createRoleControlLabel(role: Role): string {
     return (
-      this.translateService.instant(
-        `components.admin.roles.${role.roleString}`
-      ) +
+      this.translateService.instant(`components.admin.roles.${role.roleString}`) +
       ` (${role.menus
-        .map((menu: string) =>
-          this.translateService.instant(`components.profile.menu.navs.${menu}`)
-        )
+        .map((menu: string) => this.translateService.instant(`components.profile.menu.navs.${menu}`))
         .join(', ')})`
     );
   }

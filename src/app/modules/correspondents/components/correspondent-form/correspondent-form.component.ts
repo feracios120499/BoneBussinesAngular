@@ -1,23 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
-import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
+import { CorrespondentForm } from '@modules/correspondents/models/correspondent-form.model';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { distinctUntilObjectChanged } from '@custom-operators/distinct-until-object-changed.operator';
 import { IbanHelper } from '@helpers/iban.helper';
@@ -34,10 +22,7 @@ const { required, minLength, maxLength } = Validators;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideValueAccessor(CorrespondentFormComponent)],
 })
-export class CorrespondentFormComponent
-  extends BaseSubFormComponent
-  implements OnInit
-{
+export class CorrespondentFormComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
   // NAME:
   nameMaxLength = 38;
@@ -45,11 +30,7 @@ export class CorrespondentFormComponent
   // TAX CODE:
   taxCodeMinLength = 8;
   taxCodeMaxLength = 10;
-  taxCodeControl = new FormControl('', [
-    required,
-    minLength(this.taxCodeMinLength),
-    maxLength(this.taxCodeMaxLength),
-  ]);
+  taxCodeControl = new FormControl('', [required, minLength(this.taxCodeMinLength), maxLength(this.taxCodeMaxLength)]);
   // ACCOUNT:
   accountMinLength = IbanHelper.ibanLength;
   accountMaxLength = IbanHelper.ibanLength;
@@ -68,9 +49,7 @@ export class CorrespondentFormComponent
   ngOnInit(): void {
     super.ngOnInit();
     this.initForm();
-    this.accountControl.valueChanges
-      .pipe(takeUntil(this.destroy$), this.accountChange)
-      .subscribe();
+    this.accountControl.valueChanges.pipe(takeUntil(this.destroy$), this.accountChange).subscribe();
   }
 
   writeValue(value: CorrespondentForm): void {
@@ -93,9 +72,7 @@ export class CorrespondentFormComponent
     this.formGroup = new FormGroup(controls);
   }
 
-  protected formChange(
-    formValue$: Observable<CorrespondentForm>
-  ): Observable<CorrespondentForm> {
+  protected formChange(formValue$: Observable<CorrespondentForm>): Observable<CorrespondentForm> {
     return formValue$.pipe(
       map(() => this.formGroup.getRawValue()),
       distinctUntilObjectChanged(),
@@ -105,23 +82,16 @@ export class CorrespondentFormComponent
     );
   }
 
-  private accountChange = (
-    source$: Observable<string>
-  ): Observable<BankModel | undefined> => {
+  private accountChange = (source$: Observable<string>): Observable<BankModel | undefined> => {
     return source$.pipe(
       takeUntil(this.destroy$),
       distinctUntilChanged(),
       tap(() => this.bankNameControl.setValue('')),
-      filter(
-        (account: string) =>
-          IbanHelper.isIban(account) && IbanHelper.validateFormat(account)
-      ),
+      filter((account: string) => IbanHelper.isIban(account) && IbanHelper.validateFormat(account)),
       map((account: string) => IbanHelper.getBankId(account)!),
       tap((bankCode: string) => this.bankCodeControl.setValue(bankCode)),
       switchMap((id: string) => this.banksService.getBank(id)),
-      tap((value: BankModel | undefined) =>
-        this.bankNameControl.setValue(value?.name)
-      )
+      tap((value: BankModel | undefined) => this.bankNameControl.setValue(value?.name))
     );
   };
 }

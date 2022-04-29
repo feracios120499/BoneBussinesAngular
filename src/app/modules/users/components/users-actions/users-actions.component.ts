@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { UsersActions } from '@store/users/actions';
-import { UsersSelectors } from '@store/users/selectors';
+import { UsersSelectors } from '@modules/users/store/selectors';
+import { User } from '@modules/users/models/user.model';
 import { UserCreateModalComponent } from '../user-create-modal/user-create-modal.component';
-import { User } from '@models/users/user.model';
+import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
   selector: 'app-users-actions',

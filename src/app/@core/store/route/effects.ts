@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AcctActions } from '@modules/accounts/store/actions';
+import { AuthActions } from '@modules/auth/store/actions';
+import { CardsActions } from '@modules/cards/store/actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AcctActions } from '@store/acct/actions';
-import { AuthActions } from '@store/auth/actions';
-import { CardsActions } from '@store/cards/actions';
 import { UserActions } from '@store/user/actions';
 import { map, tap } from 'rxjs/operators';
 

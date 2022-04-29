@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { UsersActions } from '@store/users/actions';
 import { SharedActions } from '@store/shared/actions';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
-import { User } from '@models/users/user.model';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from '@modules/users/models/user.model';
+import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
   selector: 'app-user-item',

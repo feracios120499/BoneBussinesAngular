@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CardDetails } from '@models/cards/card-details.model';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { CardDetailsActions } from '@store/cards/details/actions';
-import { CardDetailsSelectors } from '@store/cards/details/selectors';
 import { SharedActions } from '@store/shared/actions';
+import { CardDetailsActions } from '../../store/actions';
+import { CardDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-card-details-services',
@@ -12,10 +12,7 @@ import { SharedActions } from '@store/shared/actions';
   styleUrls: ['./card-details-services.component.scss'],
 })
 export class CardDetailsServicesComponent implements OnInit {
-  constructor(
-    private store: Store,
-    private translateService: TranslateService
-  ) {}
+  constructor(private store: Store, private translateService: TranslateService) {}
 
   card$ = this.store.select(CardDetailsSelectors.card);
   smsStatus$ = this.store.select(CardDetailsSelectors.smsStatus);
@@ -23,9 +20,7 @@ export class CardDetailsServicesComponent implements OnInit {
   isCardLoading$ = this.store.select(CardDetailsSelectors.isCardLoading);
   lastApplication$ = this.store.select(CardDetailsSelectors.lastApplication);
   isAbleToReissue$ = this.store.select(CardDetailsSelectors.isAbleToReissue);
-  isShowWarningReissue$ = this.store.select(
-    CardDetailsSelectors.isShowWarningReissue
-  );
+  isShowWarningReissue$ = this.store.select(CardDetailsSelectors.isShowWarningReissue);
   ngOnInit(): void {}
 
   showStatement(card: CardDetails): void {
@@ -43,13 +38,8 @@ export class CardDetailsServicesComponent implements OnInit {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: this.translateService.instant(
-            'components.corpcard.thisFunctionIsPayConfirmUnLock'
-          ),
-          callback: () =>
-            this.store.dispatch(
-              CardDetailsActions.unlockCardRequest({ cardId })
-            ),
+          text: this.translateService.instant('components.corpcard.thisFunctionIsPayConfirmUnLock'),
+          callback: () => this.store.dispatch(CardDetailsActions.unlockCardRequest({ cardId })),
         },
       })
     );
@@ -60,10 +50,7 @@ export class CardDetailsServicesComponent implements OnInit {
       CardDetailsActions.showConfirmLockCard({
         config: {
           cardId,
-          callback: (message) =>
-            this.store.dispatch(
-              CardDetailsActions.lockCardRequest({ cardId, message })
-            ),
+          callback: (message) => this.store.dispatch(CardDetailsActions.lockCardRequest({ cardId, message })),
         },
       })
     );
@@ -73,9 +60,7 @@ export class CardDetailsServicesComponent implements OnInit {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: this.translateService.instant(
-            'components.corpcard.confirm.reissue'
-          ),
+          text: this.translateService.instant('components.corpcard.confirm.reissue'),
           callback: () =>
             this.store.dispatch(
               CardDetailsActions.createReissueApplicationRequest({
@@ -93,18 +78,12 @@ export class CardDetailsServicesComponent implements OnInit {
     );
   }
 
-  private updateSmsStatus(
-    cardId: string,
-    phoneNumber: string,
-    isEnabled: boolean
-  ): void {
+  private updateSmsStatus(cardId: string, phoneNumber: string, isEnabled: boolean): void {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
           text: this.translateService.instant(
-            isEnabled
-              ? 'components.corpcard.confirm.activateSms'
-              : 'components.corpcard.confirm.disableSms'
+            isEnabled ? 'components.corpcard.confirm.activateSms' : 'components.corpcard.confirm.disableSms'
           ),
           callback: () =>
             this.store.dispatch(

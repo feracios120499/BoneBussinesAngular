@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { AccountModel } from '@models/account.model';
+import { AccountModel } from '@modules/accounts/models/account.model';
 import { SelectAccount } from '@models/select-account.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -12,11 +12,13 @@ import { filter } from 'rxjs/operators';
   selector: 'b1-account-select',
   templateUrl: './b1-account-select.component.html',
   styleUrls: ['./b1-account-select.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => B1AccountSelectComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => B1AccountSelectComponent),
+      multi: true,
+    },
+  ],
 })
 export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
   constructor(private modalService: ModalService) {
@@ -37,22 +39,23 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
   currentAccount?: AccountModel;
   array = Array.from(Array(5).keys());
 
-  private onChange = (value: SelectAccount | undefined) => { };
-  private onTouched = () => { };
-
+  private onChange = (value: SelectAccount | undefined) => {};
+  private onTouched = () => {};
 
   private setAccount(account?: AccountModel): void {
     setTimeout(() => {
       this.currentAccount = account;
-      const selectAccount: SelectAccount | undefined = account ? {
-        id: account.id,
-        number: account.number,
-        name: account.name,
-        currencyCode: account.currencyCode,
-        currencyId: account.currencyId,
-        taxCode: account.taxCode,
-        balance: account.balance
-      } : undefined;
+      const selectAccount: SelectAccount | undefined = account
+        ? {
+            id: account.id,
+            number: account.number,
+            name: account.name,
+            currencyCode: account.currencyCode,
+            currencyId: account.currencyId,
+            taxCode: account.taxCode,
+            balance: account.balance,
+          }
+        : undefined;
       this.selectValue = selectAccount;
       this.onChange(selectAccount);
     });
@@ -86,11 +89,11 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
       }
       let account: AccountModel | undefined;
       if (value.id) {
-        account = accounts.find(p => p.id === value.id);
+        account = accounts.find((p) => p.id === value.id);
       } else {
         account = accounts.find(
-          p => p.number === value.number &&
-            (p.currencyCode === value.currencyCode || p.currencyId === value.currencyId)
+          (p) =>
+            p.number === value.number && (p.currencyCode === value.currencyCode || p.currencyId === value.currencyId)
         );
       }
       if (account) {

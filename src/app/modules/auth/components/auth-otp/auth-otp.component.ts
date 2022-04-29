@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
-import { AuthSelectors } from '@store/auth/selectors';
 
 @Component({
   selector: 'auth-otp',
   templateUrl: './auth-otp.component.html',
-  styleUrls: ['./auth-otp.component.scss']
+  styleUrls: ['./auth-otp.component.scss'],
 })
 export class AuthOtpComponent implements OnInit {
-
   LENGTH_OTP = 6;
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   loading$ = this.store.select(AuthSelectors.isLoading);
   error$ = this.store.select(AuthSelectors.error);
@@ -26,8 +25,7 @@ export class AuthOtpComponent implements OnInit {
     isPasswordInput: false,
     disableAutoFocus: false,
     placeholder: '',
-    inputStyles: {
-    }
+    inputStyles: {},
   };
 
   onOtpChange(otp: string): void {
@@ -40,7 +38,5 @@ export class AuthOtpComponent implements OnInit {
     this.ngOtpInput.setValue(this.otp);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

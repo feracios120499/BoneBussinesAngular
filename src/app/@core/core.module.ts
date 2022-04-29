@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AcctEffects } from '@modules/accounts/store/effects';
+import { AuthActions } from '@modules/auth/store/actions';
+import { AuthEffects } from '@modules/auth/store/effects';
+import { AUTH_KEY } from '@modules/auth/store/store';
+import { CorrespondentsEffects } from '@modules/correspondents/store/effects';
+import { UsersEffects } from '@modules/users/store/effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
@@ -8,11 +14,6 @@ import { PublicService } from '@services/abstract/public.service';
 import { DemoPublicService } from '@services/demo/public.service';
 import { HttpPublicService } from '@services/public.service';
 import { reducers } from '@store';
-import { AcctEffects } from '@store/acct/effects';
-import { AuthActions } from '@store/auth/actions';
-import { AuthEffects } from '@store/auth/effects';
-import { AUTH_KEY } from '@store/auth/store';
-import { CorrespondentsEffects } from '@store/correspondents/effects';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
 import { PublicEffects } from '@store/public/effects';
@@ -24,7 +25,6 @@ import { SharedEffects } from '@store/shared/effects';
 import { UserActions } from '@store/user/actions';
 import { UserEffects } from '@store/user/effects';
 import { USER_KEY } from '@store/user/store';
-import { UsersEffects } from '@store/users/effects';
 import deepmerge from 'deepmerge';
 import { Keys, localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from 'src/environments/environment';
@@ -36,41 +36,30 @@ const keys: Keys = [
   { auth: ['token', 'userKey'] },
   { user: ['currentClientId'] },
 ];
-export function localStorageSyncReducer(
-  reducer: ActionReducer<any>
-): ActionReducer<any> {
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({
     keys,
     rehydrate: true,
   })(reducer);
 }
 
-export function clearOnLogoutMetaReducer(
-  reducer: ActionReducer<any>
-): ActionReducer<any> {
+export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state, action) => {
     if (action.type === AuthActions.logout.type) {
       let saveState = {};
-      saveStoresLogout.forEach(
-        (key) => (saveState = deepmerge(saveState, { [key]: state[key] }))
-      );
+      saveStoresLogout.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
       return reducer(saveState, action);
     }
     if (action.type === UserActions.selectCurrentClientId.type) {
       let saveState = {};
-      saveStoresChangeCustomer.forEach(
-        (key) => (saveState = deepmerge(saveState, { [key]: state[key] }))
-      );
+      saveStoresChangeCustomer.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
       return reducer(saveState, action);
     }
     return reducer(state, action);
   };
 }
 
-const metaReducers: Array<MetaReducer<any, any>> = [
-  clearOnLogoutMetaReducer,
-  localStorageSyncReducer,
-];
+const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, localStorageSyncReducer];
 
 @NgModule({
   imports: [

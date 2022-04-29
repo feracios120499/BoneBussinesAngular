@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AccountCard } from '@models/cards/account-card.model';
 import { CardAccount } from '@models/cards/card-account.model';
 import { CardDetails } from '@models/cards/card-details.model';
-import { CustomCardsService } from '@services/cards/custom-card.service';
+import { CustomCardsService } from '@modules/cards/services/custom-card-service/custom-card.service';
 
 @Component({
   selector: 'app-card-styled',
@@ -23,18 +23,14 @@ export class CardStyledComponent implements OnInit {
   ngOnInit(): void {
     this.type = this.customCardService.getType(this.card.type);
     if (this.card.plasticStatus) {
-      this.plasticStatusBackgroundColor =
-        this.customCardService.getBackgroundColor(this.card.plasticStatus);
-      this.plasticStatusIcon = this.customCardService.getIcon(
-        this.card.plasticStatus
-      );
+      this.plasticStatusBackgroundColor = this.customCardService.getBackgroundColor(this.card.plasticStatus);
+      this.plasticStatusIcon = this.customCardService.getIcon(this.card.plasticStatus);
     }
 
     console.log('depositAmount' in this.card);
     if ('depositAmount' in this.card) {
       this.cardStatusIcon = this.customCardService.getIcon(this.card.status);
-      this.cardStatusBackgroundColor =
-        this.customCardService.getBackgroundColor(this.card.status);
+      this.cardStatusBackgroundColor = this.customCardService.getBackgroundColor(this.card.status);
     }
   }
 

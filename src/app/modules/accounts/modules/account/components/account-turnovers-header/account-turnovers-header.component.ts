@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ResizeService } from '@services/resize.service';
-import { AcctDetailsActions } from '@store/acct/details/actions';
-import { AcctDetailsSelectors } from '@store/acct/details/selectors';
 import { rangeValueConverter } from '@store/shared';
 import dayjs from 'dayjs';
+import { AcctDetailsActions } from '../../store/actions';
+import { AcctDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'account-turnovers-header',
   templateUrl: './account-turnovers-header.component.html',
-  styleUrls: ['./account-turnovers-header.component.scss']
+  styleUrls: ['./account-turnovers-header.component.scss'],
 })
 export class AccountTurnoversHeaderComponent implements OnInit {
-
-  constructor(private store: Store, private resizeService: ResizeService) { }
+  constructor(private store: Store, private resizeService: ResizeService) {}
 
   form$ = this.store.select(AcctDetailsSelectors.filterTransactions);
   isLoading$ = this.store.select(AcctDetailsSelectors.isLoadingDetailsPage);
@@ -28,8 +27,7 @@ export class AccountTurnoversHeaderComponent implements OnInit {
     'shared.picker.month3': [dayjs().subtract(3, 'month'), dayjs()],
   };
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   showStatement(): void {
     this.store.dispatch(AcctDetailsActions.showStatement());
