@@ -6,10 +6,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { BaseB1ModalComponent } from '@modals/base-b1-modal.component';
 import { CorrespondentFormComponent } from '../correspondent-form/correspondent-form.component';
-import { CorrespondentForm } from '@models/correspondents/correspondent-form.model';
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.modal';
 import { CorrespondentModalResult } from '@modules/correspondents/models/correspondent-modal-result.model';
+import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
+import { CorrespondentForm } from '@modules/correspondents/models/correspondent-form.model';
 
 @Component({
   selector: 'app-correspondent-modal',

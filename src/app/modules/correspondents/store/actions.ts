@@ -5,6 +5,7 @@ import { CORRESPONDENTS_KEY } from './store';
 import { CorrespondentForm } from '@modules/correspondents/models/correspondent-form.model';
 import { CorrespondentUpdateModel } from '../models/correspondent-update.model';
 import { Correspondent } from '../models/correspondent.model';
+import { CorrespondentModalConfig } from '../models/correspondent-modal-config.modal';
 
 export namespace CorrespondentsActions {
   export const [loadCorrespondentsRequest, loadCorrespondentsSuccess, loadCorrespondentsFailure] = createHTTPActions<
@@ -41,4 +42,14 @@ export namespace CorrespondentsActions {
     void,
     string
   >(`[${CORRESPONDENTS_KEY}] delete correspondent`);
+
+  export const showCorrespondentModal = createAction(
+    `[${CORRESPONDENTS_KEY} show correspondent modal]`,
+    (payload: { editingCorrespondent?: Correspondent } = {}) => payload
+  );
+
+  export const setCorrespondentModal = createAction(
+    `[${CORRESPONDENTS_KEY}] set modal`,
+    props<{ config: CorrespondentModalConfig }>()
+  );
 }
