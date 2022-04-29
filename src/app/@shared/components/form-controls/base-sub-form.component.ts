@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormArray,
-  FormGroup,
-  NgForm,
-} from '@angular/forms';
+import { ControlValueAccessor, FormArray, FormGroup, NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 
@@ -42,19 +37,16 @@ export abstract class BaseSubFormComponent
         filter(() => this.formGroup.dirty)
       )
       .subscribe((value) => {
-        this.formValueChanged =
-          JSON.stringify(value) !== JSON.stringify(this.initialValue);
+        this.formValueChanged = JSON.stringify(value) !== JSON.stringify(this.initialValue);
       });
 
-    this.isLoading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((isLoading: boolean) => {
-        if (isLoading) {
-          this.disableForm();
-        } else {
-          this.enableForm();
-        }
-      });
+    this.isLoading$.pipe(takeUntil(this.destroy$)).subscribe((isLoading: boolean) => {
+      if (isLoading) {
+        this.disableForm();
+      } else {
+        this.enableForm();
+      }
+    });
   }
 
   get isChanged(): boolean {
@@ -98,10 +90,7 @@ export abstract class BaseSubFormComponent
   protected updateTreeValidity(group: FormGroup | FormArray): void {
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = (group.controls as any)[key];
-      if (
-        abstractControl instanceof FormGroup ||
-        abstractControl instanceof FormArray
-      ) {
+      if (abstractControl instanceof FormGroup || abstractControl instanceof FormArray) {
         this.updateTreeValidity(abstractControl);
       } else {
         abstractControl.updateValueAndValidity();

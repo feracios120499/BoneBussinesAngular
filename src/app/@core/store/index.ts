@@ -4,6 +4,8 @@ import { authReducer } from '@modules/auth/store/reducer';
 import { AuthState, AUTH_KEY } from '@modules/auth/store/store';
 import { correspondentsReducer } from '@modules/correspondents/store/reducer';
 import { CorrespondentsState, CORRESPONDENTS_KEY } from '@modules/correspondents/store/store';
+import { usersReducer } from '@modules/users/store/reducer';
+import { UsersState, USERS_KEY } from '@modules/users/store/store';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { ActionReducerMap } from '@ngrx/store';
 import { appReducers } from '@store/app/reducer';
@@ -19,8 +21,6 @@ import { USER_KEY, UserState } from '@store/user/store';
 
 import { sharedReducer } from './shared/reducer';
 import { SHARED_KEY, SharedState } from './shared/store';
-import { usersReducer } from './users/reducer';
-import { UsersState, USERS_KEY } from './users/store';
 
 export interface State {
   [SETTINGS_KEY]: SettingsState;

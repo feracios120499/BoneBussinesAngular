@@ -1,7 +1,7 @@
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { createFormGroupState, FormGroupState } from 'ngrx-forms';
 import { AcctFilter } from '@modules/accounts/models/acct-filter.model';
-import { AcctLoadings } from '@modules/accounts/models/acct-loadings.enum';
+import { AcctLoadings } from '@modules/accounts/models/acct-loadings.type';
 import { AccountModel } from '../models/account.model';
 
 export const ACCT_KEY = 'acct';

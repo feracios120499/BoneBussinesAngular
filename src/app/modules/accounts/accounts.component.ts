@@ -23,7 +23,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
     });
   }
   accounts$ = this.store.select(AcctSelectors.accountsSelector);
-  isLoadingAccounts$ = this.store.select(AcctSelectors.isLoadingAccounts);
+  isLoadingAccounts$ = this.store.select(AcctSelectors.isLoading);
   ngOnInit(): void {}
 
   init(): void {

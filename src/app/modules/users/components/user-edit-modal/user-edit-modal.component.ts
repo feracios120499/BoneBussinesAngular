@@ -1,20 +1,14 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnInit,
-  Input,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
-import { UsersSelectors } from '@store/users/selectors';
-import { UsersActions } from '@store/users/actions';
 import { UserRolesFormComponent } from '../user-roles-form/user-roles-form.component';
-import { UserRolesForm } from '@models/users/user-roles-form.model';
-import { User } from '@models/users/user.model';
+import { User } from '@modules/users/models/user.model';
+import { UsersSelectors } from '@modules/users/store/selectors';
+import { UserRolesForm } from '@modules/users/models/user-roles-form.model';
+import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
   selector: 'app-user-edit-modal',
@@ -22,13 +16,8 @@ import { User } from '@models/users/user.model';
   styleUrls: ['./user-edit-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserEditModalComponent
-  extends withRequiredPropsCheck()
-  implements OnInit
-{
-  isLoading$: Observable<boolean> = this.store.select(
-    UsersSelectors.isLoadingUserEdit
-  );
+export class UserEditModalComponent extends withRequiredPropsCheck() implements OnInit {
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoadingUserEdit);
   @Input() editingUser!: User;
   userRolesForm!: UserRolesForm;
 

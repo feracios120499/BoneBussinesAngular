@@ -26,6 +26,8 @@ import { AccountsHeaderComponent } from './components/accounts-header/accounts-h
 import { AccountsListComponent } from './components/accounts-list/accounts-list.component';
 import { AccountsTabsComponent } from './components/accounts-tabs/accounts-tabs.component';
 import { AccountsComponent } from './accounts.component';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
+import { CheckRoleModule } from '@directives/check-role/check-role.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { AccountsComponent } from './accounts.component';
     AccountsFilterModule,
     SharedModule,
     CheckValueModule,
+    B1DropdownModule,
+    CheckRoleModule,
   ],
 })
 export class AccountsModule {}

@@ -152,7 +152,15 @@ export class AcctEffects {
           .getRequisites(payload.data.bankId, payload.data.accountId, payload.clientId, payload.data.format)
           .pipe(
             map((file) => AcctActions.downloadRequisitesSuccess(file)),
-            catchError((error) => of(AcctActions.downloadRequisitesFailure(error.error.Message)))
+            catchError((error) =>
+              of(
+                AcctActions.downloadRequisitesFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.downloadRequisites'),
+                })
+              )
+            )
           )
       )
     )

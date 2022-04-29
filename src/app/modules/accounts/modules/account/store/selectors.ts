@@ -1,4 +1,4 @@
-import { AcctLoadings } from '@modules/accounts/models/acct-loadings.enum';
+import { AcctLoadings } from '@modules/accounts/models/acct-loadings.type';
 import { UiTurnovers } from '@modules/accounts/models/turnovers.model';
 import { AcctSelectors } from '@modules/accounts/store/selectors';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
@@ -43,22 +43,22 @@ export namespace AcctDetailsSelectors {
 
   export const isLoadingCurrentAccount = createSelector(
     AcctSelectors.acctStore,
-    (state) => state.loadings.indexOf(AcctLoadings.details) >= 0
+    (state) => state.loadings.indexOf('details') >= 0
   );
 
   export const isLoadingTurnovers = createSelector(
     AcctSelectors.acctStore,
-    (state) => state.loadings.indexOf(AcctLoadings.turnovers) >= 0
+    (state) => state.loadings.indexOf('turnovers') >= 0
   );
 
   export const isLoadingTransactions = createSelector(
     AcctSelectors.acctStore,
-    (state) => state.loadings.indexOf(AcctLoadings.transactions) >= 0
+    (state) => state.loadings.indexOf('transactions') >= 0
   );
 
   export const isLoadingStatement = createSelector(
     AcctSelectors.acctStore,
-    (state) => state.loadings.indexOf(AcctLoadings.statement) >= 0
+    (state) => state.loadings.indexOf('statement') >= 0
   );
 
   export const isLoadingDetailsPage = createSelector(
@@ -73,7 +73,7 @@ export namespace AcctDetailsSelectors {
 
   export const isLoadingTransaction = createSelector(
     AcctSelectors.acctStore,
-    (state) => state.loadings.indexOf(AcctLoadings.transaction) >= 0
+    (state) => state.loadings.indexOf('transaction') >= 0
   );
 
   export const currencyCode = createSelector(currentAccount, (account) => account?.currencyCode);

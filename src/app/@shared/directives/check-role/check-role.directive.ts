@@ -1,11 +1,4 @@
-import {
-  Directive,
-  Input,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { UserRole } from '@b1-types/user-role.type';
 import { Store } from '@ngrx/store';
 import { UserSelectors } from '@store/user/selectors';
@@ -20,11 +13,7 @@ export class CheckRoleDirective implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<boolean>();
   private isViewed = false;
 
-  constructor(
-    private store: Store,
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef
-  ) {}
+  constructor(private store: Store, private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
 
   ngOnInit(): void {
     this.viewContainer.clear();
@@ -36,9 +25,7 @@ export class CheckRoleDirective implements OnInit, OnDestroy {
           this.hideView();
           return;
         }
-        const isInRole = currentCustomer.roles.some(
-          (role) => this.checkRole.indexOf(role) >= 0
-        );
+        const isInRole = currentCustomer.roles.some((role) => this.checkRole.indexOf(role) >= 0);
         if (isInRole) {
           if (!this.isViewed) {
             this.showView();
@@ -52,6 +39,7 @@ export class CheckRoleDirective implements OnInit, OnDestroy {
   showView(): void {
     this.viewContainer.createEmbeddedView(this.templateRef);
     this.isViewed = true;
+    console.log('show');
   }
 
   hideView(): void {

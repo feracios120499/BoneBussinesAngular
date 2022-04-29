@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+import { pushIfNotExist, removeItem } from '@store/shared';
 import { onNgrxForms } from 'ngrx-forms';
-import { AcctLoadings } from '../models/acct-loadings.enum';
+import { AcctLoadings } from '../models/acct-loadings.type';
 import { AcctDetailsActions } from '../modules/account/store/actions';
 
 import { AcctActions } from './actions';
@@ -19,31 +20,31 @@ export const acctReducer = createReducer(
   })),
   on(AcctActions.loadAccounts, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.list],
+    loadings: pushIfNotExist(state.loadings, 'list'),
   })),
   on(AcctActions.setAccounts, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== AcctLoadings.list),
+    loadings: removeItem(state.loadings, 'list'),
   })),
   on(AcctDetailsActions.loadAccount, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.details],
+    loadings: pushIfNotExist(state.loadings, 'details'),
   })),
   on(AcctDetailsActions.loadAccountSuccess, AcctDetailsActions.loadAccountFailure, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== AcctLoadings.details),
+    loadings: removeItem(state.loadings, 'details'),
   })),
   on(AcctDetailsActions.loadTurnoversRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.turnovers],
+    loadings: pushIfNotExist(state.loadings, 'turnovers'),
   })),
   on(AcctDetailsActions.loadTurnoversSuccess, AcctDetailsActions.loadTurnoversFailure, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== AcctLoadings.turnovers),
+    loadings: removeItem(state.loadings, 'turnovers'),
   })),
   on(AcctDetailsActions.loadTransactionsRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.transactions],
+    loadings: pushIfNotExist(state.loadings, 'transactions'),
   })),
   on(
     AcctDetailsActions.loadTransactionsSuccess,
@@ -51,20 +52,20 @@ export const acctReducer = createReducer(
     AcctDetailsActions.loadTransactionsCancel,
     (state) => ({
       ...state,
-      loadings: state.loadings.filter((value, index) => index !== state.loadings.indexOf(AcctLoadings.transactions)),
+      loadings: state.loadings.filter((value, index) => index !== state.loadings.indexOf('transactions')),
     })
   ),
   on(AcctDetailsActions.loadTransactionDetailRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.transaction],
+    loadings: pushIfNotExist(state.loadings, 'transaction'),
   })),
   on(AcctDetailsActions.loadTransactionDetailSuccess, AcctDetailsActions.loadTransactionDetailFailure, (state) => ({
     ...state,
-    loadings: state.loadings.filter((p) => p !== AcctLoadings.transaction),
+    loadings: removeItem(state.loadings, 'transaction'),
   })),
   on(AcctActions.downloadStatementRequest, AcctActions.sendStatementRequest, (state) => ({
     ...state,
-    loadings: [...state.loadings, AcctLoadings.statement],
+    loadings: pushIfNotExist(state.loadings, 'statement'),
   })),
   on(
     AcctActions.downloadStatementSuccess,
@@ -73,7 +74,35 @@ export const acctReducer = createReducer(
     AcctActions.sendStatementFailure,
     (state) => ({
       ...state,
-      loadings: state.loadings.filter((p) => p !== AcctLoadings.statement),
+      loadings: removeItem(state.loadings, 'statement'),
+    })
+  ),
+  on(AcctActions.downloadExportTurnoversRequest, AcctActions.sendExportTurnoversRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'export'),
+  })),
+  on(
+    AcctActions.downloadExportTurnoversSuccess,
+    AcctActions.downloadExportTurnoversFailure,
+    AcctActions.sendExportTurnoversSuccess,
+    AcctActions.sendExportTurnoversFailure,
+    (state) => ({
+      ...state,
+      loadings: removeItem(state.loadings, 'export'),
+    })
+  ),
+  on(AcctActions.downloadRequisitesRequest, AcctActions.sendRequisitesRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'requisites'),
+  })),
+  on(
+    AcctActions.downloadRequisitesSuccess,
+    AcctActions.downloadRequisitesFailure,
+    AcctActions.sendRequisitesSuccess,
+    AcctActions.sendRequisitesFailure,
+    (state) => ({
+      ...state,
+      loadings: removeItem(state.loadings, 'requisites'),
     })
   )
 );

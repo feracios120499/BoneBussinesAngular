@@ -2,7 +2,7 @@ import { AccountModel } from '@modules/accounts/models/account.model';
 import { FilterCurrency } from '@models/filter.model';
 import { AccountTab } from '@modules/accounts/models/acct-tab.enum';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AcctLoadings } from '@modules/accounts/models/acct-loadings.enum';
+import { AcctLoadings } from '@modules/accounts/models/acct-loadings.type';
 
 import { ACCT_KEY, AcctState } from './store';
 
@@ -48,7 +48,9 @@ export namespace AcctSelectors {
     }
   });
 
-  export const isLoadingAccounts = createSelector(acctStore, (state) => state.loadings.indexOf(AcctLoadings.list) >= 0);
+  export const isLoadingAccounts = createSelector(acctStore, (state) => state.loadings.indexOf('list') >= 0);
+
+  export const isLoading = createSelector(acctStore, (state) => state.loadings.length != 0);
 
   // фильтруем открытые счета + сортируем сначала по гривне, а потом по дате активности
   export const activeAccounts = createSelector(accountsSelector, (accounts) =>

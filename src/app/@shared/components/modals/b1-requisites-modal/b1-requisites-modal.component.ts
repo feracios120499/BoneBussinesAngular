@@ -7,15 +7,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'b1-requisites-modal',
   templateUrl: './b1-requisites-modal.component.html',
-  styleUrls: ['./b1-requisites-modal.component.scss']
+  styleUrls: ['./b1-requisites-modal.component.scss'],
 })
 export class B1RequisitesModalComponent implements OnInit {
-
   @Input() config!: RequisitesModalConfig;
-  result!: RequisitesModalResult;
+  result: RequisitesModalResult;
   constructor(public modal: NgbActiveModal) {
+    this.result = {
+      sendToEmail: false,
+      email: '',
+      format: '',
+    };
   }
-
 
   formGroup = new FormGroup({
     email: new FormControl('', [Validators.email]),
@@ -29,7 +32,7 @@ export class B1RequisitesModalComponent implements OnInit {
     this.result = {
       sendToEmail: false,
       email: this.config.email,
-      format: this.config.formats[0]
+      format: this.config.formats[0],
     };
   }
 
@@ -37,5 +40,4 @@ export class B1RequisitesModalComponent implements OnInit {
     this.config.callback(this.result);
     this.modal.close();
   }
-
 }
