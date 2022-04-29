@@ -8,15 +8,15 @@ import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { CorrespondentsActions } from './actions';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
-import { CorrespondentsService } from '@services/correspondents/correspondents.service';
 import { ServerError } from '@models/errors/server-error.model';
-import { Correspondent } from '@models/correspondents/correspondent.model';
 import { CorrespondentsSelectors } from './selectors';
 import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.modal';
 import { CorrespondentModalResult } from '@modules/correspondents/models/correspondent-modal-result.model';
-import { CorrespondentUpdateModel } from '@models/correspondents/correspondent-update.model';
 import { CorrespondentModalComponent } from '@modules/correspondents/components/correspondent-modal/correspondent-modal.component';
 import { ModalService } from '@services/modal.service';
+import { CorrespondentsService } from '../services/correspondents-service/correspondents.service';
+import { Correspondent } from '../models/correspondent.model';
+import { CorrespondentUpdateModel } from '../models/correspondent-update.model';
 
 @Injectable()
 export class CorrespondentsEffects {
