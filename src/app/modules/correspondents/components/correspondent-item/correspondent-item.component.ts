@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
-import { Correspondent } from '@models/correspondents/correspondent.model';
-import { SharedActions } from '@store/shared/actions';
-import { CorrespondentsActions } from '@store/correspondents/actions';
 import { PaymentAccount } from '@models/payment-account.model';
 import { Router } from '@angular/router';
+import { SharedActions } from '@store/shared/actions';
+import { CorrespondentsActions } from '@modules/correspondents/store/actions';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
 
 @Component({
   selector: 'app-correspondent-item',

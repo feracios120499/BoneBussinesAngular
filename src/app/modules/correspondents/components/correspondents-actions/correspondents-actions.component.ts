@@ -2,9 +2,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
-import { CorrespondentsActions } from '@store/correspondents/actions';
-import { Correspondent } from '@models/correspondents/correspondent.model';
+import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
+import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
+import { CorrespondentsActions } from '@modules/correspondents/store/actions';
 
 @Component({
   selector: 'app-correspondents-actions',

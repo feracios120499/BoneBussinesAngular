@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardReissueActions } from '@store/cards/reissue/actions';
-import { cardReissueReducer } from '@store/cards/reissue/reducer';
-import { CardReissueSelectors } from '@store/cards/reissue/selectors';
-import { CARD_REISSUE_KEY } from '@store/cards/reissue/store';
+import { CardReissueActions } from './store/actions';
+import { cardReissueReducer } from './store/reducer';
+import { CardReissueSelectors } from './store/selectors';
+import { CARD_REISSUE_KEY } from './store/store';
 
 @Component({
   selector: 'app-reissue-applications',

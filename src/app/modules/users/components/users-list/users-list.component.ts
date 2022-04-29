@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { User } from '@models/users/user.model';
-import { UsersSelectors } from '@store/users/selectors';
-import { UsersActions } from '@store/users/actions';
 import { UserEditModalComponent } from '../user-edit-modal/user-edit-modal.component';
 import { UserCreateModalComponent } from '../user-create-modal/user-create-modal.component';
+import { UsersSelectors } from '@modules/users/store/selectors';
+import { User } from '@modules/users/models/user.model';
+import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
   selector: 'app-users-list',

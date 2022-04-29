@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
 
 import { FilterService } from '@services/filter.service';
-import { Correspondent } from '@models/correspondents/correspondent.model';
 
 @Pipe({
   name: 'correspondentsFilter',
@@ -9,10 +9,7 @@ import { Correspondent } from '@models/correspondents/correspondent.model';
 export class CorrespondentsFilterPipe implements PipeTransform {
   constructor(private filterService: FilterService) {}
 
-  transform(
-    correspondents: Correspondent[],
-    terms: string = ''
-  ): Correspondent[] {
+  transform(correspondents: Correspondent[], terms: string = ''): Correspondent[] {
     if (!terms) {
       return correspondents;
     }

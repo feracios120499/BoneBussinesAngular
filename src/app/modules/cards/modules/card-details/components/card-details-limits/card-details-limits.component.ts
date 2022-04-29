@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CardLimit } from '@models/cards/card-limit.model';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { CardDetailsActions } from '@store/cards/details/actions';
-import { CardDetailsSelectors } from '@store/cards/details/selectors';
 import { SharedActions } from '@store/shared/actions';
+import { CardDetailsActions } from '../../store/actions';
+import { CardDetailsSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-card-details-limits',
@@ -12,10 +12,7 @@ import { SharedActions } from '@store/shared/actions';
   styleUrls: ['./card-details-limits.component.scss'],
 })
 export class CardDetailsLimitsComponent implements OnInit {
-  constructor(
-    private store: Store,
-    private translateService: TranslateService
-  ) {}
+  constructor(private store: Store, private translateService: TranslateService) {}
 
   limits$ = this.store.select(CardDetailsSelectors.limits);
   cardCurrency$ = this.store.select(CardDetailsSelectors.cardCurrency);
@@ -29,10 +26,7 @@ export class CardDetailsLimitsComponent implements OnInit {
       CardDetailsActions.openEditLimitModal({
         config: {
           limit,
-          callbackSave: (updatedLimit) =>
-            this.store.dispatch(
-              CardDetailsActions.updateLimitRequest(updatedLimit)
-            ),
+          callbackSave: (updatedLimit) => this.store.dispatch(CardDetailsActions.updateLimitRequest(updatedLimit)),
         },
       })
     );
@@ -42,13 +36,8 @@ export class CardDetailsLimitsComponent implements OnInit {
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: this.translateService.instant(
-            'components.corpcard.limitDefaultConfirm'
-          ),
-          callback: () =>
-            this.store.dispatch(
-              CardDetailsActions.setDefaultLimitRequest(limit)
-            ),
+          text: this.translateService.instant('components.corpcard.limitDefaultConfirm'),
+          callback: () => this.store.dispatch(CardDetailsActions.setDefaultLimitRequest(limit)),
         },
       })
     );

@@ -1,6 +1,6 @@
-import { AccountModel } from './account.model';
+import { AccountModel } from '../../modules/accounts/models/account.model';
 
 export interface SelectAccountsList {
-    accounts: AccountModel[];
-    isLoading: boolean;
+  accounts: AccountModel[];
+  isLoading: boolean;
 }

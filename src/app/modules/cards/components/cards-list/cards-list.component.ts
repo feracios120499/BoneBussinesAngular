@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UiCardAccount } from '@models/cards/card-account.model';
+import { CardsSelectors } from '@modules/cards/store/selectors';
 import { Store } from '@ngrx/store';
-import { CardsSelectors } from '@store/cards/selectors';
 
 @Component({
   selector: 'app-cards-list',

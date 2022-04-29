@@ -1,23 +1,18 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { withDestroy } from '@mixins/with-destroy.mixin';
-import { UsersSelectors } from '@store/users/selectors';
+import { FoundUser } from '@modules/users/models/found-user.model';
+import { UsersSelectors } from '@modules/users/store/selectors';
 import { UserCreateProgress } from '@b1-types/users/user-create-progress.type';
+import { UserRolesForm } from '@modules/users/models/user-roles-form.model';
+import { UserNameForm } from '@modules/users/models/user-name-form.model';
 import { UserRolesFormComponent } from '../user-roles-form/user-roles-form.component';
-import { UserRolesForm } from '@models/users/user-roles-form.model';
 import { UserNameFormComponent } from '../user-name-form/user-name-form.component';
-import { UserNameForm } from '@models/users/user-name-form.model';
-import { UsersActions } from '@store/users/actions';
-import { FoundUser } from '@models/users/found-user.model';
+import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -26,15 +21,9 @@ import { FoundUser } from '@models/users/found-user.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCreateModalComponent extends withDestroy() implements OnInit {
-  isLoading$: Observable<boolean> = this.store.select(
-    UsersSelectors.isLoadingUserCreate
-  );
-  progress$: Observable<UserCreateProgress> = this.store.select(
-    UsersSelectors.progress
-  );
-  foundUser$: Observable<FoundUser | null> = this.store.select(
-    UsersSelectors.foundUser
-  );
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoadingUserCreate);
+  progress$: Observable<UserCreateProgress> = this.store.select(UsersSelectors.progress);
+  foundUser$: Observable<FoundUser | null> = this.store.select(UsersSelectors.foundUser);
   foundUserId: string | null = null;
   userRolesForm!: UserRolesForm;
   userNameForm!: UserNameForm;

@@ -6,10 +6,10 @@ import { Store } from '@ngrx/store';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { BaseB1ModalComponent } from '../base-b1-modal.component';
 import { ResizeService } from '@services/resize.service';
-import { Correspondent } from '@models/correspondents/correspondent.model';
-import { CorrespondentsSelectors } from '@store/correspondents/selectors';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
 import { CorrespondentsModalResult } from '@models/modals/correspondents-modal-result.model';
+import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
+import { Correspondent } from '@modules/correspondents/models/correspondent.model';
 
 @Component({
   selector: 'b1-correspondents-modal',
@@ -25,7 +25,7 @@ export class B1CorrespondentsModalComponent extends withRequiredPropsCheck(BaseB
   isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
   isMobile$ = this.resizeService.isMobile$;
   result!: CorrespondentsModalResult;
-  filterTerm: string = '';
+  filterTerm = '';
 
   constructor(modal: NgbActiveModal, private store: Store, private resizeService: ResizeService) {
     super(modal);

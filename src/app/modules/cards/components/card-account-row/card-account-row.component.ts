@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UiCardAccount } from '@models/cards/card-account.model';
+import { CardsActions } from '@modules/cards/store/actions';
+import { CardsSelectors } from '@modules/cards/store/selectors';
 import { Store } from '@ngrx/store';
-import { CardsActions } from '@store/cards/actions';
-import { CardsSelectors } from '@store/cards/selectors';
 
 @Component({
   selector: 'app-card-account-row',
@@ -19,13 +19,9 @@ export class CardAccountRowComponent implements OnInit {
 
   toggleCardAccount(): void {
     if (this.cardAccount.isOpen) {
-      this.store.dispatch(
-        CardsActions.closeCardAccount({ cardAccount: this.cardAccount })
-      );
+      this.store.dispatch(CardsActions.closeCardAccount({ cardAccount: this.cardAccount }));
     } else {
-      this.store.dispatch(
-        CardsActions.openCardAccount({ cardAccount: this.cardAccount })
-      );
+      this.store.dispatch(CardsActions.openCardAccount({ cardAccount: this.cardAccount }));
     }
   }
 

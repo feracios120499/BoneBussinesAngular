@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaymentForm } from '@models/payment-form.model';
+import { AcctActions } from '@modules/accounts/store/actions';
 import { Store } from '@ngrx/store';
-import { AcctActions } from '@store/acct/actions';
 import { PayFormsSelectors } from '@store/payments/forms/selectors';
 import { PaySelectors } from '@store/payments/selectors';
 import { SharedActions } from '@store/shared/actions';

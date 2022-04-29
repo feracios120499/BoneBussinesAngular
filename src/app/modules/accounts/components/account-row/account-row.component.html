@@ -1,92 +1,73 @@
 <div class="account" mobileClass="b1-ellipsis">
-    <div class="account-icon">
-        <i b1-icon icon="university" class="b1-large" *ngIf="!account.isCardAccount"
-            [ngbTooltip]="'components.acct.currentAccount' | translate" placement="right"></i>
-        <i b1-icon icon="account-card" class="b1-large" *ngIf="account.isCardAccount"
-            [ngbTooltip]="'components.acct.cardAccount' | translate" placement="right"></i>
+  <div class="account-icon">
+    <i
+      b1-icon
+      icon="university"
+      class="b1-large"
+      *ngIf="!account.isCardAccount"
+      [ngbTooltip]="'components.acct.currentAccount' | translate"
+      placement="right"></i>
+    <i
+      b1-icon
+      icon="account-card"
+      class="b1-large"
+      *ngIf="account.isCardAccount"
+      [ngbTooltip]="'components.acct.cardAccount' | translate"
+      placement="right"></i>
+  </div>
+  <div class="account-body b1-ellipsis">
+    <div class="account-name b1-ellipsis">
+      {{ account.name }}
+      <div class="account-number" [iban]="account.number"></div>
     </div>
-    <div class="account-body  b1-ellipsis">
-        <div class="account-name b1-ellipsis">
-            {{account.name}}
-            <div class="account-number" [iban]="account.number">
-            </div>
-        </div>
-        <div class="account-date">
-            <span>{{'components.acct.acctDetail.turnoverDate' | translate}}</span>
-            <span class="b1-ml-2 b1-mr-2">-</span>
-            <span>{{account.lastActive | date:'dd.MM.yyyy'}}</span>
-        </div>
-        <div class="account-amount">
-            <div class="account-balance">
-                <span>{{account.balance / 100 | money}}</span>
-                <span class="b1-ml-2">{{account.currencyCode}}</span>
-            </div>
-            <div class="account-turns">
-                <div class="account-turns-debit">
-                    <i b1-icon icon="chevron-down"></i>
-                    {{account.debitTurns / 100 | money}}
-                </div>
-                <div class="account-turns-credit">
-                    <i b1-icon icon="chevron-up"></i>
-                    {{account.creditTurns / 100 | money}}
-                </div>
-            </div>
-        </div>
+    <div class="account-date">
+      <span>{{ 'components.acct.acctDetail.turnoverDate' | translate }}</span>
+      <span class="b1-ml-2 b1-mr-2">-</span>
+      <span>{{ account.lastActive | date: 'dd.MM.yyyy' }}</span>
     </div>
-    <div class="account-more b1-card__col b1-card__col_dot" style="position: relative;">
-        <div class="dropdown">
-            <a class="b1-card__v-dots" (click)="$event.stopPropagation(); dropdown.open();">
-            </a>
-
-            <ul class="b1-dropdown b1-bg-light" webClass="b1-animate fade-in-up" role="menu" style="width: 360px;"
-                ngbDropdown #dropdown="ngbDropdown" mobile-more more-auto-direction>
-                <div class="b1-modal-close" webClass="hidden">
-                    <i b1-icon icon="cancel" (click)="$event.stopPropagation(); dropdown.close();"></i>
-                </div>
-                <li class="b1-dropdown__item" *ngIf="account.currencyCode == 'UAH'">
-                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
-                        ng-click="accountsCtrl.accActions.share(account)">
-                        <i b1-icon icon="file-details" class="b1-mr-3 b1-medium"></i>
-                        {{'components.acct.share' | translate}}
-                    </a>
-                </li>
-                <!-- TODO ADD  IsPayingAccount on backend-->
-                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
-                        ng-click="accountsCtrl.accActions.createPayment($event, account.Id,'INNER')">
-                        <i b1-icon icon="cards" class="b1-medium b1-mr-3"></i>
-
-                        <span>{{'components.acct.newPayment' | translate}}</span>
-                        <span>&nbsp;</span>
-                        <span>{{'components.pay.actions.innerPay' | translate}}</span>
-                    </a>
-                </li>
-                <!-- TODO ADD  IsPayingAccount on backend-->
-                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a class="b1-dropdown__link" webClass="b1-base" mobileClass="b1-medium"
-                        ng-click="accountsCtrl.accActions.createPayment($event, account.Id, 'OUTER')">
-
-                        <i b1-icon icon="country" class="b1-medium b1-mr-3"></i>
-                        <span>{{'components.acct.newPayment' | translate}}</span>
-                        <span>&nbsp;</span>
-                        <span>{{'components.pay.actions.inUrainePay' | translate}}</span>
-                    </a>
-                </li>
-                <!-- TODO ADD  IsPayingAccount on backend-->
-                <!-- TODO ADD Directive role in -->
-                <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-                    <a data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager" class="b1-dropdown__link"
-                        webClass="b1-base" mobileClass="b1-medium"
-                        ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)" ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
-                                   'SWIFT')">
-
-                        <i b1-icon icon="swift" class=" b1-mr-3"></i>
-                        <span>{{'components.acct.newPayment' | translate}}</span>
-                        <span>&nbsp;</span>
-                        <span>{{'components.pay.actions.swift' | translate}}</span>
-                    </a>
-                </li>
-            </ul>
+    <div class="account-amount">
+      <div class="account-balance">
+        <span>{{ account.balance / 100 | money }}</span>
+        <span class="b1-ml-2">{{ account.currencyCode }}</span>
+      </div>
+      <div class="account-turns">
+        <div class="account-turns-debit">
+          <i b1-icon icon="chevron-down"></i>
+          {{ account.debitTurns / 100 | money }}
         </div>
+        <div class="account-turns-credit">
+          <i b1-icon icon="chevron-up"></i>
+          {{ account.creditTurns / 100 | money }}
+        </div>
+      </div>
     </div>
+  </div>
+
+  <b1-dropdown class="account-more b1-card__col b1-card__col_dot" label="account actions" menuWidth="360px">
+    <a class="b1-card__v-dots" slot="toggle"></a>
+    <b1-dropdown-link
+      *ngIf="account.currencyCode == 'UAH'"
+      icon="file-details"
+      label="components.acct.share"
+      (btnClick)="showRequisitesModal()"></b1-dropdown-link>
+    <ng-container *checkRole="['Director', 'Accountant', 'PaymentsManager']">
+      <!-- TODO ADD  IsPayingAccount on backend-->
+      <b1-dropdown-link
+        icon="cards"
+        label="components.acct.actions.newInnerPayment"
+        (btnClick)="createInnerPayment()"></b1-dropdown-link>
+      <b1-dropdown-link
+        icon="country"
+        label="components.acct.actions.newOuterPayment"
+        (btnClick)="createOuterPayment()"></b1-dropdown-link>
+    </ng-container>
+    <ng-container *checkRole="['Director', 'Accountant', 'ForeignCurrencyPaymentsManager']">
+      <!-- TODO ADD  IsPayingAccount on backend-->
+      <b1-dropdown-link
+        *ngIf="account.currencyCode !== 'UAH'"
+        icon="swift"
+        label="components.acct.actions.newSwiftPayment"
+        (btnClick)="createSwiftPayment()"></b1-dropdown-link>
+    </ng-container>
+  </b1-dropdown>
 </div>

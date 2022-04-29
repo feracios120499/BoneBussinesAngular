@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CardReissueActions } from '@store/cards/reissue/actions';
-import { CardReissueSelectors } from '@store/cards/reissue/selectors';
+import { CardReissueActions } from '../../store/actions';
+import { CardReissueSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-reissue-applications-actions',

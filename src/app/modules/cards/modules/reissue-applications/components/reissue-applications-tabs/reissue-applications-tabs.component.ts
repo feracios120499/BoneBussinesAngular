@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CardReissueStatus } from '@b1-types/cards/card-reissue-status.type';
 import { Store } from '@ngrx/store';
-import { CardReissueActions } from '@store/cards/reissue/actions';
-import { CardReissueSelectors } from '@store/cards/reissue/selectors';
 import { map } from 'rxjs/operators';
+import { CardReissueActions } from '../../store/actions';
+import { CardReissueSelectors } from '../../store/selectors';
 
 @Component({
   selector: 'app-reissue-applications-tabs',
@@ -43,8 +43,6 @@ export class ReissueApplicationsTabsComponent implements OnInit {
   ngOnInit(): void {}
 
   setTab(tab: string): void {
-    this.store.dispatch(
-      CardReissueActions.setTab({ tab: tab as unknown as CardReissueStatus })
-    );
+    this.store.dispatch(CardReissueActions.setTab({ tab: tab as unknown as CardReissueStatus }));
   }
 }
