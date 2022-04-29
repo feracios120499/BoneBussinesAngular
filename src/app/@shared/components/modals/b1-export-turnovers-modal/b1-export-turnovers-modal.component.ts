@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { withDestroy } from '@mixins/with-destroy.mixin';
-import { StatementModalConfig } from '@models/statement-modal-config.model';
-import { StatementModalResult } from '@models/statement-modal-result.model';
+import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
+import { ExportTurnoverModalResult } from '@models/modals/export-turnover-modal-result.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { email } from '@validators/email.validator';
 import dayjs from 'dayjs';
@@ -11,13 +11,13 @@ import { takeUntil } from 'rxjs/operators';
 const { required } = Validators;
 
 @Component({
-  selector: 'b1-statement-modal',
-  templateUrl: './b1-statement-modal.component.html',
-  styleUrls: ['./b1-statement-modal.component.scss'],
+  selector: 'b1-export-turnovers-modal',
+  templateUrl: './b1-export-turnovers-modal.component.html',
+  styleUrls: ['./b1-export-turnovers-modal.component.scss'],
 })
-export class B1StatementModalComponent extends withDestroy() implements OnInit {
-  @Input() config!: StatementModalConfig;
-  result!: StatementModalResult;
+export class B1ExportTurnoversModalComponent extends withDestroy() implements OnInit {
+  @Input() config!: ExportTurnoverModalConfig;
+  result!: ExportTurnoverModalResult;
   constructor(public modal: NgbActiveModal) {
     super();
   }
@@ -37,7 +37,6 @@ export class B1StatementModalComponent extends withDestroy() implements OnInit {
     email: new FormControl('', [email]),
     sendToEmail: new FormControl(false),
     format: new FormControl('', [required]),
-    agree: new FormControl(false),
   });
 
   agree = false;

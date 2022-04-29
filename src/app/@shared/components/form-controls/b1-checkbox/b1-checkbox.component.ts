@@ -9,7 +9,7 @@ import { BaseControlComponent } from '../base-control.component';
   styleUrls: ['./b1-checkbox.component.scss'],
   providers: [provideValueAccessor(B1CheckboxComponent)],
   host: {
-    class: 'b1-checkbox',
+    class: 'b1-input',
   },
 })
 export class B1CheckboxComponent extends BaseControlComponent {

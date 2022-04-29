@@ -22,8 +22,11 @@ import { MoneyModule } from '@pipes/money/money.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
+import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
 
-import { B1ExportTurnoversComponent } from './b1-export-turnovers/b1-export-turnovers.component';
+import { B1ExportTurnoversModalComponent } from './b1-export-turnovers-modal/b1-export-turnovers-modal.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
 import { B1RequisitesModalComponent } from './b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from './b1-statement-modal/b1-statement-modal.component';
@@ -38,7 +41,7 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     B1PaymentModalComponent,
     B1StatementModalComponent,
     B1RequisitesModalComponent,
-    B1ExportTurnoversComponent,
+    B1ExportTurnoversModalComponent,
     B1ConfirmModalComponent,
     B1ErrorModalComponent,
     B1CorrespondentsModalComponent,
@@ -69,12 +72,15 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     B1SkeletonModule,
     NumberToArrayModule,
     B1ButtonModule,
+    B1InputModule,
+    B1CheckboxModule,
+    B1ModalContainerModule,
   ],
   exports: [
     B1PaymentModalComponent,
     B1StatementModalComponent,
     B1RequisitesModalComponent,
-    B1ExportTurnoversComponent,
+    B1ExportTurnoversModalComponent,
     B1ConfirmModalComponent,
     B1ErrorModalComponent,
     B1CorrespondentsModalComponent,

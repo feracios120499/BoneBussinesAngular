@@ -12,7 +12,7 @@
     <ng-content select="[slot=body]"></ng-content>
   </div>
 
-  <b1-card-loader style="z-index: 1" [isLoading]="isLoading$"></b1-card-loader>
+  <b1-card-loader *ngIf="loader" style="z-index: 1" [isLoading]="isLoading$"></b1-card-loader>
 
   <div class="b1-modal-container__footer b1-modal-footer" ngbAutofocus>
     <ng-content select="[slot=footer]"></ng-content>

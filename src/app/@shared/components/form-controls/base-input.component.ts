@@ -1,4 +1,4 @@
-import { OnInit, Component, Input, AfterViewInit } from '@angular/core';
+import { OnInit, Component, Input, AfterViewInit, HostBinding } from '@angular/core';
 
 import { BaseFieldControlComponent } from './base-field-control.component';
 
@@ -7,10 +7,7 @@ type TInputType = 'email' | 'password' | 'number' | 'date' | 'text';
 @Component({
   template: '',
 })
-export abstract class BaseInputComponent
-  extends BaseFieldControlComponent
-  implements OnInit, AfterViewInit
-{
+export abstract class BaseInputComponent extends BaseFieldControlComponent implements OnInit, AfterViewInit {
   @Input() type: TInputType = 'text';
   @Input() toFixed: number = 0;
   @Input() min?: number | string;
@@ -19,7 +16,8 @@ export abstract class BaseInputComponent
   @Input() maxLength?: number;
   @Input() autocomplete?: 'on' | 'off';
   @Input() transform: 'uppercase' | 'lowercase' | 'none' = 'none';
-
+  @Input() resizable: boolean = false;
+  @HostBinding('class.b1-page-inputWithIcon') @Input() icon?: string;
   private decimals!: number;
 
   ngOnInit(): void {
@@ -30,11 +28,7 @@ export abstract class BaseInputComponent
     super.ngAfterViewInit();
     if (this.type === 'password') {
       this.checkRequiredProps(['autocomplete']);
-      this.renderer.setAttribute(
-        this.formControlRef.nativeElement,
-        'autocomplete',
-        this.autocomplete!
-      );
+      this.renderer.setAttribute(this.formControlRef.nativeElement, 'autocomplete', this.autocomplete!);
     }
   }
 
