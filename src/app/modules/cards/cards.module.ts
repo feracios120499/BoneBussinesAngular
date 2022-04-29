@@ -22,6 +22,7 @@ import { CardAccountRowComponent } from './components/card-account-row/card-acco
 
 import { CardsEffect } from '@store/cards/effects';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
 
 @NgModule({
   declarations: [CardsComponent, CardsListComponent, CardsActionsComponent, CardAccountRowComponent, CardRowComponent],
@@ -40,6 +41,7 @@ import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
     CheckValueModule,
     EffectsModule.forFeature([CardsEffect]),
     B1EmptyModule,
+    B1InputModule,
   ],
 })
 export class CardsModule {}

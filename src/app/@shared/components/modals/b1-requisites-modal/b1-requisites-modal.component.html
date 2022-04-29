@@ -22,6 +22,7 @@
           [formControl]="$any(formGroup.controls.email)"
           type="email"
           name="email"
+          [required]="result.sendToEmail"
           [(ngModel)]="result.email">
           {{ 'components.profile.Email' | translate }}
         </b1-input>
