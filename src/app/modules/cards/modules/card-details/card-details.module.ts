@@ -27,6 +27,8 @@ import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-da
 import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amount.module';
 import { FirstTitleModule } from '@pipes/first-title/first-title.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
 
 import { CardDetailsComponent } from './card-details.component';
 import { CardDetailsTabsComponent } from './components/card-details-tabs/card-details-tabs.component';
@@ -84,6 +86,8 @@ import { CardDetailsEffects } from './store/effects';
     B1InputAmountModule,
     FirstTitleModule,
     CheckValueModule,
+    B1ButtonModule,
+    B1ModalContainerModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })

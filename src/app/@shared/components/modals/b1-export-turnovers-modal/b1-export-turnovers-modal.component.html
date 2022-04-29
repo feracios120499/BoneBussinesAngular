@@ -1,10 +1,32 @@
 <b1-modal-container [loader]="false">
   <ng-container slot="header">
-    {{ 'components.acct.acctDetail.share' | translate }}
+    {{ 'components.acct.acctStatement.GetExportStatementStart' | translate }}
   </ng-container>
 
   <form slot="body" [formGroup]="formGroup">
     <div class="row">
+      <div class="col-md-12">
+        <div class="b1-flex b1-input">
+          <label class="b1-input__label b1-input__label_top b1-small b1-bold">
+            {{ 'components.acct.period' | translate }}
+          </label>
+          <div class="b1-page-inputWithIcon">
+            <input
+              class="b1-datepicker__input b1-rangepicker"
+              b1-daterangepicker
+              startKey="start"
+              endKey="end"
+              [(ngModel)]="result.range"
+              name="daterange"
+              [ranges]="ranges"
+              readonly
+              formControlName="range" />
+            <label for="calendar" b1-icon icon="calendar"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row b1-mt-5">
       <div class="col-md-12">
         <b1-checkbox
           class="b1-small b1-bold"
@@ -80,19 +102,20 @@
       </div>
     </div>
   </form>
+
   <ng-container slot="footer">
     <b1-button
       *ngIf="!result.sendToEmail"
       icon="download"
       label="shared.download"
-      (btnClick)="ok()"
-      [isDisabled]="formGroup.invalid"></b1-button>
+      [isDisabled]="formGroup.invalid"
+      (btnClick)="ok()"></b1-button>
 
     <b1-button
       *ngIf="result.sendToEmail"
       icon="send"
       label="shared.send"
-      (btnClick)="ok()"
-      [isDisabled]="formGroup.invalid"></b1-button>
+      [isDisabled]="formGroup.invalid"
+      (btnClick)="ok()"></b1-button>
   </ng-container>
 </b1-modal-container>

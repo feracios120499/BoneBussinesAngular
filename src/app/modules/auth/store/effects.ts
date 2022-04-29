@@ -31,17 +31,17 @@ export class AuthEffects {
     )
   );
 
-  loginError$ = createEffect(() =>
-    this.action$.pipe(
-      ofType(AuthActions.loginFailure),
-      map((action) =>
-        NotifyActions.errorNotification({
-          message: action.payload,
-          title: 'error',
-        })
-      )
-    )
-  );
+  // loginError$ = createEffect(() =>
+  //   this.action$.pipe(
+  //     ofType(AuthActions.loginFailure),
+  //     map((action) =>
+  //       NotifyActions.errorNotification({
+  //         message: action.payload,
+  //         title: 'error',
+  //       })
+  //     )
+  //   )
+  // );
 
   loginWithOtp$ = createEffect(() =>
     this.action$.pipe(

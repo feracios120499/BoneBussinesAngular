@@ -14,23 +14,23 @@
     </div>
     <div class="b1-page-icons">
       <ng-container *checkRole="['Director', 'Accountant']">
-        <button
-          (click)="signApplications()"
+        <b1-button
           *ngIf="tab == 'ONMYSIGN'"
-          class="b1-button-primary b1-button-primary_filled b1-mr-4"
-          [disabled]="isLoading">
-          <i b1-icon icon="sign"></i>
-          {{ 'components.pay.sign' | translate }}
-        </button>
+          class="b1-mr-4"
+          icon="sign"
+          label="components.pay.sign"
+          (btnClick)="signApplications()"
+          [isDisabled]="isLoading"></b1-button>
       </ng-container>
-      <button
-        (click)="sendToBankApplications()"
+
+      <b1-button
         *ngIf="tab == 'SIGNED'"
-        class="b1-button-primary b1-button-primary_filled b1-mr-4"
-        [disabled]="isLoading">
-        <i b1-icon icon="send"></i>
-        {{ 'components.pay.sendToBank' | translate }}
-      </button>
+        class="b1-mr-4"
+        icon="send"
+        label="components.pay.sendToBank"
+        (btnClick)="sendToBankApplications()"
+        [isDisabled]="isLoading"></b1-button>
+
       <b1-page-button
         label="actions.delete"
         *ngIf="tab != 'BANKRECEIVED'"

@@ -10,16 +10,10 @@
         {{ 'components.pay.supportingDoc' | translate }}
       </label>
       <div>
-        <input
-          class="b1-input__control b1-base"
-          disabled
-          readonly
-          [(ngModel)]="document.supDoc.fileName" />
+        <input class="b1-input__control b1-base" disabled readonly [(ngModel)]="document.supDoc.fileName" />
       </div>
     </div>
-    <button
-      class="b1-page-more agents-button_mobile"
-      (click)="delete(document)">
+    <button class="b1-page-more agents-button_mobile" (click)="delete(document)">
       <i b1-icon icon="delete" class="b1-page-more_icon"></i>
     </button>
   </div>
@@ -42,9 +36,7 @@
       <div class="b1-title3">
         {{ 'components.supDocuments.chooseSupDocument' | translate }}
       </div>
-      <div class="b1-medium b1-light">
-        максимальна кількість {{ maxCountDocuments }}
-      </div>
+      <div class="b1-medium b1-light">максимальна кількість {{ maxCountDocuments }}</div>
     </div>
     <div class="b1-modal-body">
       <div class="b1-modal-container invisible-xs">
@@ -57,14 +49,8 @@
       </div>
     </div>
     <div class="b1-modal-footer" ngbAutofocus>
-      <button
-        class="b1-button-primary b1-button-primary_filled"
-        type="button"
-        [disabled]="selectedInModal.length === 0"
-        (click)="save()">
-        <i b1-icon icon="plus"></i>
-        {{ 'actions.add' | translate }}
-      </button>
+      <b1-button [isDisabled]="!selectedInModal.length" (btnClick)="save()" icon="plus" label="actions.add">
+      </b1-button>
     </div>
   </div>
 </ng-template>

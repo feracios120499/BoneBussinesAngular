@@ -23,12 +23,8 @@
     <div class="row b1-mt-5">
       <div class="col-md-12">
         <label class="b1-checkbox">
-          <input
-            class="b1-checkbox__hidden"
-            type="radio"
-            name="limit"
-            value="unlimit"
-            [(ngModel)]="limitState" /><i class="b1-checkbox__check"></i>
+          <input class="b1-checkbox__hidden" type="radio" name="limit" value="unlimit" [(ngModel)]="limitState" /><i
+            class="b1-checkbox__check"></i>
           <span>
             {{ 'components.corpcard.limit.state.unLimit' | translate }}
           </span>
@@ -36,12 +32,8 @@
       </div>
       <div class="col-md-12 b1-mt-4">
         <label class="b1-checkbox">
-          <input
-            class="b1-checkbox__hidden"
-            type="radio"
-            name="limit"
-            value="zero"
-            [(ngModel)]="limitState" /><i class="b1-checkbox__check"></i>
+          <input class="b1-checkbox__hidden" type="radio" name="limit" value="zero" [(ngModel)]="limitState" /><i
+            class="b1-checkbox__check"></i>
           <span>
             {{ 'components.corpcard.limit.state.zero' | translate }}
           </span>
@@ -49,12 +41,8 @@
       </div>
       <div class="col-md-12 b1-mt-4">
         <label class="b1-checkbox">
-          <input
-            class="b1-checkbox__hidden"
-            type="radio"
-            name="limit"
-            value="limit"
-            [(ngModel)]="limitState" /><i class="b1-checkbox__check"></i>
+          <input class="b1-checkbox__hidden" type="radio" name="limit" value="limit" [(ngModel)]="limitState" /><i
+            class="b1-checkbox__check"></i>
           <span>
             {{ 'components.corpcard.limit.state.limit' | translate }}
           </span>
@@ -63,17 +51,11 @@
     </div>
     <div class="row b1-mt-6" *ngIf="limitState == 'limit'">
       <div class="col-md-12">
-        <b1-input-amount [(ngModel)]="limit.value" [labelTop]="true">
-        </b1-input-amount>
+        <b1-input-amount [(ngModel)]="limit.value" [labelTop]="true"> </b1-input-amount>
       </div>
     </div>
   </div>
   <div class="b1-modal-footer">
-    <button
-      (click)="save()"
-      class="b1-button b1-button-primary b1-button-primary_filled">
-      <i b1-icon icon="save"></i>
-      {{ 'actions.save' | translate }}
-    </button>
+    <b1-button icon="save" label="actions.save" (btnClick)="save()"></b1-button>
   </div>
 </div>

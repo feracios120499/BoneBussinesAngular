@@ -7,6 +7,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 import { B1SupDocumentsComponent } from './b1-sup-documents.component';
 
@@ -20,6 +21,7 @@ import { B1SupDocumentsComponent } from './b1-sup-documents.component';
     NgScrollbarModule,
     B1IconModule,
     CheckValueModule,
+    B1ButtonModule,
   ],
   exports: [B1SupDocumentsComponent],
 })

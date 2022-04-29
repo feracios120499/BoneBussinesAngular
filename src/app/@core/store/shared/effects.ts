@@ -5,7 +5,7 @@ import { B1ConfirmModalComponent } from '@modals/b1-confirm-modal/b1-confirm-mod
 import { B1CorrespondentsModalComponent } from '@modals/b1-correspondents-modal/b1-correspondents-modal.component';
 import { saveAs } from 'file-saver';
 import { tap } from 'rxjs/operators';
-import { B1ExportTurnoversComponent } from 'src/app/@shared/components/modals/b1-export-turnovers/b1-export-turnovers.component';
+import { B1ExportTurnoversModalComponent } from '@modals/b1-export-turnovers-modal/b1-export-turnovers-modal.component';
 import { B1PaymentModalComponent } from 'src/app/@shared/components/modals/b1-payment-modal/b1-payment-modal.component';
 import { B1RequisitesModalComponent } from 'src/app/@shared/components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from 'src/app/@shared/components/modals/b1-statement-modal/b1-statement-modal.component';
@@ -58,7 +58,7 @@ export class SharedEffects {
       this.actions$.pipe(
         ofType(SharedActions.showExportTurnovers),
         tap((action) => {
-          const modalRef = this.modalService.open(B1ExportTurnoversComponent);
+          const modalRef = this.modalService.open(B1ExportTurnoversModalComponent);
           modalRef.componentInstance.config = action.config;
         })
       ),
@@ -85,11 +85,7 @@ export class SharedEffects {
         tap((action) => {
           const file = action.html;
 
-          const printWindow = window.open(
-            'about:blank',
-            '',
-            'width=700,height=600'
-          );
+          const printWindow = window.open('about:blank', '', 'width=700,height=600');
 
           if (!printWindow) {
             return;
@@ -133,12 +129,9 @@ export class SharedEffects {
       this.actions$.pipe(
         ofType(SharedActions.showCorrespondents),
         tap((action) => {
-          const modalRef = this.modalService.open(
-            B1CorrespondentsModalComponent,
-            {
-              windowClass: 'correspondents-modal',
-            }
-          );
+          const modalRef = this.modalService.open(B1CorrespondentsModalComponent, {
+            windowClass: 'correspondents-modal',
+          });
           modalRef.componentInstance.config = action.config;
         })
       ),

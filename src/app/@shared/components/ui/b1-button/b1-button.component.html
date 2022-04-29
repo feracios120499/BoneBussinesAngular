@@ -1,9 +1,4 @@
-<button
-  class="b1-button-primary"
-  [class.b1-button-primary_filled]="filled"
-  [class.round]="mobileView"
-  [disabled]="isDisabled"
-  (click)="btnClick.emit()">
+<button class="b1-button" [class]="classes" [disabled]="isDisabled" (click)="btnClick.emit()">
   <i *ngIf="icon" b1-icon [icon]="icon"></i>
   <span>{{ label | translate }}</span>
 </button>

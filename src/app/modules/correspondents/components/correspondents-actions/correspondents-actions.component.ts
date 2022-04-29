@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
@@ -19,10 +18,10 @@ export class CorrespondentsActionsComponent {
   isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
   filterTerm$: Observable<string> = this.store.select(CorrespondentsSelectors.filterTerm);
 
-  constructor(private store: Store, private modalService: NgbModal) {}
+  constructor(private store: Store) {}
 
   onCorrespondentAdd(): void {
-    this.modalService.open(CorrespondentModalComponent);
+    this.store.dispatch(CorrespondentsActions.showCorrespondentModal());
   }
 
   onCorrespondentsFilter(term: string): void {

@@ -18,6 +18,7 @@ import { WebClassModule } from '@directives/web-class/web-class.module';
 import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-daterangepicker.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { AccountRoutingModule } from './account-routing.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 import { AccountComponent } from './account.component';
 import { AccountCardComponent } from './components/account-card/account-card.component';
@@ -69,6 +70,7 @@ import { AcctDetailsEffects } from './store/effects';
     B1DaterangepickerModule,
     B1CardLoaderModule,
     CheckValueModule,
+    B1ButtonModule,
   ],
 })
 export class AccountModule {}

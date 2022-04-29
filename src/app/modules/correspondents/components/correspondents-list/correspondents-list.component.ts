@@ -26,11 +26,12 @@ export class CorrespondentsListComponent {
   }
 
   onCorrespondentEdit(correspondent: Correspondent): void {
-    const modalRef = this.modalService.open(CorrespondentModalComponent);
-    modalRef.componentInstance.editingCorrespondent = correspondent;
+    // const modalRef = this.modalService.open(CorrespondentModalComponent);
+    // modalRef.componentInstance.editingCorrespondent = correspondent;
+    this.store.dispatch(CorrespondentsActions.showCorrespondentModal({ editingCorrespondent: correspondent }));
   }
 
   onCorrespondentAdd(): void {
-    this.modalService.open(CorrespondentModalComponent);
+    // this.modalService.open(CorrespondentModalComponent);
   }
 }

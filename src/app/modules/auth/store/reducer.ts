@@ -23,6 +23,7 @@ export const authReducer = createReducer(
         AuthActions.loadProfileRequest,
         state => ({ ...state, isLoading: true, error: '' })
     ),
+    on(AuthActions.loginFailure, (state, action) => ({ ...state, error: action.payload })),
     on(
         AuthActions.setToken,
         (state, action) => ({ ...state, token: action.token })

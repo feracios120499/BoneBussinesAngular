@@ -1,3 +1,7 @@
 :host {
   display: block;
+
+  &.b1-page-inputWithIcon {
+    display: flex;
+  }
 }

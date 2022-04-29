@@ -18,19 +18,12 @@
             maxlength="70"
             name="comment"
             id="comment"
-            placeholder="{{
-              'components.pay.commentLockCard' | translate | lowercase
-            }}" />
+            placeholder="{{ 'components.pay.commentLockCard' | translate | lowercase }}" />
         </div>
       </div>
     </div>
   </div>
   <div class="b1-modal-footer">
-    <button
-      (click)="ok()"
-      class="b1-button b1-button-primary b1-button-primary_filled">
-      <i b1-icon icon="lock"></i>
-      {{ 'components.corpcard.services.block' | translate }}
-    </button>
+    <b1-button icon="lock" label="components.corpcard.services.block" (btnClick)="ok()"></b1-button>
   </div>
 </div>

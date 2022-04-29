@@ -1,20 +1,26 @@
-<div class="b1-modal-data">
-  <div class="b1-modal-close">
-    <i b1-icon icon="cancel" (click)="modal.close()"></i>
-  </div>
-  <div class="b1-modal-header">
-    {{'components.acct.acctStatement.GetStatementStart' | translate}}
-  </div>
-  <form class="b1-modal-body b1-modal-wrapper" [formGroup]="formGroup">
+<b1-modal-container [loader]="false">
+  <ng-container slot="header">
+    {{ 'components.acct.acctStatement.GetStatementStart' | translate }}
+  </ng-container>
+
+  <form slot="body" [formGroup]="formGroup">
     <div class="row">
       <div class="col-md-12">
         <div class="b1-flex b1-input">
           <label class="b1-input__label b1-input__label_top b1-small b1-bold">
-            {{'components.acct.period' | translate}}
+            {{ 'components.acct.period' | translate }}
           </label>
           <div class="b1-page-inputWithIcon">
-            <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker startKey="start" endKey="end"
-              [(ngModel)]="result.range" name="daterange" [ranges]="ranges" readonly formControlName="range" />
+            <input
+              class="b1-datepicker__input b1-rangepicker"
+              b1-daterangepicker
+              startKey="start"
+              endKey="end"
+              [(ngModel)]="result.range"
+              name="daterange"
+              [ranges]="ranges"
+              readonly
+              formControlName="range" />
             <label for="calendar" b1-icon icon="calendar"></label>
           </div>
         </div>
@@ -22,65 +28,70 @@
     </div>
     <div class="row b1-mt-5">
       <div class="col-md-12">
-        <div class="b1-input">
-          <label class="b1-small b1-checkbox">
-            <input type="checkbox" class="b1-checkbox__hidden" [(ngModel)]="result.sendToEmail"
-              formControlName="sendToEmail" (change)="result.email = config.email" />
-            <i class="b1-checkbox__check"></i>
-            <span class="b1-checkbox__label b1-small b1-bold">
-              {{'components.acct.acctStatement.send2mail' | translate}}
-            </span>
-          </label>
-        </div>
+        <b1-checkbox
+          class="b1-small b1-bold"
+          [formControl]="$any(formGroup.controls.sendToEmail)"
+          [(ngModel)]="result.sendToEmail"
+          (ngModelChange)="result.email = config.email">
+          {{ 'components.acct.acctStatement.send2mail' | translate }}
+        </b1-checkbox>
       </div>
     </div>
     <div class="row" [hidden]="!result.sendToEmail">
       <div class="col-md-12">
-        <div class="b1-input">
-          <div class="b1-mt-6">
-            <label class="b1-input__label b1-input__label_top b1-small b1-bold">
-              {{'components.profile.Email' | translate}}
-            </label>
-            <div>
-              <input class="b1-input__control" [(ngModel)]="result.email" [required]="result.sendToEmail"
-                formControlName="email" type="email" name="email" />
-            </div>
-          </div>
-        </div>
+        <b1-input
+          class="b1-mt-6"
+          [formControl]="$any(formGroup.controls.email)"
+          type="email"
+          name="email"
+          [required]="result.sendToEmail"
+          [(ngModel)]="result.email">
+          {{ 'components.profile.Email' | translate }}
+        </b1-input>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="b1-input b1-mt-6">
           <label class="b1-input__label b1-input__label_top b1-small b1-bold">
-            {{'components.acct.acctStatement.format' | translate}}
+            {{ 'components.acct.acctStatement.format' | translate }}
           </label>
           <div class="w-full">
-            <ng-select class="formats" appendTo="body" [editableSearchTerm]="false" [searchable]="false"
-              [clearable]="false" [(ngModel)]="result.format" formControlName="format">
+            <ng-select
+              class="formats"
+              appendTo="body"
+              [editableSearchTerm]="false"
+              [searchable]="false"
+              [clearable]="false"
+              [(ngModel)]="result.format"
+              formControlName="format">
               <ng-template ng-label-tmp let-item="item">
-                <div class="b1-base b1-bold  b1-flex b1-align-center">
-                  <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-'+item.toLowerCase()"></i> {{item}}
+                <div class="b1-base b1-bold b1-flex b1-align-center">
+                  <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-' + item.toLowerCase()"></i> {{ item }}
                 </div>
               </ng-template>
               <ng-option *ngFor="let format of config.formats" [value]="format">
-
-                <div class="b1-base b1-bold  b1-flex b1-align-center">
-                  <i class="b1-mr-2 b1-title1" b1-icon [icon]="'file-'+format.toLowerCase()"></i> {{format}}
+                <div class="b1-base b1-bold b1-flex b1-align-center">
+                  <i class="b1-mr-2 b1-title1" b1-icon [icon]="'file-' + format.toLowerCase()"></i> {{ format }}
                 </div>
               </ng-option>
-
             </ng-select>
 
             <div class="b1-input__control formats-mobile">
-              <div class="b1-base b1-bold  b1-flex b1-align-center">
-                <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-'+result.format.toLowerCase()"></i> {{result.format}}
+              <div class="b1-base b1-bold b1-flex b1-align-center">
+                <i class="b1-mr-2 b1-title3" b1-icon [icon]="'file-' + result.format.toLowerCase()"></i>
+                {{ result.format }}
               </div>
               <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
-              <select [(ngModel)]="result.format" name="tabs" id="tabs" class="b1-input__select" #selectList
+              <select
+                [(ngModel)]="result.format"
+                name="tabs"
+                id="tabs"
+                class="b1-input__select"
+                #selectList
                 formControlName="format">
                 <option *ngFor="let format of config.formats" [value]="format">
-                  {{format}}
+                  {{ format }}
                 </option>
               </select>
             </div>
@@ -95,23 +106,27 @@
             <input type="checkbox" class="b1-checkbox__hidden" [(ngModel)]="agree" formControlName="agree" />
             <i class="b1-checkbox__check"></i>
             <span class="b1-checkbox__label b1-small b1-bold">
-              {{'components.corpcard.thisFunctionIsPayConfirm' | translate}}
+              {{ 'components.corpcard.thisFunctionIsPayConfirm' | translate }}
             </span>
           </label>
         </div>
       </div>
     </div>
   </form>
-  <div class="b1-modal-footer" ngbAutofocus>
-    <button class="b1-button-primary b1-button-primary_filled" type="button" (click)="ok()"
-      [disabled]="formGroup.invalid || (!config.isFree && !agree)" *ngIf="!result.sendToEmail">
-      <i b1-icon icon="download"></i>
-      {{'shared.download' | translate}}
-    </button>
-    <button class="b1-button-primary b1-button-primary_filled" type="button" (click)="ok()" *ngIf="result.sendToEmail"
-      [disabled]="formGroup.invalid || (!config.isFree && !agree)">
-      <i b1-icon icon="send"></i>
-      {{'shared.send' | translate}}
-    </button>
-  </div>
-</div>
+
+  <ng-container slot="footer">
+    <b1-button
+      *ngIf="!result.sendToEmail"
+      (btnClick)="ok()"
+      [isDisabled]="formGroup.invalid || (!config.isFree && !agree)"
+      icon="download"
+      label="shared.download"></b1-button>
+
+    <b1-button
+      *ngIf="result.sendToEmail"
+      (btnClick)="ok()"
+      [isDisabled]="formGroup.invalid || (!config.isFree && !agree)"
+      icon="send"
+      label="shared.send"></b1-button>
+  </ng-container>
+</b1-modal-container>

@@ -12,16 +12,11 @@
   <div class="b1-correspondents-modal__body b1-modal-body">
     <div class="b1-correspondents-modal__actions">
       <div class="b1-modal-search">
-        <div class="b1-page-inputWithIcon width-100">
-          <input
-            class="b1-correspondents-modal__control b1-input__control b1-base b1-page-input resize"
-            name="search"
-            id="search"
-            type="text"
-            [attr.placeholder]="'shared.search' | translate"
-            [(ngModel)]="filterTerm" />
-          <label b1-icon icon="search" class="resize" for="search"></label>
-        </div>
+        <b1-input
+          icon="search"
+          [placeholder]="'shared.search' | translate"
+          [resizable]="true"
+          [(ngModel)]="filterTerm"></b1-input>
       </div>
     </div>
 
