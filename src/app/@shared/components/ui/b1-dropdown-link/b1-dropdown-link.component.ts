@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { B1DropdownComponent } from '@ui/b1-dropdown/b1-dropdown.component';
 
 @Component({
   selector: 'b1-dropdown-link',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./b1-dropdown-link.component.scss'],
 })
 export class B1DropdownLinkComponent implements OnInit {
-  constructor() {}
+  constructor(@Inject(B1DropdownComponent) private dropdown: B1DropdownComponent) {}
 
   @Input() icon!: string;
   @Input() label!: string;
@@ -16,6 +17,7 @@ export class B1DropdownLinkComponent implements OnInit {
   ngOnInit(): void {}
 
   click(): void {
+    this.dropdown.close();
     this.btnClick.emit();
   }
 }

@@ -17,6 +17,9 @@ import { of } from 'rxjs';
 import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
 import { NotifyActions } from '@store/notify/actions';
 import { AcctFilter } from '../models/acct-filter.model';
+import { RouteActions } from '@store/route/actions';
+import { PaymentAccount } from '@models/payment-account.model';
+import { AccountModel } from '../models/account.model';
 
 @Injectable()
 export class AcctEffects {
@@ -309,6 +312,58 @@ export class AcctEffects {
       )
     )
   );
+
+  createInnerPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AcctActions.createInnerPayment),
+      switchMap((action) => {
+        const sender = this.mapToPaymentAccount(action.account);
+        return [
+          SharedActions.setCreatePartialPayment({ payment: { sender } }),
+          RouteActions.routeTo({ route: '/payments/create/my-accounts' }),
+        ];
+      })
+    )
+  );
+
+  createOuterPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AcctActions.createOuterPayment),
+      switchMap((action) => {
+        const sender = this.mapToPaymentAccount(action.account);
+        return [
+          SharedActions.setCreatePartialPayment({ payment: { sender } }),
+          RouteActions.routeTo({ route: '/payments/create/within-country' }),
+        ];
+      })
+    )
+  );
+
+  createSwiftPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AcctActions.createSwiftPayment),
+      switchMap((action) => {
+        const sender = this.mapToPaymentAccount(action.account);
+        return [
+          SharedActions.setCreatePartialPayment({ payment: { sender } }),
+          RouteActions.routeTo({ route: '/payments/create/swift' }),
+        ];
+      })
+    )
+  );
+
+  private mapToPaymentAccount(account: AccountModel): PaymentAccount {
+    const sender: PaymentAccount = {
+      accId: account.id,
+      accNumber: account.number,
+      taxCode: account.taxCode,
+      accCurrencyCode: account.currencyCode,
+      accCurrencyId: account.currencyId,
+      bankCode: account.bankId,
+      name: account.name,
+    };
+    return sender;
+  }
   // downloadRequisitesFailure$ = createEffect(()=>
   //     this.actions$.pipe(
   //         ofType(AcctActions.downloadRequisitesFailure),

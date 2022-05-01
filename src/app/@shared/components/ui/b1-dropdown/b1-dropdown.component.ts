@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
 
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'b1-dropdown',
@@ -12,8 +13,12 @@ export class B1DropdownComponent extends withRequiredPropsCheck() implements OnI
   @Input() label!: string;
   @Input() menuWidth = 'auto';
   @Input() scopeSelector = '.b1-page-data';
-
+  @ViewChild('dropdown', { static: true }) dropdown!: NgbDropdown;
   ngOnInit(): void {
     // this.checkRequiredProps(['label', 'scopeSelector']);
+  }
+
+  public close(): void {
+    this.dropdown.close();
   }
 }

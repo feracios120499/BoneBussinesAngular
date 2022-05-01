@@ -34,6 +34,7 @@ import { AccountTransactionSkeletonComponent } from './components/account-transa
 import { AccountTurnoverSkeletonComponent } from './components/account-turnover-skeleton/account-turnover-skeleton.component';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { AcctDetailsEffects } from './store/effects';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AcctDetailsEffects } from './store/effects';
     B1CardLoaderModule,
     CheckValueModule,
     B1ButtonModule,
+    B1EmptyModule,
   ],
 })
 export class AccountModule {}

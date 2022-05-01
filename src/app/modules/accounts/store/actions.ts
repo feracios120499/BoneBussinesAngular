@@ -61,4 +61,10 @@ export namespace AcctActions {
     any | undefined,
     string
   >('[ACCT] send statement');
+
+  export const createInnerPayment = createAction(`[ACCT] create inner payment`, props<{ account: AccountModel }>());
+
+  export const createOuterPayment = createAction(`[ACCT] create outer payment`, props<{ account: AccountModel }>());
+
+  export const createSwiftPayment = createAction(`[ACCT] create swift payment`, props<{ account: AccountModel }>());
 }
