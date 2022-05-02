@@ -32,7 +32,7 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
       docNumberAuto: this.docNumberAutoControl,
       amount: this.amountControl,
       purpose: this.purposeControl,
-      additionalDetails: this.additionalDetailsControl
+      additionalDetails: this.additionalDetailsControl,
     };
     this.formGroup = new FormGroup(controls);
   }
@@ -58,7 +58,6 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
   additionalDetailsMaxLength = 200;
   additionalDetailsControl = new FormControl('', [Validators.maxLength(this.additionalDetailsMaxLength)]);
 
-
   recipientAccountsWithoutSender!: Observable<SelectAccountsList>;
   // tslint:disable-next-line: no-input-rename
   @Input() senderAccounts!: Observable<SelectAccountsList>;
@@ -67,8 +66,8 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
   @ViewChild('paymentForm') paymentForm!: NgForm;
   private subscriptions: Subscription[] = [];
 
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   writeValue(form: PaymentForm): void {
     if (!form) {
@@ -78,24 +77,24 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
       docNumberAuto: !form.number,
       docNumber: form.number,
       senderAccount: {
-        id: form.sender.accId,
-        number: form.sender.accNumber || '',
-        currencyCode: form.sender.accCurrencyCode,
-        currencyId: form.sender.accCurrencyId,
-        name: form.sender.name || '',
-        taxCode: form.sender.taxCode || ''
+        id: form.sender?.accId,
+        number: form.sender?.accNumber || '',
+        currencyCode: form.sender?.accCurrencyCode,
+        currencyId: form.sender?.accCurrencyId,
+        name: form.sender?.name || '',
+        taxCode: form.sender?.taxCode || '',
       },
       recipientAccount: {
-        id: form.recipient.accId,
-        number: form.recipient.accNumber || '',
-        currencyCode: form.recipient.accCurrencyCode,
-        currencyId: form.recipient.accCurrencyId,
-        name: form.recipient.name || '',
-        taxCode: form.recipient.taxCode || ''
+        id: form.recipient?.accId,
+        number: form.recipient?.accNumber || '',
+        currencyCode: form.recipient?.accCurrencyCode,
+        currencyId: form.recipient?.accCurrencyId,
+        name: form.recipient?.name || '',
+        taxCode: form.recipient?.taxCode || '',
       },
       amount: form.amount,
       purpose: form.purpose,
-      additionalDetails: form.additionalDetails
+      additionalDetails: form.additionalDetails,
     };
     this.formGroup.patchValue(formValue);
     this.formGroup.updateValueAndValidity();
@@ -107,32 +106,37 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
     this.onTouched = fn;
   }
 
-
   ngOnInit(): void {
     // фильтруем по валюте отправителя + убираем счет отправителя из возможных для выбора
     this.recipientAccountsWithoutSender = merge(this.recipientAccounts, this.senderAccountControl.valueChanges).pipe(
-      switchMap(_ => this.recipientAccounts.pipe(
-        map((selectAccounts: SelectAccountsList) => {
-          if (this.senderAccountControl.value) {
-            const senderAccount = (this.senderAccountControl.value as SelectAccount);
-            const result = { ...selectAccounts };
-            result.accounts = selectAccounts.accounts.filter(p =>
-              p.number !== senderAccount.number &&
-              p.currencyCode === (senderAccount.currencyCode as string));
-            return result;
-          }
-          return selectAccounts;
-        }))));
+      switchMap((_) =>
+        this.recipientAccounts.pipe(
+          map((selectAccounts: SelectAccountsList) => {
+            if (this.senderAccountControl.value) {
+              const senderAccount = this.senderAccountControl.value as SelectAccount;
+              const result = { ...selectAccounts };
+              result.accounts = selectAccounts.accounts.filter(
+                (p) => p.number !== senderAccount.number && p.currencyCode === (senderAccount.currencyCode as string)
+              );
+              return result;
+            }
+            return selectAccounts;
+          })
+        )
+      )
+    );
   }
 
   ngAfterViewInit(): void {
     this.subscriptions.push(this.formGroup.valueChanges.pipe(this.formChange.bind(this)).subscribe());
-    this.subscriptions.push(this.docNumberAutoControl.valueChanges.pipe(this.docNumberAutoChange.bind(this)).subscribe());
+    this.subscriptions.push(
+      this.docNumberAutoControl.valueChanges.pipe(this.docNumberAutoChange.bind(this)).subscribe()
+    );
   }
 
   private formChange(source$: Observable<any>): Observable<MyAccountsFormModel> {
     return source$.pipe(
-      map(form => form as MyAccountsFormModel),
+      map((form) => form as MyAccountsFormModel),
       distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
       tap((form) => {
         const paymentForm: RecursivePartial<PaymentForm> = {
@@ -145,7 +149,7 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
             name: form.senderAccount?.name,
             bankCode: IbanHelper.getBankId(form.senderAccount?.number),
             taxCode: form.senderAccount?.taxCode,
-            balance: form.senderAccount?.balance
+            balance: form.senderAccount?.balance,
           },
           amount: form.amount,
           purpose: form.purpose,
@@ -158,8 +162,8 @@ export class MyAccountsFormComponent implements OnInit, AfterViewInit, ControlVa
             name: form.recipientAccount?.name,
             bankCode: IbanHelper.getBankId(form.recipientAccount?.number),
             taxCode: form.recipientAccount?.taxCode,
-            balance: form.recipientAccount?.balance
-          }
+            balance: form.recipientAccount?.balance,
+          },
         };
         setTimeout(() => {
           this.onChange(paymentForm);

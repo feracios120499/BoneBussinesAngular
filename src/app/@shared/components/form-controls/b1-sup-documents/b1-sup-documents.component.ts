@@ -13,14 +13,16 @@ import { filter } from 'rxjs/operators';
   selector: 'b1-sup-documents',
   templateUrl: './b1-sup-documents.component.html',
   styleUrls: ['./b1-sup-documents.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => B1SupDocumentsComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => B1SupDocumentsComponent),
+      multi: true,
+    },
+  ],
 })
 export class B1SupDocumentsComponent implements OnInit, ControlValueAccessor {
-  constructor(private store: Store, private modalService: ModalService) { }
+  constructor(private store: Store, private modalService: ModalService) {}
 
   maxCountDocuments = 3;
 
@@ -31,7 +33,6 @@ export class B1SupDocumentsComponent implements OnInit, ControlValueAccessor {
 
   selectedDocuments: PaymentSupDoc[] = [];
   documents$ = this.store.select(SupDocumentsSelectors.signedDocuments);
-
 
   selectedInModal: SupDocument[] = [];
 
@@ -47,10 +48,9 @@ export class B1SupDocumentsComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
+  private onChange = (value: PaymentSupDoc[]) => {};
 
-  private onChange = (value: PaymentSupDoc[]) => { };
-
-  private onTouched = () => { };
+  private onTouched = () => {};
 
   private setSelectedDocuments(documents: PaymentSupDoc[]): void {
     setTimeout(() => {
@@ -62,15 +62,15 @@ export class B1SupDocumentsComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     const change$ = combineLatest([this.documents$, this.selectValueChange]);
 
-    change$.pipe(filter(([documents]) => !!documents && documents.length > 0)).subscribe(
-      ([documents, selected]) => {
-        const selectedDocuments = selected.filter(p => documents.some(d => d.id === p.supDoc.id));
+    change$
+      .pipe(filter(([documents, selected]) => !!documents && documents.length > 0 && !!selected))
+      .subscribe(([documents, selected]) => {
+        const selectedDocuments = selected.filter((p) => documents.some((d) => d.id === p.supDoc.id));
         this.setSelectedDocuments(selectedDocuments);
-      }
-    );
+      });
   }
   openModal(): void {
-    this.selectedInModal = this.selectedDocuments.map(p => p.supDoc);
+    this.selectedInModal = this.selectedDocuments.map((p) => p.supDoc);
     this.modalRef = this.modalService.open(this.templateref);
   }
 
@@ -79,21 +79,21 @@ export class B1SupDocumentsComponent implements OnInit, ControlValueAccessor {
   }
 
   delete(document: PaymentSupDoc): void {
-    this.setSelectedDocuments(this.selectedDocuments.filter(p => p !== document));
+    this.setSelectedDocuments(this.selectedDocuments.filter((p) => p !== document));
   }
 
   clickOnDocument(document: SupDocument): void {
     if (this.isSelected(document)) {
-      this.selectedInModal = this.selectedInModal.filter(p => p !== document);
+      this.selectedInModal = this.selectedInModal.filter((p) => p !== document);
     } else if (this.selectedInModal.length < this.maxCountDocuments) {
       this.selectedInModal.push(document);
     }
   }
 
   save(): void {
-    const selectedDocuments = this.selectedInModal.map(p => {
+    const selectedDocuments = this.selectedInModal.map((p) => {
       const payDocument: PaymentSupDoc = {
-        supDoc: p
+        supDoc: p,
       };
       return payDocument;
     });

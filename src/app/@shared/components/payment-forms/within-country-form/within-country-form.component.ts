@@ -8,14 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, NgForm, Validators } from '@angular/forms';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { IbanHelper } from '@helpers/iban.helper';
@@ -29,13 +22,7 @@ import { BanksStoreService } from '@services/banks-store.service';
 import { PayActions } from '@store/payments/actions';
 import { ibanValidator } from '@validators/iban.validator';
 import { Observable, Subscription } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'within-country-form',
@@ -49,14 +36,8 @@ import {
     },
   ],
 })
-export class WithinCountryFormComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit
-{
-  constructor(
-    private banksService: BanksStoreService,
-    private detector: ChangeDetectorRef,
-    private store: Store
-  ) {
+export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
+  constructor(private banksService: BanksStoreService, private detector: ChangeDetectorRef, private store: Store) {
     const controls: ModelControl<WithinCountryForm> = {
       docNumberAuto: this.docNumberAutoControl,
       docNumber: this.docNumberControl,
@@ -73,21 +54,15 @@ export class WithinCountryFormComponent
     this.formGroup = new FormGroup(controls);
 
     this.subscriptions.push(
-      this.docNumberAutoControl.valueChanges
-        .pipe(this.docNumberAutoChange.bind(this))
-        .subscribe()
+      this.docNumberAutoControl.valueChanges.pipe(this.docNumberAutoChange.bind(this)).subscribe()
     );
 
     this.subscriptions.push(
-      this.recipientTaxCodeControl.valueChanges
-        .pipe(this.recipientTaxCodeChange.bind(this))
-        .subscribe()
+      this.recipientTaxCodeControl.valueChanges.pipe(this.recipientTaxCodeChange.bind(this)).subscribe()
     );
 
     this.subscriptions.push(
-      this.recipientAccountNumberControl.valueChanges
-        .pipe(this.recipientAccountNumberChange.bind(this))
-        .subscribe()
+      this.recipientAccountNumberControl.valueChanges.pipe(this.recipientAccountNumberChange.bind(this)).subscribe()
     );
   }
 
@@ -117,27 +92,18 @@ export class WithinCountryFormComponent
   // DOCUMENT NUMBER
   docNumberControl = new FormControl('');
   docNumberMaxLength = 10;
-  docNumberValidators = [
-    Validators.required,
-    Validators.maxLength(this.docNumberMaxLength),
-  ];
+  docNumberValidators = [Validators.required, Validators.maxLength(this.docNumberMaxLength)];
   // ---
 
   // RECIPIENT NAME
   recipientNameMaxLength = 38;
-  recipientNameControl = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(this.recipientNameMaxLength),
-  ]);
+  recipientNameControl = new FormControl('', [Validators.required, Validators.maxLength(this.recipientNameMaxLength)]);
   // ---
 
   // RECIPIENT ACCOUNT NUMBER
   recipientAccountNumberMaxLength = IbanHelper.ibanLength;
   recipientAccountNumberMinLength = IbanHelper.ibanLength;
-  recipientAccountNumberControl = new FormControl('', [
-    Validators.required,
-    ibanValidator(),
-  ]);
+  recipientAccountNumberControl = new FormControl('', [Validators.required, ibanValidator()]);
   // ---
 
   // RECIPENT TAX CODE
@@ -152,9 +118,7 @@ export class WithinCountryFormComponent
 
   // ADD DETAILS
   additionalDetailsMaxLength = 200;
-  additionalDetailsControl = new FormControl('', [
-    Validators.maxLength(this.additionalDetailsMaxLength),
-  ]);
+  additionalDetailsControl = new FormControl('', [Validators.maxLength(this.additionalDetailsMaxLength)]);
   // ----
 
   // RECIPIENT BANK NAME
@@ -162,11 +126,7 @@ export class WithinCountryFormComponent
   // --
 
   // PURPOSE
-  purposeControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(160),
-  ]);
+  purposeControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(160)]);
 
   amountControl = new FormControl(0, [Validators.required, Validators.min(1)]);
 
@@ -179,9 +139,7 @@ export class WithinCountryFormComponent
     this.subscriptions.push(
       this.formGroup.valueChanges
         .pipe(
-          distinctUntilChanged(
-            (a, b) => JSON.stringify(a) === JSON.stringify(b)
-          ),
+          distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
           tap((form: WithinCountryForm) => {
             const paymentForm: RecursivePartial<PaymentForm> = {
               number: form.docNumber,
@@ -232,10 +190,10 @@ export class WithinCountryFormComponent
         name: form.sender?.name || '',
         taxCode: form.sender?.taxCode || '',
       },
-      recipientName: form.recipient.name || '',
-      recipientAccountNumber: form.recipient.accNumber || '',
+      recipientName: form.recipient?.name || '',
+      recipientAccountNumber: form.recipient?.accNumber || '',
       recipientBankName: '',
-      recipientTaxCode: form.recipient.taxCode || '',
+      recipientTaxCode: form.recipient?.taxCode || '',
       amount: form.amount || 0,
       purpose: form.purpose || '',
       additionalDetails: form.additionalDetails,
@@ -263,9 +221,7 @@ export class WithinCountryFormComponent
     this.store.dispatch(PayActions.showCorrespondentsModal());
   }
 
-  private docNumberAutoChange(
-    source$: Observable<boolean>
-  ): Observable<boolean> {
+  private docNumberAutoChange(source$: Observable<boolean>): Observable<boolean> {
     return source$.pipe(
       tap((docNumberAuto) => {
         if (!docNumberAuto) {
@@ -281,23 +237,17 @@ export class WithinCountryFormComponent
     );
   }
 
-  private recipientAccountNumberChange(
-    source$: Observable<string>
-  ): Observable<BankModel | undefined> {
+  private recipientAccountNumberChange(source$: Observable<string>): Observable<BankModel | undefined> {
     return source$.pipe(
       tap(() => (this.bankName = '')),
-      filter(
-        (value) => IbanHelper.isIban(value) && IbanHelper.validateFormat(value)
-      ),
+      filter((value) => IbanHelper.isIban(value) && IbanHelper.validateFormat(value)),
       map((value) => IbanHelper.getBankId(value) as string),
       switchMap((id) => this.banksService.getBank(id)),
       tap((payload) => (this.bankName = payload?.name))
     );
   }
 
-  private recipientTaxCodeChange(
-    source$: Observable<string>
-  ): Observable<string> {
+  private recipientTaxCodeChange(source$: Observable<string>): Observable<string> {
     return source$.pipe(
       tap((taxCode) => {
         if (/[0]{10}/.test(taxCode)) {

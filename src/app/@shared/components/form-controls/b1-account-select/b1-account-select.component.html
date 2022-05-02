@@ -12,29 +12,22 @@
       (ngModelChange)="changeAccount()"
       [loading]="selectAccounts.isLoading">
       <ng-template ng-label-tmp let-item="item">
-        <div
-          class="b1-base b1-light b1-flex b1-align-center b1-justify-between"
-          *ngIf="currentAccount">
+        <div class="b1-base b1-light b1-flex b1-align-center b1-justify-between" *ngIf="currentAccount">
           <span>
             {{ item.name }}
           </span>
           <span>
-            <span>{{ item / 100 || 0 | money: '' }}</span>
+            <span>{{ item.balance / 100 || 0 | money: '' }}</span>
             <span class="b1-ml-2">{{ item.currencyCode }}</span>
           </span>
         </div>
       </ng-template>
       <ng-container *ngIf="!selectAccounts.isLoading">
-        <ng-option
-          *ngFor="let account of selectAccounts.accounts"
-          [value]="account">
+        <ng-option *ngFor="let account of selectAccounts.accounts" [value]="account">
           <div class="b1-flex b1-justify-between b1-align-center">
             <div>
               <div class="b1-flex b1-align-center">
-                <i
-                  b1-icon
-                  [icon]="account.isCardAccount ? 'account-card' : 'university'"
-                  class="b1-base"></i>
+                <i b1-icon [icon]="account.isCardAccount ? 'account-card' : 'university'" class="b1-base"></i>
                 <div class="b1-ml-3">
                   {{ account.name }}
                   <div class="b1-bold" [iban]="account.number"></div>
@@ -96,10 +89,7 @@
           [class.active]="account === currentAccount"
           (click)="selectAccount(account)">
           <div class="account-icon">
-            <i
-              b1-icon
-              [icon]="account.isCardAccount ? 'account-card' : 'university'"
-              class="b1-medium"></i>
+            <i b1-icon [icon]="account.isCardAccount ? 'account-card' : 'university'" class="b1-medium"></i>
           </div>
           <div class="account-body b1-base b1-light b1-ellipsis">
             <div class="b1-ellipsis">{{ account.name }}</div>

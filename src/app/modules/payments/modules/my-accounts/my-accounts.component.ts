@@ -10,9 +10,10 @@ import { PayFormsSelectors } from '@store/payments/forms/selectors';
 import { required } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
 import { SharedSelectors } from '@store/shared/selectors';
-import { Subscription } from 'rxjs';
+import { merge, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MyAccountsFormComponent } from '@payment-forms/my-accounts-form/my-accounts-form.component';
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
 
 @Component({
   selector: 'pay-my-accounts',
@@ -24,13 +25,18 @@ export class MyAccountsComponent implements OnInit, OnDestroy {
 
   private paymentSubscription: Subscription;
   constructor(private store: Store) {
-    this.paymentSubscription = this.store
-      .select(SharedSelectors.createPayment)
-      .pipe(required)
-      .subscribe((payment) => {
-        this.paymentForm = payment;
+    const createPayment$: Observable<PaymentForm> = this.store.select(SharedSelectors.createPayment).pipe(required);
+    const createPartialPayment$: Observable<Partial<PaymentForm>> = this.store
+      .select(SharedSelectors.createPartialPayment)
+      .pipe(required);
+
+    this.paymentSubscription = merge(createPayment$, createPartialPayment$).subscribe((payment) => {
+      this.paymentForm = payment;
+      if (payment) {
         this.store.dispatch(SharedActions.clearCreatePayment());
-      });
+        this.supDocuments = payment.attachedSupDocs ? payment.attachedSupDocs : [];
+      }
+    });
   }
 
   senderAccounts$ = this.store.select(PayFormsSelectors.senderAccounts);
@@ -42,14 +48,12 @@ export class MyAccountsComponent implements OnInit, OnDestroy {
   );
   isLoading$ = this.store.select(PayFormsSelectors.pageLoader);
 
-  paymentForm?: PaymentForm;
+  paymentForm?: RecursivePartial<PaymentForm>;
   supDocuments: PaymentSupDoc[] = [];
 
   ngOnInit(): void {
     this.store.dispatch(PayFormsActions.init());
-    this.store.dispatch(
-      AppActions.setPageLoader({ loader: PayFormsSelectors.pageLoader })
-    );
+    this.store.dispatch(AppActions.setPageLoader({ loader: PayFormsSelectors.pageLoader }));
   }
 
   ngOnDestroy(): void {
@@ -62,7 +66,10 @@ export class MyAccountsComponent implements OnInit, OnDestroy {
       this.store.dispatch(PayFormsActions.setProgress({ progress: 'confirm' }));
       this.store.dispatch(
         PayFormsActions.setPayment({
-          payment: { ...this.paymentForm, attachedSupDocs: this.supDocuments },
+          payment: {
+            ...(this.paymentForm as PaymentForm),
+            attachedSupDocs: this.supDocuments,
+          },
         })
       );
     }
