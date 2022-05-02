@@ -10,7 +10,7 @@ import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
 import { ServerError } from '@models/errors/server-error.model';
 import { CorrespondentsSelectors } from './selectors';
-import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.modal';
+import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.model';
 import { CorrespondentModalResult } from '@modules/correspondents/models/correspondent-modal-result.model';
 import { CorrespondentModalComponent } from '@modules/correspondents/components/correspondent-modal/correspondent-modal.component';
 import { ModalService } from '@services/modal.service';
