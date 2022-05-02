@@ -4,12 +4,11 @@
       <div class="cl-header-content">
         <div class="cl-header-left">
           <!-- TODO click start demo -->
-          <a class="cl-header-demo">DEMO</a>
+          <a class="cl-header-demo" (click)="activateDemo()">DEMO</a>
           <img class="cl-header-logo" src="assets/img/site-logo-mini.png" alt="Oschadbank logo" />
           <div class="cl-header-languages">
             <app-auth-languages></app-auth-languages>
           </div>
-
         </div>
         <a routerLink="/auth/old" class="cl-header-old" checkState="auth/logon">
           {{ 'owner.toOldVersion' | translate }}
@@ -47,7 +46,5 @@
       </div>
     </div>
   </div>
-  <div class="cl-content-news">
-
-  </div>
+  <div class="cl-content-news"></div>
 </div>

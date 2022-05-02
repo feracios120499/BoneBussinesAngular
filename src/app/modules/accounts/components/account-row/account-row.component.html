@@ -50,24 +50,26 @@
       icon="file-details"
       label="components.acct.share"
       (btnClick)="showRequisitesModal()"></b1-dropdown-link>
-    <ng-container *checkRole="['Director', 'Accountant', 'PaymentsManager']">
-      <!-- TODO ADD  IsPayingAccount on backend-->
-      <b1-dropdown-link
-        icon="cards"
-        label="components.acct.actions.newInnerPayment"
-        (btnClick)="createInnerPayment()"></b1-dropdown-link>
-      <b1-dropdown-link
-        icon="country"
-        label="components.acct.actions.newOuterPayment"
-        (btnClick)="createOuterPayment()"></b1-dropdown-link>
-    </ng-container>
-    <ng-container *checkRole="['Director', 'Accountant', 'ForeignCurrencyPaymentsManager']">
-      <!-- TODO ADD  IsPayingAccount on backend-->
-      <b1-dropdown-link
-        *ngIf="account.currencyCode !== 'UAH'"
-        icon="swift"
-        label="components.acct.actions.newSwiftPayment"
-        (btnClick)="createSwiftPayment()"></b1-dropdown-link>
+    <ng-container *ngIf="account.isPaymentPayingAccount">
+      <ng-container *checkRole="['Director', 'Accountant', 'PaymentsManager']">
+        <!-- TODO ADD  IsPayingAccount on backend-->
+        <b1-dropdown-link
+          icon="cards"
+          label="components.acct.actions.newInnerPayment"
+          (btnClick)="createInnerPayment()"></b1-dropdown-link>
+        <b1-dropdown-link
+          icon="country"
+          label="components.acct.actions.newOuterPayment"
+          (btnClick)="createOuterPayment()"></b1-dropdown-link>
+      </ng-container>
+      <ng-container *checkRole="['Director', 'Accountant', 'ForeignCurrencyPaymentsManager']">
+        <!-- TODO ADD  IsPayingAccount on backend-->
+        <b1-dropdown-link
+          *ngIf="account.currencyCode !== 'UAH'"
+          icon="swift"
+          label="components.acct.actions.newSwiftPayment"
+          (btnClick)="createSwiftPayment()"></b1-dropdown-link>
+      </ng-container>
     </ng-container>
   </b1-dropdown>
 </div>

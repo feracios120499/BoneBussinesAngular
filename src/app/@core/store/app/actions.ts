@@ -10,4 +10,8 @@ export namespace AppActions {
     '[APP] set page loader',
     props<{ loader: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>> }>()
   );
+
+  export const activateDemo = createAction('[APP] activate demo mode');
+
+  export const disableDemoMode = createAction('[APP] disable demo mode');
 }

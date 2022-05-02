@@ -9,6 +9,7 @@ import { PaymentPurposeFormModule } from '@payment-forms/payment-purpose-form/pa
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { MyAccountsFormComponent } from './my-accounts-form.component';
+import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amount.module';
 
 @NgModule({
   declarations: [MyAccountsFormComponent],
@@ -20,6 +21,7 @@ import { MyAccountsFormComponent } from './my-accounts-form.component';
     PaymentDatesFormModule,
     PaymentPurposeFormModule,
     CheckValueModule,
+    B1InputAmountModule,
   ],
   exports: [MyAccountsFormComponent],
 })

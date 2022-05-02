@@ -3,7 +3,7 @@ import { AuthActions } from '@modules/auth/store/actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { NotificationsService } from '@services/notifications.service';
-import { UserService } from '@services/user.service';
+import { UserService } from '@services/user-service/user.service';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 

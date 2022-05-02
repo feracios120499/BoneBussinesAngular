@@ -26,9 +26,15 @@ export class AccountRowComponent implements OnInit {
     this.store.dispatch(AcctActions.openRequisitesModal({ account: this.account }));
   }
 
-  createInnerPayment(): void {}
+  createInnerPayment(): void {
+    this.store.dispatch(AcctActions.createInnerPayment({ account: this.account }));
+  }
 
-  createOuterPayment(): void {}
+  createOuterPayment(): void {
+    this.store.dispatch(AcctActions.createOuterPayment({ account: this.account }));
+  }
 
-  createSwiftPayment(): void {}
+  createSwiftPayment(): void {
+    this.store.dispatch(AcctActions.createSwiftPayment({ account: this.account }));
+  }
 }

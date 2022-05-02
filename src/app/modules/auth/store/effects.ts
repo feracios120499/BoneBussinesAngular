@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AuthService } from '@modules/auth/services/auth-service/auth.service';
 import { BarsCryptorService } from '@services/sign/bars-cryptor.service';
 import { CryptorToken } from '@services/sign/models/cryptor-token.model';
-import { UserService } from '@services/user.service';
-import { NotifyActions } from '@store/notify/actions';
+import { UserService } from '@services/user-service/user.service';
+import { AppActions } from '@store/app/actions';
 import { of } from 'rxjs';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { AuthService } from '../services/auth-service/auth.service';
 
 import { AuthActions } from './actions';
 
@@ -19,6 +19,12 @@ export class AuthEffects {
     private cryptorService: BarsCryptorService
   ) {}
 
+  activateDemo$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(AppActions.activateDemo),
+      map(() => AuthActions.loginRequest({ password: 'demo', userName: 'demo' }))
+    )
+  );
   loginRequest$ = createEffect(() =>
     this.action$.pipe(
       ofType(AuthActions.loginRequest),

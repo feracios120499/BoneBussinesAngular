@@ -8,9 +8,11 @@ export interface AppState {
   globalLoader: boolean;
   pageLoader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>>;
   signProvider: SignProvider;
+  isDemo: boolean;
 }
 
 export const initialState: AppState = {
   globalLoader: false,
   signProvider: environment.defaultSignProvider as unknown as SignProvider,
+  isDemo: false,
 };

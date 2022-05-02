@@ -35,6 +35,7 @@ const keys: Keys = [
   { settings: ['currentLanguage', 'darkModeActive'] },
   { auth: ['token', 'userKey'] },
   { user: ['currentClientId'] },
+  { app: ['isDemo'] },
 ];
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({

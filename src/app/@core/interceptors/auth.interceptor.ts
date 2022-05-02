@@ -1,10 +1,10 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@modules/auth/services/auth-service/auth.service';
 import { AuthActions } from '@modules/auth/store/actions';
 import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '@modules/auth/services/auth-service/auth.service';
 import { CRYPTOR_URL } from '@services/sign/bars-cryptor.service';
 
 import { EMPTY, Observable, Subject, throwError } from 'rxjs';
