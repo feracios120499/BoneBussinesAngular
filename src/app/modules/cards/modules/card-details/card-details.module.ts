@@ -29,6 +29,10 @@ import { FirstTitleModule } from '@pipes/first-title/first-title.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
+import { B1RadioButtonGroupModule } from '@form-controls/b1-radio-button-group/b1-radio-button-group.module';
+import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 
 import { CardDetailsComponent } from './card-details.component';
 import { CardDetailsTabsComponent } from './components/card-details-tabs/card-details-tabs.component';
@@ -88,6 +92,10 @@ import { CardDetailsEffects } from './store/effects';
     CheckValueModule,
     B1ButtonModule,
     B1ModalContainerModule,
+    B1RadioButtonGroupModule,
+    B1CheckboxModule,
+    B1InputModule,
+    B1DropdownModule,
     EffectsModule.forFeature([CardDetailsEffects]),
   ],
 })

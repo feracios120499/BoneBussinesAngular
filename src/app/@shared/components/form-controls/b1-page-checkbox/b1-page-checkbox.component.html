@@ -1,0 +1,10 @@
+<input
+  type="checkbox"
+  class="b1-page-checkbox"
+  [id]="controlId"
+  #formControlRef
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))" />
+<label [for]="controlId" #labelRef>
+  <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
+</label>

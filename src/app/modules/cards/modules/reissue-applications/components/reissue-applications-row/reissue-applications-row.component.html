@@ -1,15 +1,11 @@
 <div class="b1-page-content">
-  <div id="checkbox{{ application.id }}">
-    <input
-      type="checkbox"
-      class="b1-page-checkbox"
-      [id]="application.id"
-      [checked]="application.selected"
-      (change)="selectApplication($event)" />
-    <label [for]="application.id" [id]="application.id">
-      <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
-    </label>
-  </div>
+  <b1-page-checkbox
+    controlId="checkbox{{ application.id }}"
+    [ngModel]="application.selected"
+    (change)="$event.stopPropagation()"
+    (ngModelChange)="selectApplication()">
+  </b1-page-checkbox>
+
   <div class="b1-flex b1-align-center b1-justify-center b1-ml-6 application-icon">
     <img [src]="getImage() | async" />
   </div>

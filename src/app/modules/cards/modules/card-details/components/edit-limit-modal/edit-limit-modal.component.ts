@@ -14,16 +14,18 @@ export class EditLimitModalComponent implements OnInit {
   @Input() config!: EditLimitConfig;
   limitState: LimitState = 'limit';
   limit!: CardLimit;
+  limitRadioButtons = [
+    { value: 'unlimit', label: 'components.corpcard.limit.state.unLimit' },
+    { value: 'zero', label: 'components.corpcard.limit.state.zero' },
+    { value: 'limit', label: 'components.corpcard.limit.state.limit' },
+  ];
+
   constructor(public modal: NgbActiveModal) {}
 
   ngOnInit(): void {
     this.limit = Object.assign({}, this.config.limit);
 
-    this.limitState = this.config.limit.isActive
-      ? this.limit.value === 0
-        ? 'zero'
-        : 'limit'
-      : 'unlimit';
+    this.limitState = this.config.limit.isActive ? (this.limit.value === 0 ? 'zero' : 'limit') : 'unlimit';
 
     if (this.limit.status === 'Suspended') {
       this.limitState = 'unlimit';
