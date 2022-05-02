@@ -33,8 +33,7 @@ export class ReissueApplicationsRowComponent implements OnInit {
     });
   }
 
-  selectApplication(event: any): void {
-    event.stopPropagation();
+  selectApplication(): void {
     this.store.dispatch(CardReissueActions.selectApplication({ id: this.application.id }));
   }
 

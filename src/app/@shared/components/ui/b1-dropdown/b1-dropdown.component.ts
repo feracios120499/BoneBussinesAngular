@@ -14,6 +14,6 @@ export class B1DropdownComponent extends withRequiredPropsCheck() implements OnI
   @Input() scopeSelector = '.b1-page-data';
 
   ngOnInit(): void {
-    // this.checkRequiredProps(['label', 'scopeSelector']);
+    this.checkRequiredProps(['label']);
   }
 }

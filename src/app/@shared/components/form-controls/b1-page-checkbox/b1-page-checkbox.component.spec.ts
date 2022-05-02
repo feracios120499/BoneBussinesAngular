@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { B1RadioButtonComponent } from './b1-radio-button.component';
+import { B1PageCheckboxComponent } from './b1-page-checkbox.component';
 
-describe('B1RadioButtonComponent', () => {
-  let component: B1RadioButtonComponent;
-  let fixture: ComponentFixture<B1RadioButtonComponent>;
+describe('B1PageCheckboxComponent', () => {
+  let component: B1PageCheckboxComponent;
+  let fixture: ComponentFixture<B1PageCheckboxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ B1RadioButtonComponent ]
+      declarations: [ B1PageCheckboxComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(B1RadioButtonComponent);
+    fixture = TestBed.createComponent(B1PageCheckboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

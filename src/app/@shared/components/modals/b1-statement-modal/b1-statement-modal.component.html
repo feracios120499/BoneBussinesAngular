@@ -101,15 +101,12 @@
     </div>
     <div class="row" [hidden]="config.isFree">
       <div class="col-md-12">
-        <div class="b1-input b1-mt-5">
-          <label class="b1-small b1-checkbox">
-            <input type="checkbox" class="b1-checkbox__hidden" [(ngModel)]="agree" formControlName="agree" />
-            <i class="b1-checkbox__check"></i>
-            <span class="b1-checkbox__label b1-small b1-bold">
-              {{ 'components.corpcard.thisFunctionIsPayConfirm' | translate }}
-            </span>
-          </label>
-        </div>
+        <b1-checkbox
+          class="b1-mt-5 b1-small b1-bold"
+          [formControl]="$any(formGroup.controls.agree)"
+          [(ngModel)]="agree">
+          {{ 'components.corpcard.thisFunctionIsPayConfirm' | translate }}
+        </b1-checkbox>
       </div>
     </div>
   </form>

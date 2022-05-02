@@ -1,17 +1,7 @@
 <div class="b1-page-actions" *ngrxLet="tab$ as tab">
   <div class="b1-page-actions__left" *ngrxLet="isLoading$ as isLoading">
-    <div>
-      <input
-        type="checkbox"
-        class="b1-page-checkbox"
-        id="selectAll"
-        name="selectAll"
-        [checked]="selectAll$ | ngrxPush"
-        (change)="selectAll()" />
-      <label for="selectAll">
-        <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
-      </label>
-    </div>
+    <b1-page-checkbox [ngModel]="selectAll$ | ngrxPush" (ngModelChange)="selectAll()"> </b1-page-checkbox>
+
     <div class="b1-page-icons">
       <ng-container *checkRole="['Director', 'Accountant']">
         <b1-button
@@ -41,16 +31,12 @@
     </div>
   </div>
   <form class="b1-page-actions__right" name="search" novalidate>
-    <div class="b1-page-inputWithIcon width-100">
-      <input
-        class="b1-input__control without-label b1-base b1-page-input resize"
-        name="search"
-        id="search"
-        type="text"
-        [attr.placeholder]="'shared.search' | translate"
-        [ngModel]="filter$ | ngrxPush"
-        (ngModelChange)="onFilter($event)" />
-      <label b1-icon icon="search" class="resize" for="search"></label>
-    </div>
+    <b1-input
+      name="search"
+      icon="search"
+      [placeholder]="'shared.search' | translate"
+      [resizable]="true"
+      [ngModel]="filter$ | ngrxPush"
+      (ngModelChange)="onFilter($event)"></b1-input>
   </form>
 </div>

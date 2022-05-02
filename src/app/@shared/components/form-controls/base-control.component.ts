@@ -1,12 +1,4 @@
-import {
-  Component,
-  AfterViewInit,
-  Input,
-  ViewChild,
-  ElementRef,
-  Renderer2,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, AbstractControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -47,7 +39,7 @@ export abstract class BaseControlComponent
     if (this.formControlRef.nativeElement.form) {
       this.checkRequiredProps(['formControl']);
     }
-    if (!this.labelRef.nativeElement.textContent) {
+    if (!this.labelRef.nativeElement.innerHTML) {
       throw new Error('Label text is required!');
     }
   }

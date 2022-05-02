@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { email } from '@validators/email.validator';
 import dayjs from 'dayjs';
 import { CardStatementModalConfig } from '../../models/card-statement-modal-config.model';
 import { CardStatementModalResult } from '../../models/card-statement-modal-result.model';
+
+const { required } = Validators;
 
 @Component({
   selector: 'app-card-statement-modal',
@@ -24,12 +27,16 @@ export class CardStatementModalComponent implements OnInit {
     'shared.picker.currentYear': [dayjs().startOf('year'), dayjs()],
     'shared.picker.year1': [dayjs().subtract(1, 'year'), dayjs()],
   };
+  typeRadioButtons = [
+    { value: 'card', label: 'components.corpcard.services.statement.type.card' },
+    { value: 'account', label: 'components.corpcard.services.statement.type.account' },
+  ];
 
   formGroup = new FormGroup({
-    range: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.email]),
+    range: new FormControl('', [required]),
+    email: new FormControl('', [email]),
     sendToEmail: new FormControl(false),
-    format: new FormControl('', [Validators.required]),
+    format: new FormControl('', [required]),
     agree: new FormControl(false),
     type: new FormControl('card'),
   });

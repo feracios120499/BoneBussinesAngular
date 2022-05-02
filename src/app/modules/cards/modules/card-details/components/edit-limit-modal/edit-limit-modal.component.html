@@ -1,11 +1,9 @@
-<div class="b1-modal-data">
-  <div class="b1-modal-close">
-    <i b1-icon icon="cancel" (click)="modal.close()"></i>
-  </div>
-  <div class="b1-modal-header">
+<b1-modal-container [loader]="false">
+  <ng-container slot="header">
     {{ 'components.corpcard.editingLimit' | translate }}
-  </div>
-  <div class="b1-modal-body b1-modal-wrapper">
+  </ng-container>
+
+  <ng-container slot="body">
     <div class="row">
       <div class="col-md-12">
         <div class="b1-medium b1-light">
@@ -20,42 +18,20 @@
         </div>
       </div>
     </div>
+
     <div class="row b1-mt-5">
       <div class="col-md-12">
-        <label class="b1-checkbox">
-          <input class="b1-checkbox__hidden" type="radio" name="limit" value="unlimit" [(ngModel)]="limitState" /><i
-            class="b1-checkbox__check"></i>
-          <span>
-            {{ 'components.corpcard.limit.state.unLimit' | translate }}
-          </span>
-        </label>
-      </div>
-      <div class="col-md-12 b1-mt-4">
-        <label class="b1-checkbox">
-          <input class="b1-checkbox__hidden" type="radio" name="limit" value="zero" [(ngModel)]="limitState" /><i
-            class="b1-checkbox__check"></i>
-          <span>
-            {{ 'components.corpcard.limit.state.zero' | translate }}
-          </span>
-        </label>
-      </div>
-      <div class="col-md-12 b1-mt-4">
-        <label class="b1-checkbox">
-          <input class="b1-checkbox__hidden" type="radio" name="limit" value="limit" [(ngModel)]="limitState" /><i
-            class="b1-checkbox__check"></i>
-          <span>
-            {{ 'components.corpcard.limit.state.limit' | translate }}
-          </span>
-        </label>
+        <b1-radio-button-group name="limit" [(ngModel)]="limitState" [items]="limitRadioButtons">
+        </b1-radio-button-group>
       </div>
     </div>
+
     <div class="row b1-mt-6" *ngIf="limitState == 'limit'">
       <div class="col-md-12">
         <b1-input-amount [(ngModel)]="limit.value" [labelTop]="true"> </b1-input-amount>
       </div>
     </div>
-  </div>
-  <div class="b1-modal-footer">
-    <b1-button icon="save" label="actions.save" (btnClick)="save()"></b1-button>
-  </div>
-</div>
+  </ng-container>
+
+  <b1-button slot="footer" icon="save" label="actions.save" (btnClick)="save()"></b1-button>
+</b1-modal-container>
