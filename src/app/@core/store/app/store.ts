@@ -14,5 +14,5 @@ export interface AppState {
 export const initialState: AppState = {
   globalLoader: false,
   signProvider: environment.defaultSignProvider as unknown as SignProvider,
-  isDemo: true,
+  isDemo: false,
 };
