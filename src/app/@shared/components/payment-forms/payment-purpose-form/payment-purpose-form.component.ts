@@ -10,11 +10,13 @@ import { environment } from 'src/environments/environment';
   selector: 'payment-purpose-form',
   templateUrl: './payment-purpose-form.component.html',
   styleUrls: ['./payment-purpose-form.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => PaymentPurposeFormComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => PaymentPurposeFormComponent),
+      multi: true,
+    },
+  ],
 })
 export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input() maxlength = 160;
@@ -40,10 +42,10 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
   conclusionNumber?: string;
   billNumber?: string;
 
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.amount) {
@@ -100,14 +102,16 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     if (this.withVat) {
       const tax = parseFloat(parseFloat(this.withVatValue).toFixed(2));
 
-      const realSum = parseFloat(((+this.amount) / (100 + tax)).toFixed(2));
+      const realSum = parseFloat((+this.amount / (100 + tax)).toFixed(2));
 
       this.addedText = ' ' + this.includingTemplate;
-      const vat = ((tax / 100) * realSum);
-      this.addedText += ' ' + this.withVatTemplate
-        .replace('{percent}', Number(this.withVatValue).toFixed(2))
-        .replace('{amount}', vat.toFixed(2))
-        .replace('{code}', '');
+      const vat = (tax / 100) * realSum;
+      this.addedText +=
+        ' ' +
+        this.withVatTemplate
+          .replace('{percent}', Number(this.withVatValue).toFixed(2))
+          .replace('{amount}', vat.toFixed(2))
+          .replace('{code}', '');
 
       if (this.addedText) {
         this.addText(this.addedText);
@@ -136,21 +140,26 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     this.registerDate = this.conclusionNumber = this.billNumber = undefined;
   }
 
-  buildPurpose(event: any): void {
-    event.preventDefault();
-
+  buildPurpose(): void {
     this.removeAddedText();
     if (this.taxCode) {
       this.taxCode = this.pad(this.taxCode, 8);
     }
     console.log(this.registerDate);
-    this.addedText = '*' +
-      ';' + (this.payType?.code || '') +
-      ';' + (this.taxCode || '') +
-      ';' + (this.explanatoryInfo || '') +
-      ';' + (this.registerDate ? this.registerDate.format('DD.MM.YYYY') : '') +
-      ';' + (this.conclusionNumber || '') +
-      ';' + (this.billNumber || '');
+    this.addedText =
+      '*' +
+      ';' +
+      (this.payType?.code || '') +
+      ';' +
+      (this.taxCode || '') +
+      ';' +
+      (this.explanatoryInfo || '') +
+      ';' +
+      (this.registerDate ? this.registerDate.format('DD.MM.YYYY') : '') +
+      ';' +
+      (this.conclusionNumber || '') +
+      ';' +
+      (this.billNumber || '');
 
     this.addText(this.addedText);
   }
@@ -159,8 +168,7 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     if (this.addedText) {
       const index = this.viewValue.indexOf(this.addedText);
       if (index >= 0) {
-        this.viewValue = this.viewValue.slice(0, index) +
-          this.viewValue.slice(index + this.addedText.length);
+        this.viewValue = this.viewValue.slice(0, index) + this.viewValue.slice(index + this.addedText.length);
         this.setValue(this.viewValue);
       }
       this.addedText = '';
@@ -182,6 +190,5 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     return s;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

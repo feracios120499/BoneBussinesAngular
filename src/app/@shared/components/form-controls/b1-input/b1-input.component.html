@@ -1,4 +1,4 @@
-<label *ngIf="!icon" class="b1-input__label b1-input__label_top b1-small b1-bold" [for]="controlId" #labelRef>
+<label *ngIf="!icon" [class]="labelClasses" [for]="controlId" #labelRef>
   <ng-container *ngTemplateOutlet="content"></ng-container>
 </label>
 

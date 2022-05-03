@@ -8,6 +8,7 @@
   (blur)="onBlur()"
   (ngModelChange)="onModelChange()"></textarea>
 <b1-input-error [control]="formControl" [form]="form"></b1-input-error>
+
 <div class="b1-mt-2">
   <div class="b1-small">
     <span>{{ 'components.pay.left' | translate }}</span>
@@ -18,17 +19,11 @@
 <fieldset (click)="checkSum($event)" class="b1-mt-3">
   <div class="b1-base checkboxes">
     <!-- С ПДВ -->
-    <div>
-      <label class="b1-checkbox">
-        <input
-          type="checkbox"
-          class="b1-checkbox__hidden"
-          name="type"
-          [(ngModel)]="withVat"
-          (ngModelChange)="calcTaxes()" />
-        <i class="b1-checkbox__check"></i>
-        <span class="b1-checkbox__label b1-base">{{ 'components.pay.withVAT' | translate }} </span>
-      </label>
+    <div style="display: flex; align-items: center">
+      <b1-checkbox class="b1-base" [(ngModel)]="withVat" (ngModelChange)="calcTaxes()">
+        {{ 'components.pay.withVAT' | translate }}
+      </b1-checkbox>
+
       <input
         name="vatVaue"
         [(ngModel)]="withVatValue"
@@ -41,27 +36,14 @@
     </div>
 
     <!-- БЕЗ ПДВ -->
-    <label class="b1-checkbox">
-      <input
-        type="checkbox"
-        class="b1-checkbox__hidden"
-        name="type"
-        [(ngModel)]="withoutVat"
-        (ngModelChange)="withoutVatChange()" />
-      <i class="b1-checkbox__check"></i>
-      <span class="b1-checkbox__label b1-base">{{ 'components.pay.withoutVAT' | translate }} </span>
-    </label>
+    <b1-checkbox [(ngModel)]="withoutVat" (ngModelChange)="withoutVatChange()">
+      {{ 'components.pay.withoutVAT' | translate }}
+    </b1-checkbox>
+
     <!-- БЮДЖЕТ -->
-    <label class="b1-checkbox">
-      <input
-        type="checkbox"
-        class="b1-checkbox__hidden"
-        name="type"
-        [(ngModel)]="budget"
-        (ngModelChange)="budgetChange()" />
-      <i class="b1-checkbox__check"></i>
-      <span class="b1-checkbox__label b1-base">{{ 'components.pay.budget' | translate }} </span>
-    </label>
+    <b1-checkbox [(ngModel)]="budget" (ngModelChange)="budgetChange()">
+      {{ 'components.pay.budget' | translate }}
+    </b1-checkbox>
   </div>
 </fieldset>
 
@@ -100,36 +82,26 @@
       </ng-option>
     </ng-select>
   </div>
-  <div class="b1-mt-5">
-    <label class="b1-input__label not-lower b1-base">{{ 'components.pay.edrpo' | translate }}</label>
-    <input type="text" class="b1-input__control b1-base" only-numbers maxlength="10" [(ngModel)]="taxCode" />
-  </div>
+  <b1-number-input class="b1-mt-5" [labelTop]="false" [maxLength]="10" [(ngModel)]="taxCode">
+    {{ 'components.pay.edrpo' | translate }}
+  </b1-number-input>
 
-  <div class="b1-mt-5">
-    <label class="b1-input__label b1-base">
-      {{ 'components.pay.explanatoryInfo' | translate }}
-    </label>
-    <textarea class="b1-input__control b1-base" [(ngModel)]="explanatoryInfo" maxlength="80"></textarea>
-  </div>
+  <b1-textarea class="b1-mt-5" [labelTop]="false" [autoHight]="false" [(ngModel)]="explanatoryInfo" [maxLength]="80">
+    {{ 'components.pay.explanatoryInfo' | translate }}
+  </b1-textarea>
+
   <div class="build">
-    <label class="b1-checkbox b1-mt-5">
-      <input
-        type="checkbox"
-        [(ngModel)]="showNotRequiredFields"
-        class="b1-checkbox__hidden"
-        (ngModelChange)="clearNotRequiredFields()" />
-      <i class="b1-checkbox__check"></i>
-      <span class="b1-checkbox__label b1-base">
-        {{ 'components.pay.refundVAT' | translate }}
-      </span>
-    </label>
-    <button
-      class="b1-button-warning b1-button-warning_filled b1-mt-5"
+    <b1-checkbox class="b1-mt-5 b1-base" [(ngModel)]="showNotRequiredFields" (ngModelChange)="clearNotRequiredFields()">
+      {{ 'components.pay.refundVAT' | translate }}
+    </b1-checkbox>
+
+    <b1-button
+      class="b1-mt-5"
+      mode="warning"
       [hidden]="showNotRequiredFields"
-      (click)="buildPurpose($event)">
-      <i b1-icon icon="build-purpose"></i>
-      {{ 'components.pay.buildPurpose' | translate | lowercase }}
-    </button>
+      (btnClick)="buildPurpose()"
+      icon="build-purpose"
+      [label]="'components.pay.buildPurpose' | translate | lowercase"></b1-button>
   </div>
   <div [hidden]="!showNotRequiredFields">
     <div class="b1-input b1-mt-5 b1-flex">
@@ -144,24 +116,21 @@
                 <label for="calendar" b1-icon icon="calendar"></label> -->
       </div>
     </div>
-    <div class="b1-mt-5">
-      <label class="b1-input__label b1-base">
-        {{ 'components.pay.conclusionNum' | translate }}
-      </label>
-      <input type="text" class="b1-input__control b1-base" [(ngModel)]="conclusionNumber" maxlength="20" />
-    </div>
-    <div class="b1-mt-5">
-      <label class="b1-input__label b1-base">
-        {{ 'components.pay.taxBillNum' | translate }}
-      </label>
-      <input type="text" class="b1-input__control b1-base" [(ngModel)]="billNumber" maxlength="20" />
-    </div>
-    <button
-      class="b1-button-warning b1-button-warning_filled b1-mt-5 pull-right"
+
+    <b1-input class="b1-mt-5" [labelTop]="false" [(ngModel)]="conclusionNumber" [maxLength]="20">
+      {{ 'components.pay.conclusionNum' | translate | lowercase }}
+    </b1-input>
+
+    <b1-input class="b1-mt-5" [labelTop]="false" [(ngModel)]="billNumber" [maxLength]="20">
+      {{ 'components.pay.taxBillNum' | translate | lowercase }}
+    </b1-input>
+
+    <b1-button
+      class="b1-mt-5"
+      mode="warning"
       [hidden]="!showNotRequiredFields"
-      (click)="buildPurpose($event)">
-      <i b1-icon icon="build-purpose"></i>
-      {{ 'components.pay.buildPurpose' | translate | lowercase }}
-    </button>
+      (btnClick)="buildPurpose()"
+      icon="build-purpose"
+      [label]="'components.pay.buildPurpose' | translate | lowercase"></b1-button>
   </div>
 </div>

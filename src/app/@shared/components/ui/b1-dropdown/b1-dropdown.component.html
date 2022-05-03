@@ -3,7 +3,7 @@
     <ng-content select="[slot=toggle]"></ng-content>
   </div>
 
-  <ul
+  <div
     class="b1-dropdown b1-bg-light"
     webClass="b1-animate fade-in-up"
     [style.width]="menuWidth"
@@ -19,6 +19,6 @@
     </div>
     <ng-content select="b1-dropdown-link"></ng-content>
     <ng-content select="ng-container"></ng-content>
-    <ng-content select=".b1-separator"></ng-content>
-  </ul>
+    <!-- <ng-content select=".b1-separator"></ng-content> -->
+  </div>
 </div>

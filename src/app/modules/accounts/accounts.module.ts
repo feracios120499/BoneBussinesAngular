@@ -19,6 +19,9 @@ import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { AccountsFilterModule } from '@pipes/accounts-filter/accounts-filter.module';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
+import { B1RoundCheckboxModule } from '@form-controls/b1-round-checkbox/b1-round-checkbox.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 
 import { AccountRowComponent } from './components/account-row/account-row.component';
 import { AccountsActionsComponent } from './components/accounts-actions/accounts-actions.component';
@@ -60,6 +63,9 @@ import { CheckRoleModule } from '@directives/check-role/check-role.module';
     CheckValueModule,
     B1DropdownModule,
     CheckRoleModule,
+    B1RoundCheckboxModule,
+    B1InputModule,
+    B1MoreButtonModule,
   ],
 })
 export class AccountsModule {}

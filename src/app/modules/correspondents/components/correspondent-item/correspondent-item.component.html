@@ -12,11 +12,11 @@
 <div class="correspondent-item__bank">{{ correspondent.bankName }}</div>
 
 <b1-dropdown
-  class="correspondent-item__more b1-card__col b1-card__col_dot"
+  class="correspondent-item__more"
   label="correspondent's actions"
   menuWidth="250px"
   scopeSelector="app-correspondents-list">
-  <a class="b1-card__v-dots" slot="toggle"></a>
+  <b1-more-button slot="toggle"></b1-more-button>
   <b1-dropdown-link
     icon="country"
     label="components.pay.correspondents.createPayment"

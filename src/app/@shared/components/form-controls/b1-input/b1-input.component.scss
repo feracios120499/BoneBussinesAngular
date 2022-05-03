@@ -4,4 +4,8 @@
   &.b1-page-inputWithIcon {
     display: flex;
   }
+
+  .b1-input__label {
+    text-transform: none;
+  }
 }

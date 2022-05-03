@@ -2,19 +2,18 @@
   <ng-content></ng-content>
 </label>
 
-<input
+<textarea
   class="b1-input__control"
-  [style.textTransform]="transform"
+  [class.b1-input__control_textarea]="autoHight"
   [id]="controlId"
-  [type]="type"
-  [value]="value"
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))"
   [attr.name]="name"
   [attr.placeholder]="placeholder"
-  [formControl]="$any(formControl)"
-  #formControlRef
-  [mask]="mask"
-  [prefix]="prefix"
-  [showMaskTyped]="true" />
+  [attr.minlength]="minLength"
+  [attr.maxlength]="maxLength"
+  [disabled]="isDisabled"
+  #formControlRef></textarea>
 
 <p
   *ngIf="formControl && formControl.invalid && (formControl.dirty || formControl.touched)"

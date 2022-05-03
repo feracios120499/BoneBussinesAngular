@@ -1,12 +1,20 @@
 @import 'variables';
 
+$screen-tablet: 812px;
+
 :host {
   display: block;
+
+  &.full {
+    @media (max-width: $screen-tablet) {
+      width: 100%;
+    }
+  }
 }
 
 .b1-button {
   &.round {
-    @media (max-width: 812px) {
+    @media (max-width: $screen-tablet) {
       @include button-round;
     }
   }

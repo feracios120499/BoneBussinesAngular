@@ -1,0 +1,10 @@
+<input
+  type="checkbox"
+  class="pointer"
+  [id]="controlId"
+  #formControlRef
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))" />
+<label class="b1-large b1-flex b1-align-center b1-justify-center pointer" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>

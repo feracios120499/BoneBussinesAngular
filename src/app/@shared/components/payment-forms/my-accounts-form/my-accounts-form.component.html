@@ -1,32 +1,14 @@
 <form [formGroup]="formGroup" #paymentForm="ngForm">
-  <div class="b1-input">
-    <label class="b1-small b1-checkbox noselect">
-      <input
-        type="checkbox"
-        class="b1-checkbox__hidden"
-        [formControl]="docNumberAutoControl" />
-      <i class="b1-checkbox__check"></i>
-      <span class="b1-checkbox__label b1-base">
-        {{ 'shared.autoNumber' | translate }}
-      </span>
-    </label>
-  </div>
+  <b1-checkbox class="b1-base noselect" [formControl]="docNumberAutoControl">
+    {{ 'shared.autoNumber' | translate }}
+  </b1-checkbox>
   <div class="b1-mt-5" [hidden]="docNumberAutoControl?.value">
-    <div class="b1-input">
-      <label class="b1-input__label b1-base">
-        {{ 'components.pay.paymentNumber' | translate }}
-      </label>
-      <input class="b1-input__control" [formControl]="docNumberControl" />
-      <b1-input-error [control]="docNumberControl" [form]="paymentForm">
-      </b1-input-error>
-    </div>
+    <b1-input [labelTop]="false" [formControl]="docNumberControl">
+      {{ 'components.pay.paymentNumber' | translate }}
+    </b1-input>
   </div>
-  <b1-account-select
-    class="b1-mt-5"
-    [selectAccounts]="senderAccounts"
-    [formControl]="senderAccountControl">
-    <b1-input-error [control]="senderAccountControl" [form]="paymentForm">
-    </b1-input-error>
+  <b1-account-select class="b1-mt-5" [selectAccounts]="senderAccounts" [formControl]="senderAccountControl">
+    <b1-input-error [control]="senderAccountControl" [form]="paymentForm"> </b1-input-error>
   </b1-account-select>
   <b1-account-select
     label="components.pay.accountTo"
@@ -37,16 +19,14 @@
     "
     [selectAccounts]="recipientAccountsWithoutSender"
     [formControl]="recipientAccountControl">
-    <b1-input-error [control]="recipientAccountControl" [form]="paymentForm">
-    </b1-input-error>
+    <b1-input-error [control]="recipientAccountControl" [form]="paymentForm"> </b1-input-error>
   </b1-account-select>
 
   <payment-dates-form [paymentForm]="formGroup"></payment-dates-form>
 
   <div class="b1-mt-5">
     <b1-input-amount [formControl]="amountControl">
-      <b1-input-error [control]="amountControl" [form]="paymentForm">
-      </b1-input-error>
+      <b1-input-error [control]="amountControl" [form]="paymentForm"> </b1-input-error>
     </b1-input-amount>
   </div>
 
@@ -55,10 +35,7 @@
       <label class="b1-input__label b1-base">
         {{ 'components.pay.purpose' | translate }}
       </label>
-      <payment-purpose-form
-        [formControl]="purposeControl"
-        [form]="paymentForm"
-        [amount]="amountControl.value">
+      <payment-purpose-form [formControl]="purposeControl" [form]="paymentForm" [amount]="amountControl.value">
       </payment-purpose-form>
     </div>
   </div>

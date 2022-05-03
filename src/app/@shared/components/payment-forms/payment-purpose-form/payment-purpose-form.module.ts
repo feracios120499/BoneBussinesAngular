@@ -11,6 +11,11 @@ import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scr
 import { OnlyNumbersModule } from '@directives/only-numbers/only-numbers.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { B1SinglePickerModule } from '@form-controls/b1-single-picker/b1-single-picker.module';
+import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
+import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
+import { B1NumberInputModule } from '@form-controls/b1-number-input/b1-number-input.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 
 import { PaymentPurposeFormComponent } from './payment-purpose-form.component';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
@@ -30,6 +35,11 @@ import { CheckValueModule } from '@directives/check-value/check-value.module';
     B1IconModule,
     B1SinglePickerModule,
     CheckValueModule,
+    B1TextareaModule,
+    B1CheckboxModule,
+    B1NumberInputModule,
+    B1InputModule,
+    B1ButtonModule,
   ],
   exports: [PaymentPurposeFormComponent],
 })
