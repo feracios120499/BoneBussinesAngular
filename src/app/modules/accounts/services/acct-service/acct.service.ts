@@ -28,6 +28,7 @@ export class AcctService implements BaseAcctService {
       }
     });
   }
+
   getAccounts(clientId: string): Observable<AccountModel[]> {
     return this.acctService.getAccounts(clientId);
   }
@@ -39,6 +40,9 @@ export class AcctService implements BaseAcctService {
   }
   getTurnovers(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<Turnovers[]> {
     throw new Error('Method not implemented.');
+  }
+  getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]> {
+    return this.acctService.getIncomingTransactions(clientId, start, end);
   }
   getTransactions(
     bankId: string,

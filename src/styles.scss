@@ -3843,6 +3843,7 @@ ngb-modal-window {
   }
   & .ranges li button.active {
     background-color: $color-primary !important;
+    color: $color-light !important;
   }
   & .drp-calendar.left.single {
     padding: 0;

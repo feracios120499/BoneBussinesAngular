@@ -1,46 +1,67 @@
 <div class="b1-page-title">
-    <div class="b1-title2">
-        {{'aside.nav.DOCUMENTS' | translate}}
+  <div class="b1-title2">
+    <ng-content></ng-content>
+  </div>
+  <div class="b1-page-menu">
+    <div class="b1-flex">
+      <ul class="b1-head-tabs">
+        <li
+          (click)="goTo('payments/incomings')"
+          [class.active]="isActive('/payments/incomings')"
+          class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.pay.header.incomings' | translate }}
+          </a>
+        </li>
+        <li
+          (click)="goTo('payments/create')"
+          [class.active]="isActive('/payments/create')"
+          class="b1-head-tabs__item"
+          class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.pay.header.newPayment' | translate }}
+          </a>
+        </li>
+        <li routerLink="list" routerLinkActive="active" class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.pay.header.payments' | translate }}
+          </a>
+        </li>
+        <li ng-class="{ active: $state.includes('app.payments.held') }" class="b1-head-tabs__item">
+          <a
+            href=""
+            ui-sref="app.payments.held"
+            data-translate="components.pay.header.paidPayments"
+            class="b1-head-tabs__link b1-medium b1-color-dark">
+            проведені
+          </a>
+        </li>
+        <li
+          ng-class="{ active: $state.includes('app.payments.templates') }"
+          ng-if="IsEnableFunction('Payments', 'Templates')"
+          class="b1-head-tabs__item">
+          <a
+            href=""
+            ui-sref="app.payments.templates.list"
+            data-translate="components.pay.header.templates"
+            class="b1-head-tabs__link b1-medium b1-color-dark">
+            шаблони
+          </a>
+        </li>
+        <li
+          ng-class="{ active: $state.includes('app.paymentsAuto') }"
+          ng-if="IsEnableFunction('Payments', 'RegularPayments')"
+          class="b1-head-tabs__item">
+          <a
+            href=""
+            ui-sref="app.paymentsAuto.index"
+            data-translate="components.pay.header.autoPayments"
+            class="b1-head-tabs__link b1-medium b1-color-dark">
+            автоматичні
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="b1-page-menu">
-        <div class="b1-flex">
-            <ul class="b1-head-tabs">
-                <li routerLink="incomings" routerLinkActive="active" class="b1-head-tabs__item">
-                    <a class="b1-head-tabs__link b1-medium b1-color-dark">
-                        {{'components.pay.header.incomings' | translate}}
-                    </a>
-                </li>
-                <li routerLink="create" routerLinkActive="active" class="b1-head-tabs__item" class="b1-head-tabs__item">
-                    <a class="b1-head-tabs__link b1-medium b1-color-dark">
-                        {{'components.pay.header.newPayment' | translate}}
-                    </a>
-                </li>
-                <li routerLink="list" routerLinkActive="active" class="b1-head-tabs__item">
-                    <a class="b1-head-tabs__link b1-medium b1-color-dark">
-                        {{'components.pay.header.payments' | translate}}
-                    </a>
-                </li>
-                <li ng-class="{active:$state.includes('app.payments.held')}" class="b1-head-tabs__item">
-                    <a href="" ui-sref="app.payments.held" data-translate="components.pay.header.paidPayments"
-                        class="b1-head-tabs__link b1-medium b1-color-dark">
-                        проведені
-                    </a>
-                </li>
-                <li ng-class="{active:$state.includes('app.payments.templates')}"
-                    ng-if="IsEnableFunction('Payments','Templates')" class="b1-head-tabs__item">
-                    <a href="" ui-sref="app.payments.templates.list" data-translate="components.pay.header.templates"
-                        class="b1-head-tabs__link b1-medium b1-color-dark">
-                        шаблони
-                    </a>
-                </li>
-                <li ng-class="{active:$state.includes('app.paymentsAuto')}"
-                    ng-if="IsEnableFunction('Payments','RegularPayments')" class="b1-head-tabs__item">
-                    <a href="" ui-sref="app.paymentsAuto.index" data-translate="components.pay.header.autoPayments"
-                        class="b1-head-tabs__link b1-medium b1-color-dark">
-                        автоматичні
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+  </div>
 </div>
+<b1-page-separator mobileClass="hidden"></b1-page-separator>

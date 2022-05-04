@@ -27,6 +27,8 @@ export abstract class BaseAcctService {
     end: Dayjs
   ): Observable<Turnovers[]>;
 
+  abstract getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]>;
+
   abstract getTransactions(
     bankId: string,
     accountId: number,

@@ -60,6 +60,14 @@ export class HttpAcctService extends BaseService implements BaseAcctService {
     );
   }
 
+  getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]> {
+    const startFormated = start.format('YYYY-MM-DD');
+    const endFormated = end.format('YYYY-MM-DD');
+    return this.http.get<Transaction[]>(
+      `api/v1/acct/transactions/incoming/${clientId}?dateStart=${startFormated}&dateEnd=${endFormated}&$orderby=DocumentDate%20desc`
+    );
+  }
+
   getTransactions(
     bankId: string,
     accountId: number,

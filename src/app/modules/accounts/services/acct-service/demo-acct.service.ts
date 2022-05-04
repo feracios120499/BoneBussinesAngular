@@ -316,6 +316,11 @@ export class DemoAcctService extends BaseAcctService {
   getTurnovers(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<Turnovers[]> {
     throw new Error('Method not implemented.');
   }
+
+  getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]> {
+    throw new Error('Method not implemented.');
+  }
+
   getTransactions(
     bankId: string,
     accountId: number,

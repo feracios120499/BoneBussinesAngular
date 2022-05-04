@@ -1,0 +1,37 @@
+<div class="b1-page-actions">
+  <div class="b1-page-actions__left">
+    <div>
+      <input type="checkbox" class="b1-page-checkbox" id="selectAll" name="selectAll" />
+      <label for="selectAll">
+        <div class="b1-page-checkbox-icon" b1-icon icon="check"></div>
+      </label>
+    </div>
+    <div class="b1-page-icons">
+      <b1-button class="b1-mr-4" icon="print" label="components.pay.print"> </b1-button>
+    </div>
+  </div>
+  <form class="b1-page-actions__right" name="search" novalidate>
+    <div class="b1-page-inputWithIcon width-100">
+      <input
+        class="b1-input__control without-label b1-base b1-page-input resize"
+        name="search"
+        id="search"
+        type="text"
+        [attr.placeholder]="'shared.search' | translate" />
+      <label b1-icon icon="search" class="resize" for="search"></label>
+    </div>
+    <div class="b1-page-inputWithIcon b1-ml-4">
+      <input
+        class="b1-datepicker__input b1-rangepicker"
+        b1-daterangepicker
+        startKey="start"
+        endKey="end"
+        [(ngModel)]="range"
+        name="daterange"
+        [ranges]="ranges"
+        [dateLimit]="31"
+        readonly />
+      <label for="calendar" b1-icon icon="calendar"></label>
+    </div>
+  </form>
+</div>

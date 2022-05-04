@@ -12,7 +12,7 @@ import { PaymentsRoutingModule } from './payments-routing.module';
 import { PaymentsComponent } from './payments.component';
 
 @NgModule({
-  declarations: [PaymentsComponent, PaymentsHeaderComponent],
+  declarations: [PaymentsComponent],
   imports: [
     CommonModule,
     TranslateModule,

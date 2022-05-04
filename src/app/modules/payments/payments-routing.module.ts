@@ -10,19 +10,19 @@ const routes: Routes = [
     children: [
       {
         path: 'incomings',
-        loadChildren: () => import('./modules/incoming/incoming.module').then(p => p.IncomingModule),
+        loadChildren: () => import('./modules/incoming/incoming.module').then((p) => p.IncomingModule),
       },
       {
         path: 'create',
-        loadChildren: () => import('./modules/create/create.module').then(p => p.CreateModule)
+        loadChildren: () => import('./modules/create/create.module').then((p) => p.CreateModule),
       },
-    ]
+      { path: '', redirectTo: 'incomings' },
+    ],
   },
-  { path: '', redirectTo: 'incomings' }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PaymentsRoutingModule { }
+export class PaymentsRoutingModule {}

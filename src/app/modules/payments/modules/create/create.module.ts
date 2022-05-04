@@ -17,6 +17,7 @@ import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
 import { CreateTabsComponent } from './components/create-tabs/create-tabs.component';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { PaymentsHeaderModule } from '@modules/payments/components/payments-header/payments-header.module';
 
 @NgModule({
   declarations: [CreateComponent, CreateTabsComponent],
@@ -30,6 +31,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
     StoreModule.forFeature(PAY_FORMS_KEY, payFormsReducer),
     StoreModule.forFeature(SUP_DOC_KEY, supDocReducer),
     EffectsModule.forFeature([PayFormsEffects, SupDocumentsEffects]),
+    PaymentsHeaderModule,
   ],
 })
 export class CreateModule {}

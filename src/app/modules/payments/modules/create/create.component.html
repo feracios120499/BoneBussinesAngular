@@ -1,4 +1,7 @@
+<payments-header>
+  {{ 'components.pay.paymentCreation' | translate }}
+</payments-header>
 <payment-create-tabs></payment-create-tabs>
 <div class="b1-page-card b1-bg-light" [class.create-content]="showTabs$ | ngrxPush">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
