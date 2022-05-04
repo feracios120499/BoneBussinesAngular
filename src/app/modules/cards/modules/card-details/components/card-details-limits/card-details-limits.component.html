@@ -5,19 +5,14 @@
         <div class="limits-item_body">
           <div class="limits-item_icon b1-large">
             <i b1-icon icon="cash" *ngIf="limit.type == 'ATM'"></i>
-            <i
-              b1-icon
-              icon="internet-payment"
-              *ngIf="limit.type == 'Hotel'"></i>
+            <i b1-icon icon="internet-payment" *ngIf="limit.type == 'Hotel'"></i>
             <i b1-icon icon="internet" *ngIf="limit.type == 'Internet'"></i>
             <i b1-icon icon="shop" *ngIf="limit.type == 'Retail'"></i>
             <i b1-icon icon="cards" *ngIf="limit.type == 'P2P'"></i>
           </div>
           <div class="limits-item_info">
             <div class="limits-item_name">
-              <span class="b1-large b1-light">{{
-                'components.corpcard.limits.' + limit.type | translate
-              }}</span>
+              <span class="b1-large b1-light">{{ 'components.corpcard.limits.' + limit.type | translate }}</span>
             </div>
             <div class="limits-item_amount b1-large">
               <div *ngIf="limit.value != 0 && limit.status != 'Suspended'">
@@ -26,12 +21,7 @@
               <div class="b1-large" *ngIf="limit.status == 'Suspended'">
                 {{ 'components.corpcard.notLimited' | translate }}
               </div>
-              <div
-                *ngIf="
-                  limit.value == 0 &&
-                  limit.isActive &&
-                  limit.status != 'Suspended'
-                ">
+              <div *ngIf="limit.value == 0 && limit.isActive && limit.status != 'Suspended'">
                 {{ 'components.corpcard.prohibited' | translate }}
               </div>
             </div>
@@ -41,43 +31,20 @@
           class="limits-more b1-card__col b1-card__col_dot"
           style="position: relative"
           *ngrxLet="isLimitEditable$ as isLimitEditable">
-          <div class="dropdown" *ngIf="isLimitEditable">
-            <a
-              class="b1-card__v-dots"
-              (click)="$event.stopPropagation(); dropdown.open()">
-            </a>
-
-            <ul
-              class="b1-dropdown b1-bg-light"
-              webClass="b1-animate fade-in-up"
-              role="menu"
-              style="width: 180px"
-              ngbDropdown
-              #dropdown="ngbDropdown"
-              mobile-more
-              more-auto-direction>
-              <div class="b1-modal-close" webClass="hidden">
-                <i
-                  b1-icon
-                  icon="cancel"
-                  (click)="$event.stopPropagation(); dropdown.close()"></i>
-              </div>
-              <li class="b1-dropdown__item">
-                <a class="b1-dropdown__link b1-base" (click)="editLimit(limit)">
-                  <i b1-icon icon="edit" class="b1-mr-3"></i>
-                  {{ 'actions.edit' | translate }}
-                </a>
-              </li>
-              <li *ngIf="!(limit.status == 'Active')" class="b1-dropdown__item">
-                <a
-                  class="b1-dropdown__link b1-base"
-                  (click)="setDefaultLimit(limit)">
-                  <i b1-icon icon="spinner" class="b1-mr-3"></i>
-                  {{ 'components.corpcard.limitsAction.default' | translate }}
-                </a>
-              </li>
-            </ul>
-          </div>
+          <b1-dropdown
+            *ngIf="isLimitEditable"
+            label="limit actions"
+            menuWidth="180px"
+            scopeSelector=".limits-container">
+            <a class="b1-card__v-dots" slot="toggle"></a>
+            <b1-dropdown-link icon="edit" label="actions.edit" (btnClick)="editLimit(limit)"> </b1-dropdown-link>
+            <b1-dropdown-link
+              *ngIf="!(limit.status == 'Active')"
+              icon="spinner"
+              label="components.corpcard.limitsAction.default"
+              (btnClick)="setDefaultLimit(limit)">
+            </b1-dropdown-link>
+          </b1-dropdown>
         </div>
       </div>
     </div>

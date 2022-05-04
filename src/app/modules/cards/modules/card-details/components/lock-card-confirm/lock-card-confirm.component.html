@@ -1,29 +1,19 @@
-<div class="b1-modal-data">
-  <div class="b1-modal-close">
-    <i b1-icon icon="cancel" (click)="modal.close()"></i>
-  </div>
-  <div class="b1-modal-header">
+<b1-modal-container [loader]="false">
+  <ng-container slot="header">
     {{ 'components.pay.confirmation' | translate }}
-  </div>
-  <div class="b1-modal-body b1-modal-wrapper">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="b1-input">
-          <label for="comment" class="b1-input__label b1-input__label_top">
-            {{ 'components.pay.commentCardLock' | translate | lowercase }}
-          </label>
-          <input
-            class="b1-input__control b1-base"
-            [(ngModel)]="message"
-            maxlength="70"
-            name="comment"
-            id="comment"
-            placeholder="{{ 'components.pay.commentLockCard' | translate | lowercase }}" />
-        </div>
-      </div>
+  </ng-container>
+
+  <div slot="body" class="row">
+    <div class="col-md-12">
+      <b1-input
+        name="comment"
+        [maxLength]="70"
+        placeholder="{{ 'components.pay.commentLockCard' | translate | lowercase }}"
+        [(ngModel)]="message">
+        {{ 'components.pay.commentCardLock' | translate | lowercase }}
+      </b1-input>
     </div>
   </div>
-  <div class="b1-modal-footer">
-    <b1-button icon="lock" label="components.corpcard.services.block" (btnClick)="ok()"></b1-button>
-  </div>
-</div>
+
+  <b1-button slot="footer" icon="lock" label="components.corpcard.services.block" (btnClick)="ok()"></b1-button>
+</b1-modal-container>

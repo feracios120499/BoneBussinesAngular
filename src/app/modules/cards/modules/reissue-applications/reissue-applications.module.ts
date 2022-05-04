@@ -29,6 +29,8 @@ import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { CardReissueEffect } from './store/effects';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1PageCheckboxModule } from '@form-controls/b1-page-checkbox/b1-page-checkbox.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { CardReissueEffect } from './store/effects';
     B1DropdownModule,
     SharedModule,
     B1ButtonModule,
+    B1PageCheckboxModule,
+    B1InputModule,
   ],
 })
 export class ReissueApplicationsModule {}

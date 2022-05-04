@@ -1,11 +1,9 @@
-<div class="b1-modal-data">
-  <div class="b1-modal-close">
-    <i b1-icon icon="cancel" (click)="modal.close()"></i>
-  </div>
-  <div class="b1-modal-header">
+<b1-modal-container [loader]="false">
+  <ng-container slot="header">
     {{ 'components.corpcards.applicationCreatedSuccess' | translate }}
-  </div>
-  <div class="b1-modal-body b1-modal-wrapper">
+  </ng-container>
+
+  <ng-container slot="body">
     <div class="b1-flex b1-justify-center width-100">
       <app-card-styled [card]="card" [animated]="false"></app-card-styled>
     </div>
@@ -24,8 +22,11 @@
               }
       }}
     </div>
-  </div>
-  <div class="b1-modal-footer">
-    <b1-button icon="list" label="components.corpcards.goToApplications" (btnClick)="goToApplications()"></b1-button>
-  </div>
-</div>
+  </ng-container>
+
+  <b1-button
+    slot="footer"
+    icon="list"
+    label="components.corpcards.goToApplications"
+    (btnClick)="goToApplications()"></b1-button>
+</b1-modal-container>
