@@ -3,7 +3,7 @@ import { Transaction, UiTransaction } from '@modules/accounts/models/transaction
 import { PaymentRow } from '@modules/payments/models/payment-row.model';
 
 @Component({
-  selector: 'app-pyament-row',
+  selector: 'app-payment-row',
   templateUrl: './payment-row.component.html',
   styleUrls: ['./payment-row.component.scss'],
 })
@@ -11,7 +11,7 @@ export class PaymentRowComponent implements OnInit {
   constructor() {}
 
   @Input() transaction?: UiTransaction;
-  @Output() onSelect?: EventEmitter<void>;
+  @Output() onSelect: EventEmitter<void> = new EventEmitter<void>();
 
   paymentRow!: PaymentRow;
   ngOnInit(): void {

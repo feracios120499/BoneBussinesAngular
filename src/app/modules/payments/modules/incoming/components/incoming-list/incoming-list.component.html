@@ -1,6 +1,12 @@
 <ng-container *ngrxLet="transactions$ as transactions">
-  <app-pyament-row
-    class="b1-page-data__row"
+  <app-payment-row
+    class="b1-page-data__row payment-row"
     *ngFor="let transaction of transactions"
-    [transaction]="transaction"></app-pyament-row>
+    [transaction]="transaction"
+    (onSelect)="selectTransaction(transaction)"
+    [class.selected]="transaction.selected">
+    <b1-dropdown>
+      <b1-more-button slot="toggle"></b1-more-button>
+    </b1-dropdown>
+  </app-payment-row>
 </ng-container>

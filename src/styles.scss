@@ -3133,6 +3133,9 @@ textarea {
     &_type {
       margin-left: 40px;
     }
+    @media (max-width: 812px) {
+      padding: 0 16px;
+    }
   }
   &-data {
     min-height: 450px;

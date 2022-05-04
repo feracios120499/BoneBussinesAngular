@@ -6,38 +6,42 @@
       (ngModelChange)="selectPayment()">
     </b1-page-checkbox>
   </div>
-  <div class="payment-number">
-    <div class="b1-medium">
-      <span>№</span>
-      <span>{{ paymentRow.number }}</span>
-    </div>
-    <div class="b1-page-data__subtitle b1-light">
-      <span>{{ 'components.pay.from' | translate }}</span>
-      <span class="b1-mr-2">:</span>
-      <span>{{ paymentRow.createDate | date: 'dd.MM.yyyy' }} </span>
-    </div>
-  </div>
-  <div class="payment-data">
-    <div class="b1-medium">
-      <div class="b1-flex b1-align-center">
-        <span class="b1-light">{{ 'components.pay.list.sender' | translate }}:</span>
-        <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
-          {{ paymentRow.senderName }}
-        </span>
+  <div class="payment-body">
+    <div class="payment-number">
+      <div class="b1-medium">
+        <span>№</span>
+        <span>{{ paymentRow.number }}</span>
       </div>
-      <div class="b1-flex b1-align-center b1-mt-3">
-        <span class="b1-light">{{ 'components.pay.list.recipient' | translate }}:</span>
-        <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
-          {{ paymentRow.recipientName }}
-        </span>
+      <div class="b1-page-data__subtitle b1-light">
+        <span>{{ 'components.pay.from' | translate }}</span>
+        <span class="b1-mr-2">:</span>
+        <span>{{ paymentRow.createDate | date: 'dd.MM.yyyy' }} </span>
       </div>
     </div>
-    <div id="purpose" class="b1-medium b1-mt-3 b1-page-data__subtitle">
-      {{ paymentRow.purpose }}
+    <div class="payment-data">
+      <div class="b1-medium">
+        <div class="b1-flex b1-align-center">
+          <span class="b1-light">{{ 'components.pay.list.sender' | translate }}:</span>
+          <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
+            {{ paymentRow.senderName }}
+          </span>
+        </div>
+        <div class="b1-flex b1-align-center b1-mt-3">
+          <span class="b1-light">{{ 'components.pay.list.recipient' | translate }}:</span>
+          <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
+            {{ paymentRow.recipientName }}
+          </span>
+        </div>
+      </div>
+      <div id="purpose" class="b1-medium b1-light b1-mt-3 b1-page-data__subtitle">
+        {{ paymentRow.purpose }}
+      </div>
+    </div>
+    <div class="payment-amount b1-title3">
+      <span>{{ paymentRow.amount / 100 | money: '' }}</span>
+      <span>{{ undefined | money: paymentRow.currencyCode }}</span>
     </div>
   </div>
-  <div class="payment-amount b1-title3">
-    <span>{{ paymentRow.amount / 100 | money: '' }}</span>
-    <span>{{ undefined | money: paymentRow.currencyCode }}</span>
-  </div>
+
+  <ng-content select="b1-dropdown"></ng-content>
 </div>

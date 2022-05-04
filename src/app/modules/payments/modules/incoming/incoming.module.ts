@@ -17,6 +17,8 @@ import { IncomingListComponent } from './components/incoming-list/incoming-list.
 import { EffectsModule } from '@ngrx/effects';
 import { PayIncomingEffects } from './store/effects';
 import { PaymentRowModule } from '@modules/payments/components/payment-row/payment-row.module';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 
 @NgModule({
   declarations: [IncomingComponent, IncomingActionsComponent, IncomingListComponent],
@@ -34,6 +36,8 @@ import { PaymentRowModule } from '@modules/payments/components/payment-row/payme
     B1CardLoaderModule,
     EffectsModule.forFeature([PayIncomingEffects]),
     PaymentRowModule,
+    B1DropdownModule,
+    B1MoreButtonModule,
   ],
 })
 export class IncomingModule {}
