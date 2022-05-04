@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { BaseControlComponent } from '../base-control.component';
@@ -12,8 +12,15 @@ import { BaseControlComponent } from '../base-control.component';
     class: 'b1-switcher b1-p-3 b1-flex b1-align-center',
   },
 })
-export class B1SwitcherComponent extends BaseControlComponent {
+export class B1SwitcherComponent extends BaseControlComponent implements AfterViewInit {
   handleValue(value: boolean): void {
     this.onChange(value);
+  }
+
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+    if (!this.labelRef.nativeElement.innerText) {
+      throw new Error('Label text is required!');
+    }
   }
 }

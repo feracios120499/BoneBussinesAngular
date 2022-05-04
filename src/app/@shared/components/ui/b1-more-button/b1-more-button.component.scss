@@ -1,0 +1,12 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+.b1-more-button {
+  &_not-bordered {
+    appearance: none;
+    border: none;
+    background: transparent;
+  }
+}

@@ -1,7 +1,4 @@
-<label
-  class="b1-input__label b1-input__label_top b1-small b1-bold"
-  [for]="controlId"
-  #labelRef>
+<label [class]="labelClasses" [for]="controlId" #labelRef>
   <ng-content></ng-content>
 </label>
 
@@ -20,11 +17,7 @@
   #formControlRef />
 
 <p
-  *ngIf="
-    formControl &&
-    formControl.invalid &&
-    (formControl.dirty || formControl.touched)
-  "
+  *ngIf="formControl && formControl.invalid && (formControl.dirty || formControl.touched)"
   class="b1-input__validate-message">
   {{ error!.text | translate: error!.params }}
 </p>

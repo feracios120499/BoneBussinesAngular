@@ -36,12 +36,9 @@ export abstract class BaseControlComponent
   abstract handleValue(value: TValue): void;
 
   ngAfterViewInit(): void {
-    if (this.formControlRef.nativeElement.form) {
-      this.checkRequiredProps(['formControl']);
-    }
-    if (!this.labelRef.nativeElement.innerHTML) {
-      throw new Error('Label text is required!');
-    }
+    // if (this.formControlRef.nativeElement.form) {
+    //   this.checkRequiredProps(['formControl']);
+    // }
   }
 
   get labelText(): string {

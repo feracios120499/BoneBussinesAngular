@@ -28,71 +28,47 @@
             [disabled]="isLoading">
           </b1-page-button>
         </div>
-        <button class="b1-page-more" [disabled]="isLoading" (click)="$event.stopPropagation(); dropdown.open()">
-          <a class="b1-page-more_icon" b1-icon icon="more"></a>
-          <ul class="b1-dropdown b1-bg-light" role="menu" ngbDropdown #dropdown="ngbDropdown" mobile-more>
-            <div class="b1-modal-close" webClass="hidden">
-              <i b1-icon icon="cancel" (click)="$event.stopPropagation(); dropdown.close()"></i>
-            </div>
-            <li class="b1-dropdown__item">
-              <a class="b1-dropdown__link b1-medium b1-light" (click)="showStatement()">
-                <i b1-icon icon="turnovers" class="b1-medium b1-mr-3"></i>
-                <span>{{ 'components.acct.getStatement' | translate }}</span>
-              </a>
-            </li>
-            <li class="b1-dropdown__item">
-              <a class="b1-dropdown__link b1-medium b1-light" (click)="showRequisites()">
-                <i b1-icon icon="file-details" class="b1-medium b1-mr-3"></i>
-                <span>{{ 'components.acct.share' | translate }}</span>
-              </a>
-            </li>
-            <li class="b1-dropdown__item">
-              <a class="b1-dropdown__link b1-medium b1-light" (click)="showExport()">
-                <i b1-icon icon="export" class="b1-medium b1-mr-3"></i>
-                <span>{{ 'components.acct.geExportStatement' | translate }}</span>
-              </a>
-            </li>
-            <li class="b1-separator"></li>
-            <!-- TODO ADD  IsPayingAccount on backend-->
-            <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-              <a
-                class="b1-dropdown__link b1-medium b1-light"
-                ng-click="accountsCtrl.accActions.createPayment($event, account.Id,'INNER')">
-                <i b1-icon icon="cards" class="b1-medium b1-mr-3"></i>
 
-                <span>{{ 'components.acct.newPayment' | translate }}</span>
-                <span>&nbsp;</span>
-                <span>{{ 'components.pay.actions.innerPay' | translate }}</span>
-              </a>
-            </li>
-            <!-- TODO ADD  IsPayingAccount on backend-->
-            <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-              <a
-                class="b1-dropdown__link b1-medium b1-light"
-                ng-click="accountsCtrl.accActions.createPayment($event, account.Id, 'OUTER')">
-                <i b1-icon icon="country" class="b1-medium b1-mr-3"></i>
-                <span>{{ 'components.acct.newPayment' | translate }}</span>
-                <span>&nbsp;</span>
-                <span>{{ 'components.pay.actions.inUrainePay' | translate }}</span>
-              </a>
-            </li>
-            <!-- TODO ADD  IsPayingAccount on backend-->
-            <!-- TODO ADD Directive role in -->
-            <li class="b1-dropdown__item" ng-if="account.IsPayingAccount">
-              <a
-                data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager"
-                class="b1-dropdown__link b1-medium b1-light"
-                ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)"
-                ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
-                                   'SWIFT')">
-                <i b1-icon icon="swift" class="b1-mr-3"></i>
-                <span>{{ 'components.acct.newPayment' | translate }}</span>
-                <span>&nbsp;</span>
-                <span>{{ 'components.pay.actions.swift' | translate }}</span>
-              </a>
-            </li>
-          </ul>
-        </button>
+        <b1-dropdown class="account-actions__more-button" label="account actions" menuWidth="250px">
+          <b1-more-button slot="toggle" [bordered]="true"></b1-more-button>
+          <b1-dropdown-link icon="turnovers" label="components.acct.getStatement" (btnClick)="showStatement()">
+          </b1-dropdown-link>
+          <b1-dropdown-link icon="file-details" label="components.acct.share" (btnClick)="showRequisites()">
+          </b1-dropdown-link>
+          <b1-dropdown-link
+            icon="export"
+            label="components.acct.geExportStatement"
+            (btnClick)="showExport()"
+            [separator]="true">
+          </b1-dropdown-link>
+          <!-- TODO ADD  IsPayingAccount on backend-->
+          <b1-dropdown-link
+            icon="cards"
+            [label]="('components.acct.newPayment' | translate) + ' ' + ('components.pay.actions.innerPay' | translate)"
+            ng-if="account.IsPayingAccount"
+            ng-click="accountsCtrl.accActions.createPayment($event, account.Id,'INNER')">
+          </b1-dropdown-link>
+          <!-- TODO ADD  IsPayingAccount on backend-->
+          <b1-dropdown-link
+            icon="country"
+            [label]="
+              ('components.acct.newPayment' | translate) + ' ' + ('components.pay.actions.inUrainePay' | translate)
+            "
+            ng-if="account.IsPayingAccount"
+            ng-click="accountsCtrl.accActions.createPayment($event, account.Id, 'OUTER')">
+          </b1-dropdown-link>
+          <!-- TODO ADD  IsPayingAccount on backend-->
+          <!-- TODO ADD Directive role in -->
+          <b1-dropdown-link
+            icon="swift"
+            [label]="('components.acct.newPayment' | translate) + ' ' + ('components.pay.actions.swift' | translate)"
+            ng-if="account.IsPayingAccount"
+            data-role-in="Director,Accountant,ForeignCurrencyPaymentsManager"
+            ng-show="accountsCtrl.isForeignCurrency(account.CurrencyCode)"
+            ng-click="accountsCtrl.accActions.createPayment($event, account.Id,
+            'SWIFT')">
+          </b1-dropdown-link>
+        </b1-dropdown>
       </div>
       <form class="account-actions_calendar" [ngrxFormState]="form">
         <div class="b1-page-inputWithIcon">

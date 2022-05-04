@@ -20,4 +20,6 @@ export namespace CorrespondentsSelectors {
   export const isLoadingCorrespondentCreate = createSelector(correspondentsStore, (state) =>
     state.loadings.includes('create')
   );
+
+  export const isLoading = createSelector(correspondentsStore, (state) => !!state.loadings.length);
 }

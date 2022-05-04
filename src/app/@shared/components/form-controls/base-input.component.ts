@@ -17,6 +17,7 @@ export abstract class BaseInputComponent extends BaseFieldControlComponent imple
   @Input() autocomplete?: 'on' | 'off';
   @Input() transform: 'uppercase' | 'lowercase' | 'none' = 'none';
   @Input() resizable: boolean = false;
+
   @HostBinding('class.b1-page-inputWithIcon') @Input() icon?: string;
   private decimals!: number;
 
@@ -29,6 +30,9 @@ export abstract class BaseInputComponent extends BaseFieldControlComponent imple
     if (this.type === 'password') {
       this.checkRequiredProps(['autocomplete']);
       this.renderer.setAttribute(this.formControlRef.nativeElement, 'autocomplete', this.autocomplete!);
+    }
+    if (!this.labelRef.nativeElement.innerText && !this.icon) {
+      throw new Error('Label text is required!');
     }
   }
 

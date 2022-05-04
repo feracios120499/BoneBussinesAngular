@@ -19,6 +19,7 @@ import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 
 import { CorrespondentsComponent } from './correspondents.component';
 import { CorrespondentsHeaderComponent } from './components/correspondents-header/correspondents-header.component';
@@ -59,6 +60,7 @@ import { CorrespondentModalComponent } from './components/correspondent-modal/co
     CheckValueModule,
     B1SkeletonModule,
     NumberToArrayModule,
+    B1MoreButtonModule,
     RouterModule.forChild([
       {
         path: '',

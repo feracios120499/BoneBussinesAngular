@@ -19,6 +19,10 @@ import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-da
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { AccountRoutingModule } from './account-routing.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
+import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 
 import { AccountComponent } from './account.component';
 import { AccountCardComponent } from './components/account-card/account-card.component';
@@ -73,6 +77,10 @@ import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
     CheckValueModule,
     B1ButtonModule,
     B1EmptyModule,
+    B1TextareaModule,
+    B1ModalContainerModule,
+    B1DropdownModule,
+    B1MoreButtonModule,
   ],
 })
 export class AccountModule {}

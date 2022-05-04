@@ -12,6 +12,7 @@ export class B1DropdownLinkComponent implements OnInit {
   @Input() icon!: string;
   @Input() label!: string;
   @Input() danger = false;
+  @Input() separator = false;
   @Output() btnClick = new EventEmitter();
 
   ngOnInit(): void {}

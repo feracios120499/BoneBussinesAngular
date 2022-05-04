@@ -23,9 +23,7 @@ export namespace UsersSelectors {
 
   export const isLoadingRoles = createSelector(usersStore, (state) => state.loadings.includes('roleList'));
 
-  export const isLoadingList = createSelector(usersStore, (state) =>
-    state.loadings.some((p) => p === 'userList' || p === 'roleList')
-  );
+  export const isLoading = createSelector(usersStore, (state) => !!state.loadings.length);
 
   export const isLoadingUserCreate = createSelector(usersStore, (state) => state.loadings.includes('userCreate'));
 

@@ -11,7 +11,7 @@ import { CorrespondentsActions } from './store/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrespondentsComponent implements OnInit {
-  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoadingCorrespondents);
+  isLoading$: Observable<boolean> = this.store.select(CorrespondentsSelectors.isLoading);
 
   constructor(private store: Store) {}
 
