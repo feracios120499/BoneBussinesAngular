@@ -11,7 +11,7 @@ import { UsersActions } from './store/actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit {
-  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoadingUsers);
+  isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoading);
 
   constructor(private store: Store) {}
 

@@ -2,81 +2,40 @@
   <form class="b1-page-actions" novalidate [ngrxFormState]="formState">
     <div class="b1-page-actions__left">
       <div class="b1-page-icons" style="margin-left: 0">
-        <div class="b1-group-checkboxs">
-          <div class="b1-group-checkboxs_item">
-            <input
-              name="currency"
-              id="₴"
-              type="checkbox"
-              class="pointer"
-              [ngrxFormControlState]="
-                formState.controls.currency.controls.UAH
-              " />
-            <label
-              for="₴"
-              class="b1-large b1-flex b1-align-center b1-justify-center pointer"
-              >₴</label
-            >
-          </div>
-          <div class="b1-group-checkboxs_item">
-            <input
-              name="currency"
-              id="$"
-              type="checkbox"
-              class="pointer"
-              [ngrxFormControlState]="
-                formState.controls.currency.controls.USD
-              " />
-            <label
-              for="$"
-              class="b1-large b1-flex b1-align-center b1-justify-center pointer"
-              >$</label
-            >
-          </div>
-          <div class="b1-group-checkboxs_item">
-            <input
-              name="currency"
-              id="€"
-              type="checkbox"
-              class="pointer"
-              [ngrxFormControlState]="
-                formState.controls.currency.controls.EUR
-              " />
-            <label
-              for="€"
-              class="b1-large b1-flex b1-align-center b1-justify-center pointer"
-              >€</label
-            >
-          </div>
-          <div class="b1-group-checkboxs_item">
-            <input
-              name="currency"
-              id="other"
-              type="checkbox"
-              class="pointer"
-              [ngrxFormControlState]="
-                formState.controls.currency.controls.OTHER
-              " />
-            <label
-              for="other"
-              class="b1-large b1-flex b1-align-center b1-justify-center pointer"
-              >...</label
-            >
-          </div>
+        <div style="display: flex">
+          <b1-round-checkbox
+            name="currency"
+            controlId="₴"
+            [ngrxFormControlState]="formState.controls.currency.controls.UAH">
+            ₴
+          </b1-round-checkbox>
+          <b1-round-checkbox
+            name="currency"
+            controlId="$"
+            [ngrxFormControlState]="formState.controls.currency.controls.USD">
+            $
+          </b1-round-checkbox>
+          <b1-round-checkbox
+            name="currency"
+            controlId="€"
+            [ngrxFormControlState]="formState.controls.currency.controls.EUR">
+            €
+          </b1-round-checkbox>
+          <b1-round-checkbox
+            name="currency"
+            controlId="other"
+            [ngrxFormControlState]="formState.controls.currency.controls.OTHER">
+            ...
+          </b1-round-checkbox>
         </div>
       </div>
     </div>
-    <div class="b1-page-actions__right" name="search">
-      <div class="b1-page-inputWithIcon width-100">
-        <input
-          class="b1-input__control without-label b1-base b1-page-input resize"
-          name="search"
-          id="search"
-          type="text"
-          [attr.placeholder]="'shared.search' | translate"
-          [ngrxFormControlState]="formState.controls.filter" />
-        <label b1-icon icon="search" class="resize" for="search"></label>
-      </div>
+    <div class="b1-page-actions__right">
+      <b1-input
+        icon="search"
+        [placeholder]="'shared.search' | translate"
+        [resizable]="true"
+        [ngrxFormControlState]="formState.controls.filter"></b1-input>
     </div>
   </form>
 </ng-container>

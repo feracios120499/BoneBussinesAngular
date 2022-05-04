@@ -1,4 +1,4 @@
-<li class="b1-dropdown__item">
+<div class="b1-dropdown__item">
   <a
     class="b1-dropdown__link"
     [class.b1-dropdown__link_error]="danger"
@@ -8,4 +8,5 @@
     <i b1-icon [icon]="icon" class="b1-mr-3"></i>
     <span>{{ label | translate }}</span>
   </a>
-</li>
+  <div *ngIf="separator" class="b1-separator"></div>
+</div>

@@ -39,7 +39,8 @@ export class AcctService implements BaseAcctService {
     throw new Error('Method not implemented.');
   }
   getTurnovers(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<Turnovers[]> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getTurnovers(bankId, accountId, clientId, start, end);
   }
   getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]> {
     return this.acctService.getIncomingTransactions(clientId, start, end);
@@ -51,10 +52,12 @@ export class AcctService implements BaseAcctService {
     start: Dayjs,
     end: Dayjs
   ): Observable<TurnoverTransaction[]> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getTransactions(bankId, accountId, clientId, start, end);
   }
   getTransaction(bankId: string, transactionId: number, clientId: string): Observable<Transaction> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getTransaction(bankId, transactionId, clientId);
   }
   getStatement(
     bankId: string,
@@ -65,7 +68,8 @@ export class AcctService implements BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getStatement(bankId, accountId, clientId, start, end, format, compressed);
   }
   sendStatement(
     bankId: string,
@@ -77,7 +81,8 @@ export class AcctService implements BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.sendStatement(bankId, accountId, clientId, start, end, format, email, compressed);
   }
   getRequisites(
     bankId: string,
@@ -86,7 +91,8 @@ export class AcctService implements BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getRequisites(bankId, accountId, clientId, format, compressed);
   }
   sendRequisites(
     bankId: string,
@@ -96,7 +102,8 @@ export class AcctService implements BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.sendRequisites(bankId, accountId, clientId, format, email, compressed);
   }
   getPrintTransaction(
     bankId: string,
@@ -104,7 +111,8 @@ export class AcctService implements BaseAcctService {
     clientId: string,
     format: string = 'HTML'
   ): Observable<string> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getPrintTransaction(bankId, transactionId, clientId, format);
   }
   getExportTurnovers(
     bankId: string,
@@ -115,7 +123,8 @@ export class AcctService implements BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.getExportTurnovers(bankId, accountId, clientId, start, end, format, compressed);
   }
   sendExportTurnovers(
     bankId: string,
@@ -127,6 +136,6 @@ export class AcctService implements BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    return this.acctService.sendExportTurnovers(bankId, accountId, clientId, start, end, format, email, compressed);
   }
 }

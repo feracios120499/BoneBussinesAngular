@@ -20,6 +20,7 @@ import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { UsersFilterModule } from '@pipes/users-filter/users-filter.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 
 import { UsersComponent } from './users.component';
 import { UsersHeaderComponent } from './components/users-header/users-header.component';
@@ -64,6 +65,7 @@ import { UserNameFormComponent } from './components/user-name-form/user-name-for
     CheckValueModule,
     NumberToArrayModule,
     B1SkeletonModule,
+    B1MoreButtonModule,
     RouterModule.forChild([
       {
         path: '',

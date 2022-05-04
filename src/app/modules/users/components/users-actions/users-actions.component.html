@@ -6,7 +6,7 @@
           *ngIf="users.length"
           label="components.admin.addEmployee"
           icon="plus"
-          [mobileView]="true"
+          mobileView="round"
           (click)="onUserAdd()"
           [isDisabled]="isLoading$ | ngrxPush">
         </b1-button>

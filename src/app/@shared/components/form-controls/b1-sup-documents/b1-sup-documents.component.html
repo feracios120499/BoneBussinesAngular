@@ -5,26 +5,18 @@
 
 <div class="document-edit" *ngFor="let document of selectedDocuments">
   <div class="document-edit_row b1-mt-5">
-    <div class="b1-input">
-      <label class="b1-input__label b1-base">
-        {{ 'components.pay.supportingDoc' | translate }}
-      </label>
-      <div>
-        <input class="b1-input__control b1-base" disabled readonly [(ngModel)]="document.supDoc.fileName" />
-      </div>
-    </div>
+    <b1-input [labelTop]="false" [(ngModel)]="document.supDoc.fileName" [disabled]="true">
+      {{ 'components.pay.supportingDoc' | translate }}
+    </b1-input>
+
     <button class="b1-page-more agents-button_mobile" (click)="delete(document)">
       <i b1-icon icon="delete" class="b1-page-more_icon"></i>
     </button>
   </div>
-  <div class="b1-input b1-mt-5">
-    <label class="b1-input__label b1-base">
-      {{ 'components.pay.comment' | translate }}
-    </label>
-    <div>
-      <input class="b1-input__control b1-base" [(ngModel)]="document.comment" />
-    </div>
-  </div>
+
+  <b1-input class="b1-mt-5" [labelTop]="false" [(ngModel)]="document.comment">
+    {{ 'components.pay.comment' | translate }}
+  </b1-input>
 </div>
 
 <ng-template #templateref let-modal>

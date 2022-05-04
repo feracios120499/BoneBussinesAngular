@@ -1,0 +1,22 @@
+<label [class]="labelClasses" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<textarea
+  class="b1-input__control"
+  [class.b1-input__control_textarea]="autoHight"
+  [id]="controlId"
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))"
+  [attr.name]="name"
+  [attr.placeholder]="placeholder"
+  [attr.minlength]="minLength"
+  [attr.maxlength]="maxLength"
+  [disabled]="isDisabled"
+  #formControlRef></textarea>
+
+<p
+  *ngIf="formControl && formControl.invalid && (formControl.dirty || formControl.touched)"
+  class="b1-input__validate-message">
+  {{ error!.text | translate: error!.params }}
+</p>

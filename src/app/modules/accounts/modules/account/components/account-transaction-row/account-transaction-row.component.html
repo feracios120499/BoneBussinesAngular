@@ -42,37 +42,28 @@
       </div>
     </div>
 
-    <div class="transaction-more b1-card__col b1-card__col_dots" id="dropdown{{ payment.id }}">
-      <div class="dropdown">
-        <a
-          class="b1-card__v-dots"
-          data-toggle="dropdown"
-          uib-dropdown-toggle=""
-          aria-haspopup="true"
-          onclick="$(this).offset().top - $('.b1-page-data').offset().top - $(this).next().height() < 0 ? $(this).next().addClass('b1-dropdown_down').removeClass('b1-dropdown_up') : $(this).next().addClass('b1-dropdown_up').removeClass('b1-dropdown_down')"
-          aria-expanded="false">
-        </a>
-        <ul class="b1-dropdown b1-bg-light b1-animate fade-in-up" style="min-width: 180px" role="menu">
-          <li class="b1-dropdown__item">
-            <a
-              class="b1-dropdown__link b1-base"
-              href=""
-              ng-click="printTransaction(payment.DocumentId, payment.BankId)">
-              <i class="ub-icons ub-icons-icon-print b1-mr-3"></i>
-              {{ 'components.pay.print' | translate }}
-            </a>
-          </li>
-          <li class="b1-dropdown__item" ng-show="currency === 'UAH'">
-            <a
-              class="b1-dropdown__link b1-base"
-              href=""
-              ng-click="CreatePayment(payment.DocumentId, payment.BankId, payment.credit < payment.debit)">
-              <i class="ub-icons ub-icons-icon-country b1-mr-3"></i>
-              {{ 'components.pay.correspondents.createPayment' | translate }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <b1-dropdown class="transaction-more" id="dropdown{{ payment.id }}" label="transaction actions" menuWidth="180px">
+      <!-- TODO -->
+      <a
+        slot="toggle"
+        class="b1-card__v-dots"
+        data-toggle="dropdown"
+        uib-dropdown-toggle=""
+        aria-haspopup="true"
+        onclick="$(this).offset().top - $('.b1-page-data').offset().top - $(this).next().height() < 0 ? $(this).next().addClass('b1-dropdown_down').removeClass('b1-dropdown_up') : $(this).next().addClass('b1-dropdown_up').removeClass('b1-dropdown_down')"
+        aria-expanded="false">
+      </a>
+      <!-- TODO -->
+      <b1-dropdown-link
+        icon="print"
+        label="components.pay.print"
+        ng-click="printTransaction(payment.DocumentId, payment.BankId)"></b1-dropdown-link>
+      <!-- TODO -->
+      <b1-dropdown-link
+        icon="country"
+        label="components.pay.correspondents.createPayment"
+        ng-show="currency === 'UAH'"
+        ng-click="CreatePayment(payment.DocumentId, payment.BankId, payment.credit < payment.debit)"></b1-dropdown-link>
+    </b1-dropdown>
   </div>
 </ng-container>

@@ -5,7 +5,7 @@ import { CORRESPONDENTS_KEY } from './store';
 import { CorrespondentForm } from '@modules/correspondents/models/correspondent-form.model';
 import { CorrespondentUpdateModel } from '../models/correspondent-update.model';
 import { Correspondent } from '../models/correspondent.model';
-import { CorrespondentModalConfig } from '../models/correspondent-modal-config.modal';
+import { CorrespondentModalConfig } from '../models/correspondent-modal-config.model';
 
 export namespace CorrespondentsActions {
   export const [loadCorrespondentsRequest, loadCorrespondentsSuccess, loadCorrespondentsFailure] = createHTTPActions<
