@@ -1,0 +1,12 @@
+.payment {
+  display: grid;
+  grid-template-columns: 1fr 3fr 8fr 3fr 1fr;
+  column-gap: 16px;
+  align-items: center;
+  &-data {
+    overflow: hidden;
+  }
+  &-amount {
+    text-align: right;
+  }
+}

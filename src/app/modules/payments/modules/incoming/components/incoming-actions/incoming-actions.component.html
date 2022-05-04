@@ -27,6 +27,7 @@
         startKey="start"
         endKey="end"
         [(ngModel)]="range"
+        (ngModelChange)="loadTransactions()"
         name="daterange"
         [ranges]="ranges"
         [dateLimit]="31"

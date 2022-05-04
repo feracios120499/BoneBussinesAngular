@@ -4,8 +4,10 @@ export const PAY_INCOMING_KEY = 'pay_incoming';
 
 export interface PayIncomingState {
   transactions: Transaction[];
+  selectedIds: string[];
 }
 
 export const incomingState: PayIncomingState = {
   transactions: [],
+  selectedIds: [],
 };

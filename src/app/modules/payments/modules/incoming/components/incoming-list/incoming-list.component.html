@@ -1,1 +1,6 @@
-<p>incoming-list works!</p>
+<ng-container *ngrxLet="transactions$ as transactions">
+  <app-pyament-row
+    class="b1-page-data__row"
+    *ngFor="let transaction of transactions"
+    [transaction]="transaction"></app-pyament-row>
+</ng-container>

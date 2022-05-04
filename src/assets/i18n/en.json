@@ -856,6 +856,8 @@
 	"components.pay.innerNumber": "inner number",
 	"components.pay.isNeedAdditionalDetails": "Required. For example: passport data, no information, etc.",
 	"components.pay.left": "Left",
+	"components.pay.list.recipient": "Recipient",
+	"components.pay.list.sender": "Sender",
 	"components.pay.loanAccNum": "loan acc. №",
 	"components.pay.new": "new",
 	"components.pay.next": "Next",

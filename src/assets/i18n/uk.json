@@ -856,6 +856,8 @@
 	"components.pay.innerNumber": "внутрішній номер",
 	"components.pay.isNeedAdditionalDetails": "Обов'язково. Наприклад: паспортні дані, інформація відсутня тощо.",
 	"components.pay.left": "Залишилось",
+	"components.pay.list.recipient": "Отримувач",
+	"components.pay.list.sender": "Відправник",
 	"components.pay.loanAccNum": "КРЕДИТ рах. №",
 	"components.pay.new": "новий",
 	"components.pay.next": "Далі",

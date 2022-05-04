@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DateRange } from '@models/date-range.model';
+import { Store } from '@ngrx/store';
 import dayjs, { Dayjs } from 'dayjs';
+import { PayIncomingActions } from '../../store/actions';
 
 @Component({
   selector: 'app-incoming-actions',
@@ -8,11 +10,11 @@ import dayjs, { Dayjs } from 'dayjs';
   styleUrls: ['./incoming-actions.component.scss'],
 })
 export class IncomingActionsComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store) {}
 
   range: DateRange = {
-    start: dayjs(),
-    end: dayjs(),
+    start: dayjs('03.01.2022', 'DD.MM.YYYY'),
+    end: dayjs('03.30.2022', 'DD.MM.YYYY'),
   };
 
   ranges: any = {
@@ -20,5 +22,11 @@ export class IncomingActionsComponent implements OnInit {
     'shared.picker.currentMonth': [dayjs().startOf('month'), dayjs()],
     'shared.picker.month1': [dayjs().subtract(1, 'month'), dayjs()],
   };
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //this.loadTransactions();
+  }
+
+  loadTransactions(): void {
+    this.store.dispatch(PayIncomingActions.loadTransactionsRequest(this.range));
+  }
 }

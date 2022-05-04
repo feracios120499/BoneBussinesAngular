@@ -14,6 +14,9 @@ import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-da
 import { FormsModule } from '@angular/forms';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { IncomingListComponent } from './components/incoming-list/incoming-list.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PayIncomingEffects } from './store/effects';
+import { PaymentRowModule } from '@modules/payments/components/payment-row/payment-row.module';
 
 @NgModule({
   declarations: [IncomingComponent, IncomingActionsComponent, IncomingListComponent],
@@ -29,6 +32,8 @@ import { IncomingListComponent } from './components/incoming-list/incoming-list.
     B1DaterangepickerModule,
     FormsModule,
     B1CardLoaderModule,
+    EffectsModule.forFeature([PayIncomingEffects]),
+    PaymentRowModule,
   ],
 })
 export class IncomingModule {}
