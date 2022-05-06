@@ -5,7 +5,7 @@ export interface Correspondent {
   lastUseDate: Date;
   creatingDate: Date;
   userId: string;
-  accCurrencyId: string;
+  accCurrencyId: string | null;
   bankName: string;
   bank: BankModel;
   taxCode: string;
