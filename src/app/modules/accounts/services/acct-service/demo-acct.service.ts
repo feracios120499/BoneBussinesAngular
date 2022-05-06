@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DemoError } from '@models/errors/demo-error.model';
 import { FileModel } from '@models/file.model';
 import { AccountModel } from '@modules/accounts/models/account.model';
 import { AcctEdit } from '@modules/accounts/models/acct-edit.model';
@@ -7,7 +8,8 @@ import { Transaction } from '@modules/accounts/models/transaction.model';
 import { TurnoverTransaction } from '@modules/accounts/models/turnover-transaction.model';
 import { Turnovers } from '@modules/accounts/models/turnovers.model';
 import { Dayjs } from 'dayjs';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BaseAcctService } from './base-acct.service';
 
 @Injectable({
@@ -27,7 +29,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 23160885.0,
       plannedBalance: 12303150.0,
-      lastActive: new Date('2017-04-04T00:00:00'),
+      lastActive: new Date('2022-04-04T00:00:00'),
       openingDate: new Date('2009-03-10T00:00:00'),
       closingDate: undefined,
       debitTurns: 120000.0,
@@ -54,7 +56,7 @@ export class DemoAcctService extends BaseAcctService {
       id: 2013649.0,
       customerId: 100100.0,
       type: 'CURRENT',
-      number: '26002301921',
+      number: 'UA943004650000000026002301921',
       iban: 'UA943004650000000026002301921',
       name: 'Депозитний рахунок (980)',
       bankId: '300465',
@@ -62,7 +64,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 8103849.0,
       plannedBalance: 8121595.0,
-      lastActive: new Date('2016-01-05T00:00:00'),
+      lastActive: new Date('2022-01-05T00:00:00'),
       openingDate: new Date('2013-02-18T00:00:00'),
       closingDate: undefined,
       debitTurns: 1951516.0,
@@ -97,7 +99,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 3272500000.0,
       plannedBalance: 3272500000.0,
-      lastActive: new Date('2013-02-28T00:00:00'),
+      lastActive: new Date('2022-02-28T00:00:00'),
       openingDate: new Date('2008-03-04T00:00:00'),
       closingDate: undefined,
       debitTurns: 800.0,
@@ -126,13 +128,13 @@ export class DemoAcctService extends BaseAcctService {
       type: 'CURRENT',
       number: 'UA783004650000000026006307921',
       iban: 'UA783004650000000026006307921',
-      name: 'Резервний рахунок (980)',
+      name: 'Резервний рахунок (840)',
       bankId: '300465',
       currencyId: 840,
       currencyCode: 'USD',
       balance: 3272500000.0,
       plannedBalance: 3272500000.0,
-      lastActive: new Date('2013-02-28T00:00:00'),
+      lastActive: new Date('2022-02-28T00:00:00'),
       openingDate: new Date('2008-03-04T00:00:00'),
       closingDate: undefined,
       debitTurns: 800.0,
@@ -167,7 +169,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 253530.0,
       plannedBalance: 253030.0,
-      lastActive: new Date('2014-02-18T00:00:00'),
+      lastActive: new Date('2022-02-18T00:00:00'),
       openingDate: new Date('2008-02-26T00:00:00'),
       closingDate: undefined,
       debitTurns: 103000.0,
@@ -202,7 +204,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 7707542.0,
       plannedBalance: 7707542.0,
-      lastActive: new Date('2013-04-30T00:00:00'),
+      lastActive: new Date('2022-04-30T00:00:00'),
       openingDate: new Date('2002-11-15T00:00:00'),
       closingDate: undefined,
       debitTurns: 5218222.0,
@@ -239,7 +241,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 800103849.0,
       plannedBalance: 800121595.0,
-      lastActive: new Date('2013-04-30T00:00:00'),
+      lastActive: new Date('2022-04-30T00:00:00'),
       openingDate: new Date('2002-11-15T00:00:00'),
       closingDate: undefined,
       debitTurns: 5218222.0,
@@ -274,7 +276,7 @@ export class DemoAcctService extends BaseAcctService {
       currencyCode: 'UAH',
       balance: 5623160885.0,
       plannedBalance: 5612303150.0,
-      lastActive: new Date('2014-02-18T00:00:00'),
+      lastActive: new Date('2022-02-18T00:00:00'),
       openingDate: new Date('2008-02-26T00:00:00'),
       closingDate: undefined,
       debitTurns: 103000.0,
@@ -304,18 +306,677 @@ export class DemoAcctService extends BaseAcctService {
     '565bbaee-37a6-48ff-b3e8-f4822c23c5c2': this.accounts1,
   };
 
+  private turnoversResponse: Omit<Turnovers, 'id'>[] = [
+    {
+      accId: 131210,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      debit: 10000.0,
+      debitEquivalent: 0.0,
+      credit: 5000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 3272445000.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 3272440000.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 131210,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      debit: 120000.0,
+      debitEquivalent: 0.0,
+      credit: 180000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 3272440000.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 3272500000.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 131215,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      debit: 10000.0,
+      debitEquivalent: 0.0,
+      credit: 5000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 3272445000.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 3272440000.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 131215,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      debit: 120000.0,
+      debitEquivalent: 0.0,
+      credit: 180000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 3272440000.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 3272500000.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 131696,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      debit: 10000.0,
+      debitEquivalent: 0.0,
+      credit: 5000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 23105885.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 23100885.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 131696,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      debit: 120000.0,
+      debitEquivalent: 0.0,
+      credit: 180000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 23100885.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 23160885.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 130691,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      debit: 10000.0,
+      debitEquivalent: 0.0,
+      credit: 5000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 7642542.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 7647542.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 130691,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      debit: 120000.0,
+      debitEquivalent: 0.0,
+      credit: 180000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 7647542.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 7707542.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 2013649,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      debit: 10000.0,
+      debitEquivalent: 0.0,
+      credit: 5000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 8048849.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 8043849.0,
+      balanceOutEquivalent: 0.0,
+    },
+    {
+      accId: 2013649,
+      bankId: '302076',
+      transactionsCount: 2,
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      debit: 120000.0,
+      debitEquivalent: 0.0,
+      credit: 180000.0,
+      creditEquivalent: 0.0,
+      balanceIn: 8043849.0,
+      balanceInEquivalent: 0.0,
+      balanceOut: 8103849.0,
+      balanceOutEquivalent: 0.0,
+    },
+  ];
+
+  private turnoverTransactions: TurnoverTransaction[] = [
+    {
+      id: 52811114,
+      accId: 130691.0,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264683.0,
+      documentNumber: '283-12',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      createDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      debit: 10000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Гален Марек',
+      correspondentAccountNumber: '260012341002',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 130691,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-03T10:35:43'),
+      credit: 5000,
+      debit: 0,
+      documentId: 40364683,
+      documentNumber: '283-10',
+      id: 52811115,
+      payedDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+    },
+    {
+      id: 52811116,
+      accId: 130691.0,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264686.0,
+      documentNumber: '284-12',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      createDate: new Date('2022-04-04T10:39:30'),
+      payedDate: new Date('2022-04-04T10:39:30'),
+      debit: 120000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Люк Скайуокер',
+      correspondentAccountNumber: '260012341001',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 130691,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-04T10:35:43'),
+      credit: 180000,
+      debit: 0,
+      documentId: 40364684,
+      documentNumber: '284-10',
+      id: 52811117,
+      payedDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+    },
+    {
+      id: 52811118,
+      accId: 131696,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264683.0,
+      documentNumber: '283-12',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      createDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      debit: 10000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Гален Марек',
+      correspondentAccountNumber: '260012341002',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131696,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-03T10:35:43'),
+      credit: 5000,
+      debit: 0,
+      documentId: 40364683,
+      documentNumber: '283-10',
+      id: 52811119,
+      payedDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+    },
+    {
+      id: 52811120,
+      accId: 131696,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264686.0,
+      documentNumber: '284-12',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      createDate: new Date('2022-04-04T10:39:30'),
+      payedDate: new Date('2022-04-04T10:39:30'),
+      debit: 120000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Люк Скайуокер',
+      correspondentAccountNumber: '260012341001',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131696,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-04T10:35:43'),
+      credit: 180000,
+      debit: 0,
+      documentId: 40364684,
+      documentNumber: '284-10',
+      id: 52811121,
+      payedDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+    },
+    {
+      id: 52811122,
+      accId: 131210,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264683.0,
+      documentNumber: '283-12',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      createDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      debit: 10000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Гален Марек',
+      correspondentAccountNumber: '260012341002',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131210,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-03T10:35:43'),
+      credit: 5000,
+      debit: 0,
+      documentId: 40364683,
+      documentNumber: '283-10',
+      id: 52811123,
+      payedDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+    },
+    {
+      id: 52811124,
+      accId: 131210,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264686.0,
+      documentNumber: '284-12',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      createDate: new Date('2022-04-04T10:39:30'),
+      payedDate: new Date('2022-04-04T10:39:30'),
+      debit: 120000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Люк Скайуокер',
+      correspondentAccountNumber: '260012341001',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131210,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-04T10:35:43'),
+      credit: 180000,
+      debit: 0,
+      documentId: 40364684,
+      documentNumber: '284-10',
+      id: 52811125,
+      payedDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+    },
+    {
+      id: 52811126,
+      accId: 131215,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264683.0,
+      documentNumber: '283-12',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      createDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      debit: 10000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Гален Марек',
+      correspondentAccountNumber: '260012341002',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131215,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-03T10:35:43'),
+      credit: 5000,
+      debit: 0,
+      documentId: 40364683,
+      documentNumber: '283-10',
+      id: 52811127,
+      payedDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+    },
+    {
+      id: 52811128,
+      accId: 131215,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264686.0,
+      documentNumber: '284-12',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      createDate: new Date('2022-04-04T10:39:30'),
+      payedDate: new Date('2022-04-04T10:39:30'),
+      debit: 120000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Люк Скайуокер',
+      correspondentAccountNumber: '260012341001',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 131215,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-04T10:35:43'),
+      credit: 180000,
+      debit: 0,
+      documentId: 40364684,
+      documentNumber: '284-10',
+      id: 52811129,
+      payedDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+    },
+    {
+      id: 52811130,
+      accId: 2013649,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264683.0,
+      documentNumber: '283-12',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+      createDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      debit: 10000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Гален Марек',
+      correspondentAccountNumber: '260012341002',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 2013649,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-03T10:35:43'),
+      credit: 5000,
+      debit: 0,
+      documentId: 40364683,
+      documentNumber: '283-10',
+      id: 52811131,
+      payedDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-03T00:00:00'),
+    },
+    {
+      id: 52811132,
+      accId: 2013649,
+      bankId: '302076',
+      state: 5.0,
+      transactionType: 'CL1',
+      documentId: 40264686.0,
+      documentNumber: '284-12',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+      createDate: new Date('2022-04-04T10:39:30'),
+      payedDate: new Date('2022-04-04T10:39:30'),
+      debit: 120000.0,
+      credit: 0.0,
+      purpose: 'Заробітня плата падавана',
+      correspondentName: 'Люк Скайуокер',
+      correspondentAccountNumber: '260012341001',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980.0,
+    },
+    {
+      accId: 2013649,
+      bankId: '302076',
+      correspondentAccountNumber: '2600932247879',
+      correspondentBankId: '302076',
+      correspondentCurrencyId: 980,
+      correspondentName: 'Секретно',
+      createDate: new Date('2022-04-04T10:35:43'),
+      credit: 180000,
+      debit: 0,
+      documentId: 40364684,
+      documentNumber: '284-10',
+      id: 52811133,
+      payedDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      state: 5,
+      transactionType: 'CL1',
+      turnoverDate: new Date('2022-04-04T00:00:00'),
+    },
+  ];
+
+  private transactions: Transaction[] = [
+    {
+      sender: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '290912340001',
+        name: 'Зарплатний рахунок (980)',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      recipient: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '260012341002',
+        name: 'Гален Марек',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      // id: '52811784',
+      id: '40264683',
+      number: '283-12',
+      documentDate: new Date('2022-04-03T00:00:00'),
+      createdDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      valueDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Заробітня плата падавана',
+      amount: 10000.0,
+      amountString: 'Сто грн. 00 коп.',
+      state: '5',
+    },
+    {
+      sender: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '2600932247879',
+        name: 'Секретно',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      recipient: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '260012340002',
+        name: 'Основний рахунок (980)',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      // id: '52814914',
+      id: '40364683',
+      number: '283-10',
+      documentDate: new Date('2022-04-03T00:00:00'),
+      createdDate: new Date('2022-04-03T10:35:43'),
+      payedDate: new Date('2022-04-03T10:35:43'),
+      valueDate: new Date('2022-04-03T10:35:43'),
+      purpose: 'Прибуток',
+      amount: 5000.0,
+      amountString: `П'ятдесят грн. 00 коп.`,
+      state: '5',
+    },
+    {
+      sender: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '290912340001',
+        name: 'Зарплатний рахунок (980)',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      recipient: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '260012341001',
+        name: 'Люк Скайуокер',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      // id: '52661114',
+      id: '40264686',
+      number: '284-12',
+      documentDate: new Date('2022-04-04T00:00:00'),
+      createdDate: new Date('2022-04-04T10:35:43'),
+      payedDate: new Date('2022-04-04T10:35:43'),
+      valueDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Заробітня плата падавана',
+      amount: 120000.0,
+      amountString: 'Тисяча двісті грн. 00 коп.',
+      state: '5',
+    },
+    {
+      sender: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '2600932247879',
+        name: 'Секретно',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      recipient: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        accNumber: '260012340002',
+        name: 'Основний рахунок (980)',
+        accCurrencyId: 980.0,
+        accCurrencyCode: 'UAH',
+        taxCode: '1234567890',
+      },
+      // id: '52814914',
+      id: '40364684',
+      number: '284-10',
+      documentDate: new Date('2022-04-04T00:00:00'),
+      createdDate: new Date('2022-04-04T10:35:43'),
+      payedDate: new Date('2022-04-04T10:35:43'),
+      valueDate: new Date('2022-04-04T10:35:43'),
+      purpose: 'Прибуток',
+      amount: 180000.0,
+      amountString: `Тисяча вісімсот грн. 00 коп.`,
+      state: '5',
+    },
+  ];
+
   getAccounts(clientId: string): Observable<AccountModel[]> {
     return of(this.accounts[clientId]);
   }
+
   getAccount(bankId: string, accountId: number, clientId: string): Observable<AccountModel> {
     return of(this.accounts[clientId].find((p) => p.id === accountId) as AccountModel);
   }
+
   updateAccount(bankId: string, accountId: number, clientId: string, updateAccount: AcctEdit): Observable<never> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   getTurnovers(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<Turnovers[]> {
-    throw new Error('Method not implemented.');
+    return this.getAccount(bankId, accountId, clientId).pipe(
+      map((account: AccountModel) => this.turnovers.filter((turnovers: Turnovers) => turnovers.accId === account.id))
+    );
   }
+
   getTransactions(
     bankId: string,
     accountId: number,
@@ -323,11 +984,18 @@ export class DemoAcctService extends BaseAcctService {
     start: Dayjs,
     end: Dayjs
   ): Observable<TurnoverTransaction[]> {
-    throw new Error('Method not implemented.');
+    return this.getTurnovers(bankId, accountId, clientId, start, end).pipe(
+      map(
+        (turnovers: Turnovers[]) =>
+          turnovers.find(({ turnoverDate }) => +start === +turnoverDate && +turnoverDate === +end)!.transactions!
+      )
+    );
   }
+
   getTransaction(bankId: string, transactionId: number, clientId: string): Observable<Transaction> {
-    throw new Error('Method not implemented.');
+    return of(this.transactions.find(({ id }) => +id === transactionId)!);
   }
+
   getStatement(
     bankId: string,
     accountId: number,
@@ -337,8 +1005,9 @@ export class DemoAcctService extends BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   sendStatement(
     bankId: string,
     accountId: number,
@@ -349,8 +1018,9 @@ export class DemoAcctService extends BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   getRequisites(
     bankId: string,
     accountId: number,
@@ -358,8 +1028,9 @@ export class DemoAcctService extends BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   sendRequisites(
     bankId: string,
     accountId: number,
@@ -368,11 +1039,13 @@ export class DemoAcctService extends BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   getPrintTransaction(bankId: string, transactionId: string, clientId: string, format: string): Observable<string> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   getExportTurnovers(
     bankId: string,
     accountId: number,
@@ -382,8 +1055,9 @@ export class DemoAcctService extends BaseAcctService {
     format: string,
     compressed?: boolean
   ): Observable<FileModel> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
   }
+
   sendExportTurnovers(
     bankId: string,
     accountId: number,
@@ -394,6 +1068,16 @@ export class DemoAcctService extends BaseAcctService {
     email: string,
     compressed?: boolean
   ): Observable<never> {
-    throw new Error('Method not implemented.');
+    return throwError(new DemoError());
+  }
+
+  private get turnovers(): Turnovers[] {
+    return this.turnoversResponse.map((value) => ({
+      ...value,
+      id: `${value.turnoverDate.toISOString()}_${value.accId}_${value.bankId}`,
+      transactions: this.turnoverTransactions.filter(
+        ({ accId, turnoverDate }) => accId === value.accId && +turnoverDate === +value.turnoverDate
+      ),
+    }));
   }
 }

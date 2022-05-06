@@ -32,6 +32,7 @@ import { AcctDetailsSelectors } from './selectors';
 import { ACCT_TRANSACTIONS_FILTER_FORM } from './store';
 import { AcctTransactionsFilter } from '@modules/accounts/models/acct-transaction-filter.model';
 import { AcctActions } from '@modules/accounts/store/actions';
+import { ServerError } from '@models/errors/server-error.model';
 
 @Injectable({
   providedIn: 'root',
@@ -110,7 +111,15 @@ export class AcctDetailsEffects implements OnRunEffects {
                 name: payload.data.name,
               })
             ),
-            catchError((error) => of(AcctDetailsActions.updateAccountFailure(error.error.Message)))
+            catchError((error: ServerError) =>
+              of(
+                AcctDetailsActions.updateAccountFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.updateAccount'),
+                })
+              )
+            )
           )
       )
     )
@@ -369,7 +378,18 @@ export class AcctDetailsEffects implements OnRunEffects {
       switchMap((payload) =>
         this.accountsService
           .getPrintTransaction(payload.data.bankId, payload.data.transactionId, payload.clientId)
-          .pipe(map((html) => AcctDetailsActions.printTransactionSuccess(html)))
+          .pipe(
+            map((html) => AcctDetailsActions.printTransactionSuccess(html)),
+            catchError((error: ServerError) =>
+              of(
+                AcctDetailsActions.printTransactionFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.printTransaction'),
+                })
+              )
+            )
+          )
       )
     )
   );

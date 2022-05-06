@@ -191,7 +191,15 @@ export class AcctEffects {
           )
           .pipe(
             map((file) => AcctActions.sendRequisitesSuccess(file)),
-            catchError((error) => of(AcctActions.sendRequisitesFailure(error.error.Message)))
+            catchError((error) =>
+              of(
+                AcctActions.sendRequisitesFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.sendRequisites'),
+                })
+              )
+            )
           )
       )
     )
@@ -213,7 +221,15 @@ export class AcctEffects {
           )
           .pipe(
             map((file) => AcctActions.downloadExportTurnoversSuccess(file)),
-            catchError((error) => of(AcctActions.downloadExportTurnoversFailure(error.error.Message)))
+            catchError((error) =>
+              of(
+                AcctActions.downloadExportTurnoversFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.downloadExportTurnovers'),
+                })
+              )
+            )
           )
       )
     )
@@ -243,7 +259,15 @@ export class AcctEffects {
           )
           .pipe(
             map((file) => AcctActions.sendExportTurnoversSuccess(file)),
-            catchError((error) => of(AcctActions.sendExportTurnoversFailure(error.error.Message)))
+            catchError((error) =>
+              of(
+                AcctActions.sendExportTurnoversFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.sendExportTurnovers'),
+                })
+              )
+            )
           )
       )
     )
@@ -265,7 +289,15 @@ export class AcctEffects {
           )
           .pipe(
             map((file) => AcctActions.downloadStatementSuccess(file)),
-            catchError((error) => of(AcctActions.downloadStatementFailure(error.message)))
+            catchError((error) =>
+              of(
+                AcctActions.downloadStatementFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.downloadStatement'),
+                })
+              )
+            )
           )
       )
     )
@@ -295,7 +327,15 @@ export class AcctEffects {
           )
           .pipe(
             map(() => AcctActions.sendStatementSuccess(undefined)),
-            catchError((error) => of(AcctActions.sendStatementFailure(error.message)))
+            catchError((error) =>
+              of(
+                AcctActions.sendStatementFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('errors.sendStatement'),
+                })
+              )
+            )
           )
       )
     )

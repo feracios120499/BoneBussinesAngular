@@ -3,7 +3,7 @@
 $screen-tablet: 812px;
 
 :host {
-  display: block;
+  display: inline-block;
 
   &.full {
     @media (max-width: $screen-tablet) {

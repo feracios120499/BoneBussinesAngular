@@ -35,7 +35,8 @@ export class AcctService implements BaseAcctService {
     return this.acctService.getAccount(bankId, accountId, clientId);
   }
   updateAccount(bankId: string, accountId: number, clientId: string, updateAccount: AcctEdit): Observable<never> {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
+    return this.acctService.updateAccount(bankId, accountId, clientId, updateAccount);
   }
   getTurnovers(bankId: string, accountId: number, clientId: string, start: Dayjs, end: Dayjs): Observable<Turnovers[]> {
     // throw new Error('Method not implemented.');

@@ -39,5 +39,7 @@ export class B1CorrespondentsModalComponent extends withRequiredPropsCheck(BaseB
     const { name, accNumber, taxCode } = correspondent;
     this.result = { name, accNumber, taxCode };
     this.ok();
+    // Will be implemented later in SharedEffects:
+    this.modal.close();
   }
 }

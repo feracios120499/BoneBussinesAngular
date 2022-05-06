@@ -7,6 +7,5 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class B1MoreButtonComponent {
   @Input() bordered: boolean = false;
-  @Input() isDisabled: boolean = false;
   @HostBinding('class.b1-rotate-90') @Input() horizontal: boolean = false;
 }
