@@ -1,12 +1,9 @@
 <div class="payment b1-page-content">
   <div class="payment-checkbox">
-    <b1-page-checkbox
-      controlId="checkbox{{ paymentRow.id }}"
-      [ngModel]="paymentRow.selected"
-      (ngModelChange)="selectPayment()">
+    <b1-page-checkbox controlId="checkbox{{ paymentRow.id }}" [ngModel]="selected" (ngModelChange)="selectPayment()">
     </b1-page-checkbox>
   </div>
-  <div class="payment-body">
+  <div class="payment-body" (click)="showPayment()">
     <div class="payment-number">
       <div class="b1-medium">
         <span>№</span>
@@ -42,6 +39,7 @@
       <span>{{ undefined | money: paymentRow.currencyCode }}</span>
     </div>
   </div>
-
-  <ng-content select="b1-dropdown"></ng-content>
+  <div class="payment-more">
+    <ng-content select="b1-dropdown"></ng-content>
+  </div>
 </div>

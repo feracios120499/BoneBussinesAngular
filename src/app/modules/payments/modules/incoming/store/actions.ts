@@ -19,4 +19,23 @@ export namespace PayIncomingActions {
     `[${PAY_INCOMING_KEY}] select transaction`,
     props<{ transaction: Transaction }>()
   );
+
+  export const filter = createAction(`[${PAY_INCOMING_KEY}] filter`, props<{ filter: string }>());
+
+  export const selectAll = createAction(`[${PAY_INCOMING_KEY}] select all`, props<{ transactions: Transaction[] }>());
+
+  export const setDateRange = createAction(`[${PAY_INCOMING_KEY}] set date range`, props<{ range: DateRange }>());
+
+  export const printTransactions = createAction(`[${PAY_INCOMING_KEY}] print selected transactions`);
+
+  export const [printTransactionsRequest, printTransactionsSuccess, printTransactionsFailure] = createHTTPActions<
+    Transaction[],
+    string,
+    string
+  >(`[${PAY_INCOMING_KEY}] print transactions`);
+
+  export const showTransaction = createAction(
+    `[${PAY_INCOMING_KEY}] show transaction`,
+    props<{ transaction: Transaction; transactions: Transaction[] }>()
+  );
 }

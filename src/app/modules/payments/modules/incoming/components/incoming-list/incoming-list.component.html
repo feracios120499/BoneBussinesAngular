@@ -1,4 +1,4 @@
-<ng-container *ngrxLet="transactions$ as transactions">
+<!-- <ng-container *ngrxLet="transactions$ as transactions">
   <app-payment-row
     class="b1-page-data__row payment-row"
     *ngFor="let transaction of transactions"
@@ -9,4 +9,42 @@
       <b1-more-button slot="toggle"></b1-more-button>
     </b1-dropdown>
   </app-payment-row>
+</ng-container> -->
+
+<ng-container *ngrxLet="transactions$ as transactions">
+  <ng-container *ngrxLet="isLoadingList$ as isLoadingList">
+    <div class="b1-page-data" *ngIf="isLoadingList">
+      <b1-skeleton *ngFor="let item of [0, 1, 2, 3, 4, 5]" class="b1-page-data__row skeleton payment-row"></b1-skeleton>
+    </div>
+    <ng-container *ngIf="!isLoadingList">
+      <ng-container *ngIf="transactions | transactionsFilter: (filter$ | ngrxPush) as filteredTransactions">
+        <ng-scrollbar
+          class="virtual-scroll b1-page-data"
+          [disabled]="isMobile$ | ngrxPush"
+          *ngIf="filteredTransactions.length != 0">
+          <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+            <app-payment-row
+              class="b1-page-data__row payment-row"
+              *cdkVirtualFor="let transaction of filteredTransactions; trackBy: trackId"
+              [transaction]="transaction"
+              (onSelect)="selectTransaction(transaction)"
+              [class.selected]="transaction.selected"
+              [selected]="transaction.selected"
+              (onShow)="showTransaction(transaction, filteredTransactions)">
+              <b1-dropdown label="transactions dropdown" menuWidth="180px">
+                <b1-more-button slot="toggle"></b1-more-button>
+                <b1-dropdown-link
+                  icon="print"
+                  label="components.pay.print"
+                  (btnClick)="printTransaction(transaction)"></b1-dropdown-link>
+              </b1-dropdown>
+            </app-payment-row>
+          </cdk-virtual-scroll-viewport>
+        </ng-scrollbar>
+        <div class="b1-page-data" *ngIf="filteredTransactions.length == 0">
+          <b1-empty svgName="empty-payments" header="components.corpcards.applications.notFound"> </b1-empty>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </ng-container>

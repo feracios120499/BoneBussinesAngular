@@ -84,6 +84,8 @@ export abstract class BaseAcctService {
     format: string
   ): Observable<string>;
 
+  abstract getPrintTransactions(transactions: Transaction[], clientId: string, format: string): Observable<string>;
+
   abstract getExportTurnovers(
     bankId: string,
     accountId: number,

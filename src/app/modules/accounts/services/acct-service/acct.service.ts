@@ -28,6 +28,9 @@ export class AcctService implements BaseAcctService {
       }
     });
   }
+  getPrintTransactions(transactions: Transaction[], clientId: string, format: string = 'HTML'): Observable<string> {
+    return this.acctService.getPrintTransactions(transactions, clientId, format);
+  }
 
   getAccounts(clientId: string): Observable<AccountModel[]> {
     return this.acctService.getAccounts(clientId);

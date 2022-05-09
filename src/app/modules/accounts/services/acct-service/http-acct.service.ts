@@ -176,6 +176,14 @@ export class HttpAcctService extends BaseService implements BaseAcctService {
     });
   }
 
+  getPrintTransactions(transactions: Transaction[], clientId: string, format: string = 'HTML'): Observable<string> {
+    return this.http.post(
+      `api/v1/acct/transactions/print/${format}/${clientId}`,
+      transactions.map((transaction) => ({ transactionId: transaction.id, bankId: transaction.sender.bankCode })),
+      { responseType: 'text' }
+    );
+  }
+
   getExportTurnovers(
     bankId: string,
     accountId: number,

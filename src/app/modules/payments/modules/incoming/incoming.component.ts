@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PayIncomingActions } from './store/actions';
 import { payIncomingReducer } from './store/reducer';
+import { PayIncomingSelectors } from './store/selectors';
 import { PAY_INCOMING_KEY } from './store/store';
 
 @Component({
@@ -11,6 +12,8 @@ import { PAY_INCOMING_KEY } from './store/store';
 })
 export class IncomingComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
+
+  isLoading$ = this.store.select(PayIncomingSelectors.isLoading);
 
   ngOnInit(): void {
     this.store.addReducer(PAY_INCOMING_KEY, payIncomingReducer);

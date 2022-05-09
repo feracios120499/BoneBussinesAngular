@@ -19,6 +19,14 @@ import { PayIncomingEffects } from './store/effects';
 import { PaymentRowModule } from '@modules/payments/components/payment-row/payment-row.module';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { SharedModule } from '@shared';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { TransactionFilterModule } from '@pipes/transactions-filter/transactions-filter.module';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1PageCheckboxModule } from '@form-controls/b1-page-checkbox/b1-page-checkbox.module';
+import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 
 @NgModule({
   declarations: [IncomingComponent, IncomingActionsComponent, IncomingListComponent],
@@ -38,6 +46,14 @@ import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
     PaymentRowModule,
     B1DropdownModule,
     B1MoreButtonModule,
+    B1InputModule,
+    B1SkeletonModule,
+    SharedModule,
+    NgScrollbarModule,
+    TransactionFilterModule,
+    B1EmptyModule,
+    B1PageCheckboxModule,
+    VirtualPatchModule,
   ],
 })
 export class IncomingModule {}
