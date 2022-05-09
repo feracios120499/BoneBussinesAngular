@@ -7,9 +7,10 @@ import { FoundUser } from '@modules/users/models/found-user.model';
 import { UserNameForm } from '@modules/users/models/user-name-form.model';
 import { UserRolesForm } from '@modules/users/models/user-roles-form.model';
 import { DemoError } from '@models/errors/demo-error.model';
+import { BaseUsersService } from './base-users.service';
 
 @Injectable({ providedIn: 'root' })
-export class DemoUsersService {
+export class DemoUsersService extends BaseUsersService {
   private users: User[] = [
     {
       id: 'f0ebe5a8-9843-4190-8ddf-97b46b2134c2',

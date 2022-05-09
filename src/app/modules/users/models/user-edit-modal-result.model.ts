@@ -1,6 +1,5 @@
-// import { UserEditForm } from './UserEdit-form.model';
-// import { UserEditUpdateModel } from './UserEdit-update.model';
+import { User } from './user.model';
 
-// export type UserEditModalResult = UserEditUpdateModel | UserEditForm;
-// {
-// }
+export interface UserEditModalResult extends Pick<User, 'roles'> {
+  userId: string;
+}

@@ -38,24 +38,14 @@ export const usersReducer = createReducer(
     ...state,
     roles: action.payload,
   })),
-  on(
-    UsersActions.signInUserRequest,
-    UsersActions.updateUserRolesRequest,
-    (state) => ({
-      ...state,
-      loadings: [...pushIfNotExist(state.loadings, 'userCreate')],
-    })
-  ),
-  on(
-    UsersActions.signInUserSuccess,
-    UsersActions.signInUserFailure,
-    UsersActions.updateUserRolesSuccess,
-    UsersActions.updateUserRolesFailure,
-    (state) => ({
-      ...state,
-      loadings: [...removeItem(state.loadings, 'userCreate')],
-    })
-  ),
+  on(UsersActions.updateUserRolesRequest, (state) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'userEdit')],
+  })),
+  on(UsersActions.updateUserRolesSuccess, UsersActions.updateUserRolesFailure, (state) => ({
+    ...state,
+    loadings: [...removeItem(state.loadings, 'userEdit')],
+  })),
   on(UsersActions.signInUserSuccess, (state) => ({
     ...state,
     progress: 'create',
@@ -64,15 +54,13 @@ export const usersReducer = createReducer(
     ...state,
     foundUser: action.user,
   })),
+  on(UsersActions.signInUserRequest, UsersActions.createUserRequest, UsersActions.restoreUserRequest, (state) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'userCreate')],
+  })),
   on(
-    UsersActions.createUserRequest,
-    UsersActions.restoreUserRequest,
-    (state) => ({
-      ...state,
-      loadings: [...pushIfNotExist(state.loadings, 'userCreate')],
-    })
-  ),
-  on(
+    UsersActions.signInUserSuccess,
+    UsersActions.signInUserFailure,
     UsersActions.createUserSuccess,
     UsersActions.createUserFailure,
     UsersActions.restoreUserSuccess,
@@ -86,14 +74,10 @@ export const usersReducer = createReducer(
     ...state,
     loadings: [...pushIfNotExist(state.loadings, 'lockStateEdit')],
   })),
-  on(
-    UsersActions.updateUserLockStateSuccess,
-    UsersActions.updateUserLockStateFailure,
-    (state) => ({
-      ...state,
-      loadings: [...removeItem(state.loadings, 'lockStateEdit')],
-    })
-  ),
+  on(UsersActions.updateUserLockStateSuccess, UsersActions.updateUserLockStateFailure, (state) => ({
+    ...state,
+    loadings: [...removeItem(state.loadings, 'lockStateEdit')],
+  })),
   on(UsersActions.resetUserCreation, (state) => ({
     ...state,
     foundUser: null,

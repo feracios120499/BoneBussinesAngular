@@ -23,15 +23,15 @@
     <b1-card-loader [isLoading]="isLoading$" webClass="hidden"></b1-card-loader>
 
     <div class="b1-modal-container_header b1-base">
-      <span class="b1-correspondents-modal__name">
+      <span class="b1-correspondents-modal__text b1-correspondents-modal__text_name">
         {{ 'components.pay.recipient.recipient' | translate }}
       </span>
 
-      <span class="b1-correspondents-modal__account">
+      <span class="b1-correspondents-modal__text b1-correspondents-modal__text_account">
         {{ 'components.pay.recipient.iban' | translate }}
       </span>
 
-      <span class="b1-correspondents-modal__tax-code">
+      <span class="b1-correspondents-modal__text b1-correspondents-modal__text_tax-code">
         {{ 'components.pay.recipient.taxCode' | translate }}
       </span>
     </div>
@@ -50,7 +50,7 @@
                   class="b1-correspondents-modal__item b1-modal-container_row b1-base b1-bold"
                   (click)="onCorrespondentSelect(correspondent)">
                   <span
-                    class="b1-correspondents-modal__name b1-ellipsis"
+                    class="b1-correspondents-modal__text b1-correspondents-modal__text_name b1-ellipsis"
                     [ngbTooltip]="correspondent.name | translate"
                     placement="right"
                     tooltipClass="b1-base">
@@ -58,14 +58,14 @@
                   </span>
 
                   <span
-                    class="b1-correspondents-modal__account b1-ellipsis"
+                    class="b1-correspondents-modal__text b1-correspondents-modal__text_account b1-ellipsis"
                     [ngbTooltip]="correspondent.bankName | translate"
                     placement="left"
                     tooltipClass="b1-base"
                     [iban]="correspondent.accNumber">
                   </span>
 
-                  <span class="b1-correspondents-modal__tax-code">
+                  <span class="b1-correspondents-modal__text b1-correspondents-modal__text_tax-code">
                     {{ correspondent.taxCode }}
                   </span>
                 </div>
@@ -75,10 +75,12 @@
         </ng-container>
 
         <ng-container *ngIf="isInitialLoading">
-          <div class="b1-correspondents-modal__list">
-            <b1-skeleton
-              *ngFor="let number of 4 | numberToArray"
-              class="b1-correspondents-modal__item b1-correspondents-modal__item_skeleton"></b1-skeleton>
+          <div
+            *ngFor="let number of 5 | numberToArray"
+            class="b1-correspondents-modal__item b1-correspondents-modal__item_skeletons">
+            <b1-skeleton class="b1-correspondents-modal__text b1-correspondents-modal__text_name"></b1-skeleton>
+            <b1-skeleton class="b1-correspondents-modal__text b1-correspondents-modal__text_account"></b1-skeleton>
+            <b1-skeleton class="b1-correspondents-modal__text b1-correspondents-modal__text_tax-code"></b1-skeleton>
           </div>
         </ng-container>
 

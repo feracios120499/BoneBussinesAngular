@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersSelectors } from '@modules/users/store/selectors';
 import { User } from '@modules/users/models/user.model';
-import { UserCreateModalComponent } from '../user-create-modal/user-create-modal.component';
 import { UsersActions } from '@modules/users/store/actions';
 
 @Component({
@@ -18,10 +16,10 @@ export class UsersActionsComponent {
   isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoading);
   filterTerm$: Observable<string> = this.store.select(UsersSelectors.filterTerm);
 
-  constructor(private store: Store, private modalService: NgbModal) {}
+  constructor(private store: Store) {}
 
   onUserAdd(): void {
-    this.modalService.open(UserCreateModalComponent);
+    this.store.dispatch(UsersActions.showUserCreateModal());
   }
 
   onUsersFilter(term: string): void {

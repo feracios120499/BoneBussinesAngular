@@ -1,10 +1,8 @@
-import { Component, ChangeDetectionStrategy, ViewChild, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { withDestroy } from '@mixins/with-destroy.mixin';
 import { FoundUser } from '@modules/users/models/found-user.model';
 import { UsersSelectors } from '@modules/users/store/selectors';
 import { UserCreateProgress } from '@b1-types/users/user-create-progress.type';
@@ -13,6 +11,9 @@ import { UserNameForm } from '@modules/users/models/user-name-form.model';
 import { UserRolesFormComponent } from '../user-roles-form/user-roles-form.component';
 import { UserNameFormComponent } from '../user-name-form/user-name-form.component';
 import { UsersActions } from '@modules/users/store/actions';
+import { BaseB1ModalComponent } from '@modals/base-b1-modal.component';
+import { UserCreateModalConfig } from '@modules/users/models/user-create-modal-config.model';
+import { UserCreateModalResult } from '@modules/users/models/user-create-modal-result.model';
 
 @Component({
   selector: 'app-user-create-modal',
@@ -20,7 +21,10 @@ import { UsersActions } from '@modules/users/store/actions';
   styleUrls: ['./user-create-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserCreateModalComponent extends withDestroy() implements OnInit {
+export class UserCreateModalComponent extends BaseB1ModalComponent<UserCreateModalResult> implements OnInit {
+  @Input() config!: UserCreateModalConfig;
+
+  result!: UserCreateModalResult;
   isLoading$: Observable<boolean> = this.store.select(UsersSelectors.isLoadingUserCreate);
   progress$: Observable<UserCreateProgress> = this.store.select(UsersSelectors.progress);
   foundUser$: Observable<FoundUser | null> = this.store.select(UsersSelectors.foundUser);
@@ -31,11 +35,12 @@ export class UserCreateModalComponent extends withDestroy() implements OnInit {
   @ViewChild('rolesFormRef') rolesFormRef!: UserRolesFormComponent;
   @ViewChild('nameFormRef') nameFormRef!: UserNameFormComponent;
 
-  constructor(private store: Store, private activeModal: NgbActiveModal) {
+  constructor(private store: Store) {
     super();
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.store.dispatch(UsersActions.resetUserCreation());
     this.foundUser$
       .pipe(
@@ -57,21 +62,17 @@ export class UserCreateModalComponent extends withDestroy() implements OnInit {
 
   onUserCreate(): void {
     if (this.foundUserId) {
-      this.store.dispatch(
-        UsersActions.restoreUserRequest({
-          userId: this.foundUserId,
-          roles: this.userRolesForm.roles,
-        })
-      );
-      this.activeModal.close();
+      this.result = {
+        userId: this.foundUserId,
+        roles: this.userRolesForm.roles,
+      };
+      this.ok();
     } else if (this.nameFormRef.submitForm() && this.userNameForm) {
-      this.store.dispatch(
-        UsersActions.createUserRequest({
-          ...this.userRolesForm,
-          ...this.userNameForm,
-        })
-      );
-      this.activeModal.close();
+      this.result = {
+        ...this.userRolesForm,
+        ...this.userNameForm,
+      };
+      this.ok();
     }
   }
 }

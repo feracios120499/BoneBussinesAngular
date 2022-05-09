@@ -61,53 +61,52 @@ $screen-tablet: 812px;
     align-items: center;
     height: 60px;
     padding: 0 48px;
+    box-sizing: border-box;
 
     @media (max-width: $screen-tablet) {
       flex-direction: column;
       align-items: stretch;
-      height: 82px;
+      height: 116px;
       padding: 16px;
 
       &:not(:last-of-type) {
         border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
       }
+    }
 
-      & > span {
-        width: 100%;
+    &_skeletons {
+      b1-skeleton {
+        display: block;
+        height: 1.5em;
+        border-radius: 2px;
+      }
+    }
+  }
 
-        &:not(:last-of-type) {
-          margin-bottom: 4px;
-        }
+  &__text {
+    &_name {
+      width: 42%;
+    }
+
+    &_account {
+      width: 36%;
+    }
+
+    &_tax-code {
+      width: 128px;
+      text-align: right;
+
+      @media (max-width: $screen-tablet) {
+        text-align: left;
       }
     }
 
-    &_skeleton {
-      background-clip: content-box !important;
+    @media (max-width: $screen-tablet) {
+      width: 100%;
 
       &:not(:last-of-type) {
         margin-bottom: 4px;
-
-        @media (max-width: $screen-tablet) {
-          margin-bottom: 0;
-        }
       }
-    }
-  }
-
-  &__name {
-    width: 42%;
-  }
-
-  &__account {
-    width: 36%;
-  }
-
-  &__tax-code {
-    width: 128px;
-    text-align: right;
-
-    @media (max-width: $screen-tablet) {
-      text-align: left;
     }
   }
 }

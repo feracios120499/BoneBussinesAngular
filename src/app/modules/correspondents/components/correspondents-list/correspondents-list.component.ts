@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CorrespondentModalComponent } from '../correspondent-modal/correspondent-modal.component';
 import { CorrespondentsSelectors } from '@modules/correspondents/store/selectors';
 import { Correspondent } from '@modules/correspondents/models/correspondent.model';
 import { CorrespondentsActions } from '@modules/correspondents/store/actions';
@@ -26,12 +25,10 @@ export class CorrespondentsListComponent {
   }
 
   onCorrespondentEdit(correspondent: Correspondent): void {
-    // const modalRef = this.modalService.open(CorrespondentModalComponent);
-    // modalRef.componentInstance.editingCorrespondent = correspondent;
     this.store.dispatch(CorrespondentsActions.showCorrespondentModal({ editingCorrespondent: correspondent }));
   }
 
   onCorrespondentAdd(): void {
-    // this.modalService.open(CorrespondentModalComponent);
+    this.store.dispatch(CorrespondentsActions.showCorrespondentModal());
   }
 }

@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
-import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { BaseB1ModalComponent } from '../base-b1-modal.component';
 import { ResizeService } from '@services/resize.service';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
@@ -17,7 +16,7 @@ import { Correspondent } from '@modules/correspondents/models/correspondent.mode
   styleUrls: ['./b1-correspondents-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1CorrespondentsModalComponent extends withRequiredPropsCheck(BaseB1ModalComponent) implements OnInit {
+export class B1CorrespondentsModalComponent extends BaseB1ModalComponent<CorrespondentsModalResult> {
   @Input() config!: CorrespondentsModalConfig;
 
   correspondents$: Observable<Correspondent[]> = this.store.select(CorrespondentsSelectors.correspondentList);
@@ -27,19 +26,14 @@ export class B1CorrespondentsModalComponent extends withRequiredPropsCheck(BaseB
   result!: CorrespondentsModalResult;
   filterTerm = '';
 
-  constructor(modal: NgbActiveModal, private store: Store, private resizeService: ResizeService) {
-    super(modal);
-  }
-
-  ngOnInit(): void {
-    this.checkRequiredProps(['config']);
+  constructor(public modal: NgbActiveModal, private store: Store, private resizeService: ResizeService) {
+    super();
   }
 
   onCorrespondentSelect(correspondent: Correspondent): void {
     const { name, accNumber, taxCode } = correspondent;
     this.result = { name, accNumber, taxCode };
     this.ok();
-    // Will be implemented later in SharedEffects:
     this.modal.close();
   }
 }

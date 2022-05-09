@@ -3,6 +3,8 @@ import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { FoundUser } from '../models/found-user.model';
 import { Role } from '../models/role.model';
+import { UserCreateModalConfig } from '../models/user-create-modal-config.model';
+import { UserEditModalConfig } from '../models/user-edit-modal-config.model';
 import { UserNameForm } from '../models/user-name-form.model';
 import { UserRolesForm } from '../models/user-roles-form.model';
 import { User } from '../models/user.model';
@@ -63,4 +65,21 @@ export namespace UsersActions {
   >(`[${USERS_KEY}] update user lock state`);
 
   export const resetUserCreation = createAction(`[${USERS_KEY}] reset user creation`);
+
+  export const showUserCreateModal = createAction(`[${USERS_KEY} show user creation modal]`);
+
+  export const setUserCreateModal = createAction(
+    `[${USERS_KEY}] set user creation modal`,
+    props<{ config: UserCreateModalConfig }>()
+  );
+
+  export const showUserEditModal = createAction(
+    `[${USERS_KEY} show user edition modal]`,
+    props<{ editingUser: User }>()
+  );
+
+  export const setUserEditModal = createAction(
+    `[${USERS_KEY}] set user edition modal`,
+    props<{ config: UserEditModalConfig }>()
+  );
 }
