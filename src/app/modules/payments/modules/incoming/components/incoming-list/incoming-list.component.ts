@@ -20,6 +20,7 @@ export class IncomingListComponent implements OnInit {
   transactions$ = this.store.select(PayIncomingSelectors.transactions);
   isLoadingList$ = this.store.select(PayIncomingSelectors.isLoadingList);
   filter$ = this.store.select(PayIncomingSelectors.filter);
+  rangeString$ = this.store.select(PayIncomingSelectors.rangeString);
   isMobile$ = this.resizeService.isMobile$;
   ngOnInit(): void {}
 

@@ -16,6 +16,7 @@ $screen-tablet: 812px;
 .b1-empty {
   &__img-wrapper {
     width: 350px;
+    min-height: 250px;
     & img {
       width: 100%;
     }

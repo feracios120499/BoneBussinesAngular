@@ -7,6 +7,7 @@ import { Transaction } from '@modules/accounts/models/transaction.model';
 import { AcctService } from '@modules/accounts/services/acct-service/acct.service';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
@@ -19,7 +20,12 @@ import { PayIncomingSelectors } from './selectors';
   providedIn: 'root',
 })
 export class PayIncomingEffects implements OnRunEffects {
-  constructor(private actions$: Actions, private store: Store, private acctService: AcctService) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private acctService: AcctService,
+    private translateService: TranslateService
+  ) {}
 
   setDateRange$ = createEffect(() =>
     this.actions$.pipe(
@@ -47,7 +53,9 @@ export class PayIncomingEffects implements OnRunEffects {
       withLatestFrom(this.store.select(PayIncomingSelectors.selectedTransactions)),
       map(([, selectedTransactions]) => {
         if (selectedTransactions.length === 0) {
-          return NotifyActions.warningNotification({ message: 'test' });
+          return NotifyActions.warningNotification({
+            message: this.translateService.instant('shared.selectDocumentsBeforePrint'),
+          });
         } else {
           return PayIncomingActions.printTransactionsRequest(selectedTransactions);
         }

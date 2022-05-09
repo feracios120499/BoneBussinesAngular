@@ -13,6 +13,11 @@ export namespace PayIncomingSelectors {
 
   export const range = createSelector(incomingState, (store) => store.range);
 
+  export const rangeString = createSelector(incomingState, (store) => ({
+    start: store.range.start.format('DD.MM.YYYY'),
+    end: store.range.end.format('DD.MM.YYYY'),
+  }));
+
   export const transactions = createSelector(incomingState, (store) =>
     store.transactions.map((transaction) => {
       const uiTransaction: UiTransaction = {

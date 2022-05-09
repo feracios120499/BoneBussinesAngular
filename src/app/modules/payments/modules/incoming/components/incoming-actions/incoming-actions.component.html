@@ -4,7 +4,12 @@
       <b1-page-checkbox [ngModel]="selectAll$ | ngrxPush" (ngModelChange)="selectAll(filteredTransactions)">
       </b1-page-checkbox>
       <div class="b1-page-icons">
-        <b1-button class="b1-mr-4" icon="print" label="components.pay.print" (btnClick)="printTransactions()">
+        <b1-button
+          [isDisabled]="isLoading$ | ngrxPush"
+          class="b1-mr-4"
+          icon="print"
+          label="components.pay.print"
+          (btnClick)="printTransactions()">
         </b1-button>
       </div>
     </div>

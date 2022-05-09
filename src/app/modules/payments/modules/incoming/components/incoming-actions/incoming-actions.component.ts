@@ -18,6 +18,7 @@ export class IncomingActionsComponent implements OnInit {
   selectAll$ = this.store.select(PayIncomingSelectors.selectAll);
   filteredTransactions$ = this.store.select(PayIncomingSelectors.filteredTransactions);
   range$ = this.store.select(PayIncomingSelectors.range);
+  isLoading$ = this.store.select(PayIncomingSelectors.isLoading);
   range: DateRange = {
     start: dayjs('03.01.2022', 'DD.MM.YYYY'),
     end: dayjs('03.30.2022', 'DD.MM.YYYY'),

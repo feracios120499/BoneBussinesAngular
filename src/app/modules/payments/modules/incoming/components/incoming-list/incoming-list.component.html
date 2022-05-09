@@ -41,9 +41,12 @@
             </app-payment-row>
           </cdk-virtual-scroll-viewport>
         </ng-scrollbar>
-        <div class="b1-page-data" *ngIf="filteredTransactions.length == 0">
-          <b1-empty svgName="empty-payments" header="components.corpcards.applications.notFound"> </b1-empty>
-        </div>
+        <ng-container *ngrxLet="rangeString$ as range">
+          <div class="b1-page-data" *ngIf="filteredTransactions.length == 0">
+            <b1-empty svgName="empty-payments" [header]="'components.pay.incomingNotFound' | translate: range">
+            </b1-empty>
+          </div>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>
