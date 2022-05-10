@@ -1,210 +1,213 @@
 <ng-container *ngrxLet="payment$ as payment">
-  <ng-container *ngrxLet="isLoading$ as isLoading">
-    <div class="payment-window b1-modal-data" *ngIf="payment">
-      <div class="b1-modal-close">
-        <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
-      </div>
-      <div class="b1-modal-header payment-window-header">
-        <div class="b1-large">
-          <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
-          <span>{{ 'components.pay.import.payment' | translate }}</span>
-          <span class="b1-ml-2"> №{{ payment.number }} </span>
+  <ng-container *ngIf="payment">
+    <ng-container *ngrxLet="isLoading$ as isLoading">
+      <div class="payment-window b1-modal-data" *ngIf="payment">
+        <div class="b1-modal-close">
+          <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
         </div>
-      </div>
-      <div class="b1-modal-body">
-        <div class="payment-window-info">
-          <div class="payment-window-dates">
-            <div class="payment-window-dates_item">
-              <div class="payment-window-dates_name">
-                {{ 'components.pay.import.documentDate' | translate }}
-              </div>
-              <div class="payment-window-dates_value">
-                {{ payment.documentDate | date: 'dd.MM.yyyy' }}
-              </div>
-            </div>
-            <div class="payment-window-separator">|</div>
-
-            <div class="payment-window-dates_item valueDate">
-              <div class="payment-window-dates_name">
-                {{ 'components.pay.import.valueDate' | translate }}
-              </div>
-              <div class="payment-window-dates_value">
-                {{ payment.valueDate | date: 'dd.MM.yyyy' }}
-              </div>
-            </div>
-          </div>
-          <div class="payment-window-status_info">
-            <div class="payment-window-status" *ngIf="payment.statusCode">
-              <div [class]="statusMessages[payment.statusCode].class">
-                {{ statusMessages[payment.statusCode].message | translate }}
-              </div>
-            </div>
-            <span class="b1-color-dark" ng-if="payment.StatusCode == 'BANKPAID'" style="opacity: 0.6">{{
-              payment.payedDate | date: 'dd.MM.yyyy HH:mm'
-            }}</span>
+        <div class="b1-modal-header payment-window-header">
+          <div class="b1-large">
+            <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
+            <span>{{ 'components.pay.import.payment' | translate }}</span>
+            <span class="b1-ml-2"> №{{ payment.number }} </span>
           </div>
         </div>
-        <div class="payment-window-body">
-          <div class="payment-window-container">
-            <div class="payment-window-sender">
-              <div class="payment-window-name">
-                {{ 'components.pay.import.sender' | translate }}
+        <div class="b1-modal-body">
+          <div class="payment-window-info">
+            <div class="payment-window-dates">
+              <div class="payment-window-dates_item">
+                <div class="payment-window-dates_name">
+                  {{ 'components.pay.import.documentDate' | translate }}
+                </div>
+                <div class="payment-window-dates_value">
+                  {{ payment.documentDate | date: 'dd.MM.yyyy' }}
+                </div>
               </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.sender && payment.sender.name">
-                  {{ payment.sender.name }}
-                </span>
-                <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.name)"> </ngx-skeleton-loader>
-              </div>
+              <div class="payment-window-separator">|</div>
 
-              <div class="payment-window-name">
-                {{ 'components.pay.import.senderAccNumber' | translate }}
-              </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.sender && payment.sender.number" [iban]="payment.sender.number"> </span>
-                <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.number)"> </ngx-skeleton-loader>
-              </div>
-
-              <div class="payment-window-name">
-                {{ 'components.pay.import.taxCode' | translate }}
-              </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.sender && payment.sender.taxCode">
-                  {{ payment.sender.taxCode }}
-                </span>
-                <div class="payment-window-loader">
-                  <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.taxCode)"> </ngx-skeleton-loader>
+              <div class="payment-window-dates_item valueDate">
+                <div class="payment-window-dates_name">
+                  {{ 'components.pay.import.valueDate' | translate }}
+                </div>
+                <div class="payment-window-dates_value">
+                  {{ payment.valueDate | date: 'dd.MM.yyyy' }}
                 </div>
               </div>
             </div>
-            <div class="payment-window-recipient">
-              <div class="payment-window-name">
-                {{ 'components.pay.import.recipient' | translate }}
-              </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.recipient && payment.recipient.name">
-                  {{ payment.recipient.name }}
-                </span>
-                <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.name)"> </ngx-skeleton-loader>
-              </div>
-
-              <div class="payment-window-name">
-                {{ 'components.pay.import.recipientAccNumber' | translate }}
-              </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.recipient && payment.recipient.number" [iban]="payment.recipient.number"> </span>
-                <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.number)"> </ngx-skeleton-loader>
-              </div>
-
-              <div class="payment-window-name">
-                {{ 'components.pay.import.taxCode' | translate }}
-              </div>
-              <div class="payment-window-value flex">
-                <span *ngIf="payment.recipient && payment.recipient.taxCode">
-                  {{ payment.recipient.taxCode }}
-                </span>
-                <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.taxCode)"> </ngx-skeleton-loader>
-              </div>
-
-              <div *ngIf="payment.recipient && payment.recipient.countryName">
-                <div class="payment-window-name">
-                  {{ 'components.pay.import.recipientCountry' | translate }}
-                </div>
-                <div class="payment-window-value flex">
-                  {{ payment.recipient.countryName }}
+            <div class="payment-window-status_info">
+              <div class="payment-window-status" *ngIf="payment.statusCode">
+                <div [class]="statusMessages[payment.statusCode].class">
+                  {{ statusMessages[payment.statusCode].message | translate }}
                 </div>
               </div>
-
-              <div *ngIf="payment.recipient && payment.recipient.details">
-                <div class="payment-window-name">
-                  {{ 'components.pay.import.recipientDetails' | translate }}
-                </div>
-                <div class="payment-window-value flex">
-                  {{ payment.recipient.details }}
-                </div>
-              </div>
+              <span class="b1-color-dark" ng-if="payment.StatusCode == 'BANKPAID'" style="opacity: 0.6">{{
+                payment.payedDate | date: 'dd.MM.yyyy HH:mm'
+              }}</span>
             </div>
           </div>
-          <div class="payment-window-purpose">
-            <div class="payment-window-amount row">
-              <div class="col-md-6">
+          <div class="payment-window-body">
+            <div class="payment-window-container">
+              <div class="payment-window-sender">
                 <div class="payment-window-name">
-                  {{ 'components.pay.sumSpell' | translate }}
+                  {{ 'components.pay.import.sender' | translate }}
                 </div>
                 <div class="payment-window-value flex">
-                  <span *ngIf="payment.amountString">{{ payment.amountString }}</span>
-                  <div class="payment-window-loader" *ngIf="!payment.amountString">
-                    <ngx-skeleton-loader> </ngx-skeleton-loader>
+                  <span *ngIf="payment.sender && payment.sender.name">
+                    {{ payment.sender.name }}
+                  </span>
+                  <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.name)"> </ngx-skeleton-loader>
+                </div>
+
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.senderAccNumber' | translate }}
+                </div>
+                <div class="payment-window-value flex">
+                  <span *ngIf="payment.sender && payment.sender.number" [iban]="payment.sender.number"> </span>
+                  <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.number)"> </ngx-skeleton-loader>
+                </div>
+
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.taxCode' | translate }}
+                </div>
+                <div class="payment-window-value flex">
+                  <span *ngIf="payment.sender && payment.sender.taxCode">
+                    {{ payment.sender.taxCode }}
+                  </span>
+                  <div class="payment-window-loader">
+                    <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.taxCode)"> </ngx-skeleton-loader>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="payment-window-recipient">
                 <div class="payment-window-name">
-                  {{ 'components.pay.sum' | translate }}
+                  {{ 'components.pay.import.recipient' | translate }}
+                </div>
+                <div class="payment-window-value flex">
+                  <span *ngIf="payment.recipient && payment.recipient.name">
+                    {{ payment.recipient.name }}
+                  </span>
+                  <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.name)"> </ngx-skeleton-loader>
                 </div>
 
-                <div class="payment-window-value">
-                  {{ (payment.amount || 0) / 100 || 0 | money: '' }}
-                  {{ payment.currencyCode }}
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.recipientAccNumber' | translate }}
+                </div>
+                <div class="payment-window-value flex">
+                  <span *ngIf="payment.recipient && payment.recipient.number" [iban]="payment.recipient.number"> </span>
+                  <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.number)"> </ngx-skeleton-loader>
+                </div>
+
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.taxCode' | translate }}
+                </div>
+                <div class="payment-window-value flex">
+                  <span *ngIf="payment.recipient && payment.recipient.taxCode">
+                    {{ payment.recipient.taxCode }}
+                  </span>
+                  <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.taxCode)"> </ngx-skeleton-loader>
+                </div>
+
+                <div *ngIf="payment.recipient && payment.recipient.countryName">
+                  <div class="payment-window-name">
+                    {{ 'components.pay.import.recipientCountry' | translate }}
+                  </div>
+                  <div class="payment-window-value flex">
+                    {{ payment.recipient.countryName }}
+                  </div>
+                </div>
+
+                <div *ngIf="payment.recipient && payment.recipient.details">
+                  <div class="payment-window-name">
+                    {{ 'components.pay.import.recipientDetails' | translate }}
+                  </div>
+                  <div class="payment-window-value flex">
+                    {{ payment.recipient.details }}
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="payment-window-name">
-              {{ 'components.pay.import.purpose' | translate }}
+            <div class="payment-window-purpose">
+              <div class="payment-window-amount row">
+                <div class="col-md-6">
+                  <div class="payment-window-name">
+                    {{ 'components.pay.sumSpell' | translate }}
+                  </div>
+                  <div class="payment-window-value flex">
+                    <span *ngIf="payment.amountString">{{ payment.amountString }}</span>
+                    <div class="payment-window-loader" *ngIf="!payment.amountString">
+                      <ngx-skeleton-loader> </ngx-skeleton-loader>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="payment-window-name">
+                    {{ 'components.pay.sum' | translate }}
+                  </div>
+
+                  <div class="payment-window-value">
+                    {{ (payment.amount || 0) / 100 || 0 | money: '' }}
+                    {{ payment.currencyCode }}
+                  </div>
+                </div>
+              </div>
+              <div class="payment-window-name">
+                {{ 'components.pay.import.purpose' | translate }}
+              </div>
+              <div class="payment-window-value flex">
+                {{ payment.purpose }}
+              </div>
             </div>
-            <div class="payment-window-value flex">
-              {{ payment.purpose }}
-            </div>
+            <!-- <documents ng-model="payment.AttachedSupDocs"></documents> -->
           </div>
-          <!-- <documents ng-model="payment.AttachedSupDocs"></documents> -->
+        </div>
+        <div class="payment-window-footer b1-modal-footer">
+          <div class="b1-page-hr payment-window-loader" [class.loading]="isLoading"></div>
+          <div class="payment-window-actions" ngbAutofocus>
+            <b1-button
+              [filled]="false"
+              icon="print"
+              label="components.pay.print"
+              (btnClick)="print(payment)"
+              [isDisabled]="isLoading"></b1-button>
+            <!-- <button class="b1-button b1-button-primary" ng-if="payment.IsMyPayment" ng-click="dublicate()">
+                          <i class="ub-icons-icon-repeat"></i>
+                          {{'components.applications.actions.dublicate' | translate}}
+                      </button>
+                      <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
+                          ng-click="sign()" ng-if="payment.StatusCode == 'ONSIGN' && payment.IsNeedMySign && payment.IsMyPayment">
+                          <i class="ub-icons-icon-sign"></i>
+                          {{'components.pay.sign' | translate}}
+                      </button>
+                      <button class="b1-button b1-button-primary  b1-button-primary_filled"
+                          ng-if="payment.StatusCode == 'SIGNED' && payment.IsMyPayment" ng-click="toBank()">
+                          <i class="ub-icons-icon-send"></i>
+                          {{'components.pay.sendToBank' | translate}}
+                      </button>
+                      <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
+                          ng-click="prohibition()" ng-if="payment.StatusCode == 'BANKRECEIVED' && payment.IsMyPayment">
+                          <i class="ub-icons-icon-prohibition"></i>
+                          {{'components.pay.storno.button' | translate}}
+                      </button>
+                      <button class="b1-button b1-button-primary  b1-button-primary_filled"
+                          ng-if="payment.StatusCode == 'NEW' && payment.IsMyPayment" ng-click="onSign()">
+                          <i class="ub-icons-icon-send-for-sign"></i>
+                          {{'components.pay.onSign' | translate}}
+                      </button>
+                      <button class="b1-button b1-button-primary  b1-button-primary_filled" ng-if="payment.IsTurnover"
+                          ng-click="createPayment()">
+                          <i class="ub-icons-icon-country"></i>
+                          {{'components.pay.correspondents.createPayment'|translate}}
+                      </button> -->
+          </div>
         </div>
       </div>
 
-      <div class="payment-window-footer b1-modal-footer" *ngIf="payment">
-        <div class="b1-page-hr payment-window-loader" [class.loading]="isLoading"></div>
-        <div class="payment-window-actions" ng-if="!actionsDisable" ngbAutofocus>
-          <b1-button
-            [filled]="false"
-            icon="print"
-            label="components.pay.print"
-            (btnClick)="print(payment)"
-            [isDisabled]="isLoading"></b1-button>
-          <!-- <button class="b1-button b1-button-primary" ng-if="payment.IsMyPayment" ng-click="dublicate()">
-                        <i class="ub-icons-icon-repeat"></i>
-                        {{'components.applications.actions.dublicate' | translate}}
-                    </button>
-                    <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
-                        ng-click="sign()" ng-if="payment.StatusCode == 'ONSIGN' && payment.IsNeedMySign && payment.IsMyPayment">
-                        <i class="ub-icons-icon-sign"></i>
-                        {{'components.pay.sign' | translate}}
-                    </button>
-                    <button class="b1-button b1-button-primary  b1-button-primary_filled"
-                        ng-if="payment.StatusCode == 'SIGNED' && payment.IsMyPayment" ng-click="toBank()">
-                        <i class="ub-icons-icon-send"></i>
-                        {{'components.pay.sendToBank' | translate}}
-                    </button>
-                    <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
-                        ng-click="prohibition()" ng-if="payment.StatusCode == 'BANKRECEIVED' && payment.IsMyPayment">
-                        <i class="ub-icons-icon-prohibition"></i>
-                        {{'components.pay.storno.button' | translate}}
-                    </button>
-                    <button class="b1-button b1-button-primary  b1-button-primary_filled"
-                        ng-if="payment.StatusCode == 'NEW' && payment.IsMyPayment" ng-click="onSign()">
-                        <i class="ub-icons-icon-send-for-sign"></i>
-                        {{'components.pay.onSign' | translate}}
-                    </button>
-                    <button class="b1-button b1-button-primary  b1-button-primary_filled" ng-if="payment.IsTurnover"
-                        ng-click="createPayment()">
-                        <i class="ub-icons-icon-country"></i>
-                        {{'components.pay.correspondents.createPayment'|translate}}
-                    </button> -->
-        </div>
+      <div class="payment-window-previous" *ngIf="payment.isPaginationAvailable" (click)="previous(payment)">
+        <i b1-icon icon="chevron-left"></i>
       </div>
-    </div>
-
-    <!-- <div class="payment-window-previous" ng-if="paginationAvaible" ng-click="previous()"><i
-                class="ub-icons ub-icons-icon-back"></i></div>
-        <div class="payment-window-next" ng-if="paginationAvaible" ng-click="next()"><i
-                class="ub-icons ub-icons-icon-continue"></i></div> -->
+      <div class="payment-window-next" *ngIf="payment && payment.isPaginationAvailable" (click)="next(payment)">
+        <i b1-icon icon="chevron-right"></i>
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>

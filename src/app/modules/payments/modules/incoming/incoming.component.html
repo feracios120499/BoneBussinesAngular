@@ -1,1 +1,10 @@
-<p>incoming works!</p>
+<payments-header>
+  {{ 'components.pay.incomings.title' | translate }}
+</payments-header>
+<div style="position: relative" class="full-screen">
+  <div class="b1-page-card b1-bg-light">
+    <app-incoming-actions></app-incoming-actions>
+    <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+    <app-incoming-list></app-incoming-list>
+  </div>
+</div>

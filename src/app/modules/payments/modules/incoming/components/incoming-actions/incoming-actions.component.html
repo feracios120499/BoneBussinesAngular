@@ -1,0 +1,40 @@
+<ng-container *ngrxLet="filteredTransactions$ as filteredTransactions">
+  <div class="b1-page-actions">
+    <div class="b1-page-actions__left">
+      <b1-page-checkbox [ngModel]="selectAll$ | ngrxPush" (ngModelChange)="selectAll(filteredTransactions)">
+      </b1-page-checkbox>
+      <div class="b1-page-icons">
+        <b1-button
+          [isDisabled]="isLoading$ | ngrxPush"
+          class="b1-mr-4"
+          icon="print"
+          label="components.pay.print"
+          (btnClick)="printTransactions()">
+        </b1-button>
+      </div>
+    </div>
+    <form class="b1-page-actions__right" name="search" novalidate>
+      <b1-input
+        name="search"
+        icon="search"
+        [placeholder]="'shared.search' | translate"
+        [resizable]="true"
+        [ngModel]="filter$ | ngrxPush"
+        (ngModelChange)="onFilter($event)"></b1-input>
+      <div class="b1-page-inputWithIcon b1-ml-4">
+        <input
+          class="b1-datepicker__input b1-rangepicker"
+          b1-daterangepicker
+          startKey="start"
+          endKey="end"
+          [ngModel]="range$ | ngrxPush"
+          (ngModelChange)="loadTransactions($event)"
+          name="daterange"
+          [ranges]="ranges"
+          [dateLimit]="31"
+          readonly />
+        <label for="calendar" b1-icon icon="calendar"></label>
+      </div>
+    </form>
+  </div>
+</ng-container>

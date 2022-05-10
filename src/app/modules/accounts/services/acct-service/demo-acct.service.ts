@@ -16,6 +16,9 @@ import { BaseAcctService } from './base-acct.service';
   providedIn: 'root',
 })
 export class DemoAcctService extends BaseAcctService {
+  getPrintTransactions(transactions: Transaction[], clientId: string, format: string): Observable<string> {
+    throw new Error('Method not implemented.');
+  }
   private accounts1: AccountModel[] = [
     {
       id: 131696.0,
@@ -977,6 +980,9 @@ export class DemoAcctService extends BaseAcctService {
     );
   }
 
+  getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]> {
+    throw new Error('Method not implemented.');
+  }
   getTransactions(
     bankId: string,
     accountId: number,
