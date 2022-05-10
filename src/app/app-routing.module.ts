@@ -8,8 +8,7 @@ const routes: Routes = [
   { path: 'auth', redirectTo: '/auth/logon', pathMatch: 'full' },
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((p) => p.AuthModule),
+    loadChildren: () => import('./modules/auth/auth.module').then((p) => p.AuthModule),
   },
   {
     path: '',
@@ -17,48 +16,36 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () =>
-          import('./modules/dashboard/dashboard.module').then(
-            (p) => p.DashboardModule
-          ),
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then((p) => p.DashboardModule),
       },
       {
         path: 'accounts',
-        loadChildren: () =>
-          import('./modules/accounts/accounts.module').then(
-            (p) => p.AccountsModule
-          ),
+        loadChildren: () => import('./modules/accounts/accounts.module').then((p) => p.AccountsModule),
       },
       {
         path: 'payments',
-        loadChildren: () =>
-          import('./modules/payments/payments.module').then(
-            (p) => p.PaymentsModule
-          ),
+        loadChildren: () => import('./modules/payments/payments.module').then((p) => p.PaymentsModule),
       },
       {
         path: 'cards',
-        loadChildren: () =>
-          import('./modules/cards/cards.module').then((m) => m.CardsModule),
+        loadChildren: () => import('./modules/cards/cards.module').then((m) => m.CardsModule),
       },
       {
         path: 'users',
-        loadChildren: () =>
-          import('./modules/users/users.module').then((m) => m.UsersModule),
+        loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule),
       },
       {
         path: 'correspondents',
         loadChildren: () =>
-          import('./modules/correspondents/correspondents.module').then(
-            (m) => m.CorrespondentsModule
-          ),
+          import('./modules/correspondents/correspondents.module').then((m) => m.CorrespondentsModule),
       },
       {
         path: 'instructions',
-        loadChildren: () =>
-          import('./modules/instructions/instructions.module').then(
-            (m) => m.InstructionsModule
-          ),
+        loadChildren: () => import('./modules/instructions/instructions.module').then((m) => m.InstructionsModule),
+      },
+      {
+        path: 'contacts',
+        loadChildren: () => import('./modules/contacts/contacts.module').then((m) => m.ContactsModule),
       },
     ],
   },

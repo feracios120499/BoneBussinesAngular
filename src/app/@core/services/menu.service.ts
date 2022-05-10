@@ -72,8 +72,7 @@ export class MenuService extends BaseService {
         "{active: ($state.includes('app.payments') || $state.includes('app.paymentsAuto')) && !$state.includes('app.payments.recipients')}",
       ngValue: 'payments',
       icon: 'money-bill-wave',
-      dataRole:
-        'Director,Accountant,PaymentsManager,ForeignCurrencyPaymentsManager',
+      dataRole: 'Director,Accountant,PaymentsManager,ForeignCurrencyPaymentsManager',
       route: 'payments',
       // gaTrackEvent: '[\'left-menu\', \'view-payments\']',
       dataTranslate: 'aside.nav.DOCUMENTS',
@@ -135,6 +134,16 @@ export class MenuService extends BaseService {
       route: 'app.map.index',
       dataTranslate: 'aside.nav.BranchesAndAtms',
       moduleName: 'Branches',
+      position: 0,
+    },
+    contacts: {
+      ngClass: "{active:$state.includes('app.contacts.index')}",
+      ngValue: 'contacts',
+      icon: 'phone-solid',
+      dataRole: '',
+      route: 'contacts',
+      dataTranslate: 'aside.nav.contacts',
+      moduleName: 'Contacts',
       position: 0,
     },
     promotion: {

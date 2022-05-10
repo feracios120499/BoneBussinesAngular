@@ -1,0 +1,4 @@
+<div *ngFor="let phone of phones" class="b1-large b1-mt-4">
+  <a [href]="'tel:' + phone.split(' ').join('').trim()">{{ phone }}</a>
+</div>
+<div class="b1-medium b1-opacity-60">{{ comment | translate }}</div>

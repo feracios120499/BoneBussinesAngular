@@ -1,0 +1,16 @@
+$screen-tablet: 812px;
+
+:host {
+  display: block;
+}
+
+.contacts-container {
+  &__title,
+  &__sub-title {
+    @media (max-width: $screen-tablet) {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
