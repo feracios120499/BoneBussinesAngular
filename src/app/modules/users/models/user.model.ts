@@ -9,7 +9,7 @@ export interface User {
   email: string;
   isDisable: boolean;
   isDeletable: boolean;
-  signNumber: number;
+  signNumber: number | null;
   roles: string[];
-  pictureUrl?: string;
+  pictureUrl: string | null;
 }

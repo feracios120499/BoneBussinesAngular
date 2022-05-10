@@ -1,9 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { BaseB1ModalComponent } from '@modals/base-b1-modal.component';
 import { CorrespondentFormComponent } from '../correspondent-form/correspondent-form.component';
 import { CorrespondentModalConfig } from '@modules/correspondents/models/correspondent-modal-config.model';
@@ -17,7 +15,7 @@ import { CorrespondentForm } from '@modules/correspondents/models/correspondent-
   styleUrls: ['./correspondent-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CorrespondentModalComponent extends withRequiredPropsCheck(BaseB1ModalComponent) implements OnInit {
+export class CorrespondentModalComponent extends BaseB1ModalComponent<CorrespondentModalResult> implements OnInit {
   @Input() config!: CorrespondentModalConfig;
 
   result!: CorrespondentModalResult;
@@ -26,13 +24,12 @@ export class CorrespondentModalComponent extends withRequiredPropsCheck(BaseB1Mo
 
   @ViewChild('formRef') formRef!: CorrespondentFormComponent;
 
-  constructor(modal: NgbActiveModal, private store: Store) {
-    super(modal);
+  constructor(private store: Store) {
+    super();
   }
 
   ngOnInit(): void {
-    this.checkRequiredProps(['config']);
-
+    super.ngOnInit();
     if (this.config.editingCorrespondent) {
       const { accNumber, bankCode, bankName, name, taxCode, accCurrencyCode } = this.config.editingCorrespondent;
       this.correspondentForm = {
@@ -62,6 +59,5 @@ export class CorrespondentModalComponent extends withRequiredPropsCheck(BaseB1Mo
       this.result = this.correspondentForm;
     }
     this.ok();
-    // this.activeModal.close();
   }
 }

@@ -419,7 +419,15 @@ export class CardDetailsEffects {
           )
           .pipe(
             map((_) => CardDetailsActions.sendStatementSuccess()),
-            catchError((error) => of(CardDetailsActions.sendStatementFailure(error.message)))
+            catchError((error) =>
+              of(
+                CardDetailsActions.sendStatementFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('components.corpcard.errors.sendStatement'),
+                })
+              )
+            )
           )
       )
     )
@@ -440,7 +448,15 @@ export class CardDetailsEffects {
           )
           .pipe(
             map((file) => CardDetailsActions.downloadStatementSuccess(file)),
-            catchError((error) => of(CardDetailsActions.downloadStatementFailure(error.message)))
+            catchError((error) =>
+              of(
+                CardDetailsActions.downloadStatementFailure(error.message),
+                NotifyActions.serverErrorNotification({
+                  error,
+                  message: this.translateService.instant('components.corpcard.errors.downloadStatement'),
+                })
+              )
+            )
           )
       )
     )

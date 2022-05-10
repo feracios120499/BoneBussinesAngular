@@ -126,12 +126,28 @@ export class CardReissueEffect implements OnRunEffects {
                   return of(CardReissueActions.signApplicationsSuccess(errors));
                 }
               }),
-              catchError((error) => of(CardReissueActions.signApplicationsFailure(error.message)))
+              catchError((error) =>
+                of(
+                  CardReissueActions.signApplicationsFailure(error.message),
+                  NotifyActions.serverErrorNotification({
+                    error,
+                    message: this.translateService.instant('components.corpcard.errors.signApplications'),
+                  })
+                )
+              )
             )
           )
         )
       ),
-      catchError((error) => of(CardReissueActions.signApplicationsFailure(error.message)))
+      catchError((error) =>
+        of(
+          CardReissueActions.signApplicationsFailure(error.message),
+          NotifyActions.serverErrorNotification({
+            error,
+            message: this.translateService.instant('components.corpcard.errors.signApplications'),
+          })
+        )
+      )
     )
   );
 
@@ -236,7 +252,15 @@ export class CardReissueEffect implements OnRunEffects {
       switchMap((payload) =>
         this.reissueApplicationService.removeApplications(payload.data, payload.clientId).pipe(
           map((result) => CardReissueActions.removeApplicationsSuccess(result)),
-          catchError((error) => of(CardReissueActions.removeApplicationsFailure(error.message)))
+          catchError((error) =>
+            of(
+              CardReissueActions.removeApplicationsFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('components.corpcard.errors.removeApplications'),
+              })
+            )
+          )
         )
       )
     )
@@ -269,7 +293,15 @@ export class CardReissueEffect implements OnRunEffects {
       switchMap((payload) =>
         this.reissueApplicationService.sendToBank(payload.data, payload.clientId).pipe(
           map((result) => CardReissueActions.sendToBankApplicationsSuccess(result)),
-          catchError((error) => of(CardReissueActions.sendToBankApplicationsFailure(error.message)))
+          catchError((error) =>
+            of(
+              CardReissueActions.sendToBankApplicationsFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('components.corpcard.errors.sendToBankApplications'),
+              })
+            )
+          )
         )
       )
     )

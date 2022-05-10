@@ -13,6 +13,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { ServerError } from '@models/errors/server-error.model';
 import { User } from '../models/user.model';
 import { Role } from '../models/role.model';
+import { UserEditModalConfig } from '../models/user-edit-modal-config.model';
+import { UserEditModalResult } from '../models/user-edit-modal-result.model';
+import { ModalService } from '@services/modal.service';
+import { UserEditModalComponent } from '../components/user-edit-modal/user-edit-modal.component';
+import { UserCreateModalConfig } from '../models/user-create-modal-config.model';
+import { UserCreateModalResult } from '../models/user-create-modal-result.model';
+import { UserRolesForm } from '../models/user-roles-form.model';
+import { UserNameForm } from '../models/user-name-form.model';
+import { UserCreateModalComponent } from '../components/user-create-modal/user-create-modal.component';
 
 @Injectable()
 export class UsersEffects {
@@ -20,7 +29,8 @@ export class UsersEffects {
     private actions$: Actions,
     private store: Store,
     private usersService: UsersService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalService: ModalService
   ) {}
 
   loadUsers$ = createEffect(() =>
@@ -261,5 +271,80 @@ export class UsersEffects {
         }),
       ])
     )
+  );
+
+  showUserEditModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.showUserEditModal),
+      map(({ editingUser }) => {
+        const config: UserEditModalConfig = {
+          editingUser,
+          callback: (result: UserEditModalResult) => {
+            this.store.dispatch(UsersActions.updateUserRolesRequest(result));
+          },
+        };
+        return UsersActions.setUserEditModal({ config });
+      })
+    )
+  );
+
+  setUserEditModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UsersActions.setUserEditModal),
+        map(({ config }) => {
+          const modalRef = this.modalService.open(UserEditModalComponent);
+          modalRef.componentInstance.config = config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  closeUserEditModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UsersActions.updateUserRolesSuccess),
+        tap(() => this.modalService.close(UserEditModalComponent))
+      ),
+    { dispatch: false }
+  );
+
+  showUserCreateModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.showUserCreateModal),
+      map(() => {
+        const config: UserCreateModalConfig = {
+          callback: (result: UserCreateModalResult) => {
+            if ((result as UserEditModalResult).userId) {
+              this.store.dispatch(UsersActions.restoreUserRequest(result as UserEditModalResult));
+            } else {
+              this.store.dispatch(UsersActions.createUserRequest(result as UserRolesForm & UserNameForm));
+            }
+          },
+        };
+        return UsersActions.setUserCreateModal({ config });
+      })
+    )
+  );
+
+  setUserCreateModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UsersActions.setUserCreateModal),
+        map(({ config }) => {
+          const modalRef = this.modalService.open(UserCreateModalComponent);
+          modalRef.componentInstance.config = config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  closeUserCreateModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UsersActions.createUserSuccess, UsersActions.restoreUserSuccess),
+        tap(() => this.modalService.close(UserCreateModalComponent))
+      ),
+    { dispatch: false }
   );
 }
