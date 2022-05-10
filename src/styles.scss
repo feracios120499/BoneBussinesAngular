@@ -3133,6 +3133,9 @@ textarea {
     &_type {
       margin-left: 40px;
     }
+    @media (max-width: 812px) {
+      padding: 0 16px;
+    }
   }
   &-data {
     min-height: 450px;
@@ -3843,6 +3846,7 @@ ngb-modal-window {
   }
   & .ranges li button.active {
     background-color: $color-primary !important;
+    color: $color-light !important;
   }
   & .drp-calendar.left.single {
     padding: 0;

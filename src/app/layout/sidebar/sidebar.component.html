@@ -1,9 +1,6 @@
 <ng-container *ngrxLet="isOpenMenu$ as isOpenMenu">
   <div class="app-aside" *ngrxLet="isCollapsed$ as isCollapsed">
-    <div
-      class="main-sidemenu"
-      [class.b1-collapsed]="isCollapsed"
-      [class.open]="isOpenMenu">
+    <div class="main-sidemenu" [class.b1-collapsed]="isCollapsed" [class.open]="isOpenMenu">
       <div class="main-sidemenu__wrapper">
         <div id="aside-user">
           <div class="main-sidemenu__head">
@@ -12,9 +9,7 @@
                 <div mobileClass="hidden">
                   {{ customerName$ | ngrxPush }}
                 </div>
-                <p
-                  class="bdate b1-small b1-flex b1-align-center b1-justify-center"
-                  webClass="hidden">
+                <p class="bdate b1-small b1-flex b1-align-center b1-justify-center" webClass="hidden">
                   <span>{{ 'aside.nav.bankDate' | translate }}</span
                   >:
                   <ng-container *ngrxLet="bankDate$ as bankDate">
@@ -104,8 +99,7 @@
             </div>
           </ng-container>
 
-          <ng-container
-            *ngrxLet="callCenterPhonesLocal$ as callCenterPhonesLocal">
+          <ng-container *ngrxLet="callCenterPhonesLocal$ as callCenterPhonesLocal">
             <div *ngIf="callCenterPhonesLocal && callCenterPhonesLocal.length">
               <p *ngFor="let phone of callCenterPhonesLocal">
                 <span class="b1-medium">{{ phone }}</span>
@@ -123,9 +117,7 @@
               <span class="b1-micro b1-opacity-60">
                 {{ 'shared.workDates' | translate }}
               </span>
-              <span class="b1-micro b1-opacity-60">
-                {{ callCenterWork.from }} - {{ callCenterWork.to }}
-              </span>
+              <span class="b1-micro b1-opacity-60"> {{ callCenterWork.from }} - {{ callCenterWork.to }} </span>
             </div>
           </ng-container>
 
@@ -133,9 +125,7 @@
             <div *ngIf="ecpSupportPhone && ecpSupportPhone.length">
               <p class="b1-flex b1-align-center">
                 <i b1-icon icon="cog" class="b1-color-warning"></i>
-                <span
-                  class="b1-color-warning b1-base b1-ml-2"
-                  data-translate="aside.nav.ECPTechSupport"
+                <span class="b1-color-warning b1-base b1-ml-2" data-translate="aside.nav.ECPTechSupport"
                   >технічна підтримка ЕЦП</span
                 >
               </p>
@@ -147,39 +137,23 @@
         </div>
       </div>
       <div class="main-sidemenu__collapse">
-        <a
-          class="main-sidemenu__collapse-button"
-          (click)="collapseToggle()"
-          ga-track-event="['left-menu','collapse']">
-          <span class="b1-mr-2" *ngIf="!isCollapsed">{{
-            'aside.nav.collapse' | translate
-          }}</span>
+        <a class="main-sidemenu__collapse-button" (click)="collapseToggle()" ga-track-event="['left-menu','collapse']">
+          <span class="b1-mr-2" *ngIf="!isCollapsed">{{ 'aside.nav.collapse' | translate }}</span>
           <i b1-icon icon="arrows"></i>
         </a>
       </div>
       <ng-container *ngrxLet="isOpenCustomersList$ as isOpenCustomersList">
-        <div
-          class="main-sidemenu__customers"
-          [class.open]="isOpenCustomersList">
-          <div
-            class="main-sidemenu__customers-button"
-            [class.open]="isOpenCustomersList"
-            (click)="toggleCustomers()">
-            <div
-              class="main-sidemenu__customers-name"
-              [class.open]="isOpenCustomersList">
+        <div class="main-sidemenu__customers" [class.open]="isOpenCustomersList">
+          <div class="main-sidemenu__customers-button" [class.open]="isOpenCustomersList" (click)="toggleCustomers()">
+            <div class="main-sidemenu__customers-name" [class.open]="isOpenCustomersList">
               {{ customerName$ | ngrxPush }}
             </div>
-            <div
-              class="main-sidemenu__customers-change"
-              [class.open]="isOpenCustomersList">
+            <div class="main-sidemenu__customers-change" [class.open]="isOpenCustomersList">
               <span class="b1-mr-2">змінити клієнта</span>
               <i b1-icon icon="chevron-up"></i>
             </div>
           </div>
-          <div
-            class="main-sidemenu__customers-list"
-            *ngrxLet="customers$ as customers">
+          <div class="main-sidemenu__customers-list" *ngrxLet="customers$ as customers">
             <div
               class="main-sidemenu__customers-item"
               *ngFor="let customer of customers"

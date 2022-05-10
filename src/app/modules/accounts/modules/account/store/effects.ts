@@ -346,6 +346,7 @@ export class AcctDetailsEffects implements OnRunEffects {
           amount: transaction.amount,
           amountString: transaction.amountString,
           currencyCode: transaction.sender.accCurrencyCode || transaction.recipient.accCurrencyCode,
+          isPaginationAvailable: false,
           sender: {
             name: transaction.sender.name,
             number: transaction.sender.accNumber,

@@ -5,13 +5,14 @@ import { AuthLogonOldComponent } from './views/auth-logon-old/auth-logon-old.com
 import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
 import { AuthComponent } from './views/auth/auth.component';
 
-
 const routes: Routes = [
   {
-    path: '', component: AuthComponent, children: [
+    path: '',
+    component: AuthComponent,
+    children: [
       { path: 'logon', component: AuthLogonComponent },
-      { path: 'old', component: AuthLogonOldComponent }
-    ]
+      { path: 'old', component: AuthLogonOldComponent },
+    ],
   },
   { path: '', redirectTo: '/auth/logon', pathMatch: 'full' },
 ];
@@ -20,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

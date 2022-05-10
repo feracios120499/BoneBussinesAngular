@@ -6,13 +6,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PayEffects } from '@store/payments/effects';
 import { payReducer } from '@store/payments/reducer';
 import { PAY_KEY } from '@store/payments/store';
-
-import { PaymentsHeaderComponent } from './components/payments-header/payments-header.component';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { PaymentsComponent } from './payments.component';
 
 @NgModule({
-  declarations: [PaymentsComponent, PaymentsHeaderComponent],
+  declarations: [PaymentsComponent],
   imports: [
     CommonModule,
     TranslateModule,

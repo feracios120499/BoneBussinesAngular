@@ -27,6 +27,8 @@ export abstract class BaseAcctService {
     end: Dayjs
   ): Observable<Turnovers[]>;
 
+  abstract getIncomingTransactions(clientId: string, start: Dayjs, end: Dayjs): Observable<Transaction[]>;
+
   abstract getTransactions(
     bankId: string,
     accountId: number,
@@ -81,6 +83,8 @@ export abstract class BaseAcctService {
     clientId: string,
     format: string
   ): Observable<string>;
+
+  abstract getPrintTransactions(transactions: Transaction[], clientId: string, format: string): Observable<string>;
 
   abstract getExportTurnovers(
     bankId: string,

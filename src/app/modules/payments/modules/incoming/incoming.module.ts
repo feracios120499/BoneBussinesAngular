@@ -3,15 +3,57 @@ import { CommonModule } from '@angular/common';
 
 import { IncomingRoutingModule } from './incoming-routing.module';
 import { IncomingComponent } from './incoming.component';
-
+import { PaymentsHeaderModule } from '@modules/payments/components/payments-header/payments-header.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { IncomingActionsComponent } from './components/incoming-actions/incoming-actions.component';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { B1DaterangepickerModule } from '@form-controls/b1-daterangepicker/b1-daterangepicker.module';
+import { FormsModule } from '@angular/forms';
+import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
+import { IncomingListComponent } from './components/incoming-list/incoming-list.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PayIncomingEffects } from './store/effects';
+import { PaymentRowModule } from '@modules/payments/components/payment-row/payment-row.module';
+import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
+import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { SharedModule } from '@shared';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { TransactionFilterModule } from '@pipes/transactions-filter/transactions-filter.module';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1PageCheckboxModule } from '@form-controls/b1-page-checkbox/b1-page-checkbox.module';
+import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 
 @NgModule({
-  declarations: [
-    IncomingComponent
-  ],
+  declarations: [IncomingComponent, IncomingActionsComponent, IncomingListComponent],
   imports: [
     CommonModule,
-    IncomingRoutingModule
-  ]
+    TranslateModule,
+    IncomingRoutingModule,
+    PaymentsHeaderModule,
+    B1ButtonModule,
+    B1PageButtonModule,
+    ReactiveComponentModule,
+    B1IconModule,
+    B1DaterangepickerModule,
+    FormsModule,
+    B1CardLoaderModule,
+    EffectsModule.forFeature([PayIncomingEffects]),
+    PaymentRowModule,
+    B1DropdownModule,
+    B1MoreButtonModule,
+    B1InputModule,
+    B1SkeletonModule,
+    SharedModule,
+    NgScrollbarModule,
+    TransactionFilterModule,
+    B1EmptyModule,
+    B1PageCheckboxModule,
+    VirtualPatchModule,
+  ],
 })
-export class IncomingModule { }
+export class IncomingModule {}
