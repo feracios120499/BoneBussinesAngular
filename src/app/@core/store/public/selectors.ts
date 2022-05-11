@@ -36,4 +36,6 @@ export namespace PublicSelectors {
   );
 
   export const payTypes = createSelector(publicStore, (state) => state.payTypes);
+
+  export const mobileAppLinks = createSelector(publicStore, (state) => state.mobileAppLinks);
 }

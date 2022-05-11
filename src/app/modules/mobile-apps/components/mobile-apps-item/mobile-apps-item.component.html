@@ -1,0 +1,13 @@
+<div class="mobile-apps-item__block">
+  <h2 class="b1-large b1-mb-4">
+    <ng-content></ng-content>
+  </h2>
+
+  <a class="mobile-apps-item__link" [href]="link" target="_blank">
+    <img [src]="'assets/img/' + svgName + '.svg'" width="200px" />
+  </a>
+</div>
+
+<div class="mobile-apps-item__block">
+  <qrcode [qrdata]="link" [width]="185" [margin]="0" errorCorrectionLevel="M"></qrcode>
+</div>
