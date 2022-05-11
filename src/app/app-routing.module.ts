@@ -43,6 +43,10 @@ const routes: Routes = [
         path: 'instructions',
         loadChildren: () => import('./modules/instructions/instructions.module').then((m) => m.InstructionsModule),
       },
+      {
+        path: 'contacts',
+        loadChildren: () => import('./modules/contacts/contacts.module').then((m) => m.ContactsModule),
+      },
     ],
   },
 ];

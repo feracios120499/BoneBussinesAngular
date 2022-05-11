@@ -136,6 +136,16 @@ export class MenuService extends BaseService {
       moduleName: 'Branches',
       position: 0,
     },
+    contacts: {
+      ngClass: "{active:$state.includes('app.contacts.index')}",
+      ngValue: 'contacts',
+      icon: 'phone-solid',
+      dataRole: '',
+      route: 'contacts',
+      dataTranslate: 'aside.nav.contacts',
+      moduleName: 'Contacts',
+      position: 0,
+    },
     promotion: {
       ngClass: "{active:$state.includes('app.prm.products')}",
       ngValue: 'promotion',

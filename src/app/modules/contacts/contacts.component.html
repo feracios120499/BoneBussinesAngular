@@ -1,0 +1,72 @@
+<div class="b1-wrapper no-wrap-xs b1-full-screen">
+  <app-contacts-header></app-contacts-header>
+
+  <div class="contacts__content b1-bg-light">
+    <b1-content-wrapper>
+      <div class="contacts__group">
+        <app-contacts-container class="contacts__group-item">
+          <ng-container slot="title">
+            <!-- TODO: TRANSLATE NEXT LINE: -->
+            <!-- Служба підтримки -->
+            {{ 'components.contacts.supportService' | translate }}
+          </ng-container>
+
+          <ng-container slot="sub-title">
+            <span>
+              <!-- TODO: TRANSLATE NEXT LINE: -->
+              <!-- в робочі дні -->
+              {{ 'components.contacts.onWeekdays' | translate }}
+            </span>
+            <span *ngrxLet="callCenterWork$ as callCenterWork" class="b1-ml-2">
+              {{ callCenterWork.from + ' - ' + callCenterWork.to }}
+            </span>
+          </ng-container>
+
+          <ng-container *ngrxLet="callCenterPhones$ as callCenterPhones">
+            <app-contacts-phone-list
+              *ngIf="callCenterPhones.length"
+              webClass="b1-mt-6"
+              [phones]="callCenterPhones"
+              comment="aside.nav.FreeTarif"></app-contacts-phone-list>
+          </ng-container>
+
+          <ng-container *ngrxLet="callCenterPhonesLocal$ as callCenterPhonesLocal">
+            <app-contacts-phone-list
+              *ngIf="callCenterPhonesLocal.length"
+              webClass="b1-mt-6"
+              [phones]="callCenterPhonesLocal"
+              comment="aside.nav.OperatorTarif"></app-contacts-phone-list>
+          </ng-container>
+        </app-contacts-container>
+
+        <app-contacts-container class="contacts__group-item">
+          <ng-container slot="title">{{ 'aside.nav.ECPTechSupport' | translate }}</ng-container>
+
+          <ng-container slot="sub-title">
+            <span>
+              <!-- TODO: TRANSLATE NEXT LINE: -->
+              <!-- цілодобово -->
+              {{ 'components.contacts.roundTheClock' | translate }}
+            </span>
+          </ng-container>
+
+          <ng-container *ngrxLet="ecpSupportPhones$ as ecpSupportPhones">
+            <app-contacts-phone-list
+              *ngIf="ecpSupportPhones.length"
+              webClass="b1-mt-6"
+              [phones]="ecpSupportPhones"
+              comment="aside.nav.FreeTarif"></app-contacts-phone-list>
+          </ng-container>
+
+          <ng-container *ngrxLet="ecpSupportPhonesLocal$ as ecpSupportPhonesLocal">
+            <app-contacts-phone-list
+              *ngIf="ecpSupportPhonesLocal.length"
+              webClass="b1-mt-6"
+              [phones]="ecpSupportPhonesLocal"
+              comment="aside.nav.OperatorTarif"></app-contacts-phone-list>
+          </ng-container>
+        </app-contacts-container>
+      </div>
+    </b1-content-wrapper>
+  </div>
+</div>

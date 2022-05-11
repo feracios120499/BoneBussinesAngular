@@ -12,6 +12,7 @@ export interface Owner {
   callCenterWorkTo: string;
   callCenterPhoneLocal: string[];
   ecpTechSupportPhone: string[];
+  ecpTechSupportPhoneLocal: string[];
   copyright: string;
   defaulеWebAppSettings: string;
   valueAddedTax: string;
