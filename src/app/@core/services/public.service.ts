@@ -1,40 +1,62 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 
-import { PublicService } from './abstract/public.service';
 import { BaseService } from './base.service';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-export class HttpPublicService extends BaseService implements PublicService {
-    /**
-     *
-     */
-    constructor(private http: HttpClient) {
-        super();
-    }
+export class PublicService extends BaseService {
+  /**
+   *
+   */
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-    getBank(bankCode: string): Observable<BankModel> {
-        return this.http.get<any>(`api/v1/public/banks/${bankCode}`).pipe(map((response) => response.Result ? response.Result : response));
-    }
+  getBank(bankCode: string): Observable<BankModel> {
+    return this.http
+      .get<any>(`api/v1/public/banks/${bankCode}`)
+      .pipe(map((response) => (response.Result ? response.Result : response)));
+  }
 
-    getBanks(): Observable<BankModel[]> {
-        return this.http.get<any>(`api/v1/public/banks/`).pipe(map((response) => response.Result ? response.Result : response));
-    }
+  getBanks(): Observable<BankModel[]> {
+    return this.http
+      .get<any>(`api/v1/public/banks/`)
+      .pipe(map((response) => (response.Result ? response.Result : response)));
+  }
 
-    getResources(): Observable<Resources> {
-        return this.http.get<any>('api/v1/public/resources').pipe(map((response) => response.Result ? response.Result : response));
-    }
+  getResources(): Observable<Resources> {
+    return this.http
+      .get<any>('api/v1/public/resources')
+      .pipe(map((response) => (response.Result ? response.Result : response)));
+  }
 
-    getPayTypes(): Observable<PaymentType[]> {
-        return this.http.get<any>(`api/v1/pay/paymentTypeCodes`).pipe(
-            map((response) => response.Result ? response.Result as PaymentType[] : response as PaymentType[])
-        );
-    }
+  getPayTypes(): Observable<PaymentType[]> {
+    return this.http
+      .get<any>(`api/v1/pay/paymentTypeCodes`)
+      .pipe(map((response) => (response.Result ? (response.Result as PaymentType[]) : (response as PaymentType[]))));
+  }
+
+  getMobileAppLinks(): Observable<MobileAppLinks> {
+    return this.http.get<any>('api/v1/public/mobile').pipe(
+      map((response) => (response.Result ? response.Result : response)),
+      map(this.mapMobileAppLinksResponse)
+    );
+  }
+
+  private mapMobileAppLinksResponse(response: {
+    googlePlayAndroid: string;
+    appStoreIphoneLink: string;
+    [key: string]: string;
+  }): MobileAppLinks {
+    const { googlePlayAndroid, appStoreIphoneLink } = response;
+    return { googlePlayAndroid, appStoreIphone: appStoreIphoneLink };
+  }
 }

@@ -201,7 +201,7 @@ export class MenuService extends BaseService {
       ngValue: 'mobiles',
       icon: 'mobile',
       dataRole: '',
-      route: 'app.mobile.index',
+      route: 'mobiles',
       dataTranslate: 'aside.nav.MOBILEAPP',
       moduleName: 'Mobiles',
       position: 0,

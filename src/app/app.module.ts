@@ -1,9 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import {
-  HTTP_INTERCEPTORS,
-  HttpClient,
-  HttpClientModule,
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { ReissueApplicationsModule } from '@modules/cards/modules/reissue-applications/reissue-applications.module';
 import { MobileClassModule } from '@directives/mobile-class/mobile-class.module';
@@ -81,6 +78,7 @@ import { CustomToastModule } from '@ui/custom-toast/custom-toast.module';
     B1GlobalLoaderModule,
     ReactiveComponentModule,
     ReissueApplicationsModule,
+    QRCodeModule,
   ],
   providers: [
     {
