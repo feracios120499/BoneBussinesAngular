@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'create',
         loadChildren: () => import('./modules/create/create.module').then((p) => p.CreateModule),
       },
+      {
+        path: 'list',
+        loadChildren: () => import('./modules/payments-list/payments-list.module').then((p) => p.PaymentsListModule),
+      },
       { path: '', redirectTo: 'incomings' },
     ],
   },
