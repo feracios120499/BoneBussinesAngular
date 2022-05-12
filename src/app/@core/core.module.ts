@@ -10,9 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { PublicService } from '@services/abstract/public.service';
-import { DemoPublicService } from '@services/demo/public.service';
-import { HttpPublicService } from '@services/public.service';
 import { reducers } from '@store';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
@@ -90,11 +87,5 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
   ],
   declarations: [],
   exports: [StoreModule, StoreDevtoolsModule, EffectsModule],
-  providers: [
-    {
-      provide: PublicService,
-      useClass: HttpPublicService,
-    },
-  ],
 })
 export class CoreModule {}

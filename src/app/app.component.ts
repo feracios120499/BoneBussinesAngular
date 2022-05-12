@@ -5,18 +5,21 @@ import { TranslateService } from '@ngx-translate/core';
 import { ResizeService } from '@services/resize.service';
 import { AppActions } from '@store/app/actions';
 import { MenuSelectors } from '@store/menu/selectors';
-import { PublicActions } from '@store/public/actions';
 import { SettingsSelectors } from '@store/settings/selectors';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  constructor(private translate: TranslateService, private store: Store, private router: Router, private resizeService: ResizeService) {
-  }
+  constructor(
+    private translate: TranslateService,
+    private store: Store,
+    private router: Router,
+    private resizeService: ResizeService
+  ) {}
   title = 'BOneBussinesAngular';
 
   language$ = this.store.select(SettingsSelectors.currentLanguage);
@@ -30,10 +33,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.globalLoaderStarter();
     this.store.dispatch(AppActions.start());
     // this.store.dispatch(setDarkMode({ isActive: false }));
-    this.lngSubscription$ = this.language$.subscribe(language => {
+    this.lngSubscription$ = this.language$.subscribe((language) => {
       this.translate.use(language);
     });
-    this.openMenuSubscription$ = this.isOpenMenu$.subscribe(isOpen => {
+    this.openMenuSubscription$ = this.isOpenMenu$.subscribe((isOpen) => {
       if (isOpen) {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
@@ -42,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
         document.body.classList.remove('menu-open');
       }
     });
-    this.store.dispatch(PublicActions.loadResourcesRequest());
   }
 
   ngOnDestroy(): void {
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   globalLoaderStarter(): void {
-    this.routeEventSubscription$ = this.router.events.subscribe(event => {
+    this.routeEventSubscription$ = this.router.events.subscribe((event) => {
       if (event instanceof RouteConfigLoadStart) {
         this.store.dispatch(AppActions.setGlobalLoader({ isLoading: true }));
       } else if (event instanceof RouteConfigLoadEnd) {

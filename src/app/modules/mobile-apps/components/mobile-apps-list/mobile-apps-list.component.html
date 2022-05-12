@@ -1,0 +1,9 @@
+<ng-container *ngrxLet="mobileAppLinks$ as links">
+  <app-mobile-apps-item [link]="links.appStoreIphone" svgName="app-store">
+    CorpLight {{ 'shared.for' | translate }} iPhone
+  </app-mobile-apps-item>
+
+  <app-mobile-apps-item class="b1-mt-6" [link]="links.googlePlayAndroid" svgName="google-play">
+    CorpLight {{ 'shared.for' | translate }} Android
+  </app-mobile-apps-item>
+</ng-container>

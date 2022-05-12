@@ -32,6 +32,7 @@
     "@ngrx/store-devtools": "^11.1.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "angularx-qrcode": "^12.0.3",
     "big-integer": "^1.6.48",
     "bootstrap": "^4.5.0",
     "dayjs": "^1.10.6",
