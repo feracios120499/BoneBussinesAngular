@@ -1,0 +1,21 @@
+<div class="b1-wrapper no-wrap-xs b1-full-screen">
+  <app-products-header></app-products-header>
+
+  <div style="position: relative" class="full-screen">
+    <div class="b1-page-card b1-bg-light">
+      <div class="b1-form-container b1-color-dark">
+        <app-product-order-form [isLoading$]="isLoading$" [(ngModel)]="productOrderForm" #formRef>
+        </app-product-order-form>
+
+        <b1-button
+          class="b1-mt-5"
+          label="components.prm.sendRequest"
+          icon="save"
+          mobileView="full"
+          [isDisabled]="!formRef.isValid || (isLoading$ | ngrxPush)"
+          (btnClick)="onProductOrderConfirm()">
+        </b1-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -51,6 +51,10 @@ const routes: Routes = [
         path: 'mobiles',
         loadChildren: () => import('./modules/mobile-apps/mobile-apps.module').then((m) => m.MobileAppsModule),
       },
+      {
+        path: 'products',
+        loadChildren: () => import('./modules/products/products.module').then((m) => m.ProductsModule),
+      },
     ],
   },
 ];

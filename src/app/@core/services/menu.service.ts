@@ -19,7 +19,6 @@ export interface Menu {
 export interface SubMenu {
   branches: MenuItem;
   promotion: MenuItem;
-  calculator: MenuItem;
   users: MenuItem;
   agents: MenuItem;
   instruction: MenuItem;
@@ -151,19 +150,9 @@ export class MenuService extends BaseService {
       ngValue: 'promotion',
       icon: 'basket',
       dataRole: '',
-      route: 'app.prm.products',
+      route: 'products',
       dataTranslate: 'aside.nav.orderProduct',
       moduleName: 'Promotion',
-      position: 0,
-    },
-    calculator: {
-      ngClass: "{active:$state.includes('app.payments.calculator')}",
-      ngValue: 'calculator',
-      icon: 'calculator',
-      dataRole: '',
-      route: 'app.payments.calculator',
-      dataTranslate: 'aside.nav.CALCULATOR',
-      moduleName: 'Calculator',
       position: 0,
     },
     users: {
