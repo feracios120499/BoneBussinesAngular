@@ -1,0 +1,39 @@
+$screen-tablet: 812px;
+
+:host {
+  @media (max-width: $screen-tablet) {
+    legend {
+      text-align: center;
+    }
+  }
+}
+
+.product-order-form__check {
+  &-item {
+    position: relative;
+    padding: 2px 2px 2px 48px;
+
+    b1-skeleton {
+      display: block;
+      height: 1.5em;
+      width: 50%;
+      border-radius: 2px;
+    }
+
+    &_child {
+      padding-left: 68px;
+    }
+  }
+
+  &-expand {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    i {
+      display: inline-block;
+    }
+  }
+}

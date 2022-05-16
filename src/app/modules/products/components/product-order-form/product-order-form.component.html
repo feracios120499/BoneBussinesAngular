@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup" #formRef="ngForm">
+  <fieldset>
+    <legend class="b1-large b1-mb-4">
+      {{ 'components.prm.productsOfInterest' | translate }}
+    </legend>
+
+    <ul *ngrxLet="isLoadingProducts$ as isLoadingProducts" class="product-order-form__check-list">
+      <ng-container *ngIf="!isLoadingProducts; else skeletons">
+        <li
+          *ngFor="let control of productControlsArray.controls; index as i"
+          class="product-order-form__check-item"
+          [class.product-order-form__check-item_child]="products[i].parentId"
+          [hidden]="products[i].parentId && !expandedProductIds.includes(products[i].parentId!)">
+          <span
+            *ngIf="products[i].subProducts.length"
+            class="product-order-form__check-expand"
+            (click)="onProductToggle(products[i].id)">
+            <i
+              [class.rotate]="expandedProductIds.includes(products[i].id)"
+              [class.rotate-wise]="!expandedProductIds.includes(products[i].id)"
+              b1-icon
+              [icon]="'chevron-right'"></i>
+          </span>
+
+          <b1-checkbox class="b1-base" [formControl]="$any(control)">
+            {{ products[i].name }}
+          </b1-checkbox>
+        </li>
+      </ng-container>
+
+      <ng-template #skeletons>
+        <li *ngFor="let num of 5 | numberToArray" class="product-order-form__check-item">
+          <b1-skeleton></b1-skeleton>
+        </li>
+      </ng-template>
+    </ul>
+  </fieldset>
+
+  <fieldset class="b1-mt-6">
+    <legend class="b1-large b1-mb-4">
+      {{ 'components.prm.productRegistrationRequest' | translate }}
+    </legend>
+
+    <b1-textarea mobileClass="b1-mt-3" [labelTop]="false" [formControl]="commentControl">
+      {{ 'components.prm.comment' | translate }}
+    </b1-textarea>
+  </fieldset>
+</form>

@@ -61,6 +61,10 @@ export abstract class BaseSubFormComponent
     return this.formGroup.disabled;
   }
 
+  resetForm(): void {
+    this.formGroup.reset();
+  }
+
   submitForm(): boolean {
     this.formRef.onSubmit(null as any);
     if (this.isSubmitted) {
