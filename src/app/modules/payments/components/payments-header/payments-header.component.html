@@ -13,16 +13,12 @@
             {{ 'components.pay.header.incomings' | translate }}
           </a>
         </li>
-        <li
-          (click)="goTo('payments/create')"
-          [class.active]="isActive('/payments/create')"
-          class="b1-head-tabs__item"
-          class="b1-head-tabs__item">
+        <li (click)="goTo('payments/create')" [class.active]="isActive('/payments/create')" class="b1-head-tabs__item">
           <a class="b1-head-tabs__link b1-medium b1-color-dark">
             {{ 'components.pay.header.newPayment' | translate }}
           </a>
         </li>
-        <li routerLink="list" routerLinkActive="active" class="b1-head-tabs__item">
+        <li (click)="goTo('payments/list')" [class.active]="isActive('/payments/list')" class="b1-head-tabs__item">
           <a class="b1-head-tabs__link b1-medium b1-color-dark">
             {{ 'components.pay.header.payments' | translate }}
           </a>

@@ -5,8 +5,8 @@ import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { ReissueApplication } from '@models/cards/reissue-application.model';
 import { ReissueApplicationsCount } from '@models/cards/reissue-applications-count.model';
-import { ReissueCount } from '@models/cards/reissue-count.model';
 import { ReissueHistory } from '@models/cards/reissue-history.model';
+import { StatusCount } from '@models/status-count.model';
 import { BaseService } from '@services/base.service';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -44,10 +44,10 @@ export class HttpReissueApplicationService extends BaseService implements BaseRe
       .pipe(map((applications) => (applications.length > 0 ? applications[0] : undefined)));
   }
 
-  getCount(clientId: string): Observable<ReissueCount> {
+  getCount(clientId: string): Observable<StatusCount> {
     return this.http.get<ReissueApplicationsCount[]>(`api/v1/corpcards/reissue/count/${clientId}`).pipe(
       map((list) => {
-        const count: ReissueCount = {};
+        const count: StatusCount = {};
         list.forEach((value) => (count[value.statusId] = value.statusCount));
         return count;
       })

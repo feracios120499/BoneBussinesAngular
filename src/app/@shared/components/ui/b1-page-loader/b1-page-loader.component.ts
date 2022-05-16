@@ -8,14 +8,17 @@ import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'b1-page-loader',
   templateUrl: './b1-page-loader.component.html',
-  styleUrls: ['./b1-page-loader.component.scss']
+  styleUrls: ['./b1-page-loader.component.scss'],
 })
 export class B1PageLoaderComponent implements OnInit {
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
-  loading$ = this.store.select(AppSelectors.pageLoader).pipe(switchMap(select => select ? this.store.select(select) : of(false)));
+  loading$ = this.store
+    .select(AppSelectors.pageLoader)
+    .pipe(switchMap((select) => (select ? this.store.select(select) : of(false))));
   isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
 
   ngOnInit(): void {
+    this.loading$.subscribe(console.log);
   }
 }

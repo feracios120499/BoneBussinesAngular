@@ -3,7 +3,7 @@ import { CardReissueStatus } from '@b1-types/cards/card-reissue-status.type';
 import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { ReissueApplication } from '@models/cards/reissue-application.model';
-import { ReissueCount } from '@models/cards/reissue-count.model';
+import { StatusCount } from '@models/status-count.model';
 import { ReissueHistory } from '@models/cards/reissue-history.model';
 import { Store } from '@ngrx/store';
 import { AppSelectors } from '@store/app/selectors';
@@ -44,7 +44,7 @@ export class ReissueApplicationService implements BaseReissueApplicationService 
     return this.reissueApplicationService.getLastApplication(cardId, clientId);
   }
 
-  getCount(clientId: string): Observable<ReissueCount> {
+  getCount(clientId: string): Observable<StatusCount> {
     return this.reissueApplicationService.getCount(clientId);
   }
 
