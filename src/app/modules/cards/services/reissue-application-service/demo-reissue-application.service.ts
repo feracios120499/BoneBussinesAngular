@@ -4,9 +4,9 @@ import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
 import { ReissueApplication } from '@models/cards/reissue-application.model';
 import { ReissueApplicationsCount } from '@models/cards/reissue-applications-count.model';
-import { ReissueCount } from '@models/cards/reissue-count.model';
 import { ReissueHistory } from '@models/cards/reissue-history.model';
 import { DemoError } from '@models/errors/demo-error.model';
+import { StatusCount } from '@models/status-count.model';
 import { Observable, of, throwError } from 'rxjs';
 import { BaseReissueApplicationService } from './base-reissue-application.service';
 
@@ -269,8 +269,8 @@ export class DemoReissueApplicationService extends BaseReissueApplicationService
     return of(applications.length ? applications[applications.length - 1] : undefined);
   }
 
-  getCount(clientId: string): Observable<ReissueCount> {
-    const count: ReissueCount = {};
+  getCount(clientId: string): Observable<StatusCount> {
+    const count: StatusCount = {};
     this.applicationCount.forEach((item) => (count[item.statusId] = item.statusCount));
     return of(count);
   }

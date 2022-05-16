@@ -21,6 +21,7 @@ export class CardDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(AppActions.setPageLoader({}));
     this.store.removeReducer(CARD_DETAILS_KEY as never);
   }
 }

@@ -1,7 +1,7 @@
 import { CardReissueStatus } from '@b1-types/cards/card-reissue-status.type';
 import { CardResponseResult } from '@models/cards/card-response-result.model';
 import { ReissueApplicationDetails } from '@models/cards/reissue-application-details.model';
-import { ReissueCount } from '@models/cards/reissue-count.model';
+import { StatusCount } from '@models/status-count.model';
 import { ReissueHistory } from '@models/cards/reissue-history.model';
 import { ReissueSign } from '@models/cards/reissue-sign.model';
 import { SignResponse, SignSaveResponse } from '@models/sign-response.model';
@@ -22,7 +22,7 @@ export namespace CardReissueActions {
     string
   >(`[${CARD_REISSUE_KEY}] load applications`);
 
-  export const [loadCountRequest, loadCountSuccess, loadCountFailure] = createHTTPActions<void, ReissueCount, string>(
+  export const [loadCountRequest, loadCountSuccess, loadCountFailure] = createHTTPActions<void, StatusCount, string>(
     `[${CARD_REISSUE_KEY}] load count`
   );
 

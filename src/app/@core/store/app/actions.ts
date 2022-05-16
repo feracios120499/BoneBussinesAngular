@@ -8,7 +8,7 @@ export namespace AppActions {
 
   export const setPageLoader = createAction(
     '[APP] set page loader',
-    props<{ loader: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>> }>()
+    props<{ loader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>> }>()
   );
 
   export const activateDemo = createAction('[APP] activate demo mode');
