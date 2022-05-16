@@ -26,7 +26,7 @@ export const productsReducer = createReducer(
     ...state,
     loadings: [...removeItem(state.loadings, 'create')],
   })),
-  on(ProductsActions.createProductOrderRequest, (state, action) => ({
+  on(ProductsActions.createProductOrderSuccess, (state, action) => ({
     ...state,
     orders: [...state.orders, action.payload],
   }))

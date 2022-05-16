@@ -34,8 +34,8 @@ export class ProductsComponent extends withDestroy() implements OnInit, AfterVie
 
   ngOnInit(): void {
     this.store.addReducer(PRODUCTS_KEY, productsReducer);
-    this.store.dispatch(AppActions.setPageLoader({ loader: ProductsSelectors.isLoading }));
     this.store.dispatch(ProductsActions.init());
+    this.store.dispatch(AppActions.setPageLoader({ loader: ProductsSelectors.isLoading }));
     this.store.dispatch(ProductsActions.loadProductsRequest());
   }
 
@@ -53,6 +53,7 @@ export class ProductsComponent extends withDestroy() implements OnInit, AfterVie
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.store.removeReducer(PRODUCTS_KEY as never);
     this.store.dispatch(ProductsActions.destroy());
   }
