@@ -54,6 +54,7 @@ export class ProductsComponent extends withDestroy() implements OnInit, AfterVie
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
+    this.store.dispatch(AppActions.setPageLoader({}));
     this.store.removeReducer(PRODUCTS_KEY as never);
     this.store.dispatch(ProductsActions.destroy());
   }

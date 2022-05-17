@@ -11,6 +11,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from '@store';
+import { AppActions } from '@store/app/actions';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
 import { PublicEffects } from '@store/public/effects';
@@ -41,19 +42,47 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
   })(reducer);
 }
 
+// export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+//   return (state, action) => {
+//     if (action.type === AuthActions.logout.type) {
+//       let saveState = {};
+//       saveStoresLogout
+//         .concat(!state.app.isDemo ? USER_KEY : [])
+//         .forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
+//       return reducer(saveState, action);
+//     }
+//     if (action.type === AppActions.disableDemoMode.type) {
+//       let saveState = {};
+//       saveStoresLogout.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
+//       return reducer(saveState, action);
+//     }
+//     if (action.type === UserActions.selectCurrentClientId.type) {
+//       let saveState = {};
+//       saveStoresChangeCustomer.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
+//       return reducer(saveState, action);
+//     }
+//     return reducer(state, action);
+//   };
+// }
+
 export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state, action) => {
     if (action.type === AuthActions.logout.type) {
-      let saveState = {};
-      saveStoresLogout.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
-      return reducer(saveState, action);
+      return reducer(saveState(saveStoresLogout.concat(!state.app.isDemo ? USER_KEY : [])), action);
+    }
+    if (action.type === AppActions.disableDemoMode.type) {
+      return reducer(saveState(saveStoresLogout), action);
     }
     if (action.type === UserActions.selectCurrentClientId.type) {
-      let saveState = {};
-      saveStoresChangeCustomer.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
-      return reducer(saveState, action);
+      return reducer(saveState(saveStoresChangeCustomer), action);
     }
     return reducer(state, action);
+
+    function saveState(stateKeys: string[]): Object {
+      let saveState = {};
+      stateKeys.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
+      return saveState;
+    }
   };
 }
 

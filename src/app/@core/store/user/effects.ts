@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { NotificationsService } from '@services/notifications.service';
 import { UserService } from '@services/user-service/user.service';
+import { AppSelectors } from '@store/app/selectors';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
@@ -61,9 +62,12 @@ export class UserEffects {
   loadProfileSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadProfileSuccess, AuthActions.loadProfileSuccess),
-      withLatestFrom(this.store.select(UserSelectors.currentClientIdSelector)),
-      map(([action, currentClientId]) => {
-        if (currentClientId === undefined) {
+      withLatestFrom(
+        this.store.select(UserSelectors.currentClientIdSelector),
+        this.store.select(AppSelectors.isDemo)
+      ),
+      map(([action, currentClientId, isDemo]) => {
+        if (currentClientId === undefined || isDemo) {
           return UserActions.setCurrentClientId({ clientId: action.payload.customers[0].clientId });
         } else {
           return UserActions.setCurrentClientId({ clientId: currentClientId });

@@ -5,17 +5,16 @@ import { MenuActions } from '@store/menu/actions';
 import { MenuSelectors } from '@store/menu/selectors';
 import { PublicSelectors } from '@store/public/selectors';
 import { SettingsSelectors } from '@store/settings/selectors';
+import { SharedActions } from '@store/shared/actions';
 import { UserSelectors } from '@store/user/selectors';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
-
-  constructor(private store: Store, private resizeService: ResizeService) { }
+  constructor(private store: Store, private resizeService: ResizeService) {}
 
   public countCustomers$ = this.store.select(UserSelectors.countCustomers);
   public logo$ = this.store.select(PublicSelectors.logo);
@@ -26,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // this.disableDarkMode()
   }
-
 
   openMenu(): void {
     this.store.dispatch(MenuActions.openMenu());
@@ -40,6 +38,7 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(MenuActions.closeMenu());
   }
 
-
-
+  onChangeCustomersClick(): void {
+    this.store.dispatch(SharedActions.showCustomers());
+  }
 }

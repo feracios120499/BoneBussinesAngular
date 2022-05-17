@@ -1,6 +1,7 @@
 import { FileModel } from '@models/file.model';
 import { ConfirmModalConfig } from '@models/modals/confirm-modal-config.model';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
+import { CustomersModalConfig } from '@models/modals/customers-modal-config.model';
 import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
 import { RequisitesModalConfig } from '@models/modals/requisites-modal-config.model';
 import { PaymentForm } from '@models/payment-form.model';
@@ -45,5 +46,12 @@ export namespace SharedActions {
   export const showCorrespondents = createAction(
     '[SHARED] show correspondents',
     props<{ config: CorrespondentsModalConfig }>()
+  );
+
+  export const showCustomers = createAction('[SHARED] show customers');
+
+  export const showCustomersModal = createAction(
+    '[SHARED] show customers modal',
+    props<{ config: CustomersModalConfig }>()
   );
 }

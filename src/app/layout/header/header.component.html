@@ -1,48 +1,48 @@
 <ng-container *ngrxLet="isMobile$ as isMobile">
-    <div class="main-navbar main-navbar_brand" [class.b1-collapsed]="isCollapsed$ | ngrxPush"
-        [class.open]="isOpen$ | ngrxPush">
-        <i b1-icon icon="menu" class="b1-title2 visible-xs header-icon-left" (click)="openMenu()"></i>
-        <a>
-            <img [src]="logo$ | ngrxPush" alt="" class="main-navbar__app-logo">
+  <div
+    class="main-navbar main-navbar_brand"
+    [class.b1-collapsed]="isCollapsed$ | ngrxPush"
+    [class.open]="isOpen$ | ngrxPush">
+    <i b1-icon icon="menu" class="b1-title2 visible-xs header-icon-left" (click)="openMenu()"></i>
+    <a>
+      <img [src]="logo$ | ngrxPush" alt="" class="main-navbar__app-logo" />
+    </a>
+    <i b1-icon icon="settings" class="b1-title2 visible-xs header-icon-right" (click)="openInfo()"></i>
+    <i b1-icon icon="cancel" class="b1-title2 visible-xs header-icon-close" (click)="closeMenu()"></i>
+  </div>
+  <div class="main-navbar b1-bg-light" [class.b1-collapsed]="isCollapsed$ | ngrxPush" *ngIf="!isMobile">
+    <ul class="main-navbar__list"></ul>
+    <ul class="main-navbar__list">
+      <li class="main-navbar__list__item">
+        <a class="main-navbar__list__item__link b1-base" (click)="onChangeCustomersClick()">
+          {{ 'shared.changeCustomers' | translate }}
+          <span class="b1-badge b1-bg-info">{{ countCustomers$ | ngrxPush }}</span>
         </a>
-        <i b1-icon icon="settings" class="b1-title2 visible-xs header-icon-right" (click)="openInfo()"></i>
-        <i b1-icon icon="cancel" class="b1-title2 visible-xs header-icon-close" (click)="closeMenu()"></i>
-    </div>
-    <div class="main-navbar b1-bg-light" [class.b1-collapsed]="isCollapsed$ | ngrxPush" *ngIf="!isMobile">
-        <ul class="main-navbar__list">
-
-        </ul>
-        <ul class="main-navbar__list">
-            <li class="main-navbar__list__item">
-                <a href="#" class="main-navbar__list__item__link b1-base">
-                    Customers
-                    <span class="b1-badge b1-bg-info">{{countCustomers$ | ngrxPush}}</span>
-                </a>
-            </li>
-            <!-- LANGUAGES -->
-            <li class="main-navbar__list__item">
-                <header-languages></header-languages>
-            </li>
-            <!-- DARK MODE -->
-            <li class="main-navbar__list__item">
-                <header-dark-mode></header-dark-mode>
-            </li>
-            <!-- NOTIFICATIONS -->
-            <li class="main-navbar__list__item">
-                <header-notifications></header-notifications>
-            </li>
-            <li class="main-navbar__list__item b1-mr-4">
-                <header-profile></header-profile>
-            </li>
-        </ul>
-    </div>
-
-    <div class="main-navbar_info" [class.open]="isOpenInfo$ | ngrxPush" *ngIf="isMobile">
-        <div class="info-header">
-            <header-languages></header-languages>
-            <header-dark-mode></header-dark-mode>
-            <header-notifications></header-notifications>
-        </div>
+      </li>
+      <!-- LANGUAGES -->
+      <li class="main-navbar__list__item">
+        <header-languages></header-languages>
+      </li>
+      <!-- DARK MODE -->
+      <li class="main-navbar__list__item">
+        <header-dark-mode></header-dark-mode>
+      </li>
+      <!-- NOTIFICATIONS -->
+      <li class="main-navbar__list__item">
+        <header-notifications></header-notifications>
+      </li>
+      <li class="main-navbar__list__item b1-mr-4">
         <header-profile></header-profile>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-navbar_info" [class.open]="isOpenInfo$ | ngrxPush" *ngIf="isMobile">
+    <div class="info-header">
+      <header-languages></header-languages>
+      <header-dark-mode></header-dark-mode>
+      <header-notifications></header-notifications>
     </div>
+    <header-profile></header-profile>
+  </div>
 </ng-container>

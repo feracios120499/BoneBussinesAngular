@@ -4,17 +4,21 @@ import { ModalService } from '@services/modal.service';
 import { B1ConfirmModalComponent } from '@modals/b1-confirm-modal/b1-confirm-modal.component';
 import { B1CorrespondentsModalComponent } from '@modals/b1-correspondents-modal/b1-correspondents-modal.component';
 import { saveAs } from 'file-saver';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { B1ExportTurnoversModalComponent } from '@modals/b1-export-turnovers-modal/b1-export-turnovers-modal.component';
 import { B1PaymentModalComponent } from 'src/app/@shared/components/modals/b1-payment-modal/b1-payment-modal.component';
 import { B1RequisitesModalComponent } from 'src/app/@shared/components/modals/b1-requisites-modal/b1-requisites-modal.component';
 import { B1StatementModalComponent } from 'src/app/@shared/components/modals/b1-statement-modal/b1-statement-modal.component';
-
+import { B1CustomersModalComponent } from '@modals/b1-customers-modal/b1-customers-modal.component';
+import { Store } from '@ngrx/store';
 import { SharedActions } from './actions';
+import { UserActions } from '@store/user/actions';
+import { CustomersModalConfig } from '@models/modals/customers-modal-config.model';
+import { CustomersModalResult } from '@models/modals/customers-modal-result.model';
 
 @Injectable()
 export class SharedEffects {
-  constructor(private actions$: Actions, private modalService: ModalService) {}
+  constructor(private actions$: Actions, private modalService: ModalService, private store: Store) {}
 
   showPaymentModal$ = createEffect(
     () =>
@@ -131,6 +135,34 @@ export class SharedEffects {
         tap((action) => {
           const modalRef = this.modalService.open(B1CorrespondentsModalComponent, {
             windowClass: 'correspondents-modal',
+          });
+          modalRef.componentInstance.config = action.config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  showCustomers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SharedActions.showCustomers),
+      map(() => {
+        const config: CustomersModalConfig = {
+          callback: (result: CustomersModalResult) => {
+            this.store.dispatch(UserActions.selectCurrentClientId({ clientId: result.clientId }));
+          },
+        };
+        return SharedActions.showCustomersModal({ config });
+      })
+    )
+  );
+
+  showCustomersModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SharedActions.showCustomersModal),
+        tap((action) => {
+          const modalRef = this.modalService.open(B1CustomersModalComponent, {
+            windowClass: 'customers-modal',
           });
           modalRef.componentInstance.config = action.config;
         })
