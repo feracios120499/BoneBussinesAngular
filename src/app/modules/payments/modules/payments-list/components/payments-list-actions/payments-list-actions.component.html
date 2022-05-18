@@ -5,16 +5,20 @@
                 <b1-page-checkbox [ngModel]="selectedAll$ | ngrxPush" (ngModelChange)="selectAll(filteredPayments)">
                 </b1-page-checkbox>
                 <div class="b1-page-icons">
-                    <!-- <b1-button [isDisabled]="isLoading$ | ngrxPush" class="b1-mr-4" icon="print"
-                        label="components.pay.print" (btnClick)="printTransactions()">
-                    </b1-button> -->
+                    <b1-button [isDisabled]="isLoading$ | ngrxPush" class="b1-mr-4" icon="sign" label="actions.sign"
+                        (btnClick)="signPayments(filteredPayments)">
+                    </b1-button>
                     <b1-page-button label="components.pay.print" icon="print"
                         (b1Click)="printPayments(filteredPayments)">
-
                     </b1-page-button>
                     <b1-page-button label="actions.delete" icon="delete" (b1Click)="deletePayments(filteredPayments)"
                         *ngIf="currentTab != 'BANKERROR' && currentTab != 'BANKPAID' && currentTab != 'BANKRECEIVED'">
+                    </b1-page-button>
 
+                    <b1-page-button label="actions.export" icon="export" (b1Click)="exportPayments(filteredPayments)">
+                    </b1-page-button>
+
+                    <b1-page-button label="actions.import" icon="import" (b1Click)="importPayments()">
                     </b1-page-button>
 
                 </div>

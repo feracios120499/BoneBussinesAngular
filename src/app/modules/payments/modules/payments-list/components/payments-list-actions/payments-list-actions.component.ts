@@ -44,4 +44,10 @@ export class PaymentsListActionsComponent implements OnInit {
   printPayments(payments: PaymentsListItem[]): void {}
 
   deletePayments(payments: PaymentsListItem[]): void {}
+
+  exportPayments(payments: PaymentsListItem[]): void {}
+
+  importPayments(): void {}
+
+  signPayments(payments: PaymentsListItem[]): void {}
 }
