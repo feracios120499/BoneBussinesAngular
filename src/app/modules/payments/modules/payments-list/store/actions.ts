@@ -2,6 +2,7 @@ import { DateRange } from '@models/date-range.model';
 import { StatusCount } from '@models/status-count.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
+import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { PAY_LIST_KEY } from './store';
@@ -29,4 +30,22 @@ export namespace PayListActions {
     PaymentsListItem[],
     string
   >(`[${PAY_LIST_KEY}] load payments`);
+
+  export const [printPaymentsRequest, printPaymentsSuccess, printPaymentsFailure] = createHTTPActions<
+    number[],
+    string,
+    string
+  >(`[${PAY_LIST_KEY}] print payments`);
+
+  export const [deletePaymentsRequest, deletePaymentsSuccess, deletePaymentsFailure] = createHTTPActions<
+    number[],
+    PaymentsResponseResult[],
+    string
+  >(`[${PAY_LIST_KEY}] delete payments`);
+
+  export const [sendOnSignPaymentsRequest, sendOnSignPaymentsSuccess, sendOnSignPaymentsFailure] = createHTTPActions<
+    number[],
+    PaymentsResponseResult[],
+    string
+  >(`[${PAY_LIST_KEY}] send on sign payments`);
 }

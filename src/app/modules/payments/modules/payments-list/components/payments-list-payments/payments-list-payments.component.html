@@ -1,34 +1,79 @@
 <ng-container *ngrxLet="payments$ as payments">
-    <ng-container *ngrxLet="isLoadingList$ as isLoadingList">
-        <div class="b1-page-data" *ngIf="isLoadingList">
-            <b1-skeleton *ngFor="let item of [0, 1, 2, 3, 4, 5]" class="b1-page-data__row skeleton payment-row">
-            </b1-skeleton>
-        </div>
-        <ng-container *ngIf="!isLoadingList">
-            <ng-container *ngIf="payments">
-                <ng-scrollbar class="virtual-scroll b1-page-data" [disabled]="isMobile$ | ngrxPush"
-                    *ngIf="payments.length != 0">
-                    <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
-                        <app-payment-row class="b1-page-data__row payment-row"
-                            *cdkVirtualFor="let payment of payments; trackBy: trackId" [payment]="payment"
-                            (onSelect)="selectPayment(payment)" [class.selected]="payment.selected"
-                            [selected]="payment.selected" (onShow)="showPayment(payment, payments)">
-                            <b1-dropdown label="payments dropdown" menuWidth="180px">
-                                <b1-more-button slot="toggle"></b1-more-button>
-                                <b1-dropdown-link icon="print" label="components.pay.print"
-                                    (btnClick)="printPayment(payment)"></b1-dropdown-link>
-                            </b1-dropdown>
-                        </app-payment-row>
-                    </cdk-virtual-scroll-viewport>
-                </ng-scrollbar>
-                <ng-container *ngrxLet="rangeString$ as range">
-                    <div class="b1-page-data" [hidden]="payments.length != 0">
-                        <b1-empty svgName="empty-payments"
-                            [header]="'components.pay.incomingNotFound' | translate: range">
-                        </b1-empty>
-                    </div>
+  <ng-container *ngrxLet="isLoadingList$ as isLoadingList">
+    <div class="b1-page-data" *ngIf="isLoadingList">
+      <b1-skeleton *ngFor="let item of [0, 1, 2, 3, 4, 5]" class="b1-page-data__row skeleton payment-row">
+      </b1-skeleton>
+    </div>
+    <ng-container *ngIf="!isLoadingList">
+      <ng-container *ngIf="payments">
+        <ng-scrollbar
+          class="virtual-scroll b1-page-data"
+          [disabled]="isMobile$ | ngrxPush"
+          *ngIf="payments.length != 0">
+          <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+            <app-payment-row
+              class="b1-page-data__row payment-row"
+              *cdkVirtualFor="let payment of payments; trackBy: trackId"
+              [payment]="payment"
+              (onSelect)="selectPayment(payment)"
+              [class.selected]="payment.selected"
+              [selected]="payment.selected"
+              (onShow)="showPayment(payment, payments)">
+              <b1-dropdown label="payments dropdown" menuWidth="180px">
+                <b1-more-button slot="toggle"></b1-more-button>
+                <b1-dropdown-link
+                  icon="print"
+                  label="components.pay.print"
+                  (btnClick)="printPayment(payment)"></b1-dropdown-link>
+                <b1-dropdown-link
+                  icon="list"
+                  label="shared.historyDocument"
+                  (btnClick)="showHistory(payment)"></b1-dropdown-link>
+                <b1-dropdown-link
+                  icon="sign"
+                  label="components.pay.showSignes"
+                  (btnClick)="showSignes(payment)"></b1-dropdown-link>
+                <b1-dropdown-link [separator]="true"></b1-dropdown-link>
+                <b1-dropdown-link
+                  icon="spinner"
+                  label="components.applications.actions.dublicate"
+                  (btnClick)="dublicatePayment(payment)"></b1-dropdown-link>
+                <b1-dropdown-link
+                  *ngIf="
+                    payment.statusCode == 'NEW' || payment.statusCode == 'ONSIGN' || payment.statusCode == 'SIGNED'
+                  "
+                  icon="edit"
+                  label="actions.edit"
+                  (btnClick)="editPayment(payment)"></b1-dropdown-link>
+                <b1-dropdown-link
+                  *ngIf="payment.statusCode == 'BANKRECEIVED'"
+                  icon="not-allowed"
+                  label="components.pay.storno.button"
+                  (btnClick)="stornoPayment(payment)"></b1-dropdown-link>
+                <ng-container
+                  *ngIf="
+                    payment.statusCode != 'BANKRECEIVED' &&
+                    payment.statusCode != 'BANKPAID' &&
+                    payment.statusCode != 'BANKSEND'
+                  ">
+                  <b1-dropdown-link [separator]="true"></b1-dropdown-link>
+                  <b1-dropdown-link
+                    icon="delete"
+                    label="actions.delete"
+                    [danger]="true"
+                    (btnClick)="removePayment(payment)"></b1-dropdown-link>
                 </ng-container>
-            </ng-container>
+              </b1-dropdown>
+            </app-payment-row>
+          </cdk-virtual-scroll-viewport>
+        </ng-scrollbar>
+        <ng-container *ngrxLet="rangeString$ as range">
+          <div class="b1-page-data" [hidden]="payments.length != 0">
+            <b1-empty svgName="empty-payments" [header]="'components.pay.incomingNotFound' | translate: range">
+            </b1-empty>
+          </div>
         </ng-container>
+      </ng-container>
     </ng-container>
+  </ng-container>
 </ng-container>

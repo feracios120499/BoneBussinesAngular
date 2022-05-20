@@ -1,39 +1,84 @@
 <ng-container *ngrxLet="filteredPayments$ as filteredPayments">
-    <ng-container *ngrxLet="currentTab$ as currentTab">
-        <div class="b1-page-actions">
-            <div class="b1-page-actions__left">
-                <b1-page-checkbox [ngModel]="selectedAll$ | ngrxPush" (ngModelChange)="selectAll(filteredPayments)">
-                </b1-page-checkbox>
-                <div class="b1-page-icons">
-                    <b1-button [isDisabled]="isLoading$ | ngrxPush" class="b1-mr-4" icon="sign" label="actions.sign"
-                        (btnClick)="signPayments(filteredPayments)">
-                    </b1-button>
-                    <b1-page-button label="components.pay.print" icon="print"
-                        (b1Click)="printPayments(filteredPayments)">
-                    </b1-page-button>
-                    <b1-page-button label="actions.delete" icon="delete" (b1Click)="deletePayments(filteredPayments)"
-                        *ngIf="currentTab != 'BANKERROR' && currentTab != 'BANKPAID' && currentTab != 'BANKRECEIVED'">
-                    </b1-page-button>
+  <ng-container *ngrxLet="currentTab$ as currentTab">
+    <div class="b1-page-actions" *ngrxLet="isLoading$ as isLoading">
+      <div class="b1-page-actions__left">
+        <b1-page-checkbox [ngModel]="selectedAll$ | ngrxPush" (ngModelChange)="selectAll(filteredPayments)">
+        </b1-page-checkbox>
+        <div class="b1-page-icons">
+          <b1-button
+            *ngIf="currentTab == 'ONMYSIGN'"
+            [isDisabled]="isLoading"
+            class="b1-mr-4"
+            icon="sign"
+            label="actions.sign"
+            (btnClick)="signPayments(filteredPayments)">
+          </b1-button>
 
-                    <b1-page-button label="actions.export" icon="export" (b1Click)="exportPayments(filteredPayments)">
-                    </b1-page-button>
+          <b1-button
+            *ngIf="currentTab == 'NEW'"
+            [isDisabled]="isLoading"
+            class="b1-mr-4"
+            icon="on-sign"
+            label="components.pay.onSign"
+            (btnClick)="onSignPayments(filteredPayments)">
+          </b1-button>
 
-                    <b1-page-button label="actions.import" icon="import" (b1Click)="importPayments()">
-                    </b1-page-button>
+          <b1-button
+            *ngIf="currentTab == 'SIGNED'"
+            [isDisabled]="isLoading"
+            class="b1-mr-4"
+            icon="send"
+            label="components.pay.sendToBank"
+            (btnClick)="sendToBankPayments(filteredPayments)">
+          </b1-button>
 
-                </div>
-            </div>
-            <form class="b1-page-actions__right" name="search" novalidate>
-                <b1-input name="search" icon="search" [placeholder]="'shared.search' | translate" [resizable]="true"
-                    [ngModel]="filter$ | ngrxPush" (ngModelChange)="onFilter($event)"></b1-input>
-                <div class="b1-page-inputWithIcon b1-ml-4">
-                    <input class="b1-datepicker__input b1-rangepicker" b1-daterangepicker startKey="start" endKey="end"
-                        [ngModel]="range$ | ngrxPush" (ngModelChange)="setRange($event)" name="daterange"
-                        [ranges]="ranges" readonly />
-                    <label for="calendar" b1-icon icon="calendar"></label>
-                </div>
-            </form>
+          <b1-page-button
+            [disabled]="isLoading"
+            label="components.pay.print"
+            icon="print"
+            (b1Click)="printPayments(filteredPayments)">
+          </b1-page-button>
+          <b1-page-button
+            [disabled]="isLoading"
+            label="actions.delete"
+            icon="delete"
+            (b1Click)="deletePayments(filteredPayments)"
+            *ngIf="currentTab != 'BANKERROR' && currentTab != 'BANKPAID' && currentTab != 'BANKRECEIVED'">
+          </b1-page-button>
+
+          <b1-page-button
+            [disabled]="isLoading"
+            label="actions.export"
+            icon="export"
+            (b1Click)="exportPayments(filteredPayments)">
+          </b1-page-button>
+
+          <b1-page-button [disabled]="isLoading" label="actions.import" icon="import" (b1Click)="importPayments()">
+          </b1-page-button>
         </div>
-    </ng-container>
-
+      </div>
+      <form class="b1-page-actions__right" name="search" novalidate>
+        <b1-input
+          name="search"
+          icon="search"
+          [placeholder]="'shared.search' | translate"
+          [resizable]="true"
+          [ngModel]="filter$ | ngrxPush"
+          (ngModelChange)="onFilter($event)"></b1-input>
+        <div class="b1-page-inputWithIcon b1-ml-4">
+          <input
+            class="b1-datepicker__input b1-rangepicker"
+            b1-daterangepicker
+            startKey="start"
+            endKey="end"
+            [ngModel]="range$ | ngrxPush"
+            (ngModelChange)="setRange($event)"
+            name="daterange"
+            [ranges]="ranges"
+            readonly />
+          <label for="calendar" b1-icon icon="calendar"></label>
+        </div>
+      </form>
+    </div>
+  </ng-container>
 </ng-container>

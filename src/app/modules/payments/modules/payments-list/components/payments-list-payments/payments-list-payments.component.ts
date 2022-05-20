@@ -28,6 +28,18 @@ export class PaymentsListPaymentsComponent implements OnInit {
 
   printPayment(payment: UiPaymentsListItem): void {}
 
+  showHistory(payment: UiPaymentsListItem): void {}
+
+  showSignes(payment: UiPaymentsListItem): void {}
+
+  removePayment(payment: UiPaymentsListItem): void {}
+
+  dublicatePayment(payment: UiPaymentsListItem): void {}
+
+  editPayment(payment: UiPaymentsListItem): void {}
+
+  stornoPayment(payment: UiPaymentsListItem): void {}
+
   trackId(index: number, payment: UiPaymentsListItem): string | undefined {
     return payment ? `${payment.id}` : undefined;
   }

@@ -5,6 +5,7 @@ import { StatusCount } from '@models/status-count.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsCount } from '@modules/payments/models/payments-count.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
+import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
 import { BaseService } from '@services/base.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -42,5 +43,17 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     return this.http.get<PaymentsListItem[]>(
       `api/v1/pay/payments/list/${clientId}${query}${statusQuery}&$orderby=Id desc`
     );
+  }
+
+  printPayments(ids: number[], clientId: string): Observable<string> {
+    return this.http.post(`api/v1/pay/payments/print/HTML/${clientId}`, ids, { responseType: 'text' });
+  }
+
+  deletePayments(ids: number[], clientId: string): Observable<PaymentsResponseResult[]> {
+    return this.http.post<PaymentsResponseResult[]>(`api/v1/pay/payments/delete/${clientId}`, ids);
+  }
+
+  sendOnSign(ids: number[], clientId: string): Observable<PaymentsResponseResult[]> {
+    return this.http.put<PaymentsResponseResult[]>(`api/v1/pay/payments/onSign/${clientId}`, ids);
   }
 }
