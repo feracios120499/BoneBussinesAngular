@@ -51,7 +51,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.sender' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.sender && payment.sender.name">
                     {{ payment.sender.name }}
                   </span>
@@ -61,7 +61,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.senderAccNumber' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.sender && payment.sender.number" [iban]="payment.sender.number"> </span>
                   <ngx-skeleton-loader *ngIf="!(payment.sender && payment.sender.number)"> </ngx-skeleton-loader>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.taxCode' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.sender && payment.sender.taxCode">
                     {{ payment.sender.taxCode }}
                   </span>
@@ -82,7 +82,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.recipient' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.recipient && payment.recipient.name">
                     {{ payment.recipient.name }}
                   </span>
@@ -92,7 +92,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.recipientAccNumber' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.recipient && payment.recipient.number" [iban]="payment.recipient.number"> </span>
                   <ngx-skeleton-loader *ngIf="!(payment.recipient && payment.recipient.number)"> </ngx-skeleton-loader>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="payment-window-name">
                   {{ 'components.pay.import.taxCode' | translate }}
                 </div>
-                <div class="payment-window-value flex">
+                <div class="payment-window-value">
                   <span *ngIf="payment.recipient && payment.recipient.taxCode">
                     {{ payment.recipient.taxCode }}
                   </span>
@@ -111,7 +111,7 @@
                   <div class="payment-window-name">
                     {{ 'components.pay.import.recipientCountry' | translate }}
                   </div>
-                  <div class="payment-window-value flex">
+                  <div class="payment-window-value">
                     {{ payment.recipient.countryName }}
                   </div>
                 </div>
@@ -120,7 +120,7 @@
                   <div class="payment-window-name">
                     {{ 'components.pay.import.recipientDetails' | translate }}
                   </div>
-                  <div class="payment-window-value flex">
+                  <div class="payment-window-value">
                     {{ payment.recipient.details }}
                   </div>
                 </div>
@@ -132,7 +132,7 @@
                   <div class="payment-window-name">
                     {{ 'components.pay.sumSpell' | translate }}
                   </div>
-                  <div class="payment-window-value flex">
+                  <div class="payment-window-value">
                     <span *ngIf="payment.amountString">{{ payment.amountString }}</span>
                     <div class="payment-window-loader" *ngIf="!payment.amountString">
                       <ngx-skeleton-loader> </ngx-skeleton-loader>
@@ -153,7 +153,7 @@
               <div class="payment-window-name">
                 {{ 'components.pay.import.purpose' | translate }}
               </div>
-              <div class="payment-window-value flex">
+              <div class="payment-window-value">
                 {{ payment.purpose }}
               </div>
             </div>

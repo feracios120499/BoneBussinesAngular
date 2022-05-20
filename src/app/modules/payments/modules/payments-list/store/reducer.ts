@@ -83,6 +83,24 @@ const loadings: ReducerTypes<PayListState, ActionCreator<string, Creator<any[], 
     ...state,
     loadings: removeItem(state.loadings, 'onSign'),
   })),
+
+  on(PayListActions.signPaymentsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'sign'),
+  })),
+  on(PayListActions.signPaymentsFailure, PayListActions.signPaymentsSuccess, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'sign'),
+  })),
+
+  on(PayListActions.sendToBankPaymentsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'toBank'),
+  })),
+  on(PayListActions.sendToBankPaymentsSuccess, PayListActions.sendToBankPaymentsFailure, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'toBank'),
+  })),
 ];
 
 export const payListReducer = createReducer(payListState, ...reducer, ...loadings);

@@ -47,40 +47,18 @@ export class PaymentsListActionsComponent implements OnInit {
   }
 
   printPayments(payments: UiPaymentsListItem[]): void {
-    const selected = payments.filter((p) => p.selected).map((p) => p.id);
-
-    if (selected.length === 0) {
-      this.store.dispatch(
-        NotifyActions.warningNotification({
-          message: this.translateService.instant('shared.selectDocumentsBeforePrint'),
-        })
-      );
-    } else {
-      this.store.dispatch(PayListActions.printPaymentsRequest(selected));
-    }
+    this.executer(payments, 'shared.selectDocumentsBeforeRemove', (selected) =>
+      this.store.dispatch(PayListActions.printPaymentsRequest(selected))
+    );
   }
 
   deletePayments(payments: UiPaymentsListItem[]): void {
-    const selected = payments.filter((p) => p.selected).map((p) => p.id);
-
-    if (selected.length === 0) {
-      this.store.dispatch(
-        NotifyActions.warningNotification({
-          message: this.translateService.instant('shared.selectDocumentsBeforeRemove'),
-        })
-      );
-    } else {
-      this.store.dispatch(
-        SharedActions.showConfirm({
-          config: {
-            text: this.translateService
-              .instant('components.pay.areYouSureToDeletePayments')
-              .replace('{0}', selected.length),
-            callback: () => this.store.dispatch(PayListActions.deletePaymentsRequest(selected)),
-          },
-        })
-      );
-    }
+    this.executer(
+      payments,
+      'shared.selectDocumentsBeforeRemove',
+      (selected) => this.store.dispatch(PayListActions.deletePaymentsRequest(selected)),
+      'components.pay.areYouSureToDeletePayments'
+    );
   }
 
   exportPayments(payments: UiPaymentsListItem[]): void {}
@@ -88,28 +66,59 @@ export class PaymentsListActionsComponent implements OnInit {
   importPayments(): void {}
 
   onSignPayments(payments: UiPaymentsListItem[]): void {
+    this.executer(
+      payments,
+      'shared.selectDocumentsBeforeSendOnSign',
+      (selected) => this.store.dispatch(PayListActions.sendOnSignPaymentsRequest(selected)),
+      'components.pay.areYouSureToOnSignPayments'
+    );
+  }
+
+  signPayments(payments: UiPaymentsListItem[]): void {
+    this.executer(
+      payments,
+      'shared.selectDocumentsBeforeSign',
+      (selected) => this.store.dispatch(PayListActions.signPaymentsRequest(selected)),
+      'components.pay.signTheDocumentsInNumber'
+    );
+  }
+
+  sendToBankPayments(payments: UiPaymentsListItem[]): void {
+    this.executer(
+      payments,
+      'shared.selectDocumentsBeforeSendToBank',
+      (selected) => this.store.dispatch(PayListActions.sendToBankPaymentsRequest(selected)),
+      'components.pay.toBankDocsConfirm'
+    );
+  }
+
+  private executer(
+    payments: UiPaymentsListItem[],
+    selectNotificationTranslate: string,
+    func: (selected: number[]) => void,
+    confirmTranslate?: string
+  ): void {
     const selected = payments.filter((p) => p.selected).map((p) => p.id);
 
     if (selected.length === 0) {
       this.store.dispatch(
         NotifyActions.warningNotification({
-          message: this.translateService.instant('shared.selectDocumentsBeforeSendOnSign'),
+          message: this.translateService.instant(selectNotificationTranslate),
         })
       );
     } else {
-      this.store.dispatch(
-        SharedActions.showConfirm({
-          config: {
-            text: this.translateService
-              .instant('components.pay.areYouSureToOnSignPayments')
-              .replace('{0}', selected.length),
-            callback: () => this.store.dispatch(PayListActions.sendOnSignPaymentsRequest(selected)),
-          },
-        })
-      );
+      if (confirmTranslate) {
+        this.store.dispatch(
+          SharedActions.showConfirm({
+            config: {
+              text: this.translateService.instant(confirmTranslate).replace('{0}', selected.length),
+              callback: () => func(selected),
+            },
+          })
+        );
+      } else {
+        func(selected);
+      }
     }
   }
-  signPayments(payments: UiPaymentsListItem[]): void {}
-
-  sendToBankPayments(payments: UiPaymentsListItem[]): void {}
 }

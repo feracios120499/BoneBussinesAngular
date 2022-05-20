@@ -1,4 +1,5 @@
 import { DateRange } from '@models/date-range.model';
+import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -48,4 +49,26 @@ export namespace PayListActions {
     PaymentsResponseResult[],
     string
   >(`[${PAY_LIST_KEY}] send on sign payments`);
+
+  export const [signPaymentsRequest, signPaymentsSuccess, signPaymentsFailure] = createHTTPActions<
+    number[],
+    SignSaveResponse[],
+    string
+  >(`[${PAY_LIST_KEY}] sign payments`);
+
+  export const [sendToBankPaymentsRequest, sendToBankPaymentsSuccess, sendToBankPaymentsFailure] = createHTTPActions<
+    number[],
+    PaymentsResponseResult[],
+    string
+  >(`[${PAY_LIST_KEY}] send to bank payments`);
+
+  export const showPayment = createAction(
+    `[${PAY_LIST_KEY}] show payment`,
+    props<{ payment: PaymentsListItem; payments: PaymentsListItem[] }>()
+  );
+
+  export const setPayment = createAction(
+    `[${PAY_LIST_KEY}] set payment`,
+    props<{ payment: PaymentsListItem; payments: PaymentsListItem[] }>()
+  );
 }

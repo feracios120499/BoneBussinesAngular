@@ -1,3 +1,4 @@
+import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -5,7 +6,7 @@ import { StatusCode } from './enums/status-code.enum';
 
 export interface PaymentModal {
   number: string;
-  statusCode: StatusCode;
+  statusCode: PaymentStatuses;
   documentDate: Date;
   valueDate: Date;
   payedDate?: Date;

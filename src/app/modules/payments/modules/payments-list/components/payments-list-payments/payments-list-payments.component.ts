@@ -24,7 +24,9 @@ export class PaymentsListPaymentsComponent implements OnInit {
     this.store.dispatch(PayListActions.selectPayment({ payment }));
   }
 
-  showPayment(payment: UiPaymentsListItem, payments: UiPaymentsListItem[]): void {}
+  showPayment(payment: UiPaymentsListItem, payments: UiPaymentsListItem[]): void {
+    this.store.dispatch(PayListActions.showPayment({ payment, payments }));
+  }
 
   printPayment(payment: UiPaymentsListItem): void {}
 

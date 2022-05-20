@@ -143,6 +143,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
           tap((form: WithinCountryForm) => {
             const paymentForm: RecursivePartial<PaymentForm> = {
               number: form.docNumber,
+              additionalDetails: form.additionalDetails,
               sender: {
                 accId: form.senderAccount?.id,
                 accCurrencyCode: form.senderAccount?.currencyCode,

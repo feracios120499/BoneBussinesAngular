@@ -38,11 +38,6 @@ export namespace CardReissueActions {
     string
   >(`[${CARD_REISSUE_KEY}] sign applications`);
 
-  export const signApplicationsError = createAction(
-    `[${CARD_REISSUE_KEY}] sign applications Error`,
-    props<{ errors: SignResponse[] }>()
-  );
-
   export const [showApplicationHistoryRequest, showApplicationHistorySuccess, showApplicationHistoryFailure] =
     createHTTPActions<ReissueApplicationDetails, ReissueHistory[], string>(`[${CARD_REISSUE_KEY}] show history`);
 

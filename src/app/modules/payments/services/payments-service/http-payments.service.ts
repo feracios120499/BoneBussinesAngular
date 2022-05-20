@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateRange } from '@models/date-range.model';
+import { SignBuffer } from '@models/sign-buffer.model';
+import { SignRequest } from '@models/sign-request.model';
+import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
+import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsCount } from '@modules/payments/models/payments-count.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -45,6 +49,10 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     );
   }
 
+  getPayment(id: number, clientId: string): Observable<PaymentDetails> {
+    return this.http.get<PaymentDetails>(`api/v1/pay/payments/${id}/${clientId}`);
+  }
+
   printPayments(ids: number[], clientId: string): Observable<string> {
     return this.http.post(`api/v1/pay/payments/print/HTML/${clientId}`, ids, { responseType: 'text' });
   }
@@ -55,5 +63,17 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
 
   sendOnSign(ids: number[], clientId: string): Observable<PaymentsResponseResult[]> {
     return this.http.put<PaymentsResponseResult[]>(`api/v1/pay/payments/onSign/${clientId}`, ids);
+  }
+
+  getBuffers(ids: number[], clientId: string): Observable<SignBuffer[]> {
+    return this.http.post<SignBuffer[]>(`api/v1/pay/sign/buffer/${clientId}`, ids);
+  }
+
+  addSignatures(signatures: SignRequest[], clientId: string): Observable<SignSaveResponse[]> {
+    return this.http.post<SignSaveResponse[]>(`api/v1/pay/sign/${clientId}`, signatures);
+  }
+
+  sendToBank(ids: number[], clientId: string): Observable<PaymentsResponseResult[]> {
+    return this.http.put<PaymentsResponseResult[]>(`api/v1/pay/payments/toBank/${clientId}`, ids);
   }
 }
