@@ -11,7 +11,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from '@store';
-import { AppActions } from '@store/app/actions';
+import { APP_KEY } from '@store/app/store';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
 import { PublicEffects } from '@store/public/effects';
@@ -27,8 +27,8 @@ import deepmerge from 'deepmerge';
 import { Keys, localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from 'src/environments/environment';
 
-const saveStoresLogout = [SETTINGS_KEY, PUBLIC_KEY];
-const saveStoresChangeCustomer = [...saveStoresLogout, USER_KEY, AUTH_KEY];
+const saveStoresLogout = [SETTINGS_KEY, PUBLIC_KEY, USER_KEY, APP_KEY];
+const saveStoresChangeCustomer = [...saveStoresLogout, AUTH_KEY];
 const keys: Keys = [
   { settings: ['currentLanguage', 'darkModeActive'] },
   { auth: ['token', 'userKey'] },
@@ -42,35 +42,9 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
   })(reducer);
 }
 
-// export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-//   return (state, action) => {
-//     if (action.type === AuthActions.logout.type) {
-//       let saveState = {};
-//       saveStoresLogout
-//         .concat(!state.app.isDemo ? USER_KEY : [])
-//         .forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
-//       return reducer(saveState, action);
-//     }
-//     if (action.type === AppActions.disableDemoMode.type) {
-//       let saveState = {};
-//       saveStoresLogout.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
-//       return reducer(saveState, action);
-//     }
-//     if (action.type === UserActions.selectCurrentClientId.type) {
-//       let saveState = {};
-//       saveStoresChangeCustomer.forEach((key) => (saveState = deepmerge(saveState, { [key]: state[key] })));
-//       return reducer(saveState, action);
-//     }
-//     return reducer(state, action);
-//   };
-// }
-
 export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state, action) => {
     if (action.type === AuthActions.logout.type) {
-      return reducer(saveState(saveStoresLogout.concat(!state.app.isDemo ? USER_KEY : [])), action);
-    }
-    if (action.type === AppActions.disableDemoMode.type) {
       return reducer(saveState(saveStoresLogout), action);
     }
     if (action.type === UserActions.selectCurrentClientId.type) {
