@@ -63,7 +63,10 @@ export class UserEffects {
       ofType(UserActions.loadProfileSuccess, AuthActions.loadProfileSuccess),
       withLatestFrom(this.store.select(UserSelectors.currentClientIdSelector)),
       map(([action, currentClientId]) => {
-        if (currentClientId === undefined) {
+        if (
+          currentClientId === undefined ||
+          !action.payload.customers.find(({ clientId }) => clientId === currentClientId)
+        ) {
           return UserActions.setCurrentClientId({ clientId: action.payload.customers[0].clientId });
         } else {
           return UserActions.setCurrentClientId({ clientId: currentClientId });

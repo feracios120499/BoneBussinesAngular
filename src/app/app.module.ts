@@ -17,7 +17,7 @@ import { WebClassModule } from '@directives/web-class/web-class.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { SharedModule } from './@shared/shared.module';
 import { CoreModule } from '@core/core.module';
-import { ModalsModule } from '@modals/mobals.module';
+import { ModalsModule } from '@modals/modals.module';
 import { B1PageLoaderModule } from '@ui/b1-page-loader/b1-page-loader.module';
 import { B1LinkModule } from '@ui/b1-link/b1-link.module';
 import { B1GlobalLoaderModule } from '@ui/b1-global-loader/b1-global-loader.module';
