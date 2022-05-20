@@ -3903,6 +3903,11 @@ ngb-modal-window {
   max-width: 100% !important;
 }
 
+.customers-modal .modal-dialog {
+  width: 900px !important;
+  max-width: 100% !important;
+}
+
 .payment-window {
   &-loader {
     & ngx-skeleton-loader .progress {

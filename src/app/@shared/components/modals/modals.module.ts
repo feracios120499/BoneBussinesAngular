@@ -25,6 +25,7 @@ import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
 import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
 import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
+import { CustomersFilterModule } from '@pipes/customers-filter/customers-filter.module';
 
 import { B1ExportTurnoversModalComponent } from './b1-export-turnovers-modal/b1-export-turnovers-modal.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
@@ -35,6 +36,7 @@ import { B1ErrorModalComponent } from './b1-error-modal/b1-error-modal.component
 import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-correspondents-modal.component';
 import { B1HistoryModalComponent } from './b1-history-modal/b1-history-modal.component';
 import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
+import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     B1CorrespondentsModalComponent,
     B1HistoryModalComponent,
     B1SignModalComponent,
+    B1CustomersModalComponent,
   ],
   imports: [
     CommonModule,
@@ -75,6 +78,7 @@ import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
     B1InputModule,
     B1CheckboxModule,
     B1ModalContainerModule,
+    CustomersFilterModule,
   ],
   exports: [
     B1PaymentModalComponent,

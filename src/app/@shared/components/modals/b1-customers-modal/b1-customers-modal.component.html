@@ -1,0 +1,66 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-header">
+    <div class="b1-title2">
+      {{ 'shared.changeCustomers' | translate }}
+    </div>
+
+    <div class="b1-modal-close">
+      <i b1-icon icon="cancel" (click)="modal.close()" (keyup.enter)="modal.close()" tabindex="0"></i>
+    </div>
+  </div>
+
+  <div class="b1-modal-body b1-modal-wrapper">
+    <b1-input
+      icon="search"
+      [placeholder]="'shared.search' | translate"
+      [resizable]="true"
+      [(ngModel)]="filterTerm"></b1-input>
+
+    <div class="b1-page-data b1-mt-4" style="height: 450px">
+      <ng-scrollbar>
+        <div *ngrxLet="currentCustomer$ as currentCustomer" class="b1-page-data__row selected">
+          <div class="b1-page-content" style="box-sizing: border-box">
+            <div class="col-md-10">
+              <div class="b1-page-data__subtitle b1-base">
+                {{ 'components.acct.acctDetail.name' | translate }}
+              </div>
+              <div class="b1-medium b1-ellipsis">{{ currentCustomer.name }}</div>
+            </div>
+
+            <div class="col-md-2 text-right">
+              <div class="b1-page-data__subtitle b1-base">
+                {{ 'components.payAuto.edit.taxCode' | translate }}
+              </div>
+              <div class="b1-medium">{{ currentCustomer.taxCode }}</div>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngrxLet="customers$ as customers">
+          <ng-container *ngIf="customers | customersFilter: filterTerm as filteredCustomers">
+            <div
+              *ngFor="let customer of filteredCustomers"
+              class="b1-page-data__row"
+              (click)="onCustomerSelect(customer)">
+              <div class="b1-page-content" style="box-sizing: border-box">
+                <div class="col-md-10">
+                  <div class="b1-page-data__subtitle b1-base">
+                    {{ 'components.acct.acctDetail.name' | translate }}
+                  </div>
+                  <div class="b1-medium b1-ellipsis">{{ customer.name }}</div>
+                </div>
+
+                <div class="col-md-2 text-right">
+                  <div class="b1-page-data__subtitle b1-base">
+                    {{ 'components.payAuto.edit.taxCode' | translate }}
+                  </div>
+                  <div class="b1-medium">{{ customer.taxCode }}</div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-scrollbar>
+    </div>
+  </div>
+</div>
