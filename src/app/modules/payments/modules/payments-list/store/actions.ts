@@ -1,6 +1,7 @@
 import { DateRange } from '@models/date-range.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
+import { PaymentHistory } from '@modules/payments/models/payment-history.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
@@ -71,4 +72,10 @@ export namespace PayListActions {
     `[${PAY_LIST_KEY}] set payment`,
     props<{ payment: PaymentsListItem; payments: PaymentsListItem[] }>()
   );
+
+  export const [showHistoryRequest, showHistorySuccess, showHistoryFailue] = createHTTPActions<
+    PaymentsListItem,
+    PaymentHistory[],
+    string
+  >(`[${PAY_LIST_KEY}] show history`);
 }

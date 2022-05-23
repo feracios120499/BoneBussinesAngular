@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { PaginationHelper } from '@helpers/pagination.helper';
+import { B1HistoryModalComponent } from '@modals/b1-history-modal/b1-history-modal.component';
 import { ArrayNotification } from '@models/array-notification.model';
+import { DocumentHistory } from '@models/document-history.model';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { StatusCode } from '@models/enums/status-code.enum';
+import { HistoryModalConfig } from '@models/history-modal-config.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
@@ -12,6 +15,7 @@ import { HttpPaymentsService } from '@modules/payments/services/payments-service
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalService } from '@services/modal.service';
 import { SignService } from '@services/sign/sign.service';
 import { NotifyActions } from '@store/notify/actions';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
@@ -28,7 +32,8 @@ export class PayListEffects implements OnRunEffects {
     private store: Store,
     private paymentsService: HttpPaymentsService,
     private signService: SignService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalService: ModalService
   ) {}
 
   loadData$ = createEffect(() =>
@@ -247,6 +252,42 @@ export class PayListEffects implements OnRunEffects {
               payment: this.mapPaymentDetails(payment, payload.data.payment, payload.data.payments),
             })
           )
+        )
+      )
+    )
+  );
+
+  showHistory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.showHistoryRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.paymentsService.getHistory(payload.data.id, payload.clientId).pipe(
+          map((history) => {
+            const modal = this.modalService.open(B1HistoryModalComponent, {
+              windowClass: 'left-modal',
+            });
+            const config: HistoryModalConfig = {
+              title: 'components.pay.PaymentsHistory',
+              subtitle: 'components.pay.PaymentDocumentNumber',
+              number: payload.data.number,
+              createDate: payload.data.dateCreated,
+              statusPrefix: 'statuses.history.',
+              history: history.map((value) => {
+                const historyItem: DocumentHistory = {
+                  id: value.id,
+                  statusDate: value.statusChangeDate,
+                  message: value.statusChangeMessage,
+                  statusId: value.statusId,
+                  userName: value.userName,
+                };
+                return historyItem;
+              }),
+            };
+            console.log(config.history);
+            modal.componentInstance.config = config;
+            return PayListActions.showHistorySuccess(history);
+          })
         )
       )
     )

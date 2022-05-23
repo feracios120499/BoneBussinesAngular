@@ -6,6 +6,7 @@ import { SignRequest } from '@models/sign-request.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
+import { PaymentHistory } from '@modules/payments/models/payment-history.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsCount } from '@modules/payments/models/payments-count.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -75,5 +76,9 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
 
   sendToBank(ids: number[], clientId: string): Observable<PaymentsResponseResult[]> {
     return this.http.put<PaymentsResponseResult[]>(`api/v1/pay/payments/toBank/${clientId}`, ids);
+  }
+
+  getHistory(id: number, clientId: string): Observable<PaymentHistory[]> {
+    return this.http.get<PaymentHistory[]>(`api/v1/pay/history/${id}/${clientId}`);
   }
 }

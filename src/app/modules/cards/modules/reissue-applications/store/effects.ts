@@ -184,6 +184,7 @@ export class CardReissueEffect implements OnRunEffects {
               statusPrefix: 'statuses.history.',
               history: history.map((value) => {
                 const historyItem: DocumentHistory = {
+                  id: value.id,
                   statusDate: value.statusChangeDate,
                   message: value.statusChangeMessage,
                   statusId: value.statusId,

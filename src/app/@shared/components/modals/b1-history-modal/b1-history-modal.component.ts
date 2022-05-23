@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { HistoryModalConfig } from '@models/history-modal-config.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResizeService } from '@services/resize.service';
@@ -15,13 +10,12 @@ import { ResizeService } from '@services/resize.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class B1HistoryModalComponent implements OnInit {
-  constructor(
-    public modal: NgbActiveModal,
-    private resizeService: ResizeService
-  ) {}
+  constructor(public modal: NgbActiveModal, private resizeService: ResizeService) {}
   @Input() config!: HistoryModalConfig;
   isMobile$ = this.resizeService.isMobile$;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.config.history = this.config.history.sort((a, b) => b.id - a.id);
+  }
 
   getCss(statusId: string): string {
     switch (statusId) {
