@@ -5,14 +5,17 @@
   </div>
   <div class="payment-body" (click)="showPayment()">
     <div class="payment-number">
-      <div class="b1-medium">
-        <span>№</span>
-        <span>{{ paymentRow.number }}</span>
-      </div>
-      <div class="b1-page-data__subtitle b1-light">
-        <span>{{ 'components.pay.from' | translate }}</span>
-        <span class="b1-mr-2">:</span>
-        <span>{{ paymentRow.createDate | date: 'dd.MM.yyyy' }} </span>
+      <div class="b1-large" [hidden]="!icon" b1-icon [icon]="icon!"></div>
+      <div>
+        <div class="b1-medium">
+          <span>№</span>
+          <span>{{ paymentRow.number }}</span>
+        </div>
+        <div class="b1-page-data__subtitle b1-light">
+          <span>{{ 'components.pay.from' | translate }}</span>
+          <span class="b1-mr-2">:</span>
+          <span>{{ paymentRow.createDate | date: 'dd.MM.yyyy' }} </span>
+        </div>
       </div>
     </div>
     <div class="payment-data">

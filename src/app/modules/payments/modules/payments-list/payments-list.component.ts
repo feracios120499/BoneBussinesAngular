@@ -20,6 +20,7 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('destroy');
     this.store.dispatch(PayListActions.destroy());
     this.store.removeReducer(PAY_LIST_KEY as never);
   }

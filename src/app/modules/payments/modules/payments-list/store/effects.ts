@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { PaginationHelper } from '@helpers/pagination.helper';
 import { B1HistoryModalComponent } from '@modals/b1-history-modal/b1-history-modal.component';
+import { B1SignModalComponent } from '@modals/b1-sign-modal/b1-sign-modal.component';
 import { ArrayNotification } from '@models/array-notification.model';
 import { DocumentHistory } from '@models/document-history.model';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { StatusCode } from '@models/enums/status-code.enum';
 import { HistoryModalConfig } from '@models/history-modal-config.model';
-import { PaymentModal } from '@models/payment-modal.model';
+import { PaymentForm } from '@models/payment-form.model';
+import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
+import { SignModalConfig } from '@models/sign-modal-config.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -18,6 +21,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from '@services/modal.service';
 import { SignService } from '@services/sign/sign.service';
 import { NotifyActions } from '@store/notify/actions';
+import { RouteActions } from '@store/route/actions';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
 import { Observable, of } from 'rxjs';
@@ -235,12 +239,12 @@ export class PayListEffects implements OnRunEffects {
     )
   );
 
-  setPaymentPartial$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PayListActions.setPayment),
-      map((action) => SharedActions.setPayment({ payment: this.mapPayment(action.payment, action.payments) }))
-    )
-  );
+  // setPaymentPartial$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(PayListActions.setPayment),
+  //     map((action) => SharedActions.setPayment({ payment: this.mapPayment(action.payment, action.payments) }))
+  //   )
+  // );
   setPayment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PayListActions.setPayment),
@@ -293,6 +297,82 @@ export class PayListEffects implements OnRunEffects {
     )
   );
 
+  showSignes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.showSignesRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.paymentsService.getSignes(payload.data.id, payload.clientId).pipe(
+          map((signes) => {
+            const modal = this.modalService.open(B1SignModalComponent, {
+              windowClass: 'left-modal',
+            });
+            const config: SignModalConfig = {
+              title: 'components.pay.paymentSignatures',
+              subtitle: 'components.pay.PaymentDocumentNumber',
+              number: payload.data.number,
+              createDate: payload.data.dateCreated,
+              signes,
+            };
+            modal.componentInstance.config = config;
+            return PayListActions.showSignesSuccess(signes);
+          }),
+          catchError((error) => of(PayListActions.showSignesFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  dublicatePayment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.dublicatePaymentRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.paymentsService.getPayment(payload.data.id, payload.clientId).pipe(
+          switchMap((payment) => {
+            const paymentForm: PaymentForm = {
+              amount: payment.amount,
+              additionalDetails: payment.additionalDetails,
+              paymentDate: payment.paymentDate,
+              paymentValueDate: payment.paymentValueDate,
+              purpose: payment.purpose,
+              sender: {
+                accCurrencyCode: payment.sender.accCurrencyCode,
+                accNumber: payment.sender.accNumber,
+                name: payment.sender.name,
+                taxCode: payment.sender.taxCode,
+                accCurrencyId: payment.sender.accCurrencyId,
+                accId: payment.sender.accId,
+                bankCode: payment.sender.bankCode,
+              },
+              recipient: {
+                accCurrencyCode: payment.recipient.accCurrencyCode,
+                accNumber: payment.recipient.accNumber,
+                name: payment.recipient.name,
+                taxCode: payment.recipient.taxCode,
+                accCurrencyId: payment.recipient.accCurrencyId,
+                accId: payment.recipient.accId,
+                bankCode: payment.recipient.bankCode,
+              },
+            };
+            const result: any[] = [
+              PayListActions.dublicatePaymentSuccess(),
+              SharedActions.setCreatePayment({ payment: paymentForm }),
+            ];
+            if (payment.typeId.startsWith('INNER')) {
+              result.push(RouteActions.routeTo({ route: '/payments/create/my-accounts' }));
+            } else if (payment.typeId.startsWith('SWIFT')) {
+              result.push(RouteActions.routeTo({ route: '/payments/create/swift' }));
+            } else {
+              result.push(RouteActions.routeTo({ route: '/payments/create/within-country' }));
+            }
+            return result;
+          })
+        )
+      )
+    )
+  );
+
   private mapPaymentDetails(
     paymentDetails: PaymentDetails,
     payment: PaymentsListItem,
@@ -320,11 +400,10 @@ export class PayListEffects implements OnRunEffects {
         details: paymentDetails.additionalDetails,
         countryName: paymentDetails.recipientCountryName,
       },
-      actions: {},
+      actions: this.getActions(payment),
       isPaginationAvailable: false,
     };
-    paymentModal.actions[PaymentAction.print] = () =>
-      this.store.dispatch(PayListActions.printPaymentsRequest([paymentDetails.id]));
+
     const pagination = new PaginationHelper<PaymentsListItem>(payments);
 
     pagination.startFrom(payment);
@@ -358,12 +437,9 @@ export class PayListEffects implements OnRunEffects {
         number: payment.recipient.accNumber,
         taxCode: payment.recipient.taxCode,
       },
-      actions: {},
+      actions: this.getActions(payment),
       isPaginationAvailable: false,
     };
-    paymentModal.actions[PaymentAction.print] = () =>
-      this.store.dispatch(PayListActions.printPaymentsRequest([payment.id]));
-    console.log(payment.statusCode as keyof typeof StatusCode);
     const pagination = new PaginationHelper<PaymentsListItem>(payments);
 
     pagination.startFrom(payment);
@@ -386,6 +462,17 @@ export class PayListEffects implements OnRunEffects {
       };
       return notify;
     });
+  }
+
+  private getActions(payment: PaymentsListItem): PaymentActionModal {
+    const actions: PaymentActionModal = {};
+    actions[PaymentAction.print] = () => this.store.dispatch(PayListActions.printPaymentsRequest([payment.id]));
+    actions[PaymentAction.dublicate] = (modal) => {
+      this.store.dispatch(PayListActions.dublicatePaymentRequest(payment));
+      modal.close();
+    };
+
+    return actions;
   }
 
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {

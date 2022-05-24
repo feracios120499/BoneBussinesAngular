@@ -1,31 +1,38 @@
 <ng-container *ngrxLet="tab$ as currentTab">
-    <ng-container *ngrxLet="count$ as count">
-        <ul class="b1-page-tabs b1-base b1-bold pay-tabs">
-            <li class="b1-page-tabs__item" *ngFor="let tab of tabs" [class.active]="currentTab == tab">
-                <a (click)="setTab(tab.status)" class="b1-filter-block__link">
-                    <span class="b1-mr-2">{{ tab.label | translate }}</span>
-                    <span class="b1-page-badge" [ngClass]="tab.badgeClass || ''"
-                        [class.bounce-in]="count[tab.status] != 0">
-                        {{ count[tab.status] || 0 }}
-                    </span>
-                </a>
-            </li>
-        </ul>
-        <div class="pay-tabs-mobile">
-            <div>
-                <span class="b1-mr-2">{{ currentTab!.label | translate }}</span>
-                <span class="b1-page-badge" [ngClass]="currentTab?.badgeClass || ''"
-                    [class.bounce-in]="count[currentTab!.status] != 0">
-                    {{ count[currentTab!.status] }}
-                </span>
-            </div>
-            <i b1-icon icon="chevron-down" class="pay-tabs-list_chevron"></i>
-            <select name="tabs" id="tabs" class="pay-tabs-list" #selectList (change)="setTab(selectList.value)">
-                <option *ngFor="let tab of tabs" [value]="tab.status">
-                    {{ tab.label | translate }}
-                    ({{ count[tab.status] }})
-                </option>
-            </select>
-        </div>
-    </ng-container>
+  <ng-container *ngrxLet="count$ as count">
+    <ul class="b1-page-tabs b1-base b1-bold pay-tabs">
+      <li class="b1-page-tabs__item" *ngFor="let tab of tabs" [class.active]="currentTab == tab">
+        <a (click)="setTab(tab.status)" class="b1-filter-block__link">
+          <span class="b1-mr-2">{{ tab.label | translate }}</span>
+          <span class="b1-page-badge" [ngClass]="tab.badgeClass || ''" [class.bounce-in]="count[tab.status] != 0">
+            {{ count[tab.status] || 0 }}
+          </span>
+        </a>
+      </li>
+    </ul>
+    <div class="pay-tabs-mobile">
+      <div>
+        <span class="b1-mr-2">{{ currentTab!.label | translate }}</span>
+        <span
+          class="b1-page-badge"
+          [ngClass]="currentTab?.badgeClass || ''"
+          [class.bounce-in]="count[currentTab!.status] != 0">
+          {{ count[currentTab!.status] }}
+        </span>
+      </div>
+      <i b1-icon icon="chevron-down" class="pay-tabs-list_chevron"></i>
+      <select
+        name="tabs"
+        id="tabs"
+        class="pay-tabs-list"
+        #selectList
+        (change)="setTab(selectList.value)"
+        [ngModel]="currentTab!.status">
+        <option *ngFor="let tab of tabs" [value]="tab.status">
+          {{ tab.label | translate }}
+          ({{ count[tab.status] }})
+        </option>
+      </select>
+    </div>
+  </ng-container>
 </ng-container>

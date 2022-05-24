@@ -1,4 +1,6 @@
 import { DateRange } from '@models/date-range.model';
+import { DocumentHistory } from '@models/document-history.model';
+import { DocumentSign } from '@models/document-sign.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
 import { PaymentHistory } from '@modules/payments/models/payment-history.model';
@@ -78,4 +80,16 @@ export namespace PayListActions {
     PaymentHistory[],
     string
   >(`[${PAY_LIST_KEY}] show history`);
+
+  export const [showSignesRequest, showSignesSuccess, showSignesFailure] = createHTTPActions<
+    PaymentsListItem,
+    DocumentSign[],
+    string
+  >(`[${PAY_LIST_KEY}] show signes`);
+
+  export const [dublicatePaymentRequest, dublicatePaymentSuccess, dublicatePaymentFailure] = createHTTPActions<
+    PaymentsListItem,
+    void,
+    string
+  >(`[${PAY_LIST_KEY}] dublicate payment`);
 }

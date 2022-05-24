@@ -7,4 +7,6 @@ export type PaymentsListLoadings =
   | 'toBank'
   | 'delete'
   | 'export'
-  | 'import';
+  | 'import'
+  | 'history'
+  | 'signes';

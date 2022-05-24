@@ -3,3 +3,18 @@
   flex: 1;
   flex-direction: column;
 }
+
+app-payment-row.payment-row {
+  height: 90px;
+  @media (max-width: 812px) {
+    border-radius: 0;
+    margin: 0;
+    height: 180px;
+  }
+}
+b1-skeleton.payment-row {
+  height: 90px;
+  @media (max-width: 812px) {
+    height: 180px;
+  }
+}

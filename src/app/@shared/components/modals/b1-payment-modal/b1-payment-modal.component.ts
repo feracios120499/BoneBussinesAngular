@@ -16,6 +16,7 @@ import { switchMap } from 'rxjs/operators';
 export class B1PaymentModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private store: Store) {}
 
+  paymentAction = PaymentAction;
   payment$ = this.store.select(SharedSelectors.payment);
   isLoading$ = this.store
     .select(SharedSelectors.loader)
@@ -54,9 +55,9 @@ export class B1PaymentModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  print(payment: Partial<PaymentModal>): void {
+  execute(payment: Partial<PaymentModal>, paymentAction: PaymentAction): void {
     if (payment.actions) {
-      payment.actions[PaymentAction.print](this.activeModal);
+      payment.actions[paymentAction](this.activeModal);
     }
   }
 

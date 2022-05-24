@@ -167,8 +167,16 @@
               [filled]="false"
               icon="print"
               label="components.pay.print"
-              (btnClick)="print(payment)"
-              [isDisabled]="isLoading"></b1-button>
+              (btnClick)="execute(payment, paymentAction.print)"
+              [isDisabled]="isLoading"
+              *ngIf="payment!.actions![paymentAction.print]"></b1-button>
+            <b1-button
+              [filled]="false"
+              icon="spinner"
+              label="components.applications.actions.dublicate"
+              (btnClick)="execute(payment, paymentAction.dublicate)"
+              [isDisabled]="isLoading"
+              *ngIf="payment!.actions![paymentAction.dublicate]"></b1-button>
             <!-- <button class="b1-button b1-button-primary" ng-if="payment.IsMyPayment" ng-click="dublicate()">
                           <i class="ub-icons-icon-repeat"></i>
                           {{'components.applications.actions.dublicate' | translate}}

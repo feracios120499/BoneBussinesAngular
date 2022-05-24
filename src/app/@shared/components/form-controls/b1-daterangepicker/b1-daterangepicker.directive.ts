@@ -47,9 +47,7 @@ const dayjs = _dayjs;
     },
   ],
 })
-export class B1DaterangepickerDirective
-  implements OnInit, OnChanges, DoCheck, FormViewAdapter
-{
+export class B1DaterangepickerDirective implements OnInit, OnChanges, DoCheck, FormViewAdapter {
   public picker: B1DaterangepickerComponent;
   private _onChange = Function.prototype;
   private _onTouched = Function.prototype;
@@ -160,6 +158,14 @@ export class B1DaterangepickerDirective
     }
   }
   set value(val: DateRange | _dayjs.Dayjs | undefined) {
+    if (!this.singleDatePicker && this._value && this._value[this._startKey]) {
+      const currentStart = (this._value as any)[this._startKey];
+      const currentEnd = (this._value as any)[this._endKey];
+      const start = dayjs((val as any)[this._startKey].$d);
+      const end = dayjs((val as any)[this._endKey].$d);
+      if (start.isSame(currentStart, 'day') && end.isSame(currentEnd, 'day')) return;
+    }
+
     if (this.singleDatePicker) {
       if (this._startKey in (val as any)) {
         val = (val as any)[this._startKey];
@@ -173,10 +179,8 @@ export class B1DaterangepickerDirective
     this._changeDetectorRef.markForCheck();
   }
   @Output('change') onChange: EventEmitter<Object> = new EventEmitter();
-  @Output('rangeClicked') rangeClicked: EventEmitter<Object> =
-    new EventEmitter();
-  @Output('datesUpdated') datesUpdated: EventEmitter<Object> =
-    new EventEmitter();
+  @Output('rangeClicked') rangeClicked: EventEmitter<Object> = new EventEmitter();
+  @Output('datesUpdated') datesUpdated: EventEmitter<Object> = new EventEmitter();
   @Output() startDateChanged: EventEmitter<Object> = new EventEmitter();
   @Output() endDateChanged: EventEmitter<Object> = new EventEmitter();
   @HostBinding('disabled') get disabled() {
@@ -197,10 +201,7 @@ export class B1DaterangepickerDirective
     this.startKey = 'startDate';
     this.drops = 'down';
     this.opens = 'auto';
-    const componentFactory =
-      this._componentFactoryResolver.resolveComponentFactory(
-        B1DaterangepickerComponent
-      );
+    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(B1DaterangepickerComponent);
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent(componentFactory);
     this.picker = componentRef.instance as B1DaterangepickerComponent;
@@ -224,11 +225,9 @@ export class B1DaterangepickerDirective
   }
 
   ngOnInit() {
-    this.picker.startDateChanged
-      .asObservable()
-      .subscribe((itemChanged: any) => {
-        this.startDateChanged.emit(itemChanged);
-      });
+    this.picker.startDateChanged.asObservable().subscribe((itemChanged: any) => {
+      this.startDateChanged.emit(itemChanged);
+    });
     this.picker.endDateChanged.asObservable().subscribe((itemChanged: any) => {
       this.endDateChanged.emit(itemChanged);
     });
@@ -363,21 +362,13 @@ export class B1DaterangepickerDirective
     if (this.opens === 'left') {
       style = {
         top: containerTop,
-        left:
-          element.offsetLeft -
-          container.clientWidth +
-          element.clientWidth +
-          'px',
+        left: element.offsetLeft - container.clientWidth + element.clientWidth + 'px',
         right: 'auto',
       };
     } else if (this.opens === 'center') {
       style = {
         top: containerTop,
-        left:
-          element.offsetLeft +
-          element.clientWidth / 2 -
-          container.clientWidth / 2 +
-          'px',
+        left: element.offsetLeft + element.clientWidth / 2 - container.clientWidth / 2 + 'px',
         right: 'auto',
       };
     } else if (this.opens === 'right') {
@@ -387,10 +378,7 @@ export class B1DaterangepickerDirective
         right: 'auto',
       };
     } else {
-      const position =
-        element.offsetLeft +
-        element.clientWidth / 2 -
-        container.clientWidth / 2;
+      const position = element.offsetLeft + element.clientWidth / 2 - container.clientWidth / 2;
       if (position < 0) {
         style = {
           top: containerTop,

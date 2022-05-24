@@ -26,7 +26,9 @@ export class PaymentsListPaymentsComponent implements OnInit {
     this.store.dispatch(PayListActions.selectPayment({ payment }));
   }
 
-  showPayment(payment: UiPaymentsListItem, payments: UiPaymentsListItem[]): void {}
+  showPayment(payment: UiPaymentsListItem, payments: UiPaymentsListItem[]): void {
+    this.store.dispatch(PayListActions.showPayment({ payment, payments }));
+  }
 
   printPayment(payment: UiPaymentsListItem): void {
     this.store.dispatch(PayListActions.printPaymentsRequest([payment.id]));
@@ -36,7 +38,9 @@ export class PaymentsListPaymentsComponent implements OnInit {
     this.store.dispatch(PayListActions.showHistoryRequest(payment));
   }
 
-  showSignes(payment: UiPaymentsListItem): void {}
+  showSignes(payment: UiPaymentsListItem): void {
+    this.store.dispatch(PayListActions.showSignesRequest(payment));
+  }
 
   removePayment(payment: UiPaymentsListItem): void {
     this.store.dispatch(
@@ -49,7 +53,9 @@ export class PaymentsListPaymentsComponent implements OnInit {
     );
   }
 
-  dublicatePayment(payment: UiPaymentsListItem): void {}
+  dublicatePayment(payment: UiPaymentsListItem): void {
+    this.store.dispatch(PayListActions.dublicatePaymentRequest(payment));
+  }
 
   editPayment(payment: UiPaymentsListItem): void {}
 

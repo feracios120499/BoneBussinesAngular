@@ -34,6 +34,9 @@ export interface PaymentsListItemAccount {
   accCurrencyCode: string;
   accNumber: string;
   bankName: string;
+  bankCode: string;
   name: string;
   taxCode: string;
+  accCurrencyId: number;
+  accId?: number;
 }

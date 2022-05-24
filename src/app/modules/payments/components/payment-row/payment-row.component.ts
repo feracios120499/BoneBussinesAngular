@@ -18,6 +18,8 @@ export class PaymentRowComponent implements OnInit, OnChanges {
   @Output() onShow: EventEmitter<void> = new EventEmitter<void>();
 
   paymentRow!: PaymentRow;
+  icon?: string;
+
   ngOnChanges(changes: SimpleChanges): void {
     this.initData();
   }
@@ -50,6 +52,13 @@ export class PaymentRowComponent implements OnInit, OnChanges {
         purpose: this.payment.purpose,
         currencyCode: this.payment.sender.accCurrencyCode,
       };
+      if (this.payment.typeId.startsWith('INNER')) {
+        this.icon = 'cards';
+      } else if (this.payment.typeId.startsWith('SWIFT')) {
+        this.icon = 'swift';
+      } else {
+        this.icon = 'country';
+      }
     }
   }
 

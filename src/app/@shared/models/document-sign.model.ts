@@ -6,5 +6,6 @@ export interface DocumentSign {
   potentialSigners?: SignUser[];
   signProviderType?: SignProvider;
   user?: SignUser;
-  visaId: number;
+  visaId?: number;
+  id?: number;
 }

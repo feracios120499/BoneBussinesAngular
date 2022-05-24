@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateRange } from '@models/date-range.model';
+import { DocumentSign } from '@models/document-sign.model';
 import { SignBuffer } from '@models/sign-buffer.model';
 import { SignRequest } from '@models/sign-request.model';
 import { SignSaveResponse } from '@models/sign-response.model';
@@ -12,6 +13,7 @@ import { PaymentsCount } from '@modules/payments/models/payments-count.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
 import { BaseService } from '@services/base.service';
+import dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BasePaymentsService } from './base-payments.service';
@@ -80,5 +82,9 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
 
   getHistory(id: number, clientId: string): Observable<PaymentHistory[]> {
     return this.http.get<PaymentHistory[]>(`api/v1/pay/history/${id}/${clientId}`);
+  }
+
+  getSignes(id: number, clientId: string): Observable<DocumentSign[]> {
+    return this.http.get<DocumentSign[]>(`api/v1/pay/sign/${id}/${clientId}`);
   }
 }

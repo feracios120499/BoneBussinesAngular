@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DateRange } from '@models/date-range.model';
 import { PaymentsListItem, UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { PayListSelectors } from '../../store/selectors';
   templateUrl: './payments-list-actions.component.html',
   styleUrls: ['./payments-list-actions.component.scss'],
 })
-export class PaymentsListActionsComponent implements OnInit {
+export class PaymentsListActionsComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private translateService: TranslateService) {}
 
   range$ = this.store.select(PayListSelectors.range);
@@ -34,6 +34,10 @@ export class PaymentsListActionsComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    console.log('destroy2');
+  }
+
   selectAll(payments: PaymentsListItem[]): void {
     this.store.dispatch(PayListActions.selectAll({ payments }));
   }
@@ -43,11 +47,12 @@ export class PaymentsListActionsComponent implements OnInit {
   }
 
   setRange(range: DateRange): void {
+    console.log('set range');
     this.store.dispatch(PayListActions.setRange({ range }));
   }
 
   printPayments(payments: UiPaymentsListItem[]): void {
-    this.executer(payments, 'shared.selectDocumentsBeforeRemove', (selected) =>
+    this.executer(payments, 'shared.selectDocumentsBeforePrint', (selected) =>
       this.store.dispatch(PayListActions.printPaymentsRequest(selected))
     );
   }

@@ -1,9 +1,9 @@
 <ng-container *ngrxLet="payments$ as payments">
   <ng-container *ngrxLet="isLoadingList$ as isLoadingList">
-    <div class="b1-page-data" *ngIf="isLoadingList">
+    <ng-scrollbar class="virtual-scroll b1-page-data" [disabled]="isMobile$ | ngrxPush" *ngIf="isLoadingList">
       <b1-skeleton *ngFor="let item of [0, 1, 2, 3, 4, 5]" class="b1-page-data__row skeleton payment-row">
       </b1-skeleton>
-    </div>
+    </ng-scrollbar>
     <ng-container *ngIf="!isLoadingList">
       <ng-container *ngIf="payments">
         <ng-scrollbar

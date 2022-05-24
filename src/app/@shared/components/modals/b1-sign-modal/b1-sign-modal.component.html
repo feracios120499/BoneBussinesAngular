@@ -26,7 +26,7 @@
     </div>
     <div class="sign-item" *ngFor="let sign of config.signes">
       <div class="b1-badge b1-bg-primary">
-        {{ sign.visaId }}
+        {{ sign.visaId || sign.id }}
       </div>
       <div class="sign-item_body">
         <div class="b1-medium b1-light" *ngIf="sign.user">
@@ -42,7 +42,7 @@
           <div class="b1-badge" [class.b1-bg-success]="sign.user" [class.b1-bg-warning]="!sign.user">
             {{ (sign.user ? 'components.pay.signed' : 'components.pay.waiting') | translate }}
           </div>
-          <div class="b1-badge b1-bg-info" *ngIf="sign.signProviderType">
+          <div class="b1-badge b1-bg-info b1-ml-2" *ngIf="sign.signProviderType">
             {{ sign.signProviderType }}
           </div>
         </div>
