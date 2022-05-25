@@ -1,0 +1,92 @@
+$screen-desctop: 1365px;
+$screen-tablet-medium: 1199px;
+$screen-tablet: 812px;
+
+:host {
+  display: block;
+}
+.loan-schedule {
+  &-item {
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(3, 3fr) minmax(270px, 4fr);
+    grid-column-gap: 16px;
+    padding: 16px 32px;
+    height: auto;
+    @media (max-width: $screen-desctop) {
+      grid-template-columns: 1fr 4fr repeat(3, 3fr) 4fr;
+    }
+    @media (max-width: $screen-tablet-medium) {
+      grid-template-columns: 1fr 3fr 4fr;
+      align-items: start;
+    }
+    @media (max-width: $screen-tablet) {
+      grid-column-gap: 8px;
+      margin: 0;
+      padding: 8px 16px;
+      border-radius: 0;
+    }
+    &.actual {
+      background-color: var(--color-light-100) !important;
+    }
+    &__cell {
+      grid-row: span 2;
+      &_icon-wrapper {
+        align-self: center;
+        justify-self: center;
+      }
+      &_sum,
+      &_rest {
+        grid-row: span 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+      @media (max-width: $screen-desctop) {
+        &_sum,
+        &_rest {
+          display: block;
+          text-align: right;
+        }
+      }
+      @media (max-width: $screen-tablet-medium) {
+        grid-row: span 1;
+        &_icon-wrapper {
+          grid-row: span 3;
+        }
+        &_sum,
+        &_rest {
+          text-align: left;
+        }
+        &_date {
+          order: 1;
+        }
+        &_sum {
+          order: 2;
+          text-align: right;
+        }
+        &_body {
+          order: 3;
+        }
+        &_percent {
+          order: 4;
+          text-align: right;
+        }
+        &_commission {
+          order: 5;
+        }
+        &_rest {
+          order: 6;
+          text-align: right;
+        }
+      }
+    }
+    &__icon {
+      @media (max-width: $screen-tablet) {
+        width: 32px;
+        height: 32px;
+        i {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

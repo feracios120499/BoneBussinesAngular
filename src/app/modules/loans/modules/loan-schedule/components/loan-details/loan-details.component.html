@@ -1,0 +1,80 @@
+<b1-details-container *ngrxLet="loan$ as loan">
+  <ng-container slot="card-title">{{ loan.loanType }}</ng-container>
+
+  <ng-container slot="card-content">
+    <div class="b1-mt-6 b1-base b1-opacity-80">
+      <span>{{ 'components.loan.headers.nextPayment' | translate }}</span>
+
+      <ng-container *ngIf="loan.payTerm">
+        <span> {{ 'components.pay.date' | translate }} </span>
+        <span>{{ loan.payTerm | date: 'dd.MM.yyyy' }}</span>
+      </ng-container>
+    </div>
+
+    <div class="b1-large" webClass="b1-mt-3">
+      <span>{{ loan.minRepay / 100 | money: loan.currencyCode }}</span>
+    </div>
+  </ng-container>
+
+  <ng-container slot="info">
+    <div class="row">
+      <b1-details-cell webClass="col-12" mobileClass="col-6" label="components.applications.sum">
+        {{ loan.amount | money: loan.currencyCode }}
+      </b1-details-cell>
+
+      <b1-details-cell webClass="hidden" mobileClass="col-6" label="components.loan.interestRate">
+        {{ loan.percents | money }} %
+      </b1-details-cell>
+    </div>
+
+    <div class="row" webClass="b1-mt-5" mobileClass="b1-mt-3">
+      <b1-details-cell webClass="col-12" mobileClass="hidden" label="components.loan.interestRate">
+        {{ loan.percents | money }} %
+      </b1-details-cell>
+
+      <b1-details-cell webClass="hidden" mobileClass="col-6" label="components.pay.createdDate">
+        {{ loan.contractDate | date: 'dd.MM.yyyy' }}
+      </b1-details-cell>
+
+      <b1-details-cell webClass="hidden" mobileClass="col-6" label="components.loan.repaymentDate">
+        {{ loan.dateEnd | date: 'dd.MM.yyyy' }}
+      </b1-details-cell>
+    </div>
+
+    <div class="row" webClass="hidden" mobileClass="b1-mt-3">
+      <b1-details-cell class="col-6" label="components.loan.headers.balanceBody">
+        {{ (loan.rest + loan.outstandingDebet) / 100 | money }}
+      </b1-details-cell>
+
+      <b1-details-cell class="col-6" label="components.loan.overdue">
+        {{ loan.outstandingDebet / 100 | money }}
+      </b1-details-cell>
+    </div>
+
+    <div class="row" webClass="hidden" mobileClass="b1-mt-3">
+      <b1-details-cell class="col-6" label="components.loan.headers.accruedInterest">
+        {{ (loan.percentAmount + loan.outstandingPercent) / 100 | money }}
+      </b1-details-cell>
+
+      <b1-details-cell class="col-6" label="components.loan.overdue">
+        {{ loan.outstandingPercent / 100 | money }}
+      </b1-details-cell>
+    </div>
+
+    <div class="row" webClass="hidden" mobileClass="b1-mt-3">
+      <b1-details-cell class="col-6" label="components.loan.headers.comissionAndSurcharge">
+        {{ (loan.commission + +loan.overdueCommission! + loan.outFine) / 100 | money }}
+      </b1-details-cell>
+
+      <b1-details-cell class="col-6" label="components.loan.overdue">
+        {{ +loan.overdueCommission! / 100 | money }}
+      </b1-details-cell>
+    </div>
+  </ng-container>
+
+  <b1-dropdown label="loan's actions" menuWidth="190px" scopeSelector="app-loan-details">
+    <b1-more-button slot="toggle" [horizontal]="true"></b1-more-button>
+    <b1-dropdown-link icon="country" label="components.loan.makePayment" (btnClick)="onLoanMakePayment(loan)">
+    </b1-dropdown-link>
+  </b1-dropdown>
+</b1-details-container>

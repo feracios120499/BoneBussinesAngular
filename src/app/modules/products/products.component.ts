@@ -47,7 +47,6 @@ export class ProductsComponent extends withDestroy() implements OnInit, AfterVie
 
   onProductOrderConfirm(): void {
     if (this.formRef.submitForm() && this.productOrderForm) {
-      console.log('Order is ready to be sent: ', this.productOrderForm);
       this.store.dispatch(ProductsActions.createProductOrderRequest(this.productOrderForm));
     }
   }

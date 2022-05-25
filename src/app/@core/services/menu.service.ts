@@ -48,7 +48,7 @@ export class MenuService extends BaseService {
       ngValue: 'loans',
       icon: 'pie-chart',
       dataRole: 'Director,Accountant,LoansViewer',
-      route: 'app.loan.loans',
+      route: 'loan',
       // gaTrackEvent: '[\'left-menu\', \'view-loans\']',
       dataTranslate: 'aside.nav.LOANS',
       moduleName: 'Loans',

@@ -1,0 +1,37 @@
+<app-loans-actions></app-loans-actions>
+
+<b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+
+<ng-container *ngrxLet="isInitialLoading$ as isInitialLoading">
+  <ng-container *ngrxLet="loans$ as loans">
+    <ng-container *ngIf="!isInitialLoading && loans.length">
+      <ng-container *ngIf="loans | loansFilter: (filterTerm$ | ngrxPush) as filteredLoans">
+        <ng-container *ngIf="filteredLoans.length; else notFound">
+          <div class="loans-list">
+            <ng-scrollbar
+              *ngIf="filteredLoans.length; else notFound"
+              class="virtual-scroll b1-page-data"
+              [disabled]="isMobile$ | ngrxPush">
+              <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+                <app-loan-item *cdkVirtualFor="let loan of filteredLoans" [loan]="loan"></app-loan-item>
+              </cdk-virtual-scroll-viewport>
+            </ng-scrollbar>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isInitialLoading">
+      <div class="loans-list">
+        <!-- <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton> -->
+      </div>
+    </ng-container>
+
+    <b1-empty *ngIf="!loans.length && !isInitialLoading" svgName="empty-loans" header="components.loans.doNotExist">
+    </b1-empty>
+  </ng-container>
+</ng-container>
+
+<ng-template #notFound>
+  <b1-empty svgName="empty-loans" header="components.loans.loansNotFound"></b1-empty>
+</ng-template>

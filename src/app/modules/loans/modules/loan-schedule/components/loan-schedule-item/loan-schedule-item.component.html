@@ -1,0 +1,44 @@
+<div class="loan-schedule-item b1-page-data__row" [class.actual]="loanSchedule.isActual">
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_icon-wrapper">
+    <div class="loan-schedule-item__icon b1-cards__icon">
+      <i class="b1-cards__type-icon" b1-icon icon="file-details"></i>
+    </div>
+  </div>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_date"
+    label="components.analytics.graphTooltips.date">
+    {{ loanSchedule.date | date: 'dd.MM.yyyy' }}
+  </app-loan-schedule-item-cell>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_percent"
+    label="components.loan.schedule.percent">
+    {{ loanSchedule.paymentPercent / 100 | money: currencyCode }}
+  </app-loan-schedule-item-cell>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_body"
+    label="components.loan.schedule.body">
+    {{ loanSchedule.paymentBody / 100 | money: currencyCode }}
+  </app-loan-schedule-item-cell>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_commission"
+    label="components.loan.schedule.commission"
+    [negative]="loanSchedule.commission > 0">
+    {{ loanSchedule.commission / 100 | money: currencyCode }}
+  </app-loan-schedule-item-cell>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_sum"
+    label="components.salary.sumCaps">
+    <span class="b1-color-primary">&nbsp;{{ loanSchedule.payment / 100 | money: currencyCode }}</span>
+  </app-loan-schedule-item-cell>
+
+  <app-loan-schedule-item-cell
+    class="loan-schedule-item__cell loan-schedule-item__cell_rest"
+    label="components.loan.schedule.rest">
+    &nbsp;{{ loanSchedule.rest / 100 | money: currencyCode }}
+  </app-loan-schedule-item-cell>
+</div>

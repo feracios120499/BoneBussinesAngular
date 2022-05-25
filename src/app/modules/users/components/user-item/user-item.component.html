@@ -15,11 +15,7 @@
 <div class="user-item__subtitle">{{ user.email }}</div>
 <div class="user-item__subtitle">{{ user.phoneNumber }}</div>
 
-<b1-dropdown
-  class="user-item__more b1-card__col b1-card__col_dot"
-  label="user's actions"
-  menuWidth="180px"
-  scopeSelector="app-users-list">
+<b1-dropdown class="user-item__more" label="user's actions" menuWidth="180px" scopeSelector="app-users-list">
   <b1-more-button slot="toggle"></b1-more-button>
   <b1-dropdown-link
     [icon]="user.isDisable ? 'lock' : 'unlock'"

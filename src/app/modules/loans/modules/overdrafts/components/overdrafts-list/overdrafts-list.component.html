@@ -1,0 +1,38 @@
+<ng-container *ngrxLet="isInitialLoading$ as isInitialLoading">
+  <ng-container *ngrxLet="overdrafts$ as overdrafts">
+    <ng-container *ngIf="!isInitialLoading && overdrafts.length">
+      <ng-container *ngIf="overdrafts | overdraftsFilter: (filterTerm$ | ngrxPush) as filteredOverdrafts">
+        <ng-container *ngIf="filteredOverdrafts.length; else notFound">
+          <div class="overdrafts-list">
+            <ng-scrollbar
+              *ngIf="filteredOverdrafts.length; else notFound"
+              class="virtual-scroll b1-page-data"
+              [disabled]="isMobile$ | ngrxPush">
+              <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+                <app-overdraft-item
+                  *cdkVirtualFor="let overdraft of filteredOverdrafts"
+                  [overdraft]="overdraft"></app-overdraft-item>
+              </cdk-virtual-scroll-viewport>
+            </ng-scrollbar>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isInitialLoading">
+      <div class="overdrafts-list">
+        <!-- <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton> -->
+      </div>
+    </ng-container>
+
+    <b1-empty
+      *ngIf="!overdrafts.length && !isInitialLoading"
+      svgName="empty-loans"
+      header="components.overdrafts.doNotExist">
+    </b1-empty>
+  </ng-container>
+</ng-container>
+
+<ng-template #notFound>
+  <b1-empty svgName="empty-loans" header="components.loans.overdraftsNotFound"></b1-empty>
+</ng-template>

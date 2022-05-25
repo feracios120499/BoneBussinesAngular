@@ -1,0 +1,7 @@
+<ul class="b1-head-tabs">
+  <li *ngFor="let link of links" class="b1-head-tabs__item" [routerLink]="link.url" routerLinkActive="active">
+    <a class="b1-head-tabs__link b1-medium b1-color-dark">
+      {{ link.label | translate }}
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,41 @@
+export interface Loan {
+  id: number;
+  customerId: number;
+  bankId: string;
+  loanType: string;
+  contractDate: Date;
+  contractNumber: string;
+  dateEnd: Date;
+  percents: number;
+  payPeriod: string;
+  currencyCode: string;
+  amount: number;
+  rest: number;
+  commission: number;
+  overdueCommission: number | null;
+  repaymentAccount: {
+    bankCode: string;
+    bankName: string;
+    taxCode: string;
+    name: string;
+    accNumber: string;
+    accCurrencyCode: string;
+  };
+  repaymentDefaultPurpose: string;
+  percentAmount: number;
+  percentPayTerm: Date;
+  outstandingDebet: number;
+  outstandingPercent: number;
+  percentByOutstandingDebet: number;
+  status: number;
+  statusName: string;
+  dateBegin: Date;
+  minRepay: number;
+  percentPay: null;
+  outFine: number;
+  totalSum: number;
+  payTerm: null;
+  amountEarlyPay: number;
+  lastPayDate: Date;
+  lastPayAmount: number;
+}
