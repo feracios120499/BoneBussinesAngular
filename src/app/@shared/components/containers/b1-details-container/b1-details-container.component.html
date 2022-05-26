@@ -1,0 +1,21 @@
+<div class="b1-details-container">
+  <div class="b1-details-container-header">
+    <div class="b1-details-container-header_card">
+      <div class="b1-flex b1-align-center b1-justify-between">
+        <div class="b1-medium b1-ellipsis">
+          <ng-content select="[slot=card-title]"></ng-content>
+        </div>
+        <ng-content select="[slot=card-actions]"></ng-content>
+      </div>
+      <ng-content select="[slot=card-content]"></ng-content>
+    </div>
+
+    <div class="b1-details-container-header_info">
+      <ng-content select="[slot=info]"></ng-content>
+    </div>
+  </div>
+
+  <div class="b1-details-container-more">
+    <ng-content select="b1-dropdown"></ng-content>
+  </div>
+</div>

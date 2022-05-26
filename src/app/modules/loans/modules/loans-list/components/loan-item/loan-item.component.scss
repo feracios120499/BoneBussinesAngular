@@ -1,0 +1,91 @@
+$screen-tablet-medium: 1199px;
+$screen-tablet: 812px;
+
+:host {
+  display: block;
+}
+.loan-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 8px;
+  height: auto;
+  padding: 16px 60px 32px 32px;
+  @media (max-width: $screen-tablet-medium) {
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: $screen-tablet) {
+    grid-gap: 0;
+    margin: 0;
+    padding: 8px 40px 8px 16px;
+    border-radius: 0;
+  }
+  &__more {
+    position: absolute;
+    top: 30px;
+    right: 12px;
+    @media (max-width: $screen-tablet) {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 8px;
+    }
+  }
+  &__cell {
+    grid-column: span 2;
+    &_title,
+    &_sum,
+    &_rate,
+    &_next {
+      grid-column: span 3;
+    }
+    &_separator {
+      grid-column: span 6;
+      margin-right: -30px;
+    }
+    &_sum,
+    &_next,
+    &_end-date,
+    &_commission {
+      text-align: right;
+    }
+    &_next {
+      & > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+    }
+    &_body,
+    &_percents,
+    &_commission {
+      display: flex;
+      flex-direction: column;
+    }
+    &_commission {
+      align-items: flex-end;
+    }
+    @media (max-width: $screen-tablet-medium) {
+      &_start-date,
+      &_contract,
+      &_separator,
+      &_body,
+      &_percents,
+      &_commission {
+        display: none;
+      }
+      &_sum,
+      &_next,
+      &_end-date {
+        text-align: left;
+      }
+      &_next {
+        & > div {
+          justify-content: flex-start;
+        }
+      }
+      &_sum {
+        order: 1;
+      }
+    }
+  }
+}

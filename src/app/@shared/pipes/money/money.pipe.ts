@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'money' })
 export class MoneyPipe implements PipeTransform {
   transform(amount?: number, currencyCode?: string): string {
-    if (!amount && currencyCode) return this.getCurrencySymbol(currencyCode);
+    if ((amount === null || amount === undefined) && currencyCode) return this.getCurrencySymbol(currencyCode);
     const money = amount || 0;
     let c = 2; // rounding of the fractional part to 100 (0,00)
     const d = ',';

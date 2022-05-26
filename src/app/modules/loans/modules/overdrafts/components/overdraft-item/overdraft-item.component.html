@@ -1,0 +1,86 @@
+<div class="overdraft-item b1-page-data__row">
+  <div class="overdraft-item__cell overdraft-item__cell_title">
+    <div class="b1-title3 b1-ellipsis" *skeleton="true; sizes: { w: '80%' }">
+      {{ 'components.loan.overdraft' | translate }}
+    </div>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_active-limit">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '80%' }" label="components.loan.withLimit" [marked]="true">
+      <span class="b1-title3">
+        {{ overdraft.activeLimit / 100 | money: overdraft.currencyCode }}
+      </span>
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_rate">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '65%' }" label="components.loan.interestRate" [marked]="true">
+      {{ overdraft.rate | money }} %
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_unused-limit">
+    <app-loan-item-cell
+      *skeleton="true; sizes: { w: '65%' }"
+      label="components.loan.headers.unUsedLimit"
+      [marked]="true">
+      {{ overdraft.unusedLimit / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_start-date">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '50%' }" label="components.pay.createdDate">
+      {{ overdraft.contractDate | date: 'dd.MM.yyyy' }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_contract">
+    <app-loan-item-cell
+      *skeleton="true; sizes: { w: '50%' }"
+      mobileClass="hidden"
+      label="components.loan.contractNumber">
+      {{ overdraft.contractNumber }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_reload-date">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '50%' }" label="components.loan.reloadDate">
+      {{ overdraft.maturityTDate | date: 'dd.MM.yyyy' }}
+    </app-loan-item-cell>
+  </div>
+
+  <b1-page-separator
+    class="overdraft-item__cell overdraft-item__cell_separator"
+    mobileClass="hidden"
+    size="small"></b1-page-separator>
+
+  <div class="overdraft-item__cell overdraft-item__cell_body">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.balanceBody">
+      - {{ overdraft.usedLimit / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ overdraft.overUsedLimit / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_percents">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.accruedInterest">
+      - {{ (overdraft.accruedInterest + overdraft.overCommission) / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ overdraft.overAccruedInterest / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="overdraft-item__cell overdraft-item__cell_commission">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.comissionAndSurcharge">
+      - {{ overdraft.commission / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ overdraft.overCommission / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+</div>

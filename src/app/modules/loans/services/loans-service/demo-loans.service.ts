@@ -1,0 +1,261 @@
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
+import { BaseLoansService } from './base-loans.service';
+import { Loan } from '../../models/loan.model';
+import { LoanSchedule } from '../../models/loan-schedule.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DemoLoansService extends BaseLoansService {
+  private loans1: Loan[] = [
+    {
+      id: 1321401.0,
+      customerId: 100200.0,
+      bankId: '302076',
+      loanType: 'Кредит від Міжгалактичного Банківського клану',
+      contractDate: new Date('2012-08-03T00:00:00'),
+      contractNumber: '1010',
+      dateEnd: new Date('2013-08-02T00:00:00'),
+      percents: 17.5,
+      payPeriod: 'В кінці строку',
+      currencyCode: 'UAH',
+      amount: 570000.0,
+      rest: 0.0,
+      commission: 0.0,
+      overdueCommission: null,
+      repaymentAccount: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        taxCode: '3456789012',
+        name: 'Для розрахунків в межах Галактичної Імперії',
+        accNumber: 'UA683020760000000260012340011',
+        accCurrencyCode: 'UAH',
+      },
+      repaymentDefaultPurpose: 'Погашення кредиту згідно договору 1010 від 03.08.2028',
+      percentAmount: 12054889.0,
+      percentPayTerm: new Date('2017-05-24T00:00:00'),
+      outstandingDebet: 46647597.0,
+      outstandingPercent: 0.0,
+      percentByOutstandingDebet: 50.5,
+      status: 2.0,
+      statusName: 'Проcрочен',
+      dateBegin: new Date('2012-08-03T00:00:00'),
+      minRepay: 58702486.0,
+      percentPay: null,
+      outFine: 0.0,
+      totalSum: 58702486.0,
+      payTerm: null,
+      amountEarlyPay: 58702486.0,
+      lastPayDate: new Date('2013-04-30T00:00:00'),
+      lastPayAmount: 5000000.0,
+    },
+  ];
+  private loans2: Loan[] = [
+    {
+      id: 1321401.0,
+      customerId: 100100.0,
+      bankId: '302076',
+      loanType: 'кредит на будування Зірки Смерті',
+      contractDate: new Date('2012-08-03T00:00:00'),
+      contractNumber: '665',
+      dateEnd: new Date('2013-08-02T00:00:00'),
+      percents: 17.5,
+      payPeriod: 'В кінці строку',
+      currencyCode: 'UAH',
+      amount: 570000.0,
+      rest: 0.0,
+      commission: 0.0,
+      overdueCommission: null,
+      repaymentAccount: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        taxCode: '4567890123',
+        name: 'Основний рахунок (980)',
+        accNumber: 'UA393020760000000003456789012',
+        accCurrencyCode: 'UAH',
+      },
+      repaymentDefaultPurpose: 'Погашення кредиту згідно договору 665 від 03.08.2012',
+      percentAmount: 12054889.0,
+      percentPayTerm: new Date('2017-05-24T00:00:00'),
+      outstandingDebet: 46647597.0,
+      outstandingPercent: 0.0,
+      percentByOutstandingDebet: 50.5,
+      status: 2.0,
+      statusName: 'Проcрочен',
+      dateBegin: new Date('2012-08-03T00:00:00'),
+      minRepay: 58702486.0,
+      percentPay: null,
+      outFine: 0.0,
+      totalSum: 58702486.0,
+      payTerm: null,
+      amountEarlyPay: 58702486.0,
+      lastPayDate: new Date('2013-04-30T00:00:00'),
+      lastPayAmount: 5000000.0,
+    },
+    {
+      id: 1321402.0,
+      customerId: 100100.0,
+      bankId: '302176',
+      loanType: 'кредит на армію Зірки Смерті',
+      contractDate: new Date('2020-08-12T00:00:00'),
+      contractNumber: '667',
+      dateEnd: new Date('2020-08-02T00:00:00'),
+      percents: 17.5,
+      payPeriod: 'В кінці строку',
+      currencyCode: 'UAH',
+      amount: 1500000.0,
+      rest: 0.0,
+      commission: 0.0,
+      overdueCommission: null,
+      repaymentAccount: {
+        bankCode: '302076',
+        bankName: 'Банк Галактичної Імперії',
+        taxCode: '4567890123',
+        name: 'Основний рахунок (980)',
+        accNumber: 'UA393020760000000003456789012',
+        accCurrencyCode: 'UAH',
+      },
+      repaymentDefaultPurpose: 'Погашення кредиту згідно договору 667 від 03.08.2012',
+      percentAmount: 1554889.0,
+      percentPayTerm: new Date('2020-05-24T00:00:00'),
+      outstandingDebet: 45947597.0,
+      outstandingPercent: 0.0,
+      percentByOutstandingDebet: 45.5,
+      status: 2.0,
+      statusName: 'Відкритий',
+      dateBegin: new Date('2020-005-05T00:00:00'),
+      minRepay: 59502486.0,
+      percentPay: null,
+      outFine: 0.0,
+      totalSum: 5582486.0,
+      payTerm: null,
+      amountEarlyPay: 5982486.0,
+      lastPayDate: new Date('2020-12-12T00:00:00'),
+      lastPayAmount: 5000000.0,
+    },
+  ];
+  private loans: { [id: string]: Loan[] } = {
+    '565bbaee-37a6-48ff-b3e8-f4822c23c5c1': this.loans1,
+    '565bbaee-37a6-48ff-b3e8-f4822c23c5c2': this.loans2,
+  };
+  private loanSchedules: { [key: string]: { [key: string]: { [key: string]: LoanSchedule[] } } } = {
+    '565bbaee-37a6-48ff-b3e8-f4822c23c5c1': {
+      '302076': {
+        '1321401': [],
+      },
+      '302176': {
+        '1321402': [],
+      },
+    },
+    '565bbaee-37a6-48ff-b3e8-f4822c23c5c2': {
+      '302076': {
+        '1321401': [
+          {
+            isActual: false,
+            date: new Date('2014-01-29T00:00:00'),
+            payment: 0.0,
+            paymentBody: 0.0,
+            paymentPercent: 0.0,
+            rest: 37900000.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-01-30T00:00:00'),
+            payment: 11054.0,
+            paymentBody: 151.0,
+            paymentPercent: 10903.0,
+            rest: 37899849.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-02-28T00:00:00'),
+            payment: 378400.0,
+            paymentBody: 62222.0,
+            paymentPercent: 316178.0,
+            rest: 37837627.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-03-13T00:00:00'),
+            payment: 305089.0,
+            paymentBody: 163587.0,
+            paymentPercent: 141502.0,
+            rest: 37674040.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-03-28T00:00:00'),
+            payment: 378400.0,
+            paymentBody: 215834.0,
+            paymentPercent: 162566.0,
+            rest: 37458206.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-04-28T00:00:00'),
+            payment: 378400.0,
+            paymentBody: 44355.0,
+            paymentPercent: 334045.0,
+            rest: 37413851.0,
+            commission: 0.0,
+          },
+        ],
+      },
+      '302176': {
+        '1321402': [
+          {
+            isActual: false,
+            date: new Date('2014-01-29T00:00:00'),
+            payment: 0.0,
+            paymentBody: 0.0,
+            paymentPercent: 0.0,
+            rest: 37900000.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-01-30T00:00:00'),
+            payment: 11054.0,
+            paymentBody: 151.0,
+            paymentPercent: 10903.0,
+            rest: 37899849.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-02-28T00:00:00'),
+            payment: 378400.0,
+            paymentBody: 62222.0,
+            paymentPercent: 316178.0,
+            rest: 37837627.0,
+            commission: 0.0,
+          },
+          {
+            isActual: false,
+            date: new Date('2014-03-13T00:00:00'),
+            payment: 305089.0,
+            paymentBody: 163587.0,
+            paymentPercent: 141502.0,
+            rest: 37674040.0,
+            commission: 0.0,
+          },
+        ],
+      },
+    },
+  };
+
+  getLoans(clientId: string): Observable<Loan[]> {
+    return of(this.loans[clientId]);
+  }
+
+  getLoanSchedules(clientId: string, bankId: string, loanId: number): Observable<LoanSchedule[]> {
+    return of(this.loanSchedules[clientId][bankId][loanId]);
+  }
+}

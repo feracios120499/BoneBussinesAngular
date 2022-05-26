@@ -1,0 +1,95 @@
+<div class="loan-item b1-page-data__row">
+  <div class="loan-item__cell loan-item__cell_title">
+    <div class="b1-title3 b1-ellipsis" *skeleton="true; sizes: { w: '80%' }">
+      {{ loan.loanType }}
+    </div>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_sum">
+    <div class="b1-title2" *skeleton="true; sizes: { w: '80%' }">
+      {{ loan.amount | money: loan.currencyCode }}
+    </div>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_rate">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '65%' }" label="components.loan.interestRate" [marked]="true">
+      {{ loan.percents | money }} %
+    </app-loan-item-cell>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_next">
+    <div *skeleton="true; sizes: { w: '65%' }">
+      <app-loan-item-cell label="components.loan.headers.nextPayment" [marked]="true"></app-loan-item-cell>&nbsp;
+      <app-loan-item-cell *ngIf="loan.payTerm" label="components.pay.date" [marked]="true">
+        {{ loan.payTerm | date: 'dd.MM.yyyy' }}&nbsp;
+      </app-loan-item-cell>
+      <app-loan-item-cell label="components.loan.onSum" [marked]="true">
+        {{ loan.minRepay / 100 | money }}
+      </app-loan-item-cell>
+    </div>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_start-date">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '50%' }" label="components.pay.createdDate">
+      {{ loan.contractDate | date: 'dd.MM.yyyy' }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_contract">
+    <app-loan-item-cell
+      *skeleton="true; sizes: { w: '50%' }"
+      mobileClass="hidden"
+      label="components.loan.contractNumber">
+      {{ loan.contractNumber }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_end-date">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '50%' }" label="components.loan.repaymentDate">
+      {{ loan.dateEnd | date: 'dd.MM.yyyy' }}
+    </app-loan-item-cell>
+  </div>
+
+  <b1-page-separator
+    class="loan-item__cell loan-item__cell_separator"
+    mobileClass="hidden"
+    size="small"></b1-page-separator>
+
+  <div class="loan-item__cell loan-item__cell_body">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.balanceBody">
+      - {{ (loan.rest + loan.outstandingDebet) / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ loan.outstandingDebet / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_percents">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.accruedInterest">
+      - {{ (loan.percentAmount + loan.outstandingPercent) / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ loan.outstandingPercent / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <div class="loan-item__cell loan-item__cell_commission">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.headers.comissionAndSurcharge">
+      - {{ (loan.commission + +loan.overdueCommission! + loan.outFine) / 100 | money }}
+    </app-loan-item-cell>
+
+    <app-loan-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.overdue">
+      - {{ +loan.overdueCommission! / 100 | money }}
+    </app-loan-item-cell>
+  </div>
+
+  <b1-dropdown class="loan-item__more" label="loan's actions" menuWidth="240px" scopeSelector=".loans-list">
+    <b1-more-button slot="toggle" *skeleton="true; sizes: { w: '8px', h: '40px' }"></b1-more-button>
+    <b1-dropdown-link icon="country" label="components.loan.makePayment" (btnClick)="onLoanMakePayment()">
+    </b1-dropdown-link>
+    <b1-dropdown-link icon="list" label="components.loan.loanSchedule" (btnClick)="onLoanGoToSchedule()">
+    </b1-dropdown-link>
+  </b1-dropdown>
+</div>

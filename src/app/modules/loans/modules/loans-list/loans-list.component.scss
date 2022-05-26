@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+::ng-deep {
+  ng-scrollbar.virtual-scroll {
+    --scrollbar-size: 8px;
+    --scrollbar-thumb-color: rgba(var(--color-dark-rgb), 0.5) !important;
+    --scrollbar-thumb-hover-color: rgba(var(--color-dark-rgb), 0.8) !important;
+    --scrollbar-hover-size: 12px;
+    --scrollbar-track-color: rgba(var(--color-dark-rgb), 0.1);
+    --scrollbar-border-radius: 10px;
+  }
+}
+
+.loans-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

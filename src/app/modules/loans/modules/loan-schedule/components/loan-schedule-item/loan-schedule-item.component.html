@@ -1,0 +1,52 @@
+<div class="loan-schedule-item b1-page-data__row" [class.actual]="loanSchedule?.isActual">
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_icon-wrapper">
+    <div *skeleton="true; sizes: { br: '50%' }" class="loan-schedule-item__icon b1-cards__icon">
+      <i class="b1-cards__type-icon" b1-icon icon="file-details"></i>
+    </div>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_date">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '40%' }" label="components.analytics.graphTooltips.date">
+      {{ loanSchedule.date | date: 'dd.MM.yyyy' }}
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_percent">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '40%' }" label="components.loan.schedule.percent">
+      {{ loanSchedule.paymentPercent / 100 | money: currencyCode }}
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_body">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '40%' }" label="components.loan.schedule.body">
+      {{ loanSchedule.paymentBody / 100 | money: currencyCode }}
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_commission">
+    <app-loan-schedule-item-cell
+      *skeleton="true; sizes: { w: '40%' }"
+      label="components.loan.schedule.commission"
+      [negative]="loanSchedule.commission > 0">
+      {{ loanSchedule.commission / 100 | money: currencyCode }}
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_sum">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.salary.sumCaps">
+      <span class="b1-color-primary">&nbsp;{{ loanSchedule.payment / 100 | money: currencyCode }}</span>
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '80%' }"></ng-container>
+  </div>
+
+  <div class="loan-schedule-item__cell loan-schedule-item__cell_rest">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.schedule.rest">
+      &nbsp;{{ loanSchedule.rest / 100 | money: currencyCode }}
+    </app-loan-schedule-item-cell>
+    <ng-container *skeleton="true; sizes: { w: '80%' }"></ng-container>
+  </div>
+</div>

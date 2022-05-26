@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AcctActions } from '@modules/accounts/store/actions';
 import { AuthActions } from '@modules/auth/store/actions';
 import { CardsActions } from '@modules/cards/store/actions';
+import { LoansActions } from '@modules/loans/store/actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserActions } from '@store/user/actions';
 import { map, tap } from 'rxjs/operators';
@@ -53,6 +54,17 @@ export class RouteEffects {
       map((payload) =>
         RouteActions.routeTo({
           route: `cards/${payload.cardId}/${payload.accountId}`,
+        })
+      )
+    )
+  );
+
+  loanSchedule$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LoansActions.goToSchedule),
+      map((payload) =>
+        RouteActions.routeTo({
+          route: `loan/loanSchedule/${payload.bankId}/${payload.loanId}`,
         })
       )
     )

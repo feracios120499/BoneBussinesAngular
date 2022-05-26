@@ -1,0 +1,22 @@
+<ng-container *ngrxLet="isLoading$ as isLoading">
+  <ng-container *ngrxLet="loanSchedules$ as loanSchedules">
+    <ng-container *ngIf="!isLoading">
+      <ng-container *ngrxLet="loan$ as loan">
+        <ng-scrollbar class="virtual-scroll b1-page-data" [disabled]="isMobile$ | ngrxPush">
+          <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+            <app-loan-schedule-item
+              *cdkVirtualFor="let loanSchedule of loanSchedules"
+              [loanSchedule]="loanSchedule"
+              [currencyCode]="loan.currencyCode">
+            </app-loan-schedule-item>
+          </cdk-virtual-scroll-viewport>
+        </ng-scrollbar>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isLoading">
+      <app-loan-schedule-item *ngFor="let num of 6 | numberToArray" [skeletonMode]="isLoading">
+      </app-loan-schedule-item>
+    </ng-container>
+  </ng-container>
+</ng-container>

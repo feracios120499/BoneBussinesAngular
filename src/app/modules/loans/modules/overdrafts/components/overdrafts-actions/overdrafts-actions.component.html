@@ -1,0 +1,10 @@
+<div class="b1-page-actions">
+  <div class="b1-page-actions__right">
+    <b1-input
+      icon="search"
+      [placeholder]="'shared.search' | translate"
+      [resizable]="true"
+      [ngModel]="filterTerm$ | ngrxPush"
+      (ngModelChange)="onOverdraftsFilter($event)"></b1-input>
+  </div>
+</div>

@@ -55,9 +55,17 @@ const routes: Routes = [
         path: 'products',
         loadChildren: () => import('./modules/products/products.module').then((m) => m.ProductsModule),
       },
+      {
+        path: 'loan',
+        loadChildren: () => import('./modules/loans/loans.module').then((m) => m.LoansModule),
+      },
     ],
   },
-  { path: 'payments-list', loadChildren: () => import('./modules/payments/modules/payments-list/payments-list.module').then(m => m.PaymentsListModule) },
+  {
+    path: 'payments-list',
+    loadChildren: () =>
+      import('./modules/payments/modules/payments-list/payments-list.module').then((m) => m.PaymentsListModule),
+  },
 ];
 
 @NgModule({
