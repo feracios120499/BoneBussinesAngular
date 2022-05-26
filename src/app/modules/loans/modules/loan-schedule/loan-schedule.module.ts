@@ -18,6 +18,7 @@ import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-content-wrapper.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { SkeletonModule } from '@directives/skeleton/skeleton.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
 import { LoanScheduleComponent } from './loan-schedule.component';
@@ -52,6 +53,7 @@ import { LoanScheduleActionsComponent } from './components/loan-schedule-actions
     B1IconModule,
     SharedModule,
     NgScrollbarModule,
+    SkeletonModule,
     NumberToArrayModule,
     RouterModule.forChild([
       {

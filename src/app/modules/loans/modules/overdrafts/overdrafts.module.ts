@@ -11,6 +11,11 @@ import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { SharedModule } from '@shared';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { LoanItemCellModule } from '../../components/loan-item-cell/loan-item-cell.module';
+import { MoneyModule } from '@pipes/money/money.module';
+import { B1PageSeparatorModule } from '@ui/b1-page-separator/b1-page-separator.module';
+import { SkeletonModule } from '@directives/skeleton/skeleton.module';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 
 import { OverdraftsComponent } from './overdrafts.component';
 import { OverdraftsListComponent } from './components/overdrafts-list/overdrafts-list.component';
@@ -38,6 +43,11 @@ import { OverdraftsFilterPipe } from './pipes/overdrafts-filter.pipe';
     SharedModule,
     NgScrollbarModule,
     B1EmptyModule,
+    LoanItemCellModule,
+    MoneyModule,
+    B1PageSeparatorModule,
+    NumberToArrayModule,
+    SkeletonModule,
     EffectsModule.forFeature([OverdraftsEffects]),
     RouterModule.forChild([
       {

@@ -23,7 +23,7 @@ $screen-tablet: 812px;
   &__more {
     position: absolute;
     top: 30px;
-    right: 16px;
+    right: 12px;
     @media (max-width: $screen-tablet) {
       top: 50%;
       transform: translateY(-50%);
@@ -32,7 +32,6 @@ $screen-tablet: 812px;
   }
   &__cell {
     grid-column: span 2;
-    display: grid;
     &_title,
     &_sum,
     &_rate,
@@ -47,7 +46,6 @@ $screen-tablet: 812px;
     &_next,
     &_end-date,
     &_commission {
-      justify-content: end;
       text-align: right;
     }
     &_next {
@@ -57,8 +55,16 @@ $screen-tablet: 812px;
         justify-content: flex-end;
       }
     }
+    &_body,
+    &_percents,
+    &_commission {
+      display: flex;
+      flex-direction: column;
+    }
+    &_commission {
+      align-items: flex-end;
+    }
     @media (max-width: $screen-tablet-medium) {
-      grid-column: span 1;
       &_start-date,
       &_contract,
       &_separator,
@@ -70,7 +76,6 @@ $screen-tablet: 812px;
       &_sum,
       &_next,
       &_end-date {
-        justify-content: start;
         text-align: left;
       }
       &_next {

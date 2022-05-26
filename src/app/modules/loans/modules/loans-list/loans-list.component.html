@@ -23,7 +23,7 @@
 
     <ng-container *ngIf="isInitialLoading">
       <div class="loans-list">
-        <!-- <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton> -->
+        <app-loan-item *ngFor="let num of 6 | numberToArray" [skeletonMode]="isInitialLoading"></app-loan-item>
       </div>
     </ng-container>
 

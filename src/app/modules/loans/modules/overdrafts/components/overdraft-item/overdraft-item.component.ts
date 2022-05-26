@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { BaseSkeletonComponent } from '@directives/skeleton/base-skeleton.component';
 
-import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
 import { Overdraft } from '@modules/loans/models/overdraft.model';
 
 @Component({
@@ -8,11 +8,8 @@ import { Overdraft } from '@modules/loans/models/overdraft.model';
   templateUrl: './overdraft-item.component.html',
   styleUrls: ['./overdraft-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  inputs: ['skeletonMode'],
 })
-export class OverdraftItemComponent extends withRequiredPropsCheck() implements OnInit {
+export class OverdraftItemComponent extends BaseSkeletonComponent {
   @Input() overdraft!: Overdraft;
-
-  ngOnInit(): void {
-    this.checkRequiredProps(['overdraft']);
-  }
 }

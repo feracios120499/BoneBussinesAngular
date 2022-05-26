@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, HostListener } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
+import { BaseSkeletonComponent } from '@directives/skeleton/base-skeleton.component';
 import { Loan } from '@modules/loans/models/loan.model';
 import { LoansActions } from '@modules/loans/store/actions';
 
@@ -10,16 +10,13 @@ import { LoansActions } from '@modules/loans/store/actions';
   templateUrl: './loan-item.component.html',
   styleUrls: ['./loan-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  inputs: ['skeletonMode'],
 })
-export class LoanItemComponent extends withRequiredPropsCheck() implements OnInit {
+export class LoanItemComponent extends BaseSkeletonComponent {
   @Input() loan!: Loan;
 
   constructor(private store: Store) {
     super();
-  }
-
-  ngOnInit(): void {
-    this.checkRequiredProps(['loan']);
   }
 
   onLoanMakePayment(): void {

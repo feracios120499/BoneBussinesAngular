@@ -34,7 +34,7 @@ export interface Loan {
   percentPay: null;
   outFine: number;
   totalSum: number;
-  payTerm: null;
+  payTerm: Date | null;
   amountEarlyPay: number;
   lastPayDate: Date;
   lastPayAmount: number;

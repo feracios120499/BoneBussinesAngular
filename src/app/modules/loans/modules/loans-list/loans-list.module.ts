@@ -10,7 +10,6 @@ import { SharedModule } from '@shared';
 import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
-import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
 import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
@@ -19,6 +18,7 @@ import { WebClassModule } from '@directives/web-class/web-class.module';
 import { MobileClassModule } from '@directives/mobile-class/mobile-class.module';
 import { LoanItemCellModule } from '@modules/loans/components/loan-item-cell/loan-item-cell.module';
 import { B1PageSeparatorModule } from '@ui/b1-page-separator/b1-page-separator.module';
+import { SkeletonModule } from '@directives/skeleton/skeleton.module';
 
 import { LoansListComponent } from './loans-list.component';
 import { LoansActionsComponent } from './components/loans-actions/loans-actions.component';
@@ -38,7 +38,6 @@ import { LoansFilterPipe } from './pipes/loans-filter.pipe';
     SharedModule,
     NgScrollbarModule,
     B1EmptyModule,
-    B1SkeletonModule,
     B1DropdownModule,
     B1MoreButtonModule,
     NumberToArrayModule,
@@ -47,6 +46,7 @@ import { LoansFilterPipe } from './pipes/loans-filter.pipe';
     MobileClassModule,
     LoanItemCellModule,
     B1PageSeparatorModule,
+    SkeletonModule,
     RouterModule.forChild([
       {
         path: '',
