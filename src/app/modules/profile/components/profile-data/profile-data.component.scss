@@ -1,0 +1,9 @@
+.profile {
+  &-images {
+    display: flex;
+    justify-content: space-between;
+    &_avatar {
+      width: 96px;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<div class="b1-wrapper no-wrap-xs b1-full-screen">
+  <div class="b1-page-title">
+    <div class="b1-title2">
+      {{ 'header.navbar.Profile' | translate }}
+    </div>
+  </div>
+  <b1-page-separator mobileClass="hidden" size="small"></b1-page-separator>
+  <ul class="b1-page-tabs b1-base b1-bold payment-tabs">
+    <li
+      class="b1-page-tabs__item"
+      *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      [class.active]="tab === currentTab">
+      <a class="b1-page-tabs__link b1-medium b1-bold">
+        <i b1-icon [icon]="tab.icon" class="b1-mr-3"></i>
+        <span>{{ tab.label | translate }}</span>
+      </a>
+    </li>
+  </ul>
+  <div style="position: relative" class="full-screen">
+    <div class="b1-page-card b1-bg-light">
+      <app-profile-data *ngIf="currentTab.type == 'profile'"></app-profile-data>
+      <app-profile-security *ngIf="currentTab.type == 'security'"></app-profile-security>
+      <app-profile-devices *ngIf="currentTab.type == 'devices'"></app-profile-devices>
+    </div>
+  </div>
+</div>

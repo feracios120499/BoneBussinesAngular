@@ -1,11 +1,11 @@
-<div class="b1-link">
-    <div class="b1-link-icon">
-        <i b1-icon [icon]="icon"></i>
-    </div>
-    <div class="b1-link-body">
-        <span>{{title}}</span>
-    </div>
-    <div class="b1-link-arrow">
-        <i b1-icon icon="chevron-right"></i>
-    </div>
+<div class="b1-link" [routerLink]="url">
+  <div class="b1-link-icon">
+    <i b1-icon [icon]="icon"></i>
+  </div>
+  <div class="b1-link-body">
+    <span>{{ title }}</span>
+  </div>
+  <div class="b1-link-arrow">
+    <i b1-icon icon="chevron-right"></i>
+  </div>
 </div>

@@ -25,9 +25,11 @@ export namespace UserSelectors {
   // TODO fix this shit
   export const userPicture = createSelector(userStore, (state) =>
     state.profile?.userPictureUrl
-      ? `http://10.10.10.130/Bars.API.Web.Client/api/v1${state.profile?.userPictureUrl}`
+      ? `/Bars.API.Web.Client/api/v1${state.profile?.userPictureUrl}`
       : environment.defaultUserPictureUrl
   );
+
+  export const defaultPicture = createSelector(userStore, (state) => environment.defaultUserPictureUrl);
 
   export const currentClientIdSelector = createSelector(userStore, (state) => state.currentClientId);
 

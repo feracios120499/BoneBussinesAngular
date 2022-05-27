@@ -1,0 +1,10 @@
+<div class="b1-mt-5">
+  <div class="b1-form-container">
+    <div class="profile-images">
+      <div class="profile-images_avatar">
+        <img [src]="avatar$ | ngrxPush" (error)="onAvatarError($event)" />
+      </div>
+      <div class="profile-images_qr"></div>
+    </div>
+  </div>
+</div>
