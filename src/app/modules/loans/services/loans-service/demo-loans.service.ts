@@ -125,7 +125,7 @@ export class DemoLoansService extends BaseLoansService {
       percentByOutstandingDebet: 45.5,
       status: 2.0,
       statusName: 'Відкритий',
-      dateBegin: new Date('2020-005-05T00:00:00'),
+      dateBegin: new Date('2020-05-05T00:00:00'),
       minRepay: 59502486.0,
       percentPay: null,
       outFine: 0.0,

@@ -31,7 +31,7 @@ export interface Loan {
   statusName: string;
   dateBegin: Date;
   minRepay: number;
-  percentPay: null;
+  percentPay: number | null;
   outFine: number;
   totalSum: number;
   payTerm: Date | null;

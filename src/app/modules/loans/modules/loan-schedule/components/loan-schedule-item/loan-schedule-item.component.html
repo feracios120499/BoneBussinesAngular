@@ -37,16 +37,16 @@
   </div>
 
   <div class="loan-schedule-item__cell loan-schedule-item__cell_sum">
-    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.salary.sumCaps">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '30%' }" label="components.salary.sumCaps">
       <span class="b1-color-primary">&nbsp;{{ loanSchedule.payment / 100 | money: currencyCode }}</span>
     </app-loan-schedule-item-cell>
-    <ng-container *skeleton="true; sizes: { w: '80%' }"></ng-container>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
   </div>
 
   <div class="loan-schedule-item__cell loan-schedule-item__cell_rest">
-    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '60%' }" label="components.loan.schedule.rest">
+    <app-loan-schedule-item-cell *skeleton="true; sizes: { w: '30%' }" label="components.loan.schedule.rest">
       &nbsp;{{ loanSchedule.rest / 100 | money: currencyCode }}
     </app-loan-schedule-item-cell>
-    <ng-container *skeleton="true; sizes: { w: '80%' }"></ng-container>
+    <ng-container *skeleton="true; sizes: { w: '70%' }"></ng-container>
   </div>
 </div>
