@@ -84,10 +84,9 @@
           </div>
         </ng-container>
 
-        <!-- TODO: CHANGE SVG-NAME -->
         <b1-empty
           *ngIf="!correspondents.length && !isInitialLoading"
-          svgName="empty-users"
+          svgName="empty-correspondents"
           header="components.correspondents.doNotExist">
         </b1-empty>
       </div>
@@ -95,7 +94,6 @@
   </div>
 
   <ng-template #notFound>
-    <!-- TODO: CHANGE SVG-NAME -->
-    <b1-empty svgName="empty-users" header="components.correspondents.notFound"> </b1-empty>
+    <b1-empty svgName="empty-correspondents" header="components.correspondents.notFound"> </b1-empty>
   </ng-template>
 </div>
