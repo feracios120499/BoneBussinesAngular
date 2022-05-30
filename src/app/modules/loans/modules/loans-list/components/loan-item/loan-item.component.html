@@ -86,7 +86,7 @@
   </div>
 
   <b1-dropdown class="loan-item__more" label="loan's actions" menuWidth="240px" scopeSelector=".loans-list">
-    <b1-more-button slot="toggle" *skeleton="true; sizes: { w: '8px', h: '40px' }"></b1-more-button>
+    <b1-more-button slot="toggle" [skeletonMode]="skeletonMode"></b1-more-button>
     <b1-dropdown-link icon="country" label="components.loan.makePayment" (btnClick)="onLoanMakePayment()">
     </b1-dropdown-link>
     <b1-dropdown-link icon="list" label="components.loan.loanSchedule" (btnClick)="onLoanGoToSchedule()">

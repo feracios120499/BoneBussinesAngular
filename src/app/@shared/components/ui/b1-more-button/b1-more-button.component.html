@@ -1,7 +1,9 @@
-<a *ngIf="!bordered; else withBorder" class="b1-card__v-dots b1-more-button b1-more-button_not-bordered"></a>
+<ng-container *skeleton="true; sizes: { w: '8px', h: '40px' }"
+  ><a *ngIf="!bordered; else withBorder" class="b1-card__v-dots b1-more-button b1-more-button_not-bordered"></a>
 
-<ng-template #withBorder>
-  <a class="b1-page-more b1-more-button">
-    <i class="b1-page-more_icon" b1-icon icon="more"></i>
-  </a>
-</ng-template>
+  <ng-template #withBorder>
+    <a class="b1-page-more b1-more-button">
+      <i class="b1-page-more_icon" b1-icon icon="more"></i>
+    </a>
+  </ng-template>
+</ng-container>

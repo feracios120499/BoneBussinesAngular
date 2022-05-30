@@ -1,0 +1,102 @@
+<div class="deposit-item b1-page-data__row">
+  <div class="deposit-item__icon-wrapper">
+    <div class="deposit-item__icon" *skeleton="true; sizes: { br: '50%' }">
+      {{ deposit.rate }}%
+      <!-- <div class="hidden">true</div> -->
+      <!-- ngIf: data.isClosed -->
+      <div class="deposit-item__status deposit-item__status_closed">
+        <i
+          b1-icon
+          icon="not-allowed"
+          [ngbTooltip]="'components.dpt.statuses.ended' | translate"
+          tooltipClass="b1-base"></i>
+      </div>
+      <!-- tooltips: -->
+      <!-- <tooltip
+          tooltip-template="{{ 'components.dpt.statuses.ended' | translate }}"
+          class="tooltips _top _steady _ready"
+          ><tip-cont
+            ><i
+              class="ub-icons ub-icons-icon-prohibition ng-scope"
+              tooltip-template="закінчився термін дії"></i></tip-cont
+          ><tip class=""
+            ><tip-tip><span class="close-button" style="display: none">×</span>закінчився термін дії</tip-tip
+            ><tip-arrow></tip-arrow></tip
+        ></tooltip>
+      </div> -->
+      <!-- end ngIf: data.isClosed --><!-- ngIf: !data.isClosed && data.IsProlongation == 1 -->
+    </div>
+  </div>
+
+  <div class="deposit-item__name">
+    <div class="b1-title3" *skeleton="true; sizes: { w: '80%' }">{{ deposit.typeName }}</div>
+    <div class="b1-title3" *skeleton="true; sizes: { w: '60%' }">
+      {{ deposit.balance / 100 | money: deposit.currencyCode }}
+    </div>
+  </div>
+
+  <div class="deposit-item__cell-group">
+    <b1-cell
+      class="deposit-item__cell deposit-item__cell_accrual"
+      label="components.dpt.interestAccrual"
+      [skeletonMode]="skeletonMode">
+      <ng-container *skeleton="true; sizes: { w: '90%' }">
+        {{ deposit.interestAccrual! / 100 | money: deposit.currencyCode }}
+      </ng-container>
+    </b1-cell>
+
+    <b1-cell class="deposit-item__cell" label="components.dpt.contractDate" [skeletonMode]="skeletonMode">
+      <ng-container *skeleton="true; sizes: { w: '50%' }">
+        {{ deposit.beginDate | date: 'dd.MM.yyyy' }}
+      </ng-container>
+    </b1-cell>
+
+    <b1-cell
+      class="deposit-item__cell deposit-item__cell_paid"
+      label="components.dpt.history.interestPaid"
+      [skeletonMode]="skeletonMode">
+      <ng-container *skeleton="true; sizes: { w: '90%' }">
+        {{ deposit.interestPaid! / 100 | money: deposit.currencyCode }}
+      </ng-container>
+    </b1-cell>
+
+    <b1-cell class="deposit-item__cell" label="components.dpt.contractEndDate" [skeletonMode]="skeletonMode">
+      <ng-container *skeleton="true; sizes: { w: '50%' }">
+        {{ deposit.endDate | date: 'dd.MM.yyyy' }}
+      </ng-container>
+    </b1-cell>
+  </div>
+
+  <b1-dropdown
+    *ngIf="deposit?.isReplenished"
+    class="deposit-item__more"
+    label="deposit's actions"
+    menuWidth="200px"
+    scopeSelector="app-deposits-list">
+    <b1-more-button slot="toggle" [skeletonMode]="skeletonMode"></b1-more-button>
+    <b1-dropdown-link icon="country" label="components.dpt.makePayment" (btnClick)="onDepositMakePayment()">
+    </b1-dropdown-link>
+  </b1-dropdown>
+</div>
+
+<!-- --------------------------------- -->
+<!-- <div class="deposit-item__icon" *skeleton>
+  {{ deposit.rate }}% -->
+<!-- <div class="hidden">true</div> -->
+<!-- ngIf: data.isClosed -->
+<!-- <div class="b1-deposit-status b1-deposit-status-closed ng-scope" ng-if="data.isClosed"> -->
+<!-- tooltips: -->
+<!-- <tooltip
+      tooltip-template="{{ 'components.dpt.statuses.ended' | translate }}"
+      class="tooltips _top _steady _ready"
+      ><tip-cont
+        ><i
+          class="ub-icons ub-icons-icon-prohibition ng-scope"
+          tooltip-template="закінчився термін дії"></i></tip-cont
+      ><tip class=""
+        ><tip-tip><span class="close-button" style="display: none">×</span>закінчився термін дії</tip-tip
+        ><tip-arrow></tip-arrow></tip
+    ></tooltip>
+  </div> -->
+<!-- end ngIf: data.isClosed --><!-- ngIf: !data.isClosed && data.IsProlongation == 1 -->
+<!-- </div> -->

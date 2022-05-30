@@ -40,11 +40,11 @@ $screen-tablet: 812px;
     &_body,
     &_percents,
     &_commission {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-row-gap: 4px;
     }
     &_commission {
-      align-items: flex-end;
+      justify-items: right;
     }
     @media (max-width: $screen-tablet-medium) {
       &_start-date,

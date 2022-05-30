@@ -20,11 +20,11 @@ import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 import { SkeletonModule } from '@directives/skeleton/skeleton.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
+import { B1CellModule } from '@ui/b1-cell/b1-cell.module';
 
 import { LoanScheduleComponent } from './loan-schedule.component';
 import { LoanScheduleListComponent } from './components/loan-schedule-list/loan-schedule-list.component';
 import { LoanScheduleItemComponent } from './components/loan-schedule-item/loan-schedule-item.component';
-import { LoanScheduleItemCellComponent } from './components/loan-schedule-item-cell/loan-schedule-item-cell.component';
 import { LoanScheduleActionsComponent } from './components/loan-schedule-actions/loan-schedule-actions.component';
 
 @NgModule({
@@ -33,7 +33,6 @@ import { LoanScheduleActionsComponent } from './components/loan-schedule-actions
     LoanDetailsComponent,
     LoanScheduleListComponent,
     LoanScheduleItemComponent,
-    LoanScheduleItemCellComponent,
     LoanScheduleActionsComponent,
   ],
   imports: [
@@ -55,6 +54,7 @@ import { LoanScheduleActionsComponent } from './components/loan-schedule-actions
     NgScrollbarModule,
     SkeletonModule,
     NumberToArrayModule,
+    B1CellModule,
     RouterModule.forChild([
       {
         path: '',

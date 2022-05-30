@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, HostBinding, Input } from '@angular/core';
 
-import { BaseInfoCellComponent } from 'src/app/@shared/components/base-info-cell.component';
+import { withLabel } from '@mixins/with-label.mixin';
 
 @Component({
   selector: 'app-loan-item-cell',
@@ -8,7 +8,7 @@ import { BaseInfoCellComponent } from 'src/app/@shared/components/base-info-cell
   styleUrls: ['./loan-item-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoanItemCellComponent extends BaseInfoCellComponent {
+export class LoanItemCellComponent extends withLabel() {
   @Input() marked = false;
 
   @HostBinding('class')

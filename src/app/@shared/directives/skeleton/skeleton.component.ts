@@ -21,7 +21,7 @@ const SIZES: Required<SkeletonSizes> = {
         position: relative;
         display: inline-block;
         min-height: 1.35em !important;
-        padding: 2px;
+        /* padding: 2px; */
         box-sizing: border-box;
         background: var(--color-light-300) !important;
         background-clip: content-box !important;

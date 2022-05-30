@@ -1,0 +1,8 @@
+<div class="b1-cell__label b1-base b1-color-dark-300">
+  <ng-container *skeleton="true; sizes: { w: '60%' }">
+    {{ label | translate | lowercase }}
+  </ng-container>
+</div>
+<div class="b1-cell__value b1-base b1-bold" [class.color-red]="negative">
+  <ng-content></ng-content>
+</div>

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { BaseInfoCellComponent } from '../../../base-info-cell.component';
+import { withLabel } from '@mixins/with-label.mixin';
 
 @Component({
   selector: 'b1-details-cell',
@@ -8,4 +8,4 @@ import { BaseInfoCellComponent } from '../../../base-info-cell.component';
   styleUrls: ['./b1-details-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class B1DetailsCellComponent extends BaseInfoCellComponent {}
+export class B1DetailsCellComponent extends withLabel() {}

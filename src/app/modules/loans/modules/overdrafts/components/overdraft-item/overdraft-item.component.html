@@ -1,12 +1,12 @@
 <div class="overdraft-item b1-page-data__row">
   <div class="overdraft-item__cell overdraft-item__cell_title">
-    <div class="b1-title3 b1-ellipsis" *skeleton="true; sizes: { w: '80%' }">
+    <div class="b1-title3 b1-ellipsis" *skeleton="true; sizes: { w: '40%' }">
       {{ 'components.loan.overdraft' | translate }}
     </div>
   </div>
 
   <div class="overdraft-item__cell overdraft-item__cell_active-limit">
-    <app-loan-item-cell *skeleton="true; sizes: { w: '80%' }" label="components.loan.withLimit" [marked]="true">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '70%' }" label="components.loan.withLimit" [marked]="true">
       <span class="b1-title3">
         {{ overdraft.activeLimit / 100 | money: overdraft.currencyCode }}
       </span>
@@ -14,14 +14,14 @@
   </div>
 
   <div class="overdraft-item__cell overdraft-item__cell_rate">
-    <app-loan-item-cell *skeleton="true; sizes: { w: '65%' }" label="components.loan.interestRate" [marked]="true">
+    <app-loan-item-cell *skeleton="true; sizes: { w: '50%' }" label="components.loan.interestRate" [marked]="true">
       {{ overdraft.rate | money }} %
     </app-loan-item-cell>
   </div>
 
   <div class="overdraft-item__cell overdraft-item__cell_unused-limit">
     <app-loan-item-cell
-      *skeleton="true; sizes: { w: '65%' }"
+      *skeleton="true; sizes: { w: '55%' }"
       label="components.loan.headers.unUsedLimit"
       [marked]="true">
       {{ overdraft.unusedLimit / 100 | money }}

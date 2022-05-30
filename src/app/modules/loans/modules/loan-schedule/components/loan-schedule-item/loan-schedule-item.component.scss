@@ -42,7 +42,7 @@ $screen-tablet: 812px;
         grid-row: span 1;
         display: flex;
         justify-content: flex-end;
-        app-loan-schedule-item-cell {
+        b1-cell {
           display: flex;
         }
       }
@@ -53,7 +53,7 @@ $screen-tablet: 812px;
           flex-direction: column;
           align-items: flex-end;
           text-align: right;
-          app-loan-schedule-item-cell {
+          b1-cell {
             display: block;
           }
         }
