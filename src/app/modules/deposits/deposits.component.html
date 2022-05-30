@@ -1,0 +1,13 @@
+<div class="b1-wrapper no-wrap-xs b1-full-screen">
+  <app-deposits-header></app-deposits-header>
+
+  <div style="position: relative" class="full-screen">
+    <div class="b1-page-card b1-bg-light">
+      <app-deposits-actions></app-deposits-actions>
+
+      <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+
+      <app-deposits-list></app-deposits-list>
+    </div>
+  </div>
+</div>

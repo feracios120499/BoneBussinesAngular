@@ -1,0 +1,10 @@
+$screen-tablet: 812px;
+
+:host {
+  display: block;
+  margin-bottom: 30px;
+
+  @media (max-width: $screen-tablet) {
+    margin-bottom: 0;
+  }
+}

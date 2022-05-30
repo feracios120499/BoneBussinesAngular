@@ -1,0 +1,32 @@
+<ng-container *ngrxLet="isInitialLoading$ as isInitialLoading">
+  <ng-container *ngrxLet="deposits$ as deposits">
+    <ng-container *ngIf="!isInitialLoading && deposits.length">
+      <ng-container *ngIf="deposits | depositsFilter: (filterTerm$ | ngrxPush) as filteredDeposits">
+        <ng-container *ngIf="filteredDeposits.length; else notFound">
+          <ng-scrollbar
+            *ngIf="filteredDeposits.length; else notFound"
+            class="virtual-scroll b1-page-data"
+            [disabled]="isMobile$ | ngrxPush">
+            <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+              <app-deposit-item *cdkVirtualFor="let deposit of filteredDeposits" [deposit]="deposit"></app-deposit-item>
+            </cdk-virtual-scroll-viewport>
+          </ng-scrollbar>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isInitialLoading">
+      <app-deposit-item *ngFor="let num of 6 | numberToArray" [skeletonMode]="isInitialLoading"></app-deposit-item>
+    </ng-container>
+
+    <b1-empty
+      *ngIf="!deposits.length && !isInitialLoading"
+      svgName="empty-deposits"
+      header="components.deposits.doNotExist">
+    </b1-empty>
+  </ng-container>
+</ng-container>
+
+<ng-template #notFound>
+  <b1-empty svgName="empty-deposits" header="components.dpt.notFound"></b1-empty>
+</ng-template>

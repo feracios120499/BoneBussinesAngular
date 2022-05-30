@@ -1,0 +1,100 @@
+@import 'variables';
+
+$screen-desctop: 1365px;
+$screen-tablet-medium: 1199px;
+$screen-tablet: 812px;
+
+:host {
+  display: block;
+}
+
+.deposit-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 6fr minmax(356px, 4fr) 1fr;
+  grid-gap: 16px;
+  padding: 60px 32px;
+  height: auto;
+  @media (max-width: $screen-desctop) {
+    grid-template-columns: 1fr 6fr 1fr;
+    padding: 32px;
+  }
+  @media (max-width: $screen-tablet-medium) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: $screen-tablet) {
+    grid-gap: 8px;
+    margin: 0;
+    padding: 16px 16px 8px 16px;
+    border-radius: 0;
+  }
+  &__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: $color-primary;
+    color: $color-light;
+    &-wrapper {
+      justify-self: center;
+      width: 64px;
+      height: 64px;
+      @media (max-width: $screen-desctop) {
+        grid-row: span 2;
+      }
+      @media (max-width: $screen-tablet-medium) {
+        justify-self: left;
+        grid-row: span 1;
+      }
+      @media (max-width: $screen-tablet) {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  }
+  &__status {
+    position: absolute;
+    right: -3px;
+    bottom: -10px;
+  }
+  &__name {
+    @media (max-width: $screen-tablet-medium) {
+      order: 2;
+      grid-column: span 2;
+    }
+  }
+  &__cell-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+    text-align: right;
+    @media (max-width: $screen-desctop) {
+      order: 2;
+      grid-column: span 2;
+    }
+    @media (max-width: $screen-tablet) {
+      grid-row-gap: 0;
+      grid-column-gap: 8px;
+    }
+  }
+  &__cell {
+    &_accrual,
+    &_paid {
+      @media (max-width: $screen-desctop) {
+        justify-items: left;
+        text-align: left;
+      }
+    }
+  }
+  &__more {
+    justify-self: center;
+    margin-left: 30px;
+    @media (max-width: $screen-desctop) {
+      order: 1;
+      justify-self: right;
+    }
+  }
+}

@@ -60,7 +60,7 @@ export class MenuService extends BaseService {
       ngValue: 'deposits',
       icon: 'piggy-bank',
       dataRole: 'Director,Accountant,DepositsViewer',
-      route: 'app.dpt.index',
+      route: 'deposits',
       // gaTrackEvent: '[\'left-menu\', \'view-dpt\']',
       dataTranslate: 'aside.nav.DEPOSITS',
       moduleName: 'Deposits',

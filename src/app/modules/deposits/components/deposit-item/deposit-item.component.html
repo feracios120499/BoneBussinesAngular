@@ -2,29 +2,12 @@
   <div class="deposit-item__icon-wrapper">
     <div class="deposit-item__icon" *skeleton="true; sizes: { br: '50%' }">
       {{ deposit.rate }}%
-      <!-- <div class="hidden">true</div> -->
-      <!-- ngIf: data.isClosed -->
-      <div class="deposit-item__status deposit-item__status_closed">
-        <i
-          b1-icon
-          icon="not-allowed"
-          [ngbTooltip]="'components.dpt.statuses.ended' | translate"
-          tooltipClass="b1-base"></i>
-      </div>
-      <!-- tooltips: -->
-      <!-- <tooltip
-          tooltip-template="{{ 'components.dpt.statuses.ended' | translate }}"
-          class="tooltips _top _steady _ready"
-          ><tip-cont
-            ><i
-              class="ub-icons ub-icons-icon-prohibition ng-scope"
-              tooltip-template="закінчився термін дії"></i></tip-cont
-          ><tip class=""
-            ><tip-tip><span class="close-button" style="display: none">×</span>закінчився термін дії</tip-tip
-            ><tip-arrow></tip-arrow></tip
-        ></tooltip>
-      </div> -->
-      <!-- end ngIf: data.isClosed --><!-- ngIf: !data.isClosed && data.IsProlongation == 1 -->
+      <app-deposit-item-status *ngIf="isClosed" class="deposit-item__status" status="closed"></app-deposit-item-status>
+      <app-deposit-item-status
+        *ngIf="!isClosed && deposit.isProlongation"
+        class="deposit-item__status"
+        status="prolonged">
+      </app-deposit-item-status>
     </div>
   </div>
 
@@ -78,25 +61,3 @@
     </b1-dropdown-link>
   </b1-dropdown>
 </div>
-
-<!-- --------------------------------- -->
-<!-- <div class="deposit-item__icon" *skeleton>
-  {{ deposit.rate }}% -->
-<!-- <div class="hidden">true</div> -->
-<!-- ngIf: data.isClosed -->
-<!-- <div class="b1-deposit-status b1-deposit-status-closed ng-scope" ng-if="data.isClosed"> -->
-<!-- tooltips: -->
-<!-- <tooltip
-      tooltip-template="{{ 'components.dpt.statuses.ended' | translate }}"
-      class="tooltips _top _steady _ready"
-      ><tip-cont
-        ><i
-          class="ub-icons ub-icons-icon-prohibition ng-scope"
-          tooltip-template="закінчився термін дії"></i></tip-cont
-      ><tip class=""
-        ><tip-tip><span class="close-button" style="display: none">×</span>закінчився термін дії</tip-tip
-        ><tip-arrow></tip-arrow></tip
-    ></tooltip>
-  </div> -->
-<!-- end ngIf: data.isClosed --><!-- ngIf: !data.isClosed && data.IsProlongation == 1 -->
-<!-- </div> -->
