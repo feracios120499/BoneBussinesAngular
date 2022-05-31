@@ -1195,6 +1195,7 @@
 	"components.profile.copied": "copied to the clipboard",
 	"components.profile.copyToclipboard": "copy to the clipboard",
 	"components.profile.currentPassword": "Current password",
+	"components.profile.devices": "My devices",
 	"components.profile.documentTypes.FC": "Foreign currency payments",
 	"components.profile.documentTypes.FCAPP": "Applications for currecny celling, buying, and conversion",
 	"components.profile.documentTypes.NC": "National currecy payments",

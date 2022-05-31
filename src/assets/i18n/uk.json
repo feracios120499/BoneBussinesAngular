@@ -1195,6 +1195,7 @@
 	"components.profile.copied": "скопійовано в буфер обміну",
 	"components.profile.copyToclipboard": "скопіювати в буфер обміну",
 	"components.profile.currentPassword": "Поточний пароль",
+	"components.profile.devices": "Мої пристрії",
 	"components.profile.documentTypes.FC": "Платежі в іноземній валюті",
 	"components.profile.documentTypes.FCAPP": "Заявки на купівлю, продаж та конвертацію валюти",
 	"components.profile.documentTypes.NC": "Платежі в національній валюті",

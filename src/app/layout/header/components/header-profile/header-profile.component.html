@@ -1,62 +1,65 @@
 <ng-container *ngrxLet="userPictureUrl$ as userPictureUrl">
-    <ng-container *ngrxLet="userName$ as userName">
-        <div class="invisible-xs h-100 w-100" ngbDropdown #profileDropdown="ngbDropdown">
-            <a class="main-navbar__list__item__link b1-base" id="profile"
-                (click)="$event.stopPropagation(); profileDropdown.open();">
-                <span>{{userName || ('components.main.owner' | translate)}}</span>
-                <b class="caret"></b>
-                <span class="avatar">
-                    <img [src]="userPictureUrl" (error)="handleError($event)">
-                </span>
-            </a>
-            <ul class="b1-dropdown b1-animate fade-in-up" ngbDropdownMenu aria-labelledby="languages"
-                style="width: 100%; max-width: 400px;">
-                <li class="b1-dropdown__item" *ngFor="let link of links">
-                    <!-- TODO change ui-sref to angular route -->
-                    <a class="b1-dropdown__link b1-base">
-                        <i b1-icon [icon]="link.icon" class="b1-mr-4"></i>
-                        <span>{{link.translate | translate}}</span>
-                    </a>
-                </li>
-                <hr class="b1-separator" />
-                <li class="b1-dropdown__item" (click)="logout()">
-                    <a class="b1-dropdown__link b1-dropdown__link_error b1-base">
-                        <i b1-icon icon="exit" class="b1-mr-4"></i>
-                        <span>{{'header.navbar.Logout' | translate}}</span>
-                    </a>
-                </li>
-            </ul>
+  <ng-container *ngrxLet="userName$ as userName">
+    <div class="invisible-xs h-100 w-100" ngbDropdown #profileDropdown="ngbDropdown">
+      <a
+        class="main-navbar__list__item__link b1-base"
+        id="profile"
+        (click)="$event.stopPropagation(); profileDropdown.open()">
+        <span>{{ userName || ('components.main.owner' | translate) }}</span>
+        <b class="caret"></b>
+        <span class="avatar">
+          <img [src]="userPictureUrl" (error)="handleError($event)" />
+        </span>
+      </a>
+      <ul
+        class="b1-dropdown b1-animate fade-in-up"
+        ngbDropdownMenu
+        aria-labelledby="languages"
+        style="width: 100%; max-width: 400px">
+        <li class="b1-dropdown__item" *ngFor="let link of links">
+          <!-- TODO change ui-sref to angular route -->
+          <a class="b1-dropdown__link b1-base" [routerLink]="link.url">
+            <i b1-icon [icon]="link.icon" class="b1-mr-4"></i>
+            <span>{{ link.translate | translate }}</span>
+          </a>
+        </li>
+        <hr class="b1-separator" />
+        <li class="b1-dropdown__item" (click)="logout()">
+          <a class="b1-dropdown__link b1-dropdown__link_error b1-base">
+            <i b1-icon icon="exit" class="b1-mr-4"></i>
+            <span>{{ 'header.navbar.Logout' | translate }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="visible-xs h-100 w-100">
+      <div class="info">
+        <div class="info-body">
+          <div class="info-avatar">
+            <img [src]="userPictureUrl" (error)="handleError($event)" />
+          </div>
+          <div class="info-name">
+            <span>{{ userName || ('components.main.owner' | translate) }}</span>
+          </div>
+          <div class="info-email">
+            <span>{{ userEmail$ | ngrxPush }}</span>
+          </div>
+          <div class="info-phone">
+            <span>{{ userPhone$ | ngrxPush }}</span>
+          </div>
         </div>
-        <div class="visible-xs h-100 w-100">
-            <div class="info">
-                <div class="info-body">
-                    <div class="info-avatar">
-                        <img [src]="userPictureUrl" (error)="handleError($event)">
-                    </div>
-                    <div class="info-name">
-                        <span>{{userName || ('components.main.owner' | translate)}}</span>
-                    </div>
-                    <div class="info-email">
-                        <span>{{userEmail$ | ngrxPush}}</span>
-                    </div>
-                    <div class="info-phone">
-                        <span>{{userPhone$ | ngrxPush}}</span>
-                    </div>
-                </div>
-                <div class="info-links">
-                    <b1-link *ngFor="let link of links" [icon]="link.icon" [title]="link.translate | translate">
-                    </b1-link>
-                    <!-- <b1-link icon="user" [title]="'header.navbar.Profile' | translate"></b1-link>
+        <div class="info-links">
+          <b1-link *ngFor="let link of links" [icon]="link.icon" [title]="link.translate | translate"> </b1-link>
+          <!-- <b1-link icon="user" [title]="'header.navbar.Profile' | translate"></b1-link>
                     <b1-link icon="settings" [title]="'header.navbar.Settings' | translate"></b1-link> -->
-                </div>
-                <div class="info-footer">
-                    <div class="info-logout" (click)="logout()">
-                        <i b1-icon icon="exit" class="b1-mr-4"></i>
-                        <span>{{'header.navbar.Logout' | translate}}</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </ng-container>
+        <div class="info-footer">
+          <div class="info-logout" (click)="logout()">
+            <i b1-icon icon="exit" class="b1-mr-4"></i>
+            <span>{{ 'header.navbar.Logout' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </ng-container>

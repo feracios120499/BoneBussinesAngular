@@ -20,7 +20,7 @@ export class HeaderProfileComponent implements OnInit {
     {
       translate: 'header.navbar.Profile',
       icon: 'user',
-      url: '', // TODO add url
+      url: '/profile', // TODO add url
     },
     {
       translate: 'header.navbar.Settings',
