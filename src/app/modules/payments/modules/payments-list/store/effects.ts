@@ -15,7 +15,7 @@ import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
 import { HttpPaymentsService } from '@modules/payments/services/payments-service/http-payments.service';
-import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
+import { act, Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from '@services/modal.service';
@@ -26,6 +26,8 @@ import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import { PaymentsExportModalComponent } from '../components/payments-export-modal/payments-export-modal.component';
+import { PaymentsImportModalComponent } from '../components/payments-import-modal/payments-import-modal.component';
 import { PayListActions } from './actions';
 import { PayListSelectors } from './selectors';
 
@@ -370,6 +372,73 @@ export class PayListEffects implements OnRunEffects {
           })
         )
       )
+    )
+  );
+
+  openExportModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PayListActions.openExportModal),
+        tap((action) => {
+          const modal = this.modalService.open(PaymentsExportModalComponent);
+          modal.componentInstance.downloadCallback = (format: string) =>
+            this.store.dispatch(PayListActions.exportPaymentsRequest({ ids: action.ids, format }));
+        })
+      ),
+    { dispatch: false }
+  );
+
+  exportPaymentsRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.exportPaymentsRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.paymentsService.exportPayments(payload.data.ids, payload.data.format, payload.clientId).pipe(
+          map((file) => PayListActions.exportPaymentsSuccess(file)),
+          catchError((error) => of(PayListActions.exportPaymentsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  exportPaymentsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.exportPaymentsSuccess),
+      map((action) => {
+        this.modalService.close(PaymentsExportModalComponent);
+        return SharedActions.saveFile({ file: action.payload });
+      })
+    )
+  );
+
+  openImportModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PayListActions.openImportModal),
+        tap((action) => {
+          const modal = this.modalService.open(PaymentsImportModalComponent, { windowClass: 'import-modal' });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  importPayments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.importPaymentsRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) =>
+        this.paymentsService.importCommonPayments(payload.data.files, payload.clientId).pipe(
+          map((response) => PayListActions.importPaymentsSuccess(response)),
+          catchError((error) => of(PayListActions.importPaymentsFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  importPaymentsSucess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayListActions.importPaymentsSuccess),
+      map((action) => RouteActions.routeTo({ route: 'payments/import-common', state: action.payload }))
     )
   );
 

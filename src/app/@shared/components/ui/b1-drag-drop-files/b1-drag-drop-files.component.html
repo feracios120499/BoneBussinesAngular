@@ -1,0 +1,33 @@
+<div class="b1-flex b1-align-center b1-justify-center drag-drop-container">
+  <label
+    for="file"
+    class="b1-dropzone"
+    id="dropZone"
+    *ngIf="files.length == 0"
+    dragDropFileUpload
+    (fileDropped)="droppedFiles($event)">
+    <i b1-icon icon="upload" class="b1-color-primary b1-title1"></i>
+    <span class="b1-base b1-mt-3">Натисніть або перетягніть заповнені документи</span>
+  </label>
+  <input id="file" type="file" [accept]="accept" [multiple]="multiple" (change)="selectFiles($event)" [hidden]="true" />
+  <div class="b1-files" *ngIf="files && files.length != 0">
+    visible
+    <ng-scrollbar>
+      <div class="b1-files-file" *ngFor="let file of files">
+        <div class="b1-flex b1-align-center">
+          <div class="b1-files-file_icon" [ngSwitch]="getExtension(file)">
+            <i *ngSwitchCase="'XLSX'" b1-icon icon="file-xlsx" class="b1-color-primary b1-title1"></i>
+            <i *ngSwitchCase="'XLS'" b1-icon icon="file-xls" class="b1-color-primary b1-title1"></i>
+            <i *ngSwitchCase="'DBF'" b1-icon icon="file-dbf" class="b1-color-primary b1-title1"></i>
+            <i *ngSwitchCase="'CSV'" b1-icon icon="file-csv" class="b1-color-primary b1-title1"></i>
+          </div>
+          <div class="b1-files-file_name b1-base b1-ml-3 b1-ellipsis">
+            {{ file.name }}
+          </div>
+        </div>
+
+        <i b1-icon icon="cancel" class="b1-tilte2 b1-hover-info pointer" (click)="removeFile(file)"></i>
+      </div>
+    </ng-scrollbar>
+  </div>
+</div>

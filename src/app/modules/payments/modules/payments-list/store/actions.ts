@@ -1,8 +1,10 @@
 import { DateRange } from '@models/date-range.model';
 import { DocumentHistory } from '@models/document-history.model';
 import { DocumentSign } from '@models/document-sign.model';
+import { FileModel } from '@models/file.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
+import { ImportResponse } from '@modules/payments/models/import-response.model';
 import { PaymentHistory } from '@modules/payments/models/payment-history.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -92,4 +94,23 @@ export namespace PayListActions {
     void,
     string
   >(`[${PAY_LIST_KEY}] dublicate payment`);
+
+  export const openExportModal = createAction(`[${PAY_LIST_KEY}] open export modal`, props<{ ids: number[] }>());
+
+  export const [exportPaymentsRequest, exportPaymentsSuccess, exportPaymentsFailure] = createHTTPActions<
+    { ids: number[]; format: string },
+    FileModel,
+    string
+  >(`[${PAY_LIST_KEY}] export payments`);
+
+  export const openImportModal = createAction(`[${PAY_LIST_KEY}] open import module`);
+
+  export const [importPaymentsRequest, importPaymentsSuccess, importPaymentsFailure] = createHTTPActions<
+    {
+      files: File[];
+      type: 'common' | 'swift';
+    },
+    ImportResponse,
+    string
+  >(`[${PAY_LIST_KEY}] import payments`);
 }

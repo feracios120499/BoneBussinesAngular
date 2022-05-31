@@ -1332,7 +1332,7 @@
 }
 
 .b1-dropzone {
-  width: 500px;
+  width: 100%;
   height: 160px;
   display: flex;
   margin-top: 16px;
@@ -1359,10 +1359,11 @@
 }
 
 .b1-files {
-  width: 500px;
+  width: 100%;
   height: 160px;
   display: flex;
   margin-top: 16px;
+  flex-direction: column;
   &-file {
     display: flex;
     align-items: center;

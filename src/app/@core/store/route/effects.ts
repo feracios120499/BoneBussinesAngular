@@ -17,7 +17,7 @@ export class RouteEffects {
     () =>
       this.actions$.pipe(
         ofType(RouteActions.routeTo),
-        tap((action) => this.router.navigateByUrl(action.route))
+        tap((action) => this.router.navigateByUrl(action.route, { state: action.state }))
       ),
     { dispatch: false }
   );

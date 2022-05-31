@@ -1,0 +1,11 @@
+<payments-header>
+  {{ 'components.pay.incomings.title' | translate }}
+</payments-header>
+<div style="position: relative" class="full-screen">
+  <app-import-common-tabs></app-import-common-tabs>
+  <div class="b1-page-card b1-bg-light">
+    <app-import-common-actions></app-import-common-actions>
+    <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+    <app-import-common-list></app-import-common-list>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.import {
+  &-body {
+    padding: 0 32px;
+  }
+  &-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    & .b1-head-tabs {
+      width: 100%;
+    }
+  }
+}

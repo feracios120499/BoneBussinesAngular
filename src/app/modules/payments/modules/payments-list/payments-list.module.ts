@@ -26,6 +26,9 @@ import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
 import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
+import { PaymentsImportModalComponent } from './components/payments-import-modal/payments-import-modal.component';
+import { PaymentsExportModalComponent } from './components/payments-export-modal/payments-export-modal.component';
+import { B1DragDropFilesModule } from '@ui/b1-drag-drop-files/b1-drag-drop-files.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
     PaymentsListTabsComponent,
     PaymentsListActionsComponent,
     PaymentsListPaymentsComponent,
+    PaymentsImportModalComponent,
+    PaymentsExportModalComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +61,7 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
     B1MoreButtonModule,
     B1SkeletonModule,
     B1PageButtonModule,
+    B1DragDropFilesModule,
   ],
 })
 export class PaymentsListModule {}

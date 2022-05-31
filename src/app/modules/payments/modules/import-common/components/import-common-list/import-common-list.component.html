@@ -1,0 +1,20 @@
+<ng-container *ngrxLet="payments$ as payments">
+  <ng-container *ngIf="payments">
+    <ng-scrollbar class="virtual-scroll b1-page-data" [disabled]="isMobile$ | ngrxPush" *ngIf="payments.length != 0">
+      <cdk-virtual-scroll-viewport scrollViewport smoothScroll autosize>
+        <app-payment-row
+          class="b1-page-data__row payment-row"
+          *cdkVirtualFor="let payment of payments; trackBy: trackId"
+          [paymentDetails]="payment.model"
+          [selectable]="false"
+          (onShow)="showPayment(payment, payments)">
+        </app-payment-row>
+      </cdk-virtual-scroll-viewport>
+    </ng-scrollbar>
+    <ng-container>
+      <div class="b1-page-data" [hidden]="payments.length != 0">
+        <b1-empty svgName="empty-payments"> </b1-empty>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

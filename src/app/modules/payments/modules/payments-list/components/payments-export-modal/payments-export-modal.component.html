@@ -1,0 +1,34 @@
+<div class="b1-modal-data">
+  <div class="payment-window-close">
+    <div class="ub-icons-icon-cancel" (click)="modal.close()"></div>
+  </div>
+  <div class="b1-modal-header">
+    <div class="b1-title3">{{ 'components.pay.exportPayments' | translate }}</div>
+  </div>
+  <div class="b1-modal-body">
+    <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
+    <div class="b1-flex b1-align-center b1-justify-center">
+      <div class="b1-large b1-page-data__subtitle">
+        {{ 'components.pay.export.chooseType' | translate }}
+      </div>
+    </div>
+
+    <div class="b1-files-types b1-mt-4" *ngrxLet="isLoading$ as isLoading">
+      <div class="b1-files-types_body">
+        <div class="b1-files-types_item" (click)="download('xlsx', isLoading)">
+          <i b1-icon icon="file-xlsx"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="download('xls', isLoading)">
+          <i b1-icon icon="file-xls"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="download('csv', isLoading)">
+          <i b1-icon icon="file-csv"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="download('dbf', isLoading)">
+          <i b1-icon icon="file-dbf"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b1-modal-footer"></div>
+</div>

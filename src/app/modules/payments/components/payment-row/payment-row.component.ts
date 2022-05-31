@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Transaction, UiTransaction } from '@modules/accounts/models/transaction.model';
+import { ImportResponsRow } from '@modules/payments/models/import-response.model';
+import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentRow } from '@modules/payments/models/payment-row.model';
 import { UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 
@@ -13,7 +15,9 @@ export class PaymentRowComponent implements OnInit, OnChanges {
 
   @Input() transaction?: UiTransaction;
   @Input() payment?: UiPaymentsListItem;
+  @Input() paymentDetails?: PaymentDetails;
   @Input() selected = false;
+  @Input() selectable = true;
   @Output() onSelect: EventEmitter<void> = new EventEmitter<void>();
   @Output() onShow: EventEmitter<void> = new EventEmitter<void>();
 
@@ -56,6 +60,24 @@ export class PaymentRowComponent implements OnInit, OnChanges {
         this.icon = 'cards';
       } else if (this.payment.typeId.startsWith('SWIFT')) {
         this.icon = 'swift';
+      } else {
+        this.icon = 'country';
+      }
+    } else if (this.paymentDetails) {
+      this.paymentRow = {
+        id: this.paymentDetails.id,
+        selected: false,
+        number: this.paymentDetails.number,
+        recipientName: this.paymentDetails.recipient.name,
+        senderName: this.paymentDetails.sender.name,
+        createDate: new Date(),
+        amount: this.paymentDetails.amount,
+        purpose: this.paymentDetails.purpose,
+        currencyCode: this.paymentDetails.sender.accCurrencyCode,
+      };
+
+      if (this.paymentDetails.recipient.accId) {
+        this.icon = 'cards';
       } else {
         this.icon = 'country';
       }

@@ -1,6 +1,10 @@
 <div class="payment b1-page-content">
   <div class="payment-checkbox">
-    <b1-page-checkbox controlId="checkbox{{ paymentRow.id }}" [ngModel]="selected" (ngModelChange)="selectPayment()">
+    <b1-page-checkbox
+      controlId="checkbox{{ paymentRow.id }}"
+      [ngModel]="selected"
+      (ngModelChange)="selectPayment()"
+      *ngIf="selectable">
     </b1-page-checkbox>
   </div>
   <div class="payment-body" (click)="showPayment()">

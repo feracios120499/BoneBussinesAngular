@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 
 import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
 
-import { B1DropdownLinkComponent } from './components/ui/b1-dropdown-link/b1-dropdown-link.component';
-
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
     super(50, 120, 120);
@@ -22,5 +20,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
     },
     DecimalPipe,
   ],
+  declarations: [],
 })
 export class SharedModule {}

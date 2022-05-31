@@ -1,0 +1,66 @@
+<div class="b1-modal-data" *ngrxLet="isLoading$ as isLoading">
+  <div class="b1-modal-close">
+    <div class="ub-icons-icon-cancel" ng-click="close()"></div>
+  </div>
+  <div class="b1-modal-header">
+    <div class="b1-title3">{{ 'components.pay.importTitle' | translate }}</div>
+  </div>
+  <div class="b1-modal-body import-body">
+    <div class="import-tabs">
+      <ul class="b1-head-tabs">
+        <li [class.active]="importType == 'common'" class="b1-head-tabs__item" style="width: 100%">
+          <a
+            class="b1-head-tabs__link b1-medium b1-color-dark"
+            style="text-transform: none"
+            (click)="importType = 'common'">
+            {{ 'components.pay.actions.inUrainePay' | translate }}
+            <i b1-icon icon="country" class="b1-ml-3"></i>
+          </a>
+        </li>
+        <li [class.active]="importType == 'swift'" class="b1-head-tabs__item" style="width: 100%">
+          <a
+            class="b1-head-tabs__link b1-medium b1-color-dark"
+            style="text-transform: none"
+            (click)="importType = 'swift'">
+            {{ 'components.pay.actions.swift' | translate }}
+            <i b1-icon icon="swift" class="b1-ml-3"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <b1-drag-drop-files accept=".xlsx,.xls,.dbf,.csv" [multiple]="true" [(ngModel)]="files"></b1-drag-drop-files>
+    <div class="b1-page-hr" ng-class="{ loading: state.isLoading }"></div>
+    <div class="b1-flex b1-align-center b1-justify-center">
+      <div class="b1-large b1-light">
+        {{ 'components.pay.downloadTemplate' | translate }}
+      </div>
+    </div>
+
+    <div class="b1-files-types b1-mt-4">
+      <div class="b1-files-types_body">
+        <div class="b1-files-types_item" (click)="downloadTemplate('xlsx', isLoading)">
+          <i b1-icon icon="file-xlsx"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="downloadTemplate('xls', isLoading)">
+          <i b1-icon icon="file-xls"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="downloadTemplate('csv', isLoading)">
+          <i b1-icon icon="file-csv"></i>
+        </div>
+        <div class="b1-files-types_item" (click)="downloadTemplate('dbf', isLoading)">
+          <i b1-icon icon="file-dbf"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b1-modal-footer">
+    <b1-button
+      label="components.pay.importButton"
+      icon="import"
+      (btnClick)="import()"
+      [isDisabled]="isLoading || files.length == 0">
+    </b1-button>
+  </div>
+</div>

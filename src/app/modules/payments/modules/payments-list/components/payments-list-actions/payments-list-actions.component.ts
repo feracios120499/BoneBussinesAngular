@@ -66,9 +66,15 @@ export class PaymentsListActionsComponent implements OnInit, OnDestroy {
     );
   }
 
-  exportPayments(payments: UiPaymentsListItem[]): void {}
+  exportPayments(payments: UiPaymentsListItem[]): void {
+    this.executer(payments, 'shared.selectDocumentsBeforeExport', (selected) =>
+      this.store.dispatch(PayListActions.openExportModal({ ids: selected }))
+    );
+  }
 
-  importPayments(): void {}
+  importPayments(): void {
+    this.store.dispatch(PayListActions.openImportModal());
+  }
 
   onSignPayments(payments: UiPaymentsListItem[]): void {
     this.executer(

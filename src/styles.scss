@@ -3991,3 +3991,12 @@ ngb-tooltip-window {
     height: 100%;
   }
 }
+
+.import-modal {
+  & .modal-dialog {
+    max-width: 600px;
+    @media (max-width: 812px) {
+      max-width: 100%;
+    }
+  }
+}

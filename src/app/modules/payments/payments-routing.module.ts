@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'list',
         loadChildren: () => import('./modules/payments-list/payments-list.module').then((p) => p.PaymentsListModule),
       },
+      {
+        path: 'import-common',
+        loadChildren: () => import('./modules/import-common/import-common.module').then((p) => p.ImportCommonModule),
+      },
       { path: '', redirectTo: 'incomings' },
     ],
   },
