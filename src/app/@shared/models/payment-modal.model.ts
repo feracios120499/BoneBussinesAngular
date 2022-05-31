@@ -1,3 +1,4 @@
+import { ImportError } from '@modules/payments/models/import-response.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
@@ -6,7 +7,7 @@ import { StatusCode } from './enums/status-code.enum';
 
 export interface PaymentModal {
   number: string;
-  statusCode: PaymentStatuses;
+  statusCode?: PaymentStatuses;
   documentDate: Date;
   valueDate: Date;
   payedDate?: Date;
@@ -21,6 +22,7 @@ export interface PaymentModal {
   isPaginationAvailable: boolean;
   next?: () => void;
   previous?: () => void;
+  errors?: ImportError;
 }
 
 export interface PaymentAccountModal {

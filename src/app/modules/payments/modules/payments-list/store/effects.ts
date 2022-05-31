@@ -361,9 +361,9 @@ export class PayListEffects implements OnRunEffects {
               PayListActions.dublicatePaymentSuccess(),
               SharedActions.setCreatePayment({ payment: paymentForm }),
             ];
-            if (payment.typeId.startsWith('INNER')) {
+            if (payment.typeId?.startsWith('INNER')) {
               result.push(RouteActions.routeTo({ route: '/payments/create/my-accounts' }));
-            } else if (payment.typeId.startsWith('SWIFT')) {
+            } else if (payment.typeId?.startsWith('SWIFT')) {
               result.push(RouteActions.routeTo({ route: '/payments/create/swift' }));
             } else {
               result.push(RouteActions.routeTo({ route: '/payments/create/within-country' }));
@@ -438,7 +438,10 @@ export class PayListEffects implements OnRunEffects {
   importPaymentsSucess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PayListActions.importPaymentsSuccess),
-      map((action) => RouteActions.routeTo({ route: 'payments/import-common', state: action.payload }))
+      map((action) => {
+        this.modalService.close(PaymentsImportModalComponent);
+        return RouteActions.routeTo({ route: 'payments/import-common', state: action.payload });
+      })
     )
   );
 
@@ -455,7 +458,7 @@ export class PayListEffects implements OnRunEffects {
       payedDate: paymentDetails.bankPayedDate,
       purpose: paymentDetails.purpose,
       amount: paymentDetails.amount,
-      amountString: paymentDetails.amountString,
+      amountString: paymentDetails.amountString || '',
       currencyCode: paymentDetails.sender.accCurrencyCode || paymentDetails.recipient.accCurrencyCode,
       sender: {
         name: paymentDetails.sender.name,

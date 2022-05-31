@@ -5,6 +5,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AcctLoadings } from '@modules/accounts/models/acct-loadings.type';
 
 import { ACCT_KEY, AcctState } from './store';
+import { SelectAccountsList } from '@models/select-accounts-list.model';
 
 export namespace AcctSelectors {
   export const acctStore = createFeatureSelector<AcctState>(ACCT_KEY);
@@ -69,6 +70,12 @@ export namespace AcctSelectors {
 
   // TODO добавить признак что с счета можно списывать в платежах, на беке
   export const senderPaymentAccounts = createSelector(activeAccounts, (accounts) => accounts);
+
+  export const senderAccounts = createSelector(
+    AcctSelectors.senderPaymentAccounts,
+    AcctSelectors.isLoadingAccounts,
+    (accounts, isLoading): SelectAccountsList => ({ accounts: accounts || [], isLoading })
+  );
 
   // TODO добавить признак что с счета можно списывать в платежах, на беке
   export const recipientPaymentAccounts = createSelector(activeAccounts, (accounts) => accounts);

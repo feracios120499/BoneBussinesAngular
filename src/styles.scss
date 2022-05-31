@@ -4000,3 +4000,12 @@ ngb-tooltip-window {
     }
   }
 }
+
+.edit-payment-modal {
+  & .modal-dialog {
+    max-width: 600px;
+    @media (max-width: 812px) {
+      max-width: 100%;
+    }
+  }
+}

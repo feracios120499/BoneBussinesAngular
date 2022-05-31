@@ -82,9 +82,11 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
 
   // tslint:disable-next-line: no-input-rename
   @Input('senderAccounts') senderAccounts!: Observable<SelectAccountsList>;
+  @Input('type') type: 'create' | 'edit' | 'template' = 'create';
   @ViewChild('paymentForm') paymentForm!: NgForm;
 
   formGroup: FormGroup;
+  isLoadingAccounts = false;
 
   senderAccountControl = new FormControl(Validators.required);
   docNumberAutoControl = new FormControl(true, Validators.required);
@@ -181,7 +183,7 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
       return;
     }
     const formValue: WithinCountryForm = {
-      docNumberAuto: !form.number,
+      docNumberAuto: this.type == 'create',
       docNumber: form.number,
       senderAccount: {
         id: form.sender?.accId,
@@ -212,7 +214,11 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
     this.onTouched = fn;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.senderAccounts.subscribe((accountList) => (this.isLoadingAccounts = accountList.isLoading))
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((p) => p?.unsubscribe());
@@ -265,6 +271,6 @@ export class WithinCountryFormComponent implements OnInit, OnDestroy, ControlVal
     markFormGroupTouched(this.formGroup);
 
     this.paymentForm.onSubmit(null as any);
-    return this.formGroup.valid;
+    return this.formGroup.valid && !this.isLoadingAccounts;
   }
 }

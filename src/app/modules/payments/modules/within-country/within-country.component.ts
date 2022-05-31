@@ -15,6 +15,7 @@ import { SharedSelectors } from '@store/shared/selectors';
 import { merge, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WithinCountryFormComponent } from '@payment-forms/within-country-form/within-country-form.component';
+import { AcctSelectors } from '@modules/accounts/store/selectors';
 
 @Component({
   selector: 'pay-within-country',
@@ -40,7 +41,7 @@ export class WithinCountryComponent implements OnInit, OnDestroy {
     });
   }
 
-  senderAccounts$ = this.store.select(PayFormsSelectors.senderAccounts);
+  senderAccounts$ = this.store.select(AcctSelectors.senderAccounts);
   progress$ = this.store.select(PayFormsSelectors.progress);
   status$ = this.store.select(PayFormsSelectors.createdPayment).pipe(
     required,

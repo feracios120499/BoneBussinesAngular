@@ -384,6 +384,14 @@
   }
 }
 
+.modal-dialog {
+  & within-country-form {
+    & .b1-input__label {
+      transform: translate(-10px, -32px);
+    }
+  }
+}
+
 .ui-select-toggle {
   transition: all 0.15s $animation-timing;
   &:hover {
@@ -409,8 +417,7 @@
   background-color: var(--color-light);
   margin-top: 8px;
   padding: 0;
-  box-shadow: 0 8px 24px rgba($color-dark, 0.2),
-    0 2px 4px rgba($color-dark, 0.1), inset 0 0 2px rgba($color-light, 0.2);
+  box-shadow: 0 8px 24px rgba($color-dark, 0.2), 0 2px 4px rgba($color-dark, 0.1), inset 0 0 2px rgba($color-light, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
@@ -475,8 +482,8 @@
     background: var(--color-light);
     border-radius: 2px * $border-radius-factor;
     border: 1px solid var(--color-light-200);
-    box-shadow: 0 8px 24px rgba($color-dark, 0.2),
-      0 2px 4px rgba($color-dark, 0.1), inset 0 0 2px rgba($color-light, 0.2);
+    box-shadow: 0 8px 24px rgba($color-dark, 0.2), 0 2px 4px rgba($color-dark, 0.1),
+      inset 0 0 2px rgba($color-light, 0.2);
 
     .ac-menu-item {
       border-bottom: 1px solid var(--color-light-300);

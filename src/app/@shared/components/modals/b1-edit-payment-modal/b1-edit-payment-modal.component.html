@@ -1,0 +1,17 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-header">
+    <div class="b1-title2 b1-flex b1-justify-center">
+      {{ 'components.pay.paymentEditing' | translate }}
+    </div>
+  </div>
+  <div class="b1-form-container">
+    <within-country-form
+      #form
+      [senderAccounts]="senderAccounts$"
+      [(ngModel)]="payment"
+      type="edit"></within-country-form>
+  </div>
+  <div class="b1-modal-footer">
+    <b1-button [filled]="true" label="actions.save" icon="save" (btnClick)="save()"> </b1-button>
+  </div>
+</div>

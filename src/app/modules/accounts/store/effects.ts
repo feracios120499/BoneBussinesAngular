@@ -33,12 +33,17 @@ export class AcctEffects {
   loadAccounts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AcctActions.loadAccounts),
-      switchMap(() => clientIdWithoudData(this.store)),
-      tap(console.log),
-      // waitFor(currentClientIdFilteredSelector(this.store)),
-      switchMap((clientId) =>
-        this.accountsService.getAccounts(clientId).pipe(map((accounts) => AcctActions.setAccounts({ accounts })))
-      )
+      switchMap((action) => clientIdWithData(this.store, action.reload)),
+      withLatestFrom(this.store.select(AcctSelectors.accountsSelector)),
+      switchMap(([payload, accounts]) => {
+        if (!payload.data && accounts && accounts.length > 0) {
+          return of(AcctActions.setAccounts({ accounts }));
+        } else {
+          return this.accountsService
+            .getAccounts(payload.clientId)
+            .pipe(map((accounts) => AcctActions.setAccounts({ accounts })));
+        }
+      })
     )
   );
 

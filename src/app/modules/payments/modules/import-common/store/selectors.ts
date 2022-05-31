@@ -16,11 +16,11 @@ export namespace PayImportCommonSelectors {
     if (state.importResponse) {
       statusCount.ERROR = state.importResponse.responses.filter((p) => p.status === 'ERROR').length;
       statusCount.SUCCESS = state.importResponse.responses.filter((p) => p.status === 'SUCCESS').length;
-      statusCount.EXIST = state.importResponse.responses.filter((p) => p.status === 'EXIST').length;
+      statusCount.EXISTS = state.importResponse.responses.filter((p) => p.status === 'EXISTS').length;
     } else {
       statusCount.ERROR = 0;
       statusCount.SUCCESS = 0;
-      statusCount.EXIST = 0;
+      statusCount.EXISTS = 0;
     }
     return statusCount;
   });
@@ -31,4 +31,12 @@ export namespace PayImportCommonSelectors {
     }
     return [];
   });
+
+  export const allPayments = createSelector(payImportCommonState, (state) => state?.importResponse?.responses);
+
+  export const canSave = createSelector(count, (statusCount) => statusCount.SUCCESS + statusCount.EXISTS > 0);
+
+  export const filter = createSelector(payImportCommonState, (state) => state.filter);
+
+  export const resultFile = createSelector(payImportCommonState, (state) => state?.importResponse?.responseExcel || '');
 }

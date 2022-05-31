@@ -1,3 +1,4 @@
+import { ImportStatus } from './import-status.type';
 import { PaymentDetails } from './payment-details.model';
 
 export interface ImportResponse {
@@ -10,7 +11,7 @@ export interface ImportError {
 }
 
 export interface ImportResponsRow {
-  error: ImportError;
+  error?: ImportError;
   model: PaymentDetails;
-  status: string;
+  status: ImportStatus;
 }

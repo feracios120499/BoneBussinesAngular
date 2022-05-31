@@ -58,6 +58,8 @@
 
     &_name {
       margin-right: 8px;
+      display: flex;
+      align-items: center;
       @media (max-width: 812px) {
         margin-right: 4px;
       }
@@ -188,16 +190,21 @@
   }
   &-value {
     color: var(--color-dark);
-    margin-bottom: 16px;
     @include medium;
     word-break: break-word;
+
+    @media (max-width: 812px) {
+      @include base;
+      @include bold;
+    }
+  }
+  &-section {
+    margin-bottom: 16px;
     &:last-child {
       margin-bottom: 0;
     }
     @media (max-width: 812px) {
       margin-bottom: 8px;
-      @include base;
-      @include bold;
     }
   }
   // &-error {

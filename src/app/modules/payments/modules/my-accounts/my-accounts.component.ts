@@ -14,6 +14,7 @@ import { merge, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MyAccountsFormComponent } from '@payment-forms/my-accounts-form/my-accounts-form.component';
 import { RecursivePartial } from '@b1-types/recursive-partial.type';
+import { AcctSelectors } from '@modules/accounts/store/selectors';
 
 @Component({
   selector: 'pay-my-accounts',
@@ -39,7 +40,7 @@ export class MyAccountsComponent implements OnInit, OnDestroy {
     });
   }
 
-  senderAccounts$ = this.store.select(PayFormsSelectors.senderAccounts);
+  senderAccounts$ = this.store.select(AcctSelectors.senderAccounts);
   recipientAccounts$ = this.store.select(PayFormsSelectors.recipientAccounts);
   progress$ = this.store.select(PayFormsSelectors.progress);
   status$ = this.store.select(PayFormsSelectors.createdPayment).pipe(

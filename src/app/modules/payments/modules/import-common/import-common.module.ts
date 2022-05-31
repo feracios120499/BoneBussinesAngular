@@ -18,6 +18,11 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SharedModule } from '@shared';
 import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { EffectsModule } from '@ngrx/effects';
+import { PayImportCommonEffects } from './store/effects';
+import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
+import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
+import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,10 @@ import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
     SharedModule,
     B1SkeletonModule,
     B1EmptyModule,
+    EffectsModule.forFeature([PayImportCommonEffects]),
+    B1PageButtonModule,
+    B1ButtonModule,
+    B1InputModule,
   ],
 })
 export class ImportCommonModule {}

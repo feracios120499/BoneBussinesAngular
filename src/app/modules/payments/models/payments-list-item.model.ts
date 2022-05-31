@@ -33,7 +33,7 @@ export interface UiPaymentsListItem extends PaymentsListItem {
 export interface PaymentsListItemAccount {
   accCurrencyCode: string;
   accNumber: string;
-  bankName: string;
+  bankName?: string;
   bankCode: string;
   name: string;
   taxCode: string;

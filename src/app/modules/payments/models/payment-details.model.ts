@@ -5,13 +5,13 @@ import { PaymentsListItemAccount } from './payments-list-item.model';
 export interface PaymentDetails {
   additionalDetails?: string;
   amount: number;
-  amountString: string;
+  amountString?: string;
   attachedSupDocs: PaymentSupDoc[];
   bankPayedDate?: Date;
   bankPaymentId?: number;
   bankReceivedDate?: Date;
   creatingDate?: Date;
-  customerId: string;
+  customerId?: string;
   id: number;
   isNeedMySign: boolean;
   isNeedSign: boolean;
@@ -20,14 +20,14 @@ export interface PaymentDetails {
   paymentValueDate: Date;
   purpose: string;
   recipient: PaymentsListItemAccount;
-  recipientCountryCode: number;
-  recipientCountryName: string;
+  recipientCountryCode?: number;
+  recipientCountryName?: string;
   sender: PaymentsListItemAccount;
-  statusChangeDate: Date;
-  statusId: PaymentStatuses;
-  typeId: string;
-  userId: string;
-  visaStampCount: number;
+  statusChangeDate?: Date;
+  statusId?: PaymentStatuses;
+  typeId?: string;
+  userId?: string;
+  visaStampCount?: number;
 }
 
 export interface PaymentSupDoc {

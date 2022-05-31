@@ -4,10 +4,12 @@ import { Injectable } from '@angular/core';
 import { DateRange } from '@models/date-range.model';
 import { DocumentSign } from '@models/document-sign.model';
 import { FileModel } from '@models/file.model';
+import { CreatePaymentModel } from '@models/payments/create-payment.model';
 import { SignBuffer } from '@models/sign-buffer.model';
 import { SignRequest } from '@models/sign-request.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
+import { StatusResponse } from '@models/status-response.model';
 import { ImportResponse } from '@modules/payments/models/import-response.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentHistory } from '@modules/payments/models/payment-history.model';
@@ -107,6 +109,10 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     const formData = new FormData();
     files.forEach((file, index) => formData.append(`file[${index}]`, file, file.name));
     return this.http.post<ImportResponse>(`/api/v1/pay/payments/import/validate/${clientId}`, formData);
+  }
+
+  createPayments(payments: CreatePaymentModel[], clientId: string): Observable<StatusResponse[]> {
+    return this.http.post<StatusResponse[]>(`api/v1/pay/payments/${clientId}`, payments);
   }
 
   private mapFile(res: HttpResponse<Blob>): FileModel {

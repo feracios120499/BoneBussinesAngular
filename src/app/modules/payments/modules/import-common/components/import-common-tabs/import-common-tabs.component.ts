@@ -25,7 +25,7 @@ export class ImportCommonTabsComponent implements OnInit {
       badgeClass: 'b1-page-badge__error',
     },
     {
-      status: 'EXIST',
+      status: 'EXISTS',
       label: 'components.salary.registry.import.dublicates',
     },
   ];

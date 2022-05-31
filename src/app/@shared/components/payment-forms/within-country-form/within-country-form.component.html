@@ -1,10 +1,7 @@
 <form [formGroup]="formGroup" #paymentForm="ngForm">
-  <div class="b1-input">
+  <div class="b1-input" [hidden]="type != 'create'">
     <label class="b1-small b1-checkbox noselect">
-      <input
-        type="checkbox"
-        class="b1-checkbox__hidden"
-        [formControl]="docNumberAutoControl" />
+      <input type="checkbox" class="b1-checkbox__hidden" [formControl]="docNumberAutoControl" />
       <i class="b1-checkbox__check"></i>
       <span class="b1-checkbox__label b1-base">
         {{ 'shared.autoNumber' | translate }}
@@ -17,14 +14,10 @@
         {{ 'components.pay.paymentNumber' | translate }}
       </label>
       <input class="b1-input__control" [formControl]="docNumberControl" />
-      <b1-input-error [control]="docNumberControl" [form]="paymentForm">
-      </b1-input-error>
+      <b1-input-error [control]="docNumberControl" [form]="paymentForm"> </b1-input-error>
     </div>
   </div>
-  <b1-account-select
-    class="b1-mt-5"
-    [selectAccounts]="senderAccounts"
-    [formControl]="senderAccountControl">
+  <b1-account-select class="b1-mt-5" [selectAccounts]="senderAccounts" [formControl]="senderAccountControl">
   </b1-account-select>
   <!-- acc select -->
   <payment-dates-form [paymentForm]="formGroup"></payment-dates-form>
@@ -41,10 +34,7 @@
           [maxlength]="recipientTaxCodeMaxLength"
           [minlength]="recipientTaxCodeMinLength"
           only-numbers />
-        <b1-input-error
-          [control]="recipientTaxCodeControl"
-          [form]="paymentForm">
-        </b1-input-error>
+        <b1-input-error [control]="recipientTaxCodeControl" [form]="paymentForm"> </b1-input-error>
       </div>
     </div>
 
@@ -55,9 +45,7 @@
       <i b1-icon icon="agents"></i>
       {{ 'components.pay.correspondents.dictionary' | translate }}
     </button>
-    <button
-      class="b1-page-more agents-button_mobile"
-      (click)="onCorrespondentListOpen()">
+    <button class="b1-page-more agents-button_mobile" (click)="onCorrespondentListOpen()">
       <i b1-icon icon="agents" class="b1-page-more_icon"></i>
     </button>
   </div>
@@ -71,8 +59,7 @@
         [formControl]="additionalDetailsControl"
         [maxlength]="additionalDetailsMaxLength"
         [placeholder]="additionalDetailsPlaceholder | translate" />
-      <b1-input-error [control]="additionalDetailsControl" [form]="paymentForm">
-      </b1-input-error>
+      <b1-input-error [control]="additionalDetailsControl" [form]="paymentForm"> </b1-input-error>
     </div>
   </div>
   <div class="b1-mt-5">
@@ -80,12 +67,8 @@
       <label class="b1-input__label b1-base">
         {{ 'components.pay.recipientName' | translate }}
       </label>
-      <input
-        class="b1-input__control"
-        [formControl]="recipientNameControl"
-        [maxlength]="recipientNameMaxLength" />
-      <b1-input-error [control]="recipientNameControl" [form]="paymentForm">
-      </b1-input-error>
+      <input class="b1-input__control" [formControl]="recipientNameControl" [maxlength]="recipientNameMaxLength" />
+      <b1-input-error [control]="recipientNameControl" [form]="paymentForm"> </b1-input-error>
     </div>
   </div>
   <div class="b1-mt-5">
@@ -98,10 +81,7 @@
         [formControl]="recipientAccountNumberControl"
         [maxlength]="recipientAccountNumberMaxLength"
         [minlength]="recipientAccountNumberMinLength" />
-      <b1-input-error
-        [control]="recipientAccountNumberControl"
-        [form]="paymentForm">
-      </b1-input-error>
+      <b1-input-error [control]="recipientAccountNumberControl" [form]="paymentForm"> </b1-input-error>
     </div>
   </div>
   <div class="b1-mt-5">
@@ -109,18 +89,13 @@
       <label class="b1-input__label b1-base">
         {{ 'components.pay.bankName' | translate }}
       </label>
-      <input
-        class="b1-input__control"
-        [formControl]="recipientBankNameControl"
-        readonly />
-      <b1-input-error [control]="recipientBankNameControl" [form]="paymentForm">
-      </b1-input-error>
+      <input class="b1-input__control" [formControl]="recipientBankNameControl" readonly />
+      <b1-input-error [control]="recipientBankNameControl" [form]="paymentForm"> </b1-input-error>
     </div>
   </div>
   <div class="b1-mt-5">
     <b1-input-amount [formControl]="amountControl">
-      <b1-input-error [control]="amountControl" [form]="paymentForm">
-      </b1-input-error>
+      <b1-input-error [control]="amountControl" [form]="paymentForm"> </b1-input-error>
     </b1-input-amount>
   </div>
   <div class="b1-mt-5">
@@ -128,10 +103,7 @@
       <label class="b1-input__label b1-base">
         {{ 'components.pay.purpose' | translate }}
       </label>
-      <payment-purpose-form
-        [formControl]="purposeControl"
-        [form]="paymentForm"
-        [amount]="amountControl.value">
+      <payment-purpose-form [formControl]="purposeControl" [form]="paymentForm" [amount]="amountControl.value">
       </payment-purpose-form>
     </div>
   </div>

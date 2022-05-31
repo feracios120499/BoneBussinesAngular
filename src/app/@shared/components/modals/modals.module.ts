@@ -37,6 +37,9 @@ import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-cor
 import { B1HistoryModalComponent } from './b1-history-modal/b1-history-modal.component';
 import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
 import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-modal.component';
+import { B1importErrorModule } from '@ui/b1-import-error/b1-import-error.module';
+import { B1EditPaymentModalComponent } from './b1-edit-payment-modal/b1-edit-payment-modal.component';
+import { WithinCountryFormModule } from '@payment-forms/within-country-form/within-country-form.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
     B1HistoryModalComponent,
     B1SignModalComponent,
     B1CustomersModalComponent,
+    B1EditPaymentModalComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +83,8 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
     B1CheckboxModule,
     B1ModalContainerModule,
     CustomersFilterModule,
+    B1importErrorModule,
+    WithinCountryFormModule,
   ],
   exports: [
     B1PaymentModalComponent,

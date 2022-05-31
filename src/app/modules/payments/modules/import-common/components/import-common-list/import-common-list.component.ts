@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ImportResponsRow } from '@modules/payments/models/import-response.model';
 import { Store } from '@ngrx/store';
 import { ResizeService } from '@services/resize.service';
+import { PayImportCommonActions } from '../../store/actions';
 import { PayImportCommonSelectors } from '../../store/selectors';
 
 @Component({
@@ -18,9 +19,9 @@ export class ImportCommonListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  selectPayment(payment: ImportResponsRow): void {}
-
-  showPayment(payment: ImportResponsRow, payments: ImportResponsRow[]): void {}
+  showPayment(payment: ImportResponsRow, payments: ImportResponsRow[]): void {
+    this.store.dispatch(PayImportCommonActions.showPayment({ payment, payments }));
+  }
 
   trackId(index: number, payment: ImportResponsRow): string | undefined {
     return payment ? `${payment.model.id}` : undefined;

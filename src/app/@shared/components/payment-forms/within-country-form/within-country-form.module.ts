@@ -12,6 +12,7 @@ import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amo
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { WithinCountryFormComponent } from './within-country-form.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [WithinCountryFormComponent],
@@ -26,6 +27,7 @@ import { WithinCountryFormComponent } from './within-country-form.component';
     B1InputAmountModule,
     PaymentPurposeFormModule,
     CheckValueModule,
+    CommonModule,
   ],
   exports: [WithinCountryFormComponent],
 })

@@ -7,9 +7,11 @@ export interface PayImportCommonState {
   isLoading: boolean;
   status: ImportStatus;
   importResponse?: ImportResponse;
+  filter: string;
 }
 
 export const payImportCommonInitialState: PayImportCommonState = {
   isLoading: false,
   status: 'SUCCESS',
+  filter: '',
 };

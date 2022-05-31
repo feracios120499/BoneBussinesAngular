@@ -1,1 +1,37 @@
-<p>import-common-actions works!</p>
+<div class="b1-page-actions" *ngrxLet="isLoading$ as isLoading">
+  <div class="b1-page-actions__left">
+    <div class="b1-page-icons">
+      <b1-button
+        *ngIf="canSave$ | ngrxPush"
+        [isDisabled]="isLoading"
+        class="b1-mr-4"
+        icon="save"
+        label="actions.save"
+        (btnClick)="savePayments()">
+      </b1-button>
+
+      <b1-page-button
+        [disabled]="isLoading"
+        label="components.salary.registry.import.downloadResultFile"
+        icon="download"
+        (b1Click)="downloadResultFile()">
+      </b1-page-button>
+
+      <b1-page-button
+        [disabled]="isLoading"
+        label="components.salary.registry.import.uploadAnotherFile"
+        icon="import"
+        (b1Click)="importPayments()">
+      </b1-page-button>
+    </div>
+  </div>
+  <form class="b1-page-actions__right" name="search" novalidate>
+    <b1-input
+      name="search"
+      icon="search"
+      [placeholder]="'shared.search' | translate"
+      [resizable]="true"
+      [ngModel]="filter$ | ngrxPush"
+      (ngModelChange)="onFilter($event)"></b1-input>
+  </form>
+</div>

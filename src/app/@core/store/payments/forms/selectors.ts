@@ -8,12 +8,6 @@ import { PAY_FORMS_KEY, PayFormsState } from './store';
 export namespace PayFormsSelectors {
   export const payFormState = createFeatureSelector<PayFormsState>(PAY_FORMS_KEY);
 
-  export const senderAccounts = createSelector(
-    AcctSelectors.senderPaymentAccounts,
-    AcctSelectors.isLoadingAccounts,
-    (accounts, isLoading): SelectAccountsList => ({ accounts: accounts || [], isLoading })
-  );
-
   export const recipientAccounts = createSelector(
     AcctSelectors.recipientPaymentAccounts,
     AcctSelectors.isLoadingAccounts,
