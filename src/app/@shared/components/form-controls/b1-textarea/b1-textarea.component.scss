@@ -1,3 +1,17 @@
+@import 'variables';
+
 :host {
   display: block;
+}
+
+:host-context(.b1-medium) {
+  label {
+    @include medium;
+  }
+}
+
+:host-context(.b1-light) {
+  label {
+    @include light;
+  }
 }

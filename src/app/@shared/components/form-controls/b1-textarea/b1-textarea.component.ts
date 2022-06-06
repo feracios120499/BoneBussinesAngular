@@ -16,6 +16,7 @@ export class B1TextareaComponent extends BaseFieldControlComponent {
   @Input() minLength?: number;
   @Input() maxLength?: number;
   @Input() autoHight: boolean = true;
+  @Input() minHeight: string = '';
 
   handleValue(value: string): void {
     this.onChange(value);

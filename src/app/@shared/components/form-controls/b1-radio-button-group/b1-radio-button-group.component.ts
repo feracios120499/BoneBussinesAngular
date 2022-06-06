@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
@@ -17,6 +17,7 @@ export class B1RadioButtonGroupComponent extends BaseControlComponent implements
   @Input() items!: { value: string; label: string }[];
   @Input() disabledValues: string[] = [];
   @Input() name?: string;
+  @HostBinding('class.horizontal') @Input() horizontal = false;
 
   inputName!: string;
 

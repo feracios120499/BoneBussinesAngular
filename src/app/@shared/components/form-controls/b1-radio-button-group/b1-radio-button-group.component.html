@@ -1,4 +1,9 @@
-<div *ngFor="let item of items; index as i" [class.b1-mt-4]="i !== 0">
+<div
+  *ngFor="let item of items; index as i"
+  class="b1-radio-button"
+  [class.b1-mt-4]="i !== 0 && !horizontal"
+  [class.b1-ml-4]="i !== 0 && horizontal"
+  mobileClass="b1-mt-4">
   <label class="b1-checkbox">
     <input
       class="b1-checkbox__hidden"

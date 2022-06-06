@@ -1,0 +1,29 @@
+<form [formGroup]="formGroup" #formRef="ngForm">
+  <b1-input [maxLength]="nameMaxLength" [formControl]="nameControl">
+    {{ 'components.feedback.YourName' | translate | firstLowercase }}
+  </b1-input>
+
+  <b1-input class="b1-mt-6" [formControl]="emailControl" transform="lowercase">
+    {{ 'components.feedback.YourEmail' | translate | firstLowercase }}
+  </b1-input>
+
+  <b1-masked-input class="b1-mt-6" [formControl]="phoneControl" mask="(000) 000-00-00" prefix="+38">
+    {{ 'components.applications.contactphone' | translate | firstLowercase }}
+  </b1-masked-input>
+
+  <b1-input class="b1-mt-6" [maxLength]="orgNameMaxLength" [formControl]="orgNameControl">
+    {{ 'components.feedback.NameOrganization' | translate | firstLowercase }}
+  </b1-input>
+
+  <b1-number-input
+    class="b1-mt-6"
+    [minLength]="taxCodeMinLength"
+    [maxLength]="taxCodeMaxLength"
+    [formControl]="taxCodeControl">
+    {{ 'components.pay.edrpou' | translate }}
+  </b1-number-input>
+
+  <b1-input class="b1-mt-6" [maxLength]="regionMaxLength" [formControl]="regionControl">
+    {{ 'components.pay.region' | translate | firstLowercase }}
+  </b1-input>
+</form>

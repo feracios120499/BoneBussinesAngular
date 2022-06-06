@@ -15,6 +15,7 @@ import { SharedActions } from './actions';
 import { UserActions } from '@store/user/actions';
 import { CustomersModalConfig } from '@models/modals/customers-modal-config.model';
 import { CustomersModalResult } from '@models/modals/customers-modal-result.model';
+import { B1FeedbackModalComponent } from '@modals/b1-feedback-modal/b1-feedback-modal.component';
 
 @Injectable()
 export class SharedEffects {
@@ -163,6 +164,20 @@ export class SharedEffects {
         tap((action) => {
           const modalRef = this.modalService.open(B1CustomersModalComponent, {
             windowClass: 'customers-modal',
+          });
+          modalRef.componentInstance.config = action.config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  showFeedbackModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SharedActions.showFeedbackModal),
+        tap((action) => {
+          const modalRef = this.modalService.open(B1FeedbackModalComponent, {
+            windowClass: 'feedback-modal',
           });
           modalRef.componentInstance.config = action.config;
         })

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Feedback } from '@models/feedback.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
@@ -49,6 +50,10 @@ export class PublicService extends BaseService {
       map((response) => (response.Result ? response.Result : response)),
       map(this.mapMobileAppLinksResponse)
     );
+  }
+
+  sendFeedback(feedback: Feedback): Observable<void> {
+    return this.http.post<void>('api/v1/public/feedback', feedback);
   }
 
   private mapMobileAppLinksResponse(response: {

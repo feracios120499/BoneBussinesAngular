@@ -3,6 +3,7 @@ import { ConfirmModalConfig } from '@models/modals/confirm-modal-config.model';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
 import { CustomersModalConfig } from '@models/modals/customers-modal-config.model';
 import { ExportTurnoverModalConfig } from '@models/modals/export-turnover-modal-config.model';
+import { FeedbackModalConfig } from '@models/modals/feedback-modal.config';
 import { RequisitesModalConfig } from '@models/modals/requisites-modal-config.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
@@ -53,5 +54,10 @@ export namespace SharedActions {
   export const showCustomersModal = createAction(
     '[SHARED] show customers modal',
     props<{ config: CustomersModalConfig }>()
+  );
+
+  export const showFeedbackModal = createAction(
+    '[SHARED] show feedback modal',
+    props<{ config: FeedbackModalConfig }>()
   );
 }

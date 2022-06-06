@@ -1,0 +1,12 @@
+<label class="b1-rating__label b1-checkbox__label" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<div class="b1-rating__inputs">
+  <ngb-rating [formControl]="formControl" [max]="max">
+    <ng-template let-fill="fill">
+      <span class="star" [class.filled]="fill === 100">&#9733;</span>
+    </ng-template>
+  </ngb-rating>
+  <span class="b1-ml-2 b1-light b1-large">({{ formControl.value }})</span>
+</div>

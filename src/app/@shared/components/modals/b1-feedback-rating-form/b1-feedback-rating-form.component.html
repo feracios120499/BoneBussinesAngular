@@ -1,0 +1,20 @@
+<form class="b1-feedback-rating-form" [formGroup]="formGroup" #formRef="ngForm">
+  <b1-rating class="b1-medium b1-light" [formGroup]="$any(ratingControl)" [max]="maxRate">
+    {{ 'components.feedback.rating' | translate | lowercase }}
+  </b1-rating>
+
+  <b1-radio-button-group
+    class="b1-mt-6 b1-mb-6 b1-medium b1-light"
+    [horizontal]="true"
+    [formControl]="typeControl"
+    [items]="typeRadioButtons">
+  </b1-radio-button-group>
+
+  <b1-textarea
+    class="b1-mt-6 b1-medium b1-light"
+    [maxLength]="textMaxLength"
+    minHeight="120px"
+    [formControl]="textControl">
+    {{ 'components.feedback.FeedbackText' | translate }}
+  </b1-textarea>
+</form>

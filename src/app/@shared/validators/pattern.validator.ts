@@ -7,7 +7,7 @@ export function pattern(
 ): ValidatorFn {
   const patternName: string = caller?.name || 'pattern';
   return (control: AbstractControl): ValidationErrors | null => {
-    if (control.value === '') {
+    if (control.value === null || control.value === '') {
       return null;
     }
     let isMatched: boolean;

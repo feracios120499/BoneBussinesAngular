@@ -1,0 +1,37 @@
+<b1-modal-container [isLoading$]="isLoading$">
+  <h3 slot="header" class="b1-title3 b1-bold">
+    {{ 'components.feedback.TellUsUourOpinion' | translate | firstTitle }}
+  </h3>
+
+  <ng-container slot="body">
+    <b1-feedback-rating-form
+      [isLoading$]="isLoading$"
+      [isRequired]="contactToMe"
+      [(ngModel)]="ratingForm"
+      #ratingFormRef>
+    </b1-feedback-rating-form>
+
+    <b1-checkbox
+      class="b1-mt-6"
+      [(ngModel)]="contactToMe"
+      (ngModelChange)="$event || this.contactsFormRef.resetForm(initialContactsForm)">
+      {{ 'components.feedback.ContactMe' | translate | lowercase }}
+    </b1-checkbox>
+
+    <b1-feedback-contacts-form
+      [hidden]="!contactToMe"
+      [isLoading$]="isLoading$"
+      [isRequired]="contactToMe"
+      [(ngModel)]="contactsForm"
+      #contactsFormRef>
+    </b1-feedback-contacts-form>
+  </ng-container>
+
+  <b1-button
+    slot="footer"
+    label="components.feedback.send"
+    icon="send"
+    [isDisabled]="!ratingFormRef.isValid || !contactsFormRef.isValid || (isLoading$ | ngrxPush)"
+    (btnClick)="onSend()">
+  </b1-button>
+</b1-modal-container>

@@ -24,21 +24,23 @@
     <div class="cl-footer">
       <div class="cl-footer-content">
         <!-- TODO add ngrx resource -->
-        <span class="cl-footer-copyright"></span>
+        <span class="cl-footer-copyright">
+          {{ copyright$ | ngrxPush }}
+        </span>
         <ul class="cl-footer-list">
           <li>
             <a class="cl-footer-version" href="">
               <!-- TODO add ngrx version -->
-              <span>{{ 'footer.Version' | translate }}</span>
+              <span>{{ 'footer.Version' | translate }}: {{ version$ | ngrxPush }}</span>
             </a>
           </li>
           <li>
-            <a class="cl-footer-instruction" href="" target="_blank">
+            <a class="cl-footer-instruction" href="assets/doc/User_Manual.htm" target="_blank">
               <span>{{ 'footer.Information' | translate }}</span>
             </a>
           </li>
           <li>
-            <a class="cl-footer-feedback">
+            <a class="cl-footer-feedback" (click)="onFeedbackFormOpen()">
               <span>{{ 'footer.Feedback' | translate }}</span>
             </a>
           </li>

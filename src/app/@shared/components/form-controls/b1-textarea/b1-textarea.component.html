@@ -5,6 +5,7 @@
 <textarea
   class="b1-input__control"
   [class.b1-input__control_textarea]="autoHight"
+  [style.minHeight]="minHeight"
   [id]="controlId"
   [(ngModel)]="value"
   (ngModelChange)="handleValue($any(value))"

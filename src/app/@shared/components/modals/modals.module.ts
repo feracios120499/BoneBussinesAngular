@@ -26,6 +26,13 @@ import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
 import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
 import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-container.module';
 import { CustomersFilterModule } from '@pipes/customers-filter/customers-filter.module';
+import { FirstTitleModule } from '@pipes/first-title/first-title.module';
+import { B1RadioButtonGroupModule } from '@form-controls/b1-radio-button-group/b1-radio-button-group.module';
+import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
+import { B1RatingModule } from '@form-controls/b1-rating/b1-rating.module';
+import { B1NumberInputModule } from '@form-controls/b1-number-input/b1-number-input.module';
+import { B1MaskedInputModule } from '@form-controls/b1-masked-input/b1-masked-input.module';
+import { FirstLowercaseModule } from '@pipes/first-lowercase/first-lowercase.module';
 
 import { B1ExportTurnoversModalComponent } from './b1-export-turnovers-modal/b1-export-turnovers-modal.component';
 import { B1PaymentModalComponent } from './b1-payment-modal/b1-payment-modal.component';
@@ -37,6 +44,10 @@ import { B1CorrespondentsModalComponent } from './b1-correspondents-modal/b1-cor
 import { B1HistoryModalComponent } from './b1-history-modal/b1-history-modal.component';
 import { B1SignModalComponent } from './b1-sign-modal/b1-sign-modal.component';
 import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-modal.component';
+import { B1FeedbackModalComponent } from './b1-feedback-modal/b1-feedback-modal.component';
+
+import { B1FeedbackRatingFormComponent } from './b1-feedback-rating-form/b1-feedback-rating-form.component';
+import { B1FeedbackContactsFormComponent } from './b1-feedback-contacts-form/b1-feedback-contacts-form.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +61,9 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
     B1HistoryModalComponent,
     B1SignModalComponent,
     B1CustomersModalComponent,
+    B1FeedbackModalComponent,
+    B1FeedbackRatingFormComponent,
+    B1FeedbackContactsFormComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +93,13 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
     B1CheckboxModule,
     B1ModalContainerModule,
     CustomersFilterModule,
+    FirstTitleModule,
+    B1RadioButtonGroupModule,
+    B1TextareaModule,
+    B1RatingModule,
+    B1NumberInputModule,
+    B1MaskedInputModule,
+    FirstLowercaseModule,
   ],
   exports: [
     B1PaymentModalComponent,
@@ -90,6 +111,7 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
     B1CorrespondentsModalComponent,
     B1HistoryModalComponent,
     B1SignModalComponent,
+    B1FeedbackModalComponent,
   ],
 })
 export class ModalsModule {}

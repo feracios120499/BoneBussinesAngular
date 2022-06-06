@@ -38,4 +38,10 @@ export namespace PublicSelectors {
   export const payTypes = createSelector(publicStore, (state) => state.payTypes);
 
   export const mobileAppLinks = createSelector(publicStore, (state) => state.mobileAppLinks);
+
+  export const copyright = createSelector(publicStore, (state) => state.resources?.owner.copyright);
+
+  export const version = createSelector(publicStore, (state) => state.resources?.owner.version);
+
+  export const isLoadingFeedbackSend = createSelector(publicStore, (state) => state.loadings.includes('send'));
 }

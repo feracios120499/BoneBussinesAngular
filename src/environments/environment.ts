@@ -17,6 +17,8 @@ export const environment = {
     vat: 20,
   },
   defaultSignProvider: 'BarsCryptor',
+  appId: 'CORP-LIGHT-WEB',
+  appVersion: '1.4.0',
 };
 
 /*

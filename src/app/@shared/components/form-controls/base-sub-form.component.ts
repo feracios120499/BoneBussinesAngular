@@ -61,8 +61,8 @@ export abstract class BaseSubFormComponent
     return this.formGroup.disabled;
   }
 
-  resetForm(): void {
-    this.formGroup.reset();
+  resetForm(value = {}): void {
+    this.formGroup.reset(value);
   }
 
   submitForm(): boolean {

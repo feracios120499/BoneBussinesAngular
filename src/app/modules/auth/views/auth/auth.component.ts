@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { AuthActions } from '@modules/auth/store/actions';
 import { Store } from '@ngrx/store';
 import { AppActions } from '@store/app/actions';
 import { AppSelectors } from '@store/app/selectors';
+import { PublicSelectors } from '@store/public/selectors';
+import { PublicActions } from '@store/public/actions';
+import { required } from '@store/shared';
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +15,9 @@ import { AppSelectors } from '@store/app/selectors';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
+  copyright$: Observable<string> = required(this.store.select(PublicSelectors.copyright));
+  version$: Observable<string> = required(this.store.select(PublicSelectors.version));
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -28,5 +35,9 @@ export class AuthComponent implements OnInit {
 
   activateDemo(): void {
     this.store.dispatch(AppActions.activateDemo());
+  }
+
+  onFeedbackFormOpen(): void {
+    this.store.dispatch(PublicActions.showFeedbackForm());
   }
 }

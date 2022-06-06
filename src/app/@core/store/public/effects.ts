@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
+import { B1FeedbackModalComponent } from '@modals/b1-feedback-modal/b1-feedback-modal.component';
 import { ServerError } from '@models/errors/server-error.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
+import { FeedbackModalConfig } from '@models/modals/feedback-modal.config';
+import { FeedbackModalResult } from '@models/modals/feedback-modal.result';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalService } from '@services/modal.service';
 import { PublicService } from '@services/public.service';
 import { AppActions } from '@store/app/actions';
 import { NotifyActions } from '@store/notify/actions';
+import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { environment } from '@env';
 
 import { PublicActions } from './actions';
 
@@ -18,7 +25,9 @@ export class PublicEffects {
   constructor(
     private actions$: Actions,
     private publicService: PublicService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private store: Store,
+    private modalService: ModalService
   ) {}
 
   appStart$ = createEffect(() =>
@@ -98,5 +107,61 @@ export class PublicEffects {
         )
       )
     )
+  );
+
+  sendFeedbackRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.sendFeedbackRequest),
+      switchMap(({ payload }) =>
+        this.publicService.sendFeedback(payload).pipe(
+          map(() => PublicActions.sendFeedbackSuccess()),
+          catchError((error: ServerError) =>
+            of(
+              PublicActions.sendFeedbackFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('components.feedback.errors.sendFeedback'),
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  sendFeedbackSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.sendFeedbackSuccess),
+      switchMap(() => [
+        NotifyActions.successNotification({
+          title: this.translateService.instant('shared.feedbackSent'),
+          message: this.translateService.instant('shared.thanksForCooperation'),
+        }),
+      ])
+    )
+  );
+
+  showFeedbackForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.showFeedbackForm),
+      map(() => {
+        const config: FeedbackModalConfig = {
+          callback: (result: FeedbackModalResult) => {
+            const { appId, appVersion } = environment;
+            this.store.dispatch(PublicActions.sendFeedbackRequest({ ...result, appId, appVersion }));
+          },
+        };
+        return SharedActions.showFeedbackModal({ config });
+      })
+    )
+  );
+
+  closeFeedbackForm$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PublicActions.sendFeedbackSuccess),
+        tap(() => this.modalService.close(B1FeedbackModalComponent))
+      ),
+    { dispatch: false }
   );
 }
