@@ -3,7 +3,6 @@
   width: 920px;
   color: var(--color-dark);
   border-radius: 4px;
-  position: relative;
   padding: 50px;
   @media (max-width: 812px) {
     padding: 16px;
@@ -303,6 +302,35 @@
       & .b1-confirm-container.recipient {
         display: none;
       }
+    }
+  }
+}
+
+.swift-tabs {
+  @media (max-width: 812px) {
+    display: none;
+  }
+}
+
+.swift-purpose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media (max-width: 812px) {
+    grid-template-columns: 1fr;
+  }
+  &_right {
+    @media (min-width: 812px) {
+      text-align: right;
+    }
+  }
+}
+
+.b1-confirm {
+  padding: 0;
+  @media (max-width: 812px) {
+    .sender,
+    .recipient {
+      margin-bottom: 16px;
     }
   }
 }

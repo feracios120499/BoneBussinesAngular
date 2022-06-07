@@ -1,3 +1,4 @@
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { FileModel } from '@models/file.model';
 import { ConfirmModalConfig } from '@models/modals/confirm-modal-config.model';
 import { CorrespondentsModalConfig } from '@models/modals/correspondents-modal-config.model';
@@ -14,11 +15,11 @@ import { createAction, DefaultProjectorFn, MemoizedSelector, props } from '@ngrx
 export namespace SharedActions {
   export const showPayment = createAction(
     '[SHARED] show payment',
-    props<{ payment: Partial<PaymentModal> | SwiftModal }>()
+    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> }>()
   );
   export const setPayment = createAction(
     '[SHARED] set payment',
-    props<{ payment: Partial<PaymentModal> | SwiftModal }>()
+    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> }>()
   );
   export const setPaymentLoader = createAction(
     '[SHARED] set payment loader',

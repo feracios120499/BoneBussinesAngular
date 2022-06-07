@@ -37,12 +37,12 @@
             </div>
           </div>
           <div class="payment-window-status_info">
-            <div class="payment-window-status" *ngIf="payment.statusCode">
-              <div [class]="statusMessages[payment.statusCode].class">
-                {{ statusMessages[payment.statusCode].message | translate }}
+            <div class="payment-window-status" *ngIf="statusCode">
+              <div [class]="statusMessages[statusCode].class">
+                {{ statusMessages[statusCode].message | translate }}
               </div>
             </div>
-            <span class="b1-color-dark" ng-if="payment.StatusCode == 'BANKPAID'" style="opacity: 0.6">{{
+            <span class="b1-color-dark" *ngIf="statusCode == 'BANKPAID'" style="opacity: 0.6">{{
               payment.payedDate | date: 'dd.MM.yyyy HH:mm'
             }}</span>
           </div>
@@ -212,10 +212,20 @@
               </div>
             </div>
           </div>
+          <div class="payment-window-status_info">
+            <div class="payment-window-status" *ngIf="statusCode">
+              <div [class]="statusMessages[statusCode].class">
+                {{ statusMessages[statusCode].message | translate }}
+              </div>
+            </div>
+            <span class="b1-color-dark" *ngIf="statusCode == 'BANKPAID'" style="opacity: 0.6">{{
+              swift.bankPayedDate | date: 'dd.MM.yyyy HH:mm'
+            }}</span>
+          </div>
         </div>
         <div class="b1-mt-4">
           <div class="b1-flex">
-            <ul class="b1-head-tabs">
+            <ul class="b1-head-tabs swift-tabs">
               <li [class.active]="currentTab == 'sender'" class="b1-head-tabs__item">
                 <a
                   class="b1-head-tabs__link b1-medium b1-color-dark"
@@ -255,7 +265,7 @@
                   <b1-import-error [errors]="swift.errors" field="senderDataName"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.senderData.name }}
+                  {{ swift.senderData?.name }}
                 </div>
               </div>
               <div class="b1-confirm-group">
@@ -290,7 +300,7 @@
                   <b1-import-error [errors]="swift.errors" field="senderBankName"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.senderBank.name }}
+                  {{ swift.senderBank?.name }}
                 </div>
               </div>
               <div class="b1-confirm-group">
@@ -299,65 +309,55 @@
                   <b1-import-error [errors]="swift.errors" field="senderBankLocation"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.senderBank.location }}
+                  {{ swift.senderBank?.location }}
                 </div>
               </div>
             </div>
             <div class="b1-confirm-block b1-confirm-block_bottom">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="b1-confirm-group">
-                    <div class="b1-confirm-label">
-                      {{ 'components.pay.swift.contractNumberGoodType' | translate }}
-                      <b1-import-error [errors]="swift.errors" field="purpose"></b1-import-error>
-                    </div>
-                    <div class="b1-confirm-value">
-                      {{ swift.purpose }}
-                    </div>
+              <div class="swift-purpose">
+                <div class="b1-confirm-group">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.contractNumberGoodType' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="purpose"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    {{ swift.purpose }}
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="b1-confirm-group text-right">
-                    <div class="b1-confirm-label">
-                      {{ 'components.pay.swift.expenceFee' | translate }}
-                      <b1-import-error [errors]="swift.errors" field="paymentFee"></b1-import-error>
-                    </div>
-                    <div class="b1-confirm-value">
-                      {{ swift.paymentFee }}
-                    </div>
+                <div class="b1-confirm-group swift-purpose_right">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.expenceFee' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="paymentFee"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    {{ swift.paymentFee }}
                   </div>
                 </div>
-              </div>
-              <div class="row b1-margin__top-16">
-                <div class="col-md-6">
-                  <div class="b1-confirm-group">
-                    <div class="b1-confirm-label">
-                      {{ 'components.pay.swift.typePay' | translate }}
-                      <b1-import-error [errors]="swift.errors" field="typePay"></b1-import-error>
-                    </div>
-                    <div class="b1-confirm-value" *ngIf="swift.typePay == 1">
-                      {{ 'components.pay.swift.pay' | translate }}
-                    </div>
-                    <div class="b1-confirm-value" *ngIf="swift.typePay == 0">
-                      {{ 'components.pay.swift.prepay' | translate }}
-                    </div>
+                <div class="b1-confirm-group">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.typePay' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="typePay"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value" *ngIf="swift.typePay == 1">
+                    {{ 'components.pay.swift.pay' | translate }}
+                  </div>
+                  <div class="b1-confirm-value" *ngIf="swift.typePay == 0">
+                    {{ 'components.pay.swift.prepay' | translate }}
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="b1-confirm-group text-right">
-                    <div class="b1-confirm-label">
-                      {{ 'components.pay.amount' | translate }}
-                      <b1-import-error [errors]="swift.errors" field="amount"></b1-import-error>
-                      <b1-import-error [errors]="swift.errors" field="senderAccountAccCurrencyId"></b1-import-error>
-                    </div>
-                    <div class="b1-confirm-value">
-                      <span>
-                        {{ swift.amount | money: '' }}
-                      </span>
-                      <span>
-                        {{ swift.senderAccount.accCurrencyCode }}
-                      </span>
-                    </div>
+                <div class="b1-confirm-group swift-purpose_right">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.amount' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="amount"></b1-import-error>
+                    <b1-import-error [errors]="swift.errors" field="senderAccountAccCurrencyId"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    <span>
+                      {{ swift.amount / 100 | money: '' }}
+                    </span>
+                    <span>
+                      {{ swift.senderAccount.accCurrencyCode }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -374,12 +374,12 @@
                   <b1-import-error [errors]="swift.errors" field="benificiaryName"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.name }}
+                  {{ swift.benificiary?.name }}
                 </div>
               </div>
               <div
                 class="b1-confirm-group"
-                *ngIf="swift.benificiary.iban || (swift.errors && swift.errors['benificiaryIban'])">
+                *ngIf="swift.benificiary?.iban || (swift.errors && swift.errors['benificiaryIban'])">
                 <div class="b1-confirm-label">
                   {{ 'components.pay.swift.beneficiaryAccountIBAN' | translate }}
                   <b1-import-error [errors]="swift.errors" field="benificiaryIban"></b1-import-error>
@@ -390,7 +390,7 @@
               </div>
               <div
                 class="b1-confirm-group"
-                *ngIf="swift.benificiary.iban || (swift.errors && swift.errors['benificiaryAccNumber'])">
+                *ngIf="swift.benificiary?.accNumber || (swift.errors && swift.errors['benificiaryAccNumber'])">
                 <div class="b1-confirm-label">
                   {{ 'components.salary.accNumber' | translate }}
                   <b1-import-error [errors]="swift.errors" field="benificiaryAccNumber"></b1-import-error>
@@ -405,7 +405,7 @@
                   <b1-import-error [errors]="swift.errors" field="benificiaryLocation"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.location }}
+                  {{ swift.benificiary?.location }}
                 </div>
               </div>
             </div>
@@ -419,7 +419,7 @@
                   <b1-import-error [errors]="swift.errors" field="benificiaryBankName"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.bank.name }}
+                  {{ swift.benificiary?.bank?.name }}
                 </div>
               </div>
               <div class="b1-confirm-group">
@@ -428,7 +428,7 @@
                   <b1-import-error [errors]="swift.errors" field="benificiaryBankLocation"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.bank.location }}
+                  {{ swift.benificiary?.bank?.location }}
                 </div>
               </div>
               <div class="b1-confirm-group">
@@ -437,55 +437,54 @@
                   <b1-import-error [errors]="swift.errors" field="benificiaryBankSwift"></b1-import-error>
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.bank.swift }}
+                  {{ swift.benificiary?.bank?.swift }}
                 </div>
               </div>
               <div
                 class="b1-confirm-group"
                 *ngIf="
-                  swift.benificiary.bank.corrAccNumber || (swift.errors && swift.errors['benificiaryBankCorrAccNumber'])
+                  swift.benificiary?.bank?.corrAccNumber ||
+                  (swift.errors && swift.errors['benificiaryBankCorrAccNumber'])
                 ">
                 <div class="b1-confirm-label">
                   {{ 'components.pay.swift.benificiaryBankAccount' | translate }}
                 </div>
                 <div class="b1-confirm-value">
-                  {{ swift.benificiary.bank.corrAccNumber }}
+                  {{ swift.benificiary?.bank?.corrAccNumber }}
                 </div>
               </div>
             </div>
           </div>
           <div class="b1-confirm-container intermediaryBank">
-            <div class="b1-confirm-block b1-confirm-block_bottom" ng-if="payment.IntermediaryBank.SWIFT">
+            <div class="b1-confirm-block b1-confirm-block_bottom" *ngIf="swift.intermediaryBank">
               <div class="b1-confirm-title">
                 {{ 'components.pay.swift.formTabsHeadings.intermediaryBank' | translate }}
               </div>
-              <div style="display: flex; justify-content: space-between">
-                <div class="b1-confirm-group col-md-4 no-padder">
-                  <div class="b1-confirm-label">
-                    {{ 'components.pay.swift.benificiaryBankName' | translate }}
-                    <b1-import-error [errors]="swift.errors" field="intermediaryBankName"></b1-import-error>
-                  </div>
-                  <div class="b1-confirm-value">
-                    {{ swift.intermediaryBank?.name }}
-                  </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankName' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="intermediaryBankName"></b1-import-error>
                 </div>
-                <div class="b1-confirm-group col-md-4 no-padder">
-                  <div class="b1-confirm-label">
-                    {{ 'components.pay.swift.senderBankLocation' | translate }}
-                    <b1-import-error [errors]="swift.errors" field="intermediaryBankLocation"></b1-import-error>
-                  </div>
-                  <div class="b1-confirm-value">
-                    {{ swift.intermediaryBank?.location }}
-                  </div>
+                <div class="b1-confirm-value">
+                  {{ swift.intermediaryBank?.name }}
                 </div>
-                <div class="b1-confirm-group col-md-4 no-padder text-right">
-                  <div class="b1-confirm-label">
-                    {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
-                    <b1-import-error [errors]="swift.errors" field="intermediaryBankSwift"></b1-import-error>
-                  </div>
-                  <div class="b1-confirm-value">
-                    {{ swift.intermediaryBank?.swift }}
-                  </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.senderBankLocation' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="intermediaryBankLocation"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.intermediaryBank?.location }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="intermediaryBankSwift"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.intermediaryBank?.swift }}
                 </div>
               </div>
             </div>

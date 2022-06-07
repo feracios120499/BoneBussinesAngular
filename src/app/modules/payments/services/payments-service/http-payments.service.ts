@@ -63,6 +63,10 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     return this.http.get<PaymentDetails>(`api/v1/pay/payments/${id}/${clientId}`);
   }
 
+  getSwift(id: number, clientId: string): Observable<PaymentDetails> {
+    return this.http.get<PaymentDetails>(`api/v1/pay/swift/payments/${id}/${clientId}`);
+  }
+
   printPayments(ids: number[], clientId: string): Observable<string> {
     return this.http.post(`api/v1/pay/payments/print/HTML/${clientId}`, ids, { responseType: 'text' });
   }

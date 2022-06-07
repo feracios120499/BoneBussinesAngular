@@ -20,6 +20,7 @@ export interface PaymentModal {
 
   actions: PaymentActionModal;
   isPaginationAvailable: boolean;
+  isNeedMySign: boolean;
   next?: () => void;
   previous?: () => void;
   errors?: ImportError;

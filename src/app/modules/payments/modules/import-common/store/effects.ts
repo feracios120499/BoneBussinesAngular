@@ -299,6 +299,7 @@ export class PayImportCommonEffects {
       },
       actions: {},
       isPaginationAvailable: false,
+      isNeedMySign: payment.isNeedMySign,
     };
   }
 

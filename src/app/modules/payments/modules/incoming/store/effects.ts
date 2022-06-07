@@ -118,6 +118,7 @@ export class PayIncomingEffects implements OnRunEffects {
       },
       actions: {},
       isPaginationAvailable: false,
+      isNeedMySign: false,
     };
     payment.actions[PaymentAction.print] = () =>
       this.store.dispatch(PayIncomingActions.printTransactionsRequest([transaction]));

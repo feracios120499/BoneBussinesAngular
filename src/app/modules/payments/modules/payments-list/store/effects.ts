@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { PaginationHelper } from '@helpers/pagination.helper';
 import { B1HistoryModalComponent } from '@modals/b1-history-modal/b1-history-modal.component';
 import { B1SignModalComponent } from '@modals/b1-sign-modal/b1-sign-modal.component';
@@ -12,9 +13,11 @@ import { PaymentForm } from '@models/payment-form.model';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
 import { SignModalConfig } from '@models/sign-modal-config.model';
 import { SignSaveResponse } from '@models/sign-response.model';
+import { SwiftModal } from '@models/swift-modal.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 import { HttpPaymentsService } from '@modules/payments/services/payments-service/http-payments.service';
 import { act, Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -252,15 +255,19 @@ export class PayListEffects implements OnRunEffects {
     this.actions$.pipe(
       ofType(PayListActions.setPayment),
       switchMap((action) => clientIdWithData(this.store, { payment: action.payment, payments: action.payments })),
-      switchMap((payload) =>
-        this.paymentsService.getPayment(payload.data.payment.id, payload.clientId).pipe(
+      switchMap((payload) => {
+        const method = this.isSwift(payload.data.payment)
+          ? this.paymentsService.getSwift(payload.data.payment.id, payload.clientId)
+          : this.paymentsService.getPayment(payload.data.payment.id, payload.clientId);
+
+        return method.pipe(
           map((payment) =>
             SharedActions.setPayment({
               payment: this.mapPaymentDetails(payment, payload.data.payment, payload.data.payments),
             })
           )
-        )
-      )
+        );
+      })
     )
   );
 
@@ -454,36 +461,15 @@ export class PayListEffects implements OnRunEffects {
   );
 
   private mapPaymentDetails(
-    paymentDetails: PaymentDetails,
+    paymentDetails: PaymentDetails | SwiftDetails,
     payment: PaymentsListItem,
     payments: PaymentsListItem[]
-  ): PaymentModal {
-    const paymentModal: PaymentModal = {
-      number: paymentDetails.number,
-      documentDate: paymentDetails.paymentDate,
-      valueDate: paymentDetails.paymentValueDate,
-      statusCode: payment.statusCode,
-      payedDate: paymentDetails.bankPayedDate,
-      purpose: paymentDetails.purpose,
-      amount: paymentDetails.amount,
-      amountString: paymentDetails.amountString || '',
-      currencyCode: paymentDetails.sender.accCurrencyCode || paymentDetails.recipient.accCurrencyCode,
-      sender: {
-        name: paymentDetails.sender.name,
-        number: paymentDetails.sender.accNumber,
-        taxCode: paymentDetails.sender.taxCode,
-      },
-      recipient: {
-        name: paymentDetails.recipient.name,
-        number: paymentDetails.recipient.accNumber,
-        taxCode: paymentDetails.recipient.taxCode,
-        details: paymentDetails.additionalDetails,
-        countryName: paymentDetails.recipientCountryName,
-      },
-      actions: this.getActions(payment),
-      isPaginationAvailable: false,
-    };
+  ): PaymentModal | SwiftModal {
+    const paymentModal = this.isSwift(payment)
+      ? this.mapSwiftToSwiftModal(paymentDetails as SwiftDetails)
+      : this.mapPaymentToPaymentModal(paymentDetails as PaymentDetails);
 
+    paymentModal.actions = this.getActions(payment);
     const pagination = new PaginationHelper<PaymentsListItem>(payments);
 
     pagination.startFrom(payment);
@@ -496,7 +482,68 @@ export class PayListEffects implements OnRunEffects {
     return paymentModal;
   }
 
-  private mapPayment(payment: PaymentsListItem, payments: PaymentsListItem[]): PaymentModal {
+  private mapPayment(
+    payment: PaymentsListItem,
+    payments: PaymentsListItem[]
+  ): PaymentModal | RecursivePartial<SwiftModal> {
+    const paymentModal = this.isSwift(payment)
+      ? this.mapPaymentListItemToSwiftModal(payment)
+      : this.mapPaymentListItemToPaymentModal(payment);
+
+    paymentModal.actions = this.getActions(payment);
+    const pagination = new PaginationHelper<PaymentsListItem>(payments);
+
+    pagination.startFrom(payment);
+
+    paymentModal.isPaginationAvailable = payments.length > 1;
+    paymentModal.next = () =>
+      this.store.dispatch(SharedActions.setPayment({ payment: this.mapPayment(pagination.next(), payments) }));
+    paymentModal.previous = () =>
+      this.store.dispatch(SharedActions.setPayment({ payment: this.mapPayment(pagination.previous(), payments) }));
+
+    return paymentModal;
+  }
+
+  private mapPaymentToPaymentModal(payment: PaymentDetails): PaymentModal {
+    const paymentModal: PaymentModal = {
+      number: payment.number,
+      documentDate: payment.paymentDate,
+      valueDate: payment.paymentValueDate,
+      statusCode: payment.statusId,
+      payedDate: payment.bankPayedDate,
+      purpose: payment.purpose,
+      amount: payment.amount,
+      amountString: payment.amountString || '',
+      currencyCode: payment.sender.accCurrencyCode || payment.recipient.accCurrencyCode,
+      sender: {
+        name: payment.sender.name,
+        number: payment.sender.accNumber,
+        taxCode: payment.sender.taxCode,
+      },
+      recipient: {
+        name: payment.recipient.name,
+        number: payment.recipient.accNumber,
+        taxCode: payment.recipient.taxCode,
+        details: payment.additionalDetails,
+        countryName: payment.recipientCountryName,
+      },
+      isPaginationAvailable: false,
+      actions: {},
+      isNeedMySign: payment.isNeedMySign,
+    };
+
+    return paymentModal;
+  }
+
+  private mapSwiftToSwiftModal(swift: SwiftDetails): SwiftModal {
+    return {
+      ...swift,
+      actions: {},
+      isPaginationAvailable: false,
+    };
+  }
+
+  private mapPaymentListItemToPaymentModal(payment: PaymentsListItem): PaymentModal {
     const paymentModal: PaymentModal = {
       number: payment.number,
       documentDate: payment.docDate,
@@ -517,20 +564,35 @@ export class PayListEffects implements OnRunEffects {
         number: payment.recipient.accNumber,
         taxCode: payment.recipient.taxCode,
       },
-      actions: this.getActions(payment),
+      actions: {},
       isPaginationAvailable: false,
+      isNeedMySign: payment.isNeedMySign,
     };
-    const pagination = new PaginationHelper<PaymentsListItem>(payments);
-
-    pagination.startFrom(payment);
-
-    paymentModal.isPaginationAvailable = payments.length > 1;
-    paymentModal.next = () =>
-      this.store.dispatch(SharedActions.setPayment({ payment: this.mapPayment(pagination.next(), payments) }));
-    paymentModal.previous = () =>
-      this.store.dispatch(SharedActions.setPayment({ payment: this.mapPayment(pagination.previous(), payments) }));
 
     return paymentModal;
+  }
+
+  private mapPaymentListItemToSwiftModal(payment: PaymentsListItem): RecursivePartial<SwiftModal> {
+    const swiftModal: RecursivePartial<SwiftModal> = {
+      amount: payment.amount,
+      purpose: payment.purpose,
+      paymentDate: payment.docDate,
+      paymentValueDate: payment.valueDate,
+      id: payment.id,
+      number: payment.number,
+      actions: {},
+      isPaginationAvailable: false,
+      senderAccount: {
+        ...payment.sender,
+        accId: payment.sender.accId || 0,
+        bankName: payment.sender.bankName || '',
+      },
+      benificiary: {
+        name: payment.recipient.name,
+      },
+    };
+
+    return swiftModal;
   }
 
   private mapResults(results: PaymentsResponseResult[]): ArrayNotification[] {
@@ -553,6 +615,10 @@ export class PayListEffects implements OnRunEffects {
     };
 
     return actions;
+  }
+
+  private isSwift(payment: PaymentsListItem): boolean {
+    return payment.typeId?.startsWith('SWIFT');
   }
 
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {

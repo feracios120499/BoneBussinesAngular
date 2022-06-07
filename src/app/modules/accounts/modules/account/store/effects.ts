@@ -358,6 +358,7 @@ export class AcctDetailsEffects implements OnRunEffects {
             taxCode: transaction.recipient.taxCode,
           },
           actions: {},
+          isNeedMySign: false,
         };
         payment.actions[PaymentAction.print] = () =>
           this.store.dispatch(

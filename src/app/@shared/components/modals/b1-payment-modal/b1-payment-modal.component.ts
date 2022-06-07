@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
 import { SwiftModal } from '@models/swift-modal.model';
+import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { SharedActions } from '@store/shared/actions';
@@ -27,6 +28,7 @@ export class B1PaymentModalComponent implements OnInit {
   actions: PaymentActionModal = {};
   payment?: PaymentModal;
   swift?: SwiftModal;
+  statusCode?: PaymentStatuses;
   currentTab: 'sender' | 'recipient' | 'intermediaryBank' = 'sender';
 
   statusMessages: any = {
@@ -65,12 +67,16 @@ export class B1PaymentModalComponent implements OnInit {
       this.currentTab = 'sender';
       if (payment && 'benificiary' in payment) {
         this.swift = payment as SwiftModal;
+        this.payment = undefined;
         this.isPaginationAvailable = this.swift.isPaginationAvailable;
         this.actions = this.swift.actions;
+        this.statusCode = this.swift.isNeedMySign ? 'ONMYSIGN' : this.swift.statusId;
       } else {
         this.payment = payment as PaymentModal;
+        this.swift = undefined;
         this.isPaginationAvailable = this.payment.isPaginationAvailable;
         this.actions = this.payment.actions;
+        this.statusCode = this.payment.isNeedMySign ? 'ONMYSIGN' : this.payment.statusCode;
       }
     });
   }

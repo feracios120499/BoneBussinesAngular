@@ -1,3 +1,4 @@
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { SwiftModal } from '@models/swift-modal.model';
@@ -12,7 +13,7 @@ export interface SharedState {
 }
 
 export interface CurrentPayment {
-  payment?: Partial<PaymentModal> | SwiftModal;
+  payment?: Partial<PaymentModal> | RecursivePartial<SwiftModal>;
   loader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>>;
 }
 

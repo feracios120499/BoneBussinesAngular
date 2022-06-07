@@ -942,6 +942,9 @@
       margin-bottom: 16px;
     }
   }
+  &-group {
+    word-break: break-word;
+  }
   &-group:not(:last-child) {
     margin-bottom: 16px;
     @media (max-width: 812px) {

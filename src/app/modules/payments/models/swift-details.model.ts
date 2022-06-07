@@ -1,3 +1,5 @@
+import { PaymentStatuses } from './payment-status.type';
+
 export interface SwiftDetails {
   amount: number;
   details: string;
@@ -14,6 +16,9 @@ export interface SwiftDetails {
   senderAccount: SwiftSenderAccount;
   senderBank: SwiftBank;
   senderData: SwiftSenderData;
+  bankPayedDate?: Date;
+  statusId: PaymentStatuses;
+  isNeedMySign: boolean;
 }
 
 export interface SwiftSenderData {
