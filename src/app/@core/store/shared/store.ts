@@ -1,5 +1,6 @@
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
+import { SwiftModal } from '@models/swift-modal.model';
 import { DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
 
 export const SHARED_KEY = 'shared';
@@ -11,7 +12,7 @@ export interface SharedState {
 }
 
 export interface CurrentPayment {
-  payment?: Partial<PaymentModal>;
+  payment?: Partial<PaymentModal> | SwiftModal;
   loader?: MemoizedSelector<object, boolean, DefaultProjectorFn<boolean>>;
 }
 

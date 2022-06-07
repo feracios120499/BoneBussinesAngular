@@ -6,6 +6,7 @@ import { ArrayNotification } from '@models/array-notification.model';
 import { DocumentHistory } from '@models/document-history.model';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { StatusCode } from '@models/enums/status-code.enum';
+import { FileModel } from '@models/file.model';
 import { HistoryModalConfig } from '@models/history-modal-config.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
@@ -417,6 +418,9 @@ export class PayListEffects implements OnRunEffects {
         ofType(PayListActions.openImportModal),
         tap((action) => {
           const modal = this.modalService.open(PaymentsImportModalComponent, { windowClass: 'import-modal' });
+          modal.componentInstance.onImport = (files: File[], type: 'common' | 'swift') =>
+            this.store.dispatch(PayListActions.importPaymentsRequest({ files, type }));
+          modal.componentInstance.isLoading$ = this.store.select(PayListSelectors.isLoading);
         })
       ),
     { dispatch: false }
@@ -426,12 +430,16 @@ export class PayListEffects implements OnRunEffects {
     this.actions$.pipe(
       ofType(PayListActions.importPaymentsRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
-      switchMap((payload) =>
-        this.paymentsService.importCommonPayments(payload.data.files, payload.clientId).pipe(
+      switchMap((payload) => {
+        const method =
+          payload.data.type === 'common'
+            ? this.paymentsService.importCommonPayments(payload.data.files, payload.clientId)
+            : this.paymentsService.importSwiftPayments(payload.data.files, payload.clientId);
+        return method.pipe(
           map((response) => PayListActions.importPaymentsSuccess(response)),
           catchError((error) => of(PayListActions.importPaymentsFailure(error.message)))
-        )
-      )
+        );
+      })
     )
   );
 

@@ -29,6 +29,7 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { PaymentsImportModalComponent } from './components/payments-import-modal/payments-import-modal.component';
 import { PaymentsExportModalComponent } from './components/payments-export-modal/payments-export-modal.component';
 import { B1DragDropFilesModule } from '@ui/b1-drag-drop-files/b1-drag-drop-files.module';
+import { PaymentsSumModule } from '@modules/payments/components/payments-sum/payments-sum.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { B1DragDropFilesModule } from '@ui/b1-drag-drop-files/b1-drag-drop-files
     B1SkeletonModule,
     B1PageButtonModule,
     B1DragDropFilesModule,
+    PaymentsSumModule,
   ],
 })
 export class PaymentsListModule {}

@@ -15,11 +15,11 @@ export namespace PayImportCommonSelectors {
 
     if (state.importResponse) {
       statusCount.ERROR = state.importResponse.responses.filter((p) => p.status === 'ERROR').length;
-      statusCount.SUCCESS = state.importResponse.responses.filter((p) => p.status === 'SUCCESS').length;
+      statusCount.OK = state.importResponse.responses.filter((p) => p.status === 'OK').length;
       statusCount.EXISTS = state.importResponse.responses.filter((p) => p.status === 'EXISTS').length;
     } else {
       statusCount.ERROR = 0;
-      statusCount.SUCCESS = 0;
+      statusCount.OK = 0;
       statusCount.EXISTS = 0;
     }
     return statusCount;
@@ -34,7 +34,7 @@ export namespace PayImportCommonSelectors {
 
   export const allPayments = createSelector(payImportCommonState, (state) => state?.importResponse?.responses);
 
-  export const canSave = createSelector(count, (statusCount) => statusCount.SUCCESS + statusCount.EXISTS > 0);
+  export const canSave = createSelector(count, (statusCount) => statusCount.OK + statusCount.EXISTS > 0);
 
   export const filter = createSelector(payImportCommonState, (state) => state.filter);
 

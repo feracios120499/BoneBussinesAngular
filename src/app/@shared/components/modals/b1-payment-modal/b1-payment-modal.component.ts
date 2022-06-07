@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PaymentAction } from '@models/enums/payment-action.enum';
-import { PaymentModal } from '@models/payment-modal.model';
+import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
+import { SwiftModal } from '@models/swift-modal.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { SharedActions } from '@store/shared/actions';
@@ -21,6 +22,12 @@ export class B1PaymentModalComponent implements OnInit {
   isLoading$ = this.store
     .select(SharedSelectors.loader)
     .pipe(switchMap((selector) => (selector ? this.store.select(selector) : of(false))));
+
+  isPaginationAvailable = false;
+  actions: PaymentActionModal = {};
+  payment?: PaymentModal;
+  swift?: SwiftModal;
+  currentTab: 'sender' | 'recipient' | 'intermediaryBank' = 'sender';
 
   statusMessages: any = {
     NEW: {
@@ -53,22 +60,41 @@ export class B1PaymentModalComponent implements OnInit {
     },
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.payment$.subscribe((payment) => {
+      this.currentTab = 'sender';
+      if (payment && 'benificiary' in payment) {
+        this.swift = payment as SwiftModal;
+        this.isPaginationAvailable = this.swift.isPaginationAvailable;
+        this.actions = this.swift.actions;
+      } else {
+        this.payment = payment as PaymentModal;
+        this.isPaginationAvailable = this.payment.isPaginationAvailable;
+        this.actions = this.payment.actions;
+      }
+    });
+  }
 
-  execute(payment: Partial<PaymentModal>, paymentAction: PaymentAction): void {
-    if (payment.actions) {
-      payment.actions[paymentAction](this.activeModal);
+  execute(paymentAction: PaymentAction): void {
+    if (this.payment) {
+      this.payment.actions[paymentAction](this.activeModal);
+    } else {
+      this.swift?.actions[paymentAction](this.activeModal);
     }
   }
 
-  next(payment: Partial<PaymentModal>): void {
-    if (payment.next) {
+  next(): void {
+    const payment = this.payment || this.swift;
+
+    if (payment && payment.next) {
       payment.next();
     }
   }
 
-  previous(payment: Partial<PaymentModal>): void {
-    if (payment.previous) {
+  previous(): void {
+    const payment = this.payment || this.swift;
+
+    if (payment && payment.previous) {
       payment.previous();
     }
   }

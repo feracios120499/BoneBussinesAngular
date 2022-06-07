@@ -128,6 +128,15 @@ const loadings: ReducerTypes<PayListState, ActionCreator<string, Creator<any[], 
     ...state,
     loadings: removeItem(state.loadings, 'export'),
   })),
+
+  on(PayListActions.importPaymentsRequest, (state) => ({
+    ...state,
+    loadings: pushIfNotExist(state.loadings, 'import'),
+  })),
+  on(PayListActions.importPaymentsSuccess, PayListActions.importPaymentsFailure, (state) => ({
+    ...state,
+    loadings: removeItem(state.loadings, 'import'),
+  })),
 ];
 
 export const payListReducer = createReducer(payListState, ...reducer, ...loadings);

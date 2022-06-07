@@ -20,11 +20,15 @@ export class ImportCommonActionsComponent implements OnInit {
     this.store.dispatch(PayImportCommonActions.saveResultFile());
   }
 
-  importPayments(): void {}
+  importPayments(): void {
+    this.store.dispatch(PayImportCommonActions.openImportModal());
+  }
 
   savePayments(): void {
     this.store.dispatch(PayImportCommonActions.savePayments());
   }
 
-  onFilter(filter: string): void {}
+  onFilter(filter: string): void {
+    this.store.dispatch(PayImportCommonActions.filter({ filter }));
+  }
 }

@@ -15,7 +15,7 @@ export class ImportCommonTabsComponent implements OnInit {
 
   tabs = [
     {
-      status: 'SUCCESS',
+      status: 'OK',
       label: 'components.salary.registry.import.successfull',
       badgeClass: 'b1-page-badge__success',
     },

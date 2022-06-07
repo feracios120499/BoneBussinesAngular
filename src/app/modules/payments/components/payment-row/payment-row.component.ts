@@ -4,6 +4,7 @@ import { ImportResponsRow } from '@modules/payments/models/import-response.model
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentRow } from '@modules/payments/models/payment-row.model';
 import { UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 
 @Component({
   selector: 'app-payment-row',
@@ -15,7 +16,7 @@ export class PaymentRowComponent implements OnInit, OnChanges {
 
   @Input() transaction?: UiTransaction;
   @Input() payment?: UiPaymentsListItem;
-  @Input() paymentDetails?: PaymentDetails;
+  @Input() import?: PaymentDetails | SwiftDetails;
   @Input() selected = false;
   @Input() selectable = true;
   @Output() onSelect: EventEmitter<void> = new EventEmitter<void>();
@@ -63,24 +64,41 @@ export class PaymentRowComponent implements OnInit, OnChanges {
       } else {
         this.icon = 'country';
       }
-    } else if (this.paymentDetails) {
+    } else if (this.import && !('benificiary' in this.import)) {
+      const paymentDetails = this.import as PaymentDetails;
       this.paymentRow = {
-        id: this.paymentDetails.id,
+        id: paymentDetails.id,
         selected: false,
-        number: this.paymentDetails.number,
-        recipientName: this.paymentDetails.recipient.name,
-        senderName: this.paymentDetails.sender.name,
+        number: paymentDetails.number,
+        recipientName: paymentDetails.recipient.name,
+        senderName: paymentDetails.sender.name,
         createDate: new Date(),
-        amount: this.paymentDetails.amount,
-        purpose: this.paymentDetails.purpose,
-        currencyCode: this.paymentDetails.sender.accCurrencyCode,
+        amount: paymentDetails.amount,
+        purpose: paymentDetails.purpose,
+        currencyCode: paymentDetails.sender.accCurrencyCode,
       };
 
-      if (this.paymentDetails.recipient.accId) {
+      if (paymentDetails.recipient.accId) {
         this.icon = 'cards';
       } else {
         this.icon = 'country';
       }
+    } else if (this.import && 'benificiary' in this.import) {
+      const swift = this.import as SwiftDetails;
+
+      this.paymentRow = {
+        id: swift.id,
+        selected: false,
+        number: swift.number,
+        recipientName: swift.benificiary.name,
+        senderName: swift.senderAccount.name,
+        createDate: new Date(),
+        amount: swift.amount,
+        purpose: swift.purpose,
+        currencyCode: swift.senderAccount.accCurrencyCode,
+      };
+
+      this.icon = 'swift';
     }
   }
 

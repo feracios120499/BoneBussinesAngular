@@ -1,5 +1,9 @@
+import { DatePipe } from '@angular/common';
+import { CurrencySum, ItemSum } from '@models/item-sum.model';
 import { UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { PaymentsListFilter } from '@pipes/payments-list-filter/payments-list-filter.pipe';
+import { FilterService } from '@services/filter.service';
 import { isAnyExist } from '@store/shared';
 import { PayListState, PAY_LIST_KEY } from './store';
 
@@ -38,10 +42,41 @@ export namespace PayListSelectors {
     })
   );
 
-  export const filteredPayments = createSelector(payments, (uiPayments) => uiPayments);
+  export const filteredPayments = createSelector(payments, payListState, (uiPayments, state) => {
+    const paymentsFilter = new PaymentsListFilter(new FilterService(new DatePipe(window.navigator.language)));
+
+    return paymentsFilter.transform(uiPayments, state.filter);
+  });
 
   export const rangeWithStatus = createSelector(payListState, (state) => ({
     range: state.range,
     status: state.currentTab,
   }));
+
+  export const paymentsSum = createSelector(filteredPayments, (payments) => {
+    const itemSum: ItemSum = {
+      count: payments.length,
+      sum: getSum(payments),
+    };
+    return itemSum;
+  });
+
+  export const selectedPaymentSum = createSelector(filteredPayments, (payments) => {
+    payments = payments.filter((p) => p.selected);
+    const itemSum: ItemSum = {
+      count: payments.length,
+      sum: getSum(payments),
+    };
+    return itemSum;
+  });
+
+  function getSum(payments: UiPaymentsListItem[]): CurrencySum {
+    return payments.reduce((result: CurrencySum, value) => {
+      if (!result[value.currencyCode]) {
+        result[value.currencyCode] = 0;
+      }
+      result[value.currencyCode] += value.amount;
+      return result;
+    }, {});
+  }
 }

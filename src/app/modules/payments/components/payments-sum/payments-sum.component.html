@@ -1,0 +1,22 @@
+<div class="pay-sum b1-medium b1-light" *ngrxLet="sum$ as sum">
+  <div>
+    <span>{{ 'shared.found' | translate }}</span>
+    <span>{{ sum.count }}</span>
+    <span>
+      <b1-translate-counter prefix="components.pay.paymentsTranslations." [count]="sum.count"> </b1-translate-counter>
+    </span>
+    <span>
+      <b1-currency-sum [currencySum]="sum.sum"></b1-currency-sum>
+    </span>
+  </div>
+  <ng-container *ngrxLet="selectedSum$ as selectedSum">
+    <div class="pay-sum-selected" *ngIf="selectedSum.count != 0">
+      <span> {{ 'components.pay.totalSelectedPaymentsSum' | translate }}: </span>
+      <span>
+        <b1-currency-sum [currencySum]="selectedSum.sum"></b1-currency-sum>
+      </span>
+      <span> {{ 'components.pay.totalSelectedPaymentsAmount' | translate }}: </span>
+      <span>{{ selectedSum.count }}</span>
+    </div>
+  </ng-container>
+</div>

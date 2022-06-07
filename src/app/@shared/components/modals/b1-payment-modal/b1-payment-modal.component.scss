@@ -283,3 +283,26 @@
     width: calc(100% - 32px);
   }
 }
+
+.b1-confirm {
+  @media (min-width: 812px) {
+    &.sender {
+      & .b1-confirm-container.recipient,
+      & .b1-confirm-container.intermediaryBank {
+        display: none;
+      }
+    }
+    &.recipient {
+      & .b1-confirm-container.sender,
+      & .b1-confirm-container.intermediaryBank {
+        display: none;
+      }
+    }
+    &.intermediaryBank {
+      & .b1-confirm-container.sender,
+      & .b1-confirm-container.recipient {
+        display: none;
+      }
+    }
+  }
+}

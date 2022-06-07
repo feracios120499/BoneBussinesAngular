@@ -1,5 +1,6 @@
 import { ImportStatus } from './import-status.type';
 import { PaymentDetails } from './payment-details.model';
+import { SwiftDetails } from './swift-details.model';
 
 export interface ImportResponse {
   responseExcel: string;
@@ -12,6 +13,6 @@ export interface ImportError {
 
 export interface ImportResponsRow {
   error?: ImportError;
-  model: PaymentDetails;
+  model: PaymentDetails | SwiftDetails;
   status: ImportStatus;
 }

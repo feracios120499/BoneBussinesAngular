@@ -5,7 +5,7 @@
         <app-payment-row
           class="b1-page-data__row payment-row"
           *cdkVirtualFor="let payment of payments; trackBy: trackId"
-          [paymentDetails]="payment.model"
+          [import]="payment.model"
           [selectable]="false"
           (onShow)="showPayment(payment, payments)">
         </app-payment-row>

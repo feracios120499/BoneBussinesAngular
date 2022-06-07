@@ -10,6 +10,7 @@ import { SignRequest } from '@models/sign-request.model';
 import { SignSaveResponse } from '@models/sign-response.model';
 import { StatusCount } from '@models/status-count.model';
 import { StatusResponse } from '@models/status-response.model';
+import { CreateSwiftModel } from '@modules/payments/models/create-swift.model';
 import { ImportResponse } from '@modules/payments/models/import-response.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentHistory } from '@modules/payments/models/payment-history.model';
@@ -17,6 +18,7 @@ import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsCount } from '@modules/payments/models/payments-count.model';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { PaymentsResponseResult } from '@modules/payments/models/payments-response.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 import { BaseService } from '@services/base.service';
 import dayjs from 'dayjs';
 import { Observable } from 'rxjs';
@@ -111,8 +113,18 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     return this.http.post<ImportResponse>(`/api/v1/pay/payments/import/validate/${clientId}`, formData);
   }
 
+  importSwiftPayments(files: File[], clientId: string): Observable<ImportResponse> {
+    const formData = new FormData();
+    files.forEach((file, index) => formData.append(`file[${index}]`, file, file.name));
+    return this.http.post<ImportResponse>(`/api/v1/pay/payments/import/swift/validate/${clientId}`, formData);
+  }
+
   createPayments(payments: CreatePaymentModel[], clientId: string): Observable<StatusResponse[]> {
     return this.http.post<StatusResponse[]>(`api/v1/pay/payments/${clientId}`, payments);
+  }
+
+  createSwiftPayments(swifts: CreateSwiftModel[], clientId: string): Observable<StatusResponse[]> {
+    return this.http.post<StatusResponse[]>(`api/v1/pay/payments/swift/${clientId}`, swifts);
   }
 
   private mapFile(res: HttpResponse<Blob>): FileModel {
@@ -121,6 +133,7 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     };
 
     const disposition = res.headers.get('Content-Disposition');
+    console.log(disposition);
     if (!disposition) {
       // either the disposition was not sent, or is not accessible
       //  (see CORS Access-Control-Expose-Headers)

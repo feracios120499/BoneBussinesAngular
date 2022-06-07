@@ -3,20 +3,27 @@ import { PaginationHelper } from '@helpers/pagination.helper';
 import { b64toBlob } from '@methods/base64-to-blob.method';
 import { B1EditPaymentModalComponent } from '@modals/b1-edit-payment-modal/b1-edit-payment-modal.component';
 import { B1PaymentModalComponent } from '@modals/b1-payment-modal/b1-payment-modal.component';
+import { ArrayNotification } from '@models/array-notification.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
 import { CreatePaymentModel } from '@models/payments/create-payment.model';
+import { StatusResponse } from '@models/status-response.model';
+import { SwiftModal } from '@models/swift-modal.model';
 import { ImportResponsRow } from '@modules/payments/models/import-response.model';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 import { HttpPaymentsService } from '@modules/payments/services/payments-service/http-payments.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ModalService } from '@services/modal.service';
+import { NotifyActions } from '@store/notify/actions';
+import { RouteActions } from '@store/route/actions';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { PaymentsImportModalComponent } from '../../payments-list/components/payments-import-modal/payments-import-modal.component';
 import { PayImportCommonActions } from './actions';
 import { PayImportCommonSelectors } from './selectors';
 
@@ -43,7 +50,7 @@ export class PayImportCommonEffects {
       this.actions$.pipe(
         ofType(PayImportCommonActions.editPayment),
         tap((action) => {
-          const payment = action.payment.model;
+          const payment = action.payment.model as PaymentDetails;
           const paymentForm: PaymentForm = {
             paymentDate: payment.paymentDate,
             paymentValueDate: payment.paymentValueDate,
@@ -106,7 +113,7 @@ export class PayImportCommonEffects {
 
             this.store.dispatch(
               PayImportCommonActions.saveEditPayment({
-                payment: { model: paymentSave, status: 'SUCCESS' },
+                payment: { model: paymentSave, status: 'OK' },
               })
             );
             this.modalService.close(B1PaymentModalComponent);
@@ -137,12 +144,17 @@ export class PayImportCommonEffects {
         ofType(PayImportCommonActions.savePayments),
         withLatestFrom(this.store.select(PayImportCommonSelectors.allPayments)),
         tap(([, payments]) => {
-          if (!payments) return;
-          const dublicatesExist = payments.filter((p) => p.status == 'EXISTS').length > 0;
+          if (!payments) {
+            return;
+          }
+          const dublicatesExist = payments.filter((p) => p.status === 'EXISTS').length > 0;
           if (!dublicatesExist) {
+            const successPayments = payments.filter((p) => p.status === 'OK');
             this.store.dispatch(
               PayImportCommonActions.savePaymentsRequest(
-                payments.filter((p) => p.status == 'SUCCESS').map((p) => p.model)
+                this.isSwift(payments[0])
+                  ? successPayments.map((p) => p.model as SwiftDetails)
+                  : successPayments.map((p) => p.model as PaymentDetails)
               )
             );
           }
@@ -155,51 +167,100 @@ export class PayImportCommonEffects {
     this.actions$.pipe(
       ofType(PayImportCommonActions.savePaymentsRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap((payload) => {
+        const method =
+          'benificiary' in payload.data[0]
+            ? this.paymentsService.createSwiftPayments(
+                payload.data.map((payment) => ({
+                  ...(payment as SwiftDetails),
+                  saveAsTemplate: false,
+                  status: 'NEW',
+                })),
+                payload.clientId
+              )
+            : this.paymentsService.createPayments(
+                payload.data.map((payment) => ({
+                  ...(payment as PaymentDetails),
+                  saveAsTemplate: false,
+                  status: 'NEW',
+                })),
+                payload.clientId
+              );
+
+        return method.pipe(
+          map((result) => PayImportCommonActions.savePaymentsSuccess(result)),
+          catchError((error) => of(PayImportCommonActions.savePaymentsFailure(error.message)))
+        );
+      })
+    )
+  );
+
+  savePaymentsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayImportCommonActions.savePaymentsSuccess),
+      switchMap((action) => [
+        RouteActions.routeTo({ route: 'payments/list', state: { tab: 'NEW' } }),
+        NotifyActions.arrayNotification({ results: this.mapResults(action.payload) }),
+      ])
+    )
+  );
+
+  openImportModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PayImportCommonActions.openImportModal),
+        tap((action) => {
+          const modal = this.modalService.open(PaymentsImportModalComponent, { windowClass: 'import-modal' });
+          modal.componentInstance.onImport = (files: File[], type: 'common' | 'swift') =>
+            this.store.dispatch(PayImportCommonActions.importPaymentsRequest({ files, type }));
+          modal.componentInstance.isLoading$ = this.store.select(PayImportCommonSelectors.isLoading);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  importPayments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayImportCommonActions.importPaymentsRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap((payload) =>
-        this.paymentsService
-          .createPayments(
-            payload.data.map((payment) => ({
-              ...payment,
-              saveAsTemplate: false,
-              status: 'NEW',
-            })),
-            payload.clientId
-          )
-          .pipe(
-            map((result) => PayImportCommonActions.savePaymentsSuccess(result)),
-            catchError((error) => of(PayImportCommonActions.savePaymentsFailure(error.message)))
-          )
+        this.paymentsService.importCommonPayments(payload.data.files, payload.clientId).pipe(
+          map((response) => PayImportCommonActions.importPaymentsSuccess(response)),
+          catchError((error) => of(PayImportCommonActions.importPaymentsFailure(error.message)))
+        )
       )
     )
   );
 
-  private mapPayment(payment: ImportResponsRow, payments: ImportResponsRow[]): PaymentModal {
-    const paymentDetails = payment.model;
-    const paymentModal: PaymentModal = {
-      number: paymentDetails.number,
-      documentDate: paymentDetails.paymentDate,
-      valueDate: paymentDetails.paymentValueDate,
-      payedDate: paymentDetails.bankPayedDate,
-      purpose: paymentDetails.purpose,
-      amount: paymentDetails.amount,
-      amountString: paymentDetails.amountString || '',
-      currencyCode: paymentDetails.sender.accCurrencyCode || paymentDetails.recipient.accCurrencyCode,
-      sender: {
-        name: paymentDetails.sender.name,
-        number: paymentDetails.sender.accNumber,
-        taxCode: paymentDetails.sender.taxCode,
-      },
-      recipient: {
-        name: paymentDetails.recipient.name,
-        number: paymentDetails.recipient.accNumber,
-        taxCode: paymentDetails.recipient.taxCode,
-        details: paymentDetails.additionalDetails,
-        countryName: paymentDetails.recipientCountryName,
-      },
-      errors: payment.error,
-      actions: this.getActions(payment),
-      isPaginationAvailable: false,
-    };
+  importPaymentsSucess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayImportCommonActions.importPaymentsSuccess),
+      map((action) => {
+        this.modalService.close(PaymentsImportModalComponent);
+        return PayImportCommonActions.setResponse({ response: action.payload });
+      })
+    )
+  );
+
+  private mapResults(response: StatusResponse[]): ArrayNotification[] {
+    return response.map((item) => {
+      const notify: ArrayNotification = {
+        number: item.id,
+        isSuccess: item.isSuccess,
+        message: item.message || '',
+      };
+
+      return notify;
+    });
+  }
+
+  private mapPayment(payment: ImportResponsRow, payments: ImportResponsRow[]): PaymentModal | SwiftModal {
+    const paymentModal = this.isSwift(payment)
+      ? this.getSwiftModal(payment.model as SwiftDetails)
+      : this.getPaymentModal(payment.model as PaymentDetails);
+
+    paymentModal.actions = this.getActions(payment);
+    paymentModal.errors = payment.error;
 
     const pagination = new PaginationHelper<ImportResponsRow>(payments);
 
@@ -214,14 +275,53 @@ export class PayImportCommonEffects {
     return paymentModal;
   }
 
+  private getPaymentModal(payment: PaymentDetails): PaymentModal {
+    return {
+      number: payment.number,
+      documentDate: payment.paymentDate,
+      valueDate: payment.paymentValueDate,
+      payedDate: payment.bankPayedDate,
+      purpose: payment.purpose,
+      amount: payment.amount,
+      amountString: payment.amountString || '',
+      currencyCode: payment.sender.accCurrencyCode || payment.recipient.accCurrencyCode,
+      sender: {
+        name: payment.sender.name,
+        number: payment.sender.accNumber,
+        taxCode: payment.sender.taxCode,
+      },
+      recipient: {
+        name: payment.recipient.name,
+        number: payment.recipient.accNumber,
+        taxCode: payment.recipient.taxCode,
+        details: payment.additionalDetails,
+        countryName: payment.recipientCountryName,
+      },
+      actions: {},
+      isPaginationAvailable: false,
+    };
+  }
+
+  private getSwiftModal(swift: SwiftDetails): SwiftModal {
+    return {
+      ...swift,
+      actions: {},
+      isPaginationAvailable: false,
+    };
+  }
+
+  private isSwift(payment: ImportResponsRow): boolean {
+    return 'benificiary' in payment.model;
+  }
+
   private getActions(payment: ImportResponsRow): PaymentActionModal {
     const actions: PaymentActionModal = {};
 
-    if (payment.status == 'ERROR') {
-      actions['edit'] = () => this.store.dispatch(PayImportCommonActions.editPayment({ payment }));
-    } else if (payment.status == 'EXISTS') {
-      actions['toSuccess'] = (modal: NgbActiveModal) => {
-        this.store.dispatch(PayImportCommonActions.toSuccess({ payment: { ...payment, status: 'SUCCESS' } }));
+    if (payment.status === 'ERROR' && !this.isSwift(payment)) {
+      actions.edit = () => this.store.dispatch(PayImportCommonActions.editPayment({ payment }));
+    } else if (payment.status === 'EXISTS') {
+      actions.toSuccess = (modal: NgbActiveModal) => {
+        this.store.dispatch(PayImportCommonActions.toSuccess({ payment: { ...payment, status: 'OK' } }));
         modal.close();
       };
     }

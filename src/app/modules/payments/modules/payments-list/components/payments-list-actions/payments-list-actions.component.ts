@@ -46,8 +46,11 @@ export class PaymentsListActionsComponent implements OnInit, OnDestroy {
     this.store.dispatch(PayListActions.filter({ filter }));
   }
 
-  setRange(range: DateRange): void {
-    console.log('set range');
+  setRange(range: DateRange, oldRange: DateRange): void {
+    if (range.start.isSame(oldRange.start, 'day') && range.end.isSame(oldRange.end, 'day')) {
+      return;
+    }
+
     this.store.dispatch(PayListActions.setRange({ range }));
   }
 

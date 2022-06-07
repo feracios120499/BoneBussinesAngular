@@ -30,7 +30,7 @@
     </div>
 
     <b1-drag-drop-files accept=".xlsx,.xls,.dbf,.csv" [multiple]="true" [(ngModel)]="files"></b1-drag-drop-files>
-    <div class="b1-page-hr" ng-class="{ loading: state.isLoading }"></div>
+    <div class="b1-page-hr" [class.loading]="isLoading"></div>
     <div class="b1-flex b1-align-center b1-justify-center">
       <div class="b1-large b1-light">
         {{ 'components.pay.downloadTemplate' | translate }}

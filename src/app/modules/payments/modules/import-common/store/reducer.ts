@@ -20,5 +20,16 @@ export const payImportCommonReducer = createReducer(
     newState.importResponse = importResponse;
     return newState;
   }),
-  on(PayImportCommonActions.filter, (state, action) => ({ ...state, filter: action.filter }))
+  on(PayImportCommonActions.filter, (state, action) => ({ ...state, filter: action.filter })),
+  on(PayImportCommonActions.importPaymentsRequest, PayImportCommonActions.savePaymentsRequest, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(
+    PayImportCommonActions.savePaymentsFailure,
+    PayImportCommonActions.savePaymentsSuccess,
+    PayImportCommonActions.importPaymentsSuccess,
+    PayImportCommonActions.importPaymentsFailure,
+    (state) => ({ ...state, isLoading: false })
+  )
 );

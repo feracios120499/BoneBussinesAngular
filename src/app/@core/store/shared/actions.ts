@@ -7,11 +7,19 @@ import { RequisitesModalConfig } from '@models/modals/requisites-modal-config.mo
 import { PaymentForm } from '@models/payment-form.model';
 import { PaymentModal } from '@models/payment-modal.model';
 import { StatementModalConfig } from '@models/statement-modal-config.model';
+import { SwiftModal } from '@models/swift-modal.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 import { createAction, DefaultProjectorFn, MemoizedSelector, props } from '@ngrx/store';
 
 export namespace SharedActions {
-  export const showPayment = createAction('[SHARED] show payment', props<{ payment: Partial<PaymentModal> }>());
-  export const setPayment = createAction('[SHARED] set payment', props<{ payment: Partial<PaymentModal> }>());
+  export const showPayment = createAction(
+    '[SHARED] show payment',
+    props<{ payment: Partial<PaymentModal> | SwiftModal }>()
+  );
+  export const setPayment = createAction(
+    '[SHARED] set payment',
+    props<{ payment: Partial<PaymentModal> | SwiftModal }>()
+  );
   export const setPaymentLoader = createAction(
     '[SHARED] set payment loader',
     props<{

@@ -1,0 +1,16 @@
+.pay-sum {
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & > div {
+    width: 50%;
+  }
+  & span {
+    margin-right: 8px;
+  }
+  &-selected {
+    opacity: 0.6;
+    text-align: right;
+  }
+}

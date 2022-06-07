@@ -1,1 +1,1 @@
-export type ImportStatus = 'SUCCESS' | 'ERROR' | 'EXISTS';
+export type ImportStatus = 'OK' | 'ERROR' | 'EXISTS';

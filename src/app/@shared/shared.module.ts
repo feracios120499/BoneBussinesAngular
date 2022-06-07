@@ -3,7 +3,6 @@ import { DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
-import { B1ImportErrorComponent } from './components/ui/b1-import-error/b1-import-error.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {

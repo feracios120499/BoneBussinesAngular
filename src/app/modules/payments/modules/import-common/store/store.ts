@@ -12,6 +12,6 @@ export interface PayImportCommonState {
 
 export const payImportCommonInitialState: PayImportCommonState = {
   isLoading: false,
-  status: 'SUCCESS',
+  status: 'OK',
   filter: '',
 };

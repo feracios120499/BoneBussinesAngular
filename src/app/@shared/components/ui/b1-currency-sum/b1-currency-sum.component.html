@@ -1,0 +1,4 @@
+<span *ngFor="let item of array; let last = last">
+  <span>{{ item.amount / divider | money: item.currency }}</span>
+  <span *ngIf="!last">{{ separator }}</span>
+</span>

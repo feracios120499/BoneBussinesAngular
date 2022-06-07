@@ -66,14 +66,14 @@
           [resizable]="true"
           [ngModel]="filter$ | ngrxPush"
           (ngModelChange)="onFilter($event)"></b1-input>
-        <div class="b1-page-inputWithIcon b1-ml-4">
+        <div class="b1-page-inputWithIcon b1-ml-4" *ngrxLet="range$ as range">
           <input
             class="b1-datepicker__input b1-rangepicker"
             b1-daterangepicker
             startKey="start"
             endKey="end"
-            [ngModel]="range$ | ngrxPush"
-            (ngModelChange)="setRange($event)"
+            [ngModel]="range"
+            (ngModelChange)="setRange($event, range)"
             name="daterange"
             [ranges]="ranges"
             readonly />

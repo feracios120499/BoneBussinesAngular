@@ -1,255 +1,567 @@
-<ng-container *ngrxLet="payment$ as payment">
-  <ng-container *ngIf="payment">
-    <ng-container *ngrxLet="isLoading$ as isLoading">
-      <div class="payment-window b1-modal-data" *ngIf="payment">
-        <div class="b1-modal-close">
-          <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
-        </div>
-        <div class="b1-modal-header payment-window-header">
-          <div class="b1-large">
-            <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
-            <span>{{ 'components.pay.import.payment' | translate }}</span>
-            <span class="b1-ml-2"> №{{ payment.number }} </span>
-            <b1-import-error [errors]="payment.errors" field="number"></b1-import-error>
-          </div>
-        </div>
-        <div class="b1-modal-body">
-          <div class="payment-window-info">
-            <div class="payment-window-dates">
-              <div class="payment-window-dates_item">
-                <div class="payment-window-dates_name">
-                  {{ 'components.pay.import.documentDate' | translate }}
-                </div>
-                <div class="payment-window-dates_value">
-                  {{ payment.documentDate | date: 'dd.MM.yyyy' }}
-                  <b1-import-error [errors]="payment.errors" field="paymentDate"></b1-import-error>
-                </div>
-              </div>
-              <div class="payment-window-separator">|</div>
-
-              <div class="payment-window-dates_item valueDate">
-                <div class="payment-window-dates_name">
-                  {{ 'components.pay.import.valueDate' | translate }}
-                </div>
-                <div class="payment-window-dates_value">
-                  {{ payment.valueDate | date: 'dd.MM.yyyy' }}
-                  <b1-import-error [errors]="payment.errors" field="paymentValueDate"></b1-import-error>
-                </div>
-              </div>
-            </div>
-            <div class="payment-window-status_info">
-              <div class="payment-window-status" *ngIf="payment.statusCode">
-                <div [class]="statusMessages[payment.statusCode].class">
-                  {{ statusMessages[payment.statusCode].message | translate }}
-                </div>
-              </div>
-              <span class="b1-color-dark" ng-if="payment.StatusCode == 'BANKPAID'" style="opacity: 0.6">{{
-                payment.payedDate | date: 'dd.MM.yyyy HH:mm'
-              }}</span>
-            </div>
-          </div>
-          <div class="payment-window-body">
-            <div class="payment-window-container">
-              <div class="payment-window-sender">
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.sender' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="senderName"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span *ngIf="payment.sender && payment.sender.name">
-                      {{ payment.sender.name }}
-                    </span>
-                  </div>
-                </div>
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.senderAccNumber' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="senderAccNumber"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span *ngIf="payment.sender && payment.sender.number" [iban]="payment.sender.number"> </span>
-                  </div>
-                </div>
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.taxCode' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="senderTaxCode"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span>
-                      {{ payment.sender?.taxCode }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="payment-window-recipient">
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.recipient' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="recipientName"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span>
-                      {{ payment.recipient?.name }}
-                    </span>
-                  </div>
-                </div>
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.recipientAccNumber' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="recipientAccNumber"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span *ngIf="payment.recipient && payment.recipient.number" [iban]="payment.recipient.number">
-                    </span>
-                  </div>
-                </div>
-                <div class="payment-window-section">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.taxCode' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="recipientTaxCode"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    <span>
-                      {{ payment.recipient?.taxCode }}
-                    </span>
-                  </div>
-                </div>
-
-                <div
-                  class="payment-window-section"
-                  *ngIf="
-                    (payment.recipient && payment.recipient.countryName) ||
-                    (payment.errors && payment.errors['recipientCountryCode'])
-                  ">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.recipientCountry' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="recipientCountryCode"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    {{ payment.recipient?.countryName }}
-                  </div>
-                </div>
-                <div
-                  class="payment-window-section"
-                  *ngIf="
-                    (payment.recipient && payment.recipient.details) ||
-                    (payment.errors && payment.errors['additionalDetails'])
-                  ">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.import.recipientDetails' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="additionalDetails"></b1-import-error>
-                  </div>
-                  <div class="payment-window-value">
-                    {{ payment.recipient?.details }}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="payment-window-purpose">
-              <div class="payment-window-amount row">
-                <div class="col-md-6">
-                  <div class="payment-window-name" *ngIf="payment.amountString">
-                    {{ 'components.pay.sumSpell' | translate }}
-                  </div>
-                  <div class="payment-window-value" *ngIf="payment.amountString">
-                    <span>{{ payment.amountString }}</span>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="payment-window-name">
-                    {{ 'components.pay.sum' | translate }}
-                    <b1-import-error [errors]="payment.errors" field="amount"></b1-import-error>
-                  </div>
-
-                  <div class="payment-window-value">
-                    {{ (payment.amount || 0) / 100 || 0 | money: '' }}
-                    {{ payment.currencyCode }}
-                  </div>
-                </div>
-              </div>
-              <div class="payment-window-name">
-                {{ 'components.pay.import.purpose' | translate }}
-                <b1-import-error [errors]="payment.errors" field="purpose"></b1-import-error>
-              </div>
-              <div class="payment-window-value">
-                {{ payment.purpose }}
-              </div>
-            </div>
-            <!-- <documents ng-model="payment.AttachedSupDocs"></documents> -->
-          </div>
-        </div>
-        <div class="payment-window-footer b1-modal-footer">
-          <div class="b1-page-hr payment-window-loader" [class.loading]="isLoading"></div>
-          <div class="payment-window-actions" ngbAutofocus>
-            <b1-button
-              [filled]="false"
-              icon="print"
-              label="components.pay.print"
-              (btnClick)="execute(payment, paymentAction.print)"
-              [isDisabled]="isLoading"
-              *ngIf="payment!.actions![paymentAction.print]"></b1-button>
-            <b1-button
-              [filled]="false"
-              icon="spinner"
-              label="components.applications.actions.dublicate"
-              (btnClick)="execute(payment, paymentAction.dublicate)"
-              [isDisabled]="isLoading"
-              *ngIf="payment!.actions![paymentAction.dublicate]"></b1-button>
-            <b1-button
-              [filled]="true"
-              icon="check"
-              label="components.pay.toSuccess"
-              (btnClick)="execute(payment, paymentAction.toSuccess)"
-              [isDisabled]="isLoading"
-              *ngIf="payment!.actions![paymentAction.toSuccess]"></b1-button>
-            <b1-button
-              [filled]="true"
-              icon="edit"
-              label="actions.edit"
-              (btnClick)="execute(payment, paymentAction.edit)"
-              [isDisabled]="isLoading"
-              *ngIf="payment!.actions![paymentAction.edit]"></b1-button>
-            <!-- <button class="b1-button b1-button-primary" ng-if="payment.IsMyPayment" ng-click="dublicate()">
-                          <i class="ub-icons-icon-repeat"></i>
-                          {{'components.applications.actions.dublicate' | translate}}
-                      </button>
-                      <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
-                          ng-click="sign()" ng-if="payment.StatusCode == 'ONSIGN' && payment.IsNeedMySign && payment.IsMyPayment">
-                          <i class="ub-icons-icon-sign"></i>
-                          {{'components.pay.sign' | translate}}
-                      </button>
-                      <button class="b1-button b1-button-primary  b1-button-primary_filled"
-                          ng-if="payment.StatusCode == 'SIGNED' && payment.IsMyPayment" ng-click="toBank()">
-                          <i class="ub-icons-icon-send"></i>
-                          {{'components.pay.sendToBank' | translate}}
-                      </button>
-                      <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
-                          ng-click="prohibition()" ng-if="payment.StatusCode == 'BANKRECEIVED' && payment.IsMyPayment">
-                          <i class="ub-icons-icon-prohibition"></i>
-                          {{'components.pay.storno.button' | translate}}
-                      </button>
-                      <button class="b1-button b1-button-primary  b1-button-primary_filled"
-                          ng-if="payment.StatusCode == 'NEW' && payment.IsMyPayment" ng-click="onSign()">
-                          <i class="ub-icons-icon-send-for-sign"></i>
-                          {{'components.pay.onSign' | translate}}
-                      </button>
-                      <button class="b1-button b1-button-primary  b1-button-primary_filled" ng-if="payment.IsTurnover"
-                          ng-click="createPayment()">
-                          <i class="ub-icons-icon-country"></i>
-                          {{'components.pay.correspondents.createPayment'|translate}}
-                      </button> -->
-          </div>
+<ng-container *ngrxLet="isLoading$ as isLoading">
+  <div class="payment-window b1-modal-data">
+    <div class="b1-modal-close">
+      <i b1-icon icon="cancel" (click)="activeModal.close()"></i>
+    </div>
+    <ng-container *ngIf="payment">
+      <div class="b1-modal-header payment-window-header">
+        <div class="b1-large">
+          <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
+          <span>{{ 'components.pay.import.payment' | translate }}</span>
+          <span class="b1-ml-2"> №{{ payment.number }} </span>
+          <b1-import-error [errors]="payment.errors" field="number"></b1-import-error>
         </div>
       </div>
+      <div class="b1-modal-body">
+        <div class="payment-window-info">
+          <div class="payment-window-dates">
+            <div class="payment-window-dates_item">
+              <div class="payment-window-dates_name">
+                {{ 'components.pay.import.documentDate' | translate }}
+              </div>
+              <div class="payment-window-dates_value">
+                {{ payment.documentDate | date: 'dd.MM.yyyy' }}
+                <b1-import-error [errors]="payment.errors" field="paymentDate"></b1-import-error>
+              </div>
+            </div>
+            <div class="payment-window-separator">|</div>
 
-      <div class="payment-window-previous" *ngIf="payment.isPaginationAvailable" (click)="previous(payment)">
-        <i b1-icon icon="chevron-left"></i>
-      </div>
-      <div class="payment-window-next" *ngIf="payment && payment.isPaginationAvailable" (click)="next(payment)">
-        <i b1-icon icon="chevron-right"></i>
+            <div class="payment-window-dates_item valueDate">
+              <div class="payment-window-dates_name">
+                {{ 'components.pay.import.valueDate' | translate }}
+              </div>
+              <div class="payment-window-dates_value">
+                {{ payment.valueDate | date: 'dd.MM.yyyy' }}
+                <b1-import-error [errors]="payment.errors" field="paymentValueDate"></b1-import-error>
+              </div>
+            </div>
+          </div>
+          <div class="payment-window-status_info">
+            <div class="payment-window-status" *ngIf="payment.statusCode">
+              <div [class]="statusMessages[payment.statusCode].class">
+                {{ statusMessages[payment.statusCode].message | translate }}
+              </div>
+            </div>
+            <span class="b1-color-dark" ng-if="payment.StatusCode == 'BANKPAID'" style="opacity: 0.6">{{
+              payment.payedDate | date: 'dd.MM.yyyy HH:mm'
+            }}</span>
+          </div>
+        </div>
+        <div class="payment-window-body">
+          <div class="payment-window-container">
+            <div class="payment-window-sender">
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.sender' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="senderName"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span *ngIf="payment.sender && payment.sender.name">
+                    {{ payment.sender.name }}
+                  </span>
+                </div>
+              </div>
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.senderAccNumber' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="senderAccNumber"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span *ngIf="payment.sender && payment.sender.number" [iban]="payment.sender.number"> </span>
+                </div>
+              </div>
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.taxCode' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="senderTaxCode"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span>
+                    {{ payment.sender?.taxCode }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="payment-window-recipient">
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.recipient' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="recipientName"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span>
+                    {{ payment.recipient?.name }}
+                  </span>
+                </div>
+              </div>
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.recipientAccNumber' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="recipientAccNumber"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span *ngIf="payment.recipient && payment.recipient.number" [iban]="payment.recipient.number"> </span>
+                </div>
+              </div>
+              <div class="payment-window-section">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.taxCode' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="recipientTaxCode"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  <span>
+                    {{ payment.recipient?.taxCode }}
+                  </span>
+                </div>
+              </div>
+
+              <div
+                class="payment-window-section"
+                *ngIf="
+                  (payment.recipient && payment.recipient.countryName) ||
+                  (payment.errors && payment.errors['recipientCountryCode'])
+                ">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.recipientCountry' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="recipientCountryCode"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  {{ payment.recipient?.countryName }}
+                </div>
+              </div>
+              <div
+                class="payment-window-section"
+                *ngIf="
+                  (payment.recipient && payment.recipient.details) ||
+                  (payment.errors && payment.errors['additionalDetails'])
+                ">
+                <div class="payment-window-name">
+                  {{ 'components.pay.import.recipientDetails' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="additionalDetails"></b1-import-error>
+                </div>
+                <div class="payment-window-value">
+                  {{ payment.recipient?.details }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="payment-window-purpose">
+            <div class="payment-window-amount row">
+              <div class="col-md-6">
+                <div class="payment-window-name" *ngIf="payment.amountString">
+                  {{ 'components.pay.sumSpell' | translate }}
+                </div>
+                <div class="payment-window-value" *ngIf="payment.amountString">
+                  <span>{{ payment.amountString }}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="payment-window-name">
+                  {{ 'components.pay.sum' | translate }}
+                  <b1-import-error [errors]="payment.errors" field="amount"></b1-import-error>
+                </div>
+
+                <div class="payment-window-value">
+                  {{ (payment.amount || 0) / 100 || 0 | money: '' }}
+                  {{ payment.currencyCode }}
+                </div>
+              </div>
+            </div>
+            <div class="payment-window-name">
+              {{ 'components.pay.import.purpose' | translate }}
+              <b1-import-error [errors]="payment.errors" field="purpose"></b1-import-error>
+            </div>
+            <div class="payment-window-value">
+              {{ payment.purpose }}
+            </div>
+          </div>
+          <!-- <documents ng-model="payment.AttachedSupDocs"></documents> -->
+        </div>
       </div>
     </ng-container>
-  </ng-container>
+    <ng-container *ngIf="swift">
+      <div class="payment-window-header b1-large">
+        <div>
+          <i b1-icon icon="swift" class="ub-icons-icon-country b1-mr-3"></i>
+          <span>SWIFT</span>
+          <span style="margin-left: 10px" ng-if="payment.Number"> №{{ swift.number }} </span>
+          <b1-import-error [errors]="swift.errors" field="number"></b1-import-error>
+        </div>
+      </div>
+      <div class="b1-modal-body">
+        <div class="payment-window-info b1-base">
+          <div class="payment-window-dates">
+            <div class="payment-window-dates_item">
+              <div class="payment-window-dates_name">
+                {{ 'components.pay.import.documentDate' | translate }}
+              </div>
+              <div class="payment-window-dates_value">
+                {{ swift.paymentDate | date: 'dd.MM.yyyy' }}
+                <b1-import-error [errors]="swift.errors" field="paymentDate"></b1-import-error>
+              </div>
+            </div>
+            <div class="payment-window-separator">|</div>
+
+            <div class="payment-window-dates_item valueDate">
+              <div class="payment-window-dates_name">
+                {{ 'components.pay.import.valueDate' | translate }}
+              </div>
+              <div class="payment-window-dates_value">
+                {{ swift.paymentValueDate | date: 'dd.MM.yyyy' }}
+                <b1-import-error [errors]="swift.errors" field="paymentValueDate"></b1-import-error>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="b1-mt-4">
+          <div class="b1-flex">
+            <ul class="b1-head-tabs">
+              <li [class.active]="currentTab == 'sender'" class="b1-head-tabs__item">
+                <a
+                  class="b1-head-tabs__link b1-medium b1-color-dark"
+                  style="text-transform: none"
+                  (click)="currentTab = 'sender'">
+                  {{ 'components.pay.swift.formTabsHeadings.sender' | translate | lowercase }}
+                </a>
+              </li>
+              <li [class.active]="currentTab == 'recipient'" class="b1-head-tabs__item">
+                <a
+                  class="b1-head-tabs__link b1-medium b1-color-dark"
+                  style="text-transform: none"
+                  (click)="currentTab = 'recipient'">
+                  {{ 'components.pay.swift.benificiary' | translate }}
+                </a>
+              </li>
+              <li [class.active]="currentTab == 'intermediaryBank'" class="b1-head-tabs__item">
+                <a
+                  class="b1-head-tabs__link b1-medium b1-color-dark"
+                  style="text-transform: none"
+                  (click)="currentTab = 'intermediaryBank'">
+                  {{ 'components.pay.swift.intermediaryBank' | translate }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="b1-confirm" [ngClass]="currentTab">
+          <div class="b1-confirm-container sender">
+            <div class="b1-confirm-block">
+              <div class="b1-confirm-title">
+                {{ 'components.pay.swift.formTabsHeadings.sender' | translate }}
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.senderName' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="senderDataName"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.senderData.name }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.salary.accNumber' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="senderAccountAccNumber"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  <span
+                    *ngIf="swift.senderAccount && swift.senderAccount.accNumber"
+                    [iban]="swift.senderAccount.accNumber">
+                  </span>
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.acct.acctDetail.account' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="senderAccountName"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.senderAccount.name }}
+                </div>
+              </div>
+            </div>
+            <div class="b1-confirm-block">
+              <div class="b1-confirm-title">
+                {{ 'components.pay.swift.senderBankTitle' | translate }}
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankName' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="senderBankName"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.senderBank.name }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.senderBankLocation' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="senderBankLocation"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.senderBank.location }}
+                </div>
+              </div>
+            </div>
+            <div class="b1-confirm-block b1-confirm-block_bottom">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="b1-confirm-group">
+                    <div class="b1-confirm-label">
+                      {{ 'components.pay.swift.contractNumberGoodType' | translate }}
+                      <b1-import-error [errors]="swift.errors" field="purpose"></b1-import-error>
+                    </div>
+                    <div class="b1-confirm-value">
+                      {{ swift.purpose }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="b1-confirm-group text-right">
+                    <div class="b1-confirm-label">
+                      {{ 'components.pay.swift.expenceFee' | translate }}
+                      <b1-import-error [errors]="swift.errors" field="paymentFee"></b1-import-error>
+                    </div>
+                    <div class="b1-confirm-value">
+                      {{ swift.paymentFee }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row b1-margin__top-16">
+                <div class="col-md-6">
+                  <div class="b1-confirm-group">
+                    <div class="b1-confirm-label">
+                      {{ 'components.pay.swift.typePay' | translate }}
+                      <b1-import-error [errors]="swift.errors" field="typePay"></b1-import-error>
+                    </div>
+                    <div class="b1-confirm-value" *ngIf="swift.typePay == 1">
+                      {{ 'components.pay.swift.pay' | translate }}
+                    </div>
+                    <div class="b1-confirm-value" *ngIf="swift.typePay == 0">
+                      {{ 'components.pay.swift.prepay' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="b1-confirm-group text-right">
+                    <div class="b1-confirm-label">
+                      {{ 'components.pay.amount' | translate }}
+                      <b1-import-error [errors]="swift.errors" field="amount"></b1-import-error>
+                      <b1-import-error [errors]="swift.errors" field="senderAccountAccCurrencyId"></b1-import-error>
+                    </div>
+                    <div class="b1-confirm-value">
+                      <span>
+                        {{ swift.amount | money: '' }}
+                      </span>
+                      <span>
+                        {{ swift.senderAccount.accCurrencyCode }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="b1-confirm-container recipient">
+            <div class="b1-confirm-block">
+              <div class="b1-confirm-title">
+                {{ 'components.pay.swift.formTabsHeadings.benificiary' | translate }}
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryName' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryName"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.name }}
+                </div>
+              </div>
+              <div
+                class="b1-confirm-group"
+                *ngIf="swift.benificiary.iban || (swift.errors && swift.errors['benificiaryIban'])">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.beneficiaryAccountIBAN' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryIban"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.iban }}
+                </div>
+              </div>
+              <div
+                class="b1-confirm-group"
+                *ngIf="swift.benificiary.iban || (swift.errors && swift.errors['benificiaryAccNumber'])">
+                <div class="b1-confirm-label">
+                  {{ 'components.salary.accNumber' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryAccNumber"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.accNumber }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryLocation' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryLocation"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.location }}
+                </div>
+              </div>
+            </div>
+            <div class="b1-confirm-block">
+              <div class="b1-confirm-title">
+                {{ 'components.pay.swift.benificiaryBankTitle' | translate }}
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankName' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryBankName"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.bank.name }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.senderBankLocation' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryBankLocation"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.bank.location }}
+                </div>
+              </div>
+              <div class="b1-confirm-group">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+                  <b1-import-error [errors]="swift.errors" field="benificiaryBankSwift"></b1-import-error>
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.bank.swift }}
+                </div>
+              </div>
+              <div
+                class="b1-confirm-group"
+                *ngIf="
+                  swift.benificiary.bank.corrAccNumber || (swift.errors && swift.errors['benificiaryBankCorrAccNumber'])
+                ">
+                <div class="b1-confirm-label">
+                  {{ 'components.pay.swift.benificiaryBankAccount' | translate }}
+                </div>
+                <div class="b1-confirm-value">
+                  {{ swift.benificiary.bank.corrAccNumber }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="b1-confirm-container intermediaryBank">
+            <div class="b1-confirm-block b1-confirm-block_bottom" ng-if="payment.IntermediaryBank.SWIFT">
+              <div class="b1-confirm-title">
+                {{ 'components.pay.swift.formTabsHeadings.intermediaryBank' | translate }}
+              </div>
+              <div style="display: flex; justify-content: space-between">
+                <div class="b1-confirm-group col-md-4 no-padder">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.benificiaryBankName' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="intermediaryBankName"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    {{ swift.intermediaryBank?.name }}
+                  </div>
+                </div>
+                <div class="b1-confirm-group col-md-4 no-padder">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.senderBankLocation' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="intermediaryBankLocation"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    {{ swift.intermediaryBank?.location }}
+                  </div>
+                </div>
+                <div class="b1-confirm-group col-md-4 no-padder text-right">
+                  <div class="b1-confirm-label">
+                    {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+                    <b1-import-error [errors]="swift.errors" field="intermediaryBankSwift"></b1-import-error>
+                  </div>
+                  <div class="b1-confirm-value">
+                    {{ swift.intermediaryBank?.swift }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="payment-window-footer b1-modal-footer">
+      <div class="b1-page-hr payment-window-loader" [class.loading]="isLoading"></div>
+      <div class="payment-window-actions" ngbAutofocus>
+        <b1-button
+          [filled]="false"
+          icon="print"
+          label="components.pay.print"
+          (btnClick)="execute(paymentAction.print)"
+          [isDisabled]="isLoading"
+          *ngIf="actions![paymentAction.print]"></b1-button>
+        <b1-button
+          [filled]="false"
+          icon="spinner"
+          label="components.applications.actions.dublicate"
+          (btnClick)="execute(paymentAction.dublicate)"
+          [isDisabled]="isLoading"
+          *ngIf="actions![paymentAction.dublicate]"></b1-button>
+        <b1-button
+          [filled]="true"
+          icon="check"
+          label="components.pay.toSuccess"
+          (btnClick)="execute(paymentAction.toSuccess)"
+          [isDisabled]="isLoading"
+          *ngIf="actions![paymentAction.toSuccess]"></b1-button>
+        <b1-button
+          [filled]="true"
+          icon="edit"
+          label="actions.edit"
+          (btnClick)="execute(paymentAction.edit)"
+          [isDisabled]="isLoading"
+          *ngIf="actions![paymentAction.edit]"></b1-button>
+        <!-- <button class="b1-button b1-button-primary" ng-if="payment.IsMyPayment" ng-click="dublicate()">
+                      <i class="ub-icons-icon-repeat"></i>
+                      {{'components.applications.actions.dublicate' | translate}}
+                  </button>
+                  <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
+                      ng-click="sign()" ng-if="payment.StatusCode == 'ONSIGN' && payment.IsNeedMySign && payment.IsMyPayment">
+                      <i class="ub-icons-icon-sign"></i>
+                      {{'components.pay.sign' | translate}}
+                  </button>
+                  <button class="b1-button b1-button-primary  b1-button-primary_filled"
+                      ng-if="payment.StatusCode == 'SIGNED' && payment.IsMyPayment" ng-click="toBank()">
+                      <i class="ub-icons-icon-send"></i>
+                      {{'components.pay.sendToBank' | translate}}
+                  </button>
+                  <button class="b1-button b1-button-primary  b1-button-primary_filled" data-role-in="Director,Accountant"
+                      ng-click="prohibition()" ng-if="payment.StatusCode == 'BANKRECEIVED' && payment.IsMyPayment">
+                      <i class="ub-icons-icon-prohibition"></i>
+                      {{'components.pay.storno.button' | translate}}
+                  </button>
+                  <button class="b1-button b1-button-primary  b1-button-primary_filled"
+                      ng-if="payment.StatusCode == 'NEW' && payment.IsMyPayment" ng-click="onSign()">
+                      <i class="ub-icons-icon-send-for-sign"></i>
+                      {{'components.pay.onSign' | translate}}
+                  </button>
+                  <button class="b1-button b1-button-primary  b1-button-primary_filled" ng-if="payment.IsTurnover"
+                      ng-click="createPayment()">
+                      <i class="ub-icons-icon-country"></i>
+                      {{'components.pay.correspondents.createPayment'|translate}}
+                  </button> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-window-previous" *ngIf="isPaginationAvailable" (click)="previous()">
+    <i b1-icon icon="chevron-left"></i>
+  </div>
+  <div class="payment-window-next" *ngIf="isPaginationAvailable" (click)="next()">
+    <i b1-icon icon="chevron-right"></i>
+  </div>
 </ng-container>

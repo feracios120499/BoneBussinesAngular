@@ -2,6 +2,7 @@ import { StatusResponse } from '@models/status-response.model';
 import { ImportResponse, ImportResponsRow } from '@modules/payments/models/import-response.model';
 import { ImportStatus } from '@modules/payments/models/import-status.type';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
+import { SwiftDetails } from '@modules/payments/models/swift-details.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { PAY_IMPORT_COMMON_KEY } from './store';
@@ -43,8 +44,19 @@ export namespace PayImportCommonActions {
   export const savePayments = createAction(`[${PAY_IMPORT_COMMON_KEY}] save payments preview`);
 
   export const [savePaymentsRequest, savePaymentsSuccess, savePaymentsFailure] = createHTTPActions<
-    PaymentDetails[],
+    PaymentDetails[] | SwiftDetails[],
     StatusResponse[],
     string
   >(`[${PAY_IMPORT_COMMON_KEY}] save payments`);
+
+  export const openImportModal = createAction(`[${PAY_IMPORT_COMMON_KEY}] open import module`);
+
+  export const [importPaymentsRequest, importPaymentsSuccess, importPaymentsFailure] = createHTTPActions<
+    {
+      files: File[];
+      type: 'common' | 'swift';
+    },
+    ImportResponse,
+    string
+  >(`[${PAY_IMPORT_COMMON_KEY}] import payments`);
 }

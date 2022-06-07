@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { PayListActions } from '../../store/actions';
 import { PayListSelectors } from '../../store/selectors';
 
@@ -9,16 +10,17 @@ import { PayListSelectors } from '../../store/selectors';
   styleUrls: ['./payments-import-modal.component.scss'],
 })
 export class PaymentsImportModalComponent implements OnInit {
-  constructor(private store: Store) {}
+  constructor() {}
 
-  isLoading$ = this.store.select(PayListSelectors.isLoading);
   files: File[] = [];
   importType: 'common' | 'swift' = 'common';
+  @Input() onImport!: (files: File[], type: 'common' | 'swift') => void;
+  @Input() isLoading$!: Observable<boolean>;
   ngOnInit(): void {}
 
   downloadTemplate(format: string, isLoading: boolean): void {}
 
   import(): void {
-    this.store.dispatch(PayListActions.importPaymentsRequest({ files: this.files, type: this.importType }));
+    this.onImport(this.files, this.importType);
   }
 }
