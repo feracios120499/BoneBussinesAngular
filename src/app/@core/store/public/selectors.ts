@@ -41,7 +41,9 @@ export namespace PublicSelectors {
 
   export const copyright = createSelector(publicStore, (state) => state.resources?.owner.copyright);
 
-  export const version = createSelector(publicStore, (state) => state.resources?.owner.version);
+  export const isLoadingFeedbackSend = createSelector(publicStore, (state) => state.loadings.includes('sendFeedback'));
 
-  export const isLoadingFeedbackSend = createSelector(publicStore, (state) => state.loadings.includes('send'));
+  export const currentVersion = createSelector(publicStore, (state) => state.resources?.owner.version);
+
+  export const watchVersion = createSelector(publicStore, (state) => state.watchVersion);
 }

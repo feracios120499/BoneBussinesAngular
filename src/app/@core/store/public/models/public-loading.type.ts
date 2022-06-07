@@ -1,1 +1,1 @@
-export type PublicLoading = 'send';
+export type PublicLoading = 'sendFeedback' | 'loadVersion';

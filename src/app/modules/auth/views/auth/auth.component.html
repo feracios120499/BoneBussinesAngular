@@ -29,9 +29,9 @@
         </span>
         <ul class="cl-footer-list">
           <li>
-            <a class="cl-footer-version" href="">
+            <a class="cl-footer-version">
               <!-- TODO add ngrx version -->
-              <span>{{ 'footer.Version' | translate }}: {{ version$ | ngrxPush }}</span>
+              <span version>{{ 'footer.Version' | translate }}: {{ currentVersion$ | ngrxPush }}</span>
             </a>
           </li>
           <li>

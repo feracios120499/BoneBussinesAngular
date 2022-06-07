@@ -45,7 +45,8 @@
       "@pipes/*": ["./src/app/@shared/pipes/*"],
       "@mixins/*": ["./src/app/@shared/mixins/*"],
       "@shared": ["./src/app/@shared/shared.module"],
-      "@env": ["./src/environments/environment"]
+      "@env": ["./src/environments/environment"],
+      "@animations/*": ["./src/app/@shared/animations/*"]
     }
   },
   "angularCompilerOptions": {

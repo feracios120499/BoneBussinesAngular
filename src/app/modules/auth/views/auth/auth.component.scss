@@ -249,11 +249,19 @@
             @media (max-width: 992px) {
                 color: $color-light;
             }
+            &:hover,
+            &:focus {
+              color: inherit;
+            }
         }
         &-feedback {
             color: $color-primary;
             @media (max-width: 992px) {
                 color: $color-light;
+            }
+            &:hover,
+            &:focus {
+              color: inherit;
             }
         }
     }

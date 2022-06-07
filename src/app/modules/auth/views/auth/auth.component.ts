@@ -16,7 +16,7 @@ import { required } from '@store/shared';
 })
 export class AuthComponent implements OnInit {
   copyright$: Observable<string> = required(this.store.select(PublicSelectors.copyright));
-  version$: Observable<string> = required(this.store.select(PublicSelectors.version));
+  currentVersion$: Observable<string> = required(this.store.select(PublicSelectors.currentVersion));
 
   constructor(private store: Store) {}
 

@@ -1,0 +1,77 @@
+@import 'variables';
+
+$screen-tablet: 812px;
+
+:host {
+  position: absolute;
+  z-index: 160;
+  bottom: 33px;
+  right: 15px;
+  height: 400px;
+  width: 300px;
+  padding: 20px;
+  overflow: auto;
+  background-color: #fff;
+  box-shadow: 1px 1px 7px 5px rgba(128, 128, 128, 0.2);
+  border-radius: 2px;
+  cursor: default;
+  &:hover {
+    opacity: 1;
+  }
+  @media (max-width: $screen-tablet) {
+    right: 50%;
+    transform: translateX(50%);
+    width: 280px;
+    color: $color-light-500;
+  }
+}
+
+.version-window {
+  &__header {
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  &__code {
+    position: relative;
+    padding: 0 24px;
+    font-size: 24px;
+  }
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &_left {
+      left: 0;
+    }
+    &_right {
+      right: 0;
+    }
+  }
+  &__name {
+    font-family: 'FuturaPT-Demi', sans-serif;
+    font-size: 1.3em;
+    color: $color-psy-400;
+  }
+  &__news {
+    font-size: 18px;
+  }
+  &__content {
+    padding-left: 20px;
+    ul {
+      list-style-type: circle;
+      li {
+        margin-top: 3px;
+      }
+    }
+  }
+}

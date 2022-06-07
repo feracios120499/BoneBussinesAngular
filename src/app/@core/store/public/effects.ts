@@ -17,6 +17,7 @@ import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { environment } from '@env';
 
 import { PublicActions } from './actions';
+import { Version } from '@models/version.model';
 
 @Injectable({
   providedIn: 'root',
@@ -163,5 +164,25 @@ export class PublicEffects {
         tap(() => this.modalService.close(B1FeedbackModalComponent))
       ),
     { dispatch: false }
+  );
+
+  loadVersion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.loadVersionRequest),
+      switchMap(({ payload }) =>
+        this.publicService.getVersion(payload).pipe(
+          map((version: Version) => PublicActions.loadVersionSuccess(version)),
+          catchError((error: ServerError) =>
+            of(
+              PublicActions.loadVersionFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('components.version.errors.loadVersion'),
+              })
+            )
+          )
+        )
+      )
+    )
   );
 }

@@ -5,6 +5,7 @@ import { createAction } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 import { Feedback } from '@models/feedback.model';
+import { Version } from '@models/version.model';
 
 export namespace PublicActions {
   export const [loadBanksRequest, loadBanksSuccess, loadBanksFailure] = createHTTPActions<void, BankModel[], string>(
@@ -40,4 +41,10 @@ export namespace PublicActions {
     void,
     string
   >('[PUBLIC] send feedback');
+
+  export const [loadVersionRequest, loadVersionSuccess, loadVersionFailure] = createHTTPActions<
+    string,
+    Version,
+    string
+  >('[PUBLIC] load version');
 }

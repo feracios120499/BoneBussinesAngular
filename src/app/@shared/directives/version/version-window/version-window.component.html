@@ -1,0 +1,35 @@
+<ng-container *ngrxLet="version$ as version">
+  <div class="version-window__header">
+    <h3 class="version-window__code">
+      <a
+        *ngIf="version.prevId"
+        class="version-window__arrow version-window__arrow_left"
+        (click)="getVersion(version.prevId)"
+        aria-hidden="true">
+        <i b1-icon icon="arrow-left"></i>
+      </a>
+
+      {{ 'components.version.version' | translate }} {{ version.code }}
+
+      <a
+        *ngIf="version.nextId"
+        class="version-window__arrow version-window__arrow_right"
+        (click)="getVersion(version.nextId)"
+        aria-hidden="true">
+        <i b1-icon icon="arrow-right"></i>
+      </a>
+    </h3>
+
+    <span *ngIf="version.name" class="version-window__name">"{{ version.name }}"</span>
+  </div>
+
+  <h4 *ngIf="version.descriptions.length" class="version-window__news">
+    {{ 'components.version.whatsNew' | translate }}
+  </h4>
+
+  <div class="version-window__content">
+    <ul>
+      <li *ngFor="let item of version.descriptions">{{ item }}</li>
+    </ul>
+  </div>
+</ng-container>

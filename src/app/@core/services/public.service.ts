@@ -4,6 +4,7 @@ import { Feedback } from '@models/feedback.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
+import { Version } from '@models/version.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BankModel } from 'src/app/@shared/models/bank.model';
@@ -54,6 +55,10 @@ export class PublicService extends BaseService {
 
   sendFeedback(feedback: Feedback): Observable<void> {
     return this.http.post<void>('api/v1/public/feedback', feedback);
+  }
+
+  getVersion(code: string): Observable<Version> {
+    return this.http.get<Version>(`api/v1/public/versions/${code}/core`);
   }
 
   private mapMobileAppLinksResponse(response: {

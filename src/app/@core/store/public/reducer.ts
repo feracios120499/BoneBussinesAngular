@@ -13,10 +13,19 @@ export const publicReducer = createReducer(
   on(PublicActions.loadMobileAppLinksSuccess, (state, action) => ({ ...state, mobileAppLinks: action.payload })),
   on(PublicActions.sendFeedbackRequest, (state) => ({
     ...state,
-    loadings: [...pushIfNotExist(state.loadings, 'send')],
+    loadings: [...pushIfNotExist(state.loadings, 'sendFeedback')],
   })),
   on(PublicActions.sendFeedbackSuccess, PublicActions.sendFeedbackFailure, (state) => ({
     ...state,
-    loadings: [...removeItem(state.loadings, 'send')],
-  }))
+    loadings: [...removeItem(state.loadings, 'sendFeedback')],
+  })),
+  on(PublicActions.loadVersionRequest, (state) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'loadVersion')],
+  })),
+  on(PublicActions.loadVersionSuccess, PublicActions.loadVersionFailure, (state) => ({
+    ...state,
+    loadings: [...removeItem(state.loadings, 'loadVersion')],
+  })),
+  on(PublicActions.loadVersionSuccess, (state, action) => ({ ...state, watchVersion: action.payload }))
 );
