@@ -136,5 +136,20 @@
         letter-spacing: 0.3em;
       }
     }
+    &-password {
+      padding-right: 64px;
+      &-icon {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $color-light-500;
+        cursor: pointer;
+        font-size: 20px;
+        &.active {
+          color: $color-primary;
+        }
+      }
+    }
   }
 }

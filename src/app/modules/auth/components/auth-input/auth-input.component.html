@@ -1,7 +1,8 @@
 <input
   class="cl-input"
+  [class.cl-password]="type === 'password'"
   [id]="controlId"
-  [type]="type"
+  [type]="type === 'password' ? (isShownPassword ? 'text' : 'password') : type"
   [(ngModel)]="value"
   (ngModelChange)="handleValue($any(value))"
   [attr.name]="name"
@@ -13,4 +14,15 @@
 </label>
 
 <span class="cl-input-bar"></span>
-<i class="fa fa-lock cl-input-icon" style="font-size: 20px"></i>
+
+<i
+  *ngIf="type === 'password' && value.toString().length > 0"
+  class="cl-password-icon"
+  [class.active]="isShownPassword"
+  (mouseleave)="isShownPassword = false"
+  (click)="isShownPassword = !isShownPassword"
+  b1-icon
+  icon="eye">
+</i>
+
+<i class="cl-input-icon" style="font-size: 20px" b1-icon [icon]="icon"></i>

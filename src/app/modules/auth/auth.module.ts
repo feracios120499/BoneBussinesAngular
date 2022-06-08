@@ -12,6 +12,7 @@ import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scr
 import { AuthRoutingModule } from './auth-routing.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { VersionModule } from '@directives/version/version.module';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component';
@@ -57,6 +58,7 @@ import { AuthInputComponent } from './components/auth-input/auth-input.component
     NgOtpInputModule,
     CheckValueModule,
     VersionModule,
+    B1IconModule,
   ],
   exports: [],
 })
