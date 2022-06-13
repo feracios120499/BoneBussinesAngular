@@ -50,7 +50,7 @@ export class PaymentsListActionsComponent implements OnInit, OnDestroy {
     if (range.start.isSame(oldRange.start, 'day') && range.end.isSame(oldRange.end, 'day')) {
       return;
     }
-
+    console.log(range);
     this.store.dispatch(PayListActions.setRange({ range }));
   }
 

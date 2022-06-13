@@ -24,6 +24,7 @@ import { SharedActions } from '@store/shared/actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { PaymentsImportModalComponent } from '../../payments-list/components/payments-import-modal/payments-import-modal.component';
+import { ImportSaveModalComponent } from '../components/import-save-modal/import-save-modal.component';
 import { PayImportCommonActions } from './actions';
 import { PayImportCommonSelectors } from './selectors';
 
@@ -150,6 +151,7 @@ export class PayImportCommonEffects {
           const dublicatesExist = payments.filter((p) => p.status === 'EXISTS').length > 0;
           if (!dublicatesExist) {
             const successPayments = payments.filter((p) => p.status === 'OK');
+            if (successPayments.length == 0) return;
             this.store.dispatch(
               PayImportCommonActions.savePaymentsRequest(
                 this.isSwift(payments[0])
@@ -157,6 +159,18 @@ export class PayImportCommonEffects {
                   : successPayments.map((p) => p.model as PaymentDetails)
               )
             );
+          } else {
+            const modal = this.modalService.open(ImportSaveModalComponent);
+            modal.componentInstance.rows = payments;
+            modal.componentInstance.onSave = (payments: ImportResponsRow[]) => {
+              this.store.dispatch(
+                PayImportCommonActions.savePaymentsRequest(
+                  this.isSwift(payments[0])
+                    ? payments.map((p) => p.model as SwiftDetails)
+                    : payments.map((p) => p.model as PaymentDetails)
+                )
+              );
+            };
           }
         })
       ),
@@ -223,12 +237,16 @@ export class PayImportCommonEffects {
     this.actions$.pipe(
       ofType(PayImportCommonActions.importPaymentsRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
-      switchMap((payload) =>
-        this.paymentsService.importCommonPayments(payload.data.files, payload.clientId).pipe(
+      switchMap((payload) => {
+        const method =
+          payload.data.type === 'common'
+            ? this.paymentsService.importCommonPayments(payload.data.files, payload.clientId)
+            : this.paymentsService.importSwiftPayments(payload.data.files, payload.clientId);
+        return method.pipe(
           map((response) => PayImportCommonActions.importPaymentsSuccess(response)),
           catchError((error) => of(PayImportCommonActions.importPaymentsFailure(error.message)))
-        )
-      )
+        );
+      })
     )
   );
 

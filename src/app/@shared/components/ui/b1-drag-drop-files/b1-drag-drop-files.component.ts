@@ -43,11 +43,14 @@ export class B1DragDropFilesComponent implements OnInit, ControlValueAccessor {
   }
 
   selectFiles(event: any): void {
-    this.files = Array.from(event.target.files);
-    this.onChange(this.files);
+    this.changeFiles(event.target.files);
   }
 
   droppedFiles(event: FileList): void {
+    this.changeFiles(event);
+  }
+
+  private changeFiles(event: FileList) {
     const acceptExtensions = this.accept?.split(',').map((p) => p.replace('.', '').toUpperCase()) || [];
 
     this.files = Array.from(event).filter((p) => acceptExtensions.indexOf(this.getExtension(p) || '') >= 0);

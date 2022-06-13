@@ -14,4 +14,6 @@ export namespace AppActions {
   export const activateDemo = createAction('[APP] activate demo mode');
 
   export const disableDemoMode = createAction('[APP] disable demo mode');
+
+  export const removeStore = createAction('[APP] remove store', props<{ storeKey: string }>());
 }

@@ -10,7 +10,7 @@
         </a>
       </li>
     </ul>
-    <div class="pay-tabs-mobile">
+    <div class="pay-tabs-mobile" *ngIf="currentTab">
       <div>
         <span class="b1-mr-2">{{ currentTab!.label | translate }}</span>
         <span

@@ -65,5 +65,13 @@ import { PaymentsSumModule } from '@modules/payments/components/payments-sum/pay
     B1DragDropFilesModule,
     PaymentsSumModule,
   ],
+  exports: [
+    PaymentsListComponent,
+    PaymentsListTabsComponent,
+    PaymentsListActionsComponent,
+    PaymentsListPaymentsComponent,
+    PaymentsImportModalComponent,
+    PaymentsExportModalComponent,
+  ],
 })
 export class PaymentsListModule {}

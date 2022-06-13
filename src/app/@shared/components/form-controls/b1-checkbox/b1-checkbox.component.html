@@ -5,6 +5,7 @@
     autocomplete="off"
     [(ngModel)]="value"
     (ngModelChange)="handleValue($any(value))"
+    [disabled]="isDisabled"
     #formControlRef />
   <i class="b1-checkbox__check"></i>
   <span class="b1-checkbox__label" #labelRef>

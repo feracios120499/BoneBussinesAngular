@@ -23,6 +23,12 @@ import { PayImportCommonEffects } from './store/effects';
 import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
+import { PaymentsSumModule } from '@modules/payments/components/payments-sum/payments-sum.module';
+import { ImportResponseFilterPipe } from './pipes/import-response-filter.pipe';
+import { ImportSaveModalComponent } from './components/import-save-modal/import-save-modal.component';
+import { B1CheckboxModule } from '@form-controls/b1-checkbox/b1-checkbox.module';
+import { B1CurrencySumModule } from '@ui/b1-currency-sum/b1-currency-sum.module';
+import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +36,8 @@ import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
     ImportCommonTabsComponent,
     ImportCommonActionsComponent,
     ImportCommonListComponent,
+    ImportResponseFilterPipe,
+    ImportSaveModalComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +57,10 @@ import { B1InputModule } from '@form-controls/b1-input/b1-input.module';
     B1PageButtonModule,
     B1ButtonModule,
     B1InputModule,
+    PaymentsSumModule,
+    B1CheckboxModule,
+    B1CurrencySumModule,
+    B1IconModule,
   ],
 })
 export class ImportCommonModule {}

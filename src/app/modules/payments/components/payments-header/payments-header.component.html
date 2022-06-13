@@ -23,13 +23,9 @@
             {{ 'components.pay.header.payments' | translate }}
           </a>
         </li>
-        <li ng-class="{ active: $state.includes('app.payments.held') }" class="b1-head-tabs__item">
-          <a
-            href=""
-            ui-sref="app.payments.held"
-            data-translate="components.pay.header.paidPayments"
-            class="b1-head-tabs__link b1-medium b1-color-dark">
-            проведені
+        <li (click)="goTo('payments/held')" [class.active]="isActive('/payments/held')" class="b1-head-tabs__item">
+          <a class="b1-head-tabs__link b1-medium b1-color-dark">
+            {{ 'components.pay.header.paidPayments' | translate }}
           </a>
         </li>
         <li

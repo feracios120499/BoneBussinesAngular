@@ -11,6 +11,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from '@store';
+import { AppActions } from '@store/app/actions';
 import { APP_KEY } from '@store/app/store';
 import { MenuEffects } from '@store/menu/effects';
 import { NotifyEffects } from '@store/notify/effects';
@@ -49,6 +50,10 @@ export function clearOnLogoutMetaReducer(reducer: ActionReducer<any>): ActionRed
     }
     if (action.type === UserActions.selectCurrentClientId.type) {
       return reducer(saveState(saveStoresChangeCustomer), action);
+    }
+    if (action.type == AppActions.removeStore.type) {
+      const storeKey = (action as any).storeKey;
+      return reducer(saveState(Object.keys(state).filter((p) => p != storeKey)), action);
     }
     return reducer(state, action);
 

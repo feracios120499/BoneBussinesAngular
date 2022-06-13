@@ -10,7 +10,7 @@
     </span>
   </div>
   <ng-container *ngrxLet="selectedSum$ as selectedSum">
-    <div class="pay-sum-selected" *ngIf="selectedSum.count != 0">
+    <div class="pay-sum-selected" *ngIf="selectedSum && selectedSum.count != 0">
       <span> {{ 'components.pay.totalSelectedPaymentsSum' | translate }}: </span>
       <span>
         <b1-currency-sum [currencySum]="selectedSum.sum"></b1-currency-sum>

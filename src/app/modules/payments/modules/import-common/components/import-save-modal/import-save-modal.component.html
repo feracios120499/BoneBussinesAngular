@@ -1,0 +1,41 @@
+<div class="b1-modal-data">
+  <div class="b1-modal-close">
+    <i b1-icon icon="cancel" (click)="modal.close()"></i>
+  </div>
+  <div class="b1-modal-header">
+    <div class="b1-title3">{{ 'components.pay.savingPayments' | translate }}</div>
+  </div>
+  <div class="b1-modal-body b1-modal-wrapper">
+    <b1-checkbox
+      class="b1-small b1-bold"
+      [(ngModel)]="saveSuccessfull"
+      [disabled]="successfull.length == 0"
+      (ngModelChange)="changeSave()">
+      {{ 'components.salary.registry.import.successfull' | translate }} ({{ successfull.length }})
+    </b1-checkbox>
+    <b1-checkbox class="b1-small b1-bold b1-mt-4" [(ngModel)]="saveDublicates" (ngModelChange)="changeSave()">
+      {{ 'components.salary.registry.import.dublicates' | translate }} ({{ dublicates.length }})
+    </b1-checkbox>
+    <div class="b1-mt-4 b1-base b1-bold" *ngIf="payments.length != 0">
+      <span class="b1-mr-2">{{ 'components.pay.willSuccessPayments' | translate }}</span>
+      <span class="b1-mr-2">{{ payments.length }}</span>
+      <span class="b1-mr-2">{{ 'components.loan.onSum' | translate }}</span>
+      <span><b1-currency-sum [currencySum]="sum"></b1-currency-sum></span>
+    </div>
+    <div *ngIf="importType === 'swift'">
+      <b1-checkbox class="b1-small b1-bold b1-mt-4" [(ngModel)]="isAgree">
+        {{ 'components.pay.swift.iaccept' | translate }}
+      </b1-checkbox>
+    </div>
+  </div>
+
+  <div class="b1-modal-footer">
+    <b1-button
+      [isDisabled]="payments.length == 0 || !isAgree"
+      class="b1-mr-4"
+      icon="save"
+      label="actions.save"
+      (btnClick)="savePayments()">
+    </b1-button>
+  </div>
+</div>

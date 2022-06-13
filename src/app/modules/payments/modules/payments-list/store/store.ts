@@ -1,4 +1,4 @@
-import { DateRange } from '@models/date-range.model';
+import { DateRange, DateRangeString } from '@models/date-range.model';
 import { StatusCount } from '@models/status-count.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 import { PaymentsListItem } from '@modules/payments/models/payments-list-item.model';
@@ -13,7 +13,7 @@ export interface PayListState {
   loadings: PaymentsListLoadings[];
   payments: PaymentsListItem[];
   filter: string;
-  range: DateRange;
+  range: DateRangeString;
   selectAll: boolean;
   selectedIds: number[];
 }
@@ -25,8 +25,8 @@ export const payListState: PayListState = {
   payments: [],
   filter: '',
   range: {
-    start: dayjs().add(-1, 'month'),
-    end: dayjs(),
+    start: dayjs().add(-1, 'month').toISOString(),
+    end: dayjs().toISOString(),
   },
   selectAll: false,
   selectedIds: [],

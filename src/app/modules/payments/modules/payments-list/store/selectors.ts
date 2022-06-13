@@ -5,6 +5,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { PaymentsListFilter } from '@pipes/payments-list-filter/payments-list-filter.pipe';
 import { FilterService } from '@services/filter.service';
 import { isAnyExist } from '@store/shared';
+import dayjs from 'dayjs';
 import { PayListState, PAY_LIST_KEY } from './store';
 
 export namespace PayListSelectors {
@@ -21,11 +22,14 @@ export namespace PayListSelectors {
     (state) => isAnyExist(state.loadings, 'list') && state.payments.length === 0
   );
 
-  export const range = createSelector(payListState, (state) => state.range);
+  export const range = createSelector(payListState, (state) => ({
+    end: dayjs(state.range.end),
+    start: dayjs(state.range.start),
+  }));
 
   export const rangeString = createSelector(payListState, (state) => ({
-    start: state.range.start.format('DD.MM.YYYY'),
-    end: state.range.end.format('DD.MM.YYYY'),
+    start: dayjs(state.range.start).format('DD.MM.YYYY'),
+    end: dayjs(state.range.end).format('DD.MM.YYYY'),
   }));
 
   export const filter = createSelector(payListState, (state) => state.filter);
@@ -49,7 +53,10 @@ export namespace PayListSelectors {
   });
 
   export const rangeWithStatus = createSelector(payListState, (state) => ({
-    range: state.range,
+    range: {
+      start: dayjs(state.range.start),
+      end: dayjs(state.range.end),
+    },
     status: state.currentTab,
   }));
 

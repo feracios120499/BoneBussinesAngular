@@ -26,7 +26,7 @@ const reducer: ReducerTypes<PayListState, ActionCreator<string, Creator<any[], o
   })),
   on(PayListActions.setRange, (state, action) => ({
     ...state,
-    range: action.range,
+    range: { start: action.range.start.toISOString(), end: action.range.end.toISOString() },
     payments: [],
     selectedIds: [],
     selectAll: false,

@@ -17,6 +17,7 @@ export class ImportCommonComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private location: Location) {}
 
   isLoading$ = this.store.select(PayImportCommonSelectors.isLoading);
+  paymentsSum$ = this.store.select(PayImportCommonSelectors.paymentsSum);
   ngOnInit(): void {
     this.store.addReducer(PAY_IMPORT_COMMON_KEY, payImportCommonReducer);
     this.store.dispatch(PayImportCommonActions.init());
