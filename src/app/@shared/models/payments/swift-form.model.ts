@@ -1,4 +1,5 @@
 import { SelectAccount } from '@models/select-account.model';
+import { PaymentSupDoc } from './payment-sup-doc.model';
 
 export interface SwiftForm {
   amount: number;
@@ -25,4 +26,6 @@ export interface SwiftForm {
   benificiaryBankName: string;
   benificiaryBankSWIFT: string;
   benificiaryBankLocation: string;
+  attachedSupDocs?: PaymentSupDoc[];
+  isAgree: boolean;
 }

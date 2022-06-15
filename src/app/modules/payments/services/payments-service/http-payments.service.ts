@@ -131,6 +131,10 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     return this.http.post<StatusResponse[]>(`api/v1/pay/payments/swift/${clientId}`, swifts);
   }
 
+  getSumString(amount: number, currencyCode: string, clientId: string): Observable<string> {
+    return this.http.get<string>(`api/v1/pay/payments/getsumstring/${clientId}?sum=${amount}&currCode=${currencyCode}`);
+  }
+
   private mapFile(res: HttpResponse<Blob>): FileModel {
     const file: FileModel = {
       blob: res.body ? res.body : undefined,

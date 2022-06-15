@@ -1,3 +1,4 @@
+import { Currency } from '@models/currency.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
@@ -30,4 +31,10 @@ export namespace PublicActions {
     MobileAppLinks,
     string
   >('[PUBLIC] load mobile app links');
+
+  export const [loadCurrenciesRequest, loadCurrenciesSuccess, loadCurrenciesFailure] = createHTTPActions<
+    void,
+    Currency[],
+    string
+  >(`[PUBLIC] load currencies`);
 }

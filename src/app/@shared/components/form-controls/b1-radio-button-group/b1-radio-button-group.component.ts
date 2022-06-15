@@ -14,9 +14,13 @@ import { BaseControlComponent } from '@form-controls/base-control.component';
   },
 })
 export class B1RadioButtonGroupComponent extends BaseControlComponent implements OnInit {
-  @Input() items!: { value: string; label: string }[];
+  @Input() items!: { value: string; label: string; tooltip?: string }[];
   @Input() disabledValues: string[] = [];
   @Input() name?: string;
+  @Input() direction: 'vertical' | 'horizontal' = 'vertical';
+  @Input() classItem = '';
+  @Input() label?: string;
+  @Input() class = '';
 
   inputName!: string;
 
@@ -38,6 +42,12 @@ export class B1RadioButtonGroupComponent extends BaseControlComponent implements
 
   handleValue(value: string): void {
     this.onChange(value);
+  }
+
+  getClass(index: number): string {
+    if (this.direction == 'horizontal') return 'b1-mr-4';
+    if (this.direction == 'vertical' && index !== 0) return 'b1-mt-4';
+    return '';
   }
 
   private getControlName(control: AbstractControl): string {

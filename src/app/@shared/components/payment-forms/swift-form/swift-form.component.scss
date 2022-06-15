@@ -1,0 +1,14 @@
+.swift-form {
+  margin-top: 32px;
+}
+.currencies {
+  @media (max-width: 812px) {
+    display: none;
+  }
+  &-mobile {
+    display: none;
+    @media (max-width: 812px) {
+      display: flex;
+    }
+  }
+}

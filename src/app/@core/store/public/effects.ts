@@ -29,6 +29,7 @@ export class PublicEffects {
         PublicActions.loadPayTypesReuqest(),
         PublicActions.loadResourcesRequest(),
         PublicActions.loadMobileAppLinksReuqest(),
+        PublicActions.loadCurrenciesRequest(),
       ])
     )
   );
@@ -75,6 +76,18 @@ export class PublicEffects {
         this.publicService.getPayTypes().pipe(
           map((resources) => PublicActions.loadPayTypesSuccess(resources)),
           catchError((error) => of(PublicActions.loadPayTypesFailure(error.error.Message)))
+        )
+      )
+    )
+  );
+
+  loadCurrencies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.loadCurrenciesRequest),
+      switchMap((_) =>
+        this.publicService.getCurrencies().pipe(
+          map((currenices) => PublicActions.loadCurrenciesSuccess(currenices)),
+          catchError((error) => of(PublicActions.loadCurrenciesFailure(error.message)))
         )
       )
     )

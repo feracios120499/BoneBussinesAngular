@@ -6,6 +6,7 @@ import { AcctLoadings } from '@modules/accounts/models/acct-loadings.type';
 
 import { ACCT_KEY, AcctState } from './store';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
+import { environment } from 'src/environments/environment';
 
 export namespace AcctSelectors {
   export const acctStore = createFeatureSelector<AcctState>(ACCT_KEY);
@@ -76,6 +77,11 @@ export namespace AcctSelectors {
     AcctSelectors.isLoadingAccounts,
     (accounts, isLoading): SelectAccountsList => ({ accounts: accounts || [], isLoading })
   );
+
+  export const swiftSenderAccounts = createSelector(senderAccounts, (accounts) => {
+    accounts.accounts = accounts.accounts.filter((p) => p.currencyCode != 'UAH');
+    return accounts;
+  });
 
   // TODO добавить признак что с счета можно списывать в платежах, на беке
   export const recipientPaymentAccounts = createSelector(activeAccounts, (accounts) => accounts);

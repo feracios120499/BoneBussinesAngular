@@ -1,9 +1,106 @@
-<div class="b1-form-block">
-  <div class="b1-form-block-header">
-    <div class="b1-form-block-header_index">1</div>
-    <div class="b1-form-block-header_title">
-      {{ 'components.salary.generalDetails' | translate }}
+<form [formGroup]="formGroup" #paymentForm="ngForm" class="swift-form">
+  <div class="b1-form-block">
+    <div class="b1-form-block-header">
+      <div class="b1-form-block-header_index">1</div>
+      <div class="b1-form-block-header_title">
+        {{ 'components.salary.generalDetails' | translate }}
+      </div>
+    </div>
+    <div class="b1-form-container">
+      <b1-checkbox class="b1-base noselect" [formControl]="docNumberAutoControl" [hidden]="type != 'create'">
+        {{ 'shared.autoNumber' | translate }}
+      </b1-checkbox>
+      <b1-input
+        class="b1-mt-5"
+        [formControl]="docNumberControl"
+        [hidden]="docNumberAutoControl?.value"
+        [labelTop]="false">
+        {{ 'components.pay.paymentNumber' | translate }}
+      </b1-input>
+
+      <payment-dates-form [paymentForm]="formGroup"></payment-dates-form>
+      <div class="b1-input b1-mt-5">
+        <label class="b1-input__label b1-base">
+          {{ 'components.pay.currency' | translate }}
+        </label>
+        <div class="w-full">
+          <ng-select
+            class="currencies"
+            appendTo="body"
+            [editableSearchTerm]="false"
+            [searchable]="false"
+            [clearable]="false"
+            [formControl]="currencyControl">
+            <ng-template ng-label-tmp let-item="item">
+              <div class="b1-base b1-bold b1-flex b1-align-center">{{ item.name }} ({{ item.code }})</div>
+            </ng-template>
+            <ng-option *ngFor="let currency of currencies" [value]="currency">
+              <div class="b1-base b1-bold b1-flex b1-align-center b1-justify-between">
+                <span>{{ currency.name }}</span>
+                <span>{{ currency.code }}</span>
+              </div>
+            </ng-option>
+          </ng-select>
+
+          <div class="b1-input__control currencies-mobile">
+            <div class="b1-base b1-bold b1-flex b1-align-center">
+              {{ currencyControl?.value?.name }} ({{ currencyControl?.value?.code }})
+            </div>
+            <i b1-icon icon="chevron-down" class="b1-input__select_chevron"></i>
+            <select [formControl]="currencyControl" name="tabs" id="tabs" class="b1-input__select" #selectList>
+              <option *ngFor="let currency of currencies" [value]="currency">
+                {{ currency.name }} ({{ currency.code }})
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="b1-mt-5">
+        <b1-input-amount [formControl]="amountControl">
+          <b1-input-error [control]="amountControl" [form]="paymentForm"> </b1-input-error>
+        </b1-input-amount>
+      </div>
+
+      <b1-input class="b1-mt-5" [formControl]="amountStringControl" [disabled]="true" [labelTop]="false">
+        {{ 'components.pay.swift.amountString' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="purposeControl" [labelTop]="false">
+        {{ 'components.pay.swift.contractNumberGoodType' | translate }}
+      </b1-input>
+
+      <b1-radio-button-group
+        class="b1-mt-5"
+        [formControl]="typePayControl"
+        [items]="typesPay"
+        direction="horizontal"
+        classItem="b1-base"
+        label="components.pay.swift.typePay">
+      </b1-radio-button-group>
+
+      <b1-radio-button-group
+        class="b1-mt-5"
+        [formControl]="paymentFeeControl"
+        [items]="paymentsFee"
+        direction="horizontal"
+        classItem="b1-base"
+        label="components.pay.swift.expenceFee">
+      </b1-radio-button-group>
+
+      <b1-input class="b1-mt-5" [formControl]="otherControl" [labelTop]="false">
+        {{ 'components.pay.swift.others' | translate }}
+      </b1-input>
+
+      <div class="b1-mt-5">
+        <b1-sup-documents [formControl]="attachedSupDocsControl"></b1-sup-documents>
+      </div>
+
+      <b1-checkbox class="b1-base noselect" [formControl]="isAgreeControl">
+        {{ 'components.pay.swift.iaccept' | translate }}
+      </b1-checkbox>
+
+      <button type="submit" (click)="test()">submit</button>
     </div>
   </div>
-  <div class="b1-form-block-body"></div>
-</div>
+</form>

@@ -1,17 +1,20 @@
-<div *ngFor="let item of items; index as i" [class.b1-mt-4]="i !== 0">
-  <label class="b1-checkbox">
-    <input
-      class="b1-checkbox__hidden"
-      [id]="item.value + '-' + controlId"
-      type="radio"
-      [name]="inputName"
-      [value]="item.value"
-      [checked]="item.value === value"
-      [disabled]="isDisabled || disabledValues.includes(item.value) || null"
-      #formControlRef />
-    <i class="b1-checkbox__check"></i>
-    <span class="b1-checkbox__label" #labelRef>
-      {{ item.label | translate }}
-    </span>
-  </label>
+<div [class.b1-flex]="direction == 'horizontal'" [class.b1-align-center]="direction == 'horizontal'" [ngClass]="class">
+  <div class="b1-input__label b1-base" *ngIf="label">{{ label | translate }}</div>
+  <div *ngFor="let item of items; index as i" [ngClass]="getClass(i)" [ngbTooltip]="item.tooltip || '' | translate">
+    <label class="b1-checkbox">
+      <input
+        class="b1-checkbox__hidden"
+        [id]="item.value + '-' + controlId"
+        type="radio"
+        [name]="inputName"
+        [value]="item.value"
+        [checked]="item.value === value"
+        [disabled]="isDisabled || disabledValues.includes(item.value) || null"
+        #formControlRef />
+      <i class="b1-checkbox__check"></i>
+      <span class="b1-checkbox__label" #labelRef [ngClass]="classItem">
+        {{ item.label | translate }}
+      </span>
+    </label>
+  </div>
 </div>

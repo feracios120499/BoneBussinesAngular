@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Currency } from '@models/currency.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
@@ -49,6 +50,10 @@ export class PublicService extends BaseService {
       map((response) => (response.Result ? response.Result : response)),
       map(this.mapMobileAppLinksResponse)
     );
+  }
+
+  getCurrencies(): Observable<Currency[]> {
+    return this.http.get<Currency[]>(`api/v1/public/currencies`);
   }
 
   private mapMobileAppLinksResponse(response: {

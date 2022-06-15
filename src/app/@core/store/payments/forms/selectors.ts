@@ -34,4 +34,6 @@ export namespace PayFormsSelectors {
   );
 
   export const showCreateTabs = createSelector(payFormState, (state) => state.progress === 'form');
+
+  export const amountString = createSelector(payFormState, (state) => state.amountString);
 }
