@@ -5,25 +5,28 @@ import { CreateComponent } from './create.component';
 
 const routes: Routes = [
   {
-    path: '', component: CreateComponent,
+    path: '',
+    component: CreateComponent,
     children: [
       {
         path: 'within-country',
-        loadChildren: () =>
-          import('./../within-country/within-country.module').then(p => p.WithinCountryModule),
+        loadChildren: () => import('./../within-country/within-country.module').then((p) => p.WithinCountryModule),
       },
       {
         path: 'my-accounts',
-        loadChildren: () =>
-          import('./../my-accounts/my-accounts.module').then(p => p.MyAccountsModule)
+        loadChildren: () => import('./../my-accounts/my-accounts.module').then((p) => p.MyAccountsModule),
       },
-      { path: '', redirectTo: 'within-country' }
-    ]
-  }
+      {
+        path: 'swift',
+        loadChildren: () => import('./../swift/swift.module').then((p) => p.SwiftModule),
+      },
+      { path: '', redirectTo: 'within-country' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CreateRoutingModule { }
+export class CreateRoutingModule {}
