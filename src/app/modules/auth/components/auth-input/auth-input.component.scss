@@ -1,8 +1,7 @@
 @import 'variables';
 
-:host(.cl-group) {
+:host {
   display: block;
-
   position: relative;
   margin-top: 32px;
   & tooltip {
@@ -21,6 +20,9 @@
     .cl-input {
       & ~ .cl-input-bar:before {
         width: 100%;
+      }
+      & ~ .cl-input-icon {
+        color: $color-primary;
       }
     }
   }
@@ -97,8 +99,7 @@
         font-size: 14px;
       }
       &:focus ~ .cl-input-bar:before,
-      &:focus ~ .cl-input-icon,
-      &:valid ~ .cl-input-icon {
+      &:focus ~ .cl-input-icon {
         color: $color-primary;
       }
       &-label {
@@ -151,5 +152,10 @@
         }
       }
     }
+  }
+  .validate-messages {
+    position: absolute;
+    top: 100%;
+    right: 0;
   }
 }

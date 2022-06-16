@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ChangePasswordModel } from '@modules/auth/models/change-password.model';
 import { LoginModel, LoginSignModel } from '@modules/auth/models/login.model';
 import { LoginResponse } from '@modules/auth/models/login.response';
+import { PasswordRestrictions } from '@modules/auth/models/password-restrictions.model';
+import { RestorePasswordModel } from '@modules/auth/models/restore-password.model';
 import { Token } from '@modules/auth/models/token.model';
 import { Observable, of } from 'rxjs';
 import { BaseAuthService } from './base-auth.service';
@@ -20,6 +23,14 @@ export class DemoAuthService implements BaseAuthService {
     expiresIn: '123',
     expires: '123',
     issued: new Date(),
+  };
+
+  private passRestrictions: PasswordRestrictions = {
+    uppercaseCount: 1,
+    lowercaseCount: 1,
+    digitsCount: 1,
+    specCharsCount: 1,
+    minPassLength: 9,
   };
 
   logIn(data: LoginModel): Observable<LoginResponse> {
@@ -43,5 +54,25 @@ export class DemoAuthService implements BaseAuthService {
 
   refreshToken(refreshToken: string | undefined, sessionId: string | undefined): Observable<Token> {
     return of(this.token);
+  }
+
+  restorePassword(data: RestorePasswordModel): Observable<void> {
+    return of();
+  }
+
+  restorePasswordWithOtp(data: RestorePasswordModel): Observable<void> {
+    return of();
+  }
+
+  getPassRestrictions(): Observable<PasswordRestrictions> {
+    return of(this.passRestrictions);
+  }
+
+  changePassword(data: ChangePasswordModel): Observable<void> {
+    return of();
+  }
+
+  changePasswordWithOtp(data: ChangePasswordModel): Observable<void> {
+    return of();
   }
 }

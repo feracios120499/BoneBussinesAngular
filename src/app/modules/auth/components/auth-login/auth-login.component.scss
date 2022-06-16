@@ -1,0 +1,12 @@
+@import 'variables';
+
+.cl-forgot {
+  margin: 24px 0 16px 0;
+  @include base;
+  display: block;
+  transition: all 0.15s ease-in;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

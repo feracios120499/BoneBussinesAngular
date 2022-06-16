@@ -11,10 +11,7 @@ interface IErrorData {
 @Component({
   template: '',
 })
-export abstract class BaseValidatableControlComponent
-  extends BaseControlComponent
-  implements AfterViewInit
-{
+export abstract class BaseValidatableControlComponent extends BaseControlComponent implements AfterViewInit {
   // @Input() labelForError!: string;
 
   ngAfterViewInit(): void {
@@ -76,7 +73,7 @@ export abstract class BaseValidatableControlComponent
       }),
       password: () => ({ text: 'Password is invalid.' }),
       auth: () => ({ text: 'Email/phone or password is invalid.' }),
-      sameAs: () => ({ text: 'must be equal to each other.' }),
+      sameAs: () => ({ text: 'validate.compareTo' }),
       min: () => ({
         text: `can't be less than`,
         // value: this.formControl.errors!.min['value'],

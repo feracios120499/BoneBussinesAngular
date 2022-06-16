@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { BaseButtonComponent } from '@ui/base-button.component';
 
 @Component({
-  selector: 'auth-button',
+  selector: 'app-auth-button',
   templateUrl: './auth-button.component.html',
   styleUrls: ['./auth-button.component.scss'],
 })

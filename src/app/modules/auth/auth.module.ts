@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { CheckStateModule } from '@directives/check-state/check-state.module';
 import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
@@ -27,6 +28,16 @@ import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { AuthCryptorComponent } from './components/auth-cryptor/auth-cryptor.component';
 import { AuthInputComponent } from './components/auth-input/auth-input.component';
+import { AuthBccDropdownComponent } from './components/auth-bcc-dropdown/auth-bcc-dropdown.component';
+import { AuthRestorePasswordComponent } from './views/auth-restore-password/auth-restore-password.component';
+import { AuthRestorePasswordFormComponent } from './components/auth-restore-password-form/auth-restore-password-form.component';
+import { AuthPasswordInputComponent } from './components/auth-password-input/auth-password-input.component';
+import { AuthPhoneInputComponent } from './components/auth-phone-input/auth-phone-input.component';
+import { AuthChangePasswordComponent } from './views/auth-change-password/auth-change-password.component';
+import { AuthChangePasswordFormComponent } from './components/auth-change-password-form/auth-change-password-form.component';
+import { AuthBackLinkComponent } from './components/auth-back-link/auth-back-link.component';
+import { AuthAlertComponent } from './components/auth-alert/auth-alert.component';
+import { AuthAlertRequirementComponent } from './components/auth-alert-requirement/auth-alert-requirement.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +54,16 @@ import { AuthInputComponent } from './components/auth-input/auth-input.component
     AuthOtpComponent,
     AuthCryptorComponent,
     AuthInputComponent,
+    AuthBccDropdownComponent,
+    AuthRestorePasswordComponent,
+    AuthRestorePasswordFormComponent,
+    AuthPasswordInputComponent,
+    AuthPhoneInputComponent,
+    AuthChangePasswordComponent,
+    AuthChangePasswordFormComponent,
+    AuthBackLinkComponent,
+    AuthAlertComponent,
+    AuthAlertRequirementComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +80,7 @@ import { AuthInputComponent } from './components/auth-input/auth-input.component
     CheckValueModule,
     VersionModule,
     B1IconModule,
+    NgxMaskModule,
   ],
   exports: [],
 })

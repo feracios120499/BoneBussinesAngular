@@ -320,7 +320,7 @@
 	"components.auth.RestorationPassword": "Password restoration",
 	"components.auth.RunTheEncryptionSoftware": "Run the encryption software",
 	"components.auth.SMSpassword": "SMS password",
-	"components.auth.Send": "send",
+	"components.auth.Send": "Send",
 	"components.auth.YourBrowserIsOutdated": "Your browser is outdated and not support demo mode",
 	"components.auth.YourEmail": "Your e-mail",
 	"components.auth.YourLogin": "Your login",

@@ -6,7 +6,7 @@ import { CryptorKey } from '@services/sign/models/cryptor-key.model';
 import { CryptorToken } from '@services/sign/models/cryptor-token.model';
 
 @Component({
-  selector: 'auth-cryptor',
+  selector: 'app-auth-cryptor',
   templateUrl: './auth-cryptor.component.html',
   styleUrls: ['./auth-cryptor.component.scss'],
 })

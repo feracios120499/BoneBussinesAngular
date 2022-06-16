@@ -6,6 +6,9 @@ import { CryptorKey } from '@services/sign/models/cryptor-key.model';
 import { CryptorToken } from '@services/sign/models/cryptor-token.model';
 import { createHTTPActions } from '@store/shared';
 import { Profile } from 'src/app/@shared/models/profile.model';
+import { ChangePasswordModel } from '../models/change-password.model';
+import { PasswordRestrictions } from '../models/password-restrictions.model';
+import { RestorePasswordModel } from '../models/restore-password.model';
 
 export namespace AuthActions {
   export const [loginRequest, loginSuccess, loginFailure] = createHTTPActions<LoginModel, LoginResponse, string>(
@@ -25,7 +28,9 @@ export namespace AuthActions {
   export const resetLogin = createAction('[AUTH] reset login data');
 
   // setNeedOtp action
-  export const setNeedOtp = createAction('[AUTH] sett need otp', props<{ phone: string }>());
+  export const setNeedOtp = createAction('[AUTH] set need otp', props<{ phone: string }>());
+
+  export const clearNeedOtp = createAction('[AUTH] clear need otp');
 
   export const [loadProfileRequest, loadProfileSuccess, loadProfileFailure] = createHTTPActions<void, Profile, string>(
     '[AUTH] load profile'
@@ -62,4 +67,34 @@ export namespace AuthActions {
     Token,
     string
   >('[AUTH] login cryptor');
+
+  export const [restorePasswordRequest, restorePasswordSuccess, restorePasswordFailure] = createHTTPActions<
+    RestorePasswordModel,
+    void,
+    string
+  >('[AUTH] restore password');
+
+  export const [restorePasswordWithOtpRequest, restorePasswordWithOtpSuccess, restorePasswordWithOtpFailure] =
+    createHTTPActions<{ confirmCode: string }, void, string>('[AUTH] restore password with otp');
+
+  export const setNeedChangeTechPassword = createAction(
+    '[AUTH] set need change tech password',
+    props<{ techPassword: string }>()
+  );
+
+  export const clearTechPassword = createAction('[AUTH] clear tech password');
+
+  export const [loadPassRestrictionsRequest, loadPassRestrictionsSuccess, loadPassRestrictionsFailure] =
+    createHTTPActions<void, PasswordRestrictions, string>('[AUTH] load password restrictions');
+
+  export const [changePasswordRequest, changePasswordSuccess, changePasswordFailure] = createHTTPActions<
+    ChangePasswordModel,
+    ChangePasswordModel,
+    string
+  >('[AUTH] change password');
+
+  export const [changePasswordWithOtpRequest, changePasswordWithOtpSuccess, changePasswordWithOtpFailure] =
+    createHTTPActions<{ confirmCode: string }, void, string>('[AUTH] change password with otp');
+
+  export const clearChangePasswordData = createAction('[AUTH] clear change password data');
 }

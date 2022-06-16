@@ -1,19 +1,21 @@
 <form *ngrxLet="isLoading$ as isLoading" [formGroup]="form" (ngSubmit)="onLogin()">
-  <app-auth-input name="email" controlId="email" icon="user-solid" [formControl]="userNameControl">
+  <app-auth-input name="email" controlId="email" [formControl]="userNameControl">
     {{ 'logon.EmailOrPhone' | translate }}
   </app-auth-input>
 
-  <app-auth-input
-    controlId="password"
-    name="password"
-    type="password"
-    autocomplete="on"
-    icon="lock-2"
-    [formControl]="passwordControl">
+  <app-auth-password-input controlId="password" name="password" autocomplete="on" [formControl]="passwordControl">
     {{ 'components.auth.YourPassword' | translate }}
-  </app-auth-input>
+  </app-auth-password-input>
 
-  <auth-button type="submit" [isLoading]="isLoading" label="bid.Enter"> </auth-button>
+  <a class="cl-forgot" [routerLink]="['/', 'auth', 'forgotpwd']">
+    {{ 'components.auth.ForgotYourPassword' | translate }}
+  </a>
+
+  <app-auth-button
+    type="submit"
+    [isLoading]="isLoading"
+    label="bid.Enter"
+    [isDisabled]="form.invalid"></app-auth-button>
 </form>
 
-<auth-error [message]="errorMessage"></auth-error>
+<app-auth-error [message]="errorMessage"></app-auth-error>

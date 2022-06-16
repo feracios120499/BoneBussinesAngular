@@ -60,4 +60,6 @@ export namespace SharedActions {
     '[SHARED] show feedback modal',
     props<{ config: FeedbackModalConfig }>()
   );
+
+  export const downloadFileByUrl = createAction('[SHARED] download file by url', props<{ url: string }>());
 }

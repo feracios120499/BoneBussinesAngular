@@ -320,7 +320,7 @@
 	"components.auth.RestorationPassword": "Відновлення паролю",
 	"components.auth.RunTheEncryptionSoftware": "Запустити ПЗ криптозахисту",
 	"components.auth.SMSpassword": "Пароль з СМС",
-	"components.auth.Send": "відправити",
+	"components.auth.Send": "Відправити",
 	"components.auth.YourBrowserIsOutdated": "Ваш браузер застарілий, і не підтримує роботу тих функцій, котрі потрібні для коректної роботи функцій демонстраційного режиму",
 	"components.auth.YourEmail": "Ваш e-mail",
 	"components.auth.YourLogin": "Ваш логін",

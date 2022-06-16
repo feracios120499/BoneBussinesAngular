@@ -1,0 +1,89 @@
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+.cl {
+  &__bcc {
+    position: relative;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+    @include cl-anim;
+  }
+
+  &__bcc-download {
+    display: flex;
+    padding: 0;
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+    position: relative;
+    @include medium;
+    @include light;
+    color: $color-primary;
+
+    &__link {
+      height: 40px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.15s ease-in;
+
+      &:hover {
+        background-color: rgba($color-primary, 0.2);
+      }
+    }
+
+    &__toggle {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid rgba($color-primary, 0.4);
+      transition: background-color 0.15s ease-in;
+
+      &:hover {
+        background-color: rgba($color-primary, 0.2);
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &__menu {
+      list-style-type: none;
+      position: absolute;
+      top: -90px;
+      right: 0;
+      left: 0;
+      padding: 0;
+      margin: 0;
+      display: none;
+      background-color: $color-light;
+      border: 1px solid rgba($color-dark, 0.1);
+      box-shadow: 0 4px 8px rgba($color-dark, 0.1);
+      z-index: 90;
+      & li {
+        width: 100%;
+        transition: background-color 0.15s ease-in;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba($color-primary, 0.2);
+        }
+        & > a {
+          display: block;
+          padding: 8px 32px;
+        }
+      }
+    }
+
+    &.show &__menu {
+      display: block;
+    }
+  }
+}

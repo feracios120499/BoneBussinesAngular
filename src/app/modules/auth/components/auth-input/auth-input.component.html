@@ -1,8 +1,7 @@
 <input
   class="cl-input"
-  [class.cl-password]="type === 'password'"
   [id]="controlId"
-  [type]="type === 'password' ? (isShownPassword ? 'text' : 'password') : type"
+  [type]="type"
   [(ngModel)]="value"
   (ngModelChange)="handleValue($any(value))"
   [attr.name]="name"
@@ -15,14 +14,10 @@
 
 <span class="cl-input-bar"></span>
 
-<i
-  *ngIf="type === 'password' && value.toString().length > 0"
-  class="cl-password-icon"
-  [class.active]="isShownPassword"
-  (mouseleave)="isShownPassword = false"
-  (click)="isShownPassword = !isShownPassword"
-  b1-icon
-  icon="eye">
-</i>
+<i class="cl-input-icon" style="font-size: 20px" b1-icon icon="user-solid"></i>
 
-<i class="cl-input-icon" style="font-size: 20px" b1-icon [icon]="icon"></i>
+<p
+  *ngIf="showError && formControl && formControl.invalid && (formControl.dirty || formControl.touched)"
+  class="validate-messages">
+  {{ error!.text | translate: error!.params }}
+</p>

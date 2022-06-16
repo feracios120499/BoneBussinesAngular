@@ -46,4 +46,11 @@ export namespace PublicSelectors {
   export const currentVersion = createSelector(publicStore, (state) => state.resources?.owner.version);
 
   export const watchVersion = createSelector(publicStore, (state) => state.watchVersion);
+
+  export const cloudUrls = createSelector(publicStore, (state) => ({
+    win32: state.resources?.owner.cloudWin32Url,
+    win64: state.resources?.owner.cloudWin64Url,
+    linux: state.resources?.owner.cloudLinuxUrl,
+    mac: state.resources?.owner.cloudMacUrl,
+  }));
 }

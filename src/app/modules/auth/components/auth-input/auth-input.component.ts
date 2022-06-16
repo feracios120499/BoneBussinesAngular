@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { BaseInputComponent } from '@form-controls/base-input.component';
@@ -7,17 +7,8 @@ import { BaseInputComponent } from '@form-controls/base-input.component';
   selector: 'app-auth-input',
   templateUrl: './auth-input.component.html',
   styleUrls: ['./auth-input.component.scss'],
-  host: {
-    class: 'cl-group',
-  },
   providers: [provideValueAccessor(AuthInputComponent)],
 })
-export class AuthInputComponent extends BaseInputComponent implements OnInit {
-  @Input() icon!: string;
-  isShownPassword = false;
-
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.checkRequiredProps(['icon']);
-  }
+export class AuthInputComponent extends BaseInputComponent {
+  @Input() showError = false;
 }

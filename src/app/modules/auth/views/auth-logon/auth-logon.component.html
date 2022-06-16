@@ -1,11 +1,12 @@
-<div class="cl-content-form" *ngIf="(isNeedOtp$ | async) === false">
-  <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo">
+<div *ngIf="(isNeedOtp$ | async) === false">
+  <img src="assets/img/corplight.svg" alt="corplight_logo" class="cl-content-logo" />
   <div class="cl-content-title">
     {{ 'owner.slogan' | translate }}
   </div>
-  <auth-login></auth-login>
+  <app-auth-login></app-auth-login>
+  <app-auth-bcc-dropdown></app-auth-bcc-dropdown>
 </div>
 
-<div *ngIf="(isNeedOtp$ | async)" class="b1-mt-5">
-  <auth-otp [phone]="(phone$ | async)" (sendOtp)="logintOtp($event)"></auth-otp>
+<div *ngIf="isNeedOtp$ | async" class="b1-mt-5">
+  <app-auth-otp [phone]="phone$ | async" (sendOtp)="logintOtp($event)"></app-auth-otp>
 </div>

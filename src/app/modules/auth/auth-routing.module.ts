@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthLogonOldComponent } from './views/auth-logon-old/auth-logon-old.component';
 import { AuthLogonComponent } from './views/auth-logon/auth-logon.component';
+import { AuthRestorePasswordComponent } from './views/auth-restore-password/auth-restore-password.component';
+import { AuthChangePasswordComponent } from './views/auth-change-password/auth-change-password.component';
 import { AuthComponent } from './views/auth/auth.component';
 
 const routes: Routes = [
@@ -12,6 +14,8 @@ const routes: Routes = [
     children: [
       { path: 'logon', component: AuthLogonComponent },
       { path: 'old', component: AuthLogonOldComponent },
+      { path: 'forgotpwd', component: AuthRestorePasswordComponent },
+      { path: 'changePassword', component: AuthChangePasswordComponent },
     ],
   },
   { path: '', redirectTo: '/auth/logon', pathMatch: 'full' },

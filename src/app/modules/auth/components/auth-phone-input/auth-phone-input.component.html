@@ -1,0 +1,25 @@
+<input
+  class="cl-input"
+  [id]="controlId"
+  type="text"
+  [value]="value"
+  [attr.name]="name"
+  [attr.autocomplete]="autocomplete"
+  [formControl]="$any(formControl)"
+  #formControlRef
+  mask="(000) 000-00-00"
+  [prefix]="prefix"
+  [showMaskTyped]="true" />
+<label class="cl-input-label" [for]="controlId" #labelRef>
+  <ng-content></ng-content>
+</label>
+
+<span class="cl-input-bar"></span>
+
+<i class="cl-input-icon b1-rotate-270" style="font-size: 20px" b1-icon icon="phone-solid"></i>
+
+<p
+  *ngIf="showError && formControl && formControl.invalid && (formControl.dirty || formControl.touched)"
+  class="validate-messages">
+  {{ error!.text | translate: error!.params }}
+</p>

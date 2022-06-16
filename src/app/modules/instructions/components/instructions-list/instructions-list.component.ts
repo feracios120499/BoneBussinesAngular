@@ -30,9 +30,7 @@ export class InstructionsListComponent {
       url: 'assets/barsCryptorCloud/BarsCryptorCloud_User_Manual.htm',
     },
     {
-      // TODO: ADD TO I18.JSON AND CHANGE TITLE TO 'aside.nav.UserManualCertificate':
-      // title: 'components.contacts.refreshCertificate',
-      title: 'Reissue of the certificate',
+      title: 'components.instructions.reissueOfTheCertificate',
       svgName: 'instruction-certificate',
       url: 'http://ca.oschadbank.ua/storage/app/media/doc/GenCertInstr.pdf',
     },

@@ -3,7 +3,7 @@ import { AuthSelectors } from '@modules/auth/store/selectors';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'auth-otp',
+  selector: 'app-auth-otp',
   templateUrl: './auth-otp.component.html',
   styleUrls: ['./auth-otp.component.scss'],
 })

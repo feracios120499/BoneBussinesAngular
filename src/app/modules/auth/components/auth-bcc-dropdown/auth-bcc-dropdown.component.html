@@ -1,0 +1,58 @@
+<ng-container *ngrxLet="cloudUrls$ as cloudUrls">
+  <div
+    class="cl__bcc _active"
+    anim-scroll=""
+    anim-class="_active"
+    delay="800"
+    *ngIf="cloudUrls.mac || cloudUrls.linux || cloudUrls.win32 || cloudUrls.win64">
+    <div class="cl__bcc-download dropdown" ngbDropdown>
+      <a
+        *ngIf="osName === 'MacOS' && cloudUrls.mac"
+        (click)="downloadFile(cloudUrls.mac)"
+        class="cl__bcc-download__link">
+        <i b1-icon icon="download-solid"></i>
+        <span class="b1-ml-3">{{ 'owner.cloudForMac' | translate }}</span>
+      </a>
+      <a
+        *ngIf="osName === 'Linux' && cloudUrls.linux"
+        (click)="downloadFile(cloudUrls.linux)"
+        class="cl__bcc-download__link">
+        <i b1-icon icon="download-solid"></i>
+        <span class="b1-ml-3">{{ 'owner.cloudForLinux' | translate }}</span>
+      </a>
+      <a
+        *ngIf="osName === 'Windows32' && cloudUrls.win32"
+        (click)="downloadFile(cloudUrls.win32)"
+        class="cl__bcc-download__link">
+        <i b1-icon icon="download-solid"></i>
+        <span class="b1-ml-3">{{ 'owner.cloudForWindows32' | translate }}</span>
+      </a>
+      <a
+        *ngIf="osName !== 'MacOS' && osName !== 'Linux' && osName !== 'Windows32' && cloudUrls.win64"
+        (click)="downloadFile(cloudUrls.win64)"
+        class="cl__bcc-download__link">
+        <i b1-icon icon="download-solid"></i>
+        <span class="b1-ml-3">{{ 'owner.cloudForWindows' | translate }}</span>
+      </a>
+
+      <a class="cl__bcc-download__toggle dropdown-toggle" ngbDropdownToggle>
+        <b class="caret" style="margin: 0"></b>
+      </a>
+
+      <ul class="cl__bcc-download__menu">
+        <li *ngIf="cloudUrls.mac">
+          <a (click)="downloadFile(cloudUrls.mac)">{{ 'owner.cloudForMac' | translate }}</a>
+        </li>
+        <li *ngIf="cloudUrls.linux">
+          <a (click)="downloadFile(cloudUrls.linux)">{{ 'owner.cloudForLinux' | translate }}</a>
+        </li>
+        <li *ngIf="cloudUrls.win32">
+          <a (click)="downloadFile(cloudUrls.win32)">{{ 'owner.cloudForWindows32' | translate }}</a>
+        </li>
+        <li *ngIf="cloudUrls.win64">
+          <a (click)="downloadFile(cloudUrls.win64)">{{ 'owner.cloudForWindows' | translate }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>

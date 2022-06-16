@@ -1,7 +1,5 @@
 <div class="cl-content-form auth-key">
-  <div
-    class="b1-flex b1-align-center-b1-justify-center b1-flex-direction"
-    *ngrxLet="tokens$ as tokens">
+  <div class="b1-flex b1-align-center-b1-justify-center b1-flex-direction" *ngrxLet="tokens$ as tokens">
     <ng-select
       class="auth-select"
       [editableSearchTerm]="false"
@@ -30,10 +28,6 @@
         </ng-option>
       </ng-select>
     </ng-container>
-    <auth-button
-      [isDisabled]="!key || !token"
-      (btnClick)="onLogin()"
-      label="bid.Enter">
-    </auth-button>
+    <app-auth-button [isDisabled]="!key || !token" (btnClick)="onLogin()" label="bid.Enter"> </app-auth-button>
   </div>
 </div>

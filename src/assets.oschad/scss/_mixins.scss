@@ -1,9 +1,9 @@
-@import "colors";
+@import 'colors';
 
-@import "mixins/layout";
-@import "mixins/elements";
-@import "mixins/main";
-@import "mixins/buttons";
+@import 'mixins/layout';
+@import 'mixins/elements';
+@import 'mixins/main';
+@import 'mixins/buttons';
 // DEPRECATED
 
 @mixin sidebar {
@@ -58,7 +58,7 @@ $color-sidebar-hover: $color-primary;
   z-index: 9999;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 5px;
     left: 5px;
@@ -73,7 +73,7 @@ $color-sidebar-hover: $color-primary;
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 15px;
     left: 15px;
@@ -85,5 +85,15 @@ $color-sidebar-hover: $color-primary;
 
     -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
     animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+}
+
+@mixin cl-anim {
+  transform: translateY(100px);
+  transition: all 0.3s;
+  opacity: 0;
+  &._active {
+    transform: translate(0, 0);
+    opacity: 1;
   }
 }

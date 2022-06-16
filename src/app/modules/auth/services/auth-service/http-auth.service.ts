@@ -10,6 +10,10 @@ import { LoginResponse } from '../../models/login.response';
 import { Token } from '../../models/token.model';
 import { BaseService } from '../../../../@core/services/base.service';
 import { BaseAuthService } from './base-auth.service';
+import { PasswordRestrictions } from '@modules/auth/models/password-restrictions.model';
+import { RestorePasswordModel } from '@modules/auth/models/restore-password.model';
+import { ChangePasswordModel } from '@modules/auth/models/change-password.model';
+import { EncodeUrlHepler } from '@helpers/encodeUrl.helper';
 
 const CONTENT_TYPE = 'Content-Type';
 
@@ -35,7 +39,7 @@ export class HttpAuthService extends BaseService implements BaseAuthService {
   }
 
   loginWithData(data: LoginModel): Observable<Token> {
-    const params = new HttpParams()
+    const params = new HttpParams({ encoder: new EncodeUrlHepler() })
       .set('grant_type', 'password')
       .set('username', data.userName)
       .set('device', JSON.stringify(this.device))
@@ -46,7 +50,7 @@ export class HttpAuthService extends BaseService implements BaseAuthService {
   }
 
   loginBySign(data: LoginSignModel): Observable<Token> {
-    const params = new HttpParams()
+    const params = new HttpParams({ encoder: new EncodeUrlHepler() })
       .set('grant_type', 'password')
       .set('mode', 'key')
       .set('KeyId', data.keyId)
@@ -61,7 +65,7 @@ export class HttpAuthService extends BaseService implements BaseAuthService {
   }
 
   loginWithOtp(data: LoginModel, otp: string): Observable<Token> {
-    const params = new HttpParams()
+    const params = new HttpParams({ encoder: new EncodeUrlHepler() })
       .set('grant_type', 'password')
       .set('username', data.userName)
       .set('device', JSON.stringify(this.device))
@@ -81,7 +85,7 @@ export class HttpAuthService extends BaseService implements BaseAuthService {
   }
 
   refreshToken(refreshToken: string | undefined, sessionId: string | undefined): Observable<Token> {
-    const params = new HttpParams()
+    const params = new HttpParams({ encoder: new EncodeUrlHepler() })
       .set('grant_type', 'refresh_token')
       .set('refresh_token', refreshToken || '')
       .set('sessionId', sessionId || '')
@@ -92,6 +96,26 @@ export class HttpAuthService extends BaseService implements BaseAuthService {
     };
     httpOptions.headers.append(CONTENT_TYPE, 'application/x-www-form-urlencoded');
     return this.http.post<Token>('api/v1/auth/token', params, httpOptions);
+  }
+
+  restorePassword(data: RestorePasswordModel): Observable<void> {
+    return this.http.post<void>('api/v1/auth/restorePassword', data);
+  }
+
+  restorePasswordWithOtp(data: RestorePasswordModel, confirmCode: string): Observable<void> {
+    return this.http.post<void>('api/v1/auth/restorePasswordOtp', { ...data, confirmCode });
+  }
+
+  getPassRestrictions(): Observable<PasswordRestrictions> {
+    return this.http.get<PasswordRestrictions>('api/v1/auth/PassComplexity');
+  }
+
+  changePassword(data: ChangePasswordModel): Observable<void> {
+    return this.http.post<void>('api/v1/auth/changePassword', data);
+  }
+
+  changePasswordWithOtp(data: ChangePasswordModel, confirmCode: string): Observable<void> {
+    return this.http.post<void>('api/v1/auth/changePasswordOtp', { ...data, confirmCode });
   }
 
   private getUuid(): string {

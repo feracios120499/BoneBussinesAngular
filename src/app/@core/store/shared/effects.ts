@@ -184,4 +184,33 @@ export class SharedEffects {
       ),
     { dispatch: false }
   );
+
+  downloadFileByUrl$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SharedActions.downloadFileByUrl),
+        tap(({ url }) => {
+          if (
+            navigator.userAgent.toLowerCase().includes('chrome') ||
+            navigator.userAgent.toLowerCase().includes('safari')
+          ) {
+            const link: HTMLAnchorElement = document.createElement('a');
+            link.href = url;
+            if (link.download !== undefined) {
+              const filename: string = url.slice(url.lastIndexOf('/') + 1);
+              link.download = filename;
+            }
+            // Dispatching click event:
+            const e: MouseEvent = document.createEvent('MouseEvents');
+            e.initEvent('click', true, true);
+            link.dispatchEvent(e);
+            return;
+          }
+          // Force file download (whether supported by server):
+          const query = '?download';
+          window.open(url + query, '_self');
+        })
+      ),
+    { dispatch: false }
+  );
 }

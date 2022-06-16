@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { BaseFormComponent } from '@form-controls/base-form.component';
 import { LoginModel } from '@modules/auth/models/login.model';
 import { ModelControl } from '@b1-types/model-controls.type';
-import { AuthLoginForm } from '../../models/auth-login-form.model';
+import { LoginForm } from '../../models/login-form.model';
 import { pattern } from '@validators/pattern.validator';
 import { emailRegExp } from '@validators/email.validator';
 import { phoneRegExp } from '@validators/phone.validator';
@@ -27,9 +27,10 @@ const PASSWORD_LENGTH: Readonly<{ [key: string]: number }> = {
 };
 
 @Component({
-  selector: 'auth-login',
+  selector: 'app-auth-login',
   templateUrl: './auth-login.component.html',
-  styleUrls: ['./auth-login.component.scss', './../../views/auth/auth.component.scss'],
+  // styleUrls: ['./auth-login.component.scss', './../../views/auth/auth.component.scss'],
+  styleUrls: ['./auth-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLoginComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -45,7 +46,7 @@ export class AuthLoginComponent extends BaseFormComponent implements OnInit, Aft
   }
 
   ngOnInit(): void {
-    const controls: ModelControl<AuthLoginForm> = {
+    const controls: ModelControl<LoginForm> = {
       userName: this.userNameControl,
       password: this.passwordControl,
     };
@@ -65,11 +66,34 @@ export class AuthLoginComponent extends BaseFormComponent implements OnInit, Aft
 
   onLogin(): void {
     this.store.dispatch(AuthActions.resetLogin());
-    const model = this.form.value as LoginModel;
-    this.submit(AuthActions.loginRequest({ ...model }), AuthSelectors.error);
+    let { userName, password } = this.form.value as LoginModel;
+    if (this.checkIsPhone(userName)) {
+      userName = this.mapPhone(userName);
+    }
+    // console.log('login model: ', { userName, password });
+    this.submit(AuthActions.loginRequest({ userName, password }), AuthSelectors.error);
   }
 
   ngOnDestroy(): void {
     this.unlistenPasswordChange();
+  }
+
+  private checkIsPhone(value: string): boolean {
+    return !value.includes('@') && 10 <= value.length && value.length <= 12;
+  }
+
+  private mapPhone(phone: string): string {
+    if (phone.includes('+')) return phone;
+
+    switch (phone.length) {
+      case 10:
+        return '+38' + phone;
+      case 11:
+        return '+3' + phone;
+      case 12:
+        return '+' + phone;
+      default:
+        return phone;
+    }
   }
 }
