@@ -7,10 +7,11 @@ import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
 
 import { B1InputComponent } from './b1-input.component';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [B1InputComponent],
-  imports: [CommonModule, TranslateModule, FormsModule, CheckValueModule, B1IconModule],
+  imports: [CommonModule, TranslateModule, FormsModule, CheckValueModule, B1IconModule, ReactiveComponentModule],
   exports: [B1InputComponent],
 })
 export class B1InputModule {}

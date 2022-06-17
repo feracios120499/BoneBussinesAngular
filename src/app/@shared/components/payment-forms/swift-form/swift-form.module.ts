@@ -18,6 +18,7 @@ import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scr
 import { B1InputAmountModule } from '@form-controls/b1-input-amount/b1-input-amount.module';
 import { B1RadioButtonGroupModule } from '@form-controls/b1-radio-button-group/b1-radio-button-group.module';
 import { B1SupDocumentsModule } from '@form-controls/b1-sup-documents/b1-sup-documents.module';
+import { B1AccountSelectModule } from '@form-controls/b1-account-select/b1-account-select.module';
 
 @NgModule({
   declarations: [SwiftFormComponent],
@@ -39,6 +40,7 @@ import { B1SupDocumentsModule } from '@form-controls/b1-sup-documents/b1-sup-doc
     B1InputAmountModule,
     B1RadioButtonGroupModule,
     B1SupDocumentsModule,
+    B1AccountSelectModule,
   ],
   exports: [SwiftFormComponent],
 })

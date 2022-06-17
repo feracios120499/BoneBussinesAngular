@@ -4,6 +4,7 @@ import { Currency } from '@models/currency.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
+import { SwiftBank } from '@models/swift-bank.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BankModel } from 'src/app/@shared/models/bank.model';
@@ -54,6 +55,10 @@ export class PublicService extends BaseService {
 
   getCurrencies(): Observable<Currency[]> {
     return this.http.get<Currency[]>(`api/v1/public/currencies`);
+  }
+
+  getSwiftBanks(bic: string): Observable<SwiftBank[]> {
+    return this.http.get<SwiftBank[]>(`api/v1/public/swbanks?$top=20&$filter=contains(BIC,'${bic}')`);
   }
 
   private mapMobileAppLinksResponse(response: {

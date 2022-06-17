@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
+import { Observable } from 'rxjs';
 import { BaseInputComponent } from '../base-input.component';
 
 @Component({
@@ -12,4 +13,10 @@ import { BaseInputComponent } from '../base-input.component';
     class: 'b1-input',
   },
 })
-export class B1InputComponent extends BaseInputComponent {}
+export class B1InputComponent extends BaseInputComponent {
+  @Input() data?: Observable<any>;
+  @Output() selectData = new EventEmitter<any>();
+  @Input() itemTemplate?: TemplateRef<any>;
+
+  focused = false;
+}

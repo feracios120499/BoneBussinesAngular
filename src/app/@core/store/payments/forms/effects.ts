@@ -3,6 +3,7 @@ import { HttpPaymentsService } from '@modules/payments/services/payments-service
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { PaymentsService } from '@services/payments/payments.service';
+import { PublicService } from '@services/public.service';
 import { clientIdWithData } from '@store/shared';
 import { of } from 'rxjs';
 import { catchError, filter, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
@@ -19,7 +20,8 @@ export class PayFormsEffects {
     private actions$: Actions,
     private store: Store,
     private paymentsService: PaymentsService,
-    private httpPaymentsService: HttpPaymentsService
+    private httpPaymentsService: HttpPaymentsService,
+    private publicService: PublicService
   ) {}
 
   createWithinCountry$ = createEffect(() =>
@@ -122,6 +124,15 @@ export class PayFormsEffects {
           map((result) => PayFormsActions.loadAmountStringSuccess(result)),
           catchError((error) => of(PayFormsActions.loadAmountStringFailure(error.message)))
         )
+      )
+    )
+  );
+
+  searchSwiftBanks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PayFormsActions.searchSwiftBanks),
+      switchMap((action) =>
+        this.publicService.getSwiftBanks(action.bic).pipe(map((banks) => PayFormsActions.setSwiftBanks({ banks })))
       )
     )
   );

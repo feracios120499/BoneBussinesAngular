@@ -1,6 +1,7 @@
 import { PaymentForm } from '@models/payment-form.model';
 import { CreatePaymentModel } from '@models/payments/create-payment.model';
 import { PaymentCommon } from '@models/payments/payment-common.model';
+import { SwiftBank } from '@models/swift-bank.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { number } from 'ngrx-forms/validation';
@@ -37,6 +38,9 @@ export namespace PayFormsActions {
     string,
     string
   >(`[${PAY_FORMS_KEY}] load amount string`);
+
+  export const searchSwiftBanks = createAction(`[${PAY_FORMS_KEY}] search swift banks`, props<{ bic: string }>());
+  export const setSwiftBanks = createAction(`[${PAY_FORMS_KEY}] set swift banks`, props<{ banks?: SwiftBank[] }>());
 
   // export const setSupDocuments = createAction(`[${PAY_FORMS_KEY}] set sup documents`,props<{document}>);
 

@@ -6,15 +6,11 @@ import { DecimalNumbersModule } from '@directives/decimal-numbers/decimal-number
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 
 import { B1InputAmountComponent } from './b1-input-amount.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [B1InputAmountComponent],
-  imports: [
-    TranslateModule,
-    FormsModule,
-    DecimalNumbersModule,
-    CheckValueModule,
-  ],
+  imports: [CommonModule, TranslateModule, FormsModule, DecimalNumbersModule, CheckValueModule],
   exports: [B1InputAmountComponent],
 })
 export class B1InputAmountModule {}

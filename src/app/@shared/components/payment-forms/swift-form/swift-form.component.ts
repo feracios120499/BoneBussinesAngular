@@ -4,14 +4,17 @@ import { ModelControl } from '@b1-types/model-controls.type';
 import { markFormGroupTouched } from '@methods/form-group-touched.method';
 import { Currency } from '@models/currency.model';
 import { SwiftForm } from '@models/payments/swift-form.model';
+import { Customer } from '@models/profile.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
 import { Store } from '@ngrx/store';
 import { PayFormsActions } from '@store/payments/forms/actions';
 import { PayFormsSelectors } from '@store/payments/forms/selectors';
 import { PublicSelectors } from '@store/public/selectors';
+import { UserSelectors } from '@store/user/selectors';
+import { minAmountValidator } from '@validators/min-amount.validator';
 import { number } from 'ngrx-forms/validation';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, tap, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subscriber, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-swift-form',
@@ -31,6 +34,7 @@ export class SwiftFormComponent implements OnInit {
       senderDataCountry: this.senderDataLangCodeControl,
       senderDataName: this.senderDataNameControl,
       senderDataLocation: this.senderDataLocationControl,
+      senderDataTaxCode: this.senderDataTaxCodeControl,
       senderBankName: this.senderBankNameControl,
       senderBankLocation: this.senderBankLocationControl,
       senderAccount: this.senderAccountControl,
@@ -51,6 +55,13 @@ export class SwiftFormComponent implements OnInit {
 
     this.formGroup = new FormGroup(controls);
 
+    this.amountStringControl.disable();
+    this.senderDataCountryControl.disable();
+    this.senderDataLangCodeControl.disable();
+    this.senderDataLocationControl.disable();
+    this.senderDataNameControl.disable();
+    this.senderDataTaxCodeControl.disable();
+
     this.subscriptions.push(
       this.docNumberAutoControl.valueChanges.pipe(this.docNumberAutoChange.bind(this)).subscribe()
     );
@@ -67,6 +78,30 @@ export class SwiftFormComponent implements OnInit {
     this.subscriptions.push(
       this.store.select(PayFormsSelectors.amountString).pipe(this.setAmountString.bind(this)).subscribe()
     );
+
+    this.subscriptions.push(this.currencyControl.valueChanges.pipe(this.updateAccountsList.bind(this)).subscribe());
+
+    this.subscriptions.push(
+      this.store.select(UserSelectors.currentCustomer).pipe(this.setCustomerData.bind(this)).subscribe()
+    );
+
+    this.subscriptions.push(
+      this.intermediaryBankRequiredControl.valueChanges
+        .pipe(this.intermediaryBankRequeiredChange.bind(this))
+        .subscribe()
+    );
+
+    this.subscriptions.push(
+      this.benificiaryAccNumberControl.valueChanges.pipe(this.benecifiaryAccNumberChange.bind(this)).subscribe()
+    );
+
+    this.subscriptions.push(
+      this.benificiaryIbanControl.valueChanges.pipe(this.benecifiaryIbanChange.bind(this)).subscribe()
+    );
+
+    this.subscriptions.push(
+      this.intermediaryBankSwiftControl.valueChanges.pipe(this.loadSwiftBanks.bind(this)).subscribe()
+    );
   }
 
   formGroup: FormGroup;
@@ -76,8 +111,11 @@ export class SwiftFormComponent implements OnInit {
 
   subscriptions: Subscription[] = [];
   currencies: Currency[] = [];
+  availableAccountsSubscriber = new Subscriber<SelectAccountsList>();
+  availableAccounts: Observable<SelectAccountsList> = of({ accounts: [], isLoading: true });
+  swiftBanks = this.store.select(PayFormsSelectors.swiftBanks);
 
-  amountControl = new FormControl(0, [Validators.required, Validators.min(1)]);
+  amountControl = new FormControl(0, [Validators.required, minAmountValidator(1)]);
 
   amountStringControl = new FormControl('');
 
@@ -114,24 +152,27 @@ export class SwiftFormComponent implements OnInit {
   senderDataCountryControl = new FormControl('');
   senderDataNameControl = new FormControl('');
   senderDataLocationControl = new FormControl('');
+  senderDataTaxCodeControl = new FormControl('');
 
-  senderBankNameControl = new FormControl('', [Validators.required]);
-  senderBankLocationControl = new FormControl('', [Validators.required]);
+  senderBankNameControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  senderBankLocationControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
 
-  senderAccountControl = new FormControl(Validators.required);
+  senderAccountControl = new FormControl(undefined, Validators.required);
 
+  intermediaryBankValidators = [Validators.required, Validators.maxLength(250)];
+  intermediaryBankRequiredControl = new FormControl(false);
   intermediaryBankLocationControl = new FormControl('');
   intermediaryBankNameControl = new FormControl('');
   intermediaryBankSwiftControl = new FormControl('');
 
-  benificiaryIbanControl = new FormControl('');
-  benificiaryAccNumberControl = new FormControl('');
-  benificiaryNameControl = new FormControl('');
-  benificiaryLocationControl = new FormControl('');
-  benificiaryBankCorrAccNumberControl = new FormControl('');
-  benificiaryBankNameControl = new FormControl('');
-  benificiaryBankSwiftControl = new FormControl('');
-  benificiaryBankLocationControl = new FormControl('');
+  benificiaryIbanControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  benificiaryAccNumberControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  benificiaryNameControl = new FormControl('', [Validators.required]);
+  benificiaryLocationControl = new FormControl('', [Validators.required]);
+  benificiaryBankCorrAccNumberControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  benificiaryBankNameControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  benificiaryBankSwiftControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
+  benificiaryBankLocationControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
 
   private docNumberAutoChange(source$: Observable<boolean>): Observable<boolean> {
     return source$.pipe(
@@ -145,6 +186,68 @@ export class SwiftFormComponent implements OnInit {
         this.docNumberControl.setValue('');
         this.docNumberControl.markAsUntouched();
         this.docNumberControl.updateValueAndValidity();
+      })
+    );
+  }
+
+  private intermediaryBankRequeiredChange(source$: Observable<boolean>): Observable<boolean> {
+    return source$.pipe(
+      tap((required) => {
+        if (required) {
+          this.intermediaryBankLocationControl.addValidators(this.intermediaryBankValidators);
+          this.intermediaryBankNameControl.addValidators(this.intermediaryBankValidators);
+          this.intermediaryBankSwiftControl.addValidators(this.intermediaryBankValidators);
+        } else {
+          this.intermediaryBankLocationControl.removeValidators(this.intermediaryBankValidators);
+          this.intermediaryBankNameControl.removeValidators(this.intermediaryBankValidators);
+          this.intermediaryBankSwiftControl.removeValidators(this.intermediaryBankValidators);
+        }
+        this.setValueAndUpdate(this.intermediaryBankLocationControl, '');
+        this.setValueAndUpdate(this.intermediaryBankNameControl, '');
+        this.setValueAndUpdate(this.intermediaryBankSwiftControl, '');
+      })
+    );
+  }
+
+  private benecifiaryAccNumberChange(source$: Observable<string>): Observable<string> {
+    return source$.pipe(
+      tap((accNumber) => {
+        if (accNumber && accNumber.length > 0) {
+          this.benificiaryIbanControl.disable({ emitEvent: false });
+          this.benificiaryIbanControl.removeValidators(Validators.required);
+          this.setValueAndUpdate(this.benificiaryIbanControl, '');
+        } else {
+          console.log(this.benificiaryIbanControl.validator?.length);
+          this.benificiaryIbanControl.enable({ emitEvent: false });
+          this.benificiaryIbanControl.addValidators(Validators.required);
+        }
+      })
+    );
+  }
+
+  private benecifiaryIbanChange(source$: Observable<string>): Observable<string> {
+    return source$.pipe(
+      tap((iban) => {
+        if (iban && iban.length > 0) {
+          this.benificiaryAccNumberControl.disable({ emitEvent: false });
+          this.benificiaryAccNumberControl.removeValidators(Validators.required);
+          this.setValueAndUpdate(this.benificiaryAccNumberControl, '');
+        } else {
+          this.benificiaryAccNumberControl.enable({ emitEvent: false });
+          this.benificiaryAccNumberControl.addValidators(Validators.required);
+        }
+      })
+    );
+  }
+
+  private loadSwiftBanks(source$: Observable<string>): Observable<string> {
+    return source$.pipe(
+      tap((bic) => {
+        if (bic && bic.length >= 3) {
+          this.store.dispatch(PayFormsActions.searchSwiftBanks({ bic }));
+        } else {
+          this.store.dispatch(PayFormsActions.setSwiftBanks({ banks: undefined }));
+        }
       })
     );
   }
@@ -166,6 +269,45 @@ export class SwiftFormComponent implements OnInit {
     );
   }
 
+  private setCustomerData(customerSource$: Observable<Customer | undefined>): Observable<Customer | undefined> {
+    return customerSource$.pipe(
+      tap((customer) => {
+        if (customer) {
+          this.setValueAndUpdate(this.senderDataCountryControl, 'Україна');
+
+          this.setValueAndUpdate(this.senderDataLangCodeControl, 'UA');
+
+          this.setValueAndUpdate(this.senderDataLocationControl, customer.address);
+
+          this.setValueAndUpdate(this.senderDataNameControl, customer.name);
+
+          this.setValueAndUpdate(this.senderDataTaxCodeControl, customer.taxCode);
+
+          this.setValueAndUpdate(this.senderBankLocationControl, customer.bankAddress);
+
+          this.setValueAndUpdate(this.senderBankNameControl, customer.bankName);
+        }
+      })
+    );
+  }
+
+  private updateAccountsList(currencySource$: Observable<Currency>): Observable<Currency> {
+    return currencySource$.pipe(
+      tap((currency) => {
+        this.availableAccounts = this.senderAccounts.pipe(
+          map((value) => {
+            const accounts = value.accounts.filter((p) => p.currencyCode == currency.code);
+
+            return {
+              ...value,
+              accounts: accounts,
+            };
+          })
+        );
+      })
+    );
+  }
+
   private setAmountString(amountString: Observable<string>): Observable<string> {
     return amountString.pipe(
       tap((value) => {
@@ -176,6 +318,19 @@ export class SwiftFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.availableAccounts = combineLatest([this.senderAccounts, this.currencyControl.valueChanges]).pipe(
+      map(([value, currency]) => {
+        console.log('change');
+        const accounts = value.accounts.filter((p) => p.currencyCode == currency.code);
+
+        console.log(accounts);
+        return {
+          ...value,
+          accounts: accounts,
+        };
+      })
+    );
+
     this.senderAccounts
       .pipe(withLatestFrom(this.store.select(PublicSelectors.currencies)))
       .subscribe(([accounts, currencies]) => {
@@ -191,6 +346,10 @@ export class SwiftFormComponent implements OnInit {
       });
   }
 
+  private setValueAndUpdate(control: FormControl, value: any): void {
+    control.setValue(value);
+    control.updateValueAndValidity();
+  }
   test(): void {
     markFormGroupTouched(this.formGroup);
   }

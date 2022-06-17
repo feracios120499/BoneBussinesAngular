@@ -57,9 +57,7 @@
       </div>
 
       <div class="b1-mt-5">
-        <b1-input-amount [formControl]="amountControl">
-          <b1-input-error [control]="amountControl" [form]="paymentForm"> </b1-input-error>
-        </b1-input-amount>
+        <b1-input-amount [formControl]="amountControl"> </b1-input-amount>
       </div>
 
       <b1-input class="b1-mt-5" [formControl]="amountStringControl" [disabled]="true" [labelTop]="false">
@@ -96,11 +94,138 @@
         <b1-sup-documents [formControl]="attachedSupDocsControl"></b1-sup-documents>
       </div>
 
-      <b1-checkbox class="b1-base noselect" [formControl]="isAgreeControl">
+      <b1-checkbox class="b1-base noselect b1-mt-5" [formControl]="isAgreeControl">
         {{ 'components.pay.swift.iaccept' | translate }}
       </b1-checkbox>
 
       <button type="submit" (click)="test()">submit</button>
+    </div>
+    <div class="b1-form-block-header">
+      <div class="b1-form-block-header_index">2</div>
+      <div class="b1-form-block-header_title">
+        {{ 'components.pay.swift.formTabsHeadings.sender' | translate }}
+      </div>
+    </div>
+    <div class="b1-form-container">
+      <div class="b1-large">
+        {{ 'components.pay.swift.senderRequisites' | translate }}
+      </div>
+      <b1-account-select class="b1-mt-5" [selectAccounts]="availableAccounts" [formControl]="senderAccountControl">
+      </b1-account-select>
+
+      <b1-input class="b1-mt-5" [formControl]="senderDataNameControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderName' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="senderDataCountryControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderCountry' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="senderDataLocationControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderLocation' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="senderDataTaxCodeControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderTexCode' | translate }}
+      </b1-input>
+
+      <div class="b1-mt-6">
+        <div class="b1-large">
+          {{ 'components.pay.swift.senderBank' | translate }}
+        </div>
+      </div>
+      <b1-input class="b1-mt-5" [formControl]="senderBankNameControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderBankName' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="senderBankLocationControl" [labelTop]="false">
+        {{ 'components.pay.swift.senderBankLocation' | translate }}
+      </b1-input>
+    </div>
+
+    <div class="b1-form-block-header">
+      <div class="b1-form-block-header_index">3</div>
+      <div class="b1-form-block-header_title">
+        {{ 'components.pay.swift.formTabsHeadings.intermediaryBank' | translate }}
+      </div>
+    </div>
+
+    <div class="b1-form-container">
+      <b1-checkbox class="b1-base noselect" [formControl]="intermediaryBankRequiredControl">
+        {{ 'components.pay.swift.intermediaryBankPresent' | translate }}
+      </b1-checkbox>
+
+      <ng-container *ngIf="intermediaryBankRequiredControl.value">
+        <b1-input
+          class="b1-mt-5"
+          [formControl]="intermediaryBankSwiftControl"
+          [labelTop]="false"
+          [data]="swiftBanks"
+          [itemTemplate]="itemTemplate">
+          {{ 'components.pay.swift.intermediaryBankSwift' | translate }}
+        </b1-input>
+
+        <ng-template #itemTemplate let-item>
+          {{ item.bic }}
+        </ng-template>
+
+        <b1-input class="b1-mt-5" [formControl]="intermediaryBankNameControl" [labelTop]="false">
+          {{ 'components.pay.swift.intermediaryBankName' | translate }}
+        </b1-input>
+
+        <b1-input class="b1-mt-5" [formControl]="intermediaryBankLocationControl" [labelTop]="false">
+          {{ 'components.pay.swift.intermediaryBankLocation' | translate }}
+        </b1-input>
+      </ng-container>
+    </div>
+
+    <div class="b1-form-block-header">
+      <div class="b1-form-block-header_index">4</div>
+      <div class="b1-form-block-header_title">
+        {{ 'components.pay.swift.formTabsHeadings.benificiary' | translate }}
+      </div>
+    </div>
+
+    <div class="b1-form-container">
+      <div class="b1-large">
+        {{ 'components.pay.swift.benificiary' | translate }}
+      </div>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryAccNumberControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryAccount' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryIbanControl" [labelTop]="false">
+        {{ 'components.pay.swift.beneficiaryAccountIBAN' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryNameControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryName' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryLocationControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryLocation' | translate }}
+      </b1-input>
+
+      <div class="b1-large b1-mt-6">
+        {{ 'components.pay.swift.benificiaryBank' | translate }}
+      </div>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryBankCorrAccNumberControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryBankAccount' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryBankSwiftControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryBankNameControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryBankName' | translate }}
+      </b1-input>
+
+      <b1-input class="b1-mt-5" [formControl]="benificiaryBankLocationControl" [labelTop]="false">
+        {{ 'components.pay.swift.benificiaryBankLocation' | translate }}
+      </b1-input>
     </div>
   </div>
 </form>

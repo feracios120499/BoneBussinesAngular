@@ -20,5 +20,6 @@ export const payFormsReducer = createReducer(
     (state) => ({ ...state, isLoading: false })
   ),
   on(payActions.init, payActions.destroy, (state) => ({ ...initialState })),
-  on(PayFormsActions.loadAmountStringSuccess, (state, action) => ({ ...state, amountString: action.payload }))
+  on(PayFormsActions.loadAmountStringSuccess, (state, action) => ({ ...state, amountString: action.payload })),
+  on(PayFormsActions.setSwiftBanks, (state, action) => ({ ...state, swiftBanks: action.banks }))
 );

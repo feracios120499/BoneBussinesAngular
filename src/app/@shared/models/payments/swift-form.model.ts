@@ -12,6 +12,7 @@ export interface SwiftForm {
   senderDataCountry: string;
   senderDataName: string;
   senderDataLocation: string;
+  senderDataTaxCode: string;
   senderBankName: string;
   senderBankLocation: string;
   senderAccount: SelectAccount;

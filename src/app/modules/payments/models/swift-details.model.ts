@@ -12,9 +12,9 @@ export interface SwiftDetails {
   typePay: number;
   paymentFee: string;
   benificiary: SwiftBenificiary;
-  intermediaryBank: SwiftBank;
+  intermediaryBank: SwiftDetailsBank;
   senderAccount: SwiftSenderAccount;
-  senderBank: SwiftBank;
+  senderBank: SwiftDetailsBank;
   senderData: SwiftSenderData;
   bankPayedDate?: Date;
   statusId: PaymentStatuses;
@@ -45,10 +45,10 @@ export interface SwiftBenificiary {
   iban?: string;
   location: string;
   name: string;
-  bank: SwiftBank;
+  bank: SwiftDetailsBank;
 }
 
-export interface SwiftBank {
+export interface SwiftDetailsBank {
   corrAccNumber?: string;
   location: string;
   name: string;

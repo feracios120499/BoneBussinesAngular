@@ -11,10 +11,7 @@ interface IErrorData {
 @Component({
   template: '',
 })
-export abstract class BaseValidatableControlComponent
-  extends BaseControlComponent
-  implements AfterViewInit
-{
+export abstract class BaseValidatableControlComponent extends BaseControlComponent implements AfterViewInit {
   // @Input() labelForError!: string;
 
   ngAfterViewInit(): void {
@@ -96,6 +93,12 @@ export abstract class BaseValidatableControlComponent
       acceptableFiles: () => ({
         text: 'must have one of the following formats:',
         // value: this.formControl.errors!.acceptableFiles['value'],
+      }),
+      minAmount: () => ({
+        text: 'validate.minAmount',
+        params: {
+          amount: this.formControl.errors!.minAmount['amount'],
+        },
       }),
     };
   }

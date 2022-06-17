@@ -12,3 +12,8 @@
     <ng-content></ng-content>
   </span>
 </label>
+<p
+  *ngIf="formControl && formControl.invalid && (formControl.dirty || formControl.touched)"
+  class="b1-input__validate-message">
+  {{ error!.text | translate: error!.params }}
+</p>

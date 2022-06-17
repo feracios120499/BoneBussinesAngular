@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { BaseValidatableControlComponent } from '@form-controls/base-validatable-control.component';
 
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { BaseControlComponent } from '../base-control.component';
@@ -12,7 +13,7 @@ import { BaseControlComponent } from '../base-control.component';
   //   class: 'b1-input',
   // },
 })
-export class B1CheckboxComponent extends BaseControlComponent implements AfterViewInit {
+export class B1CheckboxComponent extends BaseValidatableControlComponent implements AfterViewInit {
   handleValue(value: boolean): void {
     this.onChange(value);
   }
