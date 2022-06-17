@@ -18,6 +18,7 @@ import { environment } from '@env';
 
 import { PublicActions } from './actions';
 import { Version } from '@models/version.model';
+import { News } from '@models/news.model';
 
 @Injectable({
   providedIn: 'root',
@@ -178,6 +179,26 @@ export class PublicEffects {
               NotifyActions.serverErrorNotification({
                 error,
                 message: this.translateService.instant('components.version.errors.loadVersion'),
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  loadNewsList$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PublicActions.loadNewsListRequest),
+      switchMap(() =>
+        this.publicService.getNewsList().pipe(
+          map((newsList: News[]) => PublicActions.loadNewsListSuccess(newsList)),
+          catchError((error: ServerError) =>
+            of(
+              PublicActions.loadNewsListFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.loadNewsList'),
               })
             )
           )

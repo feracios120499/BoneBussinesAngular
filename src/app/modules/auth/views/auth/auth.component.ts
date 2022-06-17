@@ -8,6 +8,7 @@ import { AppSelectors } from '@store/app/selectors';
 import { PublicSelectors } from '@store/public/selectors';
 import { PublicActions } from '@store/public/actions';
 import { required } from '@store/shared';
+import { News } from '@models/news.model';
 
 @Component({
   selector: 'app-auth',
@@ -17,11 +18,14 @@ import { required } from '@store/shared';
 export class AuthComponent implements OnInit {
   copyright$: Observable<string> = required(this.store.select(PublicSelectors.copyright));
   currentVersion$: Observable<string> = required(this.store.select(PublicSelectors.currentVersion));
+  // FOR DEMO PURPOSE ONLY:
+  newsList$: Observable<News[]> = this.store.select(PublicSelectors.newsList);
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(AuthActions.resetLogin());
+    this.store.dispatch(PublicActions.loadNewsListRequest());
     this.store
       .select(AppSelectors.isDemo)
       .pipe(

@@ -267,41 +267,41 @@
       display: none;
     }
   }
-  &-news {
-    &._empty {
-      display: none;
-    }
-  }
-  &-post {
-    color: $color-light;
-    position: relative;
-    @include cl-anim;
-    &-header {
-      padding-right: 17px;
-    }
-    &-content {
-      & > .simplebar-track.vertical {
-        background-color: $color-primary;
-      }
-      max-height: 400px !important;
-      & .simplebar-scroll-content {
-        overflow-x: hidden !important;
-        padding-right: 20px !important;
-      }
-      & .simplebar-content {
-        margin-right: 30px;
-      }
-    }
-    &-date {
-      opacity: 0.6;
-    }
-    &-close {
-      top: 0;
-      position: absolute;
-      right: 0px;
-      cursor: pointer;
-    }
-  }
+  // &-news {
+  //   &._empty {
+  //     display: none;
+  //   }
+  // }
+  // &-post {
+  //   color: $color-light;
+  //   position: relative;
+  //   @include cl-anim;
+  //   &-header {
+  //     padding-right: 17px;
+  //   }
+  //   &-content {
+  //     & > .simplebar-track.vertical {
+  //       background-color: $color-primary;
+  //     }
+  //     max-height: 400px !important;
+  //     & .simplebar-scroll-content {
+  //       overflow-x: hidden !important;
+  //       padding-right: 20px !important;
+  //     }
+  //     & .simplebar-content {
+  //       margin-right: 30px;
+  //     }
+  //   }
+  //   &-date {
+  //     opacity: 0.6;
+  //   }
+  //   &-close {
+  //     top: 0;
+  //     position: absolute;
+  //     right: 0px;
+  //     cursor: pointer;
+  //   }
+  // }
   &-instructions {
     color: $color-light;
     display: flex;

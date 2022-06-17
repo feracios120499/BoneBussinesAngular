@@ -48,5 +48,51 @@
       </div>
     </div>
   </div>
-  <div class="cl-content-news"></div>
+  <!-- <div class="cl-content-news"></div> -->
+  <div class="cl-content-news">
+    <img
+      src="assets/img/site-logo.png"
+      alt="Oschadbank logo"
+      class="cl-bankLogo _active"
+      anim-scroll=""
+      anim-class="_active"
+      delay="500" />
+
+    <ng-container *ngrxLet="newsList$ as newsList">
+      <div class="cl-content-top" [hidden]="!newsList.length">
+        <div class="cl-news">
+          <app-news-list
+            class="_active"
+            [newsList]="newsList"
+            anim-scroll=""
+            anim-class="_active"
+            delay="800"></app-news-list>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="cl-content-bottom">
+      <div class="cl-instructions _active" anim-scroll="" anim-class="_active" delay="1100">
+        <a
+          href="assets/barsCryptorCloud/BarsCryptorCloud_User_Manual.htm"
+          target="_blank"
+          class="cl-instructions-cloud b1-base">
+          {{ 'owner.instructionCloud' | translate }}
+        </a>
+        <a href="assets/doc/User_Manual.htm" target="_blank" class="cl-instructions-user b1-base">
+          {{ 'owner.instruction' | translate }}
+        </a>
+      </div>
+      <div class="cl-applications _active" anim-scroll="" anim-class="_active" delay="1300">
+        <a
+          href="https://play.google.com/store/apps/details?id=com.unitybars.corplight.oschadbank"
+          target="_blank"
+          class="cl-applications-android"></a>
+        <a
+          href="https://itunes.apple.com/us/app/corplight-oschadbank/id1120169675"
+          target="_blank"
+          class="cl-applications-apple"></a>
+      </div>
+    </div>
+  </div>
 </div>

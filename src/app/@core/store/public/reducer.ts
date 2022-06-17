@@ -27,5 +27,18 @@ export const publicReducer = createReducer(
     ...state,
     loadings: [...removeItem(state.loadings, 'loadVersion')],
   })),
-  on(PublicActions.loadVersionSuccess, (state, action) => ({ ...state, watchVersion: action.payload }))
+  on(PublicActions.loadVersionSuccess, (state, action) => ({ ...state, watchVersion: action.payload })),
+  on(PublicActions.loadNewsListRequest, (state) => ({
+    ...state,
+    loadings: [...pushIfNotExist(state.loadings, 'loadNewsList')],
+  })),
+  on(PublicActions.loadNewsListSuccess, PublicActions.loadNewsListFailure, (state) => ({
+    ...state,
+    loadings: [...removeItem(state.loadings, 'loadNewsList')],
+  })),
+  on(PublicActions.loadNewsListSuccess, (state, action) => ({ ...state, newsList: action.payload })),
+  on(PublicActions.removeNewsItem, (state, { id }) => ({
+    ...state,
+    newsList: state.newsList.filter((item) => item.id !== id),
+  }))
 );

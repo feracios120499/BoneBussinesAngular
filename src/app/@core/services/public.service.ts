@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Feedback } from '@models/feedback.model';
 import { MobileAppLinks } from '@models/mobile-app-links.model';
+import { News } from '@models/news.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
 import { Version } from '@models/version.model';
@@ -59,6 +60,10 @@ export class PublicService extends BaseService {
 
   getVersion(code: string): Observable<Version> {
     return this.http.get<Version>(`api/v1/public/versions/${code}/core`);
+  }
+
+  getNewsList(): Observable<News[]> {
+    return this.http.get<News[]>('api/v1/prm/news/lastfive');
   }
 
   private mapMobileAppLinksResponse(response: {

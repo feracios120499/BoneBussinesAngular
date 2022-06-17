@@ -1,0 +1,14 @@
+<section *ngFor="let newsItem of newsList | slice: 0:1" class="cl-post-section">
+  <div class="cl-post-header">
+    <h2 class="b1-medium">
+      <b>{{ newsItem.header }}</b>
+    </h2>
+  </div>
+  <div class="cl-post-content">
+    <ng-scrollbar class="cl-post-scrollbar">
+      <p class="b1-base cl-post-text" [innerHTML]="sanitizer.bypassSecurityTrustHtml(newsItem.text)"></p>
+    </ng-scrollbar>
+  </div>
+  <p class="b1-base cl-post-date">{{ newsItem.dateStart | date: 'dd.MM.yyyy' }}</p>
+  <span class="cl-post-close" (click)="close(newsItem.id)" ng-click="newsCtrl.close(item)">✖</span>
+</section>

@@ -14,6 +14,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { CheckValueModule } from '@directives/check-value/check-value.module';
 import { VersionModule } from '@directives/version/version.module';
 import { B1IconModule } from '@directives/b1-icon/b1-icon.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { AuthCloudComponent } from './components/auth-cloud/auth-cloud.component';
@@ -38,6 +39,7 @@ import { AuthChangePasswordFormComponent } from './components/auth-change-passwo
 import { AuthBackLinkComponent } from './components/auth-back-link/auth-back-link.component';
 import { AuthAlertComponent } from './components/auth-alert/auth-alert.component';
 import { AuthAlertRequirementComponent } from './components/auth-alert-requirement/auth-alert-requirement.component';
+import { NewsListComponent } from './components/news-list/news-list.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { AuthAlertRequirementComponent } from './components/auth-alert-requireme
     AuthBackLinkComponent,
     AuthAlertComponent,
     AuthAlertRequirementComponent,
+    NewsListComponent,
   ],
   imports: [
     CommonModule,
@@ -81,6 +84,7 @@ import { AuthAlertRequirementComponent } from './components/auth-alert-requireme
     VersionModule,
     B1IconModule,
     NgxMaskModule,
+    NgScrollbarModule,
   ],
   exports: [],
 })

@@ -53,4 +53,6 @@ export namespace PublicSelectors {
     linux: state.resources?.owner.cloudLinuxUrl,
     mac: state.resources?.owner.cloudMacUrl,
   }));
+
+  export const newsList = createSelector(publicStore, (state) => state.newsList);
 }

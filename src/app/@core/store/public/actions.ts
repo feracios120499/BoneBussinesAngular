@@ -1,11 +1,12 @@
 import { MobileAppLinks } from '@models/mobile-app-links.model';
 import { PaymentType } from '@models/payment-type.model';
 import { Resources } from '@models/resources.model';
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { BankModel } from 'src/app/@shared/models/bank.model';
 import { Feedback } from '@models/feedback.model';
 import { Version } from '@models/version.model';
+import { News } from '@models/news.model';
 
 export namespace PublicActions {
   export const [loadBanksRequest, loadBanksSuccess, loadBanksFailure] = createHTTPActions<void, BankModel[], string>(
@@ -47,4 +48,12 @@ export namespace PublicActions {
     Version,
     string
   >('[PUBLIC] load version');
+
+  export const [loadNewsListRequest, loadNewsListSuccess, loadNewsListFailure] = createHTTPActions<
+    void,
+    News[],
+    string
+  >('[PUBLIC] load news list');
+
+  export const removeNewsItem = createAction('[PUBLIC] remove news item', props<{ id: number }>());
 }
