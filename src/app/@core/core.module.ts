@@ -21,6 +21,7 @@ import { RouteEffects } from '@store/route/effects';
 import { SettingsEffects } from '@store/settings/effects';
 import { SETTINGS_KEY } from '@store/settings/store';
 import { SharedEffects } from '@store/shared/effects';
+import { SupDocumentsEffects } from '@store/sup-documents/effects';
 import { UserActions } from '@store/user/actions';
 import { UserEffects } from '@store/user/effects';
 import { USER_KEY } from '@store/user/store';
@@ -90,6 +91,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [clearOnLogoutMetaReducer, lo
       SharedEffects,
       UsersEffects,
       CorrespondentsEffects,
+      SupDocumentsEffects
     ]),
     StoreRouterConnectingModule.forRoot(),
   ],

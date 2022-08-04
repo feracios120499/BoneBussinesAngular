@@ -13,6 +13,7 @@ export class SupDocumentsService extends BaseService {
     }
 
     getDocuments(clientId: string): Observable<SupDocument[]> {
+        debugger;
         return this.http.get<SupDocument[]>(`api/v1/supdocuments/${clientId}`);
     }
 

@@ -4,8 +4,11 @@ import { supDocInitialState } from './store';
 
 export const supDocReducer = createReducer(
     supDocInitialState,
+   
     on(
         SupDocumentsActions.loadDocumentsSuccess,
         (state, action) => ({ ...state, documents: action.payload })
     )
 );
+
+

@@ -94,7 +94,7 @@ export class MenuService extends BaseService {
       ngValue: 'supdocuments',
       icon: 'file',
       dataRole: 'Director,Accountant,ForeignCurrencyApplicationsManager',
-      route: 'app.supdocuments.list.documents',
+      route: 'supdocuments',
       // gaTrackEvent: '[\'left-menu\', \'view-sup-docs\']',
       dataTranslate: 'aside.nav.SUPDOCUMENTS',
       moduleName: 'SupportDocuments',

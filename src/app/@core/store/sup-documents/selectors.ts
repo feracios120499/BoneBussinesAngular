@@ -4,6 +4,7 @@ import { SupDocumentsState, SUP_DOC_KEY } from './store';
 export namespace SupDocumentsSelectors {
 
     export const supDocState = createFeatureSelector<SupDocumentsState>(SUP_DOC_KEY);
+    debugger;
 
     export const documents = createSelector(
         supDocState,

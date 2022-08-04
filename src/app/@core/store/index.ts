@@ -21,6 +21,8 @@ import { USER_KEY, UserState } from '@store/user/store';
 
 import { sharedReducer } from './shared/reducer';
 import { SHARED_KEY, SharedState } from './shared/store';
+import { supDocReducer } from './sup-documents/reducer';
+import { SupDocumentsState, SUP_DOC_KEY } from './sup-documents/store';
 
 export interface State {
   [SETTINGS_KEY]: SettingsState;
@@ -33,6 +35,7 @@ export interface State {
   [SHARED_KEY]: SharedState;
   [USERS_KEY]: UsersState;
   [CORRESPONDENTS_KEY]: CorrespondentsState;
+  [SUP_DOC_KEY]: SupDocumentsState;
   router: RouterReducerState;
   [key: string]: any;
 }
@@ -48,5 +51,6 @@ export const reducers: ActionReducerMap<State> = {
   [SHARED_KEY]: sharedReducer,
   [USERS_KEY]: usersReducer,
   [CORRESPONDENTS_KEY]: correspondentsReducer,
+  [SUP_DOC_KEY]: supDocReducer,
   router: routerReducer,
 };
