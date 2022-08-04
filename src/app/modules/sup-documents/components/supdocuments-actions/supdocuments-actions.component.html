@@ -1,0 +1,33 @@
+<div class="b1-page-actions">
+    <div class="b1-page-actions__left">
+      <div class="b1-page-icons" style="margin-left: 0">
+        <ng-container *ngrxLet="supdocuments$ as docs">
+            <b1-button
+            *ngIf="docs.length"
+            label="components.supDocuments.actions.add"
+            icon="plus"
+            mobileView="round"
+            (click)="onSupdocumentAdd()">
+          </b1-button>
+
+          <button type="button" class="b1-page-more agents-button_mobile" (click)="onSupdocumentDelete()">
+            <i b1-icon icon="delete" class="b1-page-more_icon"></i>
+          </button>
+
+          <button type="button" class="b1-page-more agents-button_mobile" (click)="onSupdocumentSend()">
+            <i b1-icon icon="send" class="b1-page-more_icon"></i>
+          </button>
+
+        </ng-container>
+      </div>
+    </div>
+    <div class="b1-page-actions__right">
+      <b1-input
+      icon="search"
+      [placeholder]="'shared.search' | translate"
+      [resizable]="true"
+      ></b1-input>
+    </div>
+          <!-- [ngModel]="filterTerm$ | ngrxPush" -->
+          <!-- (ngModelChange)="onCorrespondentsFilter($event)" -->
+</div>

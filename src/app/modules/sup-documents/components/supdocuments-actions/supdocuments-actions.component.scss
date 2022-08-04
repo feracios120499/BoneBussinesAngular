@@ -1,0 +1,14 @@
+.b1-page-actions {
+    @media (max-width: 812px) {
+      flex-wrap: nowrap;
+      height: auto;
+      min-height: 90px;
+  
+      &__right {
+        margin-left: 16px;
+      }
+    }
+}
+button{
+    margin-left: 10px;
+}

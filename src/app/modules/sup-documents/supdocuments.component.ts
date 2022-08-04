@@ -11,7 +11,6 @@ export class SupdocumentsComponent implements OnInit {
   constructor(private store:Store) {
    }
   ngOnInit(): void {
-    this.store.dispatch(SupDocumentsActions.loadDocumentsSuccess([]));
+    this.store.dispatch(SupDocumentsActions.loadDocuments());
   }
-
 }

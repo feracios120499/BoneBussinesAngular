@@ -1,11 +1,17 @@
 <div class="b1-wrapper no-wrap-xs b1-full-screen">
- 
-    <div style="position: relative" class="full-screen">
-      <div class="b1-page-card b1-bg-light">
-  
-        <b1-content-wrapper>
-          <app-supdocuments-list></app-supdocuments-list>
-        </b1-content-wrapper>
-      </div>
+  <app-supdocuments-header></app-supdocuments-header>
+
+  <div style="position: relative" class="full-screen">
+    <div class="b1-page-card b1-bg-light">
+      <app-supdocuments-actions></app-supdocuments-actions>
+
+      <b1-card-loader></b1-card-loader>
+
+
+      <b1-content-wrapper>
+        <app-supdocuments-list></app-supdocuments-list>
+      </b1-content-wrapper>
+
     </div>
   </div>
+</div>

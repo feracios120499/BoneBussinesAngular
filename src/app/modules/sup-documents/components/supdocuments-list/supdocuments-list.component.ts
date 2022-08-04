@@ -12,15 +12,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./supdocuments-list.component.scss']
 })
 export class SupdocumentsListComponent implements OnInit {
-  documents$: Observable<SupDocument[]> = this.store.pipe(select(SupDocumentsSelectors.documents));
+  supdocuments$: Observable<SupDocument[]> = this.store.pipe(select(SupDocumentsSelectors.documents));
 
   constructor(private store: Store<AppState>) {
 
    }
 
   ngOnInit(): void {
-    debugger;
     this.store.dispatch(SupDocumentsActions.loadDocuments());
   }
-
 }

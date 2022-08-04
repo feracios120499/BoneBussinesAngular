@@ -1,3 +1,7 @@
-        <div class="supdocuments-list" *ngFor="let doc of documents$ | async">
-            {{doc.fileName}}
-        </div>
+<ng-container *ngrxLet="supdocuments$ as docs">
+    <ng-container *ngIf="docs.length">
+          <div class="supdocuments-list">
+            <app-supdocument-item *ngFor="let doc of docs" [supdocument]="doc"> </app-supdocument-item>
+          </div>
+      </ng-container>
+</ng-container>
