@@ -1,16 +1,15 @@
 <div class="supdocument-item__image">
-    <i b1-icon icon="delete" class="b1-page-more_icon" ></i>
-    <!--  -->
+    <i b1-icon icon="file-pdf" style="font-size: 64px;"></i>
 </div>
 
 <div class="supdocument-item__name b1-ellipsis">{{ supdocument.fileName }}</div>
-<div class="supdocument-item__subtitle">{{ supdocument.fileSize }}</div>
+<div class="supdocument-item__subtitle">{{ formatBytes(supdocument.fileSize, 2) }}</div>
   
 <b1-dropdown
     class="supdocument-item__more b1-card__col b1-card__col_dot"
     label="user's actions"
     menuWidth="180px"
-    scopeSelector="app-users-list">
+    scopeSelector="app-supdocuments-list">
     <b1-more-button slot="toggle"></b1-more-button>
 
     <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true"></b1-dropdown-link>

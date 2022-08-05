@@ -3,9 +3,9 @@ $screen-tablet: 812px;
 
 .supdocuments-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    grid-auto-rows: minmax(200px, max-content);
-    grid-gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    grid-auto-rows: minmax(180px, max-content);
+    grid-gap: 30px;
     margin: 12px 0;
   
     @media (max-width: $screen-tablet) {
