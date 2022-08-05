@@ -6,10 +6,12 @@ export const SUP_DOC_KEY = 'sup-doc';
 
 export interface SupDocumentsState {
     documents: SupDocument[],
+    filterTerm: string,
     loadings: SupdocumentsLoading[]
 }
 
 export const supDocInitialState: SupDocumentsState = {
     documents: [],
+    filterTerm: '',
     loadings: []
 };

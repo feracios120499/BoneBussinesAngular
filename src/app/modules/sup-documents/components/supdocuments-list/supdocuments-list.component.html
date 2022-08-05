@@ -1,7 +1,38 @@
-<ng-container *ngrxLet="supdocuments$ as docs">
-    <ng-container *ngIf="docs.length">
-          <div class="supdocuments-list">
-            <app-supdocument-item *ngFor="let doc of docs" [supdocument]="doc"> </app-supdocument-item>
-          </div>
+<ng-container *ngrxLet="isLoading$ as isLoading">
+  <ng-container *ngrxLet="supdocuments$ as docs">
+    <ng-container *ngIf="!isLoading && docs.length">
+      <ng-container *ngIf="docs | supdocumentsFilter: (filterTerm$ | ngrxPush) as filteredSupdocuments">
+        <ng-container *ngIf="filteredSupdocuments.length; else notFound">
+            <div class="supdocuments-list">
+              <app-supdocument-item *ngFor="let doc of filteredSupdocuments" [supdocument]="doc"> </app-supdocument-item>
+            </div>
+        </ng-container>
       </ng-container>
+    </ng-container>
+
+
+
+    <ng-container *ngIf="isLoading">
+      <div class="supdocuments-list">
+        <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton>
+      </div>
+    </ng-container>
+
+      <!-- TODO: CHANGE SVG-NAME -->
+    <b1-empty
+      *ngIf="!docs.length && !isLoading"
+      svgName="empty-users"
+      header="components.supdocuments.doNotExist"
+      description="components.correspondents.displayIfAdd">
+      
+      <b1-button label="components.supDocuments.uploadSupDocument" icon="plus">
+      </b1-button>
+    </b1-empty>
+
+  </ng-container>
 </ng-container>
+
+<ng-template #notFound>
+  <!-- TODO: CHANGE SVG-NAME -->
+  <b1-empty svgName="empty-users" header="components.supDoc.notFound"></b1-empty>
+</ng-template>

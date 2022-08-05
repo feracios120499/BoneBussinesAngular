@@ -20,6 +20,10 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { B1CardLoaderModule } from '@ui/b1-card-loader/b1-card-loader.module';
 import { SupdocumentItemComponent } from './components/supdocument-item/supdocument-item.component';
 import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SupdocumentsFilterModule } from '@pipes/supdocuments-filter/supdocuments-filter.module';
 
 
 @NgModule({
@@ -32,7 +36,12 @@ import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
   ],
   imports: [
     CommonModule,
+    TranslateModule,
+    NumberToArrayModule,
     ReactiveComponentModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SupdocumentsFilterModule,
     B1ContentWrapperModule,
     B1DropdownModule,
     B1ModalContainerModule,
@@ -44,7 +53,7 @@ import { B1MoreButtonModule } from '@ui/b1-more-button/b1-more-button.module';
     B1PageSeparatorModule,
     B1CardLoaderModule,
     B1MoreButtonModule,
-    TranslateModule,
+    B1SkeletonModule,
     RouterModule.forChild([
       {
         path: '',

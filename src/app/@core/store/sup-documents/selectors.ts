@@ -13,4 +13,21 @@ export namespace SupDocumentsSelectors {
         supDocState,
         (state) => state.documents.filter(p => p.status === 'SIGNED').sort((a, b) => a.lastActiveDate > b.lastActiveDate ? 1 : 0)
     );
+
+    export const isLoading = createSelector(
+        supDocState,
+        (state) => !!state.loadings.length
+    );
+    export const isInitialLoadingSupdocuments = createSelector(
+        supDocState,
+        (state) => !state.documents.length && state.loadings.includes('list')
+    );
+    export const isLoadingSupdocuments = createSelector(
+        supDocState,
+        (state) => state.loadings.includes('list')
+    );
+    export const filterTerm = createSelector(
+        supDocState,
+        (state) => state.filterTerm);
+
 }

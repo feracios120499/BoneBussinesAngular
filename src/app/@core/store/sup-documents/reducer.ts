@@ -7,6 +7,14 @@ export const supDocReducer = createReducer(
     on(
         SupDocumentsActions.loadDocumentsSuccess,
         (state, action) => ({ ...state, documents: action.payload })
+    ),
+    on(
+        SupDocumentsActions.filterSupdocuments,
+        (state, action) => ({ ...state, filterTerm: action.term })
+    ),
+    on(
+        SupDocumentsActions.resetSupdocumentFilter,
+        (state) => ({ ...state, filterTerm: '' })
     )
 );
 

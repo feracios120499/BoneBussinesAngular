@@ -2,32 +2,21 @@
   <ng-container *ngTemplateOutlet="content"></ng-container>
 </label>
 
-<div class="autocomplete-wrapper">
-  <input
-    class="b1-input__control"
-    [class.resize]="resizable"
-    [style.textTransform]="transform"
-    [id]="controlId"
-    [type]="type"
-    [(ngModel)]="value"
-    (ngModelChange)="handleValue($any(value))"
-    [attr.name]="name"
-    [attr.autocomplete]="autocomplete"
-    [attr.placeholder]="placeholder"
-    [attr.minlength]="minLength"
-    [attr.maxlength]="maxLength"
-    [disabled]="isDisabled"
-    (focus)="focused = true"
-    (blur)="focused = false"
-    #formControlRef />
-  <div *ngIf="data && itemTemplate" class="b1-page-card b1-color-dark autocomplete-container">
-    <ng-container *ngrxLet="data as dataList">
-      <div class="autocomplete-item" *ngFor="let item of dataList">
-        <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"> </ng-container>
-      </div>
-    </ng-container>
-  </div>
-</div>
+<input
+  class="b1-input__control"
+  [class.resize]="resizable"
+  [style.textTransform]="transform"
+  [id]="controlId"
+  [type]="type"
+  [(ngModel)]="value"
+  (ngModelChange)="handleValue($any(value))"
+  [attr.name]="name"
+  [attr.autocomplete]="autocomplete"
+  [attr.placeholder]="placeholder"
+  [attr.minlength]="minLength"
+  [attr.maxlength]="maxLength"
+  [disabled]="isDisabled"
+  #formControlRef />
 
 <label *ngIf="icon" [class.resize]="resizable" b1-icon [icon]="icon" [for]="controlId" #labelRef></label>
 

@@ -7,7 +7,8 @@
             label="components.supDocuments.actions.add"
             icon="plus"
             mobileView="round"
-            (click)="onSupdocumentAdd()">
+            (click)="onSupdocumentAdd()"
+            [isDisabled]="isLoading$ | ngrxPush">
           </b1-button>
 
           <button type="button" class="b1-page-more agents-button_mobile" (click)="onSupdocumentDelete()">
@@ -26,8 +27,8 @@
       icon="search"
       [placeholder]="'shared.search' | translate"
       [resizable]="true"
+      [ngModel]="filterTerm$ | ngrxPush"
+      (ngModelChange)="onSupdocumentsFilter($event)"
       ></b1-input>
     </div>
-          <!-- [ngModel]="filterTerm$ | ngrxPush" -->
-          <!-- (ngModelChange)="onCorrespondentsFilter($event)" -->
 </div>
