@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { BaseService } from '@services/base.service';
 import { Observable } from 'rxjs';
 
@@ -18,5 +19,9 @@ export class SupDocumentsService extends BaseService {
 
     getSignedDocuments(clientId: string): Observable<SupDocument[]> {
         return this.http.get<SupDocument[]>(`api/v1/supdocuments/${clientId}?$filter=Status eq 'SIGNED'`);
+    }
+    createSupdocument(clientId: string, data: SupdocumentForm): Observable<SupDocument> {
+        console.log('service post called');
+        return this.http.post<SupDocument>(`api/v1/supdocuments/${clientId}`, data);
     }
 }

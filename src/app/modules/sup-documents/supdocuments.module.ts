@@ -24,6 +24,9 @@ import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
 import { NumberToArrayModule } from '@pipes/number-to-array/number-to-array.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SupdocumentsFilterModule } from '@pipes/supdocuments-filter/supdocuments-filter.module';
+import { SupdocumentAddModalComponent } from './components/supdocument-add-modal/supdocument-add-modal.component';
+import { SupdocumentFormComponent } from './components/supdocument-form/supdocument-form.component';
+import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
 
 
 @NgModule({
@@ -32,7 +35,9 @@ import { SupdocumentsFilterModule } from '@pipes/supdocuments-filter/supdocument
     SupdocumentsListComponent,
     SupdocumentsHeaderComponent,
     SupdocumentsActionsComponent,
-    SupdocumentItemComponent
+    SupdocumentItemComponent,
+    SupdocumentAddModalComponent,
+    SupdocumentFormComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +59,7 @@ import { SupdocumentsFilterModule } from '@pipes/supdocuments-filter/supdocument
     B1CardLoaderModule,
     B1MoreButtonModule,
     B1SkeletonModule,
+    B1TextareaModule,
     RouterModule.forChild([
       {
         path: '',

@@ -18,7 +18,12 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
   constructor(private store: Store, private translateService: TranslateService) {
     super();
   }
-
+  ifSigned(): boolean {
+    if (this.supdocument.status == 'SIGNED')
+      {return true;}
+    else
+      {return false;}
+  }
   ngOnInit(): void {
     this.checkRequiredProps(['supdocument']);
   }

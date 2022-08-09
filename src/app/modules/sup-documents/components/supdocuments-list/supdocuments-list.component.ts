@@ -24,4 +24,7 @@ export class SupdocumentsListComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(SupDocumentsActions.loadDocuments());
   }
+  onSupdocumentAdd(): void {
+    this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
+  }
 }

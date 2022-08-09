@@ -19,7 +19,7 @@ export class SupdocumentsActionsComponent implements OnInit {
   constructor(private store: Store) { }
 
   onSupdocumentAdd(): void {
-    console.log('module add window');
+    this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
   }
 
   onSupdocumentDelete(): void {

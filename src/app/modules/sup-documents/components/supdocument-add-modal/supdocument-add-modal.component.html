@@ -1,0 +1,14 @@
+<b1-modal-container [isLoading$]="isLoading$">
+     
+    <app-supdocument-form slot="body" [isLoading$]="isLoading$" [(ngModel)]="supdocumentForm" #formRef>
+    </app-supdocument-form>
+  
+    <b1-button
+      slot="footer"
+      label="actions.save"
+      icon="save"
+      [isDisabled]="!formRef?.isChanged || !formRef?.isValid || (isLoading$ | ngrxPush)"
+      (btnClick)="onSave()">
+    </b1-button>
+  </b1-modal-container>
+  
