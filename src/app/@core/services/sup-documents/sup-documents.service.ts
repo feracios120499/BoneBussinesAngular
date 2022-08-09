@@ -20,8 +20,8 @@ export class SupDocumentsService extends BaseService {
     getSignedDocuments(clientId: string): Observable<SupDocument[]> {
         return this.http.get<SupDocument[]>(`api/v1/supdocuments/${clientId}?$filter=Status eq 'SIGNED'`);
     }
-    createSupdocument(clientId: string, data: SupdocumentForm): Observable<SupDocument> {
+    createSupdocument(clientId: string, data: SupdocumentForm): Observable<any> {
         console.log('service post called');
-        return this.http.post<SupDocument>(`api/v1/supdocuments/${clientId}`, data);
+        return this.http.post<any>(`api/v1/supdocuments/${clientId}`, data);
     }
 }

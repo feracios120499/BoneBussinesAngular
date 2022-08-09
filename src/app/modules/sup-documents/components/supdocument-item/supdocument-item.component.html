@@ -1,13 +1,11 @@
 <div class="supdocument-item__image">
-    <i b1-icon icon="file-pdf" style="font-size: 64px;"></i>
-    <i b1-icon icon="lock" *ngIf='ifSigned()'></i>
+    <i b1-icon icon="file-pdf" class="supdocument-item__image__pdf"></i>
+    <i b1-icon icon="key" *ngIf='ifSigned()'></i>
 </div>
 
 
 <div class="supdocument-item__name b1-ellipsis">{{ supdocument.fileName }}</div>
 <div class="supdocument-item__subtitle">{{ formatBytes(supdocument.fileSize, 2) }}</div>
-<div class="supdocument-item__subtitle">{{ supdocument.id }}</div>
-<div class="supdocument-item__subtitle">{{ supdocument.fileExt }}</div>
 
 
   
@@ -18,5 +16,8 @@
     scopeSelector="app-supdocuments-list">
     <b1-more-button slot="toggle"></b1-more-button>
 
+    <b1-dropdown-link icon="sign" label="actions.sign" [danger]="false"></b1-dropdown-link>
+    <b1-dropdown-link icon="file" label="components.supDocuments.actions.details" [danger]="false"></b1-dropdown-link>
+    <b1-dropdown-link icon="download" label="components.supDocuments.actions.download" [danger]="false"></b1-dropdown-link>
     <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true"></b1-dropdown-link>
 </b1-dropdown>

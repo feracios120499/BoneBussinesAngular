@@ -1,32 +1,46 @@
-<form [formGroup]="formGroup" #formRef="ngForm">
-  <div class="b1-modal-header">
-    <div class="b1-title2">
-      {{'components.supDocuments.uploadSupDocument' | translate}}
-    </div>
+<ng-container select="body">
+  <div>
+    <form [formGroup]="formGroup" #formRef="ngForm">
+      <div class="b1-flex b1-align-center b1-justify-center">
+        <label for="file" class="b1-button b1-button-primary">
+          <i b1-icon icon="upload"></i>
+            <div>
+            {{'components.supDocuments.chooseSupDocument' | translate}}
+            </div>
+        <input hidden id="file" type="file" fileinput="file" filepreview="file.name" ng-show="false"
+        accept="application/pdf" (change)="getFile($event)">
+        </label>
+      </div>
+    
+      <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate}} </div>
+      
+      <div class="b1-mt-4 b1-schedules" *ngIf="isFileExist()">
+        <div class="b1-supdoc-cursor b1-card">
+          <div class="row">
+            <div class="col-md-9 b1-ellipsis">
+              <span class="b1-ellipsis">
+                {{ FileNameControl.value }} {{ FileExtControl.value ? "." : ""}} {{
+                  FileExtControl.value }}
+              </span>
+            </div>
+            <div class="b1-md-3 text-right">
+              {{formatBytes(FileSizeControl.value, 2)}}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+        <fieldset class="b1-mt-6">
+          <legend class="b1-large b1-mb-4">
+            {{ 'components.supDocuments.details.description' | translate }}
+          </legend>
+          <b1-textarea mobileClass="b1-mt-3" [maxLength]="descriptionMaxLength" [formControl]="DescriptionControl">
+          </b1-textarea>
+        </fieldset>
+    
+      </form>
+    
   </div>
 
-  <div class="b1-flex b1-align-center b1-justify-center">
-    <label for="file" class="b1-button b1-button-primary">
-      <i b1-icon icon="upload"></i>
-       <div *ngIf="!isFileExist()">
-        {{'components.supDocuments.chooseSupDocument' | translate}}
-       </div>
-       <div *ngIf="isFileExist()">
-        {{ fileNameControl.value }}
-       </div>
-    <input hidden id="file" type="file" fileinput="file" filepreview="file.name" ng-show="false"
-    accept="application/pdf" (change)="getFile($event)">
-    </label>
-  </div>
-  
-  <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate}} </div>
-     
-
-  <fieldset class="b1-mt-6">
-    <legend class="b1-large b1-mb-4">
-      {{ 'components.supDocuments.details.description' | translate }}
-    </legend>
-    <b1-textarea mobileClass="b1-mt-3" [maxLength]="descriptionMaxLength" [formControl]="descriptionControl">
-    </b1-textarea>
-  </fieldset>
-</form>
+</ng-container>

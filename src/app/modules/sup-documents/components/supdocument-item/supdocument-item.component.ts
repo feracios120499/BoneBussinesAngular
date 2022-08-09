@@ -33,7 +33,7 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
 
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const sizes = ['Bytes', 'kB', 'MB'];
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 

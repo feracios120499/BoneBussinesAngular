@@ -4,7 +4,7 @@ import { ModelControl } from '@b1-types/model-controls.type';
 import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
 
@@ -22,15 +22,18 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
 
   // DESCRIPTION:
   descriptionMaxLength = 100;
-  descriptionControl = new FormControl('', [required, maxLength(this.descriptionMaxLength)]);
+  DescriptionControl = new FormControl('', [required, maxLength(this.descriptionMaxLength)]);
 
   // UNVALIDATED & DISABLED:
-  creatingDateControl= new FormControl({ value: new Date(), disabled: true });
-  lastActiveDateControl = new FormControl({ value: '', disabled: true });
-  fileNameControl = new FormControl({ value: '', disabled: true });
-  fileExtControl = new FormControl({ value: '', disabled: true });
-  fileSizeControl = new FormControl({ value: '', disabled: true });
-  fileStatusControl = new FormControl({ value: 'NEW', disabled: true });
+  FileNameControl = new FormControl({ value: '', disabled: true });
+  FileExtControl = new FormControl({ value: '', disabled: true });
+  FileSizeControl = new FormControl({ value: '', disabled: true });
+  FileBodyControl = new FormControl({ value: '', disabled: true });
+  CreatingDateControl = new FormControl({ value: '', disabled: true });
+  LastActiveDateControl = new FormControl({ value: '', disabled: true });
+  IdControl = new FormControl({ value: 0, disabled: true });
+  StatusControl = new FormControl({ value: 'NEW', disabled: true })
+  EDRPOControl = new FormControl({ value: '', disabled: true })
 
   @ViewChild('formRef') formRef!: NgForm;
 
@@ -51,33 +54,62 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
     this.updateTreeValidity(this.formGroup);
   }
 
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event?.target?.result?.toString() as string));
+    return result;
+  }
+
+  formatBytes(bytes: number, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'kB', 'MB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
   getFile(event: any): void {
-    this.writeValue({
-      creatingDate: new Date(),
-      lastActiveDate: event.target.files[0].lastModifiedDate,
-      fileName: event.target.files[0].name,
-      fileExt: event.target.files[0].type,
-      fileSize: event.target.files[0].size,
-      status: 'NEW',
-      description: this.descriptionControl.value
+    this.convertFile(event.target.files[0]).subscribe(base64 => {
+      this.writeValue({
+        FileName: event.target.files[0].name.split('.')[0],
+        FileExt: event.target.files[0].name.split('.').pop(),
+        FileSize: event.target.files[0].size,
+        FileBody: base64 !== '' ? base64 : '',
+        Description: this.DescriptionControl.value,
+        Id: 0,
+        CreatingDate: '',
+        LastActiveDate: '',
+        Status: 'NEW',
+        EDRPO: ''
+      });
     });
   }
 
   isFileExist():boolean {
-    if (this.formGroup.controls['fileName'].value != '')
+    if (this.formGroup.controls['FileName'].value != '')
       {return true;};
       return false;
   }
 
   private initForm(): void {
     const controls: ModelControl<SupdocumentForm> = {
-      creatingDate: this.creatingDateControl,
-      lastActiveDate: this.lastActiveDateControl,
-      fileName: this.fileNameControl,
-      fileExt: this.fileExtControl,
-      fileSize: this.fileSizeControl,
-      description: this.descriptionControl,
-      status: this.fileStatusControl
+      FileName: this.FileNameControl,
+      FileExt: this.FileExtControl,
+      FileSize: this.FileSizeControl,
+      FileBody: this.FileBodyControl,
+      Description: this.DescriptionControl,
+      Id: this.IdControl,
+      CreatingDate: this.CreatingDateControl,
+      LastActiveDate: this.LastActiveDateControl,
+      Status: this.StatusControl,
+      EDRPO: this.EDRPOControl
+
     };
     this.formGroup = new FormGroup(controls);
   }

@@ -30,13 +30,16 @@ $screen-tablet: 812px;
     & img {
       border-radius: 50%;
     }
+    &__pdf{
+      color: var(--color-primary-light);
+      font-size: 64px;
+    }
   }
   &__lock {
     position: absolute;
     bottom: -15px;
     right: -5px;
     @include large;
-    color: $color-dark;
 
     @media (max-width: 991px) {
       bottom: -10px;

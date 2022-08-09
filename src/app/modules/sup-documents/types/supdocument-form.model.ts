@@ -1,13 +1,16 @@
-import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { SupDocumentUploadModel } from './supdocument-upload.model';
 
 export interface SupdocumentForm
   extends Pick<
-    SupDocument,
-    | 'creatingDate'
-    | 'lastActiveDate'
-    | 'fileName'
-    | 'fileExt'
-    | 'fileSize'
-    | 'description'
-    | 'status'
+    SupDocumentUploadModel,
+    | 'Id'
+    | 'CreatingDate'
+    | 'EDRPO'
+    | 'LastActiveDate'
+    | 'Status'
+    | 'FileName'
+    | 'FileExt'
+    | 'FileSize'
+    | 'FileBody'
+    | 'Description'
   > {}

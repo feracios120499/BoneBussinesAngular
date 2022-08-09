@@ -1,7 +1,12 @@
-<b1-modal-container [isLoading$]="isLoading$">
-     
-    <app-supdocument-form slot="body" [isLoading$]="isLoading$" [(ngModel)]="supdocumentForm" #formRef>
+<b1-modal-container [isLoading$]="isLoading$" style="width: 1000px;">
+  <ng-container slot="header">
+    {{'components.supDocuments.uploadSupDocument' | translate}}
+  </ng-container>
+
+  <ng-container slot="body" >
+    <app-supdocument-form [isLoading$]="isLoading$" [(ngModel)]="supdocumentForm" #formRef>
     </app-supdocument-form>
+  </ng-container>
   
     <b1-button
       slot="footer"
@@ -10,5 +15,6 @@
       [isDisabled]="!formRef?.isChanged || !formRef?.isValid || (isLoading$ | ngrxPush)"
       (btnClick)="onSave()">
     </b1-button>
-  </b1-modal-container>
+
+</b1-modal-container>
   
