@@ -33,5 +33,11 @@ export namespace SupDocumentsActions {
     string
 >(`[${SUP_DOC_KEY}] create supdocument`);
 
+export const [deleteSupdocumentRequest, deleteSupdocumentSuccess, deleteSupdocumentFailure] = createHTTPActions<
+    string,
+    void,
+    string
+  >(`[${SUP_DOC_KEY}] delete correspondent`);
+
 
 }

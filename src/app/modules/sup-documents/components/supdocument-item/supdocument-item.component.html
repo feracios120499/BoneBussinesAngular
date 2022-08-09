@@ -19,5 +19,7 @@
     <b1-dropdown-link icon="sign" label="actions.sign" [danger]="false"></b1-dropdown-link>
     <b1-dropdown-link icon="file" label="components.supDocuments.actions.details" [danger]="false"></b1-dropdown-link>
     <b1-dropdown-link icon="download" label="components.supDocuments.actions.download" [danger]="false"></b1-dropdown-link>
-    <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true"></b1-dropdown-link>
+    <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true"
+    (btnClick)="onSupdocumentDelete()"></b1-dropdown-link>
+    
 </b1-dropdown>

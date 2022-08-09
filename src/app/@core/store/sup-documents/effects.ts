@@ -14,6 +14,8 @@ import { SupdocumentModalConfig } from '@modules/sup-documents/types/supdocument
 import { SupdocumentModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { ServerError } from '@models/errors/server-error.model';
+import { NotifyActions } from '@store/notify/actions';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +24,8 @@ export class SupDocumentsEffects {
     constructor(private actions$: Actions,
         private store: Store,
         private supDocumentsService: SupDocumentsService,
-        private modalService: ModalService
+        private modalService: ModalService,
+        private translateService: TranslateService,
         ) { }
 
     loadDocuments$ = createEffect(() =>
@@ -37,7 +40,7 @@ export class SupDocumentsEffects {
         )
     );
 
-    showCorrespondentModal$ = createEffect(() =>
+    showSupdocumentModal$ = createEffect(() =>
     this.actions$.pipe(
         ofType(SupDocumentsActions.showSupdocumentModal),
         map(({}) => {
@@ -51,7 +54,7 @@ export class SupDocumentsEffects {
       )
     );
 
-    setCorrespondentModal$ = createEffect(
+    setSupdocumentModal$ = createEffect(
         () =>
           this.actions$.pipe(
             ofType(SupDocumentsActions.setSupdocumentModal),
@@ -70,7 +73,7 @@ export class SupDocumentsEffects {
         { dispatch: false }
       );
 
-      createCorrespondentRequest$ = createEffect(() =>
+      createSupdocumentRequest$ = createEffect(() =>
       this.actions$.pipe(
         ofType(SupDocumentsActions.createSupdocumentRequest),
         switchMap((action) => clientIdWithData(this.store, action.payload)),
@@ -86,6 +89,53 @@ export class SupDocumentsEffects {
         )
       )
     );
+
+    createSupdocumentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.createSupdocumentSuccess),
+      switchMap(() => [
+        SupDocumentsActions.loadDocuments(),
+        NotifyActions.successNotification({
+          message: this.translateService.instant('components.pay.correspondents.newCorrespondentAdded'),
+        }),
+      ])
+    )
+  );
+
+
+    deleteSupdocumentRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.deleteSupdocumentRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap(({ clientId, data: supdocumentId }) =>
+        this.supDocumentsService.deleteSupdocument(clientId, supdocumentId).pipe(
+          map(() => SupDocumentsActions.deleteSupdocumentSuccess()),
+          catchError((error: ServerError) =>
+            of(
+              SupDocumentsActions.deleteSupdocumentFailure(error.message),
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.deleteSupdocument'),
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  deleteSupdocumentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.deleteSupdocumentSuccess),
+      switchMap(() => [
+        SupDocumentsActions.loadDocuments(),
+        NotifyActions.successNotification({
+          message: this.translateService.instant(''),
+        }),
+      ])
+    )
+  );
+
 
    // closeSupdocumentModal$ = createEffect(
     //     () =>
