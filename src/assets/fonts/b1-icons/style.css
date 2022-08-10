@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'b1-icons';
-  src:  url('fonts/b1-icons.eot?uy1ds5');
-  src:  url('fonts/b1-icons.eot?uy1ds5#iefix') format('embedded-opentype'),
-    url('fonts/b1-icons.ttf?uy1ds5') format('truetype'),
-    url('fonts/b1-icons.woff?uy1ds5') format('woff'),
-    url('fonts/b1-icons.svg?uy1ds5#b1-icons') format('svg');
+  src:  url('fonts/b1-icons.eot?phjanl');
+  src:  url('fonts/b1-icons.eot?phjanl#iefix') format('embedded-opentype'),
+    url('fonts/b1-icons.ttf?phjanl') format('truetype'),
+    url('fonts/b1-icons.woff?phjanl') format('woff'),
+    url('fonts/b1-icons.svg?phjanl#b1-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.b1-icons-icon-send:before {
+  content: "\e93e";
+}
 .b1-icons-icon-key:before {
   content: "\e93d";
 }
@@ -282,9 +285,6 @@
 }
 .b1-icons-icon-university:before {
   content: "\f19c";
-}
-.b1-icons-icon-send:before {
-  content: "\f1d8";
 }
 .b1-icons-icon-calculator:before {
   content: "\f1ec";

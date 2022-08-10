@@ -46,9 +46,7 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: `${this.translateService.instant('components.supDocuments.areYouSureToDeleteSupDocuments')} ${
-            this.supdocument.fileName
-          }?`,
+          text: `${this.translateService.instant('components.supDocuments.areYouSureToDeleteSupDocuments')}`,
           callback: () => this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest(this.supdocument.id)),
         },
       })

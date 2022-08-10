@@ -1784,7 +1784,7 @@
 	"components.supDocuments.errors.load": "Error retrieving documents",
 	"components.supDocuments.errors.sendingSupDocument": "Error while sending support document",
 	"components.supDocuments.errors.toBigSize": "",
-	"components.supDocuments.fileFormatSupDocument": "File requirements: maximal size {0}mb, file format .pdf",
+	"components.supDocuments.fileFormatSupDocument": "File requirements: maximal size {{size}}mb, file format .pdf",
 	"components.supDocuments.from": "from",
 	"components.supDocuments.header": "Support documents",
 	"components.supDocuments.limitSupDocsSelect": "Exceeded the number of selected documents for sending to the bank. Permissible amount {0}",

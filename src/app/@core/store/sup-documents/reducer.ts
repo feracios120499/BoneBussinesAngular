@@ -21,14 +21,14 @@ export const supDocReducer = createReducer(
         SupDocumentsActions.createSupdocumentRequest,
         (state) => ({ ...state, loadings: [...pushIfNotExist(state.loadings, 'create')],
       })),
-      on(
-        SupDocumentsActions.createSupdocumentSuccess,
-        SupDocumentsActions.createSupdocumentFailure,
-        (state) => ({
-          ...state,
-          loadings: [...removeItem(state.loadings, 'create')],
-        })
-      )
+    on(
+      SupDocumentsActions.createSupdocumentSuccess,
+      SupDocumentsActions.createSupdocumentFailure,
+      (state) => ({
+        ...state,
+        loadings: [...removeItem(state.loadings, 'create')],
+      })
+    )
 
 );
 

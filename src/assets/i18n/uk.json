@@ -1784,7 +1784,7 @@
 	"components.supDocuments.errors.load": "Помилка при отриманні списку документів",
 	"components.supDocuments.errors.sendingSupDocument": "Помилка відправки підтверджуючого документа",
 	"components.supDocuments.errors.toBigSize": "занадто великий розмір файла. Має бути не більше 30 мб.",
-	"components.supDocuments.fileFormatSupDocument": "Вимоги до файлу: максимальний розмір {0}мб, файл формату .pdf",
+	"components.supDocuments.fileFormatSupDocument": "Вимоги до файлу: максимальний розмір {{size}}мб, файл формату .pdf",
 	"components.supDocuments.from": "від",
 	"components.supDocuments.header": "Підтверджуючі документи",
 	"components.supDocuments.limitSupDocsSelect": "Перевищена кількість обраних документів для відправки в банк. Допустима кількість {0}",

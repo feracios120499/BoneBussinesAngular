@@ -12,7 +12,7 @@
         </label>
       </div>
     
-      <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate}} </div>
+      <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate: {size: this.maxFileSize} }} </div>
       
       <div class="b1-mt-4 b1-schedules" *ngIf="isFileExist()">
         <div class="b1-supdoc-cursor b1-card">

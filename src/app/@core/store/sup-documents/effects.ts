@@ -16,6 +16,7 @@ import { ServerError } from '@models/errors/server-error.model';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
 import { FileModel } from '@models/file.model';
+import { SharedActions } from '@store/shared/actions';
 
 @Injectable({
     providedIn: 'root'
@@ -147,7 +148,6 @@ export class SupDocumentsEffects {
     switchMap(({ clientId, data: supdocumentId }) =>
       this.supDocumentsService.downloadSupdocument(clientId, supdocumentId).pipe(
         map((supdocumentBlob: FileModel) =>{
-            window.open(window.URL.createObjectURL(supdocumentBlob.blob as Blob));
             return SupDocumentsActions.downloadSupdocumentSuccess(supdocumentBlob);
         }
         ),
@@ -164,17 +164,13 @@ export class SupDocumentsEffects {
   )
 );
 
-// downloadSupdocumentSuccess$ = createEffect(() =>
-// this.actions$.pipe(
-//   ofType(SupDocumentsActions.downloadSupdocumentSuccess),
-//   switchMap(() => [
-//     SupDocumentsActions.loadDocuments(),
-//     NotifyActions.errorNotification({
-//       message: this.translateService.instant('errors.downloadSupdocument'),
-//     }),
-//   ])
-// )
-// );
+
+downloadSupdocumentSuccess$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(SupDocumentsActions.downloadSupdocumentSuccess),
+  map((action) => SharedActions.saveFile({ file: action.payload }))
+)
+);
 
 
    closeSupdocumentModal$ = createEffect(

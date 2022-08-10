@@ -4,6 +4,7 @@ import { ModelControl } from '@b1-types/model-controls.type';
 import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
@@ -19,6 +20,7 @@ const { required, maxLength } = Validators;
 })
 export class SupdocumentFormComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
+  maxFileSize: number = 30;
 
   // DESCRIPTION:
   descriptionMaxLength = 100;
@@ -27,6 +29,7 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
   // UNVALIDATED & DISABLED:
   FileNameControl = new FormControl({ value: '', disabled: true });
   FileExtControl = new FormControl({ value: '', disabled: true });
+
   FileSizeControl = new FormControl({ value: '', disabled: true });
   FileBodyControl = new FormControl({ value: '', disabled: true });
   CreatingDateControl = new FormControl({ value: '', disabled: true });
@@ -37,7 +40,7 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
 
   @ViewChild('formRef') formRef!: NgForm;
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
     super();
   }
 
@@ -45,7 +48,6 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
     super.ngOnInit();
     this.initForm();
   }
-
   writeValue(value: SupdocumentForm): void {
     if (!value) {
       return;
