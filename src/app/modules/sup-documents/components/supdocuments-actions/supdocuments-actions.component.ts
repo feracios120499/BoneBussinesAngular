@@ -22,8 +22,10 @@ export class SupdocumentsActionsComponent implements OnInit {
     this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
   }
 
-  onSupdocumentDelete(): void {
-    console.log('document delete');
+  onSupdocumentDelete(ids: string[]): void {
+    for (const id of ids) {
+      this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest(id));
+    }
   }
   onSupdocumentSend(): void {
     console.log('document sent');

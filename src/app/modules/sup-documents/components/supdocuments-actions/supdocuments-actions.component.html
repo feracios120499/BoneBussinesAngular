@@ -11,7 +11,8 @@
             [isDisabled]="isLoading$ | ngrxPush">
           </b1-button>
 
-          <button type="button" class="b1-page-more agents-button_mobile" (click)="onSupdocumentDelete()">
+          <button type="button" class="b1-page-more agents-button_mobile" 
+          (click)="onSupdocumentDelete(['as'])">
             <i b1-icon icon="delete"></i>
           </button>
 

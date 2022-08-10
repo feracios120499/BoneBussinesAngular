@@ -5,17 +5,17 @@ import { Store } from '@ngrx/store';
 import { SupDocumentsService } from '@services/sup-documents/sup-documents.service';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { SupDocumentsActions } from './actions';
 import { SupdocumentAddModalComponent } from '@modules/sup-documents/components/supdocument-add-modal/supdocument-add-modal.component';
 import { ModalService } from '@services/modal.service';
 import { SupdocumentModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
 import { SupdocumentModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
-import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { ServerError } from '@models/errors/server-error.model';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
+import { FileModel } from '@models/file.model';
 
 @Injectable({
     providedIn: 'root'
@@ -79,10 +79,13 @@ export class SupDocumentsEffects {
         switchMap((action) => clientIdWithData(this.store, action.payload)),
         switchMap(({ clientId, data }) =>
           this.supDocumentsService.createSupdocument(clientId, data).pipe(
-            map((supdocument: SupDocument) => SupDocumentsActions.createSupdocumentSuccess(supdocument)),
+            map((supdocument) => SupDocumentsActions.createSupdocumentSuccess(supdocument)),
             catchError((error: ServerError) =>
               of(
-                SupDocumentsActions.createSupdocumentFailure(error.message)
+                SupDocumentsActions.createSupdocumentFailure(error.message),
+                NotifyActions.errorNotification({
+                  message: this.translateService.instant('create error'),
+                }),
               )
             )
           )
@@ -96,7 +99,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant('components.pay.correspondents.newCorrespondentAdded'),
+          message: this.translateService.instant(''),
         }),
       ])
     )
@@ -137,12 +140,49 @@ export class SupDocumentsEffects {
   );
 
 
-   // closeSupdocumentModal$ = createEffect(
-    //     () =>
-    //       this.actions$.pipe(
-    //         ofType(SupDocumentsActions.createSupdocumentSuccess),
-    //         tap(() => this.modalService.close(SupdocumentAddModalComponent))
-    //       ),
-    //     { dispatch: false }
-    //   );
+  downloadSupdocumentRequest$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(SupDocumentsActions.downloadSupdocumentRequest),
+    switchMap((action) => clientIdWithData(this.store, action.payload)),
+    switchMap(({ clientId, data: supdocumentId }) =>
+      this.supDocumentsService.downloadSupdocument(clientId, supdocumentId).pipe(
+        map((supdocumentBlob: FileModel) =>{
+            window.open(window.URL.createObjectURL(supdocumentBlob.blob as Blob));
+            return SupDocumentsActions.downloadSupdocumentSuccess(supdocumentBlob);
+        }
+        ),
+        catchError((error: ServerError) =>
+          of(
+            SupDocumentsActions.downloadSupdocumentFailure(error.message),
+            NotifyActions.errorNotification({
+              message: this.translateService.instant('components.supDocuments.errors.errorDownloadFile'),
+            })
+          )
+        )
+      )
+    )
+  )
+);
+
+// downloadSupdocumentSuccess$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(SupDocumentsActions.downloadSupdocumentSuccess),
+//   switchMap(() => [
+//     SupDocumentsActions.loadDocuments(),
+//     NotifyActions.errorNotification({
+//       message: this.translateService.instant('errors.downloadSupdocument'),
+//     }),
+//   ])
+// )
+// );
+
+
+   closeSupdocumentModal$ = createEffect(
+        () =>
+          this.actions$.pipe(
+            ofType(SupDocumentsActions.createSupdocumentSuccess),
+            tap(() => this.modalService.close(SupdocumentAddModalComponent))
+          ),
+        { dispatch: false }
+      );
 }

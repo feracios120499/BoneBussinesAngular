@@ -54,4 +54,14 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
       })
     );
   }
+
+  onSupdocumentDownload(): void {
+    this.store.dispatch(SupDocumentsActions.downloadSupdocumentRequest(this.supdocument.id));
+  }
+  onSupdocumentDetails(): void {
+
+  }
+  onSupdocumentSign(): void {
+
+  }
 }

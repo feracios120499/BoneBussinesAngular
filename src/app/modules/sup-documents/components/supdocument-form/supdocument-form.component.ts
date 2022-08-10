@@ -81,12 +81,7 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
         FileExt: event.target.files[0].name.split('.').pop(),
         FileSize: event.target.files[0].size,
         FileBody: base64 !== '' ? base64 : '',
-        Description: this.DescriptionControl.value,
-        Id: 0,
-        CreatingDate: '',
-        LastActiveDate: '',
-        Status: 'NEW',
-        EDRPO: ''
+        Description: this.DescriptionControl.value
       });
     });
   }
@@ -104,12 +99,6 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
       FileSize: this.FileSizeControl,
       FileBody: this.FileBodyControl,
       Description: this.DescriptionControl,
-      Id: this.IdControl,
-      CreatingDate: this.CreatingDateControl,
-      LastActiveDate: this.LastActiveDateControl,
-      Status: this.StatusControl,
-      EDRPO: this.EDRPOControl
-
     };
     this.formGroup = new FormGroup(controls);
   }

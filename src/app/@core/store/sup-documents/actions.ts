@@ -1,3 +1,4 @@
+import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { SupdocumentModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
@@ -37,7 +38,12 @@ export const [deleteSupdocumentRequest, deleteSupdocumentSuccess, deleteSupdocum
     string,
     void,
     string
-  >(`[${SUP_DOC_KEY}] delete correspondent`);
+  >(`[${SUP_DOC_KEY}] delete supdocument`);
 
 
+export const [downloadSupdocumentRequest, downloadSupdocumentSuccess, downloadSupdocumentFailure] = createHTTPActions<
+        string,
+        FileModel,
+        string
+>(`[${SUP_DOC_KEY}] download supdocument`);
 }
