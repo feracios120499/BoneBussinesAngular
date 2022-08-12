@@ -14,7 +14,7 @@ export namespace SupDocumentsActions {
     string
     >(`[${SUP_DOC_KEY}] load supdocuments`);
 
-    export const loadIfNotStoredCorrespondents = createAction(
+    export const loadIfNotStoredSupdocuments = createAction(
         `${[SUP_DOC_KEY]} load if not stored correspondents`
       );
 

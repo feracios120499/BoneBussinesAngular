@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SupDocument, UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
+import { UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { FilterService } from '@services/filter.service';
 
 @Pipe({

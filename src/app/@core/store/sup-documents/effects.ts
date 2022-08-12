@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { SupDocumentsService } from '@services/sup-documents/sup-documents.service';
 import { clientIdWithData, clientIdWithoudData } from '@store/shared';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { SupDocumentsActions } from './actions';
 import { SupdocumentAddModalComponent } from '@modules/sup-documents/components/supdocument-add-modal/supdocument-add-modal.component';
@@ -17,6 +17,8 @@ import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
 import { FileModel } from '@models/file.model';
 import { SharedActions } from '@store/shared/actions';
+import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { SupDocumentsSelectors } from './selectors';
 
 @Injectable({
     providedIn: 'root'
@@ -32,16 +34,25 @@ export class SupDocumentsEffects {
     loadDocuments$ = createEffect(() =>
         this.actions$.pipe(
             ofType(SupDocumentsActions.loadDocuments),
-            switchMap(_ => clientIdWithoudData(this.store)),
-            switchMap(clientId =>
+            switchMap(() => clientIdWithoudData(this.store)),
+            switchMap((clientId: string) =>
               this.supDocumentsService.getDocuments(clientId).pipe(
-                map(documents => SupDocumentsActions.loadDocumentsSuccess(documents)),
+                map((documents: SupDocument[]) => SupDocumentsActions.loadDocumentsSuccess(documents)),
                 catchError(error =>
                   of(SupDocumentsActions.loadDocumentsFailure(error.error.message))
                 ))
             )
         )
     );
+
+    loadIfNotStoredSupdocuments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.loadIfNotStoredSupdocuments),
+      withLatestFrom(this.store.select(SupDocumentsSelectors.documents)),
+      filter(([_, correspondents]) => !correspondents.length),
+      map(() => SupDocumentsActions.loadDocuments())
+    )
+  );
 
 
     showSupdocumentModal$ = createEffect(() =>

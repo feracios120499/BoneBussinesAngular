@@ -1,11 +1,11 @@
-<ng-container *ngrxLet="isLoading$ as isLoading">
-  <ng-container *ngrxLet="supdocuments$ as docs">
+<ng-container *ngrxLet="supdocuments$ as docs">
+  <ng-container *ngrxLet="isLoading$ as isLoading">
     <ng-container *ngIf="!isLoading && docs.length">
       <ng-container *ngIf="docs | supdocumentsFilter: (filterTerm$ | ngrxPush) as filteredSupdocuments">
         <ng-container *ngIf="filteredSupdocuments.length; else notFound">
             <div class="supdocuments-list">
               <app-supdocument-item 
-              *ngFor="let doc of docs; ngForTrackBy: trackId"
+              *ngFor="let doc of filteredSupdocuments; trackBy: trackId"
               [supdocument]="doc"
               [class.selected]="doc.selected"
               (click)="onSupdocumentSelect(doc)"
@@ -24,7 +24,6 @@
       </div>
     </ng-container>
 
-      <!-- TODO: CHANGE SVG-NAME -->
     <b1-empty
       *ngIf="!docs.length && !isLoading"
       svgName="empty-documents"

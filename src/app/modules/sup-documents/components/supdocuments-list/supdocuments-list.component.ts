@@ -14,17 +14,16 @@ import { Observable } from 'rxjs';
 })
 export class SupdocumentsListComponent implements OnInit {
   isLoading$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isInitialLoadingSupdocuments);
-  supdocuments$: Observable<UiSupDocumentListItem[]> = this.store.select(SupDocumentsSelectors.filteredSupdocuments);
+  supdocuments$: Observable<UiSupDocumentListItem[]> = this.store.select(SupDocumentsSelectors.documents);
   filterTerm$: Observable<string> = this.store.select(SupDocumentsSelectors.filterTerm);
 
   isSingleClick: Boolean = true;
 
   constructor(private store: Store<AppState>) {
-    this.store.dispatch(SupDocumentsActions.resetSupdocumentFilter());
-   }
+  }
 
   ngOnInit(): void {
-    this.store.dispatch(SupDocumentsActions.loadDocuments());
+    this.store.dispatch(SupDocumentsActions.resetSupdocumentFilter());
   }
   onSupdocumentAdd(): void {
     this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
