@@ -7,11 +7,13 @@ export const SUP_DOC_KEY = 'sup-doc';
 export interface SupDocumentsState {
     documents: SupDocument[],
     filterTerm: string,
-    loadings: SupdocumentsLoading[]
+    loadings: SupdocumentsLoading[],
+    selectedIds: string[];
 }
 
 export const supDocInitialState: SupDocumentsState = {
     documents: [],
     filterTerm: '',
-    loadings: []
+    loadings: [],
+    selectedIds: []
 };

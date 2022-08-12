@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { NotifyActions } from '@store/notify/actions';
+import { SharedActions } from '@store/shared/actions';
 import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-supdocuments-actions',
@@ -13,19 +17,22 @@ import { Observable } from 'rxjs';
 })
 export class SupdocumentsActionsComponent implements OnInit {
   isLoading$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoading);
-  supdocuments$: Observable<SupDocument[]> = this.store.select(SupDocumentsSelectors.documents);
+  supdocuments$: Observable<UiSupDocumentListItem[]> = this.store.select(SupDocumentsSelectors.documents);
   filterTerm$: Observable<string> = this.store.select(SupDocumentsSelectors.filterTerm);
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private translateService: TranslateService) { }
 
   onSupdocumentAdd(): void {
     this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
   }
 
-  onSupdocumentDelete(ids: string[]): void {
-    for (const id of ids) {
-      this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest(id));
-    }
+  onSupdocumentDelete(supdocuments: UiSupDocumentListItem[]): void {
+    this.executer(
+      supdocuments,
+      'shared.selectDocumentsBeforeRemove',
+      (selected) => this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest(selected)),
+      'components.supDocuments.areYouSureToDeleteSupDocuments'
+    );
   }
   onSupdocumentSend(): void {
     console.log('document sent');
@@ -35,5 +42,34 @@ export class SupdocumentsActionsComponent implements OnInit {
     this.store.dispatch(SupDocumentsActions.filterSupdocuments({ term }));
   }
   ngOnInit(): void {
+  }
+  private executer(
+    supdocuments: UiSupDocumentListItem[],
+    selectNotificationTranslate: string,
+    func: (selected: string[]) => void,
+    confirmTranslate?: string
+  ): void {
+    const selected = supdocuments.filter((s) => s.selected).map((s) => s.id);
+
+    if (selected.length === 0) {
+      this.store.dispatch(
+        NotifyActions.warningNotification({
+          message: this.translateService.instant(selectNotificationTranslate),
+        })
+      );
+    } else {
+      if (confirmTranslate) {
+        this.store.dispatch(
+          SharedActions.showConfirm({
+            config: {
+              text: this.translateService.instant(confirmTranslate).replace('{0}', selected.length),
+              callback: () => func(selected),
+            },
+          })
+        );
+      } else {
+        func(selected);
+      }
+    }
   }
 }

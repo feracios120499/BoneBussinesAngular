@@ -27,6 +27,8 @@ import { SupdocumentsFilterModule } from '@pipes/supdocuments-filter/supdocument
 import { SupdocumentAddModalComponent } from './components/supdocument-add-modal/supdocument-add-modal.component';
 import { SupdocumentFormComponent } from './components/supdocument-form/supdocument-form.component';
 import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
+import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module'
     FormsModule,
     ReactiveFormsModule,
     SupdocumentsFilterModule,
+    NgbModule,
     B1ContentWrapperModule,
     B1DropdownModule,
     B1ModalContainerModule,
@@ -60,6 +63,7 @@ import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module'
     B1MoreButtonModule,
     B1SkeletonModule,
     B1TextareaModule,
+    B1PageButtonModule,
     RouterModule.forChild([
       {
         path: '',

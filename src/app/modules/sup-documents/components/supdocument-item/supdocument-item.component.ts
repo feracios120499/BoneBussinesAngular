@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin';
-import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedActions } from '@store/shared/actions';
@@ -15,7 +15,14 @@ import { SupDocumentsActions } from '@store/sup-documents/actions';
   }
 })
 export class SupdocumentItemComponent extends withRequiredPropsCheck() implements OnInit {
-  @Input() supdocument!: SupDocument;
+  @Input() supdocument!: UiSupDocumentListItem;
+
+
+  getName(): string {
+    if (this.supdocument)
+    {return this.supdocument.fileName;};
+    return '';
+  }
 
   constructor(private store: Store, private translateService: TranslateService) {
     super();
@@ -46,8 +53,9 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: `${this.translateService.instant('components.supDocuments.areYouSureToDeleteSupDocuments')}`,
-          callback: () => this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest(this.supdocument.id)),
+          text: `${this.translateService.instant('components.supDocuments.areYouSureToDeleteSupDocuments').replace('{0}', 1)}`,
+          callback: () =>
+          this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest([this.supdocument.id])),
         },
       })
     );

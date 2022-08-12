@@ -10,3 +10,7 @@ export interface SupDocument {
     description?: string;
     status: SupDocumentStatus;
 }
+
+export interface UiSupDocumentListItem extends SupDocument {
+    selected: boolean;
+  }

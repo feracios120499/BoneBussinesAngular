@@ -33,18 +33,21 @@ export class SupDocumentsEffects {
         this.actions$.pipe(
             ofType(SupDocumentsActions.loadDocuments),
             switchMap(_ => clientIdWithoudData(this.store)),
-            switchMap(clientId => this.supDocumentsService.getDocuments(clientId).pipe(
+            switchMap(clientId =>
+              this.supDocumentsService.getDocuments(clientId).pipe(
                 map(documents => SupDocumentsActions.loadDocumentsSuccess(documents)),
-                catchError(error => of(SupDocumentsActions.loadDocumentsFailure(error.error.message))
+                catchError(error =>
+                  of(SupDocumentsActions.loadDocumentsFailure(error.error.message))
                 ))
             )
         )
     );
 
+
     showSupdocumentModal$ = createEffect(() =>
     this.actions$.pipe(
         ofType(SupDocumentsActions.showSupdocumentModal),
-        map(({}) => {
+        map(() => {
           const config: SupdocumentModalConfig = {
             callback: (result: SupdocumentModalResult) => {
                 this.store.dispatch(SupDocumentsActions.createSupdocumentRequest(result));
@@ -100,7 +103,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant(''),
+          message: this.translateService.instant('create success'),
         }),
       ])
     )
@@ -111,8 +114,8 @@ export class SupDocumentsEffects {
     this.actions$.pipe(
       ofType(SupDocumentsActions.deleteSupdocumentRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
-      switchMap(({ clientId, data: supdocumentId }) =>
-        this.supDocumentsService.deleteSupdocument(clientId, supdocumentId).pipe(
+      switchMap((payload ) =>
+        this.supDocumentsService.deleteSupdocument(payload.clientId, payload.data).pipe(
           map(() => SupDocumentsActions.deleteSupdocumentSuccess()),
           catchError((error: ServerError) =>
             of(
@@ -134,7 +137,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant(''),
+          message: this.translateService.instant('delete success'),
         }),
       ])
     )

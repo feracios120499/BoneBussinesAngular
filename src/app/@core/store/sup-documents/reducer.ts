@@ -1,21 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
-import { pushIfNotExist, removeItem } from '@store/shared';
+import { isAnyExist, pushIfNotExist, removeItem } from '@store/shared';
 import { SupDocumentsActions } from './actions';
 import { supDocInitialState } from './store';
 
 export const supDocReducer = createReducer(
     supDocInitialState,
+    on(SupDocumentsActions.loadDocuments,
+      (state) => ({ ...state, loadings: [...pushIfNotExist(state.loadings, 'list')] })
+    ),
+    on(SupDocumentsActions.loadDocumentsSuccess, SupDocumentsActions.loadDocumentsFailure, (state) => ({
+      ...state,
+      loadings: [...removeItem(state.loadings, 'list')],
+      selectedIds: []
+    })),
     on(
         SupDocumentsActions.loadDocumentsSuccess,
-        (state, action) => ({ ...state, documents: action.payload })
+        (state, action) => ({ ...state, documents: action.payload, selectedIds: [] })
     ),
     on(
         SupDocumentsActions.filterSupdocuments,
-        (state, action) => ({ ...state, filterTerm: action.term })
+        (state, action) => ({ ...state, filterTerm: action.term, selectedIds: [] })
     ),
     on(
         SupDocumentsActions.resetSupdocumentFilter,
-        (state) => ({ ...state, filterTerm: '' })
+        (state) => ({ ...state, filterTerm: '', selectedIds: [] })
     ),
     on(
         SupDocumentsActions.createSupdocumentRequest,
@@ -28,7 +36,14 @@ export const supDocReducer = createReducer(
         ...state,
         loadings: [...removeItem(state.loadings, 'create')],
       })
-    )
+    ),
+    on(SupDocumentsActions.selectSupdocument, (state, action) => ({
+      ...state,
+      selectedIds: isAnyExist(state.selectedIds, action.supdocument.id)
+        ? removeItem(state.selectedIds, action.supdocument.id)
+        : pushIfNotExist(state.selectedIds, action.supdocument.id),
+    })),
+
 
 );
 

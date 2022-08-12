@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { SupDocument, UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { FilterService } from '@services/filter.service';
 
 @Pipe({
@@ -10,11 +10,11 @@ export class SupdocumentsFilterPipe implements PipeTransform {
 
 
   }
-  transform(supdocuments: SupDocument[], terms: string = ''): SupDocument[] {
+  transform(supdocuments: UiSupDocumentListItem[], terms: string = ''): UiSupDocumentListItem[] {
     if (!terms) {
       return supdocuments;
     }
-    return supdocuments.filter((supdocument: SupDocument) =>
+    return supdocuments.filter((supdocument: UiSupDocumentListItem) =>
       this.getUpperCasedTerms(terms).every((term: string) =>
         Object.entries(supdocument)
           .reduce((accum: string) => {

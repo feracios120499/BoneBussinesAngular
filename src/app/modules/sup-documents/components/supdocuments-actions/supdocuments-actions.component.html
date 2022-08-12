@@ -2,23 +2,38 @@
     <div class="b1-page-actions__left">
       <div class="b1-page-icons" style="margin-left: 0">
         <ng-container *ngrxLet="supdocuments$ as docs">
-            <b1-button
-            *ngIf="docs.length"
-            label="components.supDocuments.actions.add"
-            icon="plus"
-            mobileView="round"
-            (click)="onSupdocumentAdd()"
-            [isDisabled]="isLoading$ | ngrxPush">
-          </b1-button>
 
-          <button type="button" class="b1-page-icon" 
-          (click)="onSupdocumentDelete(['as'])">
-            <i b1-icon icon="delete"></i>
-          </button>
+          <div class="b1-page-buttons">
+              <b1-button
+              class="b1-mr-4 b1-ml-4"
+              *ngIf="docs.length"
+              label="components.supDocuments.actions.add"
+              icon="plus"
+              mobileView="round"
+              (click)="onSupdocumentAdd()"
+              [isDisabled]="isLoading$ | ngrxPush">
+            </b1-button>
+  
+  
+            <b1-page-button  
+              (click)="onSupdocumentDelete(docs)"
+              label="components.supDocuments.actions.delete"
+              icon="delete">
+            </b1-page-button>
+  
 
-          <button type="button" class="b1-page-icon" (click)="onSupdocumentSend()">
-            <i b1-icon icon="send" ></i>
-          </button>
+            
+
+            <b1-page-button (click)="onSupdocumentSend()"
+            label="components.supDocuments.actions.sendToBank"
+            icon="send">
+            </b1-page-button>
+  
+
+
+          </div>
+
+
 
         </ng-container>
       </div>

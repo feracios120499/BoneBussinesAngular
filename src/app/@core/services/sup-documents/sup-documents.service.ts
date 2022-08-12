@@ -4,9 +4,10 @@ import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { BaseService } from '@services/base.service';
-import { extend, merge } from 'lodash';
+import { merge } from 'lodash';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 
 @Injectable({
     providedIn: 'root'
@@ -36,29 +37,33 @@ export class SupDocumentsService extends BaseService {
         };
 
         const disposition = res.headers.get('Content-Disposition');
+        console.log('disposition', disposition);
         if (!disposition) {
-          // either the disposition was not sent, or is not accessible
-          //  (see CORS Access-Control-Expose-Headers)
           return file;
         }
         const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; |$)/;
         const asciiFilenameRegex = /filename=(["'])(.*?[^\\])\1(?:; |$)/;
 
-        let fileName = '';
-        if (utf8FilenameRegex.test(disposition)) {
-          const exec = utf8FilenameRegex.exec(disposition);
-          if (exec) {
-            fileName = decodeURIComponent(exec[1]);
-          } else {
-            return file;
-          }
-        } else {
-          const matches = asciiFilenameRegex.exec(disposition);
-          if (matches != null && matches[2]) {
-            fileName = matches[2];
-          }
-        }
+        const fileName = '';
+        // if (utf8FilenameRegex.test(disposition)) {
+        //   const exec = utf8FilenameRegex.exec(disposition);
+        //   console.log('exec', exec);
+        //   if (exec) {
+        //     fileName = decodeURIComponent(exec[1]);
+        //   } else {
+        //     return file;
+        //   }
+        // } else {
+        //   const matches = asciiFilenameRegex.exec(disposition);
+        //   console.log('matches', matches);
+        //   if (matches != null && matches[2]) {
+        //     fileName = matches[2];
+        //   }
+        // }
         file.name = fileName;
+
+        file.name = disposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+        console.log(file.name as string);
         return file;
       }
 
@@ -70,13 +75,14 @@ export class SupDocumentsService extends BaseService {
     getSignedDocuments(clientId: string): Observable<SupDocument[]> {
         return this.http.get<SupDocument[]>(`api/v1/supdocuments/${clientId}?$filter=Status eq 'SIGNED'`);
     }
+
     createSupdocument(clientId: string, data: SupdocumentForm): Observable<SupDocument> {
         console.log('service post called');
         return this.http.post<SupDocument>(`api/v1/supdocuments/${clientId}`, merge(true, this._SupportDocumentModel, data));
     }
 
-    deleteSupdocument(clientId: string, supdocumentId: string): Observable<any> {
-        return this.http.delete<any>(`api/v1/supdocuments/${supdocumentId}/${clientId}`);
+    deleteSupdocument(clientId: string, supdocumentId: string[]): Observable<any> {
+            return this.http.post<any>(`api/v1/supdocuments/delete/${clientId}`, supdocumentId);
     }
 
     downloadSupdocument(clientId: string, supdocumentId: string): Observable<FileModel> {
@@ -86,7 +92,7 @@ export class SupDocumentsService extends BaseService {
         )
         .pipe(
             map((response) => this.mapFile(response)),
-            map((result) => ({ ...result, name: result.name || `supdocument.PDF` }))
+            map((result) => ({ ...result, name: result.name as string || `supdocument.PDF` }))
           );
     ;
     }

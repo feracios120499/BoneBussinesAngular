@@ -1,4 +1,9 @@
+import { DatePipe } from '@angular/common';
+import { UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { SupdocumentsFilterPipe } from '@pipes/supdocuments-filter/supdocuments-filter.pipe';
+import { FilterService } from '@services/filter.service';
+import { isAnyExist } from '@store/shared';
 import { SupDocumentsState, SUP_DOC_KEY } from './store';
 
 export namespace SupDocumentsSelectors {
@@ -6,7 +11,13 @@ export namespace SupDocumentsSelectors {
     export const supDocState = createFeatureSelector<SupDocumentsState>(SUP_DOC_KEY);
     export const documents = createSelector(
         supDocState,
-        (state) => state.documents
+        (state) => state.documents.map((supdocument) => {
+            const uiSupdocument: UiSupDocumentListItem={
+                ...supdocument,
+                selected: isAnyExist(state.selectedIds, supdocument.id),
+            };
+            return uiSupdocument;
+        })
     );
 
     export const signedDocuments = createSelector(
@@ -29,9 +40,16 @@ export namespace SupDocumentsSelectors {
     export const isLoadingSupdocumentsCreate = createSelector(
         supDocState,
         (state) => state.loadings.includes('create')
-  );
+    );
     export const filterTerm = createSelector(
         supDocState,
-        (state) => state.filterTerm);
+        (state) => state.filterTerm
+    );
+    export const filteredSupdocuments = createSelector(documents, supDocState, (uiSupdocuments, state) => {
+        const supdocumentFilter = new SupdocumentsFilterPipe(new FilterService(new DatePipe(window.navigator.language)));
+
+        return supdocumentFilter.transform(uiSupdocuments, state.filterTerm);
+      });
+
 
 }

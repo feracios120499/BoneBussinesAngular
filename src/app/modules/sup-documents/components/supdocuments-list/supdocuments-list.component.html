@@ -5,8 +5,11 @@
         <ng-container *ngIf="filteredSupdocuments.length; else notFound">
             <div class="supdocuments-list">
               <app-supdocument-item 
-              *ngFor="let doc of filteredSupdocuments" 
-              [supdocument]="doc"> 
+              *ngFor="let doc of docs; ngForTrackBy: trackId"
+              [supdocument]="doc"
+              [class.selected]="doc.selected"
+              (click)="onSupdocumentSelect(doc)"
+              (dblclick)="onSupdocumentDetails(doc)"> 
             </app-supdocument-item>
             </div>
         </ng-container>

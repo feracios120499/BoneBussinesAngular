@@ -14,6 +14,11 @@ export namespace SupDocumentsActions {
     string
     >(`[${SUP_DOC_KEY}] load supdocuments`);
 
+    export const loadIfNotStoredCorrespondents = createAction(
+        `${[SUP_DOC_KEY]} load if not stored correspondents`
+      );
+
+
     export const filterSupdocuments = createAction(
         `[${SUP_DOC_KEY}] filter supdocuments`,
         props<{ term: string }>()
@@ -35,7 +40,7 @@ export namespace SupDocumentsActions {
 >(`[${SUP_DOC_KEY}] create supdocument`);
 
 export const [deleteSupdocumentRequest, deleteSupdocumentSuccess, deleteSupdocumentFailure] = createHTTPActions<
-    string,
+    string[],
     void,
     string
   >(`[${SUP_DOC_KEY}] delete supdocument`);
@@ -46,4 +51,7 @@ export const [downloadSupdocumentRequest, downloadSupdocumentSuccess, downloadSu
         FileModel,
         string
 >(`[${SUP_DOC_KEY}] download supdocument`);
+
+export const selectSupdocument = createAction(`[${SUP_DOC_KEY}] select supdocument`, props<{ supdocument: SupDocument }>());
+
 }
