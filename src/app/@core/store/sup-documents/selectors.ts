@@ -45,6 +45,10 @@ export namespace SupDocumentsSelectors {
         supDocState,
         (state) => state.loadings.includes('create')
     );
+    export const isLoadingRecipients = createSelector(
+        supDocState,
+        (state) => !state.loadingRecipients
+    );
     export const filterTerm = createSelector(
         supDocState,
         (state) => state.filterTerm

@@ -40,6 +40,7 @@
     "deepmerge": "^4.2.2",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
+    "ng-multiselect-dropdown": "^0.3.8",
     "ng-otp-input": "^1.7.1",
     "ngrx-forms": "^6.3.5",
     "ngrx-store-localstorage": "^11.0.0",

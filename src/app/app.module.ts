@@ -38,6 +38,9 @@ import { AngularDateHttpInterceptor } from '@core/interceptors/date.interceptor'
 import { ServerErrorInteceptor } from '@core/interceptors/server-error.interceptor';
 import { CustomToastModule } from '@ui/custom-toast/custom-toast.module';
 
+import { MatSelectModule } from '@angular/material/select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +57,8 @@ import { CustomToastModule } from '@ui/custom-toast/custom-toast.module';
     BrowserModule,
     HttpClientModule,
     ReactiveComponentModule,
+    MatSelectModule,
+    NgMultiSelectDropDownModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

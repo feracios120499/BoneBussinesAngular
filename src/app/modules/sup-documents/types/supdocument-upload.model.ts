@@ -1,8 +1,8 @@
 
 export interface Recipient {
-    Id: number,
-    Email: string,
-    Name: string
+    id: number,
+    email: string,
+    name: string
 }
 
 export interface SupDocumentUploadModel {

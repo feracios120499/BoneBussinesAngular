@@ -15,7 +15,7 @@ export const supDocReducer = createReducer(
     })),
     on(
       SupDocumentsActions.loadRecipientsRequest,
-      (state) => ({ ...state })
+      (state) => ({ ...state, loadingRecipients: true })
     ),
     on(
         SupDocumentsActions.loadDocumentsSuccess,
@@ -23,7 +23,7 @@ export const supDocReducer = createReducer(
     ),
     on(
       SupDocumentsActions.loadRecipientsSuccess,
-      (state, action) => ({ ...state, recipients: action.payload })
+      (state, action) => ({ ...state, loadingRecipients: false, recipients: action.payload })
     ),
     on(
         SupDocumentsActions.filterSupdocuments,

@@ -6,12 +6,11 @@ import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 import { Store } from '@ngrx/store';
-import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
-
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 const { required, maxLength } = Validators;
 
 
@@ -24,10 +23,17 @@ const { required, maxLength } = Validators;
 
 })
 export class SupdocumentFormSendComponent extends BaseSubFormComponent implements OnInit {
+  dropdownSettings: IDropdownSettings = {};
+
+  onItemSelect(item: any): void {
+    console.log(item);
+  }
+
+
   formGroup!: FormGroup;
 
-  selected$: Observable<string[]> = this.store.select(SupDocumentsSelectors.selectedIds)
   recipients$: Observable<Recipient[]> = this.store.select(SupDocumentsSelectors.recipients)
+  isLoadingRecipients$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingRecipients)
 
   @ViewChild('formRef') formRef!: NgForm;
 
@@ -35,7 +41,7 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   MessageControl = new FormControl('', [maxLength(this.messageMaxLength)]);
 
   recipientsMaxLength = 3;
-  RecipientsControl = new FormControl({ value: [], disabled: true }, [required, maxLength(this.recipientsMaxLength)]);
+  RecipientsControl = new FormControl({ value: [], disabled: false }, [required, maxLength(this.recipientsMaxLength)]);
 
   constructor(private store: Store) {
     super();
@@ -44,6 +50,15 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   ngOnInit(): void {
     super.ngOnInit();
     this.initForm();
+
+    this.dropdownSettings = {
+      allowSearchFilter: false,
+      singleSelection: false,
+      limitSelection: 3,
+      idField: 'id',
+      textField: 'email',
+      maxHeight: 150
+    };
   }
 
   private initForm(): void {

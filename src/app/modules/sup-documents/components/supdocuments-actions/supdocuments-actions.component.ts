@@ -62,24 +62,6 @@ export class SupdocumentsActionsComponent implements OnInit {
         })
       );
     }
-    // else if (checkSigned) {
-    //   const selected2 = supdocuments.filter((s) => s.selected);
-    //   let ifSigned: boolean = true;
-    //   for (const s of selected2) {
-    //     if (s.status != 'SIGNED') {
-    //       console.log(s.status);
-    //       ifSigned = false;
-    //       break;
-    //     }
-    //   }
-    //   if (!ifSigned) {
-    //     this.store.dispatch(
-    //       NotifyActions.warningNotification({
-    //         message: this.translateService.instant(selectNotificationTranslate),
-    //       })
-    //     );
-    //   }
-    // }
     else {
       if (confirmTranslate) {
         this.store.dispatch(
@@ -124,14 +106,14 @@ export class SupdocumentsActionsComponent implements OnInit {
         if (!ifSigned) {
           this.store.dispatch(
             NotifyActions.warningNotification({
-              message: this.translateService.instant(selectNotificationTranslate),
+              message: this.translateService.instant('components.supDocuments.documentIsNotSigned'),
             })
           );
         }
         else if (selected.length > 3) {
           this.store.dispatch(
             NotifyActions.warningNotification({
-              message: this.translateService.instant(selectNotificationTranslate),
+              message: this.translateService.instant('components.supDocuments.limitSupDocsSelect').replace('{0}', 3),
             })
           );
       }

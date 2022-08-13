@@ -9,14 +9,20 @@ export interface SupDocumentsState {
     documents: SupDocument[],
     filterTerm: string,
     loadings: SupdocumentsLoading[],
+
     selectedIds: string[];
-    recipients: Recipient[]
+
+    recipients: Recipient[],
+    loadingRecipients: boolean
 }
 
 export const supDocInitialState: SupDocumentsState = {
     documents: [],
     filterTerm: '',
     loadings: [],
+
     selectedIds: [],
-    recipients: []
+
+    recipients: [],
+    loadingRecipients: false
 };
