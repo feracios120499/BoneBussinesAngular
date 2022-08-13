@@ -1,4 +1,4 @@
-import { SupDocumentUploadModel } from './supdocument-upload.model';
+import { SupDocumentSendToBankModel, SupDocumentUploadModel } from './supdocument-upload.model';
 
 export interface SupdocumentForm
   extends Pick<
@@ -9,3 +9,11 @@ export interface SupdocumentForm
     | 'FileBody'
     | 'Description'
   > {}
+
+
+  export interface SupdocumentSendForm extends Pick<
+    SupDocumentSendToBankModel,
+    | 'Ids'
+    | 'Recipients'
+    | 'Message'
+  >{}

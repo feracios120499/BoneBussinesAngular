@@ -29,6 +29,8 @@ import { SupdocumentFormComponent } from './components/supdocument-form/supdocum
 import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
 import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SupdocumentSendModalComponent } from './components/supdocument-send-modal/supdocument-send-modal.component';
+import { SupdocumentFormSendComponent } from './components/supdocument-form-send/supdocument-form-send.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SupdocumentsActionsComponent,
     SupdocumentItemComponent,
     SupdocumentAddModalComponent,
-    SupdocumentFormComponent
+    SupdocumentFormComponent,
+    SupdocumentSendModalComponent,
+    SupdocumentFormSendComponent
   ],
   imports: [
     CommonModule,

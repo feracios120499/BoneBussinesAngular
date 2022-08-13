@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
-import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
+import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { BaseService } from '@services/base.service';
 import { merge } from 'lodash';
 import { Observable } from 'rxjs';
@@ -83,6 +83,10 @@ export class SupDocumentsService extends BaseService {
 
     deleteSupdocument(clientId: string, supdocumentId: string[]): Observable<any> {
             return this.http.post<any>(`api/v1/supdocuments/delete/${clientId}`, supdocumentId);
+    }
+    sendToBank(clientId: string, data: SupdocumentSendForm): Observable<any> {
+        console.log('service send called');
+        return this.http.post<any>(`api/v1/supdocuments/tobank/${clientId}`, data);
     }
 
     downloadSupdocument(clientId: string, supdocumentId: string): Observable<FileModel> {

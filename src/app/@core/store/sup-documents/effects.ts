@@ -10,8 +10,6 @@ import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/op
 import { SupDocumentsActions } from './actions';
 import { SupdocumentAddModalComponent } from '@modules/sup-documents/components/supdocument-add-modal/supdocument-add-modal.component';
 import { ModalService } from '@services/modal.service';
-import { SupdocumentModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
-import { SupdocumentModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { ServerError } from '@models/errors/server-error.model';
 import { NotifyActions } from '@store/notify/actions';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,6 +17,9 @@ import { FileModel } from '@models/file.model';
 import { SharedActions } from '@store/shared/actions';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupDocumentsSelectors } from './selectors';
+import { SupdocumentModalConfig, SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
+import { SupdocumentModalResult, SupdocumentSendModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
+import { SupdocumentSendModalComponent } from '@modules/sup-documents/components/supdocument-send-modal/supdocument-send-modal.component';
 
 @Injectable({
     providedIn: 'root'
@@ -76,17 +77,37 @@ export class SupDocumentsEffects {
             map(({ config }) => {
               const modalRef = this.modalService.open(SupdocumentAddModalComponent);
               modalRef.componentInstance.config = config;
-              // return modalRef;
             })
-            // mergeMap((modalRef: NgbModalRef) =>
-            //   this.actions$.pipe(
-            //     ofType(CorrespondentsActions.createCorrespondentSuccess, CorrespondentsActions.updateCorrespondentSuccess),
-            //     tap(() => modalRef.close())
-            //   )
-            // )
           ),
         { dispatch: false }
-      );
+    );
+
+    showSupdocumentSendModal$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(SupDocumentsActions.showSupdocumentSendModal),
+        map(() => {
+          const config: SupdocumentSendModalConfig = {
+            callback: (result: SupdocumentSendModalResult) => {
+                this.store.dispatch(SupDocumentsActions.sendSupdocumentRequest(result));
+            },
+          };
+          return SupDocumentsActions.setSupdocumentSendModal({ config });
+        })
+      )
+    );
+
+    setSupdocumentSendModal$ = createEffect(
+      () =>
+        this.actions$.pipe(
+          ofType(SupDocumentsActions.setSupdocumentSendModal),
+          map(({ config }) => {
+            const modalRef = this.modalService.open(SupdocumentSendModalComponent);
+            modalRef.componentInstance.config = config;
+          })
+        ),
+      { dispatch: false }
+  );
+
 
       createSupdocumentRequest$ = createEffect(() =>
       this.actions$.pipe(
@@ -119,6 +140,38 @@ export class SupDocumentsEffects {
       ])
     )
   );
+
+  sendSupdocumentRequest$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(SupDocumentsActions.sendSupdocumentRequest),
+    switchMap((action) => clientIdWithData(this.store, action.payload)),
+    switchMap(({ clientId, data }) =>
+      this.supDocumentsService.sendToBank(clientId, data).pipe(
+        map((response) => SupDocumentsActions.sendSupdocumentSuccess(response)),
+        catchError((error: ServerError) =>
+          of(
+            SupDocumentsActions.sendSupdocumentFailure(error.message),
+            NotifyActions.errorNotification({
+              message: this.translateService.instant('send error'),
+            }),
+          )
+        )
+      )
+    )
+  )
+);
+
+sendSupdocumentSuccess$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(SupDocumentsActions.sendSupdocumentSuccess),
+  switchMap(() => [
+    // SupDocumentsActions.loadDocuments(),
+    NotifyActions.successNotification({
+      message: this.translateService.instant('send success'),
+    }),
+  ])
+)
+);
 
 
     deleteSupdocumentRequest$ = createEffect(() =>
@@ -187,12 +240,21 @@ this.actions$.pipe(
 );
 
 
-   closeSupdocumentModal$ = createEffect(
-        () =>
-          this.actions$.pipe(
-            ofType(SupDocumentsActions.createSupdocumentSuccess),
-            tap(() => this.modalService.close(SupdocumentAddModalComponent))
-          ),
-        { dispatch: false }
-      );
+  closeSupdocumentModal$ = createEffect(
+      () =>
+        this.actions$.pipe(
+          ofType(SupDocumentsActions.createSupdocumentSuccess),
+          tap(() => this.modalService.close(SupdocumentAddModalComponent))
+        ),
+      { dispatch: false }
+    );
+
+  closeSupdocumentSendModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SupDocumentsActions.sendSupdocumentSuccess),
+        tap(() => this.modalService.close(SupdocumentSendModalComponent))
+      ),
+    { dispatch: false }
+  );
 }

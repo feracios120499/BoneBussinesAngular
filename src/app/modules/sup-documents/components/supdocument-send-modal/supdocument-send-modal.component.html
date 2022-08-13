@@ -1,0 +1,19 @@
+<b1-modal-container [isLoading$]="isLoading$" style="width: 1000px;">
+  <ng-container slot="header">
+    {{'components.supDocuments.sendToBankMail' | translate}}
+  </ng-container>
+
+  <ng-container slot="body" >
+    <app-supdocument-form-send [isLoading$]="isLoading$" [(ngModel)]="supdocumentSendForm" #formRef>
+    </app-supdocument-form-send>
+  </ng-container>
+  
+    <b1-button
+      slot="footer"
+      label="components.auth.Send"
+      icon="send"
+      [isDisabled]="!formRef?.isChanged || !formRef?.isValid || (isLoading$ | ngrxPush)"
+      (btnClick)="onSend()">
+    </b1-button>
+
+</b1-modal-container>

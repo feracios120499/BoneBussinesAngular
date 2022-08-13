@@ -1,0 +1,20 @@
+<ng-container select="body">
+    <div>
+      <form [formGroup]="formGroup" #formRef="ngForm">
+      
+        <!-- <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate: {size: this.maxFileSize} }} </div> -->
+        
+     
+      
+          <fieldset class="b1-mt-6">
+            <legend class="b1-large b1-mb-4">
+              {{ 'components.supDocuments.details.description' | translate }}
+            </legend>
+            <b1-textarea mobileClass="b1-mt-3" [maxLength]="messageMaxLength" [formControl]="MessageControl">
+            </b1-textarea>
+          </fieldset>
+      
+        </form>
+    </div>
+</ng-container>
+  

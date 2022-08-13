@@ -34,8 +34,12 @@ export class SupdocumentsActionsComponent implements OnInit {
       'components.supDocuments.areYouSureToDeleteSupDocuments'
     );
   }
-  onSupdocumentSend(): void {
-    console.log('document sent');
+  onSupdocumentSend(supdocuments: UiSupDocumentListItem[]): void {
+    this.executerSend(
+      supdocuments,
+      'shared.selectDocumentsBeforeSendToBank',
+      () => this.store.dispatch(SupDocumentsActions.showSupdocumentSendModal())
+    );
   }
 
   onSupdocumentsFilter(term: string): void {
@@ -47,7 +51,7 @@ export class SupdocumentsActionsComponent implements OnInit {
     supdocuments: UiSupDocumentListItem[],
     selectNotificationTranslate: string,
     func: (selected: string[]) => void,
-    confirmTranslate?: string
+    confirmTranslate?: string,
   ): void {
     const selected = supdocuments.filter((s) => s.selected).map((s) => s.id);
 
@@ -57,7 +61,26 @@ export class SupdocumentsActionsComponent implements OnInit {
           message: this.translateService.instant(selectNotificationTranslate),
         })
       );
-    } else {
+    }
+    // else if (checkSigned) {
+    //   const selected2 = supdocuments.filter((s) => s.selected);
+    //   let ifSigned: boolean = true;
+    //   for (const s of selected2) {
+    //     if (s.status != 'SIGNED') {
+    //       console.log(s.status);
+    //       ifSigned = false;
+    //       break;
+    //     }
+    //   }
+    //   if (!ifSigned) {
+    //     this.store.dispatch(
+    //       NotifyActions.warningNotification({
+    //         message: this.translateService.instant(selectNotificationTranslate),
+    //       })
+    //     );
+    //   }
+    // }
+    else {
       if (confirmTranslate) {
         this.store.dispatch(
           SharedActions.showConfirm({
@@ -72,4 +95,44 @@ export class SupdocumentsActionsComponent implements OnInit {
       }
     }
   }
-}
+
+  private executerSend(
+    supdocuments: UiSupDocumentListItem[],
+    selectNotificationTranslate: string,
+    func: (selectedIds: string[]) => void,
+  ): void {
+    const selectedIds = supdocuments.filter((s) => s.selected).map((s) => s.id);
+    const selected = supdocuments.filter((s) => s.selected);
+    let ifSigned: boolean = true;
+
+    for (const s of selected) {
+      if (s.status != 'SIGNED') {
+        console.log(s.status);
+        ifSigned = false;
+        break;
+      }
+    }
+
+    if (selectedIds.length === 0) {
+      this.store.dispatch(
+        NotifyActions.warningNotification({
+          message: this.translateService.instant(selectNotificationTranslate),
+        })
+      );
+    }
+    else {
+        if (!ifSigned) {
+          this.store.dispatch(
+            NotifyActions.warningNotification({
+              message: this.translateService.instant(selectNotificationTranslate),
+            })
+          );
+      }
+      else {
+          func(selectedIds);
+        }
+      }
+    }
+  }
+
+

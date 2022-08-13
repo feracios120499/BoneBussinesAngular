@@ -49,7 +49,12 @@ export namespace SupDocumentsSelectors {
         const supdocumentFilter = new SupdocumentsFilterPipe(new FilterService(new DatePipe(window.navigator.language)));
 
         return supdocumentFilter.transform(uiSupdocuments, state.filterTerm);
-      });
+    });
+
+    export const selectedIds = createSelector(
+        supDocState,
+        (state) => state.selectedIds
+    );
 
 
 }

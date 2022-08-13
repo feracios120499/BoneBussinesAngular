@@ -1,7 +1,7 @@
 import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
-import { SupdocumentForm } from '@modules/sup-documents/types/supdocument-form.model';
-import { SupdocumentModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
+import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
+import { SupdocumentModalConfig, SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { SUP_DOC_KEY } from './store';
@@ -30,9 +30,20 @@ export namespace SupDocumentsActions {
         `[${SUP_DOC_KEY}] open supdocument creation modal`
     );
     export const setSupdocumentModal = createAction(
-        `[${SUP_DOC_KEY}] set modal`,
+        `[${SUP_DOC_KEY}] set creation modal`,
         props<{ config: SupdocumentModalConfig }>()
-      );
+    );
+
+    export const showSupdocumentSendModal = createAction(
+      `[${SUP_DOC_KEY}] open supdocument send modal`
+      // props<{selected: string[]}>()
+    );
+    export const setSupdocumentSendModal = createAction(
+      `[${SUP_DOC_KEY}] set send modal`,
+      props<{ config: SupdocumentSendModalConfig }>()
+    );
+
+
     export const [createSupdocumentRequest, createSupdocumentSuccess, createSupdocumentFailure] = createHTTPActions<
     SupdocumentForm,
     SupDocument,
@@ -51,6 +62,13 @@ export const [downloadSupdocumentRequest, downloadSupdocumentSuccess, downloadSu
         FileModel,
         string
 >(`[${SUP_DOC_KEY}] download supdocument`);
+
+export const [sendSupdocumentRequest, sendSupdocumentSuccess, sendSupdocumentFailure] = createHTTPActions<
+        SupdocumentSendForm,
+        void,
+        string
+>(`[${SUP_DOC_KEY}] send supdocument`);
+
 
 export const selectSupdocument = createAction(`[${SUP_DOC_KEY}] select supdocument`, props<{ supdocument: SupDocument }>());
 
