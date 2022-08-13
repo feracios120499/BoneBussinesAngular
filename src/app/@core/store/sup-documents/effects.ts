@@ -20,6 +20,7 @@ import { SupDocumentsSelectors } from './selectors';
 import { SupdocumentModalConfig, SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
 import { SupdocumentModalResult, SupdocumentSendModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { SupdocumentSendModalComponent } from '@modules/sup-documents/components/supdocument-send-modal/supdocument-send-modal.component';
+import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,7 @@ export class SupDocumentsEffects {
         )
     );
 
+
     loadIfNotStoredSupdocuments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.loadIfNotStoredSupdocuments),
@@ -54,6 +56,20 @@ export class SupDocumentsEffects {
       map(() => SupDocumentsActions.loadDocuments())
     )
   );
+
+  loadRecipientsRequest$ = createEffect(() =>
+  this.actions$.pipe(
+      ofType(SupDocumentsActions.loadRecipientsRequest),
+      switchMap(() => clientIdWithoudData(this.store)),
+      switchMap((clientId: string) =>
+        this.supDocumentsService.getRecipients(clientId).pipe(
+          map((documents: Recipient[]) => SupDocumentsActions.loadRecipientsSuccess(documents)),
+          catchError(error =>
+            of(SupDocumentsActions.loadRecipientsFailure(error.error.message))
+          ))
+      )
+  )
+);
 
 
     showSupdocumentModal$ = createEffect(() =>

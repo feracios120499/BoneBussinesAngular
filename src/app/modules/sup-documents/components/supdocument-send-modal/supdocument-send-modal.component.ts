@@ -4,6 +4,7 @@ import { SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-fo
 import { SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
 import { SupdocumentSendModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { Store } from '@ngrx/store';
+import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
 import { Observable } from 'rxjs';
 import { SupdocumentFormSendComponent } from '../supdocument-form-send/supdocument-form-send.component';
@@ -29,6 +30,7 @@ export class SupdocumentSendModalComponent extends BaseB1ModalComponent<Supdocum
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.store.dispatch(SupDocumentsActions.loadRecipientsRequest());
   }
 
   onSend(): void {

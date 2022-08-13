@@ -127,6 +127,13 @@ export class SupdocumentsActionsComponent implements OnInit {
               message: this.translateService.instant(selectNotificationTranslate),
             })
           );
+        }
+        else if (selected.length > 3) {
+          this.store.dispatch(
+            NotifyActions.warningNotification({
+              message: this.translateService.instant(selectNotificationTranslate),
+            })
+          );
       }
       else {
           func(selectedIds);

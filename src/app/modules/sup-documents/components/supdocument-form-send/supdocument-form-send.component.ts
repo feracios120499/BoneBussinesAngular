@@ -4,7 +4,9 @@ import { ModelControl } from '@b1-types/model-controls.type';
 import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
 import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
+import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 import { Store } from '@ngrx/store';
+import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -25,13 +27,15 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   formGroup!: FormGroup;
 
   selected$: Observable<string[]> = this.store.select(SupDocumentsSelectors.selectedIds)
+  recipients$: Observable<Recipient[]> = this.store.select(SupDocumentsSelectors.recipients)
+
   @ViewChild('formRef') formRef!: NgForm;
 
   messageMaxLength = 100;
   MessageControl = new FormControl('', [maxLength(this.messageMaxLength)]);
 
   recipientsMaxLength = 3;
-  RecipientsControl = new FormControl({ value: [], disabled: true }, [maxLength(this.recipientsMaxLength)]);
+  RecipientsControl = new FormControl({ value: [], disabled: true }, [required, maxLength(this.recipientsMaxLength)]);
 
   constructor(private store: Store) {
     super();

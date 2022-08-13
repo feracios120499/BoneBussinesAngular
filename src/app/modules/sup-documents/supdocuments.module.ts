@@ -31,7 +31,8 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SupdocumentSendModalComponent } from './components/supdocument-send-modal/supdocument-send-modal.component';
 import { SupdocumentFormSendComponent } from './components/supdocument-form-send/supdocument-form-send.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { SupdocumentFormSendComponent } from './components/supdocument-form-send
     SupdocumentFormSendComponent
   ],
   imports: [
+    MatFormFieldModule,
+    MatSelectModule,
     CommonModule,
     TranslateModule,
     NumberToArrayModule,

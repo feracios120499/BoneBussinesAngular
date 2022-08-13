@@ -20,6 +20,10 @@ export namespace SupDocumentsSelectors {
         })
     );
 
+    export const recipients = createSelector(
+        supDocState,
+        (state) => state.recipients
+    );
     export const signedDocuments = createSelector(
         supDocState,
         (state) => state.documents.filter(p => p.status === 'SIGNED').sort((a, b) => a.lastActiveDate > b.lastActiveDate ? 1 : 0)

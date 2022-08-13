@@ -14,8 +14,16 @@ export const supDocReducer = createReducer(
       selectedIds: []
     })),
     on(
+      SupDocumentsActions.loadRecipientsRequest,
+      (state) => ({ ...state })
+    ),
+    on(
         SupDocumentsActions.loadDocumentsSuccess,
         (state, action) => ({ ...state, documents: action.payload, selectedIds: [] })
+    ),
+    on(
+      SupDocumentsActions.loadRecipientsSuccess,
+      (state, action) => ({ ...state, recipients: action.payload })
     ),
     on(
         SupDocumentsActions.filterSupdocuments,

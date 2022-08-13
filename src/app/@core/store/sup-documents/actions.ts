@@ -2,6 +2,7 @@ import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { SupdocumentModalConfig, SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
+import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
 import { SUP_DOC_KEY } from './store';
@@ -17,6 +18,12 @@ export namespace SupDocumentsActions {
     export const loadIfNotStoredSupdocuments = createAction(
         `${[SUP_DOC_KEY]} load if not stored correspondents`
       );
+
+    export const [loadRecipientsRequest, loadRecipientsSuccess, loadRecipientsFailure] = createHTTPActions<
+    void,
+    Recipient[],
+    string
+    >(`[${SUP_DOC_KEY}] load recipients`);
 
 
     export const filterSupdocuments = createAction(

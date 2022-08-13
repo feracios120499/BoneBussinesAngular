@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
+import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 import { BaseService } from '@services/base.service';
 import { merge } from 'lodash';
 import { Observable } from 'rxjs';
@@ -75,6 +76,11 @@ export class SupDocumentsService extends BaseService {
     getSignedDocuments(clientId: string): Observable<SupDocument[]> {
         return this.http.get<SupDocument[]>(`api/v1/supdocuments/${clientId}?$filter=Status eq 'SIGNED'`);
     }
+
+    getRecipients(clientId: string): Observable<Recipient[]> {
+        return this.http.get<Recipient[]>(`api/v1/supdocuments/recipients/${clientId}`);
+    }
+
 
     createSupdocument(clientId: string, data: SupdocumentForm): Observable<SupDocument> {
         console.log('service post called');

@@ -1,4 +1,10 @@
 
+export interface Recipient {
+    Id: number,
+    Email: string,
+    Name: string
+}
+
 export interface SupDocumentUploadModel {
     FileName: string;
     FileExt: string;
@@ -8,7 +14,7 @@ export interface SupDocumentUploadModel {
 };
 
 export interface SupDocumentSendToBankModel{
-    Recipients: string[],
+    Recipients: Recipient[],
     Message: string
 }
 
