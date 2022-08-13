@@ -8,7 +8,7 @@ export interface SupDocumentUploadModel {
 };
 
 export interface SupDocumentSendToBankModel{
-    Ids: string[],
     Recipients: string[],
     Message: string
 }
+

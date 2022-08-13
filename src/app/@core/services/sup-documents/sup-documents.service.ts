@@ -84,9 +84,14 @@ export class SupDocumentsService extends BaseService {
     deleteSupdocument(clientId: string, supdocumentId: string[]): Observable<any> {
             return this.http.post<any>(`api/v1/supdocuments/delete/${clientId}`, supdocumentId);
     }
-    sendToBank(clientId: string, data: SupdocumentSendForm): Observable<any> {
-        console.log('service send called');
-        return this.http.post<any>(`api/v1/supdocuments/tobank/${clientId}`, data);
+    sendToBank(clientId: string, data: SupdocumentSendForm, ids: string[]): Observable<any> {
+        console.log(data);
+        const obj = {
+            Ids: ids,
+            Recipients: data.Recipients,
+            Message: data.Message
+        };
+        return this.http.post<any>(`api/v1/supdocuments/tobank/${clientId}`, obj);
     }
 
     downloadSupdocument(clientId: string, supdocumentId: string): Observable<FileModel> {

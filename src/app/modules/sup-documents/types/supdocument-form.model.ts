@@ -13,7 +13,7 @@ export interface SupdocumentForm
 
   export interface SupdocumentSendForm extends Pick<
     SupDocumentSendToBankModel,
-    | 'Ids'
     | 'Recipients'
     | 'Message'
   >{}
+

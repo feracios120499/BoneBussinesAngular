@@ -4,7 +4,42 @@
       
         <!-- <div class="b1-micro text-left b1-mt-4"> {{'components.supDocuments.fileFormatSupDocument' | translate: {size: this.maxFileSize} }} </div> -->
         
-     
+        <div class="col-md-12">
+            <div class="b1-input">
+              <label class="b1-input__label b1-input__label_top b1-small b1-bold" data-translate="components.pay.recipient">
+              </label>
+              <div class="w-full">
+                <!-- <ui-select multiple ng-model="model.Recipients" close-on-select="false"
+                  limit="{{LIMIT_AMOUNT_FOR_SENDING_TO_BANK}}" style="z-index: 250;" ng-change="isCanSend()">
+                  <ui-select-match placeholder="{{'components.supDocuments.choose' | translate}}">
+                    <span class="b1-base">
+                      <div>
+                        {{$item.Name}}
+                      </div>
+                      <div class="b1-bold b1-mt-2">
+                        {{$item.Email}}
+                      </div>
+                    </span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="recipient in Recipients | filter: $select.search">
+                    <span class="b1-base">
+                      <div>
+                        {{recipient.Name}}
+                      </div>
+                      <div class="b1-bold b1-mt-2">
+                        {{recipient.Email}}
+                      </div>
+    
+                    </span>
+                  </ui-select-choices>
+                </ui-select> -->
+              </div>
+              <span class="b1-small b1-opacity-60">{{'components.supDocuments.maxAmountRecipientEmails' |
+                translate }}{{recipientsMaxLength}}</span>
+
+            </div>
+          </div>
+    
       
           <fieldset class="b1-mt-6">
             <legend class="b1-large b1-mb-4">

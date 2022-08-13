@@ -145,8 +145,9 @@ export class SupDocumentsEffects {
   this.actions$.pipe(
     ofType(SupDocumentsActions.sendSupdocumentRequest),
     switchMap((action) => clientIdWithData(this.store, action.payload)),
-    switchMap(({ clientId, data }) =>
-      this.supDocumentsService.sendToBank(clientId, data).pipe(
+    withLatestFrom(this.store.select(SupDocumentsSelectors.selectedIds)),
+    switchMap(([{ clientId, data }, ids]) =>
+      this.supDocumentsService.sendToBank(clientId, data, ids).pipe(
         map((response) => SupDocumentsActions.sendSupdocumentSuccess(response)),
         catchError((error: ServerError) =>
           of(

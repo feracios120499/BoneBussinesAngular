@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { BaseSubFormComponent } from '@form-controls/base-sub-form.component';
+import { provideValueAccessor } from '@methods/provide-value-accessor.method';
 import { SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { Store } from '@ngrx/store';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
@@ -15,7 +16,10 @@ const { required, maxLength } = Validators;
 @Component({
   selector: 'app-supdocument-form-send',
   templateUrl: './supdocument-form-send.component.html',
-  styleUrls: ['./supdocument-form-send.component.scss']
+  styleUrls: ['./supdocument-form-send.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideValueAccessor(SupdocumentFormSendComponent)],
+
 })
 export class SupdocumentFormSendComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
@@ -27,36 +31,11 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   MessageControl = new FormControl('', [maxLength(this.messageMaxLength)]);
 
   recipientsMaxLength = 3;
-  RecipientsControl = new FormControl([], [maxLength(this.recipientsMaxLength)]);
-
-  IdsControl = new FormControl({ value: [], disabled: true });
+  RecipientsControl = new FormControl({ value: [], disabled: true }, [maxLength(this.recipientsMaxLength)]);
 
   constructor(private store: Store) {
     super();
   }
-
-  getSelectedIds(): Observable<string[]> {
-    let ids:string[];
-    const subject = new Subject<string[]>();
-    // this.getFirebaseData(idForm+'/Metadatos')
-    // .subscribe(items => {
-    //     items.map(item => {
-    //       totalQuestions=item.Total;
-    //       console.log(totalQuestions);
-    //       subject.next(totalQuestions);
-    //     });
-    //   }
-    // );
-
-    this.selected$.subscribe(idss => {
-      idss.map( id => {
-        ids.push(id);
-        subject.next(ids);
-      });
-    }
-    );
-      return subject.asObservable();
-    }
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -65,7 +44,6 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
 
   private initForm(): void {
     const controls: ModelControl<SupdocumentSendForm> = {
-      Ids: this.IdsControl,
       Recipients: this.RecipientsControl,
       Message: this.MessageControl
     };
