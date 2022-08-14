@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { indexOf, merge } from 'lodash';
+import { pushIfNotExist } from '@store/shared';
 const { required, maxLength } = Validators;
 
 
@@ -23,14 +25,8 @@ const { required, maxLength } = Validators;
 
 })
 export class SupdocumentFormSendComponent extends BaseSubFormComponent implements OnInit {
-  dropdownSettings: IDropdownSettings = {};
-
-  onItemSelect(item: any): void {
-    console.log(item);
-  }
-
-
   formGroup!: FormGroup;
+  dropdownSettings: IDropdownSettings = {};
 
   recipients$: Observable<Recipient[]> = this.store.select(SupDocumentsSelectors.recipients)
   isLoadingRecipients$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingRecipients)
@@ -52,7 +48,7 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
     this.initForm();
 
     this.dropdownSettings = {
-      allowSearchFilter: false,
+      allowSearchFilter: true,
       singleSelection: false,
       limitSelection: 3,
       idField: 'id',
@@ -68,6 +64,30 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
     };
     this.formGroup = new FormGroup(controls);
   }
+
+  // getRecipient(recipient: any): void {
+  //     console.log(recipient);
+  //     const temp: Recipient[] = [...this.RecipientsControl.value];
+
+  //     this.recipients$.subscribe(
+  //       (data) => {
+  //         data.forEach(element => {
+  //           if (element.id == recipient.id) {
+  //             const index = temp.findIndex(x => x.id == element.id);
+  //             temp.splice(index, 1);
+  //             temp.push(element);
+  //           }
+  //         });
+  //         console.log(temp);
+
+  //         this.writeValue({
+  //           Message: this.MessageControl.value,
+  //           Recipients: temp
+  //         });
+  //       }
+  //     );
+  // }
+
 
   writeValue(value: SupdocumentSendForm): void {
     if (!value) {
