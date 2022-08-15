@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class SupdocumentsComponent implements OnInit {
   isLoading$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoading);
-
-  constructor(private store : Store) {}
+  isLoadingDownload$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingDownload);
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(SupDocumentsActions.loadDocuments());

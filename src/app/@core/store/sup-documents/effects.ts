@@ -17,38 +17,43 @@ import { FileModel } from '@models/file.model';
 import { SharedActions } from '@store/shared/actions';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupDocumentsSelectors } from './selectors';
-import { SupdocumentModalConfig, SupdocumentSendModalConfig } from '@modules/sup-documents/types/supdocument-modal-config.model';
-import { SupdocumentModalResult, SupdocumentSendModalResult } from '@modules/sup-documents/types/supdocument-modal-result.model';
+import {
+  SupdocumentModalConfig,
+  SupdocumentSendModalConfig,
+} from '@modules/sup-documents/types/supdocument-modal-config.model';
+import {
+  SupdocumentModalResult,
+  SupdocumentSendModalResult,
+} from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { SupdocumentSendModalComponent } from '@modules/sup-documents/components/supdocument-send-modal/supdocument-send-modal.component';
 import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class SupDocumentsEffects {
-    constructor(private actions$: Actions,
-        private store: Store,
-        private supDocumentsService: SupDocumentsService,
-        private modalService: ModalService,
-        private translateService: TranslateService,
-        ) { }
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private supDocumentsService: SupDocumentsService,
+    private modalService: ModalService,
+    private translateService: TranslateService
+  ) {}
 
-    loadDocuments$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(SupDocumentsActions.loadDocuments),
-            switchMap(() => clientIdWithoudData(this.store)),
-            switchMap((clientId: string) =>
-              this.supDocumentsService.getDocuments(clientId).pipe(
-                map((documents: SupDocument[]) => SupDocumentsActions.loadDocumentsSuccess(documents)),
-                catchError(error =>
-                  of(SupDocumentsActions.loadDocumentsFailure(error.error.message))
-                ))
-            )
+  loadDocuments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.loadDocuments),
+      switchMap(() => clientIdWithoudData(this.store)),
+      switchMap((clientId: string) =>
+        this.supDocumentsService.getDocuments(clientId).pipe(
+          map((documents: SupDocument[]) => SupDocumentsActions.loadDocumentsSuccess(documents)),
+          catchError((error) => of(SupDocumentsActions.loadDocumentsFailure(error.error.message)))
         )
-    );
+      )
+    )
+  );
 
-
-    loadIfNotStoredSupdocuments$ = createEffect(() =>
+  loadIfNotStoredSupdocuments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.loadIfNotStoredSupdocuments),
       withLatestFrom(this.store.select(SupDocumentsSelectors.documents)),
@@ -58,94 +63,95 @@ export class SupDocumentsEffects {
   );
 
   loadRecipientsRequest$ = createEffect(() =>
-  this.actions$.pipe(
+    this.actions$.pipe(
       ofType(SupDocumentsActions.loadRecipientsRequest),
       switchMap(() => clientIdWithoudData(this.store)),
       switchMap((clientId: string) =>
         this.supDocumentsService.getRecipients(clientId).pipe(
           map((documents: Recipient[]) => SupDocumentsActions.loadRecipientsSuccess(documents)),
-          catchError(error =>
-            of(SupDocumentsActions.loadRecipientsFailure(error.error.message))
-          ))
-      )
-  )
-);
-
-
-    showSupdocumentModal$ = createEffect(() =>
-    this.actions$.pipe(
-        ofType(SupDocumentsActions.showSupdocumentModal),
-        map(() => {
-          const config: SupdocumentModalConfig = {
-            callback: (result: SupdocumentModalResult) => {
-                this.store.dispatch(SupDocumentsActions.createSupdocumentRequest(result));
-            },
-          };
-          return SupDocumentsActions.setSupdocumentModal({ config });
-        })
-      )
-    );
-
-    setSupdocumentModal$ = createEffect(
-        () =>
-          this.actions$.pipe(
-            ofType(SupDocumentsActions.setSupdocumentModal),
-            map(({ config }) => {
-              const modalRef = this.modalService.open(SupdocumentAddModalComponent);
-              modalRef.componentInstance.config = config;
-            })
-          ),
-        { dispatch: false }
-    );
-
-    showSupdocumentSendModal$ = createEffect(() =>
-    this.actions$.pipe(
-        ofType(SupDocumentsActions.showSupdocumentSendModal),
-        map(() => {
-          const config: SupdocumentSendModalConfig = {
-            callback: (result: SupdocumentSendModalResult) => {
-                this.store.dispatch(SupDocumentsActions.sendSupdocumentRequest(result));
-            },
-          };
-          return SupDocumentsActions.setSupdocumentSendModal({ config });
-        })
-      )
-    );
-
-    setSupdocumentSendModal$ = createEffect(
-      () =>
-        this.actions$.pipe(
-          ofType(SupDocumentsActions.setSupdocumentSendModal),
-          map(({ config }) => {
-            const modalRef = this.modalService.open(SupdocumentSendModalComponent);
-            modalRef.componentInstance.config = config;
-          })
-        ),
-      { dispatch: false }
-  );
-
-
-      createSupdocumentRequest$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(SupDocumentsActions.createSupdocumentRequest),
-        switchMap((action) => clientIdWithData(this.store, action.payload)),
-        switchMap(({ clientId, data }) =>
-          this.supDocumentsService.createSupdocument(clientId, data).pipe(
-            map((supdocument) => SupDocumentsActions.createSupdocumentSuccess(supdocument)),
-            catchError((error: ServerError) =>
-              of(
-                SupDocumentsActions.createSupdocumentFailure(error.message),
-                NotifyActions.errorNotification({
-                  message: this.translateService.instant('create error'),
-                }),
-              )
-            )
-          )
+          catchError((error) => of(SupDocumentsActions.loadRecipientsFailure(error.error.message)))
         )
       )
-    );
+    )
+  );
 
-    createSupdocumentSuccess$ = createEffect(() =>
+  loadRecipientsFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.loadRecipientsFailure),
+      switchMap(() => [
+        NotifyActions.successNotification({
+          message: this.translateService.instant('load recipient failure'),
+        }),
+      ])
+    )
+  );
+
+  showSupdocumentModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.showSupdocumentModal),
+      map(() => {
+        const config: SupdocumentModalConfig = {
+          callback: (result: SupdocumentModalResult) => {
+            this.store.dispatch(SupDocumentsActions.createSupdocumentRequest(result));
+          },
+        };
+        return SupDocumentsActions.setSupdocumentModal({ config });
+      })
+    )
+  );
+
+  setSupdocumentModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SupDocumentsActions.setSupdocumentModal),
+        map(({ config }) => {
+          const modalRef = this.modalService.open(SupdocumentAddModalComponent);
+          modalRef.componentInstance.config = config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  showSupdocumentSendModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.showSupdocumentSendModal),
+      map(() => {
+        const config: SupdocumentSendModalConfig = {
+          callback: (result: SupdocumentSendModalResult) => {
+            this.store.dispatch(SupDocumentsActions.sendSupdocumentRequest(result));
+          },
+        };
+        return SupDocumentsActions.setSupdocumentSendModal({ config });
+      })
+    )
+  );
+
+  setSupdocumentSendModal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SupDocumentsActions.setSupdocumentSendModal),
+        map(({ config }) => {
+          const modalRef = this.modalService.open(SupdocumentSendModalComponent);
+          modalRef.componentInstance.config = config;
+        })
+      ),
+    { dispatch: false }
+  );
+
+  createSupdocumentRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.createSupdocumentRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap(({ clientId, data }) =>
+        this.supDocumentsService.createSupdocument(clientId, data).pipe(
+          map((supdocument) => SupDocumentsActions.createSupdocumentSuccess(supdocument)),
+          catchError((error: ServerError) => of(SupDocumentsActions.createSupdocumentFailure(error.message)))
+        )
+      )
+    )
+  );
+
+  createSupdocumentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.createSupdocumentSuccess),
       switchMap(() => [
@@ -157,45 +163,65 @@ export class SupDocumentsEffects {
     )
   );
 
+  createSupdocumentFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.createSupdocumentFailure),
+      switchMap(() => [
+        NotifyActions.errorNotification({
+          message: this.translateService.instant('components.supDocuments.errors.addSupDoc'),
+        }),
+      ])
+    )
+  );
+
   sendSupdocumentRequest$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(SupDocumentsActions.sendSupdocumentRequest),
-    switchMap((action) => clientIdWithData(this.store, action.payload)),
-    withLatestFrom(this.store.select(SupDocumentsSelectors.selectedIds)),
-    switchMap(([{ clientId, data }, ids]) =>
-      this.supDocumentsService.sendToBank(clientId, data, ids).pipe(
-        map((response) => SupDocumentsActions.sendSupdocumentSuccess(response)),
-        catchError((error: ServerError) =>
-          of(
-            SupDocumentsActions.sendSupdocumentFailure(error.message),
-            NotifyActions.errorNotification({
-              message: this.translateService.instant('send error'),
-            }),
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.sendSupdocumentRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      withLatestFrom(this.store.select(SupDocumentsSelectors.selectedIds)),
+      switchMap(([{ clientId, data }, ids]) =>
+        this.supDocumentsService.sendToBank(clientId, data, ids).pipe(
+          map((response) => SupDocumentsActions.sendSupdocumentSuccess(response)),
+          catchError((error: ServerError) =>
+            of(
+              SupDocumentsActions.sendSupdocumentFailure(error.message),
+              NotifyActions.errorNotification({
+                message: this.translateService.instant('send error'),
+              })
+            )
           )
         )
       )
     )
-  )
-);
+  );
 
-sendSupdocumentSuccess$ = createEffect(() =>
-this.actions$.pipe(
-  ofType(SupDocumentsActions.sendSupdocumentSuccess),
-  switchMap(() => [
-    // SupDocumentsActions.loadDocuments(),
-    NotifyActions.successNotification({
-      message: this.translateService.instant('send success'),
-    }),
-  ])
-)
-);
+  sendSupdocumentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.sendSupdocumentSuccess),
+      switchMap(() => [
+        NotifyActions.successNotification({
+          message: this.translateService.instant('components.supDocuments.successSendingSupDocument'),
+        }),
+      ])
+    )
+  );
 
+  sendSupdocumentFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.sendSupdocumentFailure),
+      switchMap(() => [
+        NotifyActions.successNotification({
+          message: this.translateService.instant('components.supDocuments.errors.sendingSupDocument'),
+        }),
+      ])
+    )
+  );
 
-    deleteSupdocumentRequest$ = createEffect(() =>
+  deleteSupdocumentRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.deleteSupdocumentRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
-      switchMap((payload ) =>
+      switchMap((payload) =>
         this.supDocumentsService.deleteSupdocument(payload.clientId, payload.data).pipe(
           map(() => SupDocumentsActions.deleteSupdocumentSuccess()),
           catchError((error: ServerError) =>
@@ -224,47 +250,67 @@ this.actions$.pipe(
     )
   );
 
+  deleteSupdocumenFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.deleteSupdocumentFailure),
+      switchMap(() => [
+        NotifyActions.errorNotification({
+          message: this.translateService.instant('delete bad'),
+        }),
+      ])
+    )
+  );
 
   downloadSupdocumentRequest$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(SupDocumentsActions.downloadSupdocumentRequest),
-    switchMap((action) => clientIdWithData(this.store, action.payload)),
-    switchMap(({ clientId, data: supdocumentId }) =>
-      this.supDocumentsService.downloadSupdocument(clientId, supdocumentId).pipe(
-        map((supdocumentBlob: FileModel) =>{
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.downloadSupdocumentRequest),
+      switchMap((action) => clientIdWithData(this.store, action.payload)),
+      switchMap(({ clientId, data: supdocumentId }) =>
+        this.supDocumentsService.downloadSupdocument(clientId, supdocumentId).pipe(
+          map((supdocumentBlob: FileModel) => {
             return SupDocumentsActions.downloadSupdocumentSuccess(supdocumentBlob);
-        }
-        ),
-        catchError((error: ServerError) =>
-          of(
-            SupDocumentsActions.downloadSupdocumentFailure(error.message),
-            NotifyActions.errorNotification({
-              message: this.translateService.instant('components.supDocuments.errors.errorDownloadFile'),
-            })
+          }),
+          catchError((error: ServerError) =>
+            of(
+              SupDocumentsActions.downloadSupdocumentFailure(error.message),
+              NotifyActions.errorNotification({
+                message: this.translateService.instant('components.supDocuments.errors.errorDownloadFile'),
+              })
+            )
           )
         )
       )
     )
-  )
-);
+  );
 
+  downloadSupdocumentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.downloadSupdocumentSuccess),
+      map((action) => {
+        return SharedActions.saveFile({ file: action.payload });
+      })
+    )
+  );
 
-downloadSupdocumentSuccess$ = createEffect(() =>
-this.actions$.pipe(
-  ofType(SupDocumentsActions.downloadSupdocumentSuccess),
-  map((action) => SharedActions.saveFile({ file: action.payload }))
-)
-);
-
+  downloadSupdocumentFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.downloadSupdocumentFailure),
+      switchMap(() => [
+        NotifyActions.errorNotification({
+          message: this.translateService.instant('components.supDocuments.errors.errorDownloadFile'),
+        }),
+      ])
+    )
+  );
 
   closeSupdocumentModal$ = createEffect(
-      () =>
-        this.actions$.pipe(
-          ofType(SupDocumentsActions.createSupdocumentSuccess),
-          tap(() => this.modalService.close(SupdocumentAddModalComponent))
-        ),
-      { dispatch: false }
-    );
+    () =>
+      this.actions$.pipe(
+        ofType(SupDocumentsActions.createSupdocumentSuccess),
+        tap(() => this.modalService.close(SupdocumentAddModalComponent))
+      ),
+    { dispatch: false }
+  );
 
   closeSupdocumentSendModal$ = createEffect(
     () =>

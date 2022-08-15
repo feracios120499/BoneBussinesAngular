@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ModelControl } from '@b1-types/model-controls.type';
@@ -33,7 +34,7 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
 
   @ViewChild('formRef') formRef!: NgForm;
 
-  messageMaxLength = 100;
+  messageMaxLength = 300;
   MessageControl = new FormControl('', [maxLength(this.messageMaxLength)]);
 
   recipientsMaxLength = 3;

@@ -3,25 +3,26 @@
     <ng-container *ngIf="!isLoading && docs.length">
       <ng-container *ngIf="docs | supdocumentsFilter: (filterTerm$ | ngrxPush) as filteredSupdocuments">
         <ng-container *ngIf="filteredSupdocuments.length; else notFound">
-            <div class="supdocuments-list">
-              <app-supdocument-item 
+          <div class="b1-sup-docs">
+            <app-supdocument-item
+              class="b1-sup-docs_item"
               *ngFor="let doc of filteredSupdocuments; trackBy: trackId"
               [supdocument]="doc"
               [class.selected]="doc.selected"
               (click)="onSupdocumentSelect(doc)"
-              (dblclick)="onSupdocumentDetails(doc)"> 
+              (dblclick)="onSupdocumentDetails(doc)">
             </app-supdocument-item>
-            </div>
+          </div>
         </ng-container>
       </ng-container>
     </ng-container>
 
-
-
-    <ng-container *ngIf="isLoading">
-      <div class="supdocuments-list">
-        <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton>
-      </div>
+    <ng-container *ngrxLet="isLoadingDownload$ as isLoadingDownload">
+      <ng-container *ngIf="isLoading || isLoadingDownload">
+        <div class="b1-sup-docs">
+          <b1-skeleton *ngFor="let number of 6 | numberToArray"></b1-skeleton>
+        </div>
+      </ng-container>
     </ng-container>
 
     <b1-empty
@@ -29,11 +30,9 @@
       svgName="empty-documents"
       header="components.supdocuments.doNotExist"
       description="components.correspondents.displayIfAdd">
-      
       <b1-button label="components.supDocuments.uploadSupDocument" icon="plus" (click)="onSupdocumentAdd()">
       </b1-button>
     </b1-empty>
-
   </ng-container>
 </ng-container>
 

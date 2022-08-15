@@ -2,79 +2,148 @@
 
 $screen-tablet: 812px;
 
-:host(.supdocument-item) {
-  position: relative;
+// :host(.supdocument-item) {
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 24px;
+//   border: 2px solid rgba(var(--color-dark-rgb), 0.14);
+//   border-radius: 12px;
+//   transition: all 150ms $animation-timing;
+//   cursor: pointer;
+//   &.selected {
+//     background-image: $linear-gradient;
+//     color: var(--color-light);
+//   }
+//   &:hover:not(.selected) {
+//     background-color: rgba($color-primary, 0.1);
+//     border-color: $color-primary;
+//   }
+// }
+
+// .supdocument-item {
+//   width: 200px;
+//   height: 200px;
+//   &__image {
+//     position: relative;
+//     width: 64px;
+//     height: 64px;
+//     & img {
+//       border-radius: 50%;
+//     }
+//     &__pdf{
+//       color: var(--color-primary-light);
+//       font-size: 64px;
+//     }
+//   }
+//   &__lock {
+//     position: absolute;
+//     bottom: -15px;
+//     right: -5px;
+//     @include large;
+
+//     @media (max-width: 991px) {
+//       bottom: -10px;
+//       right: 0;
+//     }
+//   }
+//   &__letters {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: relative;
+//     width: 64px;
+//     height: 64px;
+//     border-radius: 50%;
+//     background-color: $color-primary;
+//     color: $color-light;
+//     @include medium;
+//     @include bold;
+//   }
+//   &__name {
+//     margin-top: 25px;
+//     width: 100%;
+//     text-align: center;
+//     @include base;
+//     @include bold;
+//   }
+//   &__subtitle {
+//     margin-top: 8px;
+//     @include base;
+//     @include light;
+//     color: rgba(var(--color-dark-rgb), 0.6);
+//   }
+//   &__more {
+//     position: absolute;
+//     top: 11px;
+//     right: 10px;
+//   }
+// }
+
+.b1-sup-docs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
-  border: 2px solid rgba(var(--color-dark-rgb), 0.14);
-  border-radius: 12px;
-  transition: all 150ms $animation-timing;
-  cursor: pointer;
-  &.selected {
-    background-image: $linear-gradient;
-    color: var(--color-light);
-  }
-  &:hover:not(.selected) {
-    background-color: rgba($color-primary, 0.1);
-    border-color: $color-primary;
-  }
-}
-
-.supdocument-item {
-  &__image {
+  flex-wrap: wrap;
+  padding: 0 24px;
+  min-height: 450px;
+  &_item {
+    &.ng-animate {
+      transition: none;
+    }
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgba(var(--color-dark-rgb), 0.14);
+    border-radius: 12px;
+    margin: 12px;
+    transition: all 150ms $animation-timing;
+    cursor: pointer;
     position: relative;
-    width: 64px;
-    height: 64px;
-    & img {
-      border-radius: 50%;
-    }
-    &__pdf{
-      color: var(--color-primary-light);
-      font-size: 64px;
-    }
-  }
-  &__lock {
-    position: absolute;
-    bottom: -15px;
-    right: -5px;
-    @include large;
-
-    @media (max-width: 991px) {
-      bottom: -10px;
-      right: 0;
-    }
-  }
-  &__letters {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-color: $color-primary;
-    color: $color-light;
-    @include medium;
-    @include bold;
-  }
-  &__name {
-    margin-top: 25px;
-    width: 100%;
-    text-align: center;
-    @include base;
-    @include bold;
-  }
-  &__subtitle {
-    margin-top: 8px;
-    @include base;
-    @include light;
-    color: rgba(var(--color-dark-rgb), 0.6);
-  }
-  &__more {
-    position: absolute;
-    top: 11px;
-    right: 10px;
+    &.selected {
+      background-color: $color-primary;
+      color: $color-light;
+      border-color: $color-primary;
+    }
+    &:hover:not(.selected) {
+      background-color: rgba($color-primary, 0.1);
+      border-color: $color-primary;
+    }
+    &_more {
+      position: absolute;
+      top: 11px;
+      right: 10px;
+    }
+    &_key {
+      position: absolute;
+      top: 97px;
+      left: 130px;
+    }
+    &_icon {
+      margin-top: 32px;
+      font-size: 80px;
+      color: var(--color-primary-light);
+    }
+    &_name {
+      @include base;
+      @include bold;
+      margin-top: 24px;
+      max-width: 160px;
+    }
+    &_size {
+      @include base;
+      @include light;
+      margin-top: 8px;
+      color: rgba(var(--color-dark-rgb), 0.6);
+    }
+    &.selected {
+      .b1-sup-docs_item_icon {
+        color: $color-light;
+      }
+      .b1-sup-docs_item_size {
+        color: $color-light;
+      }
+    }
   }
 }

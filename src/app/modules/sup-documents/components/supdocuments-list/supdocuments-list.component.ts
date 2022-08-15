@@ -10,17 +10,15 @@ import { Observable } from 'rxjs';
   selector: 'app-supdocuments-list',
   templateUrl: './supdocuments-list.component.html',
   styleUrls: ['./supdocuments-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SupdocumentsListComponent implements OnInit {
   isLoading$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isInitialLoadingSupdocuments);
+  isLoadingDownload$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingDownload);
   supdocuments$: Observable<UiSupDocumentListItem[]> = this.store.select(SupDocumentsSelectors.documents);
   filterTerm$: Observable<string> = this.store.select(SupDocumentsSelectors.filterTerm);
 
-  isSingleClick: Boolean = true;
-
-  constructor(private store: Store<AppState>) {
-  }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(SupDocumentsActions.resetSupdocumentFilter());
@@ -32,17 +30,11 @@ export class SupdocumentsListComponent implements OnInit {
     return supdocument ? `${supdocument.id}` : undefined;
   }
 
-
   onSupdocumentSelect(supdocument: UiSupDocumentListItem): void {
-    this.isSingleClick = true;
-        setTimeout(()=>{
-            if (this.isSingleClick) {
-              this.store.dispatch(SupDocumentsActions.selectSupdocument({ supdocument }));
-            }
-         }, 250);
- }
+    this.store.dispatch(SupDocumentsActions.selectSupdocument({ supdocument }));
+  }
 
   onSupdocumentDetails(supdocument: UiSupDocumentListItem): void {
-      this.isSingleClick = false;
-      console.log('dbl');}
+    console.log('dbl');
+  }
 }

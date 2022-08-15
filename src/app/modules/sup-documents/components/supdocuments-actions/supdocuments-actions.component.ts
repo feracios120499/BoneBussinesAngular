@@ -8,7 +8,6 @@ import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-supdocuments-actions',
   templateUrl: './supdocuments-actions.component.html',
@@ -20,7 +19,7 @@ export class SupdocumentsActionsComponent implements OnInit {
   supdocuments$: Observable<UiSupDocumentListItem[]> = this.store.select(SupDocumentsSelectors.documents);
   filterTerm$: Observable<string> = this.store.select(SupDocumentsSelectors.filterTerm);
 
-  constructor(private store: Store, private translateService: TranslateService) { }
+  constructor(private store: Store, private translateService: TranslateService) {}
 
   onSupdocumentAdd(): void {
     this.store.dispatch(SupDocumentsActions.showSupdocumentModal());
@@ -35,23 +34,20 @@ export class SupdocumentsActionsComponent implements OnInit {
     );
   }
   onSupdocumentSend(supdocuments: UiSupDocumentListItem[]): void {
-    this.executerSend(
-      supdocuments,
-      'shared.selectDocumentsBeforeSendToBank',
-      () => this.store.dispatch(SupDocumentsActions.showSupdocumentSendModal())
+    this.executerSend(supdocuments, 'shared.selectDocumentsBeforeSendToBank', () =>
+      this.store.dispatch(SupDocumentsActions.showSupdocumentSendModal())
     );
   }
 
   onSupdocumentsFilter(term: string): void {
     this.store.dispatch(SupDocumentsActions.filterSupdocuments({ term }));
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   private executer(
     supdocuments: UiSupDocumentListItem[],
     selectNotificationTranslate: string,
-    func: (selected: string[]) => void,
-    confirmTranslate?: string,
+    func: (selected: number[]) => void,
+    confirmTranslate?: string
   ): void {
     const selected = supdocuments.filter((s) => s.selected).map((s) => s.id);
 
@@ -61,8 +57,7 @@ export class SupdocumentsActionsComponent implements OnInit {
           message: this.translateService.instant(selectNotificationTranslate),
         })
       );
-    }
-    else {
+    } else {
       if (confirmTranslate) {
         this.store.dispatch(
           SharedActions.showConfirm({
@@ -81,7 +76,7 @@ export class SupdocumentsActionsComponent implements OnInit {
   private executerSend(
     supdocuments: UiSupDocumentListItem[],
     selectNotificationTranslate: string,
-    func: (selectedIds: string[]) => void,
+    func: (selectedIds: number[]) => void
   ): void {
     const selectedIds = supdocuments.filter((s) => s.selected).map((s) => s.id);
     const selected = supdocuments.filter((s) => s.selected);
@@ -101,27 +96,22 @@ export class SupdocumentsActionsComponent implements OnInit {
           message: this.translateService.instant(selectNotificationTranslate),
         })
       );
-    }
-    else {
-        if (!ifSigned) {
-          this.store.dispatch(
-            NotifyActions.warningNotification({
-              message: this.translateService.instant('components.supDocuments.documentIsNotSigned'),
-            })
-          );
-        }
-        else if (selected.length > 3) {
-          this.store.dispatch(
-            NotifyActions.warningNotification({
-              message: this.translateService.instant('components.supDocuments.limitSupDocsSelect').replace('{0}', 3),
-            })
-          );
-      }
-      else {
-          func(selectedIds);
-        }
+    } else {
+      if (!ifSigned) {
+        this.store.dispatch(
+          NotifyActions.warningNotification({
+            message: this.translateService.instant('components.supDocuments.documentIsNotSigned'),
+          })
+        );
+      } else if (selected.length > 3) {
+        this.store.dispatch(
+          NotifyActions.warningNotification({
+            message: this.translateService.instant('components.supDocuments.limitSupDocsSelect').replace('{0}', 3),
+          })
+        );
+      } else {
+        func(selectedIds);
       }
     }
   }
-
-
+}

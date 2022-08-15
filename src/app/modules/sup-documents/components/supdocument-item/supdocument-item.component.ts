@@ -3,6 +3,7 @@ import { withRequiredPropsCheck } from '@mixins/with-required-props-check.mixin'
 import { UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { NotifyActions } from '@store/notify/actions';
 import { SharedActions } from '@store/shared/actions';
 import { SupDocumentsActions } from '@store/sup-documents/actions';
 
@@ -63,6 +64,9 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
 
   onSupdocumentDownload(): void {
     this.store.dispatch(SupDocumentsActions.downloadSupdocumentRequest(this.supdocument.id));
+    NotifyActions.successNotification({
+      message: this.translateService.instant('components.supDocuments.successAddingSupDocument'),
+    });
   }
   onSupdocumentDetails(): void {
 
