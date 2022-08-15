@@ -7,7 +7,6 @@ export class CardNumberPipe implements PipeTransform {
     for (let i = 0; i < 4; i++) {
       formatNumber += this.getPart(cardNumber, i);
     }
-    console.log(formatNumber);
     return formatNumber;
   }
 

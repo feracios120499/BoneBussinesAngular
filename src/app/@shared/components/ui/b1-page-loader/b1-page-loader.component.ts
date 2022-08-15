@@ -18,7 +18,5 @@ export class B1PageLoaderComponent implements OnInit {
     .pipe(switchMap((select) => (select ? this.store.select(select) : of(false))));
   isCollapsed$ = this.store.select(MenuSelectors.isCollapsed);
 
-  ngOnInit(): void {
-    this.loading$.subscribe(console.log);
-  }
+  ngOnInit(): void {}
 }

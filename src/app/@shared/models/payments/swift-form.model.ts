@@ -3,6 +3,7 @@ import { PaymentSupDoc } from './payment-sup-doc.model';
 
 export interface SwiftForm {
   amount: number;
+  amountString: string;
   number?: string;
   other: string;
   purpose: string;

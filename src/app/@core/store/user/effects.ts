@@ -24,7 +24,6 @@ export class UserEffects {
       ofType(UserActions.checkProfile),
       withLatestFrom(this.store.select(UserSelectors.profile)),
       map(([, profile]) => {
-        console.log(profile);
         if (profile !== undefined) {
           return UserActions.profileExist();
         } else {

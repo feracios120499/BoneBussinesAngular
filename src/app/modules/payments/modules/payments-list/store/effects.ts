@@ -298,7 +298,6 @@ export class PayListEffects implements OnRunEffects {
                 return historyItem;
               }),
             };
-            console.log(config.history);
             modal.componentInstance.config = config;
             return PayListActions.showHistorySuccess(history);
           })
@@ -624,7 +623,6 @@ export class PayListEffects implements OnRunEffects {
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
     return this.actions$.pipe(
       ofType(PayListActions.init),
-      tap((action) => console.log(action)),
       exhaustMap(() => resolvedEffects$.pipe(takeUntil(this.actions$.pipe(ofType(PayListActions.destroy)))))
     );
   }

@@ -141,7 +141,6 @@ export class HttpPaymentsService extends BaseService implements BasePaymentsServ
     };
 
     const disposition = res.headers.get('Content-Disposition');
-    console.log(disposition);
     if (!disposition) {
       // either the disposition was not sent, or is not accessible
       //  (see CORS Access-Control-Expose-Headers)

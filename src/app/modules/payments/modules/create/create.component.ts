@@ -39,6 +39,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       },
     };
     // this.store.dispatch(SharedActions.setCreatePayment({ payment }));
+    console.log('hello');
   }
 
   showTabs$ = this.store.select(PayFormsSelectors.showCreateTabs);

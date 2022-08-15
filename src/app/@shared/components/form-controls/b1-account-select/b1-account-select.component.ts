@@ -21,9 +21,7 @@ import { filter } from 'rxjs/operators';
   ],
 })
 export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  constructor(private modalService: ModalService) {
-    console.log(this.selectAccounts$);
-  }
+  constructor(private modalService: ModalService) {}
 
   @Input('selectAccounts') selectAccounts$!: Observable<SelectAccountsList>;
   @Input() class = '';
@@ -79,6 +77,8 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
 
   ngOnInit(): void {
     const change$ = combineLatest([this.selectAccounts$, this.selectValueChange]);
+    console.log('account-select init');
+    this.selectAccounts$.subscribe((value) => console.log('account-select', value));
     this.changeSubcription = change$.pipe(filter(([select, value]) => !!select)).subscribe(([select, value]) => {
       const accounts = select.accounts;
 
@@ -109,7 +109,6 @@ export class B1AccountSelectComponent implements OnInit, OnDestroy, ControlValue
   }
 
   openModal(): void {
-    console.log(this.templateref);
     this.modal = this.modalService.open(this.templateref);
   }
 

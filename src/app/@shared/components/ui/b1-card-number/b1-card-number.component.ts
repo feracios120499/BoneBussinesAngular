@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'b1-card-number',
@@ -15,9 +8,7 @@ import {
 })
 export class B1CardNumberComponent implements OnInit, OnChanges {
   constructor() {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   @Input() cardNumber!: string;
   @Input() cardNumberClass: string = '';

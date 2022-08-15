@@ -145,7 +145,6 @@ export class PaymentPurposeFormComponent implements OnInit, OnChanges, ControlVa
     if (this.taxCode) {
       this.taxCode = this.pad(this.taxCode, 8);
     }
-    console.log(this.registerDate);
     this.addedText =
       '*' +
       ';' +

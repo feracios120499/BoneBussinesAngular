@@ -8,38 +8,35 @@ import { Observable, of } from 'rxjs';
 import { first, map, switchMap, take, tap } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class BanksStoreService {
-    constructor(private store: Store, private actions$: Actions) {
+  constructor(private store: Store, private actions$: Actions) {}
 
-    }
+  getBank(bankCode: string): Observable<BankModel | undefined> {
+    return this.store.pipe(
+      select(PublicSelectors.bank, { id: bankCode }),
+      first(),
+      take(1),
+      switchMap((bank) => {
+        if (bank) {
+          return of(bank);
+        }
+        this.store.dispatch(PublicActions.loadBankRequest(bankCode));
+        return this.actions$.pipe(
+          ofType(PublicActions.loadBankSuccess, PublicActions.loadBankFailure),
+          map((action) => {
+            if (action.type === PublicActions.loadBankSuccess.type) {
+              const bankResponse = action.payload as BankModel;
+              if (bankResponse.bankCode === bankCode) {
+                return bankResponse;
+              }
+            }
 
-    getBank(bankCode: string): Observable<BankModel | undefined> {
-        return this.store.pipe(
-            select(PublicSelectors.bank, { id: bankCode }),
-            tap(console.log),
-            first(),
-            take(1),
-            switchMap((bank) => {
-                if (bank) {
-                    return of(bank);
-                }
-                this.store.dispatch(PublicActions.loadBankRequest(bankCode));
-                return this.actions$.pipe(
-                    ofType(PublicActions.loadBankSuccess, PublicActions.loadBankFailure),
-                    map((action) => {
-                        if (action.type === PublicActions.loadBankSuccess.type) {
-                            const bankResponse = action.payload as BankModel;
-                            if (bankResponse.bankCode === bankCode) {
-                                return bankResponse;
-                            }
-                        }
-
-                        return undefined;
-                    })
-                );
-            })
+            return undefined;
+          })
         );
-    }
+      })
+    );
+  }
 }

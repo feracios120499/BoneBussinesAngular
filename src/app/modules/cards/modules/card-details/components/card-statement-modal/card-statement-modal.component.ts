@@ -44,7 +44,6 @@ export class CardStatementModalComponent implements OnInit {
   agree = false;
 
   ngOnInit(): void {
-    console.log(this.config);
     this.result = {
       range: {
         start: this.config.start || dayjs(),

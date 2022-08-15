@@ -27,7 +27,6 @@ export class CardStyledComponent implements OnInit {
       this.plasticStatusIcon = this.customCardService.getIcon(this.card.plasticStatus);
     }
 
-    console.log('depositAmount' in this.card);
     if ('depositAmount' in this.card) {
       this.cardStatusIcon = this.customCardService.getIcon(this.card.status);
       this.cardStatusBackgroundColor = this.customCardService.getBackgroundColor(this.card.status);

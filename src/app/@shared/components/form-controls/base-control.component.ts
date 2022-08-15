@@ -60,7 +60,6 @@ export abstract class BaseControlComponent
   }
 
   setDisabledState(isDisabled: boolean): void {
-    console.log('hello', isDisabled);
     this.isDisabled = isDisabled;
   }
 

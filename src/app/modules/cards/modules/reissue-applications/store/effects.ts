@@ -326,7 +326,6 @@ export class CardReissueEffect implements OnRunEffects {
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
     return this.actions$.pipe(
       ofType(CardReissueActions.init),
-      tap((action) => console.log(action)),
       exhaustMap(() => resolvedEffects$.pipe(takeUntil(this.actions$.pipe(ofType(CardReissueActions.destroy)))))
     );
   }

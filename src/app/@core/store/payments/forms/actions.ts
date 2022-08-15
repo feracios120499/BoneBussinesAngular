@@ -1,6 +1,8 @@
+import { Currency } from '@models/currency.model';
 import { PaymentForm } from '@models/payment-form.model';
 import { CreatePaymentModel } from '@models/payments/create-payment.model';
 import { PaymentCommon } from '@models/payments/payment-common.model';
+import { SwiftForm } from '@models/payments/swift-form.model';
 import { SwiftBank } from '@models/swift-bank.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
@@ -13,6 +15,13 @@ export namespace PayFormsActions {
   export const setProgress = createAction(`[${PAY_FORMS_KEY}] set progress`, props<{ progress: ProgressForm }>());
 
   export const setPayment = createAction(`[${PAY_FORMS_KEY}] set payment`, props<{ payment: PaymentForm }>());
+
+  export const setSwift = createAction(`[${PAY_FORMS_KEY}] set swift`, props<{ swift: SwiftForm }>());
+
+  export const setSwiftCurrency = createAction(
+    `[${PAY_FORMS_KEY}] set swift currency`,
+    props<{ currency: Currency }>()
+  );
 
   export const setCreatedPayment = createAction(
     `[${PAY_FORMS_KEY}] set created payment`,

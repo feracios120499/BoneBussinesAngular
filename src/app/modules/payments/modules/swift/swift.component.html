@@ -1,1 +1,15 @@
-<app-swift-form [senderAccounts]="senderAccounts$"></app-swift-form>
+<ng-container *ngrxLet="progress$ as progress">
+  <div class="b1-color-dark" [hidden]="progress !== 'form'" *ngIf="progress !== 'result'">
+    <app-swift-form #form [senderAccounts]="senderAccounts$" [(ngModel)]="swiftForm"></app-swift-form>
+
+    <div class="w-100 b1-flex b1-align-center b1-justify-center b1-mt-5 b1-mb-5 confirm">
+      <b1-button label="components.pay.confirmPayment" icon="check" (btnClick)="toConfirm()"></b1-button>
+    </div>
+  </div>
+  <ng-container *ngIf="progress === 'confirm'">
+    <app-swift-confirm></app-swift-confirm>
+  </ng-container>
+  <ng-container *ngIf="progress === 'result'">
+    <payment-result [status]="status$" [isLoading]="isLoading$"></payment-result>
+  </ng-container>
+</ng-container>

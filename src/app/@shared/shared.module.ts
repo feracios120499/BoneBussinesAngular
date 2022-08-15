@@ -3,6 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { VirtualPatchModule } from '@directives/virtual-patch/virtual-patch.module';
+import { SwiftConfirmComponent } from './components/payment-forms/swift-confirm/swift-confirm.component';
 
 export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy {
   constructor() {
@@ -19,6 +20,6 @@ export class CustomVirtualScrollStrategy extends FixedSizeVirtualScrollStrategy 
       useClass: CustomVirtualScrollStrategy,
     },
     DecimalPipe,
-  ],
+  ]
 })
 export class SharedModule {}

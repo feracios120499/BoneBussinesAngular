@@ -18,6 +18,8 @@ export namespace PayFormsSelectors {
 
   export const payment = createSelector(payFormState, (state) => state.payment);
 
+  export const swift = createSelector(payFormState, (state) => state.swift);
+
   export const createdPayment = createSelector(payFormState, (state) => state.createdPayment);
 
   export const createLoading = createSelector(payFormState, (state) => state.isLoading);
@@ -38,4 +40,19 @@ export namespace PayFormsSelectors {
   export const amountString = createSelector(payFormState, (state) => state.amountString);
 
   export const swiftBanks = createSelector(payFormState, (state) => state.swiftBanks);
+
+  export const swiftAvailableAccounts = createSelector(
+    AcctSelectors.swiftSenderAccounts,
+    payFormState,
+    (value, state) => {
+      if (!state.swiftCurrency) return { accounts: [], isLoading: value.isLoading };
+
+      const accounts = value.accounts.filter((p) => p.currencyCode == state.swiftCurrency?.code);
+
+      return {
+        ...value,
+        accounts,
+      };
+    }
+  );
 }

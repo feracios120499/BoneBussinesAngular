@@ -2,7 +2,25 @@
   <ng-container *ngTemplateOutlet="content"></ng-container>
 </label>
 
-<div class="autocomplete-wrapper">
+<input
+  class="b1-input__control"
+  [class.resize]="resizable"
+  [style.textTransform]="transform"
+  [id]="controlId"
+  [type]="type"
+  [(ngModel)]="value"
+  (ngModelChange)="inputHandleValue($any(value))"
+  [attr.name]="name"
+  [attr.autocomplete]="autocomplete"
+  [attr.placeholder]="placeholder"
+  [attr.minlength]="minLength"
+  [attr.maxlength]="maxLength"
+  [disabled]="isDisabled"
+  (focus)="inputOnFocus($event)"
+  #formControlRef
+  *ngIf="!itemTemplate" />
+
+<div class="autocomplete-wrapper" #autoCompleteWrapper *ngIf="itemTemplate">
   <input
     class="b1-input__control"
     [class.resize]="resizable"
@@ -10,21 +28,27 @@
     [id]="controlId"
     [type]="type"
     [(ngModel)]="value"
-    (ngModelChange)="handleValue($any(value))"
+    (ngModelChange)="inputHandleValue($any(value))"
     [attr.name]="name"
     [attr.autocomplete]="autocomplete"
     [attr.placeholder]="placeholder"
     [attr.minlength]="minLength"
     [attr.maxlength]="maxLength"
     [disabled]="isDisabled"
-    (focus)="focused = true"
-    (blur)="focused = false"
+    (focus)="inputOnFocus($event)"
     #formControlRef />
-  <div *ngIf="data && itemTemplate" class="b1-page-card b1-color-dark autocomplete-container">
+  <div *ngIf="data && itemTemplate && focused">
     <ng-container *ngrxLet="data as dataList">
-      <div class="autocomplete-item" *ngFor="let item of dataList">
-        <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"> </ng-container>
-      </div>
+      <ng-scrollbar
+        *ngIf="dataList && dataList.length != 0"
+        class="b1-page-card b1-bg-light b1-color-dark autocomplete-container"
+        #scrollable
+        (updated)="autoHeight()">
+        <div class="autocomplete-item" *ngFor="let item of dataList" (click)="onSelectItem(item)">
+          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item, value: this.value }">
+          </ng-container>
+        </div>
+      </ng-scrollbar>
     </ng-container>
   </div>
 </div>

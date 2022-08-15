@@ -20,7 +20,6 @@ export class CdkVirtualScrollViewportPatchDirective implements OnInit, OnDestroy
       const viewportObject = this.viewport as CdkVirtualScrollViewport;
       const renderedRangeStream = (this.viewport as any).renderedRangeStream as Subject<any>;
       this.renderedRangeStreamSub = renderedRangeStream.pipe(take(1)).subscribe(() => {
-        console.log('hello');
         setTimeout(() => {
           const strategy = (viewportObject as any)._scrollStrategy as any;
 
@@ -32,7 +31,6 @@ export class CdkVirtualScrollViewportPatchDirective implements OnInit, OnDestroy
             start: 0,
             end: (viewportObject.getViewportSize() + strategy._minBufferPx) / itemSize,
           });
-          console.log(itemSize);
           strategy.updateItemAndBufferSize(itemSize, strategy._minBufferPx, strategy._maxBufferPx);
         });
       });

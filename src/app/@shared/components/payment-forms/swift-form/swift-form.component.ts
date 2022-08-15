@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NgForm, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { ModelControl } from '@b1-types/model-controls.type';
 import { markFormGroupTouched } from '@methods/form-group-touched.method';
 import { Currency } from '@models/currency.model';
 import { SwiftForm } from '@models/payments/swift-form.model';
 import { Customer } from '@models/profile.model';
 import { SelectAccountsList } from '@models/select-accounts-list.model';
+import { SwiftBank } from '@models/swift-bank.model';
 import { Store } from '@ngrx/store';
 import { PayFormsActions } from '@store/payments/forms/actions';
 import { PayFormsSelectors } from '@store/payments/forms/selectors';
@@ -13,17 +14,34 @@ import { PublicSelectors } from '@store/public/selectors';
 import { UserSelectors } from '@store/user/selectors';
 import { minAmountValidator } from '@validators/min-amount.validator';
 import { number } from 'ngrx-forms/validation';
-import { combineLatest, Observable, of, Subscriber, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, fromEvent, Observable, of, Subject, Subscriber, Subscription } from 'rxjs';
+import {
+  combineAll,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-swift-form',
   templateUrl: './swift-form.component.html',
   styleUrls: ['./swift-form.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SwiftFormComponent),
+      multi: true,
+    },
+  ],
 })
-export class SwiftFormComponent implements OnInit {
-  constructor(private store: Store) {
+export class SwiftFormComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+  constructor(private store: Store, private el: ElementRef) {
     const controls: ModelControl<SwiftForm> = {
+      amountString: this.amountStringControl,
       amount: this.amountControl,
       number: this.docNumberControl,
       other: this.otherControl,
@@ -79,8 +97,6 @@ export class SwiftFormComponent implements OnInit {
       this.store.select(PayFormsSelectors.amountString).pipe(this.setAmountString.bind(this)).subscribe()
     );
 
-    this.subscriptions.push(this.currencyControl.valueChanges.pipe(this.updateAccountsList.bind(this)).subscribe());
-
     this.subscriptions.push(
       this.store.select(UserSelectors.currentCustomer).pipe(this.setCustomerData.bind(this)).subscribe()
     );
@@ -100,19 +116,63 @@ export class SwiftFormComponent implements OnInit {
     );
 
     this.subscriptions.push(
-      this.intermediaryBankSwiftControl.valueChanges.pipe(this.loadSwiftBanks.bind(this)).subscribe()
+      this.intermediaryBankSwiftControl.valueChanges.subscribe((value) => this.loadSwiftBanks(value))
     );
+
+    this.subscriptions.push(
+      this.benificiaryBankSwiftControl.valueChanges.subscribe((value) => this.loadSwiftBanks(value))
+    );
+  }
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
+
+  ngAfterViewInit(): void {
+    this.subscriptions.push(
+      this.formGroup.valueChanges
+        .pipe(
+          distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+          tap((_) => {
+            this.onChange(this.formGroup.getRawValue());
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  writeValue(form: SwiftForm | undefined): void {
+    if (!form) {
+      this.formGroup.patchValue({});
+      this.formGroup.updateValueAndValidity();
+      return;
+    }
+
+    const formGroup: SwiftForm = {
+      ...form,
+    };
+
+    this.formGroup.patchValue(formGroup);
+    this.formGroup.updateValueAndValidity();
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   formGroup: FormGroup;
 
   @Input('senderAccounts') senderAccounts!: Observable<SelectAccountsList>;
   @Input('type') type: 'create' | 'edit' | 'template' = 'create';
+  @ViewChild('paymentForm') paymentForm!: NgForm;
+
+  isLoadingAccounts = false;
 
   subscriptions: Subscription[] = [];
   currencies: Currency[] = [];
   availableAccountsSubscriber = new Subscriber<SelectAccountsList>();
-  availableAccounts: Observable<SelectAccountsList> = of({ accounts: [], isLoading: true });
+  availableAccounts = this.store.select(PayFormsSelectors.swiftAvailableAccounts);
   swiftBanks = this.store.select(PayFormsSelectors.swiftBanks);
 
   amountControl = new FormControl(0, [Validators.required, minAmountValidator(1)]);
@@ -174,6 +234,55 @@ export class SwiftFormComponent implements OnInit {
   benificiaryBankSwiftControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
   benificiaryBankLocationControl = new FormControl('', [Validators.required, Validators.maxLength(250)]);
 
+  maxLengthConfig = {
+    maxLength: 140,
+    maxLengthInRow: 35,
+  };
+
+  benificiaryNameMaxLength = this.maxLengthConfig.maxLength;
+  benificiaryLocationMaxLength = this.maxLengthConfig.maxLength;
+
+  recalcMaxLength(): void {
+    let nameLength = 0;
+    let locationLength = 0;
+
+    if (this.benificiaryNameControl.value) {
+      nameLength = this.benificiaryNameControl.value.length;
+    }
+
+    if (this.benificiaryLocationControl.value) {
+      locationLength = this.benificiaryLocationControl.value.length;
+    }
+
+    this.benificiaryNameMaxLength =
+      Math.floor((this.maxLengthConfig.maxLength - locationLength) / this.maxLengthConfig.maxLengthInRow) *
+      this.maxLengthConfig.maxLengthInRow;
+    this.benificiaryLocationMaxLength =
+      Math.floor((this.maxLengthConfig.maxLength - nameLength) / this.maxLengthConfig.maxLengthInRow) *
+      this.maxLengthConfig.maxLengthInRow;
+
+    if (this.benificiaryNameMaxLength == this.maxLengthConfig.maxLength) {
+      this.benificiaryNameMaxLength = this.maxLengthConfig.maxLength - this.maxLengthConfig.maxLengthInRow;
+    }
+
+    if (this.benificiaryLocationMaxLength == this.maxLengthConfig.maxLength) {
+      this.benificiaryLocationMaxLength = this.maxLengthConfig.maxLength - this.maxLengthConfig.maxLengthInRow;
+    }
+
+    this.benificiaryNameControl.setValidators([
+      Validators.required,
+      Validators.maxLength(this.benificiaryNameMaxLength),
+    ]);
+    this.benificiaryNameControl.updateValueAndValidity();
+
+    this.benificiaryLocationControl.setValidators([
+      Validators.required,
+      Validators.maxLength(this.benificiaryLocationMaxLength),
+    ]);
+    this.benificiaryLocationControl.updateValueAndValidity();
+
+    console.log(this.benificiaryNameMaxLength, this.benificiaryLocationMaxLength);
+  }
   private docNumberAutoChange(source$: Observable<boolean>): Observable<boolean> {
     return source$.pipe(
       tap((docNumberAuto) => {
@@ -202,6 +311,13 @@ export class SwiftFormComponent implements OnInit {
           this.intermediaryBankNameControl.removeValidators(this.intermediaryBankValidators);
           this.intermediaryBankSwiftControl.removeValidators(this.intermediaryBankValidators);
         }
+
+        this.intermediaryBankLocationControl.markAsUntouched();
+        this.intermediaryBankNameControl.markAsUntouched();
+        this.intermediaryBankSwiftControl.markAsUntouched();
+        this.intermediaryBankLocationControl.markAsPristine();
+        this.intermediaryBankNameControl.markAsPristine();
+        this.intermediaryBankSwiftControl.markAsPristine();
         this.setValueAndUpdate(this.intermediaryBankLocationControl, '');
         this.setValueAndUpdate(this.intermediaryBankNameControl, '');
         this.setValueAndUpdate(this.intermediaryBankSwiftControl, '');
@@ -217,7 +333,6 @@ export class SwiftFormComponent implements OnInit {
           this.benificiaryIbanControl.removeValidators(Validators.required);
           this.setValueAndUpdate(this.benificiaryIbanControl, '');
         } else {
-          console.log(this.benificiaryIbanControl.validator?.length);
           this.benificiaryIbanControl.enable({ emitEvent: false });
           this.benificiaryIbanControl.addValidators(Validators.required);
         }
@@ -240,16 +355,12 @@ export class SwiftFormComponent implements OnInit {
     );
   }
 
-  private loadSwiftBanks(source$: Observable<string>): Observable<string> {
-    return source$.pipe(
-      tap((bic) => {
-        if (bic && bic.length >= 3) {
-          this.store.dispatch(PayFormsActions.searchSwiftBanks({ bic }));
-        } else {
-          this.store.dispatch(PayFormsActions.setSwiftBanks({ banks: undefined }));
-        }
-      })
-    );
+  loadSwiftBanks(bic: string): void {
+    if (bic && bic.length >= 3) {
+      this.store.dispatch(PayFormsActions.searchSwiftBanks({ bic }));
+    } else {
+      this.store.dispatch(PayFormsActions.setSwiftBanks({ banks: undefined }));
+    }
   }
 
   private loadAmountString(amountCurrencySource$: Observable<[any, any]>): Observable<[any, any]> {
@@ -291,23 +402,6 @@ export class SwiftFormComponent implements OnInit {
     );
   }
 
-  private updateAccountsList(currencySource$: Observable<Currency>): Observable<Currency> {
-    return currencySource$.pipe(
-      tap((currency) => {
-        this.availableAccounts = this.senderAccounts.pipe(
-          map((value) => {
-            const accounts = value.accounts.filter((p) => p.currencyCode == currency.code);
-
-            return {
-              ...value,
-              accounts: accounts,
-            };
-          })
-        );
-      })
-    );
-  }
-
   private setAmountString(amountString: Observable<string>): Observable<string> {
     return amountString.pipe(
       tap((value) => {
@@ -317,20 +411,14 @@ export class SwiftFormComponent implements OnInit {
     );
   }
 
+  test?: Observable<number>;
+
+  senderAccountsSubject?: SelectAccountsList;
+
   ngOnInit(): void {
-    this.availableAccounts = combineLatest([this.senderAccounts, this.currencyControl.valueChanges]).pipe(
-      map(([value, currency]) => {
-        console.log('change');
-        const accounts = value.accounts.filter((p) => p.currencyCode == currency.code);
-
-        console.log(accounts);
-        return {
-          ...value,
-          accounts: accounts,
-        };
-      })
+    this.currencyControl.valueChanges.subscribe((value) =>
+      this.store.dispatch(PayFormsActions.setSwiftCurrency({ currency: value }))
     );
-
     this.senderAccounts
       .pipe(withLatestFrom(this.store.select(PublicSelectors.currencies)))
       .subscribe(([accounts, currencies]) => {
@@ -340,17 +428,85 @@ export class SwiftFormComponent implements OnInit {
 
         this.currencies = currencies.filter((p) => accountsCurrencies.indexOf(p.code) >= 0);
         if (this.currencies.length > 0) {
+          console.log('test');
           this.currencyControl.setValue(this.currencies[0]);
           this.currencyControl.updateValueAndValidity();
         }
       });
+
+    this.recalcMaxLength();
+
+    this.subscriptions.push(
+      this.senderAccounts.subscribe((accountList) => (this.isLoadingAccounts = accountList.isLoading))
+    );
   }
 
-  private setValueAndUpdate(control: FormControl, value: any): void {
-    control.setValue(value);
-    control.updateValueAndValidity();
+  private setValueAndUpdate(control: FormControl, value: any, emitEvent = true): void {
+    control.setValue(value, { emitEvent });
+    control.updateValueAndValidity({ emitEvent });
   }
-  test(): void {
+
+  selectIntermediaryBank(bank: SwiftBank): void {
+    this.setValueAndUpdate(this.intermediaryBankSwiftControl, bank.bic, false);
+    this.setValueAndUpdate(this.intermediaryBankNameControl, bank.name);
+    this.setValueAndUpdate(this.intermediaryBankLocationControl, bank.address);
+    this.store.dispatch(PayFormsActions.setSwiftBanks({ banks: undefined }));
+  }
+
+  selectBenificiaryBank(bank: SwiftBank): void {
+    this.setValueAndUpdate(this.benificiaryBankSwiftControl, bank.bic, false);
+    this.setValueAndUpdate(this.benificiaryBankNameControl, bank.name);
+    this.setValueAndUpdate(this.benificiaryBankLocationControl, bank.address);
+    this.store.dispatch(PayFormsActions.setSwiftBanks({ banks: undefined }));
+  }
+
+  submitForm(): boolean {
     markFormGroupTouched(this.formGroup);
+
+    this.paymentForm.onSubmit(null as any);
+
+    if (this.formGroup.invalid) {
+      this.scrollToFirstInvalidControl();
+    }
+    return this.formGroup.valid && !this.isLoadingAccounts;
+  }
+
+  private scrollToFirstInvalidControl() {
+    const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector('form .ng-invalid:not(div)');
+
+    console.log(firstInvalidControl);
+    window.scroll({
+      top: this.getTopOffset(firstInvalidControl),
+      left: 0,
+      behavior: 'smooth',
+    });
+
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+    const inputInvalid = firstInvalidControl.querySelector('input');
+
+    if (scrollTop <= this.getTopOffset(firstInvalidControl)) {
+      if (inputInvalid) {
+        inputInvalid.focus();
+      } else {
+        firstInvalidControl.focus();
+      }
+    } else {
+      fromEvent(window, 'scroll')
+        .pipe(debounceTime(100), take(1))
+        .subscribe(() => {
+          console.log('scroll');
+          if (inputInvalid) {
+            inputInvalid.focus();
+          } else {
+            firstInvalidControl.focus();
+          }
+        });
+    }
+  }
+
+  private getTopOffset(controlEl: HTMLElement): number {
+    const labelOffset = 50;
+    return controlEl.getBoundingClientRect().top + window.scrollY - labelOffset;
   }
 }

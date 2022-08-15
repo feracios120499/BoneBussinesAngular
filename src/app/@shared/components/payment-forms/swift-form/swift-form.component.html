@@ -30,7 +30,8 @@
             [editableSearchTerm]="false"
             [searchable]="false"
             [clearable]="false"
-            [formControl]="currencyControl">
+            [formControl]="currencyControl"
+            bindLabel="name">
             <ng-template ng-label-tmp let-item="item">
               <div class="b1-base b1-bold b1-flex b1-align-center">{{ item.name }} ({{ item.code }})</div>
             </ng-template>
@@ -97,8 +98,6 @@
       <b1-checkbox class="b1-base noselect b1-mt-5" [formControl]="isAgreeControl">
         {{ 'components.pay.swift.iaccept' | translate }}
       </b1-checkbox>
-
-      <button type="submit" (click)="test()">submit</button>
     </div>
     <div class="b1-form-block-header">
       <div class="b1-form-block-header_index">2</div>
@@ -110,6 +109,7 @@
       <div class="b1-large">
         {{ 'components.pay.swift.senderRequisites' | translate }}
       </div>
+      {{ availableAccounts | async | json }}
       <b1-account-select class="b1-mt-5" [selectAccounts]="availableAccounts" [formControl]="senderAccountControl">
       </b1-account-select>
 
@@ -161,13 +161,13 @@
           [formControl]="intermediaryBankSwiftControl"
           [labelTop]="false"
           [data]="swiftBanks"
-          [itemTemplate]="itemTemplate">
+          [itemTemplate]="itemTemplate"
+          (selectData)="selectIntermediaryBank($event)"
+          [uppercase]="true"
+          transform="uppercase"
+          (onFocus)="loadSwiftBanks(intermediaryBankSwiftControl.value)">
           {{ 'components.pay.swift.intermediaryBankSwift' | translate }}
         </b1-input>
-
-        <ng-template #itemTemplate let-item>
-          {{ item.bic }}
-        </ng-template>
 
         <b1-input class="b1-mt-5" [formControl]="intermediaryBankNameControl" [labelTop]="false">
           {{ 'components.pay.swift.intermediaryBankName' | translate }}
@@ -199,13 +199,27 @@
         {{ 'components.pay.swift.beneficiaryAccountIBAN' | translate }}
       </b1-input>
 
-      <b1-input class="b1-mt-5" [formControl]="benificiaryNameControl" [labelTop]="false">
+      <b1-input
+        class="b1-mt-5"
+        [formControl]="benificiaryNameControl"
+        [labelTop]="false"
+        (ngModelChange)="recalcMaxLength()">
         {{ 'components.pay.swift.benificiaryName' | translate }}
       </b1-input>
+      <div class="b1-base b1-light">
+        {{ benificiaryNameControl.value.length || 0 }} / {{ benificiaryNameMaxLength }}
+      </div>
 
-      <b1-input class="b1-mt-5" [formControl]="benificiaryLocationControl" [labelTop]="false">
+      <b1-input
+        class="b1-mt-5"
+        [formControl]="benificiaryLocationControl"
+        [labelTop]="false"
+        (ngModelChange)="recalcMaxLength()">
         {{ 'components.pay.swift.benificiaryLocation' | translate }}
       </b1-input>
+      <div class="b1-base b1-light">
+        {{ benificiaryLocationControl.value.length || 0 }} / {{ benificiaryLocationMaxLength }}
+      </div>
 
       <div class="b1-large b1-mt-6">
         {{ 'components.pay.swift.benificiaryBank' | translate }}
@@ -215,7 +229,16 @@
         {{ 'components.pay.swift.benificiaryBankAccount' | translate }}
       </b1-input>
 
-      <b1-input class="b1-mt-5" [formControl]="benificiaryBankSwiftControl" [labelTop]="false">
+      <b1-input
+        class="b1-mt-5"
+        [formControl]="benificiaryBankSwiftControl"
+        [labelTop]="false"
+        [data]="swiftBanks"
+        [itemTemplate]="itemTemplate"
+        (selectData)="selectBenificiaryBank($event)"
+        [uppercase]="true"
+        transform="uppercase"
+        (onFocus)="loadSwiftBanks(benificiaryBankSwiftControl.value)">
         {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
       </b1-input>
 
@@ -229,3 +252,14 @@
     </div>
   </div>
 </form>
+
+<ng-template #itemTemplate let-item let-value="value">
+  <div>
+    <span [innerHTML]="item.bic | highlight: value"></span>
+    <span class="b1-mr-2 b1-ml-2">-</span>
+    <span>{{ item.name }}</span>
+  </div>
+  <div class="b1-mt-2 b1-base b1-light">
+    {{ item.address }}
+  </div>
+</ng-template>

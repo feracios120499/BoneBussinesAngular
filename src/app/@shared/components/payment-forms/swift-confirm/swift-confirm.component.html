@@ -1,0 +1,273 @@
+<div class="b1-confirm" *ngrxLet="swift$ as swift">
+  <ng-container *ngrxLet="isLoading$ as isLoading">
+    <div class="b1-confirm-header">
+      <div class="b1-back" (click)="toForm(isLoading)">
+        <i b1-icon icon="chevron-left" class="b1-medium"></i>
+      </div>
+      <div class="b1-title2">Перевiрте iнформацiю</div>
+      <div class="b1-medium b1-light b1-opacity-80">
+        {{ 'components.pay.actions.innerPay' | translate }}
+      </div>
+    </div>
+    <div class="b1-confirm-container">
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.swift.formTabsHeadings.sender' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.senderName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.senderDataName }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.salary.accNumber' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            <span [iban]="swift.senderAccount.number"></span>
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.acct.acctDetail.account' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.senderAccount.name }}
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.swift.formTabsHeadings.benificiary' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryName }}
+          </div>
+        </div>
+        <div class="b1-confirm-group" *ngIf="swift.benificiaryIBAN">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.beneficiaryAccountIBAN' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryIBAN }}
+          </div>
+        </div>
+        <div class="b1-confirm-group" *ngIf="swift.benificiaryAccNumber">
+          <div class="b1-confirm-label">
+            {{ 'components.salary.accNumber' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryAccNumber }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryLocation' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryLocation }}
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.swift.senderBankTitle' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryBankName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.senderBankName }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.senderBankLocation' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.senderBankLocation }}
+          </div>
+        </div>
+      </div>
+
+      <div class="b1-confirm-block">
+        <div class="b1-confirm-title">
+          {{ 'components.pay.swift.benificiaryBankTitle' | translate }}
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryBankName' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryBankName }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.senderBankLocation' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryBankLocation }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryBankSWIFT }}
+          </div>
+        </div>
+        <div class="b1-confirm-group">
+          <div class="b1-confirm-label">
+            {{ 'components.pay.swift.benificiaryBankAccount' | translate }}
+          </div>
+          <div class="b1-confirm-value">
+            {{ swift.benificiaryBankCorrAccNumber }}
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block b1-confirm-block_bottom" *ngIf="swift.intermediaryBankSWIFT">
+        <div class="b1-confirm-title">{{ 'components.pay.swift.formTabsHeadings.intermediaryBank' | translate }}</div>
+        <div style="display: flex; justify-content: space-between">
+          <div class="b1-confirm-group col-md-4 no-padder">
+            <div class="b1-confirm-label">
+              {{ 'components.pay.swift.benificiaryBankName' | translate }}
+            </div>
+            <div class="b1-confirm-value">
+              {{ swift.intermediaryBankName }}
+            </div>
+          </div>
+          <div class="b1-confirm-group col-md-4 no-padder">
+            <div class="b1-confirm-label">
+              {{ 'components.pay.swift.senderBankLocation' | translate }}
+            </div>
+            <div class="b1-confirm-value">
+              {{ swift.intermediaryBankLocation }}
+            </div>
+          </div>
+          <div class="b1-confirm-group col-md-4 no-padder text-right">
+            <div class="b1-confirm-label">
+              {{ 'components.pay.swift.benificiaryBankSwift' | translate }}
+            </div>
+            <div class="b1-confirm-value">
+              {{ swift.intermediaryBankSWIFT }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="b1-confirm-block b1-confirm-block_bottom">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="b1-confirm-group">
+              <div class="b1-confirm-label">
+                {{ 'components.pay.swift.contractNumberGoodType' | translate }}
+              </div>
+              <div class="b1-confirm-value">
+                {{ swift.purpose }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="b1-confirm-group text-right">
+              <div class="b1-confirm-label">
+                {{ 'components.pay.swift.expenceFee' | translate }}
+              </div>
+              <div class="b1-confirm-value">
+                {{ swift.paymentFee }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row b1-margin__top-16">
+          <div class="col-md-6">
+            <div class="b1-confirm-group">
+              <div class="b1-confirm-label">
+                {{ 'components.pay.swift.amountString' | translate }}
+              </div>
+              <div class="b1-confirm-value">
+                {{ swift.amountString }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="b1-confirm-group text-right">
+              <div class="b1-confirm-label">
+                {{ 'components.pay.amount' | translate }}
+              </div>
+              <div class="b1-confirm-value">
+                <span>
+                  {{ swift.amount | money: '' }}
+                </span>
+                <span>
+                  {{ swift.senderAccount.currencyCode }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <b1-list-documents [documents]="swift.attachedSupDocs"></b1-list-documents>
+    <div class="col-md-12 b1-separator b1-margin__top-24"></div>
+    <div class="row">
+      <div class="col-xs-12 b1-margin__top-32" ng-if="IsEnableFunction('Payments', 'Templates')">
+        <label class="b1-checkbox">
+          <input
+            type="checkbox"
+            ng-model="swift.SaveAsTemplate"
+            class="b1-checkbox__hidden"
+            tabindex="0"
+            aria-checked="true"
+            aria-invalid="false" /><i class="b1-checkbox__check"></i>
+          <span class="b1-base b1-light" data-translate="components.pay.saveAsTemplate">зберегти як шаблон</span>
+        </label>
+      </div>
+      <div
+        class="col-sm-12 b1-margin__top-24"
+        ng-show="swift.SaveAsTemplate"
+        ng-if="IsEnableFunction('Payments', 'Templates')">
+        <div class="col-sm-2 b1-margin__top-12">
+          <label class="b1-base b1-light" data-translate="components.pay.templateName">назва шаблону</label>
+        </div>
+        <div class="col-sm-10">
+          <input
+            class="b1-input__control b1-ml-3 b1-base"
+            ng-model="swift.TemplateName"
+            required=""
+            maxlength="50"
+            aria-required="true"
+            aria-invalid="true" />
+        </div>
+      </div>
+    </div>
+    <div class="b1-confirm-actions">
+      <button
+        ng-click="documentCtrl.actions.createNewPayment('NEW')"
+        ng-disabled="documentCtrl.states.payment.isLoading"
+        class="b1-button-primary b1-button-primary_filled pull-right b1-mr-4"
+        ga-track-event="['pay', 'save-payment-swift']">
+        <i class="ub-icons-icon-save"></i>
+        {{ 'components.pay.save' | translate }}
+        <!-- зберегти -->
+      </button>
+      <button
+        ng-click="documentCtrl.actions.createNewPayment('ONSIGN')"
+        ng-disabled="documentCtrl.states.payment.isLoading"
+        class="b1-button-primary b1-mr-4"
+        ga-track-event="['pay', 'on-sign-swift']">
+        <i class="ub-icons-icon-send-for-sign"></i>
+        {{ 'components.pay.onSign' | translate }}
+        <!-- на підпис -->
+      </button>
+    </div>
+  </ng-container>
+</div>

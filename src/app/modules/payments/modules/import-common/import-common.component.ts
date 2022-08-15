@@ -22,7 +22,6 @@ export class ImportCommonComponent implements OnInit, OnDestroy {
     this.store.addReducer(PAY_IMPORT_COMMON_KEY, payImportCommonReducer);
     this.store.dispatch(PayImportCommonActions.init());
     const response = this.location.getState();
-    console.log(JSON.stringify(response));
     if ((response as any).responseExcel) {
       this.store.dispatch(PayImportCommonActions.setResponse({ response: response as ImportResponse }));
     } else {

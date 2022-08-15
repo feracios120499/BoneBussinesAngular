@@ -39,7 +39,6 @@ export class CheckRoleDirective implements OnInit, OnDestroy {
   showView(): void {
     this.viewContainer.createEmbeddedView(this.templateRef);
     this.isViewed = true;
-    console.log('show');
   }
 
   hideView(): void {

@@ -150,7 +150,6 @@ export class B1DaterangepickerDirective implements OnInit, OnChanges, DoCheck, F
   notForChangesProperty: Array<string> = ['locale', 'endKey', 'startKey'];
 
   get value(): DateRange | _dayjs.Dayjs {
-    console.log(this._value);
     if (this.singleDatePicker) {
       return this._value[this._startKey] || null;
     } else {

@@ -7,6 +7,8 @@ export const payFormsReducer = createReducer(
 
   on(payActions.setProgress, (state, action) => ({ ...state, progress: action.progress })),
   on(payActions.setPayment, (state, action) => ({ ...state, payment: action.payment })),
+  on(payActions.setSwift, (state, action) => ({ ...state, swift: action.swift })),
+  on(payActions.setSwiftCurrency, (state, action) => ({ ...state, swiftCurrency: action.currency })),
   on(payActions.setCreatedPayment, (state, action) => ({ ...state, createdPayment: action.payment })),
   on(payActions.createWithinCountryRequest, payActions.createMyAccountsRequest, (state) => ({
     ...state,

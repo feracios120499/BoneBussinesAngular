@@ -19,7 +19,6 @@ export class ModalService {
       document.body.style.top = offset * -1 + 'px';
 
       const modalRef = this.modalService.open(content, options);
-      console.log(modalRef.componentInstance);
       modalRef.result.then(
         () => {
           window.scrollTo(0, offset);

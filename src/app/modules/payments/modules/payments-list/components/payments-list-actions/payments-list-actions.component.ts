@@ -34,9 +34,7 @@ export class PaymentsListActionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    console.log('destroy2');
-  }
+  ngOnDestroy(): void {}
 
   selectAll(payments: PaymentsListItem[]): void {
     this.store.dispatch(PayListActions.selectAll({ payments }));
@@ -50,7 +48,6 @@ export class PaymentsListActionsComponent implements OnInit, OnDestroy {
     if (range.start.isSame(oldRange.start, 'day') && range.end.isSame(oldRange.end, 'day')) {
       return;
     }
-    console.log(range);
     this.store.dispatch(PayListActions.setRange({ range }));
   }
 

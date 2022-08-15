@@ -12,9 +12,7 @@ import { AcctDetailsSelectors } from '../../store/selectors';
 export class AccountTurnoverRowComponent implements OnInit {
   @Input() turnover!: UiTurnovers;
 
-  constructor(private store: Store) {
-    console.log('AccountTurnoversRowComponent');
-  }
+  constructor(private store: Store) {}
 
   currencyCode$ = this.store.select(AcctDetailsSelectors.currencyCode);
 

@@ -26,9 +26,7 @@ export class ReissueApplicationsRowComponent implements OnInit {
     selected: this.selected,
   });
   ngOnInit(): void {
-    console.log('init');
     this.selected.valueChanges.subscribe(() => {
-      console.log(this.application);
       this.store.dispatch(CardReissueActions.selectApplication({ id: this.application.id }));
     });
   }
