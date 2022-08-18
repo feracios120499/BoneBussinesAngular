@@ -5,10 +5,8 @@
         <ng-container *ngIf="filteredSupdocuments.length; else notFound">
           <div class="b1-sup-docs">
             <app-supdocument-item
-              class="b1-sup-docs_item"
               *ngFor="let doc of filteredSupdocuments; trackBy: trackId"
               [supdocument]="doc"
-              [class.selected]="doc.selected"
               (click)="onSupdocumentSelect(doc)"
               (dblclick)="onSupdocumentDetails(doc)">
             </app-supdocument-item>

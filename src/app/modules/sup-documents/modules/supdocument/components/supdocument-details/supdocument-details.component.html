@@ -1,0 +1,132 @@
+<ng-container *ngrxLet="supdocument$ as supdocument">
+    <ng-container *ngrxLet="isLoading$ as isLoading">
+      <div class="b1-sup-doc" *ngIf="supdocument">
+        <div class="b1-sup-doc-header">
+          <div class="b1-account-header_card">
+            <div class="b1-flex b1-align-center b1-justify-between">
+              <div class="b1-medium b1-ellipsis">
+                {{supdocument.fileName}}.{{supdocument.fileExt | lowercase}}
+              </div>
+              <div class="b1-large b1-ml-2 b1-hover-info pointer" (click)="editSupdocument(supdocument)">
+                <i b1-icon icon="edit"></i>              
+              </div>
+            </div>
+            <div class="b1-medium b1-mt-6">
+              <div class="b1-micro b1-page-data__subtitle b1-mb-2">
+                  {{'components.supDocuments.details.description' | translate}}
+              </div>
+              <div *ngIf="supdocument.description">
+                  {{supdocument.description}}
+              </div>
+              <div *ngIf="!supdocument.description">
+                  {{'components.supDocuments.noComment' | translate}}
+              </div>
+          </div>
+
+          </div>
+          <div class="b1-account-header_info">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="b1-micro b1-page-data__subtitle b1-mb-2">
+                        {{'components.supDocuments.details.createdDate' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold b1-ellipsis">
+                        {{supdocument.creatingDate | date:'dd.MM.yyyy'}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="b1-micro b1-page-data__subtitle b1-mb-2">
+                        {{'components.supDocuments.details.lastActiveDate' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold b1-ellipsis">
+                        {{supdocument.lastActiveDate | date:'dd.MM.yyyy'}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="row b1-mt-5">
+                <div class="col-md-12">
+                    <div class="b1-micro b1-page-data__subtitle b1-mb-2">
+                        {{'components.supDocuments.details.size' | translate}}
+                    </div>
+                    <div class="b1-base b1-bold b1-ellipsis">
+                        {{formatBytes(supdocument.fileSize, 2)}}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <b1-dropdown class="b1-account-more" label="account actions" menuWidth="360px">
+          <b1-more-button slot="toggle" [horizontal]="true"></b1-more-button>
+          <b1-dropdown-link
+            icon="sign"
+            [label]="('components.supDocuments.actions.sign' | translate)"
+            >
+          </b1-dropdown-link>
+          <b1-dropdown-link
+            icon="download"
+            [label]="
+              ('components.supDocuments.actions.download' | translate)
+            "></b1-dropdown-link>
+        </b1-dropdown>
+      </div>
+  
+      <!-- SKELETON -->
+      <!-- <div class="b1-account" *ngIf="!supdocument && isLoading">
+        <div class="b1-account-header">
+          <div class="b1-account-header_card">
+            <div class="b1-flex b1-align-center b1-justify-between">
+              <div class="b1-medium b1-ellipsis width-100">
+                <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+              </div>
+            </div>
+            <div class="b1-large b1-mt-6">
+              <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+              <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+            </div>
+            <div class="b1-base b1-bold">
+              <div class="b1-flex b1-align-center">
+                <div class="b1-color-error b1-mr-5 b1-flex b1-align-center">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+                <div class="b1-color-success b1-flex b1-align-center">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="b1-account-header_info">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+                <div class="b1-base b1-bold b1-ellipsis">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+                <div class="b1-base b1-bold b1-ellipsis">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="b1-micro b1-page-data__subtitle b1-mb-2 width-50">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+                <div class="b1-base b1-bold b1-ellipsis">
+                  <ngx-skeleton-loader animation="pulse"> </ngx-skeleton-loader>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </ng-container>
+  </ng-container>
+  

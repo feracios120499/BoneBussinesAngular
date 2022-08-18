@@ -112,4 +112,17 @@ export class SupDocumentsService extends BaseService {
         map((result) => ({ ...result, name: (result.name as string) || `supdocument.PDF` }))
       );
   }
+
+  getSupdocument(clientId: string, supdocumentId: number): Observable<SupDocument> {
+    console.log('get supdoc service call');
+    return this.http.get<SupDocument>(`api/v1/supdocuments/${supdocumentId}/${clientId}`);
+  }
+
+  updateSupdocument(clientId: string, supdocumentId: number, obeject: any): Observable<any> {
+    return this.http.post<any>(`api/v1/supdocuments/${clientId}/${supdocumentId}`, obeject);
+  }
+
+  getPayments(clientId: string, supdocumentId: number): Observable<any> {
+    return this.http.get<any>(`api/v1/supdocuments/${clientId}/${supdocumentId}`);
+  }
 }

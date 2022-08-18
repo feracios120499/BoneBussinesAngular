@@ -79,7 +79,7 @@ export class SupDocumentsEffects {
     this.actions$.pipe(
       ofType(SupDocumentsActions.loadRecipientsFailure),
       switchMap(() => [
-        NotifyActions.successNotification({
+        NotifyActions.errorNotification({
           message: this.translateService.instant('load recipient failure'),
         }),
       ])

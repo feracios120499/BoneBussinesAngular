@@ -4,6 +4,7 @@ import { AcctActions } from '@modules/accounts/store/actions';
 import { AuthActions } from '@modules/auth/store/actions';
 import { CardsActions } from '@modules/cards/store/actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { UserActions } from '@store/user/actions';
 import { map, tap } from 'rxjs/operators';
 
@@ -42,6 +43,17 @@ export class RouteEffects {
       map((payload) =>
         RouteActions.routeTo({
           route: `accounts/${payload.account.bankId}/${payload.account.id}`,
+        })
+      )
+    )
+  );
+
+  detailSupdocument$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentsActions.goToDetail),
+      map((payload) =>
+        RouteActions.routeTo({
+          route: `supdocuments/details/${payload.supdocument.id}`,
         })
       )
     )

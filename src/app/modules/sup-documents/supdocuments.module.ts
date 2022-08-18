@@ -36,7 +36,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { SupdocumentsRoutingModule } from './supdocuments-routing.module';
 
 @NgModule({
   declarations: [
@@ -48,9 +48,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SupdocumentAddModalComponent,
     SupdocumentFormComponent,
     SupdocumentSendModalComponent,
-    SupdocumentFormSendComponent
+    SupdocumentFormSendComponent,
   ],
   imports: [
+    SupdocumentsRoutingModule,
     NgMultiSelectDropDownModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -82,6 +83,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         component: SupdocumentsComponent,
       },
     ]),
-  ]
+  ],
 })
-export class SupdocumentsModule { }
+export class SupdocumentsModule {}

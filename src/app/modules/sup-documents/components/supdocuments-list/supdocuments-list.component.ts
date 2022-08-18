@@ -35,6 +35,6 @@ export class SupdocumentsListComponent implements OnInit {
   }
 
   onSupdocumentDetails(supdocument: UiSupDocumentListItem): void {
-    console.log('dbl');
+    this.store.dispatch(SupDocumentsActions.goToDetail({ supdocument }));
   }
 }

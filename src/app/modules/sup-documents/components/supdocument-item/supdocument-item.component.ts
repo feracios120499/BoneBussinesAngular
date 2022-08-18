@@ -11,17 +11,14 @@ import { SupDocumentsActions } from '@store/sup-documents/actions';
   selector: 'app-supdocument-item',
   templateUrl: './supdocument-item.component.html',
   styleUrls: ['./supdocument-item.component.scss'],
-  host: {
-    class: 'supdocument-item',
-  }
 })
 export class SupdocumentItemComponent extends withRequiredPropsCheck() implements OnInit {
   @Input() supdocument!: UiSupDocumentListItem;
 
-
   getName(): string {
-    if (this.supdocument)
-    {return this.supdocument.fileName;};
+    if (this.supdocument) {
+      return this.supdocument.fileName;
+    }
     return '';
   }
 
@@ -29,10 +26,11 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
     super();
   }
   ifSigned(): boolean {
-    if (this.supdocument.status == 'SIGNED')
-      {return true;}
-    else
-      {return false;}
+    if (this.supdocument.status == 'SIGNED') {
+      return true;
+    } else {
+      return false;
+    }
   }
   ngOnInit(): void {
     this.checkRequiredProps(['supdocument']);
@@ -54,9 +52,10 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
     this.store.dispatch(
       SharedActions.showConfirm({
         config: {
-          text: `${this.translateService.instant('components.supDocuments.areYouSureToDeleteSupDocuments').replace('{0}', 1)}`,
-          callback: () =>
-          this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest([this.supdocument.id])),
+          text: `${this.translateService
+            .instant('components.supDocuments.areYouSureToDeleteSupDocuments')
+            .replace('{0}', 1)}`,
+          callback: () => this.store.dispatch(SupDocumentsActions.deleteSupdocumentRequest([this.supdocument.id])),
         },
       })
     );
@@ -69,9 +68,7 @@ export class SupdocumentItemComponent extends withRequiredPropsCheck() implement
     });
   }
   onSupdocumentDetails(): void {
-
+    this.store.dispatch(SupDocumentsActions.goToDetail({ supdocument: this.supdocument }));
   }
-  onSupdocumentSign(): void {
-
-  }
+  onSupdocumentSign(): void {}
 }

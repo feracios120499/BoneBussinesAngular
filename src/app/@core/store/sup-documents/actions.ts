@@ -1,5 +1,5 @@
 import { FileModel } from '@models/file.model';
-import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { SupDocument, UiSupDocumentListItem } from '@models/sup-documents/sup-document.model';
 import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import {
   SupdocumentModalConfig,
@@ -69,6 +69,11 @@ export namespace SupDocumentsActions {
 
   export const selectSupdocument = createAction(
     `[${SUP_DOC_KEY}] select supdocument`,
+    props<{ supdocument: SupDocument }>()
+  );
+
+  export const goToDetail = createAction(
+    `[${SUP_DOC_KEY}] go to supdocument details`,
     props<{ supdocument: SupDocument }>()
   );
 }

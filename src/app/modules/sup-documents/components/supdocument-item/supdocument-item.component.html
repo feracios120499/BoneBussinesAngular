@@ -1,31 +1,38 @@
-    <i b1-icon icon="file-pdf" class="b1-sup-docs_item_icon"></i>
-    <i b1-icon icon="key" *ngIf='ifSigned()' class="b1-sup-docs_item_key"></i>
+<div class="b1-sup-docs_item" [class.selected]="supdocument.selected">
+  <i b1-icon icon="file-pdf" class="b1-sup-docs_item_icon"></i>
+  <i b1-icon icon="key" *ngIf="ifSigned()" class="b1-sup-docs_item_key"></i>
 
-    <div class="b1-sup-docs_item_name b1-ellipsis" [ngbTooltip]="this.supdocument.fileName">{{ supdocument.fileName }}</div>
-    <div class="b1-sup-docs_item_size">{{ formatBytes(supdocument.fileSize, 2) }}</div>
+  <div class="b1-sup-docs_item_name b1-ellipsis" [ngbTooltip]="supdocument.fileName">{{ supdocument.fileName }}</div>
+  <div class="b1-sup-docs_item_size">{{ formatBytes(supdocument.fileSize, 2) }}</div>
 
-    <b1-dropdown
+  <b1-dropdown
     class="b1-sup-docs_item_more b1-card__col b1-card__col_dot"
-        label="user's actions"
-        menuWidth="180px"
-        scopeSelector="app-supdocuments-list">
-        <b1-more-button slot="toggle"></b1-more-button>
+    label="user's actions"
+    menuWidth="180px"
+    scopeSelector="app-supdocuments-list">
+    <b1-more-button slot="toggle"></b1-more-button>
 
-        <b1-dropdown-link icon="sign" label="actions.sign" [danger]="false"
-        (btnClick)="onSupdocumentSign()">
-        </b1-dropdown-link>
+    <b1-dropdown-link icon="sign" label="actions.sign" [danger]="false" (btnClick)="onSupdocumentSign()">
+    </b1-dropdown-link>
 
-        <b1-dropdown-link icon="file" label="components.supDocuments.actions.details" [danger]="false"
-        (btnClick)="onSupdocumentDetails()"></b1-dropdown-link>
+    <b1-dropdown-link
+      icon="file"
+      label="components.supDocuments.actions.details"
+      [danger]="false"
+      (btnClick)="onSupdocumentDetails()"></b1-dropdown-link>
 
-        <b1-dropdown-link icon="download" label="components.supDocuments.actions.download" [danger]="false"
-        (btnClick)="onSupdocumentDownload()"></b1-dropdown-link>
+    <b1-dropdown-link
+      icon="download"
+      label="components.supDocuments.actions.download"
+      [danger]="false"
+      (btnClick)="onSupdocumentDownload()"></b1-dropdown-link>
 
-        <b1-dropdown-link [separator]="true"></b1-dropdown-link>
-        
-        <b1-dropdown-link icon="delete" label="actions.delete" [danger]="true"
-        (btnClick)="onSupdocumentDelete()"></b1-dropdown-link>
-        
-    </b1-dropdown>
+    <b1-dropdown-link [separator]="true"></b1-dropdown-link>
 
-
+    <b1-dropdown-link
+      icon="delete"
+      label="actions.delete"
+      [danger]="true"
+      (btnClick)="onSupdocumentDelete()"></b1-dropdown-link>
+  </b1-dropdown>
+</div>
