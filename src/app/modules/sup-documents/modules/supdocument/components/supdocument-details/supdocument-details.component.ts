@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { SupDocumentsActions } from '@store/sup-documents/actions';
 import { SupDocumentDetailsSelectors } from '../../store/selectors';
+import { SupdocumentEditModalComponent } from '../supdocument-edit-modal/supdocument-edit-modal.component';
 
 @Component({
   selector: 'app-supdocument-details',
@@ -18,10 +20,10 @@ export class SupdocumentDetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   editSupdocument(supdocument: SupDocument): void {
-    // const modalRef = this.modalService.open(AccountEditModalComponent);
-    // modalRef.componentInstance.name = supdocument.fileName;
-    // modalRef.componentInstance.description = supdocument.description;
-    console.log('edit');
+    const modalRef = this.modalService.open(SupdocumentEditModalComponent);
+    modalRef.componentInstance.name = supdocument.fileName;
+    modalRef.componentInstance.description = supdocument.description;
+    modalRef.componentInstance.id = supdocument.id;
   }
 
   formatBytes(bytes: number, decimals = 2) {
@@ -34,5 +36,8 @@ export class SupdocumentDetailsComponent implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+  onSupdocumentDownload(supdocument: SupDocument): void {
+    this.store.dispatch(SupDocumentsActions.downloadSupdocumentRequest(supdocument.id));
   }
 }

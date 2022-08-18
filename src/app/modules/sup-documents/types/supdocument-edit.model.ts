@@ -1,4 +1,5 @@
 export interface SupDocumentEdit {
-  name: string;
+  id: number;
+  fileName: string;
   description: string;
 }

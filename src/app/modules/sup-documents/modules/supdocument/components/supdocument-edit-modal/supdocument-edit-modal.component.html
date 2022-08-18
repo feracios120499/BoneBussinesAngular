@@ -1,0 +1,32 @@
+<b1-modal-container [loader]="false" *ngrxLet="editForm$ as editForm">
+  <ng-container slot="header">
+    {{ 'components.supDocuments.editDocument' | translate }}
+  </ng-container>
+
+  <form slot="body" name="form">
+    <div class="row">
+      <div class="col-md-12">
+        <b1-textarea
+          class="b1-mt-5"
+          style="max-width: 360px; max-height: 360px"
+          [ngrxFormControlState]="editForm.controls.fileName">
+          {{ 'components.acct.acctDetail.name' | translate }}
+        </b1-textarea>
+
+        <b1-textarea
+          class="b1-mt-5"
+          style="max-width: 360px; max-height: 360px"
+          [ngrxFormControlState]="editForm.controls.description">
+          {{ 'components.supDocuments.details.description' | translate }}
+        </b1-textarea>
+      </div>
+    </div>
+  </form>
+
+  <b1-button
+    slot="footer"
+    icon="save"
+    label="actions.save"
+    (btnClick)="save()"
+    [isDisabled]="editForm.isInvalid"></b1-button>
+</b1-modal-container>

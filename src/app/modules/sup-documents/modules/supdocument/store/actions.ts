@@ -17,8 +17,14 @@ export namespace SupDocumentDetailsActions {
     props<{ supdocument: SupDocument }>()
   );
 
+  export const setSupdocumentId = createAction('[sup-doc] set supdocument id', props<{ id: number }>());
   // setAccountName action
   export const setSupdocumentName = createAction('[sup-doc] set supdocument name', props<{ name: string }>());
+
+  export const setSupdocumentDescription = createAction(
+    '[sup-doc] set supdocument description',
+    props<{ description: string }>()
+  );
 
   // setEditFormInitState action
   export const setEditFormInitState = createAction('[sup-doc] set edit form init state');

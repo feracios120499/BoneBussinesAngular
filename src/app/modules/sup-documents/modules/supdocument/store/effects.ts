@@ -11,6 +11,7 @@ import { SupDocumentsService } from '@services/sup-documents/sup-documents.servi
 import { SupDocumentDetailsActions } from './actions';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupDocumentDetailsSelectors } from './selectors';
+import { SetValueAction } from 'ngrx-forms';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +24,29 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     private translateService: TranslateService
   ) {}
 
-  // setDocumentName$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(SupDocumentDetailsActions.setSupdocumentName),
-  //     withLatestFrom(this.store.select(AcctDetailsSelectors.editForm)),
-  //     map(([action, formControl]) => new SetValueAction(formControl.controls.name.id, action.name))
-  //   )
-  // );
+  setDocumentId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentDetailsActions.setSupdocumentId),
+      withLatestFrom(this.store.select(SupDocumentDetailsSelectors.editForm)),
+      map(([action, formControl]) => new SetValueAction(formControl.controls.id.id, action.id))
+    )
+  );
+
+  setDocumentName$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentDetailsActions.setSupdocumentName),
+      withLatestFrom(this.store.select(SupDocumentDetailsSelectors.editForm)),
+      map(([action, formControl]) => new SetValueAction(formControl.controls.fileName.id, action.name))
+    )
+  );
+
+  setDocumentDescription$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentDetailsActions.setSupdocumentDescription),
+      withLatestFrom(this.store.select(SupDocumentDetailsSelectors.editForm)),
+      map(([action, formControl]) => new SetValueAction(formControl.controls.description.id, action.description))
+    )
+  );
 
   loadCurrentSupdocument$ = createEffect(() =>
     this.actions$.pipe(
@@ -88,15 +105,15 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       ofType(SupDocumentDetailsActions.updateSupdocumentRequest),
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       withLatestFrom(this.store.select(SupDocumentDetailsSelectors.currentSupdocumentRouteParams)),
-      switchMap(([payload, routeParams]) =>
-        this.supdocumentService.updateSupdocument(payload.clientId, routeParams.supdocumentId, payload.data).pipe(
+      switchMap(([payload]) =>
+        this.supdocumentService.updateSupdocument(payload.clientId, payload.data).pipe(
           withLatestFrom(this.store.select(SupDocumentDetailsSelectors.currentSupdocument)),
           filter(([, supdocument]) => supdocument !== undefined),
           map(([, supdocument]) => supdocument as SupDocument),
           map((supdocument) =>
             SupDocumentDetailsActions.updateSupdocumentSuccess({
               ...supdocument,
-              fileName: payload.data.name,
+              fileName: payload.data.fileName,
               description: payload.data.description,
             })
           ),
@@ -105,7 +122,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
               SupDocumentDetailsActions.updateSupdocumentFailure(error.message),
               NotifyActions.serverErrorNotification({
                 error,
-                message: this.translateService.instant('errors.updateAccount'),
+                message: this.translateService.instant('errors.updateSupdocument'),
               })
             )
           )

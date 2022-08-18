@@ -6,7 +6,7 @@ import { SupDocumentDetailsActions } from './actions';
 import { SupDocumentEdit } from '@modules/sup-documents/types/supdocument-edit.model';
 
 export const validateAndUpdateEditForm = updateGroup<SupDocumentEdit>({
-  name: validate(required, maxLength(70)),
+  fileName: validate(required, maxLength(70)),
 });
 
 export const SupDocumentDetailsReducer = wrapReducerWithFormStateUpdate(

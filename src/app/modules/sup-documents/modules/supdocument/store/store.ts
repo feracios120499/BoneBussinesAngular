@@ -15,7 +15,8 @@ export interface SupDocumentDetailsState {
 }
 
 export const initialEditFormState = createFormGroupState<SupDocumentEdit>(SUP_DETAILS_KEY, {
-  name: '',
+  id: 0,
+  fileName: '',
   description: '',
 });
 
