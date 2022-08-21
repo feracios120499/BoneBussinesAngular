@@ -24,6 +24,16 @@ import { B1ModalContainerModule } from '@containers/b1-modal-container/b1-modal-
 import { B1ButtonModule } from '@ui/b1-button/b1-button.module';
 import { B1TextareaModule } from '@form-controls/b1-textarea/b1-textarea.module';
 import { NgrxFormsModule } from 'ngrx-forms';
+import { SupdocumentPaymentRowComponent } from './components/supdocument-payment-row/supdocument-payment-row.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { TransactionFilterModule } from '@pipes/transactions-filter/transactions-filter.module';
+import { FormsModule } from '@angular/forms';
+import { PaymentsListFilterModule } from '@pipes/payments-list-filter/payments-list-filter.module';
+import { SupdocumentPaymentsFilterModule } from '@pipes/supdocuments-filter/supdocument-payments-filter.module';
+import { MoneyModule } from '@pipes/money/money.module';
+import { B1EmptyModule } from '@containers/b1-empty/b1-empty.module';
+import { B1SkeletonModule } from '@ui/b1-skeleton/b1-skeleton.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -35,9 +45,12 @@ import { NgrxFormsModule } from 'ngrx-forms';
     SupdocumentPaymentsListComponent,
     SupdocumentPaymentsComponent,
     SupdocumentEditModalComponent,
+    SupdocumentPaymentRowComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ScrollingModule,
     SupdocumentRoutingModule,
     TranslateModule,
     B1DropdownModule,
@@ -51,6 +64,11 @@ import { NgrxFormsModule } from 'ngrx-forms';
     B1ModalContainerModule,
     B1ButtonModule,
     B1TextareaModule,
+    B1EmptyModule,
+    B1SkeletonModule,
+    NgScrollbarModule,
+    SupdocumentPaymentsFilterModule,
+    MoneyModule,
     EffectsModule.forFeature([SupDocumentDetailsEffects]),
   ],
 })

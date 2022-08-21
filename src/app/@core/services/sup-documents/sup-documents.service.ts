@@ -2,6 +2,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FileModel } from '@models/file.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { PaymentsListItem, UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
+import { SupDocumentPayment } from '@modules/sup-documents/modules/supdocument/types/supdocument-payments.model';
 import { SupDocumentEdit } from '@modules/sup-documents/types/supdocument-edit.model';
 import { SupdocumentForm, SupdocumentSendForm } from '@modules/sup-documents/types/supdocument-form.model';
 import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
@@ -124,7 +126,7 @@ export class SupDocumentsService extends BaseService {
     return this.http.put<any>(`api/v1/supdocuments/${clientId}`, supdocument);
   }
 
-  getPayments(clientId: string, supdocumentId: number): Observable<any> {
-    return this.http.get<any>(`api/v1/supdocuments/${clientId}/${supdocumentId}`);
+  getPayments(clientId: string, supdocumentId: number): Observable<SupDocumentPayment[]> {
+    return this.http.get<SupDocumentPayment[]>(`api/v1/supdocuments/relations/${supdocumentId}/${clientId}`);
   }
 }

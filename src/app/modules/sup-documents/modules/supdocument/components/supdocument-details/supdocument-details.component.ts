@@ -3,6 +3,7 @@ import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { SupDocumentsActions } from '@store/sup-documents/actions';
+import { SupDocumentDetailsActions } from '../../store/actions';
 import { SupDocumentDetailsSelectors } from '../../store/selectors';
 import { SupdocumentEditModalComponent } from '../supdocument-edit-modal/supdocument-edit-modal.component';
 
@@ -17,7 +18,9 @@ export class SupdocumentDetailsComponent implements OnInit {
   supdocument$ = this.store.select(SupDocumentDetailsSelectors.currentSupdocument);
   isLoading$ = this.store.select(SupDocumentDetailsSelectors.isLoadingCurrentSupdocument);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(SupDocumentDetailsActions.loadPaymentsCurrentSupdocument());
+  }
 
   editSupdocument(supdocument: SupDocument): void {
     const modalRef = this.modalService.open(SupdocumentEditModalComponent);

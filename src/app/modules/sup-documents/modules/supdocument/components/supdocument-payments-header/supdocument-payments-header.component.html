@@ -7,11 +7,13 @@
     </div>
 
     <div class="b1-page-actions__right">
-      <b1-input icon="search" [placeholder]="'shared.search' | translate" [resizable]="true"></b1-input>
+      <b1-input
+        icon="search"
+        [placeholder]="'shared.search' | translate"
+        [resizable]="true"
+        [ngModel]="filterTerm$ | ngrxPush"
+        (ngModelChange)="onPaymentsFilter($event)"></b1-input>
     </div>
   </div>
   <b1-card-loader [isLoading]="isLoading$"></b1-card-loader>
 </ng-container>
-
-<!-- [ngModel]="filterTerm$ | ngrxPush"
-(ngModelChange)="onSupdocumentsFilter($event)" -->

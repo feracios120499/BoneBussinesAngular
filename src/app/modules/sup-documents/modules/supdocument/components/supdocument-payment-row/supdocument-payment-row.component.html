@@ -1,0 +1,96 @@
+<div class="col-lg-1 col-md-2 b1-margin__right-20">
+  <div class="flex" style="align-items: center">
+    <div class="b1-page-content_type">
+      <i
+        class="ub-icons ub-icons-icon-SWIFT b1-large"
+        b1-icon
+        icon="swift"
+        *ngIf="payment.relatedPayment.typeId == 'SWIFT'"></i>
+      <i
+        class="ub-icons ub-icons-icon-my-accounts b1-large"
+        b1-icon
+        icon="cards"
+        *ngIf="payment.relatedPayment.typeId == 'INNER' || payment.relatedPayment.typeId == 'INNER-AP'"></i>
+      <i
+        class="ub-icons ub-icons-icon-country b1-large"
+        b1-icon
+        icon="country"
+        *ngIf="
+          payment.relatedPayment.typeId == 'OUTER' ||
+          payment.relatedPayment.typeId == 'OUTER-AP' ||
+          payment.relatedPayment.typeId == 'SEP' ||
+          payment.relatedPayment.typeId == 'SEP-AP'
+        "></i>
+      <span
+        *ngIf="payment.relatedPayment.typeId == 'FCAPP_P'"
+        b1-icon
+        icon="buying"
+        class="ub-icons ub-icons-icon-buying b1-large"></span>
+      <span
+        *ngIf="payment.relatedPayment.typeId == 'FCAPP_S'"
+        b1-icon
+        icon="selling"
+        class="ub-icons ub-icons-icon-selling b1-large"></span>
+      <span
+        *ngIf="payment.relatedPayment.typeId == 'FCAPP_C'"
+        b1-icon
+        icon="exchange"
+        class="ub-icons ub-icons-icon-exchange b1-large"></span>
+    </div>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="b1-medium b1-ellipsis">
+    <span data-translate="components.pay.number">№</span>
+    <span> {{ payment.relatedPayment.number || payment.relatedPayment.typeId }}</span>
+  </div>
+  <div class="b1-medium b1-page-data__subtitle b1-light">
+    <span data-translate="components.pay.from">від</span>:
+    <span>{{ payment.relatedPayment.creatingDate | date: 'dd.MM.yyyy' }} </span>
+  </div>
+</div>
+<div class="col-md-5">
+  <div class="b1-medium">
+    <div class="b1-flex b1-align-center">
+      <span class="b1-light">{{ 'components.pay.list.sender' | translate }}:</span>
+      <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
+        {{ payment.relatedPayment.sender.name }}
+      </span>
+    </div>
+    <div class="b1-flex b1-align-center b1-mt-3">
+      <span class="b1-light">{{ 'components.pay.list.recipient' | translate }}:</span>
+      <span class="b1-ellipsis b1-ml-3 word-break-all b1-IE-word">
+        {{ payment.relatedPayment.recipient.name }}
+      </span>
+    </div>
+  </div>
+  <div id="purpose" class="b1-medium b1-mt-3 b1-page-data__subtitle b1-word-wrap b1-IE-word">
+    {{ payment.relatedPayment.purpose }}
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="b1-title3 text-right">
+    {{ payment.relatedPayment.amount / 100 | money: '' }}
+    <span> {{ payment.relatedPayment.currencyCode }}</span>
+  </div>
+  <div class="payment-window-status b1-base text-right">
+    <span class="payment-window-status b1-color-success" *ngIf="payment.relatedPayment.statusId == 'NEW'">
+      {{ 'components.pay.payment.status.NEW' | translate }}
+    </span>
+    <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'ONSIGN'">
+      {{ 'components.pay.payment.status.ONSIGNING' | translate }}</span
+    >
+    <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'SIGNED'">
+      {{ 'components.pay.payment.status.SIGNED' | translate }}</span
+    >
+    <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'BANKRECEIVED'">
+      {{ 'components.pay.payment.status.BANKRECEIVED' | translate }}</span
+    >
+    <span *ngIf="payment.relatedPayment.statusId == 'BANKPAID'" class="b1-color-success payment-window-status">
+      <span>{{ 'components.pay.payment.status.BANKPAID' | translate }}</span>
+    </span>
+    <span class="payment-window-status b1-color-error" *ngIf="payment.relatedPayment.statusId == 'BANKERROR'">
+      {{ 'components.pay.payment.status.BANKERROR' | translate }}</span
+    >
+  </div>
+</div>

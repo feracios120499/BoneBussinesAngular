@@ -37,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { SupdocumentsRoutingModule } from './supdocuments-routing.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SupdocumentsRoutingModule } from './supdocuments-routing.module';
     SupdocumentFormSendComponent,
   ],
   imports: [
+    NgxSkeletonLoaderModule,
     SupdocumentsRoutingModule,
     NgMultiSelectDropDownModule,
     MatFormFieldModule,

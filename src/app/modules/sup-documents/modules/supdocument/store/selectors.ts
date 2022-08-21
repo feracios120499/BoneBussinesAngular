@@ -1,6 +1,11 @@
+import { DatePipe } from '@angular/common';
+import { UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { SupdocumentPaymentsFilterPipe } from '@pipes/supdocuments-filter/supdocument-payments-filter.pipe';
+import { FilterService } from '@services/filter.service';
 import { RouteSelectors } from '@store/route/selectors';
 import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
+import { SupDocumentPayment } from '../types/supdocument-payments.model';
 import { SupDocumentDetailsState, SUP_DETAILS_KEY } from './store';
 
 export namespace SupDocumentDetailsSelectors {
@@ -39,6 +44,20 @@ export namespace SupDocumentDetailsSelectors {
     (state) => state.loadings.indexOf('payments') >= 0
   );
 
+  export const payments = createSelector(detailStore, (state) => state.payments as SupDocumentPayment[]);
+
+  export const filterTerm = createSelector(detailStore, (state) => state.filterTerms);
+
+  export const filteredPayments = createSelector(payments, detailStore, (payments, state) => {
+    const paymentsFilter = new SupdocumentPaymentsFilterPipe(
+      new FilterService(new DatePipe(window.navigator.language))
+    );
+
+    console.log(state.filterTerms);
+
+    return paymentsFilter.transform(payments, state.filterTerms);
+  });
+
   // export const isLoadingTransactions = createSelector(
   //   AcctSelectors.acctStore,
   //   (state) => state.loadings.indexOf('transactions') >= 0
@@ -61,16 +80,24 @@ export namespace SupDocumentDetailsSelectors {
   //   (state) => state.loadings.indexOf('transaction') >= 0
   // );
 
-  export const openPayments = createSelector(detailStore, (store) => store.openPayments);
+  // export const openPayments = createSelector(detailStore, (store) => store.openPayments);
 
-  export const loadPayments = createSelector(detailStore, (store) => store.loadPayments);
+  // export const selectedPayments = createSelector(detailStore, (store) => store.loadPayments);
 
-  // export const turnovers = createSelector(detailStore, openTurnovers, loadTurnovers, (store, openArray, loadArray) =>
-  //   store.turnovers?.map(
+  // export const payments = createSelector(detailStore, (store, openArray, loadArray) =>
+  //   store.payments?.map(
   //     (value) =>
-  //       ({ ...value, isOpen: openArray.includes(value.id), isLoading: loadArray.includes(value.id) } as UiTurnovers)
+  //       ({
+  //         ...value,
+  //         selected: openArray.includes(value.id),
+  //         // isLoading: loadArray.includes(value.id),
+  //       } as UiPaymentsListItem)
   //   )
   // );
+  // export const selectPayment = createAction(
+  //   `[${SUP_DOC_KEY}] select supdocument`,
+  //   props<{ supdocument: SupDocument }>()
+  // );
 
-  // export const turnover = (id: string) => createSelector(turnovers, (items) => items?.find((p) => p.id === id));
+  // export const payment = (id: number) => createSelector(payments, (items) => items?.find((p) => p.id === id));
 }

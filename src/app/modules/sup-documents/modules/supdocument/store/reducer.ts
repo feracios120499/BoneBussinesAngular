@@ -32,7 +32,16 @@ export const SupDocumentDetailsReducer = wrapReducerWithFormStateUpdate(
     on(SupDocumentDetailsActions.closePayments, (state, action) => ({
       ...state,
       openPayments: state.openPayments.filter((p) => p !== parseInt(action.id)),
+    })),
+    on(SupDocumentDetailsActions.filterPayments, (state, action) => ({
+      ...state,
+      filterTerms: action.term,
+    })),
+    on(SupDocumentDetailsActions.resetPaymnetsFilter, (state) => ({
+      ...state,
+      filterTerm: '',
     }))
+
     // on(SupDocumentDetailsActions.loadTransactionsRequest, (state, action) => ({
     //   ...state,
     //   loadTurnovers: [...state.loadTurnovers, action.payload],

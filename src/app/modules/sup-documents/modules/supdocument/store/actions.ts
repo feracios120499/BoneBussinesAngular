@@ -46,6 +46,9 @@ export namespace SupDocumentDetailsActions {
     string
   >('[sup-doc] load payments');
 
+  export const filterPayments = createAction('[sup-doc] filter payments', props<{ term: string }>());
+  export const resetPaymnetsFilter = createAction('[sup-doc] reset filter payments');
+
   export const initDetails = createAction('[sup-doc][Details] init');
 
   export const destroyDetails = createAction('[sup-doc][Details] destroy');
@@ -81,12 +84,4 @@ export namespace SupDocumentDetailsActions {
   // );
 
   // export const showRequisitesModal = createAction('[ACCT][Details] show requisites modal');
-
-  // export const showExportModal = createAction('[ACCT][Details] show export modal');
-
-  // export const [printTransactionRequest, printTransactionSuccess, printTransactionFailure] = createHTTPActions<
-  //   { transactionId: string; bankId: string },
-  //   string,
-  //   string
-  // >('[ACCT][Details] print transaction');
 }
