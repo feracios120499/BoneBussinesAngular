@@ -10,16 +10,17 @@ import { PaymentModal } from '@models/payment-modal.model';
 import { StatementModalConfig } from '@models/statement-modal-config.model';
 import { SwiftModal } from '@models/swift-modal.model';
 import { SwiftDetails } from '@modules/payments/models/swift-details.model';
+import { PaymentConvertModal } from '@modules/sup-documents/modules/supdocument/types/payment-convert.modal.model';
 import { createAction, DefaultProjectorFn, MemoizedSelector, props } from '@ngrx/store';
 
 export namespace SharedActions {
   export const showPayment = createAction(
     '[SHARED] show payment',
-    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> }>()
+    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> | Partial<PaymentConvertModal> }>()
   );
   export const setPayment = createAction(
     '[SHARED] set payment',
-    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> }>()
+    props<{ payment: Partial<PaymentModal> | RecursivePartial<SwiftModal> | Partial<PaymentConvertModal> }>()
   );
   export const setPaymentLoader = createAction(
     '[SHARED] set payment loader',

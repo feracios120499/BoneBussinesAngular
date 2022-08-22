@@ -22,6 +22,8 @@ import { PaymentCommon } from '@models/payments/payment-common.model';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { PayListActions } from '@modules/payments/modules/payments-list/store/actions';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
+import { PaymentConvertModal } from '../types/payment-convert.modal.model';
+import { ContactsPhoneListComponent } from '@modules/contacts/components/contacts-phone-list/contacts-phone-list.component';
 
 @Injectable({
   providedIn: 'root',
@@ -35,13 +37,27 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     private translateService: TranslateService
   ) {}
 
-  private mapPayment(payment: PaymentDetails): PaymentModal | RecursivePartial<SwiftModal> {
-    const paymentModal = this.isSwift(payment)
-      ? this.mapPaymentListItemToSwiftModal(payment)
-      : this.mapPaymentListItemToPaymentModal(payment);
+  private mapPayment(payment: PaymentDetails): PaymentModal | RecursivePartial<SwiftModal> | PaymentConvertModal {
+    let paymentModal = undefined;
 
-    this.store.dispatch(SharedActions.setPayment({ payment }));
+    switch (payment.typeId as string) {
+      case this.isSwift(payment): {
+        paymentModal = this.mapPaymentListItemToSwiftModal(payment);
+        break;
+      }
+      case this.isConvert(payment): {
+        paymentModal = this.mapPaymentToPaymentConvertModal(payment);
+        break;
+      }
+      default: {
+        paymentModal = this.mapPaymentToPaymentModal(payment);
+        break;
+      }
+    }
 
+    console.log(paymentModal);
+
+    this.store.dispatch(SharedActions.setPayment({ payment: payment }));
     return paymentModal;
   }
 
@@ -77,7 +93,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     return swiftModal;
   }
 
-  private mapPaymentListItemToPaymentModal(payment: any): PaymentModal {
+  private mapPaymentToPaymentModal(payment: any): PaymentModal {
     const paymentModal: PaymentModal = {
       number: payment.number,
       documentDate: payment.paymentDate,
@@ -106,8 +122,48 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     return paymentModal;
   }
 
-  private isSwift(payment: any): boolean {
-    return payment.typeId?.startsWith('SWIFT');
+  private mapPaymentToPaymentConvertModal(payment: any): PaymentConvertModal {
+    const paymentModal: PaymentConvertModal = {
+      amount: payment.amount,
+      amountString: payment.amountString,
+      applicationDate: payment.applicationDate,
+      applicationValueDate: payment.applicationValueDate,
+      attachedSupDocs: { ...payment.attachedSupDocs },
+      bankPaymentId: payment.bankPaymentId,
+      bankReceivedDate: payment.bankReceivedDate,
+      commission: payment.commission,
+      commissionSum: payment.commissionSum,
+      creatingTimeStamp: payment.creatingTimeStamp,
+      currencyCode: payment.currencyCode,
+      customerId: payment.customerId,
+      dateBankPayed: payment.dateBankPayed,
+      dateCreated: payment.dateCreated,
+      id: payment.id,
+      number: payment.number,
+      purpose: payment.purpose,
+      rate: payment.rate,
+      recipientAcc: { ...payment.recipientAcc },
+      responsiblePerson: payment.responsiblePerson,
+      responsiblePersonPhone: payment.responsiblePersonPhone,
+      senderAcc: { ...payment.senderAcc },
+      statusChangedDate: payment.statusChangedDate,
+      statusId: payment.statusId,
+      transitAccount: payment.transitAccount,
+      typeId: payment.typeId,
+      userId: payment.userId,
+      visaStampCount: payment.visaStampCount,
+
+      actions: {},
+    };
+    return paymentModal;
+  }
+
+  private isSwift(payment: any): string {
+    return payment.typeId?.startsWith('SWIFT') ? 'SWIFT' : '';
+  }
+
+  private isConvert(payment: any): string {
+    return payment.typeId?.startsWith('FCAPP') ? payment.typeId : '';
   }
 
   setDocumentId$ = createEffect(() =>
@@ -283,13 +339,13 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
   showPaymentInfo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentDetailsActions.showPayment),
-      switchMap((action) => [
-        SharedActions.showPayment({
-          payment: this.mapPayment(action.payment),
-          // payment: action.payment,
-        }),
-        SupDocumentDetailsActions.setPayment({ payment: action.payment }),
-      ])
+      switchMap((action) => {
+        return [
+          SharedActions.showPayment({
+            payment: this.mapPayment(action.payment),
+          }),
+        ];
+      })
     )
   );
 
