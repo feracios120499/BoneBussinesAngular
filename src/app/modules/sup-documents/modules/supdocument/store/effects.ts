@@ -152,6 +152,8 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       typeId: payment.typeId,
       userId: payment.userId,
       visaStampCount: payment.visaStampCount,
+      isNeedMySign: payment.isNeedMySign,
+      isNeedSign: payment.isNeedSign,
 
       actions: {},
     };

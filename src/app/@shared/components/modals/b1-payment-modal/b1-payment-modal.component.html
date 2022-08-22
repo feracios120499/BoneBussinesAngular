@@ -493,6 +493,27 @@
       </div>
     </ng-container>
 
+    <ng-container *ngIf="convertPayment">
+      <div class="b1-modal-header payment-window-header">
+        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_C'">
+          <i b1-icon icon="exchange" class="ub-icons-icon-country b1-mr-2"></i>
+          <span>{{ 'components.fcapp.type.FCAPP_C' | translate }}</span>
+          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+        </div>
+        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_P'">
+          <i b1-icon icon="buying" class="ub-icons-icon-country b1-mr-2"></i>
+          <span>{{ 'components.fcapp.type.FCAPP_P' | translate }}</span>
+          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+        </div>
+        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_S'">
+          <i b1-icon icon="selling" class="ub-icons-icon-country b1-mr-2"></i>
+          <span>{{ 'components.fcapp.type.FCAPP_S' | translate }}</span>
+          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+        </div>
+      </div>
+      <div class="b1-modal-body"></div>
+    </ng-container>
+
     <div class="payment-window-footer b1-modal-footer">
       <div class="b1-page-hr payment-window-loader" [class.loading]="isLoading"></div>
       <div class="payment-window-actions" ngbAutofocus>

@@ -3,6 +3,7 @@ import { PaymentAction } from '@models/enums/payment-action.enum';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
 import { SwiftModal } from '@models/swift-modal.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
+import { PaymentConvertModal } from '@modules/sup-documents/modules/supdocument/types/payment-convert.modal.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { SharedActions } from '@store/shared/actions';
@@ -27,7 +28,10 @@ export class B1PaymentModalComponent implements OnInit {
   isPaginationAvailable = false;
   actions: PaymentActionModal = {};
   payment?: PaymentModal;
+
   swift?: SwiftModal;
+  convertPayment?: PaymentConvertModal;
+
   statusCode?: PaymentStatuses;
   currentTab: 'sender' | 'recipient' | 'intermediaryBank' = 'sender';
 
@@ -68,12 +72,21 @@ export class B1PaymentModalComponent implements OnInit {
       if (payment && 'benificiary' in payment) {
         this.swift = payment as SwiftModal;
         this.payment = undefined;
+        this.convertPayment = undefined;
         this.isPaginationAvailable = this.swift.isPaginationAvailable;
         this.actions = this.swift.actions;
         this.statusCode = this.swift.isNeedMySign ? 'ONMYSIGN' : this.swift.statusId;
+      } else if (payment && 'typeId' in payment) {
+        this.convertPayment = payment as PaymentConvertModal;
+        this.payment = undefined;
+        this.swift = undefined;
+        this.isPaginationAvailable = false;
+        this.actions = this.convertPayment.actions;
+        this.statusCode = this.convertPayment.isNeedMySign ? 'ONMYSIGN' : this.convertPayment.statusId;
       } else {
         this.payment = payment as PaymentModal;
         this.swift = undefined;
+        this.convertPayment = undefined;
         this.isPaginationAvailable = this.payment.isPaginationAvailable;
         this.actions = this.payment.actions;
         this.statusCode = this.payment.isNeedMySign ? 'ONMYSIGN' : this.payment.statusCode;

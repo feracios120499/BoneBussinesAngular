@@ -1,5 +1,6 @@
 import { PaymentActionModal } from '@models/payment-modal.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
 
 export interface PaymentConvertModal {
   amount: number;
@@ -25,11 +26,13 @@ export interface PaymentConvertModal {
   responsiblePersonPhone: string;
   senderAcc: RecipientAcc;
   statusChangedDate: string;
-  statusId: string;
+  statusId: PaymentStatuses;
   transitAccount: string;
   typeId: string;
   userId: string;
   visaStampCount: number;
+  isNeedMySign: boolean;
+  isNeedSign: boolean;
 
   actions: PaymentActionModal;
 }
