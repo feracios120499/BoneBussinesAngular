@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ResizeService } from '@services/resize.service';
 import { Observable } from 'rxjs';
+import { SupDocumentDetailsActions } from '../../store/actions';
 import { SupDocumentDetailsSelectors } from '../../store/selectors';
+import { SupDocumentPayment } from '../../types/supdocument-payments.model';
 
 @Component({
   selector: 'app-supdocument-payments-list',
@@ -19,8 +21,8 @@ export class SupdocumentPaymentsListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onPaymentClick(): void {
-    console.log('open payment');
+  onPaymentClick(payment: SupDocumentPayment): void {
+    this.store.dispatch(SupDocumentDetailsActions.getPaymentInfo({ payment }));
   }
 
   // trackId(index: number, turnover: UiTurnovers): string | undefined {

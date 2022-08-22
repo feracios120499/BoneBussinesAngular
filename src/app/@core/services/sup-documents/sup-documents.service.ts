@@ -1,7 +1,9 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FileModel } from '@models/file.model';
+import { PaymentCommon } from '@models/payments/payment-common.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentsListItem, UiPaymentsListItem } from '@modules/payments/models/payments-list-item.model';
 import { SupDocumentPayment } from '@modules/sup-documents/modules/supdocument/types/supdocument-payments.model';
 import { SupDocumentEdit } from '@modules/sup-documents/types/supdocument-edit.model';
@@ -128,5 +130,17 @@ export class SupDocumentsService extends BaseService {
 
   getPayments(clientId: string, supdocumentId: number): Observable<SupDocumentPayment[]> {
     return this.http.get<SupDocumentPayment[]>(`api/v1/supdocuments/relations/${supdocumentId}/${clientId}`);
+  }
+
+  getPayment(payment: SupDocumentPayment, clientId: string): Observable<PaymentDetails> {
+    let url = 'api/v1/pay/payments';
+    if (payment.relatedPayment.typeId === 'SWIFT') {
+      url = 'api/v1/pay/swift/payments';
+    } else if (payment.relatedPayment.typeId.startsWith('FCAPP')) {
+      url = 'api/v1/fcapplications';
+    }
+    {
+      return this.http.get<PaymentDetails>(`${url}/${payment.relatedPayment.payDocId}/${clientId}`);
+    }
   }
 }

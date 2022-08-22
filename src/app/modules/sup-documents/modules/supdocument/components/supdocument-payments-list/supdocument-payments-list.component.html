@@ -13,7 +13,7 @@
             *cdkVirtualFor="let payment of filteredPayments"
             class="b1-page-data__row payment-row"
             [payment]="payment"
-            (click)="onPaymentClick()">
+            (click)="onPaymentClick(payment)">
           </app-supdocument-payment-row>
         </cdk-virtual-scroll-viewport>
       </ng-scrollbar>

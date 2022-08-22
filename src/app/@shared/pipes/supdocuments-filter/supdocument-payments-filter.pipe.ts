@@ -8,8 +8,6 @@ import { FilterService } from '@services/filter.service';
 export class SupdocumentPaymentsFilterPipe implements PipeTransform {
   constructor(private filterService: FilterService) {}
   transform(payments: SupDocumentPayment[], terms: string = ''): SupDocumentPayment[] {
-    console.log(terms);
-
     if (!terms) {
       return payments;
     }

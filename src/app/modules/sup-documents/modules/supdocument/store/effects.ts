@@ -12,6 +12,16 @@ import { SupDocumentDetailsActions } from './actions';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupDocumentDetailsSelectors } from './selectors';
 import { SetValueAction } from 'ngrx-forms';
+import { SharedActions } from '@store/shared/actions';
+import { SupDocumentPayment } from '../types/supdocument-payments.model';
+import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
+import { RecursivePartial } from '@b1-types/recursive-partial.type';
+import { SwiftModal } from '@models/swift-modal.model';
+import { PaymentsService } from '@services/payments/payments.service';
+import { PaymentCommon } from '@models/payments/payment-common.model';
+import { PaymentAction } from '@models/enums/payment-action.enum';
+import { PayListActions } from '@modules/payments/modules/payments-list/store/actions';
+import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +31,84 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     private actions$: Actions,
     private store: Store,
     private supdocumentService: SupDocumentsService,
+    private paymentService: PaymentsService,
     private translateService: TranslateService
   ) {}
+
+  private mapPayment(payment: PaymentDetails): PaymentModal | RecursivePartial<SwiftModal> {
+    const paymentModal = this.isSwift(payment)
+      ? this.mapPaymentListItemToSwiftModal(payment)
+      : this.mapPaymentListItemToPaymentModal(payment);
+
+    this.store.dispatch(SharedActions.setPayment({ payment }));
+
+    return paymentModal;
+  }
+
+  private mapPaymentListItemToSwiftModal(payment: any): RecursivePartial<SwiftModal> {
+    const swiftModal: RecursivePartial<SwiftModal> = {
+      amount: payment.amount,
+      purpose: payment.purpose,
+      paymentDate: payment.paymentDate,
+      paymentValueDate: payment.paymentValueDate,
+      paymentFee: payment.paymentFee,
+      id: payment.id,
+      number: payment.number,
+      actions: {},
+      typePay: payment.typePay,
+      isPaginationAvailable: false,
+      senderAccount: {
+        ...payment.senderAccount,
+        accId: payment.senderAccount.accId || 0,
+        bankName: payment.senderAccount.bankName || '',
+      },
+      senderBank: {
+        ...payment.senderBank,
+      },
+      benificiary: {
+        ...payment.benificiary,
+        name: payment.benificiary.name,
+      },
+      intermediaryBank: {
+        ...payment.intermediaryBank,
+      },
+    };
+
+    return swiftModal;
+  }
+
+  private mapPaymentListItemToPaymentModal(payment: any): PaymentModal {
+    const paymentModal: PaymentModal = {
+      number: payment.number,
+      documentDate: payment.paymentDate,
+      valueDate: payment.paymentValueDate,
+      statusCode: payment.statusCode,
+      payedDate: payment.dateBankPayed,
+      purpose: payment.purpose,
+      amount: payment.amount,
+      amountString: payment.amountString,
+      currencyCode: payment.sender.accCurrencyCode || payment.recipient.accCurrencyCode,
+      sender: {
+        name: payment.sender.name,
+        number: payment.sender.accNumber,
+        taxCode: payment.sender.taxCode,
+      },
+      recipient: {
+        name: payment.recipient.name,
+        number: payment.recipient.accNumber,
+        taxCode: payment.recipient.taxCode,
+      },
+      actions: {},
+      isPaginationAvailable: false,
+      isNeedMySign: payment.isNeedMySign,
+    };
+
+    return paymentModal;
+  }
+
+  private isSwift(payment: any): boolean {
+    return payment.typeId?.startsWith('SWIFT');
+  }
 
   setDocumentId$ = createEffect(() =>
     this.actions$.pipe(
@@ -53,7 +139,6 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       ofType(SupDocumentDetailsActions.loadCurrentSupdocument),
       withLatestFrom(this.store.select(SupDocumentDetailsSelectors.currentSupdocumentRouteParams)),
       map(([_, routeParams]) => {
-        console.log('request');
         return SupDocumentDetailsActions.loadSupdocumentRequest({
           supdocumentId: routeParams.supdocumentId,
         });
@@ -131,36 +216,16 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     )
   );
 
-  updateAccountSuccess$ = createEffect(() =>
+  updateSupdocumentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentDetailsActions.updateSupdocumentSuccess),
       map(() =>
         NotifyActions.successNotification({
-          message: this.translateService.instant('componets.acct.updateAccountSuccess'),
+          message: this.translateService.instant('componets.acct.updateSupdocumentSuccess'),
         })
       )
     )
   );
-
-  // updateRangeTransactions$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType<SetValueAction<Boxed<DateRangeString>>>(SetValueAction.TYPE),
-  //     filter((formControl: SetValueAction<Boxed<DateRangeString>>) =>
-  //       formControl.controlId.startsWith(ACCT_TRANSACTIONS_FILTER_FORM)
-  //     ),
-  //     withLatestFrom(
-  //       this.store.select(AcctDetailsSelectors.filterTransactions).pipe(
-  //         filter((p) => !!p),
-  //         map((p) => p as FormGroupState<AcctTransactionsFilter>)
-  //       )
-  //     ),
-  //     filter(
-  //       ([formControl, form]: [SetValueAction<Boxed<DateRangeString>>, FormGroupState<AcctTransactionsFilter>]) =>
-  //         formControl.controlId === form.controls.range.id
-  //     ),
-  //     map((_) => AcctDetailsActions.loadTurnoversCurrentAccount())
-  //   )
-  // );
 
   loadPaymentsCurrentSupdocument$ = createEffect(() =>
     this.actions$.pipe(
@@ -194,6 +259,40 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       )
     )
   );
+
+  getPaymentInfo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentDetailsActions.getPaymentInfo),
+      switchMap((action) => clientIdWithData(this.store, action.payment)),
+      switchMap((payload) =>
+        this.supdocumentService.getPayment(payload.data, payload.clientId).pipe(
+          map((payment) => SupDocumentDetailsActions.showPayment({ payment })),
+          catchError((error) => {
+            return of(
+              NotifyActions.serverErrorNotification({
+                error,
+                message: this.translateService.instant('errors.loadPayment'),
+              })
+            );
+          })
+        )
+      )
+    )
+  );
+
+  showPaymentInfo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SupDocumentDetailsActions.showPayment),
+      switchMap((action) => [
+        SharedActions.showPayment({
+          payment: this.mapPayment(action.payment),
+          // payment: action.payment,
+        }),
+        SupDocumentDetailsActions.setPayment({ payment: action.payment }),
+      ])
+    )
+  );
+
   // openPayments$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(SupDocumentDetailsActions.openPayments),

@@ -1,7 +1,10 @@
+import { PaymentCommon } from '@models/payments/payment-common.model';
 import { SupDocument } from '@models/sup-documents/sup-document.model';
+import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { SupDocumentEdit } from '@modules/sup-documents/types/supdocument-edit.model';
 import { createAction, props } from '@ngrx/store';
 import { createHTTPActions } from '@store/shared';
+import { SupDocumentPayment } from '../types/supdocument-payments.model';
 
 export namespace SupDocumentDetailsActions {
   export const loadCurrentSupdocument = createAction('[sup-doc][Details] load current supdocument');
@@ -68,6 +71,14 @@ export namespace SupDocumentDetailsActions {
 
   export const closePayments = createAction('[sup-doc][Details] close payments', props<{ id: string }>());
 
+  export const showPayment = createAction('[sup-doc][Details] show payment', props<{ payment: PaymentDetails }>());
+
+  export const setPayment = createAction('[sup-doc][Details] set payment', props<{ payment: PaymentDetails }>());
+
+  export const getPaymentInfo = createAction(
+    '[sup-doc][Details] get payment info',
+    props<{ payment: SupDocumentPayment }>()
+  );
   // export const [loadTransactionDetailRequest, loadTransactionDetailSuccess, loadTransactionDetailFailure] =
   //   createHTTPActions<{ id: number; bankId: string }, Transaction, string>('[ACCT][Details] load transaction detail');
 

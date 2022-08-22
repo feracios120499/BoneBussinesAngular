@@ -21,7 +21,6 @@ export namespace SupDocumentDetailsSelectors {
   export const currentSupdocumentRouteParams = createSelector(
     RouteSelectors.selectRouteNestedParams,
     ({ supdocumentId }) => {
-      console.log(supdocumentId);
       return { supdocumentId: parseInt(supdocumentId || '', 10) };
     }
   );
@@ -52,9 +51,6 @@ export namespace SupDocumentDetailsSelectors {
     const paymentsFilter = new SupdocumentPaymentsFilterPipe(
       new FilterService(new DatePipe(window.navigator.language))
     );
-
-    console.log(state.filterTerms);
-
     return paymentsFilter.transform(payments, state.filterTerms);
   });
 
