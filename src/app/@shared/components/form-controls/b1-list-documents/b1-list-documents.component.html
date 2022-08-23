@@ -3,9 +3,36 @@
     <div
       class="b1-documents-list_item"
       *ngFor="let doc of documents"
+      (click)="onSupdocumentSelect(doc)"
       [ngbTooltip]="doc.supDoc.fileName + '.' + doc.supDoc.fileExt">
       <i b1-icon icon="file-pdf"></i>
       <span>{{ doc.supDoc.fileName }}</span>
+    </div>
+  </div>
+
+  <div class="b1-documents-document" [ngClass]="{ showDocument: showDocument, hiddenDocument: !showDocument }">
+    <div style="display: flex; align-items: center">
+      <div class="b1-documents-icon">
+        <i b1-icon icon="file-pdf"></i>
+      </div>
+      <div class="b1-documents-name">
+        <div class="b1-medium">{{ currentDocument?.supDoc?.fileName }}</div>
+        <div class="b1-base b1-opacity-60">{{ currentDocument?.comment }}</div>
+      </div>
+    </div>
+    <div class="b1-documents-info">
+      <div class="text-right">
+        <span class="b1-base b1-opacity-60">{{ 'components.supDocuments.details.size' | translate }}</span>
+        <span class="b1-large b1-bold">
+          {{ formatBytes(currentDocument?.supDoc?.fileSize, 2) }}
+        </span>
+      </div>
+      <div class="text-right">
+        <span class="b1-base b1-opacity-60">{{ 'components.pay.attachmentDate' | translate }}</span>
+        <span class="b1-large b1-bold">
+          {{ currentDocument?.supDoc?.lastActiveDate | date: 'dd.MM.yyyy' }}
+        </span>
+      </div>
     </div>
   </div>
 </div>

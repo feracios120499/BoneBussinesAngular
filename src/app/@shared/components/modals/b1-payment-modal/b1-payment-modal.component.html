@@ -510,6 +510,18 @@
           <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
         </div>
       </div>
+      <div class="payment-window-status" *ngIf="statusCode">
+        <div [class]="statusMessages[statusCode].class">
+          {{ statusMessages[statusCode].message | translate }}
+        </div>
+      </div>
+
+      <div class="payment-window-status_info">
+        <span class="b1-color-dark" *ngIf="statusCode == 'BANKPAID'" style="opacity: 0.6">{{
+          convertPayment.dateBankPayed | date: 'dd.MM.yyyy HH:mm'
+        }}</span>
+      </div>
+
       <div class="b1-modal-body">
         <div class="payment-window-info">
           <div class="payment-window-dates">
@@ -521,16 +533,6 @@
                 {{ convertPayment.applicationDate | date: 'dd.MM.yyyy' }}
               </div>
             </div>
-          </div>
-          <div class="payment-window-status_info">
-            <div class="payment-window-status" *ngIf="statusCode">
-              <div [class]="statusMessages[statusCode].class">
-                {{ statusMessages[statusCode].message | translate }}
-              </div>
-            </div>
-            <span class="b1-color-dark" *ngIf="statusCode == 'BANKPAID'" style="opacity: 0.6">{{
-              convertPayment.dateBankPayed | date: 'dd.MM.yyyy HH:mm'
-            }}</span>
           </div>
         </div>
         <div class="payment-window-body">
