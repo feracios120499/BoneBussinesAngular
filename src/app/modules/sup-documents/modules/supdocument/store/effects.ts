@@ -42,7 +42,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
 
     switch (payment.typeId as string) {
       case this.isSwift(payment): {
-        paymentModal = this.mapPaymentListItemToSwiftModal(payment);
+        paymentModal = this.mapPaymentItemToSwiftModal(payment);
         break;
       }
       case this.isConvert(payment): {
@@ -61,9 +61,10 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
     return paymentModal;
   }
 
-  private mapPaymentListItemToSwiftModal(payment: any): RecursivePartial<SwiftModal> {
+  private mapPaymentItemToSwiftModal(payment: any): RecursivePartial<SwiftModal> {
     const swiftModal: RecursivePartial<SwiftModal> = {
       amount: payment.amount,
+      attachedSupDocs: [...payment.attachedSupDocs],
       purpose: payment.purpose,
       paymentDate: payment.paymentDate,
       paymentValueDate: payment.paymentValueDate,
@@ -103,6 +104,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       purpose: payment.purpose,
       amount: payment.amount,
       amountString: payment.amountString,
+      attachedSupDocs: [...payment.attachedSupDocs],
       currencyCode: payment.sender.accCurrencyCode || payment.recipient.accCurrencyCode,
       sender: {
         name: payment.sender.name,
@@ -128,7 +130,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       amountString: payment.amountString,
       applicationDate: payment.applicationDate,
       applicationValueDate: payment.applicationValueDate,
-      attachedSupDocs: { ...payment.attachedSupDocs },
+      attachedSupDocs: [...payment.attachedSupDocs],
       bankPaymentId: payment.bankPaymentId,
       bankReceivedDate: payment.bankReceivedDate,
       commission: payment.commission,

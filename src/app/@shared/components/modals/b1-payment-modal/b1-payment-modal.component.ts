@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PaymentAction } from '@models/enums/payment-action.enum';
 import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
+import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SwiftModal } from '@models/swift-modal.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
-import { PaymentConvertModal } from '@modules/sup-documents/modules/supdocument/types/payment-convert.modal.model';
+import {
+  PaymentConvertModal,
+  SupDocumentAttach,
+} from '@modules/sup-documents/modules/supdocument/types/payment-convert.modal.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { SharedActions } from '@store/shared/actions';
@@ -34,6 +38,8 @@ export class B1PaymentModalComponent implements OnInit {
 
   statusCode?: PaymentStatuses;
   currentTab: 'sender' | 'recipient' | 'intermediaryBank' = 'sender';
+
+  attachedSupDocs?: SupDocumentAttach[];
 
   statusMessages: any = {
     NEW: {
@@ -67,6 +73,7 @@ export class B1PaymentModalComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.attachedSupDocs = undefined;
     this.payment$.subscribe((payment) => {
       this.currentTab = 'sender';
       if (payment && 'benificiary' in payment) {
@@ -76,6 +83,10 @@ export class B1PaymentModalComponent implements OnInit {
         this.isPaginationAvailable = this.swift.isPaginationAvailable;
         this.actions = this.swift.actions;
         this.statusCode = this.swift.isNeedMySign ? 'ONMYSIGN' : this.swift.statusId;
+        if (this.swift && 'attachedSupDocs' in this.swift) {
+          this.attachedSupDocs = this.swift.attachedSupDocs;
+          console.log('swift', this.attachedSupDocs);
+        }
       } else if (payment && 'typeId' in payment) {
         this.convertPayment = payment as PaymentConvertModal;
         this.payment = undefined;
@@ -83,6 +94,10 @@ export class B1PaymentModalComponent implements OnInit {
         this.isPaginationAvailable = false;
         this.actions = this.convertPayment.actions;
         this.statusCode = this.convertPayment.isNeedMySign ? 'ONMYSIGN' : this.convertPayment.statusId;
+        if (this.convertPayment && 'attachedSupDocs' in this.convertPayment) {
+          this.attachedSupDocs = this.convertPayment.attachedSupDocs;
+          console.log('convert', this.attachedSupDocs);
+        }
       } else {
         this.payment = payment as PaymentModal;
         this.swift = undefined;
@@ -90,6 +105,10 @@ export class B1PaymentModalComponent implements OnInit {
         this.isPaginationAvailable = this.payment.isPaginationAvailable;
         this.actions = this.payment.actions;
         this.statusCode = this.payment.isNeedMySign ? 'ONMYSIGN' : this.payment.statusCode;
+        if (this.payment && 'attachedSupDocs' in this.payment) {
+          this.attachedSupDocs = this.payment.attachedSupDocs;
+          console.log('payment', this.attachedSupDocs);
+        }
       }
     });
   }
@@ -116,5 +135,9 @@ export class B1PaymentModalComponent implements OnInit {
     if (payment && payment.previous) {
       payment.previous();
     }
+  }
+
+  onClick(doc: SupDocumentAttach): void {
+    console.log(doc.supDoc.fileName);
   }
 }
