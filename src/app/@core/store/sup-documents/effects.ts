@@ -157,7 +157,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant('create success'),
+          message: this.translateService.instant('notify.success'),
         }),
       ])
     )
@@ -244,7 +244,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant('delete success'),
+          message: this.translateService.instant('notify.deleted'),
         }),
       ])
     )

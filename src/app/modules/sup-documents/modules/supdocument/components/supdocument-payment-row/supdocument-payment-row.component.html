@@ -75,22 +75,22 @@
   </div>
   <div class="payment-window-status b1-base text-right">
     <span class="payment-window-status b1-color-success" *ngIf="payment.relatedPayment.statusId == 'NEW'">
-      {{ 'components.pay.payment.status.NEW' | translate }}
+      <span>{{ 'components.pay.payment.status.NEW' | translate }}</span>
     </span>
     <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'ONSIGN'">
-      {{ 'components.pay.payment.status.ONSIGNING' | translate }}</span
-    >
+      <span>{{ 'components.pay.payment.status.ONSIGNING' | translate }}</span>
+    </span>
     <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'SIGNED'">
-      {{ 'components.pay.payment.status.SIGNED' | translate }}</span
-    >
+      <span>{{ 'components.pay.payment.status.SIGNED' | translate }}</span>
+    </span>
     <span class="payment-window-status b1-color-info" *ngIf="payment.relatedPayment.statusId == 'BANKRECEIVED'">
-      {{ 'components.pay.payment.status.BANKRECEIVED' | translate }}</span
-    >
+      <span>{{ 'components.pay.payment.status.BANKRECEIVED' | translate }}</span>
+    </span>
     <span *ngIf="payment.relatedPayment.statusId == 'BANKPAID'" class="b1-color-success payment-window-status">
       <span>{{ 'components.pay.payment.status.BANKPAID' | translate }}</span>
     </span>
     <span class="payment-window-status b1-color-error" *ngIf="payment.relatedPayment.statusId == 'BANKERROR'">
-      {{ 'components.pay.payment.status.BANKERROR' | translate }}</span
-    >
+      <span>{{ 'components.pay.payment.status.BANKERROR' | translate }}</span>
+    </span>
   </div>
 </div>

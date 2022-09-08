@@ -16,8 +16,9 @@ export class B1ListDocumentsComponent implements OnInit {
 
   onSupdocumentSelect(doc: PaymentSupDoc): void {
     if (this.currentDocument == doc) {
-      this.currentDocument = undefined;
       this.showDocument = false;
+
+      this.currentDocument = undefined;
       return;
     }
     this.currentDocument = doc;

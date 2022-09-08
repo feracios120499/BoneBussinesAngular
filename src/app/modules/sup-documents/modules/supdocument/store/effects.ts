@@ -13,17 +13,12 @@ import { SupDocument } from '@models/sup-documents/sup-document.model';
 import { SupDocumentDetailsSelectors } from './selectors';
 import { SetValueAction } from 'ngrx-forms';
 import { SharedActions } from '@store/shared/actions';
-import { SupDocumentPayment } from '../types/supdocument-payments.model';
-import { PaymentActionModal, PaymentModal } from '@models/payment-modal.model';
 import { RecursivePartial } from '@b1-types/recursive-partial.type';
 import { SwiftModal } from '@models/swift-modal.model';
 import { PaymentsService } from '@services/payments/payments.service';
-import { PaymentCommon } from '@models/payments/payment-common.model';
-import { PaymentAction } from '@models/enums/payment-action.enum';
-import { PayListActions } from '@modules/payments/modules/payments-list/store/actions';
 import { PaymentDetails } from '@modules/payments/models/payment-details.model';
 import { PaymentConvertModal } from '../types/payment-convert.modal.model';
-import { ContactsPhoneListComponent } from '@modules/contacts/components/contacts-phone-list/contacts-phone-list.component';
+import { PaymentModal } from '@models/payment-modal.model';
 
 @Injectable({
   providedIn: 'root',
@@ -281,7 +276,7 @@ export class SupDocumentDetailsEffects implements OnRunEffects {
       ofType(SupDocumentDetailsActions.updateSupdocumentSuccess),
       map(() =>
         NotifyActions.successNotification({
-          message: this.translateService.instant('componets.acct.updateSupdocumentSuccess'),
+          message: this.translateService.instant('components.supDocuments.successfullyProcessed'),
         })
       )
     )

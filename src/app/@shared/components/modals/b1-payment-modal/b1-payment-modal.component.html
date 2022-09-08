@@ -5,7 +5,7 @@
     </div>
     <ng-container *ngIf="payment">
       <div class="b1-modal-header payment-window-header">
-        <div class="b1-large">
+        <div class="payment-window-header b1-large">
           <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
           <span>{{ 'components.pay.import.payment' | translate }}</span>
           <span class="b1-ml-2"> №{{ payment.number }} </span>
@@ -494,32 +494,31 @@
     </ng-container>
     <ng-container *ngIf="convertPayment">
       <div class="b1-modal-header payment-window-header">
-        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_C'">
-          <i b1-icon icon="exchange" class="ub-icons-icon-country b1-mr-2"></i>
-          <span>{{ 'components.fcapp.type.FCAPP_C' | translate }}</span>
-          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
-        </div>
-        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_P'">
-          <i b1-icon icon="buying" class="ub-icons-icon-country b1-mr-2"></i>
-          <span>{{ 'components.fcapp.type.FCAPP_P' | translate }}</span>
-          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
-        </div>
-        <div class="b1-large" *ngIf="convertPayment.typeId === 'FCAPP_S'">
-          <i b1-icon icon="selling" class="ub-icons-icon-country b1-mr-2"></i>
-          <span>{{ 'components.fcapp.type.FCAPP_S' | translate }}</span>
-          <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
-        </div>
-      </div>
-      <div class="payment-window-status" *ngIf="statusCode">
-        <div [class]="statusMessages[statusCode].class">
-          {{ statusMessages[statusCode].message | translate }}
-        </div>
-      </div>
+        <div style="display: flex; justify-content: space-between">
+          <div class="payment-window-header b1-large" *ngIf="convertPayment.typeId === 'FCAPP_C'">
+            <i b1-icon icon="exchange" class="ub-icons-icon-country b1-mr-2"></i>
+            <span>{{ 'components.fcapp.type.FCAPP_C' | translate }}</span>
+            <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+          </div>
 
-      <div class="payment-window-status_info">
-        <span class="b1-color-dark" *ngIf="statusCode == 'BANKPAID'" style="opacity: 0.6">{{
-          convertPayment.dateBankPayed | date: 'dd.MM.yyyy HH:mm'
-        }}</span>
+          <div class="payment-window-header b1-large" *ngIf="convertPayment.typeId === 'FCAPP_P'">
+            <i b1-icon icon="buying" class="ub-icons-icon-country b1-mr-2"></i>
+            <span>{{ 'components.fcapp.type.FCAPP_P' | translate }}</span>
+            <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+          </div>
+
+          <div class="payment-window-header b1-large" *ngIf="convertPayment.typeId === 'FCAPP_S'">
+            <i b1-icon icon="selling" class="ub-icons-icon-country b1-mr-2"></i>
+            <span>{{ 'components.fcapp.type.FCAPP_S' | translate }}</span>
+            <span class="b1-ml-2"> №{{ convertPayment.number }} </span>
+          </div>
+
+          <div class="payment-window-status" *ngIf="statusCode">
+            <div [class]="statusMessages[statusCode].class">
+              {{ statusMessages[statusCode].message | translate }}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="b1-modal-body">
@@ -539,11 +538,13 @@
           <div class="payment-window-container">
             <div class="payment-window-sender">
               <div class="payment-window-section">
-                <div class="b1-large">
+                <div class="b1-large" style="display: flex; justify-content: space-between">
                   <span *ngIf="convertPayment.senderAcc && convertPayment.senderAcc.accCurrencyCode">
                     {{ 'components.pay.writeoffAccount' | translate }}
                   </span>
-                  <span *ngIf="convertPayment.senderAcc && convertPayment.senderAcc.accCurrencyCode">
+                  <span
+                    class="b1-large b1-page-data__subtitle b1-IE-word"
+                    *ngIf="convertPayment.senderAcc && convertPayment.senderAcc.accCurrencyCode">
                     {{ convertPayment.senderAcc.accCurrencyCode }}
                   </span>
                 </div>
@@ -572,11 +573,13 @@
             </div>
             <div class="payment-window-recipient">
               <div class="payment-window-section">
-                <div class="b1-large">
+                <div class="b1-large" style="display: flex; justify-content: space-between">
                   <span *ngIf="convertPayment.recipientAcc && convertPayment.recipientAcc.accCurrencyCode">
                     {{ 'components.salary.debitAccount' | translate }}
                   </span>
-                  <span *ngIf="convertPayment.recipientAcc && convertPayment.recipientAcc.accCurrencyCode">
+                  <span
+                    class="b1-large b1-page-data__subtitle b1-IE-word"
+                    *ngIf="convertPayment.recipientAcc && convertPayment.recipientAcc.accCurrencyCode">
                     {{ convertPayment.recipientAcc.accCurrencyCode }}
                   </span>
                 </div>
