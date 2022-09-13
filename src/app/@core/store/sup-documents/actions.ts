@@ -51,7 +51,7 @@ export namespace SupDocumentsActions {
 
   export const [deleteSupdocumentRequest, deleteSupdocumentSuccess, deleteSupdocumentFailure] = createHTTPActions<
     number[],
-    void,
+    number,
     string
   >(`[${SUP_DOC_KEY}] delete supdocument`);
 

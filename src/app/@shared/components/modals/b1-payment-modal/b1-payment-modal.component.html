@@ -7,6 +7,11 @@
       <div class="b1-modal-header payment-window-header">
         <div class="payment-window-header b1-large">
           <i b1-icon icon="country" class="ub-icons-icon-country b1-mr-2"></i>
+          <!-- <i
+            b1-icon
+            icon="cards"
+            class="ub-icons-icon-my-accounts b1-mr-2"
+            *ngIf="payment.typeId == 'INNER' || payment.typeId == 'INNER-AP'"></i> -->
           <span>{{ 'components.pay.import.payment' | translate }}</span>
           <span class="b1-ml-2"> №{{ payment.number }} </span>
           <b1-import-error [errors]="payment.errors" field="number"></b1-import-error>

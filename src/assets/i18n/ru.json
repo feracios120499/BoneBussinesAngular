@@ -1808,6 +1808,7 @@
 	"components.supDocuments.signed": "подписано",
 	"components.supDocuments.successAddingSupDocument": "Подтверждающий документ успешно добавлен",
 	"components.supDocuments.successSendingSupDocument": "Подтверждающие документы успешно отправлен",
+	"components.supDocuments.successDeletingSupDocument": "Подтверждающие документы в количестве {0} успешно удалены",
 	"components.supDocuments.successfullyProcessed": "успешно обработано",
 	"components.supDocuments.supDocumentSignatures": "Подписи подтверждающего документа",
 	"components.supDocuments.uploadSupDocument": "Добавление документа",

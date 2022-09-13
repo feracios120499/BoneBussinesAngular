@@ -27,6 +27,8 @@ import {
 } from '@modules/sup-documents/types/supdocument-modal-result.model';
 import { SupdocumentSendModalComponent } from '@modules/sup-documents/components/supdocument-send-modal/supdocument-send-modal.component';
 import { Recipient } from '@modules/sup-documents/types/supdocument-upload.model';
+import { StatusResponse } from '@models/status-response.model';
+import { ArrayNotification } from '@models/array-notification.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,18 @@ export class SupDocumentsEffects {
     private modalService: ModalService,
     private translateService: TranslateService
   ) {}
+
+  private mapResults(response: StatusResponse[]): ArrayNotification[] {
+    return response.map((item) => {
+      const notify: ArrayNotification = {
+        number: item.id,
+        isSuccess: item.isSuccess,
+        message: item.message || '',
+      };
+
+      return notify;
+    });
+  }
 
   loadDocuments$ = createEffect(() =>
     this.actions$.pipe(
@@ -79,6 +93,7 @@ export class SupDocumentsEffects {
     this.actions$.pipe(
       ofType(SupDocumentsActions.loadRecipientsFailure),
       switchMap(() => [
+        // NotifyActions.arrayNotification({ results: this.mapResults(action.payload) })
         NotifyActions.errorNotification({
           message: this.translateService.instant('load recipient failure'),
         }),
@@ -157,7 +172,7 @@ export class SupDocumentsEffects {
       switchMap(() => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant('notify.success'),
+          message: this.translateService.instant('components.supDocuments.successAddingSupDocument'),
         }),
       ])
     )
@@ -216,16 +231,8 @@ export class SupDocumentsEffects {
       switchMap((action) => clientIdWithData(this.store, action.payload)),
       switchMap((payload) =>
         this.supDocumentsService.deleteSupdocument(payload.clientId, payload.data).pipe(
-          map(() => SupDocumentsActions.deleteSupdocumentSuccess()),
-          catchError((error: ServerError) =>
-            of(
-              SupDocumentsActions.deleteSupdocumentFailure(error.message),
-              NotifyActions.serverErrorNotification({
-                error,
-                message: this.translateService.instant('errors.deleteSupdocument'),
-              })
-            )
-          )
+          map(() => SupDocumentsActions.deleteSupdocumentSuccess(payload.data.length)),
+          catchError((error: ServerError) => of(SupDocumentsActions.deleteSupdocumentFailure(error.message)))
         )
       )
     )
@@ -234,10 +241,12 @@ export class SupDocumentsEffects {
   deleteSupdocumentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.deleteSupdocumentSuccess),
-      switchMap(() => [
+      switchMap((count) => [
         SupDocumentsActions.loadDocuments(),
         NotifyActions.successNotification({
-          message: this.translateService.instant('notify.deleted'),
+          message: this.translateService
+            .instant('components.supDocuments.successDeletingSupDocument')
+            .replace('{0}', count.payload),
         }),
       ])
     )
@@ -248,7 +257,7 @@ export class SupDocumentsEffects {
       ofType(SupDocumentsActions.deleteSupdocumentFailure),
       switchMap(() => [
         NotifyActions.errorNotification({
-          message: this.translateService.instant('delete bad'),
+          message: this.translateService.instant('errors.deletingError'),
         }),
       ])
     )
@@ -279,9 +288,7 @@ export class SupDocumentsEffects {
   downloadSupdocumentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SupDocumentsActions.downloadSupdocumentSuccess),
-      map((action) => {
-        return SharedActions.saveFile({ file: action.payload });
-      })
+      map((action) => SharedActions.saveFile({ file: action.payload }))
     )
   );
 

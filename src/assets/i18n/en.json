@@ -1808,6 +1808,7 @@
 	"components.supDocuments.signed": "signed",
 	"components.supDocuments.successAddingSupDocument": "Support document successfully added",
 	"components.supDocuments.successSendingSupDocument": "Support documents successfully sent",
+	"components.supDocuments.successDeletingSupDocument": "Support document in number of {0} successfully deleted",
 	"components.supDocuments.successfullyProcessed": "successfully processed",
 	"components.supDocuments.supDocumentSignatures": "Support document signatures",
 	"components.supDocuments.uploadSupDocument": "Add a document",
