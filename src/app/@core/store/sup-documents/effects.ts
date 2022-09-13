@@ -182,14 +182,7 @@ export class SupDocumentsEffects {
       switchMap(([{ clientId, data }, ids]) =>
         this.supDocumentsService.sendToBank(clientId, data, ids).pipe(
           map((response) => SupDocumentsActions.sendSupdocumentSuccess(response)),
-          catchError((error: ServerError) =>
-            of(
-              SupDocumentsActions.sendSupdocumentFailure(error.message),
-              NotifyActions.errorNotification({
-                message: this.translateService.instant('send error'),
-              })
-            )
-          )
+          catchError((error: ServerError) => of(SupDocumentsActions.sendSupdocumentFailure(error.message)))
         )
       )
     )
@@ -210,7 +203,7 @@ export class SupDocumentsEffects {
     this.actions$.pipe(
       ofType(SupDocumentsActions.sendSupdocumentFailure),
       switchMap(() => [
-        NotifyActions.successNotification({
+        NotifyActions.errorNotification({
           message: this.translateService.instant('components.supDocuments.errors.sendingSupDocument'),
         }),
       ])
