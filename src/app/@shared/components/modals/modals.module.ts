@@ -40,6 +40,7 @@ import { B1CustomersModalComponent } from './b1-customers-modal/b1-customers-mod
 import { B1importErrorModule } from '@ui/b1-import-error/b1-import-error.module';
 import { B1EditPaymentModalComponent } from './b1-edit-payment-modal/b1-edit-payment-modal.component';
 import { WithinCountryFormModule } from '@payment-forms/within-country-form/within-country-form.module';
+import { B1ListDocumentsModule } from '@form-controls/b1-list-documents/b1-list-documents.module';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { WithinCountryFormModule } from '@payment-forms/within-country-form/with
     CorrespondentsFilterModule,
     B1EmptyModule,
     B1IconModule,
+    B1ListDocumentsModule,
     IbanModule,
     NgSelectScrollModule,
     NgSelectModule,

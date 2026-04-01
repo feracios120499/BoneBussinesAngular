@@ -1,13 +1,13 @@
 <ng-container select="body">
   <div>
     <form [formGroup]="formGroup" #formRef="ngForm">
-      <div class="b1-flex b1-align-center b1-justify-center">
+      <div class="b1-flex b1-align-center b1-justify-center" style="margin-bottom: 16px;">
         <label for="file" class="b1-button b1-button-primary">
           <i b1-icon icon="upload"></i>
             <div>
             {{'components.supDocuments.chooseSupDocument' | translate}}
             </div>
-        <input hidden id="file" type="file" fileinput="file" filepreview="file.name" ng-show="false"
+        <input  [formControl]="FileControl" hidden id="file" type="file" fileinput="file" filepreview="file.name" ng-show="false"
         accept="application/pdf" (change)="getFile($event)">
         </label>
       </div>

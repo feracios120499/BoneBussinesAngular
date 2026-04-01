@@ -8,7 +8,7 @@ describe('SupdocumentItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SupdocumentItemComponent ]
+      declarations: [SupdocumentItemComponent]
     })
     .compileComponents();
   });

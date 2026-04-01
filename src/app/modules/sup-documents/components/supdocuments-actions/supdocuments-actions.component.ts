@@ -45,7 +45,7 @@ export class SupdocumentsActionsComponent implements OnInit {
   private executer(
     supdocuments: UiSupDocumentListItem[],
     selectNotificationTranslate: string,
-    func: (selected: string[]) => void,
+    func: (selected: number[]) => void,
     confirmTranslate?: string
   ): void {
     const selected = supdocuments.filter((s) => s.selected).map((s) => s.id);
@@ -75,7 +75,7 @@ export class SupdocumentsActionsComponent implements OnInit {
   private executerSend(
     supdocuments: UiSupDocumentListItem[],
     selectNotificationTranslate: string,
-    func: (selectedIds: string[]) => void
+    func: (selectedIds: number[]) => void
   ): void {
     const selectedIds = supdocuments.filter((s) => s.selected).map((s) => s.id);
     const selected = supdocuments.filter((s) => s.selected);

@@ -1,5 +1,6 @@
 import { ImportError } from '@modules/payments/models/import-response.model';
 import { PaymentStatuses } from '@modules/payments/models/payment-status.type';
+import { SupDocumentAttach } from '@modules/sup-documents/modules/supdocument/types/payment-convert.modal.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DefaultProjectorFn, MemoizedSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -24,6 +25,8 @@ export interface PaymentModal {
   next?: () => void;
   previous?: () => void;
   errors?: ImportError;
+
+  attachedSupDocs?: SupDocumentAttach[];
 }
 
 export interface PaymentAccountModal {

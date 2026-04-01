@@ -3,17 +3,7 @@ import { SupDocumentSendToBankModel, SupDocumentUploadModel } from './supdocumen
 export interface SupdocumentForm
   extends Pick<
     SupDocumentUploadModel,
-    | 'FileName'
-    | 'FileExt'
-    | 'FileSize'
-    | 'FileBody'
-    | 'Description'
+    'FileName' | 'FileExt' | 'FileSize' | 'FileBody' | 'Description' | 'FileControl'
   > {}
 
-
-  export interface SupdocumentSendForm extends Pick<
-    SupDocumentSendToBankModel,
-    | 'Recipients'
-    | 'Message'
-  >{}
-
+export interface SupdocumentSendForm extends Pick<SupDocumentSendToBankModel, 'Recipients' | 'Message'> {}

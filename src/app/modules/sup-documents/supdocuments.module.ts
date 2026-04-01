@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupdocumentsComponent } from './supdocuments.component';
 import { SupdocumentsListComponent } from './components/supdocuments-list/supdocuments-list.component';
-import { RouterModule } from '@angular/router';
 import { B1ContentWrapperModule } from '@containers/b1-content-wrapper/b1-content-wrapper.module';
 import { SupdocumentsHeaderComponent } from './components/supdocuments-header/supdocuments-header.component';
 import { B1DropdownModule } from '@ui/b1-dropdown/b1-dropdown.module';
@@ -34,6 +33,11 @@ import { SupdocumentFormSendComponent } from './components/supdocument-form-send
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { SupdocumentsRoutingModule } from './supdocuments-routing.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SupdocumentFormSendComponent,
   ],
   imports: [
+    NgxSkeletonLoaderModule,
+    SupdocumentsRoutingModule,
+    NgMultiSelectDropDownModule,
+    MatFormFieldModule,
+    MatSelectModule,
     CommonModule,
     TranslateModule,
     NumberToArrayModule,
@@ -73,12 +82,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgScrollbarModule,
     NgSelectScrollModule,
     NgSelectModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: SupdocumentsComponent,
-      },
-    ]),
   ],
 })
 export class SupdocumentsModule {}

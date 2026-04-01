@@ -1,1 +1,1 @@
-export type SupdocumentsLoading = 'list' | 'create';
+export type SupdocumentsLoading = 'list' | 'create' | 'details' | 'payments';

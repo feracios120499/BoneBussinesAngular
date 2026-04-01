@@ -9,7 +9,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
 
-const { required, maxLength } = Validators;
+const { maxLength } = Validators;
 
 @Component({
   selector: 'app-supdocument-form',
@@ -22,9 +22,11 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
   formGroup!: FormGroup;
   maxFileSize: number = 30;
 
+  FileControl = new FormControl({ value: '', disabled: false });
+
   // DESCRIPTION:
-  descriptionMaxLength = 100;
-  DescriptionControl = new FormControl('', [required, maxLength(this.descriptionMaxLength)]);
+  descriptionMaxLength = 300;
+  DescriptionControl = new FormControl('', [maxLength(this.descriptionMaxLength)]);
 
   // UNVALIDATED & DISABLED:
   FileNameControl = new FormControl({ value: '', disabled: true });
@@ -35,8 +37,10 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
   CreatingDateControl = new FormControl({ value: '', disabled: true });
   LastActiveDateControl = new FormControl({ value: '', disabled: true });
   IdControl = new FormControl({ value: 0, disabled: true });
-  StatusControl = new FormControl({ value: 'NEW', disabled: true })
-  EDRPOControl = new FormControl({ value: '', disabled: true })
+  StatusControl = new FormControl({ value: 'NEW', disabled: true });
+  EDRPOControl = new FormControl({ value: '', disabled: true });
+
+  FileControll = new FormControl('');
 
   @ViewChild('formRef') formRef!: NgForm;
 
@@ -56,7 +60,7 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
     this.updateTreeValidity(this.formGroup);
   }
 
-  convertFile(file : File) : Observable<string> {
+  convertFile(file: File): Observable<string> {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -77,21 +81,23 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
   }
 
   getFile(event: any): void {
-    this.convertFile(event.target.files[0]).subscribe(base64 => {
+    this.convertFile(event.target.files[0]).subscribe((base64) => {
       this.writeValue({
         FileName: event.target.files[0].name.split('.')[0],
         FileExt: event.target.files[0].name.split('.').pop(),
         FileSize: event.target.files[0].size,
         FileBody: base64 !== '' ? base64 : '',
-        Description: this.DescriptionControl.value
+        Description: '',
+        FileControl: '',
       });
     });
   }
 
-  isFileExist():boolean {
-    if (this.formGroup.controls['FileName'].value != '')
-      {return true;};
-      return false;
+  isFileExist(): boolean {
+    if (this.formGroup.controls['FileName'].value != '') {
+      return true;
+    }
+    return false;
   }
 
   private initForm(): void {
@@ -101,6 +107,7 @@ export class SupdocumentFormComponent extends BaseSubFormComponent implements On
       FileSize: this.FileSizeControl,
       FileBody: this.FileBodyControl,
       Description: this.DescriptionControl,
+      FileControl: this.FileControl,
     };
     this.formGroup = new FormGroup(controls);
   }
