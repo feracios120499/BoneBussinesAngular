@@ -31,12 +31,9 @@ import { B1PageButtonModule } from '@ui/b1-page-button/b1-page-button.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SupdocumentSendModalComponent } from './components/supdocument-send-modal/supdocument-send-modal.component';
 import { SupdocumentFormSendComponent } from './components/supdocument-form-send/supdocument-form-send.component';
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NgSelectScrollModule } from '@directives/ng-select-scroll/ng-select-scroll.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -48,12 +45,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SupdocumentAddModalComponent,
     SupdocumentFormComponent,
     SupdocumentSendModalComponent,
-    SupdocumentFormSendComponent
+    SupdocumentFormSendComponent,
   ],
   imports: [
-    NgMultiSelectDropDownModule,
-    MatFormFieldModule,
-    MatSelectModule,
     CommonModule,
     TranslateModule,
     NumberToArrayModule,
@@ -76,12 +70,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     B1SkeletonModule,
     B1TextareaModule,
     B1PageButtonModule,
+    NgScrollbarModule,
+    NgSelectScrollModule,
+    NgSelectModule,
     RouterModule.forChild([
       {
         path: '',
         component: SupdocumentsComponent,
       },
     ]),
-  ]
+  ],
 })
-export class SupdocumentsModule { }
+export class SupdocumentsModule {}

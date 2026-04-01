@@ -13,7 +13,6 @@ import { SupdocumentFormSendComponent } from '../supdocument-form-send/supdocume
   selector: 'app-supdocument-send-modal',
   templateUrl: './supdocument-send-modal.component.html',
   styleUrls: ['./supdocument-send-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SupdocumentSendModalComponent extends BaseB1ModalComponent<SupdocumentSendModalResult> implements OnInit {
   @Input() config!: SupdocumentSendModalConfig;

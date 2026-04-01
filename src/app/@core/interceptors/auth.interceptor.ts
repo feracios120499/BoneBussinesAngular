@@ -14,7 +14,7 @@ import { Token } from './../../modules/auth/models/token.model';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  endpoint = 'https://bobusiness.unity-bars.com/Bars.API.Web.Client/';
+  endpoint = 'http://obbbmw01.unity-bars.com/Bars.API.Web.Client/';
   token: Token | undefined = undefined;
 
   constructor(private translate: TranslateService, private store: Store, private authService: AuthService) {
@@ -41,9 +41,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return this.authService.refreshToken(this.token?.refreshToken, this.token?.sessionId).pipe(
         tap((token) => {
-          this.store.dispatch(AuthActions.setToken({ token }));
           this.refreshTokenInProgress = false;
-          this.tokenRefreshedSource.next();
+          if (token) {
+            this.store.dispatch(AuthActions.setToken({ token }));
+            this.tokenRefreshedSource.next();
+          } else {
+            this.logout();
+          }
         }),
         catchError(() => {
           this.refreshTokenInProgress = false;

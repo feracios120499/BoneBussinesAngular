@@ -1,32 +1,49 @@
 <ng-container select="body">
-      <form [formGroup]="formGroup" #formRef="ngForm">
-        <ng-container *ngrxLet="recipients$ as recipients">
-          <ng-container *ngrxLet="isLoadingRecipients$ as isLoadingRecipients">
-            <ng-container *ngIf="isLoadingRecipients && recipients.length">
+  <form [formGroup]="formGroup" #formRef="ngForm">
+    <ng-container *ngrxLet="recipients$ as recipients">
+      <ng-container *ngrxLet="isLoadingRecipients$ as isLoadingRecipients">
+        <ng-container *ngIf="isLoadingRecipients && recipients.length">
 
-                  <ng-multiselect-dropdown
-                  [placeholder]="'Select emails'"
-                  [settings]="dropdownSettings"
-                  [data]="recipients"
-                  [formControl]="RecipientsControl"
-                  >
-                  </ng-multiselect-dropdown>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="b1-input b1-mt-6">
+                <label class="b1-input__label b1-input__label_top b1-small b1-bold">
+                  {{ 'components.acct.acctStatement.format' | translate }}
+                </label>
+                <div class="w-full">
+                  <ng-select class="formats" appendTo="body" [editableSearchTerm]="false" [searchable]="false"
+                    [maxSelectedItems]="3" [multiple]="true" [clearable]="false" [(ngModel)]="selectedRecipients"
+                    formControlName="format" [closeOnSelect]="false">
+                    <ng-template ng-label-tmp let-item="item">
+                      <div class="b1-base b1-bold b1-flex b1-align-center">
+                        {{ item | json}}
+                      </div>
+                    </ng-template>
+                    <ng-option *ngFor="let format of recipients" [value]="format">
+                      <div class="b1-base b1-bold b1-flex b1-align-center">
+                        {{ format | json}}
+                      </div>
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  <span class="b1-small b1-opacity-60">{{'components.supDocuments.maxAmountRecipientEmails' |
-                  translate }}{{recipientsMaxLength}}</span>
-        
-              
-            </ng-container>
-          </ng-container>
+          <span class="b1-small b1-opacity-60">{{'components.supDocuments.maxAmountRecipientEmails' |
+            translate }}{{recipientsMaxLength}}</span>
+
+
         </ng-container>
-      
-          <fieldset class="b1-mt-6">
-            <legend class="b1-large b1-mb-4">
-              {{ 'components.supDocuments.details.description' | translate }}
-            </legend>
-            <b1-textarea mobileClass="b1-mt-3" [maxLength]="messageMaxLength" [formControl]="MessageControl">
-            </b1-textarea>
-          </fieldset>
-        </form>
+      </ng-container>
+    </ng-container>
+
+    <fieldset class="b1-mt-6">
+      <legend class="b1-large b1-mb-4">
+        {{ 'components.supDocuments.details.description' | translate }}
+      </legend>
+      <b1-textarea mobileClass="b1-mt-3" [maxLength]="messageMaxLength" [formControl]="MessageControl">
+      </b1-textarea>
+    </fieldset>
+  </form>
 </ng-container>
-  

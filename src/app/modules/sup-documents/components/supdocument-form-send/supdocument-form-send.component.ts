@@ -10,26 +10,21 @@ import { SupDocumentsSelectors } from '@store/sup-documents/selectors';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { distinctUntilObjectChanged } from '../../../../@shared/custom-operators/distinct-until-object-changed.operator';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { indexOf, merge } from 'lodash';
 import { pushIfNotExist } from '@store/shared';
 const { required, maxLength } = Validators;
-
 
 @Component({
   selector: 'app-supdocument-form-send',
   templateUrl: './supdocument-form-send.component.html',
   styleUrls: ['./supdocument-form-send.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideValueAccessor(SupdocumentFormSendComponent)],
-
 })
 export class SupdocumentFormSendComponent extends BaseSubFormComponent implements OnInit {
   formGroup!: FormGroup;
-  dropdownSettings: IDropdownSettings = {};
 
-  recipients$: Observable<Recipient[]> = this.store.select(SupDocumentsSelectors.recipients)
-  isLoadingRecipients$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingRecipients)
+  recipients$: Observable<Recipient[]> = this.store.select(SupDocumentsSelectors.recipients);
+  isLoadingRecipients$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoadingRecipients);
 
   @ViewChild('formRef') formRef!: NgForm;
 
@@ -46,24 +41,17 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   ngOnInit(): void {
     super.ngOnInit();
     this.initForm();
-
-    this.dropdownSettings = {
-      allowSearchFilter: true,
-      singleSelection: false,
-      limitSelection: 3,
-      idField: 'id',
-      textField: 'email',
-      maxHeight: 150
-    };
   }
 
   private initForm(): void {
     const controls: ModelControl<SupdocumentSendForm> = {
       Recipients: this.RecipientsControl,
-      Message: this.MessageControl
+      Message: this.MessageControl,
     };
     this.formGroup = new FormGroup(controls);
   }
+
+  selectedRecipients = [];
 
   // getRecipient(recipient: any): void {
   //     console.log(recipient);
@@ -87,7 +75,6 @@ export class SupdocumentFormSendComponent extends BaseSubFormComponent implement
   //       }
   //     );
   // }
-
 
   writeValue(value: SupdocumentSendForm): void {
     if (!value) {

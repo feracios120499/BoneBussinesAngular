@@ -8,12 +8,11 @@ import { Observable } from 'rxjs';
   selector: 'app-supdocuments',
   templateUrl: './supdocuments.component.html',
   styleUrls: ['./supdocuments.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SupdocumentsComponent implements OnInit {
   isLoading$: Observable<boolean> = this.store.select(SupDocumentsSelectors.isLoading);
 
-  constructor(private store : Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(SupDocumentsActions.loadDocuments());

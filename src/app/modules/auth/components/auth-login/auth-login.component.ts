@@ -56,6 +56,7 @@ export class AuthLoginComponent extends BaseFormComponent implements OnInit, Aft
     super.ngAfterViewInit();
     const passwordInput = document.getElementById('password')! as HTMLInputElement;
     this.unlistenPasswordChange = this.renderer.listen(passwordInput, 'change', (event: Event) => {
+      console.log(event);
       this.form.setValue({
         userName: this.form.value.userName,
         password: (event.target as HTMLInputElement).value,
